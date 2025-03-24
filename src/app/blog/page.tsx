@@ -3,6 +3,7 @@ import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
 import ScrollToContent from '@/components/ScrollToContent';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: "所有文章 - Elecmonkey的小花园",
@@ -14,8 +15,10 @@ export default async function BlogPage() {
 
   return (
     <PageContainer>
-      {/* 添加滚动处理组件 */}
-      <ScrollToContent />
+      {/* 添加滚动处理组件，用 Suspense 包裹 */}
+      <Suspense fallback={null}>
+        <ScrollToContent />
+      </Suspense>
       
       <h1 className="text-3xl font-bold mb-8">博客文章</h1>
       
