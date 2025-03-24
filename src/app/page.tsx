@@ -24,13 +24,16 @@ export default async function Home() {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-40 h-40 relative overflow-hidden rounded-full border-4 border-gray-200 dark:border-gray-700">
             {/* 这里可以放你的头像，如果没有可以替换为默认图标 */}
-            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold">
+            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-5xl font-bold">
               EM
             </div>
           </div>
           <div className="text-center md:text-left">
-            <h1 className="text-4xl font-bold mb-4">Elecmonkey</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">存在 为将心声响彻</p>
+            <h1>
+              <span className="text-4xl font-bold mb-4">Elecmonkey</span>
+              <span className="text-4xl font-light mb-4">&apos;s Garden</span>
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-6" title="来自COP《光与影的对白》">存在 为将心声响彻</p>
             
             {/* 导航链接 */}
             <div className="flex gap-4 justify-center md:justify-start">
@@ -71,7 +74,7 @@ export default async function Home() {
       {/* 标签云部分 */}
       <section className="mb-16">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">标签云&nbsp;☁️</h2>
+          <h2 className="text-2xl font-bold">标签云</h2>
           <Link href="/tags" className="text-blue-600 hover:underline text-sm flex items-center">
             查看所有标签
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
