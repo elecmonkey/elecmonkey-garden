@@ -15,6 +15,13 @@ type PostData = {
   [key: string]: unknown;
 };
 
+// 定义标签统计类型
+export type TagCount = {
+  name: string;     // 标签名称
+  count: number;    // 出现次数
+  size?: string;    // 标签大小（用于UI显示）
+};
+
 // 博客文章根目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
@@ -85,6 +92,59 @@ export async function getAllPosts(): Promise<PostData[]> {
     } else {
       return -1;
     }
+  });
+}
+
+// 获取所有标签及其计数
+export async function getAllTags(): Promise<TagCount[]> {
+  const posts = await getAllPosts();
+  const tagCount: Record<string, number> = {};
+  
+  // 统计每个标签出现的次数
+  posts.forEach(post => {
+    post.tags.forEach(tag => {
+      tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+  });
+  
+  // 转换为数组并按标签名称字母顺序排序
+  const tags = Object.entries(tagCount)
+    .map(([name, count]) => ({
+      name,
+      count,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  
+  // 计算标签大小
+  return calculateTagSizes(tags);
+}
+
+// 根据标签名获取相关文章
+export async function getPostsByTag(tagName: string): Promise<PostData[]> {
+  const allPosts = await getAllPosts();
+  return allPosts.filter(post => post.tags.includes(tagName));
+}
+
+// 计算标签云的标签大小
+function calculateTagSizes(tags: TagCount[]): TagCount[] {
+  // 找出最大和最小出现次数
+  const maxCount = Math.max(...tags.map(tag => tag.count));
+  const minCount = Math.min(...tags.map(tag => tag.count));
+  
+  // 定义最小和最大字体大小
+  const minSize = 0.8;  // em
+  const maxSize = 2;    // em
+  
+  // 为每个标签计算相对大小
+  return tags.map(tag => {
+    // 如果只有一个标签或所有标签出现次数相同
+    if (maxCount === minCount) {
+      return { ...tag, size: `${(minSize + maxSize) / 2}em` };
+    }
+    
+    // 线性映射 count 到 size
+    const size = minSize + ((tag.count - minCount) / (maxCount - minCount)) * (maxSize - minSize);
+    return { ...tag, size: `${size.toFixed(2)}em` };
   });
 }
 

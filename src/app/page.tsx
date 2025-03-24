@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/api';
+import { getAllPosts, getAllTags } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
+import TagCloud from '@/components/TagCloud';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,6 +13,9 @@ export default async function Home() {
   // 获取所有文章并只显示最近的5篇
   const allPosts = await getAllPosts();
   const recentPosts = allPosts.slice(0, 5);
+  
+  // 获取所有标签
+  const tags = await getAllTags();
 
   return (
     <PageContainer>
@@ -61,6 +65,23 @@ export default async function Home() {
               </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 标签云部分 */}
+      <section className="mb-16">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">主题标签</h2>
+          <Link href="/tags" className="text-blue-600 hover:underline text-sm flex items-center">
+            查看所有标签
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+        
+        <div className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm">
+          <TagCloud tags={tags} />
         </div>
       </section>
 
