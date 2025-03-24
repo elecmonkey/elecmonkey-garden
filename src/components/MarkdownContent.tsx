@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import { CodeComponent } from './ClientMarkdownRenderer';
+import Image from 'next/image';
 
 // 服务器端组件包装器
 export default function MarkdownContent({ content }: { content: string }) {
@@ -22,15 +23,49 @@ export default function MarkdownContent({ content }: { content: string }) {
         // 代码块渲染 - 使用客户端组件
         code: CodeComponent,
         
-        // 添加图片样式
-        img: ({ src, alt, ...props }) => (
-          <img 
-            src={src} 
-            alt={alt || ''} 
-            className="max-w-full my-4 rounded shadow-md"
-            {...props}
-          />
-        ),
+        // 添加图片样式 - 使用 Next.js Image 组件优化图片
+        img: ({ src, alt, width, height, ...props }) => {
+          // 检查 src 是否存在
+          if (!src) return null;
+          
+          // 设置默认宽高
+          const imgWidth = typeof width === 'number' ? width : 800;
+          const imgHeight = typeof height === 'number' ? height : 600;
+          
+          // 如果是外部 URL，使用 Image 组件并设置 domains 或 remotePatterns
+          if (src.startsWith('http')) {
+            return (
+              <div className="my-4 overflow-hidden rounded shadow-md">
+                <Image 
+                  src={src} 
+                  alt={alt || ''} 
+                  width={imgWidth}
+                  height={imgHeight}
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className="max-w-full"
+                  style={{ width: '100%', height: 'auto' }}
+                  {...props}
+                />
+              </div>
+            );
+          }
+          
+          // 对于本地图片，使用 Image 组件
+          return (
+            <div className="my-4 overflow-hidden rounded shadow-md">
+              <Image 
+                src={src} 
+                alt={alt || ''} 
+                width={imgWidth}
+                height={imgHeight}
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="max-w-full"
+                style={{ width: '100%', height: 'auto' }}
+                {...props}
+              />
+            </div>
+          );
+        },
       }}
     >
       {content}
