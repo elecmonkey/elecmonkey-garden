@@ -1,0 +1,15 @@
+classDiagram
+    class Animal {
+        +String name
+        +move()
+    }
+    class Dog {
+        +String breed
+        +bark()
+    }
+    class Bird {
+        +String color
+        +fly()
+    }
+    Animal <|-- Dog
+    Animal <|-- Bird
