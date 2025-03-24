@@ -325,3 +325,11 @@ graph TD
 ### 添加新页面
 
 在 `src/app` 目录下创建新目录和 `page.tsx` 文件，遵循 Next.js App Router 的约定。
+
+## 许可协议
+
+### 代码部分
+源代码采用 [MIT 许可证](LICENSE)。
+
+### 内容部分
+所有博客文章、图片和其他创意内容采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议（CC BY-NC-SA 4.0）](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)。

@@ -10,7 +10,7 @@ export default function Footer() {
           {/* 网站信息 */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Elecmonkey的小花园</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+            <p className="text-sm text-gray-700 dark:text-gray-400 mb-3" title="来自COP《光与影的对白》">
               存在 为将心声响彻
             </p>
             <div className="my-4"></div>
@@ -18,7 +18,7 @@ export default function Footer() {
               href="https://github.com/elecmonkey/elecmonkey-garden" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center max-w-fit"
+              className="text-xs text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center max-w-fit"
             >
               本站源码已在
               <div className="flex items-center mx-1">
@@ -28,6 +28,15 @@ export default function Footer() {
                 <span>GitHub</span>
               </div>
               开源
+            </a>
+            <div className="my-4"></div>
+            <a 
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 dark:hover:text-blue-400 text-xs text-gray-500 dark:text-gray-400 flex items-center max-w-fit"
+            >
+            <span>文章采用 CC BY-NC-SA 4.0 许可证</span>
             </a>
           </div>
           
