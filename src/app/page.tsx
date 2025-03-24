@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
+import PostCard from '@/components/PostCard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -67,40 +68,11 @@ export default async function Home() {
       <section className="mb-10">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">最近文章</h2>
-          <Link href="/blog" className="text-blue-600 hover:underline">
-            查看全部 →
-          </Link>
         </div>
 
         <div className="space-y-6">
           {recentPosts.map((post) => (
-            <article key={post.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <div className="flex justify-between items-start">
-                <div>
-                  <Link href={`/blog/${post.id}`}>
-                    <h3 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">{post.title}</h3>
-                  </Link>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mb-3">
-                    {new Date(post.date).toLocaleDateString('zh-CN', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </p>
-                </div>
-              </div>
-              <p className="text-gray-700 dark:text-gray-300 mb-4">{post.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </article>
+            <PostCard key={post.id} post={post} />
           ))}
         </div>
 
