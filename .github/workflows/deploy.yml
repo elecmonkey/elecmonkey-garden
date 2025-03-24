@@ -1,0 +1,102 @@
+name: 部署到服务器
+
+on:
+  push:
+    branches: [ main ]  # 当推送到 main 分支时触发
+  workflow_dispatch:    # 允许手动触发工作流程
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 获取完整的 git 历史
+      
+      - name: 设置 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8  # 使用 pnpm 8.x 版本
+      
+      - name: 设置 Node.js 环境
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'  # 使用 pnpm 缓存
+      
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+      
+      - name: 构建项目
+        run: pnpm build
+      
+      - name: 运行测试 (如果有)
+        run: |
+          if grep -q "\"test\":" "package.json"; then
+            pnpm test
+          else
+            echo "没有找到测试脚本，跳过测试步骤"
+          fi
+      
+      - name: 准备部署文件
+        run: |
+          # 创建包含必要文件的部署目录
+          mkdir -p deploy
+          
+          # 复制 Next.js 构建产物
+          cp -r .next deploy/
+          
+          # 复制必要的文件
+          cp package.json pnpm-lock.yaml ecosystem.config.js deploy/
+          
+          # 创建 node_modules 目录并安装生产依赖
+          cd deploy
+          pnpm install --prod --frozen-lockfile
+          
+          # 打包为 tar 文件便于传输
+          cd ..
+          tar -czf deploy.tar.gz deploy
+      
+      - name: 部署到服务器
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "deploy.tar.gz"
+          target: "/tmp"
+      
+      - name: 配置服务器并启动应用
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            # 进入项目目录
+            cd ${{ secrets.REMOTE_TARGET_DIR }}
+            
+            # 备份当前部署（以防需要回滚）
+            timestamp=$(date +%Y%m%d_%H%M%S)
+            mkdir -p ~/backups
+            if [ -d ".next" ]; then
+              cp -r .next ~/backups/.next_$timestamp
+            fi
+            
+            # 提取并应用新的部署包
+            rm -rf /tmp/deploy
+            tar -xzf /tmp/deploy.tar.gz -C /tmp
+            
+            # 同步新文件到项目目录（保留 .git 等不在部署包中的文件）
+            rsync -a --delete --exclude='.git' --exclude='public/uploads' /tmp/deploy/ ./
+            
+            # 清理临时文件
+            rm -f /tmp/deploy.tar.gz
+            rm -rf /tmp/deploy
+            
+            # 使用 PM2 重启应用
+            pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
