@@ -98,9 +98,21 @@ export default async function Home() {
         </div>
 
         {/* 如果没有文章，显示提示 */}
-        {recentPosts.length === 0 && (
+        {recentPosts.length === 0 ? (
           <div className="text-center py-10">
             <p className="text-gray-500 dark:text-gray-400">暂无文章，请稍后再来！</p>
+          </div>
+        ) : (
+          <div className="mt-10 text-center">
+            <Link 
+              href="/blog?scroll=true"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center"
+            >
+              查看所有文章
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </Link>
           </div>
         )}
       </section>

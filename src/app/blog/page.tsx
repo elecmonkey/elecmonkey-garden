@@ -1,6 +1,7 @@
 import { getAllPosts } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
+import ScrollToContent from '@/components/ScrollToContent';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,6 +14,9 @@ export default async function BlogPage() {
 
   return (
     <PageContainer>
+      {/* 添加滚动处理组件 */}
+      <ScrollToContent />
+      
       <h1 className="text-3xl font-bold mb-8">博客文章</h1>
       
       {posts.length === 0 ? (

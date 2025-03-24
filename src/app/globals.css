@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* 确保平滑滚动应用在html元素上 */
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
