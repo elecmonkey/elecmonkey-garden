@@ -98,11 +98,13 @@ export async function getAllPostIds() {
       return fileNames
         .filter(fileName => fileName.endsWith('.md'))
         .map(fileName => {
+          const slug = fileName.replace(/\.md$/, '');
           return {
             params: {
-              slug: fileName.replace(/\.md$/, ''),
-              monthFolder
-            }
+              slug,
+            },
+            // 将 monthFolder 作为元数据而不是路由参数
+            monthFolder,
           };
         });
     } catch (error) {

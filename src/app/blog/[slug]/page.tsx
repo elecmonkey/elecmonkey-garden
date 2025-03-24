@@ -12,10 +12,14 @@ export async function generateStaticParams() {
   }));
 }
 
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
 // 动态生成元数据
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const { slug } = params;
     const post = await getPostById(slug);
     
     return {
@@ -30,10 +34,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 // 异步组件
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: Props) {
   try {
     // 获取文章数据
-    const { slug } = params;
+    const { slug } = await params;
     const post = await getPostById(slug);
     
     return (
