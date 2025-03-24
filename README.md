@@ -1,17 +1,15 @@
-# ElecMonkey Garden
+# Elecmonkey Garden
 
-ElecMonkey的个人数字花园，基于 [Next.js](https://nextjs.org) 开发中。
+个人技术博客，基于 [Next.js](https://nextjs.org) 开发中。
 
 ## 技术栈
 
-- **框架**: Next.js 15
-- **前端**: React 19
-- **样式**: TailwindCSS 4
+- **框架**: Next.js
+- **前端**: React
+- **样式**: TailwindCSS
 - **内容管理**: MDX + Markdown
 - **代码处理**: React Syntax Highlighter（基于 PrismJS）
 - **图表渲染**: Mermaid（客户端渲染）
-- **响应式设计**: 针对移动设备和桌面设备优化
-- **部署**: PM2 + Nginx
 
 ## 设计特点
 
@@ -22,12 +20,6 @@ ElecMonkey的个人数字花园，基于 [Next.js](https://nextjs.org) 开发中
 - **图表支持**: 通过 Mermaid 集成支持流程图、时序图、类图等多种图表
 - **响应式图片**: 自动优化图片显示效果
 - **暗色模式**: 支持明暗主题切换，代码块和图表自动适应主题
-
-### 性能优化
-
-- **客户端组件**: 使用 Next.js 的客户端组件实现复杂交互
-- **动态导入**: 使用 dynamic import 减小初始加载体积
-- **懒加载**: 对重型组件（如代码高亮和图表）使用懒加载
 
 ### 文件组织
 
@@ -232,9 +224,11 @@ nohup npm start > app.log 2>&1 &
 
 这会在后台运行应用并将输出重定向到 app.log 文件。
 
-### Nginx 反向代理配置
+### 反向代理配置
 
-通常建议在前端配置 Nginx 作为反向代理：
+通常建议在前端配置反向代理服务器。
+
+#### Nginx作为反向代理配置
 
 ```nginx
 server {
@@ -250,6 +244,31 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+```
+
+#### Caddy作为反向代理配置
+
+Caddy 是一个现代化、自动配置 HTTPS 的 Web 服务器，配置更简单：
+
+```
+yourdomain.com {
+    reverse_proxy localhost:3000
+}
+```
+
+Caddy 会自动获取和续期 HTTPS 证书，极大简化了配置过程。安装方法：
+
+```bash
+# Debian/Ubuntu
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+
+# 启动服务
+sudo systemctl enable caddy
+sudo systemctl start caddy
 ```
 
 ## 环境变量配置
