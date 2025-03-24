@@ -66,12 +66,15 @@ export default async function BlogPost({ params }: Props) {
             </p>
             <div className="flex flex-wrap gap-2 mt-4">
               {post.tags.map((tag: string) => (
-                <span
+                <Link
                   key={tag}
-                  className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs"
+                  href={`/tags/${encodeURIComponent(tag)}`}
+                  className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs transition-colors no-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           </header>
