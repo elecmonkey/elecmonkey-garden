@@ -4,9 +4,9 @@ import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
 import Link from 'next/link';
 
-interface Props {
-  params: { tag: string };
-}
+type Props = {
+  params: Promise<{ tag: string }>;
+};
 
 // 生成可能的标签路径
 export async function generateStaticParams() {
@@ -18,7 +18,8 @@ export async function generateStaticParams() {
 
 // 为每个标签页生成元数据
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const decodedTag = decodeURIComponent(params.tag);
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
   
   return {
     title: `#${decodedTag} - Elecmonkey的小花园`,
@@ -27,7 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function TagPage({ params }: Props) {
-  const decodedTag = decodeURIComponent(params.tag);
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
   const posts = await getPostsByTag(decodedTag);
   
   return (
