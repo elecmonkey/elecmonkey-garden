@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
             <div className="my-4"></div>
             <a 
-              href="https://github.com/elecmonkey/blog" 
+              href="https://github.com/elecmonkey/elecmonkey-garden" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center max-w-fit"
