@@ -63,16 +63,16 @@ export default function Navbar() {
             <Link href="/about" className={getLinkClassName("/about")}>
               关于我
             </Link>
-            <div className="ml-2">
+            {/* <div className="ml-2">
               <ThemeSwitcher />
-            </div>
+            </div> */}
           </div>
           
           {/* 移动端菜单按钮 */}
           <div className="md:hidden flex items-center">
-            <div className="mr-2">
+            {/* <div className="mr-2">
               <ThemeSwitcher />
-            </div>
+            </div> */}
             <button 
               className="text-gray-700 dark:text-gray-300 focus:outline-none p-2" 
               onClick={toggleMenu}

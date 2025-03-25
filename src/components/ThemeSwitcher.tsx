@@ -9,8 +9,8 @@ export default function ThemeSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
 
   // 切换主题函数
-  const toggleTheme = (newTheme: ThemeMode) => {
-    setTheme(newTheme);
+  const toggleTheme = (newTheme: /*ThemeMode*/string) => {
+    // setTheme(newTheme);
     setIsOpen(false);
   };
 
