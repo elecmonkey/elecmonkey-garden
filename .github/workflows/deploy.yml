@@ -132,3 +132,16 @@ jobs:
             # 直接使用PM2启动Next.js应用
             pm2 delete "elecmonkey-garden" 2>/dev/null || true
             pm2 reload "elecmonkey-garden" || pm2 start "pnpm run start" --name "elecmonkey-garden" --cwd ${{ secrets.REMOTE_TARGET_DIR }}
+            
+            # 保存PM2配置，确保服务器重启后自动启动
+            echo "保存PM2配置"
+            pm2 save
+            
+            # 确保PM2开机自启（如果尚未配置）
+            if ! pm2 list | grep -q "module" || ! systemctl list-unit-files | grep -q "pm2-"; then
+              echo "配置PM2开机自启"
+              sudo env PATH=$PATH:/usr/bin pm2 startup || pm2 startup || echo "无法自动配置PM2开机自启，可能需要手动配置"
+              pm2 save
+            fi
+            
+            echo "部署完成：$(date)"
