@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useRef, useState } from 'react';
 
 interface MermaidRendererProps {
@@ -10,6 +8,7 @@ interface MermaidRendererProps {
 export default function MermaidRenderer({ chart, className = '' }: MermaidRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svgContent, setSvgContent] = useState<string>('<div>加载中...</div>');
+  const actualTheme = 'light';
 
   useEffect(() => {
     // 避免在服务器端运行
@@ -18,11 +17,33 @@ export default function MermaidRenderer({ chart, className = '' }: MermaidRender
     // 动态导入 mermaid
     import('mermaid').then(async (mermaid) => {
       try {
+        // 设置主题
+        const theme = actualTheme === 'dark' ? 'dark' : 'default';
+        
         // 初始化 mermaid
         mermaid.default.initialize({
           startOnLoad: false,
-          theme: 'default',
+          theme: theme,
           securityLevel: 'strict',
+          darkMode: actualTheme === 'dark',
+          fontFamily: 'sans-serif',
+          // 暗色模式下的颜色设置
+          themeVariables: actualTheme === 'dark' ? {
+            primaryColor: '#3b82f6',
+            primaryTextColor: '#f1f5f9',
+            primaryBorderColor: '#475569',
+            lineColor: '#94a3b8',
+            secondaryColor: '#4b5563',
+            tertiaryColor: '#1e293b',
+            backgroundColor: 'transparent',
+            mainBkg: '#1e293b',
+            nodeBorder: '#475569', 
+            clusterBkg: '#1e293b',
+            clusterBorder: '#475569',
+            titleColor: '#f1f5f9',
+            edgeLabelBackground: '#1e293b',
+            textColor: '#f1f5f9'
+          } : {}
         });
 
         // 生成 SVG
@@ -30,15 +51,15 @@ export default function MermaidRenderer({ chart, className = '' }: MermaidRender
         setSvgContent(svg);
       } catch (error) {
         console.error('渲染 Mermaid 图表失败:', error);
-        setSvgContent(`<div class="p-4 bg-red-100 text-red-700 rounded">Mermaid 图表渲染失败</div>`);
+        setSvgContent(`<div class="p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">Mermaid 图表渲染失败</div>`);
       }
     });
-  }, [chart]);
+  }, [chart, actualTheme]);
 
   return (
     <div 
       ref={containerRef}
-      className={`my-6 overflow-x-auto flex justify-center bg-white dark:bg-gray-900 p-4 rounded-md ${className}`}
+      className={`my-6 overflow-x-auto flex justify-center ${actualTheme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'} p-4 rounded-md shadow-sm ${className}`}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   );

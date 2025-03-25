@@ -75,7 +75,10 @@ export default async function Home() {
       <section className="mb-16">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">标签云</h2>
-          <Link href="/tags" className="text-blue-600 hover:underline text-sm flex items-center">
+          <Link 
+            href="/tags" 
+            className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center"
+          >
             查看所有标签
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -109,7 +112,7 @@ export default async function Home() {
           <div className="mt-10 text-center">
             <Link 
               href="/blog?scroll=true"
-              className="text-blue-600 hover:underline text-base flex items-center justify-center"
+              className="text-blue-600 dark:text-blue-400 hover:underline text-base flex items-center justify-center"
             >
               查看所有文章
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

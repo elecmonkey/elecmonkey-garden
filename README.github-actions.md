@@ -14,7 +14,7 @@
 
 ## 必要的 Secrets 配置
 
-需要在 GitHub 仓库的 Settings -> Secrets and variables -> Actions 中配置以下密钥：
+需要在 GitHub 仓库的 Settings -> Secrets and variables -> Actions -> **Repository secrets** 中配置以下密钥：
 
 | 名称 | 说明 | 示例 |
 |-----|------|------|

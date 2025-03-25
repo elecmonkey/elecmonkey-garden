@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -51,8 +52,8 @@ export default function Navbar() {
             </Link>
           </div>
           
-          {/* 桌面导航链接 */}
-          <div className="hidden md:flex space-x-2">
+          {/* 桌面导航链接和主题切换器 */}
+          <div className="hidden md:flex items-center space-x-2">
             <Link href="/" className={getLinkClassName("/")}>
               首页
             </Link>
@@ -62,10 +63,16 @@ export default function Navbar() {
             <Link href="/about" className={getLinkClassName("/about")}>
               关于我
             </Link>
+            <div className="ml-2">
+              <ThemeSwitcher />
+            </div>
           </div>
           
           {/* 移动端菜单按钮 */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+            <div className="mr-2">
+              <ThemeSwitcher />
+            </div>
             <button 
               className="text-gray-700 dark:text-gray-300 focus:outline-none p-2" 
               onClick={toggleMenu}

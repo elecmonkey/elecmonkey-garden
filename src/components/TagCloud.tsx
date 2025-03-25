@@ -55,7 +55,7 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
           rel="noopener noreferrer"
         >
           <span
-            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md transition-colors"
+            className="px-3 py-1.5 rounded-md transition-colors bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-black dark:hover:bg-gray-900 dark:text-gray-300"
             style={{ fontSize: tag.size }}
           >
             {tag.name}

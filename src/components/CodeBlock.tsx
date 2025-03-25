@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 // 导入常用语言支持
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
@@ -54,35 +54,32 @@ SyntaxHighlighter.registerLanguage('swift', swift);
 SyntaxHighlighter.registerLanguage('php', php);
 SyntaxHighlighter.registerLanguage('sql', sql);
 
-// 代码块复制按钮组件
+// 复制按钮组件
 function CopyButton({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
-  
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(code).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('复制失败:', err);
-    }
+    });
   };
-  
+
+  const isDarkTheme = false;
+
   return (
     <button
-      onClick={handleCopy}
-      className="absolute top-1.5 right-1.5 p-1 rounded hover:bg-gray-700 bg-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-400 transition-colors opacity-90 hover:opacity-100"
+      onClick={copyToClipboard}
+      className={`absolute top-2 right-2 p-1.5 rounded-md ${isDarkTheme ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'} text-sm transition-colors`}
       aria-label="复制代码"
-      title="复制代码"
     >
       {copied ? (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-          <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
         </svg>
       )}
     </button>
@@ -95,31 +92,44 @@ export default function CodeBlock({ language, code, ...props }: {
   code: string, 
   [key: string]: unknown 
 }) {
+  const isDarkTheme = false;
+
+  // 根据当前主题选择样式
+  const syntaxStyle = isDarkTheme ? vscDarkPlus : oneLight;
+  
+  // 根据主题设置颜色
+  const headerBgColor = isDarkTheme ? 'bg-gray-800' : 'bg-gray-200';
+  const headerTextColor = isDarkTheme ? 'text-gray-300' : 'text-gray-700';
+  const borderColor = isDarkTheme ? 'border-gray-700' : 'border-gray-300';
+  const lineNumberColor = isDarkTheme ? '#6e7681' : '#aaa';
+  const lineNumberBorderColor = isDarkTheme ? '#334155' : '#e5e5e5';
+
   return (
-    <div className="relative my-6 rounded-sm overflow-hidden border border-gray-700">
-      <div className="bg-gray-800 text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-700">
+    <div className={`relative my-6 rounded-sm overflow-hidden border ${borderColor}`}>
+      <div className={`${headerBgColor} ${headerTextColor} text-xs py-1 px-3 font-mono border-b ${borderColor}`}>
         {language}
       </div>
       <div className="relative">
         <SyntaxHighlighter
-          style={vscDarkPlus}
+          style={syntaxStyle}
           language={language}
           showLineNumbers={true}
           wrapLines={true}
           lineNumberStyle={{ 
             width: '3em',
-            color: '#6e7681', 
+            color: lineNumberColor, 
             textAlign: 'center', 
             userSelect: 'none',
-            borderRight: '1px solid #334155',
+            borderRight: `1px solid ${lineNumberBorderColor}`,
             marginRight: '1em',
-            paddingRight: '0' // 移除右内边距，使用中心对齐
+            paddingRight: '0' 
           }}
           customStyle={{ 
             margin: 0, 
             padding: '0.8rem 0.5rem 0.8rem 0',
             borderRadius: 0,
-            fontSize: '0.9rem'
+            fontSize: '0.9rem',
+            backgroundColor: isDarkTheme ? '#1e1e1e' : '#f8f8f8'
           }}
           PreTag="div"
           {...props}

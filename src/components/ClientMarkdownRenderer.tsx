@@ -7,11 +7,11 @@ import { Components } from 'react-markdown';
 // 动态导入客户端组件
 const CodeBlock = dynamic(() => import('./CodeBlock'), { 
   ssr: false,
-  loading: () => <div className="p-4 text-gray-500">加载代码高亮，需要启用 JavaScript ...</div>
+  loading: () => <div className="p-4 text-gray-500 dark:text-gray-400">加载代码高亮，需要启用 JavaScript ...</div>
 });
 const MermaidRenderer = dynamic(() => import('./MermaidRenderer'), { 
   ssr: false,
-  loading: () => <div className="p-4 text-gray-500">加载图表，需要启用 JavaScript ...</div>
+  loading: () => <div className="p-4 text-gray-500 dark:text-gray-400">加载图表，需要启用 JavaScript ...</div>
 });
 
 // 使用 react-markdown 的 Components 类型来确保兼容性
@@ -35,9 +35,18 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
     );
   }
   
+  // 增强内联代码样式
+  const isDark = false;
+  const bgColor = isDark ? 'bg-gray-800' : 'bg-gray-100';
+  const textColor = isDark ? 'text-blue-300' : 'text-blue-600';
+  const borderColor = isDark ? 'border-gray-700' : 'border-gray-200';
+  
   // 内联代码
   return (
-    <code className={`bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded ${className || ''}`} {...props}>
+    <code 
+      className={`${bgColor} ${textColor} px-1.5 py-0.5 rounded border ${borderColor} font-mono text-sm ${className || ''}`} 
+      {...props}
+    >
       {children}
     </code>
   );
