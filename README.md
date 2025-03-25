@@ -91,7 +91,7 @@ pnpm build
 4. 使用 PM2 启动服务:
 
 ```bash
-pm2 start npm --name "elecmonkey-garden" -- start
+pm2 start node_modules/.bin/next --name "elecmonkey-garden" -- start -p 3000
 ```
 
 5. 设置开机自启:
@@ -115,15 +115,20 @@ cd /path/to/your/app
 git pull
 pnpm install
 pnpm build
-pm2 restart elecmonkey-garden
+pm2 reload "elecmonkey-garden" || pm2 start node_modules/.bin/next --name "elecmonkey-garden" -- start -p 3000
 ```
 
-### PM2 配置文件
-
-使用以下命令启动：
+### PM2 启动命令
 
 ```bash
-pm2 start ecosystem.config.js
+# 首次启动
+pm2 start node_modules/.bin/next --name "elecmonkey-garden" -- start -p 3000
+
+# 重新加载已有应用
+pm2 reload "elecmonkey-garden"
+
+# 或组合命令（先尝试重载，若失败则启动）
+pm2 reload "elecmonkey-garden" || pm2 start node_modules/.bin/next --name "elecmonkey-garden" -- start -p 3000
 ```
 
 ### 不使用 PM2 的部署方法

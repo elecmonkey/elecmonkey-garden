@@ -49,7 +49,7 @@ jobs:
           cp -r .next deploy/
           
           # 复制必要的文件
-          cp package.json pnpm-lock.yaml ecosystem.config.js deploy/
+          cp package.json pnpm-lock.yaml deploy/
           
           # 创建 node_modules 目录并安装生产依赖
           cd deploy
@@ -91,12 +91,44 @@ jobs:
             rm -rf /tmp/deploy
             tar -xzf /tmp/deploy.tar.gz -C /tmp
             
-            # 同步新文件到项目目录（保留 .git 等不在部署包中的文件）
-            rsync -a --delete --exclude='.git' --exclude='public/uploads' /tmp/deploy/ ./
+            # 检查是否安装了rsync，如果没有则使用cp命令
+            if command -v rsync > /dev/null; then
+              # 使用rsync同步文件
+              rsync -a --delete --exclude='.git' --exclude='public/uploads' /tmp/deploy/ ./
+            else
+              # 使用cp命令复制文件
+              echo "rsync未安装，使用cp命令替代"
+              rm -rf .next node_modules package.json pnpm-lock.yaml
+              cp -a /tmp/deploy/. ./
+            fi
             
             # 清理临时文件
             rm -f /tmp/deploy.tar.gz
             rm -rf /tmp/deploy
             
-            # 使用 PM2 重启应用
-            pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
+            # 查看环境和目录结构
+            echo "当前目录: $(pwd)"
+            echo "目录内容:"
+            ls -la
+            echo "next路径检查:"
+            find . -name next -type f
+            
+            # 直接使用 PM2 启动 Next.js 应用，使用绝对路径
+            NEXT_BIN="$(pwd)/node_modules/.bin/next"
+            
+            if [ -f "$NEXT_BIN" ]; then
+              echo "找到next执行文件: $NEXT_BIN"
+            else
+              echo "未找到next执行文件，尝试重新安装"
+              pnpm install --prod
+              if [ -f "$NEXT_BIN" ]; then
+                echo "安装后找到next执行文件: $NEXT_BIN"
+              else
+                echo "仍然未找到next执行文件，列出node_modules/.bin目录:"
+                ls -la node_modules/.bin || echo "node_modules/.bin目录不存在"
+              fi
+            fi
+            
+            # 直接使用PM2启动Next.js应用
+            pm2 delete "elecmonkey-garden" 2>/dev/null || true
+            pm2 reload "elecmonkey-garden" || pm2 start "pnpm run start" --name "elecmonkey-garden" --cwd ${{ secrets.REMOTE_TARGET_DIR }}
