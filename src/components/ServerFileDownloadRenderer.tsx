@@ -22,7 +22,6 @@ interface FileInfo {
   size: string;
 }
 
-// 纯服务端组件，不需要 'use client'
 export default function ServerFileDownloadRenderer({ fileContent, className = '' }: FileDownloadProps) {
   // 解析五行文本为文件信息
   const parseFileContent = (content: string): FileInfo => {
@@ -51,7 +50,7 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
   // 根据文件类型获取图标
   const getFileIcon = (type: string) => {
     const iconProps = { 
-      size: 48, // 增大图标尺寸
+      size: 48,
       strokeWidth: 1.5,
       className: getIconColorClass(type)
     };
@@ -178,19 +177,21 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
   
   return (
     <div className={`my-6 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 ${className}`}>
-      <div className="flex flex-col sm:flex-row p-4 gap-4">
-        <div className="flex flex-shrink-0 items-center justify-center w-16 h-16 mt-2 ml-0.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+      <div className="flex flex-col sm:flex-row px-4 pt-4 pb-8 sm:pb-4 gap-4">
+        {/* 图标容器 - 在移动端居中 */}
+        <div className="flex flex-shrink-0 items-center justify-center mx-auto sm:mx-0 w-20 h-20 sm:w-16 sm:h-16 mt-2 sm:ml-0.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
           {getFileIcon(fileInfo.type)}
         </div>
         
-        <div className="flex-grow">
+        {/* 文件信息 - 在移动端居中对齐文本 */}
+        <div className="flex-grow text-center sm:text-left">
           <h3 className="font-medium text-lg mb-1 text-gray-900 dark:text-gray-100">
             {fileInfo.filename}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
             {fileInfo.description}
           </p>
-          <div className="flex flex-wrap gap-3 items-center">
+          <div className="flex flex-wrap gap-3 items-center justify-center sm:justify-start">
             <span className="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-md text-gray-600 dark:text-gray-300">
               {fileInfo.size}
             </span>
@@ -200,12 +201,13 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
           </div>
         </div>
         
-        <div className="flex-shrink-0 flex items-center mt-3 sm:mt-0">
+        {/* 下载按钮 - 在移动端居中 */}
+        <div className="flex-shrink-0 flex items-center justify-center sm:justify-start mt-4 sm:mt-0">
           <a 
             href={fileInfo.url} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 mr-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-200"
+            className="inline-flex items-center px-4 py-2 mr-0 sm:mr-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-200"
           >
             <Download className="my-1" size={18} />
           </a>
