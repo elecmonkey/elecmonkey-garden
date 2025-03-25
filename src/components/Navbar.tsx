@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import ThemeSwitcher from './ThemeSwitcher';
+// import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Navbar() {
   const pathname = usePathname();
