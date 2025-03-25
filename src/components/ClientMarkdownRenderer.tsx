@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { Components } from 'react-markdown';
+import ServerFileDownloadRenderer from './ServerFileDownloadRenderer';
 
 // 动态导入客户端组件
 const CodeBlock = dynamic(() => import('./CodeBlock'), { 
@@ -22,6 +23,12 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
   if (match && match[1] === 'mermaid') {
     const code = String(children || '').replace(/\n$/, '');
     return <MermaidRenderer chart={code} />;
+  }
+  
+  // 如果是 File 代码块，使用文件下载渲染器（服务端组件）
+  if (match && match[1] === 'file') {
+    const code = String(children || '').replace(/\n$/, '');
+    return <ServerFileDownloadRenderer fileContent={code} />;
   }
   
   // 其他代码块使用原来的 CodeBlock 组件
