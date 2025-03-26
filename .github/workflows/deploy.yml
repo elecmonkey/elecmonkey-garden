@@ -40,7 +40,7 @@ jobs:
             echo "没有找到测试脚本，跳过测试步骤"
           fi
       
-      - name: 准备部署文件
+      - name: 打包上传文件
         run: |
           # 创建包含必要文件的部署目录
           mkdir -p deploy
@@ -56,25 +56,42 @@ jobs:
             cp -r public deploy/
           fi
           
-          # 打包为 tar 文件
-          cd deploy
-          # 注意：不再执行 pnpm install --prod --frozen-lockfile
-          cd ..
-          tar -czf deploy.tar.gz deploy
+          # 显示文件夹总大小
+          echo "部署目录总大小："
+          du -sh deploy/
 
-          # 显示打包后的大小，以便于比较优化效果
-          ls -lh deploy.tar.gz
+          echo "开始传输文件..."
+          # 确保 .ssh 目录存在并设置正确权限
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          
+          # 将 SSH 私钥写入临时文件
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # 添加服务器到 known_hosts
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          
+          echo "开始使用rsync传输文件到服务器..."
+          if rsync -avz --delete \
+            --exclude='.next/cache/' \
+            --exclude='.next/trace' \
+            --exclude='.next/analyze' \
+            --exclude='.next/routes-manifest.json' \
+            -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then
+            echo "✅ 文件传输成功！"
+          else
+            echo "❌ 文件传输失败，退出代码: $?"
+            exit 1
+          fi
+
+          # 删除临时 SSH 密钥文件
+          rm -f ~/.ssh/id_rsa
+          echo "文件传输完成"
       
-      - name: 部署到服务器
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "deploy.tar.gz"
-          target: "/tmp"
-      
+
       - name: 配置服务器并启动应用
         uses: appleboy/ssh-action@master
         with:
@@ -93,14 +110,39 @@ jobs:
               cp -r .next ~/backups/.next_$timestamp
             fi
             
-            # 提取并应用新的部署包
-            rm -rf /tmp/deploy
-            tar -xzf /tmp/deploy.tar.gz -C /tmp
+            # 检查/tmp/deploy目录是否存在及其中是否包含.next目录
+            if [ ! -d "/tmp/deploy" ]; then
+              echo "❌ 错误: /tmp/deploy 目录不存在！同步可能失败。"
+              exit 1
+            fi
+            
+            echo "检查同步的文件目录内容（包括隐藏文件）："
+            ls -lha /tmp/deploy/
+            
+            if [ ! -d "/tmp/deploy/.next" ]; then
+              echo "❌ 错误: /tmp/deploy/.next 目录不存在！部署终止。"
+              echo "同步目录中的内容："
+              find /tmp/deploy -type d | sort
+              exit 1
+            else
+              echo "✅ .next 目录存在，继续部署..."
+            fi
+            
+            # 直接使用rsync同步的/tmp/deploy目录中的文件
+            echo "从/tmp/deploy目录同步文件..."
             
             # 检查是否安装了rsync，如果没有则使用cp命令
             if command -v rsync > /dev/null; then
               # 使用rsync同步文件
-              rsync -a --delete --exclude='.git' --exclude='public/uploads' --exclude='node_modules' /tmp/deploy/ ./
+              rsync -a --delete \
+                --exclude='.git' \
+                --exclude='public/uploads' \
+                --exclude='node_modules' \
+                --exclude='.next/cache/' \
+                --exclude='.next/trace' \
+                --exclude='.next/analyze' \
+                --exclude='.next/routes-manifest.json' \
+                /tmp/deploy/ ./
             else
               # 使用cp命令复制文件
               echo "rsync未安装，使用cp命令替代"
@@ -115,13 +157,12 @@ jobs:
             pnpm install --prod --frozen-lockfile
             
             # 清理临时文件
-            rm -f /tmp/deploy.tar.gz
             rm -rf /tmp/deploy
             
-            # 查看环境和目录结构
+            # 查看环境和目录结构（显示隐藏文件）
             echo "当前目录: $(pwd)"
-            echo "目录内容:"
-            ls -la
+            echo "目录内容（包括隐藏文件）:"
+            ls -lha
             echo "next路径检查:"
             find . -name next -type f
             
