@@ -51,14 +51,18 @@ jobs:
           # 复制必要的文件
           cp package.json pnpm-lock.yaml deploy/
           
-          # 创建 node_modules 目录并安装生产依赖
-          cd deploy
-          pnpm install --prod --frozen-lockfile
+          # 复制其他必要的静态文件和配置
+          if [ -d "public" ]; then
+            cp -r public deploy/
+          fi
           
-          # 打包为 tar 文件便于传输
+          # 打包为 tar 文件
+          cd deploy
+          # 注意：不再执行 pnpm install --prod --frozen-lockfile
           cd ..
           tar -czf deploy.tar.gz deploy
 
+          # 显示打包后的大小，以便于比较优化效果
           ls -lh deploy.tar.gz
       
       - name: 部署到服务器
@@ -96,13 +100,19 @@ jobs:
             # 检查是否安装了rsync，如果没有则使用cp命令
             if command -v rsync > /dev/null; then
               # 使用rsync同步文件
-              rsync -a --delete --exclude='.git' --exclude='public/uploads' /tmp/deploy/ ./
+              rsync -a --delete --exclude='.git' --exclude='public/uploads' --exclude='node_modules' /tmp/deploy/ ./
             else
               # 使用cp命令复制文件
               echo "rsync未安装，使用cp命令替代"
-              rm -rf .next node_modules package.json pnpm-lock.yaml
+              rm -rf .next package.json pnpm-lock.yaml
+              [ -d "public" ] && mv public/uploads public_uploads || true
               cp -a /tmp/deploy/. ./
+              [ -d "public_uploads" ] && mkdir -p public && mv public_uploads public/uploads || true
             fi
+            
+            # 在服务器端安装生产依赖
+            echo "在服务器端安装生产依赖..."
+            pnpm install --prod --frozen-lockfile
             
             # 清理临时文件
             rm -f /tmp/deploy.tar.gz
