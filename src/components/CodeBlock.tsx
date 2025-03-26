@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import '../styles/syntax-highlighter-override.css';
 
 // 导入常用语言支持
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
@@ -104,14 +105,47 @@ export default function CodeBlock({ language, code, ...props }: {
   const lineNumberColor = isDarkTheme ? '#6e7681' : '#aaa';
   const lineNumberBorderColor = isDarkTheme ? '#334155' : '#e5e5e5';
 
+  // 添加CSS类到行号元素的钩子
+  useEffect(() => {
+    // 给所有行号元素添加css类
+    const lineNumbers = document.querySelectorAll('.react-syntax-highlighter-line-number');
+    lineNumbers.forEach(el => {
+      el.classList.add('linenumber');
+      // 直接设置内联样式，确保最高优先级
+      (el as HTMLElement).style.fontStyle = 'normal';
+    });
+  }, [code, language]); // 代码或语言变化时重新运行
+
   return (
     <div className={`relative my-6 rounded-sm overflow-hidden border ${borderColor}`}>
+      {/* 内联样式覆盖 */}
+      <style jsx global>{`
+        /* 全局覆盖React Syntax Highlighter的行号样式 */
+        .react-syntax-highlighter-line-number,
+        pre span.linenumber,
+        span[class*="linenumber"],
+        span[style*="fontStyle: italic"] {
+          font-style: normal !important;
+        }
+        
+        /* 强制第一列（行号）不使用斜体 */
+        pre > span > span:first-child,
+        pre > span > span.token.comment:first-child {
+          font-style: normal !important;
+        }
+      `}</style>
+      
       <div className={`${headerBgColor} ${headerTextColor} text-xs py-1 px-3 font-mono border-b ${borderColor}`}>
         {language}
       </div>
       <div className="relative">
         <SyntaxHighlighter
-          style={syntaxStyle}
+          style={{
+            ...syntaxStyle,
+            'span.linenumber, span.react-syntax-highlighter-line-number': {
+              fontStyle: 'normal !important'
+            }
+          }}
           language={language}
           showLineNumbers={true}
           wrapLines={true}
@@ -121,8 +155,12 @@ export default function CodeBlock({ language, code, ...props }: {
             textAlign: 'center', 
             userSelect: 'none',
             borderRight: `1px solid ${lineNumberBorderColor}`,
-            marginRight: '1em',
-            paddingRight: '0' 
+            marginRight: "1em",
+            paddingRight: '0',
+            fontStyle: 'normal !important'
+          }}
+          lineNumberContainerStyle={{
+            fontStyle: 'normal !important'
           }}
           customStyle={{ 
             margin: 0, 
@@ -132,6 +170,11 @@ export default function CodeBlock({ language, code, ...props }: {
             backgroundColor: isDarkTheme ? '#1e1e1e' : '#f8f8f8'
           }}
           PreTag="div"
+          codeTagProps={{
+            style: {
+              fontStyle: 'normal'
+            }
+          }}
           {...props}
         >
           {code}

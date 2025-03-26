@@ -1,0 +1,16 @@
+/* 覆盖react-syntax-highlighter的行号样式 */
+pre > span:first-child > span {
+  font-style: normal !important;
+}
+
+/* 确保所有行号都不是斜体 */
+.linenumber {
+  font-style: normal !important;
+}
+
+/* 针对prism特定的行号类 */
+.prism-code .linenumber, 
+.prism-code .token.linenumber,
+.react-syntax-highlighter-line-number {
+  font-style: normal !important;
+} 
