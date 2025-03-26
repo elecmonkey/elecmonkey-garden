@@ -154,11 +154,9 @@ jobs:
             
             # 在服务器端安装生产依赖
             echo "在服务器端安装生产依赖..."
-            # 添加处理pnpm锁文件兼容性问题的逻辑
-            if ! pnpm install --prod --frozen-lockfile; then
-              echo "尝试使用--force参数重新创建锁文件..."
-              pnpm install --prod --force
-            fi
+            pnpm install --prod --frozen-lockfile
+            
+            # pnpm install --prod --force
             
             # 查看环境和目录结构（显示隐藏文件）
             echo "当前目录: $(pwd)"
