@@ -326,3 +326,51 @@ export async function getAllPostsWithPagination(page: number = 1, pageSize: numb
     pageSize,
   };
 }
+
+// 根据标签获取分页的文章列表
+export async function getPostsByTagWithPagination(tagName: string, page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+  // 获取包含该标签的所有文章
+  const allPosts = await getPostsByTag(tagName);
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 确保页码在有效范围内
+  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  
+  // 计算当前页的文章
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentPagePosts = allPosts.slice(startIndex, endIndex);
+  
+  return {
+    posts: currentPagePosts,
+    totalPosts,
+    totalPages,
+    currentPage: validPage,
+    pageSize,
+  };
+}
+
+// 根据月份获取分页的文章列表
+export async function getPostsByMonthWithPagination(month: string, page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+  // 获取该月份的所有文章
+  const allPosts = await getPostsByMonth(month);
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 确保页码在有效范围内
+  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  
+  // 计算当前页的文章
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentPagePosts = allPosts.slice(startIndex, endIndex);
+  
+  return {
+    posts: currentPagePosts,
+    totalPosts,
+    totalPages,
+    currentPage: validPage,
+    pageSize,
+  };
+}

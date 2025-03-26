@@ -1,11 +1,18 @@
 import { Metadata } from 'next';
-import { getAllMonths, getPostsByMonth } from '@/lib/api';
+import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
 import Link from 'next/link';
+import Pagination from '@/components/Pagination';
+import PageTransition from '@/components/PageTransition';
+import { Suspense } from 'react';
+import ScrollToContent from '@/components/ScrollToContent';
+import { notFound } from 'next/navigation';
+import { PostData } from '@/lib/api';
 
 type Props = {
   params: Promise<{ month: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 // 生成可能的月份路径
@@ -31,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function MonthArchivePage({ params }: Props) {
+export default async function MonthArchivePage({ params, searchParams }: Props) {
   const { month } = await params;
   
   // 转换月份格式: YYYYMM -> YYYY年MM月
@@ -39,10 +46,25 @@ export default async function MonthArchivePage({ params }: Props) {
   const monthNum = month.substring(4, 6);
   const displayName = `${year}年${monthNum}月`;
   
-  const posts = await getPostsByMonth(month);
+  const searchParamsWait = await searchParams;
+  // 获取当前页码，默认为第1页
+  const currentPage = Number(searchParamsWait.page) || 1;
+  
+  // 获取分页的文章列表
+  const { posts, totalPosts, totalPages } = await getPostsByMonthWithPagination(month, currentPage);
+  
+  // 如果页码超出范围且总页数大于0，返回404
+  if (currentPage > totalPages && totalPages > 0) {
+    notFound();
+  }
   
   return (
     <PageContainer>
+      {/* 添加滚动处理组件，用 Suspense 包裹 */}
+      <Suspense fallback={null}>
+        <ScrollToContent />
+      </Suspense>
+      
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold flex items-center">
@@ -52,7 +74,7 @@ export default async function MonthArchivePage({ params }: Props) {
               </svg>
             </span>
             {displayName}
-            <span className="ml-3 text-lg font-normal text-gray-500">({posts.length} 篇文章)</span>
+            <span className="ml-3 text-lg font-normal text-gray-500">({totalPosts} 篇文章)</span>
           </h1>
           <div className="flex gap-2">
             <Link 
@@ -77,19 +99,26 @@ export default async function MonthArchivePage({ params }: Props) {
         </div>
       </div>
       
-      {posts.length === 0 ? (
-        <div className="text-center py-10">
-          <p className="text-gray-500 dark:text-gray-400">该月份未找到文章</p>
-          <Link href="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
-            查看所有文章
-          </Link>
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
+      <PageTransition>
+        {posts.length === 0 ? (
+          <div className="text-center py-10">
+            <p className="text-gray-500 dark:text-gray-400">该月份未找到文章</p>
+            <Link href="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
+              查看所有文章
+            </Link>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {posts.map((post: PostData) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
+      </PageTransition>
+      
+      {/* 只有当总页数大于1时才显示分页组件 */}
+      {totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       )}
     </PageContainer>
   );
