@@ -154,39 +154,51 @@ jobs:
             
             # 在服务器端安装生产依赖
             echo "在服务器端安装生产依赖..."
-            pnpm install --prod --frozen-lockfile
-            
-            # 清理临时文件
-            rm -rf /tmp/deploy
+            # 添加处理pnpm锁文件兼容性问题的逻辑
+            if ! pnpm install --prod --frozen-lockfile; then
+              echo "尝试使用--force参数重新创建锁文件..."
+              pnpm install --prod --force
+            fi
             
             # 查看环境和目录结构（显示隐藏文件）
             echo "当前目录: $(pwd)"
             echo "目录内容（包括隐藏文件）:"
             ls -lha
-            echo "next路径检查:"
-            find . -name next -type f
             
-            # 直接使用 PM2 启动 Next.js 应用，使用绝对路径
+            # Next.js可执行文件路径
             NEXT_BIN="$(pwd)/node_modules/.bin/next"
+            echo "设置Next.js可执行文件路径: $NEXT_BIN"
             
-            if [ -f "$NEXT_BIN" ]; then
-              echo "找到next执行文件: $NEXT_BIN"
-            else
-              echo "未找到next执行文件，尝试重新安装"
-              pnpm install --prod
-              if [ -f "$NEXT_BIN" ]; then
-                echo "安装后找到next执行文件: $NEXT_BIN"
-              else
-                echo "仍然未找到next执行文件，列出node_modules/.bin目录:"
-                ls -la node_modules/.bin || echo "node_modules/.bin目录不存在"
-              fi
+            # 检查文件是否存在，如果不存在使用备选方案
+            if [ ! -f "$NEXT_BIN" ]; then
+              echo "警告: 未找到Next.js可执行文件，使用备选方案"
+              NEXT_BIN="npx next"
             fi
             
-            # 直接使用PM2启动Next.js应用
-            pm2 delete "elecmonkey-garden" 2>/dev/null || true
-            pm2 reload "elecmonkey-garden" || pm2 start "pnpm run start" --name "elecmonkey-garden" --cwd ${{ secrets.REMOTE_TARGET_DIR }}
+            # 定义应用配置
+            APP_NAME="elecmonkey-garden"
+            START_SCRIPT="$NEXT_BIN start"
             
-            # 保存PM2配置，确保服务器重启后自动启动
+            # 优化的PM2启动逻辑
+            echo "使用PM2启动或重启应用..."
+            
+            # 检查应用是否已存在
+            if pm2 list | grep -q "$APP_NAME"; then
+              # 应用已存在，执行reload操作
+              echo "应用已存在，执行优雅重启..."
+              pm2 reload "$APP_NAME" --update-env || {
+                # 如果reload失败，尝试重新启动
+                echo "Reload失败，执行删除后重新启动..."
+                pm2 delete "$APP_NAME"
+                pm2 start "$START_SCRIPT" --name "$APP_NAME"
+              }
+            else
+              # 应用不存在，直接启动
+              echo "应用不存在，启动新实例..."
+              pm2 start "$START_SCRIPT" --name "$APP_NAME"
+            fi
+            
+            # 保存PM2配置
             echo "保存PM2配置"
             pm2 save
             
