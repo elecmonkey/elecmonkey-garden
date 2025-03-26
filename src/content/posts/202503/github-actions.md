@@ -1,8 +1,8 @@
 ---
 title: '前端小项目的 GitHub Actions 配置爬坑记'
 date: '2024-03-26'
-description: '对大模型太不信任导致的惨剧❌ 一个前端开发者与 GitHub Actions 斗智斗勇的故事✅'
-tags: ['GitHub Actions', 'CI/CD', 'Next.js', 'DevOps', '运维', '前端工程化']
+description: '又名被大模型坑的前端开发者决心拯救自己的CI/CD工作流（bu。'
+tags: ['GitHub Actions', 'CI/CD', 'Next.js', 'DevOps', '前端工程化', '性能优化', 'rsync']
 author: 'Elecmonkey'
 ---
 
@@ -57,4 +57,61 @@ echo "在服务器端安装生产依赖..."
 pnpm install --prod --frozen-lockfile
 ```
 
-蒽 看着不错，打出来的 `tar.gz` 只有 20MB 左右大小了。就这样吧先。
+蒽 看着不错，打出来的 `tar.gz` 只有 20MB ，那就这样了…… 不对啊，不能这样。直觉告诉我我的这些破玩意儿也没有 20MB 大小。那看看 `.next` 目录里到底有些啥：
+
+ - ​开发相关
+```txt
+.next/cache/ - 构建缓存
+.next/routes-manifest.json - 开发调试文件
+```
+ - ​临时文件
+```txt
+.next/trace
+.next/analyze
+```
+
+这些东西生产环境也不需要啊！
+
+顺便的顺便，其实任意两次编译出来的结果，并非每个文件都有差异。如果能每次都 diff 出差异来针对性的上传——好的，我们都会想到 `rsync` 。不过这其实有点问题，用压缩包传输就不太好 diff 了。所以究竟是压缩包的那点压缩量更能节省流量还是避免相同文件重复上传更能节省流量？我猜对于"持续集成、持续部署"的项目来说，应该是后者会效果显著一点。
+
+```shell
+if rsync -avz --delete \
+  --exclude='.next/cache/' \
+  --exclude='.next/trace' \
+  --exclude='.next/analyze' \
+  --exclude='.next/routes-manifest.json' \
+  -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+  ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then
+  echo "✅ 文件传输成功！"
+else
+  echo "❌ 文件传输失败，退出代码: $?"
+  exit 1
+fi
+```
+
+通过 `--exclude` 参数排除开发缓存和调试文件，通过 `--delete` 参数可以自动删除服务器目录中多余的文件。
+
+```shell
+du -sh deploy/
+```
+输出：
+```txt
+275M	deploy/
+```
+
+但是 `rsync` 告诉我——
+```txt
+sent 1,403,633 bytes  received 3,500 bytes  187,617.73 bytes/sec
+total size is 5,833,900  speedup is 4.15
+```
+沃德玛雅。不带生产环境依赖的目录还有275MB，我想知道我最开始带着完整环境几次 Actions 到底传了多大的包。排除掉 `cache` 之类的东西后大小仅仅 5MB ，实际传输增量仅 1MB 多。。。
+
+啊想到自己盯着屏幕等十几分钟 Actions 的过往。。。请本文主角 Claude 老师来总结一下吧：
+
+1. **不要盲目信任模型生成的"最佳实践"**：即使是强大的大模型，它们给出的方案也可能只是一种通用解决方案，而不一定适合你的具体场景。需要理解每一步操作的目的，不要无脑复制粘贴。
+
+2. **了解项目的构建产物特性**：不同前端框架的构建产物差异很大。Next.js 这类同构框架与纯静态框架有本质区别，了解这些特性对优化部署策略至关重要。
+
+3. **合理选择工具链**：`rsync` 这类老牌工具之所以能流行几十年，正是因为它们解决了实际问题且性能优异。在选择工具时，应该关注其核心优势而不是追逐新潮。
+
+4. **持续优化是值得的**：从最初的二十分钟到最后的几十秒，每一步优化都带来了明显的收益。对于需要频繁部署的项目，这种积累的时间节省是巨大的。
