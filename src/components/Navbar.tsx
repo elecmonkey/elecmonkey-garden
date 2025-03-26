@@ -2,16 +2,25 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const pathname = usePathname() || ''; // 提供默认值，避免undefined
+  
   // 检查是否是主页
   const isHomePage = pathname === '/';
   
   // 控制移动端菜单展开/折叠的状态
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // 添加一个状态来记录是否是客户端渲染
+  const [isClient, setIsClient] = useState(false);
+  
+  // 在客户端挂载后设置isClient为true
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // 切换菜单状态
   const toggleMenu = () => {
@@ -20,10 +29,11 @@ export default function Navbar() {
   
   // 定义一个函数来确定导航链接是否为当前页面
   const isActive = (path: string) => {
-    // 对于博客子页面的处理
-    if (path === '/blog' && pathname.startsWith('/blog/')) {
-      return true;
+    // 对于所有文章页面，确保服务器端和客户端渲染一致
+    if (path === '/blog') {
+      return isClient ? (pathname === '/blog') : (pathname === '/blog');
     }
+    // 其他页面保持精确匹配
     return pathname === path;
   };
   
