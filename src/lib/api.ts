@@ -22,6 +22,13 @@ export type TagCount = {
   size?: string;    // 标签大小（用于UI显示）
 };
 
+// 定义月份统计类型
+export type MonthData = {
+  id: string;       // 月份ID (例如: "202503")
+  displayName: string; // 显示名称 (例如: "2025年5月")
+  count: number;    // 文章数量
+};
+
 // 博客文章根目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
@@ -236,4 +243,54 @@ export async function getPostById(id: string): Promise<PostData & { prevPost?: {
     prevPost,
     nextPost
   };
+}
+
+// 获取所有月份及其文章数量
+export async function getAllMonths(): Promise<MonthData[]> {
+  const monthFolders = await getMonthFolders();
+  const monthDataPromises = monthFolders.map(async (monthFolder) => {
+    // 获取该月份的文章数量
+    const postsInMonth = await getPostsFromMonth(monthFolder);
+    
+    // 转换月份格式: YYYYMM -> YYYY年MM月
+    const year = monthFolder.substring(0, 4);
+    const month = monthFolder.substring(4, 6);
+    const displayName = `${year}年${month}月`;
+    
+    return {
+      id: monthFolder,
+      displayName,
+      count: postsInMonth.length
+    };
+  });
+  
+  const monthsData = await Promise.all(monthDataPromises);
+  
+  // 按月份降序排列（最新的月份在前）
+  return monthsData.sort((a, b) => {
+    if (a.id < b.id) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+
+// 根据月份获取相关文章
+export async function getPostsByMonth(month: string): Promise<PostData[]> {
+  try {
+    const posts = await getPostsFromMonth(month);
+    
+    // 按日期降序排列
+    return posts.sort((a, b) => {
+      if (a.date < b.date) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  } catch (error) {
+    console.error(`获取月份 ${month} 的文章失败:`, error);
+    return [];
+  }
 }

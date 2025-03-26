@@ -4,6 +4,7 @@ import PostCard from '@/components/PostCard';
 import ScrollToContent from '@/components/ScrollToContent';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: "所有文章 - Elecmonkey的小花园",
@@ -20,7 +21,18 @@ export default async function BlogPage() {
         <ScrollToContent />
       </Suspense>
       
-      <h1 className="text-3xl font-bold mb-8">博客文章</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">博客文章</h1>
+        <Link 
+          href="/archive" 
+          className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center"
+        >
+          按月归档
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
       
       {posts.length === 0 ? (
         <div className="text-center py-10">
