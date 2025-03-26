@@ -58,6 +58,8 @@ jobs:
           # 打包为 tar 文件便于传输
           cd ..
           tar -czf deploy.tar.gz deploy
+
+          ls -lh deploy.tar.gz
       
       - name: 部署到服务器
         uses: appleboy/scp-action@master
