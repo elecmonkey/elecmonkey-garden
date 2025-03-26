@@ -1,18 +1,33 @@
-import { getAllPosts } from '@/lib/api';
+import { getAllPostsWithPagination } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
 import ScrollToContent from '@/components/ScrollToContent';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import Link from 'next/link';
+import Pagination from '@/components/Pagination';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: "所有文章 - Elecmonkey的小花园",
 };
 
-export default async function BlogPage() {
-  const posts = await getAllPosts();
-  // 文章已按日期降序排列
+interface BlogPageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  // 获取当前页码，默认为第1页
+  const searchParamsWait = await searchParams;
+  const currentPage = Number(searchParamsWait.page) || 1;
+  
+  // 获取分页的文章列表
+  const { posts, totalPages } = await getAllPostsWithPagination(currentPage);
+  
+  // 如果页码超出范围且总页数大于0，返回404
+  if (currentPage > totalPages && totalPages > 0) {
+    notFound();
+  }
 
   return (
     <PageContainer>
@@ -44,6 +59,11 @@ export default async function BlogPage() {
             <PostCard key={post.id} post={post} />
           ))}
         </div>
+      )}
+      
+      {/* 只有当总页数大于1时才显示分页组件 */}
+      {totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       )}
     </PageContainer>
   );

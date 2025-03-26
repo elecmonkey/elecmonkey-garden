@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 // 定义文章数据类型
-type PostData = {
+export type PostData = {
   id: string;           // 文章唯一标识符
   content: string;      // 文章内容
   title: string;        // 文章标题
@@ -27,6 +27,15 @@ export type MonthData = {
   id: string;       // 月份ID (例如: "202503")
   displayName: string; // 显示名称 (例如: "2025年5月")
   count: number;    // 文章数量
+};
+
+// 分页结果类型
+export type PaginatedPosts = {
+  posts: PostData[];
+  totalPosts: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
 };
 
 // 博客文章根目录路径
@@ -293,4 +302,27 @@ export async function getPostsByMonth(month: string): Promise<PostData[]> {
     console.error(`获取月份 ${month} 的文章失败:`, error);
     return [];
   }
+}
+
+// 获取分页的文章列表
+export async function getAllPostsWithPagination(page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+  const allPosts = await getAllPosts();
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 确保页码在有效范围内
+  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  
+  // 计算当前页的文章
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentPagePosts = allPosts.slice(startIndex, endIndex);
+  
+  return {
+    posts: currentPagePosts,
+    totalPosts,
+    totalPages,
+    currentPage: validPage,
+    pageSize,
+  };
 }
