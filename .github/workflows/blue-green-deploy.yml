@@ -166,10 +166,22 @@ jobs:
             # 如果应用不存在，则首次启动
             if ! pm2 list | grep -q "elecmonkey-garden"; then
               echo "首次启动应用..."
-              NODE_OPTIONS="--preserve-symlinks" pm2 start server.js --name elecmonkey-garden -i 2 --time
+              NODE_OPTIONS="--preserve-symlinks" pm2 start server.js \
+                --name elecmonkey-garden \
+                -i 2 \
+                --time \
+                --max-memory-restart 768M \
+                --kill-timeout 5000 \
+                --no-autorestart \
+                --no-watch \
+                --env production \
+                --update-env \
             else
               echo "平滑重载应用..."
-              NODE_OPTIONS="--preserve-symlinks" pm2 reload elecmonkey-garden --update-env
+              NODE_OPTIONS="--preserve-symlinks" pm2 reload elecmonkey-garden \
+                --update-env \
+                --max-memory-restart 768M \
+                --kill-timeout 5000
             fi
             
             # 保存PM2配置
