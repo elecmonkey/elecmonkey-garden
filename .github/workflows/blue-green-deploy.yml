@@ -46,20 +46,14 @@ jobs:
           mkdir -p deploy
           
           # 复制 Next.js 构建产物
-          cp -r .next deploy/
-          
-          # 复制必要的文件
-          cp package.json pnpm-lock.yaml ecosystem.config.js deploy/
-          mv deploy/.next/static deploy/.next/standalone/
-          
-          # 复制博客文章目录
-          mkdir -p deploy/src/content
-          cp -r src/content/posts deploy/src/content/
-          
-          # 复制其他必要的静态文件和配置
-          if [ -d "public" ]; then
-            cp -r public deploy/
-          fi
+          cp -r .next/standalone/.next deploy/
+          cp -r .next/standalone/src deploy/
+          cp -r .next/standalone/package.json deploy/
+          cp -r .next/static deploy/.next/
+
+          cp .next/standalone/server.js deploy/
+          cp pnpm-lock.yaml deploy/
+          cp ecosystem.config.js deploy/
           
           # 显示文件夹总大小
           echo "部署目录总大小："
@@ -119,7 +113,7 @@ jobs:
             
             # 1. 复制文件到非活跃目录
             echo "从临时目录复制文件到新发布目录..."
-            rsync -a --exclude='node_modules' /tmp/deploy/ "$RELEASE_DIR/"
+            rsync -a /tmp/deploy/ "$RELEASE_DIR/"
             
             # 创建回滚脚本
             echo "创建回滚脚本..."
@@ -153,6 +147,7 @@ jobs:
             echo "✅ 回滚完成"
             exit 0
             EOF
+            
             chmod +x "$RELEASE_DIR/rollback.sh"
             
             # 2. 在非活跃目录中安装依赖
