@@ -65,6 +65,17 @@ export default function AboutPage() {
               <div className="flex flex-col items-center group">
                 <div className="relative w-16 h-16 mb-2">
                   <Image
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                    alt="Node.js"
+                    fill
+                    className="object-contain transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Node.js</span>
+              </div>
+              <div className="flex flex-col items-center group">
+                <div className="relative w-16 h-16 mb-2">
+                  <Image
                     src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
                     alt="Golang"
                     fill
