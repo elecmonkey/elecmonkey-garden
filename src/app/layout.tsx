@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
         {/* 主题初始化脚本，避免闪烁 */}
-        <script dangerouslySetInnerHTML={{
+        {/* <script dangerouslySetInnerHTML={{
           __html: `
             (function() {
               try {
@@ -34,7 +34,7 @@ export default function RootLayout({
               }
             })();
           `
-        }} />
+        }} /> */}
       </head>
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-blue-950 text-gray-900 dark:text-blue-50`}
