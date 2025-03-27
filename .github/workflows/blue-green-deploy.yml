@@ -18,7 +18,7 @@ jobs:
       - name: 设置 pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8  # 使用 pnpm 8.x 版本
+          version: 10  # 使用 pnpm 8.x 版本
       
       - name: 设置 Node.js 环境
         uses: actions/setup-node@v3
@@ -82,7 +82,6 @@ jobs:
             --exclude='.next/cache/' \
             --exclude='.next/trace' \
             --exclude='.next/analyze' \
-            --exclude='.next/routes-manifest.json' \
             -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
             ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then
             echo "✅ 文件传输成功！"
