@@ -37,7 +37,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   if (!keyword.trim()) {
     return (
       <PageContainer>
-        <h1 className="text-3xl font-bold mb-8">搜索文章</h1>
+        <h1 className="text-3xl font-bold mb-8">搜索</h1>
         <div className="mb-8">
           <SearchBar className="max-w-2xl mx-auto" placeholder="输入关键词搜索文章..." />
         </div>
@@ -63,10 +63,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         <ScrollToContent />
       </Suspense>
       
-      <h1 className="text-3xl font-bold mb-4">搜索结果</h1>
+      <h1 className="text-3xl font-bold mb-8">搜索</h1>
       
       <div className="mb-8">
-        <SearchBar className="max-w-2xl" />
+        <SearchBar className="max-w-2xl mx-auto" placeholder="搜索文章..." />
       </div>
       
       <div className="mb-6">

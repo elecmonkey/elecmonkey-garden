@@ -65,7 +65,7 @@ export default function Navbar() {
     ? "bg-white dark:bg-gray-900 shadow-sm" // 主页导航栏：相对定位
     : "bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10"; // 其他页面导航栏：固定在顶部
   
-  const littleCircleButtonClass = "text-gray-700 dark:text-gray-300 focus:outline-none p-2 rounded-full active:bg-gray-200 hover:bg-gray-200 dark:active:bg-gray-700 dark:hover:bg-gray-700 transition-colors px-2";
+  const littleCircleButtonClass = "text-gray-700 dark:text-gray-300 focus:outline-none p-2 rounded-full active:bg-gray-200 hover:bg-gray-200 dark:active:bg-gray-700 dark:hover:bg-gray-700 transition-colors mx-0.5";
 
   return (
     <nav className={navbarClasses}>
