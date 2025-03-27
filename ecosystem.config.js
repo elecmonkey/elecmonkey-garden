@@ -3,8 +3,7 @@ module.exports = {
     {
       name: 'elecmonkey-garden',
       cwd: '.',  // 设置工作目录
-      script: 'node',  // 使用 pnpm 来运行
-      args: '.next/standalone/server.js',  // 运行 start 命令
+      script: '.next/standalone/server.js',
       instances: 2,               // 使用2个实例(双核服务器)
       exec_mode: 'cluster',       // 使用集群模式
       autorestart: true,

@@ -82,6 +82,7 @@ jobs:
             --exclude='.next/cache/' \
             --exclude='.next/trace' \
             --exclude='.next/analyze' \
+            --exclude='.next/standalone/node_modules/' \
             -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
             ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then
             echo "✅ 文件传输成功！"
