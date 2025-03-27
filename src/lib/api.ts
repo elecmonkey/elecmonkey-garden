@@ -480,15 +480,24 @@ export async function searchPosts(keyword: string): Promise<SearchResultItem[]> 
       }
     }
     
-    // 日期因素（新文章略微提升）
-    const dateScore = new Date(post.date).getTime() / (1000 * 60 * 60 * 24) / 100;
-    score += dateScore;
+    // 日期因素（新文章略微提升）- 只有在至少有一个匹配时才考虑日期因素
+    const hasMatches = matches.title || matches.description || matches.content.matched || matches.tags.length > 0;
+    
+    if (hasMatches) {
+      const dateScore = new Date(post.date).getTime() / (1000 * 60 * 60 * 24) / 100;
+      score += dateScore;
+    }
     
     return { post, score, matches };
   });
   
-  // 过滤掉得分为0的文章（没有匹配项）
-  const matchedPosts = scoredPosts.filter(item => item.score > 0);
+  // 过滤掉没有匹配项的文章
+  const matchedPosts = scoredPosts.filter(item => 
+    item.matches.title || 
+    item.matches.description || 
+    item.matches.content.matched || 
+    item.matches.tags.length > 0
+  );
   
   // 按得分降序排序
   matchedPosts.sort((a, b) => b.score - a.score);
