@@ -82,7 +82,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             if (type === 'checkbox') {
               return (
                 <span 
-                  className={`inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 mt-0.5 border rounded ${checked 
+                  className={`inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 -ml-2 mt-1 border rounded ${checked 
                     ? 'bg-blue-500 border-blue-500 dark:bg-blue-600 dark:border-blue-600' 
                     : 'border-gray-400 dark:border-gray-600'}`}
                 >
