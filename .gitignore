@@ -42,3 +42,6 @@ next-env.d.ts
 
 # mermaid cache
 /.mermaid-cache/
+
+# cspell configuration
+.cspell.json
