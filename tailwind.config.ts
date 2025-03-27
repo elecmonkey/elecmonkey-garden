@@ -3,11 +3,12 @@ import typography from '@tailwindcss/typography';
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/*.{tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class', // 启用基于class的深色模式
+  // darkMode: 'class', // 启用基于class的深色模式
   theme: {
     extend: {
       typography: {

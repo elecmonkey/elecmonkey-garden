@@ -58,6 +58,33 @@ SyntaxHighlighter.registerLanguage('sql', sql);
 // 复制按钮组件
 function CopyButton({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    // 检查当前主题
+    const checkTheme = () => {
+      setIsDarkTheme(document.documentElement.classList.contains('dark'));
+    };
+
+    // 初始检查
+    checkTheme();
+
+    // 监听主题变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code).then(() => {
@@ -65,8 +92,6 @@ function CopyButton({ code }: { code: string }) {
       setTimeout(() => setCopied(false), 2000);
     });
   };
-
-  const isDarkTheme = false;
 
   return (
     <button
@@ -93,7 +118,33 @@ export default function CodeBlock({ language, code, ...props }: {
   code: string, 
   [key: string]: unknown 
 }) {
-  const isDarkTheme = false;
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    // 检查当前主题
+    const checkTheme = () => {
+      setIsDarkTheme(document.documentElement.classList.contains('dark'));
+    };
+
+    // 初始检查
+    checkTheme();
+
+    // 监听主题变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // 根据当前主题选择样式
   const syntaxStyle = isDarkTheme ? vscDarkPlus : oneLight;

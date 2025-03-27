@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from 'react';
 
 interface MermaidRendererProps {
@@ -8,9 +10,31 @@ interface MermaidRendererProps {
 export default function MermaidRenderer({ chart, className = '' }: MermaidRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svgContent, setSvgContent] = useState<string>('<div>加载中...</div>');
-  const actualTheme = 'light';
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
+    // 检查当前主题
+    const checkTheme = () => {
+      setIsDarkTheme(document.documentElement.classList.contains('dark'));
+    };
+
+    // 初始检查
+    checkTheme();
+
+    // 监听主题变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
     // 避免在服务器端运行
     if (typeof window === 'undefined') return;
 
@@ -18,18 +42,17 @@ export default function MermaidRenderer({ chart, className = '' }: MermaidRender
     import('mermaid').then(async (mermaid) => {
       try {
         // 设置主题
-        const theme = /*actualTheme === 'dark' ? 'dark' : 'default';*/ 'default';
+        const mermaidTheme = isDarkTheme ? 'dark' : 'default';
         
         // 初始化 mermaid
         mermaid.default.initialize({
           startOnLoad: false,
-          theme: theme,
+          theme: mermaidTheme,
           securityLevel: 'strict',
-          // darkMode: actualTheme === 'dark',
-          darkMode: false,
+          darkMode: isDarkTheme,
           fontFamily: 'sans-serif',
           // 暗色模式下的颜色设置
-          themeVariables: /*actualTheme === 'dark'*/ false ? {
+          themeVariables: isDarkTheme ? {
             primaryColor: '#3b82f6',
             primaryTextColor: '#f1f5f9',
             primaryBorderColor: '#475569',
@@ -55,12 +78,14 @@ export default function MermaidRenderer({ chart, className = '' }: MermaidRender
         setSvgContent(`<div class="p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">Mermaid 图表渲染失败</div>`);
       }
     });
-  }, [chart, actualTheme]);
+
+    return () => observer.disconnect();
+  }, [chart, isDarkTheme]);
 
   return (
     <div 
       ref={containerRef}
-      className={`my-6 overflow-x-auto flex justify-center ${/*actualTheme === 'dark' */ false ? 'bg-gray-800' : 'bg-gray-50'} p-4 rounded-md shadow-sm ${className}`}
+      className={`my-6 overflow-x-auto flex justify-center ${isDarkTheme ? 'bg-gray-800' : 'bg-gray-50'} p-4 rounded-md shadow-sm ${className}`}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   );

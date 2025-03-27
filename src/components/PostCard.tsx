@@ -15,7 +15,7 @@ export default function PostCard({ post }: PostCardProps) {
   return (
     <article className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow">
       <Link href={`/blog/${post.id}`}>
-        <h3 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">{post.title}</h3>
+        <h3 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors dark:mt-10">{post.title}</h3>
       </Link>
       
       <p className="text-gray-500 dark:text-gray-400 text-sm mb-3">
