@@ -6,6 +6,7 @@ import MarkdownContent from '@/components/MarkdownContent';
 import { Metadata } from 'next';
 
 export async function generateStaticParams() {
+  // 预生成普通文章和隐藏文章
   const posts = await getAllPostIds();
   return posts.map((post) => ({
     slug: post.params.slug,
@@ -25,6 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: `${post.title} - Elecmonkey的小花园`,
       description: post.description,
+      // 禁止搜索引擎索引隐藏文章
+      robots: post.isHidden ? 'noindex, nofollow' : undefined,
     };
   } catch {
     return {
@@ -44,7 +47,14 @@ export default async function BlogPost({ params }: Props) {
       <PageContainer>
         <article className="prose dark:prose-invert lg:prose-xl max-w-none">
           <header className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+            <h1 className="text-3xl font-bold mb-2">
+              {post.isHidden && (
+                <span className="inline-block bg-gray-500 text-white text-sm py-1 px-2 rounded mr-2 align-middle">
+                  隐藏
+                </span>
+              )}
+              {post.title}
+            </h1>
             <p className="text-gray-500 dark:text-gray-400">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
