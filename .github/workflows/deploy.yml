@@ -51,6 +51,10 @@ jobs:
           # 复制必要的文件
           cp package.json pnpm-lock.yaml deploy/
           
+          # 复制博客文章目录
+          mkdir -p deploy/src/content
+          cp -r src/content/posts deploy/src/content/
+          
           # 复制其他必要的静态文件和配置
           if [ -d "public" ]; then
             cp -r public deploy/
@@ -118,6 +122,7 @@ jobs:
             
             echo "检查同步的文件目录内容（包括隐藏文件）："
             ls -lha /tmp/deploy/
+            du -sh /tmp/deploy/
             
             if [ ! -d "/tmp/deploy/.next" ]; then
               echo "❌ 错误: /tmp/deploy/.next 目录不存在！部署终止。"
@@ -199,12 +204,5 @@ jobs:
             # 保存PM2配置
             echo "保存PM2配置"
             pm2 save
-            
-            # 确保PM2开机自启（如果尚未配置）
-            if ! pm2 list | grep -q "module" || ! systemctl list-unit-files | grep -q "pm2-"; then
-              echo "配置PM2开机自启"
-              sudo env PATH=$PATH:/usr/bin pm2 startup || pm2 startup || echo "无法自动配置PM2开机自启，可能需要手动配置"
-              pm2 save
-            fi
             
             echo "部署完成：$(date)"
