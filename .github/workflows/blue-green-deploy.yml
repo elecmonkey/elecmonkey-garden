@@ -176,12 +176,14 @@ jobs:
                 --no-watch \
                 --env production \
                 --update-env \
+                --cwd "$CURRENT_LINK"
             else
               echo "平滑重载应用..."
               NODE_OPTIONS="--preserve-symlinks" pm2 reload elecmonkey-garden \
                 --update-env \
                 --max-memory-restart 768M \
-                --kill-timeout 5000
+                --kill-timeout 5000 \
+                --restart-delay=5000
             fi
             
             # 保存PM2配置
