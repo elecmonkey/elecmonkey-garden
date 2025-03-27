@@ -45,3 +45,6 @@ next-env.d.ts
 
 # cspell configuration
 .cspell.json
+
+git*.sh
+git*.txt
