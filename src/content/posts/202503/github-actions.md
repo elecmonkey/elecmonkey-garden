@@ -59,13 +59,9 @@ pnpm install --prod --frozen-lockfile
 
 蒽 看着不错，打出来的 `tar.gz` 只有 20MB ，那就这样了…… 不对啊，不能这样。直觉告诉我我的这些破玩意儿也没有 20MB 大小。那看看 `.next` 目录里到底有些啥：
 
- - ​开发相关
+ - ​缓存/临时文件
 ```txt
 .next/cache/ - 构建缓存
-.next/routes-manifest.json - 开发调试文件
-```
- - ​临时文件
-```txt
 .next/trace
 .next/analyze
 ```
@@ -79,7 +75,6 @@ if rsync -avz --delete \
   --exclude='.next/cache/' \
   --exclude='.next/trace' \
   --exclude='.next/analyze' \
-  --exclude='.next/routes-manifest.json' \
   -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
   ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then
   echo "✅ 文件传输成功！"
