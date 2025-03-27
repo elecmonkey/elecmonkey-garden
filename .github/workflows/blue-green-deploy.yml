@@ -50,6 +50,7 @@ jobs:
           
           # 复制必要的文件
           cp package.json pnpm-lock.yaml ecosystem.config.js deploy/
+          mv deploy/.next/static deploy/.next/standalone/
           
           # 复制博客文章目录
           mkdir -p deploy/src/content
