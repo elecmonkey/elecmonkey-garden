@@ -38,6 +38,21 @@ export type PaginatedPosts = {
   pageSize: number;
 };
 
+// 定义搜索结果类型
+export type SearchResultItem = {
+  post: PostData;
+  score: number;
+  matches: {
+    title: boolean;
+    tags: string[];
+    description: boolean;
+    content: {
+      matched: boolean;
+      excerpt: string;
+    };
+  };
+};
+
 // 博客文章根目录路径
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
@@ -368,6 +383,152 @@ export async function getPostsByMonthWithPagination(month: string, page: number 
   
   return {
     posts: currentPagePosts,
+    totalPosts,
+    totalPages,
+    currentPage: validPage,
+    pageSize,
+  };
+}
+
+// 搜索文章
+export async function searchPosts(keyword: string): Promise<SearchResultItem[]> {
+  if (!keyword.trim()) {
+    return [];
+  }
+  
+  const allPosts = await getAllPosts();
+  
+  // 转换关键词为小写，用于不区分大小写的搜索
+  const normalizedKeyword = keyword.toLowerCase();
+  
+  // 计算每篇文章的相关度得分
+  const scoredPosts = allPosts.map(post => {
+    let score = 0;
+    const matches = {
+      title: false,
+      tags: [] as string[],
+      description: false,
+      content: {
+        matched: false,
+        excerpt: "",
+      }
+    };
+    
+    // 标题匹配（权重最高）
+    if (post.title.toLowerCase().includes(normalizedKeyword)) {
+      score += 10;
+      matches.title = true;
+      // 标题开头匹配得分更高
+      if (post.title.toLowerCase().startsWith(normalizedKeyword)) {
+        score += 5;
+      }
+    }
+    
+    // 标签匹配（权重次高）
+    post.tags.forEach(tag => {
+      if (tag.toLowerCase().includes(normalizedKeyword)) {
+        score += 8;
+        matches.tags.push(tag);
+        // 精确匹配标签得分更高
+        if (tag.toLowerCase() === normalizedKeyword) {
+          score += 5;
+        }
+      }
+    });
+    
+    // 描述匹配（中等权重）
+    if (post.description.toLowerCase().includes(normalizedKeyword)) {
+      score += 5;
+      matches.description = true;
+    }
+    
+    // 内容匹配（基础权重）
+    if (post.content.toLowerCase().includes(normalizedKeyword)) {
+      score += 3;
+      matches.content.matched = true;
+      
+      // 计算关键词在内容中出现的次数
+      const matchCount = post.content.toLowerCase().split(normalizedKeyword).length - 1;
+      // 出现次数也计入得分，但设置上限以避免过度权重
+      score += Math.min(matchCount, 5) * 0.5;
+      
+      // 提取匹配的上下文作为摘要
+      try {
+        const lowerContent = post.content.toLowerCase();
+        const keywordIndex = lowerContent.indexOf(normalizedKeyword);
+        if (keywordIndex !== -1) {
+          // 获取关键词前后一定长度的内容作为摘要
+          const startIndex = Math.max(0, keywordIndex - 50);
+          const endIndex = Math.min(lowerContent.length, keywordIndex + normalizedKeyword.length + 50);
+          let excerpt = post.content.substring(startIndex, endIndex);
+          
+          // 如果摘要不是从内容开头开始，添加省略号
+          if (startIndex > 0) {
+            excerpt = "..." + excerpt;
+          }
+          
+          // 如果摘要不是到内容结尾，添加省略号
+          if (endIndex < post.content.length) {
+            excerpt = excerpt + "...";
+          }
+          
+          matches.content.excerpt = excerpt;
+        }
+      } catch (error) {
+        console.error("提取摘要时出错:", error);
+        matches.content.excerpt = post.description;
+      }
+    }
+    
+    // 日期因素（新文章略微提升）- 只有在至少有一个匹配时才考虑日期因素
+    const hasMatches = matches.title || matches.description || matches.content.matched || matches.tags.length > 0;
+    
+    if (hasMatches) {
+      const dateScore = new Date(post.date).getTime() / (1000 * 60 * 60 * 24) / 100;
+      score += dateScore;
+    }
+    
+    return { post, score, matches };
+  });
+  
+  // 过滤掉没有匹配项的文章
+  const matchedPosts = scoredPosts.filter(item => 
+    item.matches.title || 
+    item.matches.description || 
+    item.matches.content.matched || 
+    item.matches.tags.length > 0
+  );
+  
+  // 按得分降序排序
+  matchedPosts.sort((a, b) => b.score - a.score);
+  
+  // 返回排序后的文章数组及匹配信息
+  return matchedPosts;
+}
+
+// 搜索文章并分页
+export async function searchPostsWithPagination(keyword: string, page: number = 1, pageSize: number = 10): Promise<{
+  posts: SearchResultItem[];
+  totalPosts: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+}> {
+  // 获取搜索结果
+  const allResults = await searchPosts(keyword);
+  const totalPosts = allResults.length;
+  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 确保页码在有效范围内
+  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  
+  // 计算当前页的文章
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentPageResults = allResults.slice(startIndex, endIndex);
+  
+  return {
+    posts: currentPageResults,
     totalPosts,
     totalPages,
     currentPage: validPage,

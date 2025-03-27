@@ -29,9 +29,14 @@ export default function Navbar() {
   
   // 定义一个函数来确定导航链接是否为当前页面
   const isActive = (path: string) => {
+    console.log(123, pathname, path);
     // 对于所有文章页面，确保服务器端和客户端渲染一致
     if (path === '/blog') {
       return isClient ? (pathname === '/blog') : (pathname === '/blog');
+    }
+    // 对于搜索页面
+    if (path === '/search') {
+      return pathname === '/search';
     }
     // 其他页面保持精确匹配
     return pathname === path;
@@ -60,6 +65,8 @@ export default function Navbar() {
     ? "bg-white dark:bg-gray-900 shadow-sm" // 主页导航栏：相对定位
     : "bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10"; // 其他页面导航栏：固定在顶部
   
+  const littleCircleButtonClass = "text-gray-700 dark:text-gray-300 focus:outline-none p-2 rounded-full active:bg-gray-200 hover:bg-gray-200 dark:active:bg-gray-700 dark:hover:bg-gray-700 transition-colors mx-0.5";
+
   return (
     <nav className={navbarClasses}>
       <div className="max-w-4xl mx-auto px-4 py-3">
@@ -82,7 +89,16 @@ export default function Navbar() {
             <Link href="/about" className={getLinkClassName("/about")}>
               关于我
             </Link>
-            {/* <div className="ml-2">
+            <Link 
+              href="/search"
+              className={getLinkClassName("/search")}
+              aria-label="搜索"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </Link>
+            {/* <div className="mr-2">
               <ThemeSwitcher />
             </div> */}
           </div>
@@ -92,8 +108,17 @@ export default function Navbar() {
             {/* <div className="mr-2">
               <ThemeSwitcher />
             </div> */}
+            <Link 
+              href="/search"
+              className={littleCircleButtonClass}
+              aria-label="搜索"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </Link>
             <button 
-              className="text-gray-700 dark:text-gray-300 focus:outline-none p-2 rounded-full active:bg-gray-200 hover:bg-gray-200 dark:active:bg-gray-700 dark:hover:bg-gray-700 transition-colors" 
+              className={littleCircleButtonClass} 
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "关闭菜单" : "打开菜单"}
             >
@@ -137,4 +162,4 @@ export default function Navbar() {
       </div>
     </nav>
   );
-} 
+}
