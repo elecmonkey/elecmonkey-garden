@@ -312,21 +312,28 @@ export async function getPostById(id: string): Promise<PostData & { prevPost?: {
     throw new Error(`找不到ID为 "${id}" 的文章`);
   }
   
-  // 获取所有非草稿文章，用于确定前后文章
-  const allPosts = await getAllPosts({ includeHidden: true }); // 允许隐藏文章有前后文章
+  // 只有非隐藏文章才需要前后文章导航
+  let prevPost: { id: string; title: string } | undefined = undefined;
+  let nextPost: { id: string; title: string } | undefined = undefined;
   
-  // 找到当前文章在所有文章中的索引
-  const currentIndex = allPosts.findIndex(post => post.id === id);
-  
-  // 确定上一篇和下一篇文章（如果存在）
-  // 注意：由于文章是按日期降序排序的，所以索引+1是较旧的文章（上一篇），索引-1是较新的文章（下一篇）
-  const prevPost = currentIndex < allPosts.length - 1 ? 
-    { id: allPosts[currentIndex + 1].id, title: allPosts[currentIndex + 1].title } : 
-    undefined;
-  
-  const nextPost = currentIndex > 0 ? 
-    { id: allPosts[currentIndex - 1].id, title: allPosts[currentIndex - 1].title } : 
-    undefined;
+  if (!currentPost.isHidden) {
+    // 获取所有非草稿、非隐藏文章，用于确定前后文章
+    const allPublicPosts = await getAllPosts({ includeHidden: false });
+    
+    // 找到当前文章在所有公开文章中的索引
+    const currentIndex = allPublicPosts.findIndex(post => post.id === id);
+    
+    // 确定上一篇和下一篇文章（如果存在）
+    // 注意：由于文章是按日期降序排序的，所以索引+1是较旧的文章（上一篇），索引-1是较新的文章（下一篇）
+    prevPost = currentIndex < allPublicPosts.length - 1 ? 
+      { id: allPublicPosts[currentIndex + 1].id, title: allPublicPosts[currentIndex + 1].title } : 
+      undefined;
+    
+    nextPost = currentIndex > 0 ? 
+      { id: allPublicPosts[currentIndex - 1].id, title: allPublicPosts[currentIndex - 1].title } : 
+      undefined;
+  }
+  // 隐藏文章不需要有前后导航
   
   // 返回增强的文章数据，包含前后文章信息
   return {

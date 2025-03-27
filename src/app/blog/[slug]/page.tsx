@@ -94,6 +94,7 @@ export default async function BlogPost({ params }: Props) {
           </div>
 
           {/* 底部导航 */}
+          {!post.isHidden && (
           <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
             <div className="flex justify-between items-center">
               {/* 下一篇文章（更新的文章） */}
@@ -137,6 +138,7 @@ export default async function BlogPost({ params }: Props) {
               </div>
             </div>
           </div>
+          )}
         </article>
       </PageContainer>
     );
