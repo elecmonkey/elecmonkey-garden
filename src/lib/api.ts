@@ -374,3 +374,56 @@ export async function getPostsByMonthWithPagination(month: string, page: number 
     pageSize,
   };
 }
+
+// 搜索文章
+export async function searchPosts(keyword: string): Promise<PostData[]> {
+  if (!keyword.trim()) {
+    return [];
+  }
+  
+  const allPosts = await getAllPosts();
+  
+  // 转换关键词为小写，用于不区分大小写的搜索
+  const normalizedKeyword = keyword.toLowerCase();
+  
+  return allPosts.filter(post => {
+    // 搜索标题
+    const titleMatch = post.title.toLowerCase().includes(normalizedKeyword);
+    
+    // 搜索内容
+    const contentMatch = post.content.toLowerCase().includes(normalizedKeyword);
+    
+    // 搜索描述
+    const descriptionMatch = post.description.toLowerCase().includes(normalizedKeyword);
+    
+    // 搜索标签
+    const tagMatch = post.tags.some(tag => tag.toLowerCase().includes(normalizedKeyword));
+    
+    // 只要有一项匹配即返回true
+    return titleMatch || contentMatch || descriptionMatch || tagMatch;
+  });
+}
+
+// 搜索文章并分页
+export async function searchPostsWithPagination(keyword: string, page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+  // 获取搜索结果
+  const allPosts = await searchPosts(keyword);
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 确保页码在有效范围内
+  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  
+  // 计算当前页的文章
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentPagePosts = allPosts.slice(startIndex, endIndex);
+  
+  return {
+    posts: currentPagePosts,
+    totalPosts,
+    totalPages,
+    currentPage: validPage,
+    pageSize,
+  };
+}
