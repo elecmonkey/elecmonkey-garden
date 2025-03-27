@@ -323,10 +323,22 @@ export async function getPostsByMonth(month: string): Promise<PostData[]> {
 export async function getAllPostsWithPagination(page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
   const allPosts = await getAllPosts();
   const totalPosts = allPosts.length;
-  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 如果文章总数少于或等于每页数量，则不分页
+  if (totalPosts <= pageSize) {
+    return {
+      posts: allPosts,
+      totalPosts,
+      totalPages: 1, // 总是至少有1页
+      currentPage: 1,
+      pageSize,
+    };
+  }
+  
+  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
   
   // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  const validPage = Math.max(1, Math.min(page, totalPages));
   
   // 计算当前页的文章
   const startIndex = (validPage - 1) * pageSize;
@@ -347,10 +359,22 @@ export async function getPostsByTagWithPagination(tagName: string, page: number 
   // 获取包含该标签的所有文章
   const allPosts = await getPostsByTag(tagName);
   const totalPosts = allPosts.length;
-  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 如果文章总数少于或等于每页数量，则不分页
+  if (totalPosts <= pageSize) {
+    return {
+      posts: allPosts,
+      totalPosts,
+      totalPages: 1, // 总是至少有1页
+      currentPage: 1,
+      pageSize,
+    };
+  }
+  
+  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
   
   // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  const validPage = Math.max(1, Math.min(page, totalPages));
   
   // 计算当前页的文章
   const startIndex = (validPage - 1) * pageSize;
@@ -371,10 +395,22 @@ export async function getPostsByMonthWithPagination(month: string, page: number 
   // 获取该月份的所有文章
   const allPosts = await getPostsByMonth(month);
   const totalPosts = allPosts.length;
-  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 如果文章总数少于或等于每页数量，则不分页
+  if (totalPosts <= pageSize) {
+    return {
+      posts: allPosts,
+      totalPosts,
+      totalPages: 1, // 总是至少有1页
+      currentPage: 1,
+      pageSize,
+    };
+  }
+  
+  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
   
   // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  const validPage = Math.max(1, Math.min(page, totalPages));
   
   // 计算当前页的文章
   const startIndex = (validPage - 1) * pageSize;
@@ -517,10 +553,22 @@ export async function searchPostsWithPagination(keyword: string, page: number = 
   // 获取搜索结果
   const allResults = await searchPosts(keyword);
   const totalPosts = allResults.length;
-  const totalPages = Math.ceil(totalPosts / pageSize);
+  
+  // 如果搜索结果总数少于或等于每页数量，则不分页
+  if (totalPosts <= pageSize) {
+    return {
+      posts: allResults,
+      totalPosts,
+      totalPages: 1, // 总是至少有1页
+      currentPage: 1,
+      pageSize,
+    };
+  }
+  
+  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
   
   // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages || 1));
+  const validPage = Math.max(1, Math.min(page, totalPages));
   
   // 计算当前页的文章
   const startIndex = (validPage - 1) * pageSize;
