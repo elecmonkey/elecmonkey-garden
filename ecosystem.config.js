@@ -4,6 +4,7 @@ module.exports = {
       name: 'elecmonkey-garden',
       cwd: '.',  // 设置工作目录
       script: 'server.js',
+      node_args: '--preserve-symlinks', // 禁止 Node.js 解析软链接
       instances: 2,               // 使用2个实例(双核服务器)
       exec_mode: 'cluster',       // 使用集群模式
       autorestart: true,
