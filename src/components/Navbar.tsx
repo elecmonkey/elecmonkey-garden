@@ -29,7 +29,6 @@ export default function Navbar() {
   
   // 定义一个函数来确定导航链接是否为当前页面
   const isActive = (path: string) => {
-    console.log(123, pathname, path);
     // 对于所有文章页面，确保服务器端和客户端渲染一致
     if (path === '/blog') {
       return isClient ? (pathname === '/blog') : (pathname === '/blog');
