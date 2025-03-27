@@ -161,18 +161,17 @@ jobs:
             mv -T "$CURRENT_LINK.new" "$CURRENT_LINK"
             
             # 4. 重载应用
-            cd "$CURRENT_LINK"
             echo "重载应用..."
             if pm2 list | grep -q "elecmonkey-garden"; then
               echo "使用PM2集群模式重载应用..."
-              pm2 reload ecosystem.config.js --update-env || {
+              pm2 reload "$CURRENT_LINK/ecosystem.config.js" --update-env || {
                 echo "PM2 reload失败，尝试重启..."
                 pm2 delete elecmonkey-garden
-                pm2 start ecosystem.config.js
+                pm2 start "$CURRENT_LINK/ecosystem.config.js"
               }
             else
               echo "首次启动应用..."
-              pm2 start ecosystem.config.js
+              pm2 start "$CURRENT_LINK/ecosystem.config.js"
             fi
             
             # 保存PM2配置
