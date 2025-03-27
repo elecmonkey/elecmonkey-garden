@@ -13,6 +13,21 @@ export const metadata: Metadata = {
   title: "所有文章 - Elecmonkey的小花园",
 };
 
+// 预生成所有分页的静态页面
+export async function generateStaticParams() {
+  const { totalPages } = await getAllPostsWithPagination(1);
+  
+  // 为所有可能的页码生成参数
+  const params = [];
+  
+  // 生成所有分页参数
+  for (let page = 1; page <= totalPages; page++) {
+    params.push({ searchParams: { page: page.toString() } });
+  }
+  
+  return params;
+}
+
 interface BlogPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

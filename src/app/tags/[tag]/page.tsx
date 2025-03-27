@@ -15,12 +15,29 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-// 生成可能的标签路径
+// 预生成所有标签及其分页的静态路径
 export async function generateStaticParams() {
   const tags = await getAllTags();
-  return tags.map((tag) => ({
-    tag: tag.name,
-  }));
+  const params = [];
+  
+  // 为每个标签生成参数
+  for (const tag of tags) {
+    // 获取该标签的所有文章，计算总页数
+    const { totalPages } = await getPostsByTagWithPagination(tag.name, 1);
+    
+    // 为每个标签的第1页生成参数（不带page参数）
+    params.push({ tag: tag.name });
+    
+    // 为每个标签的所有其他页生成参数
+    for (let page = 2; page <= totalPages; page++) {
+      params.push({ 
+        tag: tag.name,
+        searchParams: { page: page.toString() }
+      });
+    }
+  }
+  
+  return params;
 }
 
 // 为每个标签页生成元数据

@@ -15,12 +15,29 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-// 生成可能的月份路径
+// 预生成所有月份及其分页的静态路径
 export async function generateStaticParams() {
   const months = await getAllMonths();
-  return months.map((month) => ({
-    month: month.id,
-  }));
+  const params = [];
+  
+  // 为每个月份生成参数
+  for (const month of months) {
+    // 获取该月份的所有文章，计算总页数
+    const { totalPages } = await getPostsByMonthWithPagination(month.id, 1);
+    
+    // 为每个月份的第1页生成参数（不带page参数）
+    params.push({ month: month.id });
+    
+    // 为每个月份的所有其他页生成参数
+    for (let page = 2; page <= totalPages; page++) {
+      params.push({ 
+        month: month.id,
+        searchParams: { page: page.toString() }
+      });
+    }
+  }
+  
+  return params;
 }
 
 // 为每个月份页生成元数据
