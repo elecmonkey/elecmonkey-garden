@@ -53,7 +53,6 @@ jobs:
 
           cp .next/standalone/server.js deploy/
           cp pnpm-lock.yaml deploy/
-          cp ecosystem.config.js deploy/
           
           # 显示文件夹总大小
           echo "部署目录总大小："
@@ -111,7 +110,7 @@ jobs:
             # 确保目录结构存在
             mkdir -p "$RELEASE_DIR" "$APP_ROOT/releases"
             
-            # 1. 复制文件到非活跃目录
+            # 1. 复制文件到新发布目录
             echo "从临时目录复制文件到新发布目录..."
             rsync -a /tmp/deploy/ "$RELEASE_DIR/"
             
@@ -162,16 +161,15 @@ jobs:
             
             # 4. 重载应用
             echo "重载应用..."
-            if pm2 list | grep -q "elecmonkey-garden"; then
-              echo "使用PM2集群模式重载应用..."
-              pm2 reload "$CURRENT_LINK/ecosystem.config.js" --update-env || {
-                echo "PM2 reload失败，尝试重启..."
-                pm2 delete elecmonkey-garden
-                pm2 start "$CURRENT_LINK/ecosystem.config.js"
-              }
-            else
+            # cd "$CURRENT_LINK"
+            
+            # 如果应用不存在，则首次启动
+            if ! pm2 list | grep -q "elecmonkey-garden"; then
               echo "首次启动应用..."
-              pm2 start "$CURRENT_LINK/ecosystem.config.js"
+              NODE_OPTIONS="--preserve-symlinks" pm2 start server.js --name elecmonkey-garden -i 2 --time
+            else
+              echo "平滑重载应用..."
+              NODE_OPTIONS="--preserve-symlinks" pm2 reload elecmonkey-garden --update-env
             fi
             
             # 保存PM2配置
