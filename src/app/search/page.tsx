@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
-import { searchPostsWithPagination } from '@/lib/api';
+import { searchPostsWithPagination, SearchResultItem } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
-import PostCard from '@/components/PostCard';
+import SearchResultCard from '@/components/SearchResultCard';
 import SearchBar from '@/components/SearchBar';
 import Pagination from '@/components/Pagination';
 import PageTransition from '@/components/PageTransition';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
-import { PostData } from '@/lib/api';
 
 interface SearchPageProps {
   searchParams: Promise<{ 
@@ -85,8 +84,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           </div>
         ) : (
           <div className="space-y-6">
-            {posts.map((post: PostData) => (
-              <PostCard key={post.id} post={post} />
+            {posts.map((result: SearchResultItem) => (
+              <SearchResultCard 
+                key={result.post.id} 
+                result={result} 
+                keyword={keyword}
+              />
             ))}
           </div>
         )}
