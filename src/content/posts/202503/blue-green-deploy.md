@@ -1,8 +1,8 @@
 ---
-title: 'Next.js 零停机部署踩坑录：PM2 Cluster 模式下多实例部署陷阱'
+title: 'Next.js 零停机部署记录：从 PM2 Cluster 到 Next Standalone 模式'
 date: '2025-03-28'
-description: '记录一次 Next.js 项目零停机部署的实践历程。从 PM2 Cluster 模式下的多实例部署陷阱，到 Next.js standalone 模式的构建方案，再到静态资源路径的配置问题，一步步带你了解如何实现真正的零停机部署。'
-tags: ['Next.js', 'PM2', 'Node.js', '零停机部署', 'DevOps', 'CI/CD', '性能优化', '实战经验', 'Cluster模式']
+description: '记录一次 Next.js 项目在生产环境中的零停机部署方案。'
+tags: ['Next.js', 'PM2', 'Node.js', '零停机部署', 'DevOps', 'CI/CD', 'Cluster模式']
 author: 'Elecmonkey'
 ---
 
@@ -14,7 +14,7 @@ author: 'Elecmonkey'
 
 **`pm2 reload`** 会在不中断服务的情况下，逐个重启 Cluster 模式下的进程。当 PM2 开始重启时，它会先启动一个新的进程，等待新进程完全启动并正常运行后，才会优雅地关闭旧进程。这样，在重启过程中，始终有进程在提供服务，从而实现零停机更新。
 
-那怎么以最快速度更改掉生产环境的代码呢？**软链接**是个好东西。PM2 部署时，给 PM2 的应用指向当前运行版本的软链接（如 `current` -> `releases/oldVersion`），而不是直接用固定的目录。当需要部署新版本时，我们先将新版本部署到一个新目录（如 `releases/newVersion`），然后通过更新软链接指向，实现瞬间切换。这种方式的优势在于切换过程是原子操作，几乎没有停机时间，且如果新版本出现问题，可以立即将软链接指回旧版本，回滚也很容易。
+那怎么以最快速度更改掉生产环境的代码呢？**软链接**是个好东西。PM2 部署时，给 PM2 的应用指向当前运行版本的软链接（如 `current` -> `releases/oldVersion`），而不是直接用固定的目录。当需要部署新版本时，我们先将新版本部署到一个新目录（如 `releases/newVersion`），然后通过更新软链接指向，实现瞬间切换。这种方式的优势在于切换过程是原子操作，几乎没有停机时间，且如果新版本出现问题，可以立即将软链接指回旧版本，回滚也很容易。不过还有一个小坑，Node.js 会自作聪明把软链接解析了去，添加 `--preserve-symlinks` 参数可以避免这一问题。翻 Node.js [`preserve-symlinks`相关文档](https://nodejs.org/api/cli.html#cli_preserve_symlinks) 才翻出来原因。
 
 目录名用部署时的时间戳，可以省去判断新旧环境的劳神费力。按当下时间创文件夹怎么都不会跟前面的冲突。
 
@@ -34,31 +34,6 @@ author: 'Elecmonkey'
 ln -sfn "$RELEASE_DIR" "$CURRENT_LINK.new"
 mv -T "$CURRENT_LINK.new" "$CURRENT_LINK"
 ```
-> 软连接操作
-
-```js
-module.exports = {
-  apps: [
-    {
-      name: 'app',
-      cwd: '.',  // 设置工作目录
-      script: 'server.js',
-      instances: 2,               // 使用2个实例(双核服务器)
-      exec_mode: 'cluster',       // 使用集群模式
-      autorestart: true,
-      watch: false,
-      max_memory_restart: '768M', // 限制内存使用
-      kill_timeout: 5000,         // 优雅退出等待时间
-      env: {
-        NODE_ENV: 'production',
-        PORT: 3000,
-        PATH: process.env.PATH  // 继承系统 PATH
-      }
-    }
-  ]
-};
-```
-> Cluster 模式启动脚本
 
 更新后再`pm2 reload`，**似乎**我们的零停机部署就这样设计好了。似乎？理论上这样没问题对吧（）
 
@@ -80,9 +55,34 @@ Next.js 的 `pnpm start` 命令多实例部署会冲突。那那那，那怎么�
 
 `standalone` 模式下编译，Next.js 会提供一个包含独立服务器（可以用 `server.js` 启动）的产物。这样构建出来的产物可以直接用 `node .next/standalone/server.js` 启动服务，PM2 就可以正常启动多份了。
 
-## 静态资源丢失之谜与 Next.js 构建方式
+```shell
+# 如果应用不存在，则首次启动
+if ! pm2 list | grep -q "app"; then
+  echo "首次启动应用..."
+  NODE_OPTIONS="--preserve-symlinks" pm2 start server.js \
+    --name app \
+    -i 2 \
+    --time \
+    --max-memory-restart 768M \
+    --kill-timeout 5000 \
+    --no-autorestart \
+    --no-watch \
+    --env production \
+    --update-env \
+    --cwd "$CURRENT_LINK"
+else
+  echo "平滑重载应用..."
+  NODE_OPTIONS="--preserve-symlinks" pm2 reload app \
+    --update-env \
+    --max-memory-restart 768M \
+    --kill-timeout 5000 \
+    --restart-delay=5000
+fi
+```
 
-本以为问题解决了，结果网站前端出现了 JS、CSS 无法正常显示的 bug。排查了三个小时，终于发现问题的根源：自动构建结果 `.next/standalone` 目录其实是个独立的项目，它并不依赖父层级中 `.next` 文件夹中的其它产物，事实上，它自己内部有一个独立的 `.next` 文件夹（是的，`./.next/standalone/.next`，不知道谁设计的）。所以需要需要把外面的 `static` 文件夹拷贝到 `standalone` 里。默认构建结果 `.next/static` 和 `.next/standalone` 是平级的，层级关系错了所以一直有问题。正确的目录结构应该是：
+## 静态资源丢失与 Next.js 构建方式
+
+本以为问题解决了，结果网站前端出现了 JS、CSS 无法正常显示的问题。各种排查终于发现问题的根源：自动构建结果 `.next/standalone` 目录其实是个独立的项目，它并不依赖父层级中 `.next` 文件夹中的其它产物，事实上，它自己内部有一个独立的 `.next` 文件夹（是的，`./.next/standalone/.next`，不知道谁设计的）。所以需要需要把外面的 `static` 文件夹拷贝到 `standalone` 里。默认构建结果 `.next/static` 和 `.next/standalone` 是平级的，层级关系错了所以一直有问题。正确的目录结构应该是：
 
 ```dir
 .next/
