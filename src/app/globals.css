@@ -104,3 +104,41 @@ blockquote {
 img {
   border-radius: var(--radius);
 }
+
+
+/* focus 切换文字效果 - Footer彩蛋 */
+.quote-text {
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.quote-text::before {
+  content: attr(data-text-1);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity 0.3s ease;
+}
+
+.quote-text::after {
+  content: attr(data-text-2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.quote-text:focus::before {
+  opacity: 0;
+}
+
+.quote-text:focus::after {
+  opacity: 1;
+}
+
+.quote-text span {
+  visibility: hidden;
+}
