@@ -25,14 +25,63 @@ export default function AboutPage() {
           <p className="text-xl font-medium">以下是我很想玩明白但完全玩不明白的东西。</p>
           <p className="text-lg font-none mb-6">但没关系，时间还多。</p>
           
+          {/* 操作系统 */}
+          <div className="mb-8">
+            <h3 className="text-lg font-medium mb-4">OS Platforms</h3>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                alt="Linux"
+                label="Linux"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg"
+                alt="Debian"
+                label="Debian"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-original.svg"
+                alt="Ubuntu"
+                label="Ubuntu"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opensuse/opensuse-original.svg"
+                alt="openSUSE"
+                label="openSUSE"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rockylinux/rockylinux-original.svg"
+                alt="Rocky Linux"
+                label="Rocky Linux"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/freebsd.svg"
+                alt="FreeBSD"
+                label="FreeBSD"
+                isGray={true}
+              />
+            </div>
+          </div>
+
           {/* 编程语言 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">编程语言</h3>
+            <h3 className="text-lg font-medium mb-4">Languages</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
                 alt="Python"
                 label="Python"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg"
+                alt="HTML5"
+                label="HTML5"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                alt="CSS3"
+                label="CSS3"
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
@@ -45,11 +94,6 @@ export default function AboutPage() {
                 label="TypeScript"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                alt="Node.js"
-                label="Node.js"
-              />
-              <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
                 alt="Golang"
                 label="Golang"
@@ -59,6 +103,12 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
                 alt="Java"
                 label="Java"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+                alt="Kotlin"
+                label="Kotlin"
                 isGray={true}
               />
               <TechIcon
@@ -82,13 +132,70 @@ export default function AboutPage() {
                 alt="C++"
                 label="C++"
               />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg"
+                alt="Swift"
+                label="Swift"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
+                alt="Dart"
+                label="Dart"
+                isGray={true}
+              />
             </div>
           </div>
 
           {/* 前端框架 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">前端框架</h3>
+            <h3 className="text-lg font-medium mb-4">Frontend</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+            <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                alt="Node.js"
+                label="Node.js"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/denojs/denojs-original.svg"
+                alt="Deno"
+                label="Deno"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg"
+                alt="Bun"
+                label="Bun"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg"
+                alt="npm"
+                label="npm"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pnpm/pnpm-original.svg"
+                alt="pnpm"
+                label="pnpm"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
+                alt="Vite"
+                label="Vite"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
+                alt="Webpack"
+                label="Webpack"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/esbuild.svg"
+                alt="ESBuild"
+                label="ESBuild"
+                isGray={true}
+              />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
                 alt="Vue.js"
@@ -143,26 +250,63 @@ export default function AboutPage() {
                 label="Bootstrap"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/unocss/unocss@main/docs/public/logo.svg"
-                alt="UnoCSS"
-                label="UnoCSS"
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg"
+                alt="Material UI"
+                label="Material UI"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuetify/vuetify-original.svg"
+                alt="Vuetify"
+                label="Vuetify"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
                 alt="Vite"
                 label="Vite"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
+                alt="Webpack"
+                label="Webpack"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/qwik.svg"
+                alt="Qwik"
+                label="Qwik"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://vitest.dev/logo.svg"
+                alt="Vitest"
+                label="Vitest"
+                isGray={true}
               />
             </div>
           </div>
-
           {/* 后端框架 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">后端框架</h3>
+            <h3 className="text-lg font-medium mb-4">Backend</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
                 alt="Express"
                 label="Express"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
+                alt="Nest.js"
+                label="Nest.js"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastify/fastify-original.svg"
+                alt="Fastify"
+                label="Fastify"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
@@ -191,12 +335,17 @@ export default function AboutPage() {
                 label="Spring Boot"
                 isGray={true}
               />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg"
+                alt="Socket.IO"
+                label="Socket.IO"
+              />
             </div>
           </div>
 
           {/* 桌面/跨平台开发 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">跨端开发</h3>
+            <h3 className="text-lg font-medium mb-4">Cross-Platform</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/qt/qt-original.svg"
@@ -215,12 +364,18 @@ export default function AboutPage() {
                 label="Tauri"
                 isGray={true}
               />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
+                alt="Flutter"
+                label="Flutter"
+                isGray={true}
+              />
             </div>
           </div>
 
           {/* 数据库 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">数据库</h3>
+            <h3 className="text-lg font-medium mb-4">Databases</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
@@ -272,7 +427,7 @@ export default function AboutPage() {
                 label="Nginx"
               />
               <TechIcon
-                src="https://user-images.githubusercontent.com/1128849/210187356-dfb7f1c5-ac2e-43aa-bb23-fc014280ae1f.svg"
+                src="https://images.elecmonkey.com/pages/about/caddy.svg"
                 alt="Caddy"
                 label="Caddy"
                 className="object-left"
@@ -301,14 +456,72 @@ export default function AboutPage() {
                 label="Redis"
                 isGray={true}
               />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                alt="GitHub"
+                label="GitHub"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg"
+                alt="GitLab"
+                label="GitLab"
+                isGray={true}
+              />
             </div>
           </div>
-        </section>
 
-        {/* 机器学习框架 */}
-        <div className="mb-8">
-          <h3 className="text-lg font-medium mb-4">机器学习</h3>
+          <div className="mb-8">
+            <h3 className="text-lg font-medium mb-4">Tools</h3>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cmake/cmake-original.svg"
+                alt="CMake"
+                label="CMake"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"
+                alt="Jupyter"
+                label="Jupyter"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg"
+                alt="OpenCV"
+                label="OpenCV"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
+                alt="Postman"
+                label="Postman"
+                isGray={true}
+              />
+            </div>
+          </div>
+
+          <div className="mb-8">
+          <h3 className="text-lg font-medium mb-4">Data Science & Machine Learning</h3>
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+            <TechIcon
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+              alt="Numpy"
+              label="Numpy"
+              isGray={true}
+            />
+            <TechIcon
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+              alt="Pandas"
+              label="Pandas"
+              isGray={true}
+            />
+            <TechIcon
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
+              alt="Matplotlib"
+              label="Matplotlib"
+              isGray={true}
+            />
+            
             <TechIcon
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
               alt="Keras"
@@ -326,9 +539,12 @@ export default function AboutPage() {
               alt="PyTorch"
               label="PyTorch"
               isGray={true}
-            />
+              />
+            </div>
           </div>
-        </div>
+        </section>
+
+        
       </div>
     </PageContainer>
   );
