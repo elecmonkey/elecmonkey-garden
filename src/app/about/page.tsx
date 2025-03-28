@@ -1,6 +1,6 @@
 import PageContainer from '@/components/PageContainer';
+import TechIcon from '@/components/TechIcon';
 import { Metadata } from 'next';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: "关于我 - Elecmonkey的小花园",
@@ -28,438 +28,263 @@ export default function AboutPage() {
           {/* 编程语言 */}
           <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">编程语言</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                    alt="Python"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Python</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                    alt="JavaScript"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">JavaScript</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                    alt="TypeScript"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">TypeScript</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                    alt="Node.js"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Node.js</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
-                    alt="Golang"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Golang</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                    alt="Java"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Java</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg"
-                    alt="Rust"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Rust</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                    alt="PHP"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">PHP</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
-                    alt="C"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">C</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-                    alt="C++"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">C++</span>
-              </div>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                alt="Python"
+                label="Python"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                alt="JavaScript"
+                label="JavaScript"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                alt="TypeScript"
+                label="TypeScript"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                alt="Node.js"
+                label="Node.js"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
+                alt="Golang"
+                label="Golang"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                alt="Java"
+                label="Java"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg"
+                alt="Rust"
+                label="Rust"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                alt="PHP"
+                label="PHP"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
+                alt="C"
+                label="C"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                alt="C++"
+                label="C++"
+              />
             </div>
           </div>
 
           {/* 前端框架 */}
           <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">前端框架</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
-                    alt="Vue"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Vue</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                    alt="React"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">React</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg"
-                    alt="Svelte"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Svelte</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-                    alt="Next.js"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Next.js</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"
-                    alt="Nuxt"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Nuxt</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-                    alt="Tailwind CSS"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Tailwind CSS</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg"
-                    alt="Astro"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Astro</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
-                    alt="Angular"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Angular</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
-                    alt="Vite"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Vite</span>
-              </div>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                alt="Vue.js"
+                label="Vue.js"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                alt="React"
+                label="React"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg"
+                alt="Svelte"
+                label="Svelte"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                alt="Next.js"
+                label="Next.js"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"
+                alt="Nuxt"
+                label="Nuxt"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg"
+                alt="Astro"
+                label="Astro"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
+                alt="Angular"
+                label="Angular"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                alt="Tailwind CSS"
+                label="Tailwind CSS"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
+                alt="Sass"
+                label="Sass"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                alt="Bootstrap"
+                label="Bootstrap"
+              />
+              <TechIcon
+                src="https://raw.githubusercontent.com/unocss/unocss/main/docs/public/logo.svg"
+                alt="UnoCSS"
+                label="UnoCSS"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
+                alt="Vite"
+                label="Vite"
+              />
             </div>
           </div>
 
           {/* 后端框架 */}
           <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">后端框架</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
-                    alt="Express"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Express</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
-                    alt="Flask"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Flask</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
-                    alt="Django"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Django</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
-                    alt="FastAPI"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">FastAPI</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
-                    alt="Gin"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Gin</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
-                    alt="Spring Boot"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Spring Boot</span>
-              </div>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                alt="Express"
+                label="Express"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
+                alt="Flask"
+                label="Flask"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
+                alt="Django"
+                label="Django"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
+                alt="FastAPI"
+                label="FastAPI"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
+                alt="Gin"
+                label="Gin"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
+                alt="Spring Boot"
+                label="Spring Boot"
+              />
             </div>
           </div>
 
           {/* 桌面/跨平台开发 */}
           <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">跨端开发</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/qt/qt-original.svg"
-                    alt="Qt"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Qt</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg"
-                    alt="Electron"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Electron</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tauri/tauri-original.svg"
-                    alt="Tauri"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Tauri</span>
-              </div>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/qt/qt-original.svg"
+                alt="Qt"
+                label="Qt"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg"
+                alt="Electron"
+                label="Electron"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tauri/tauri-original.svg"
+                alt="Tauri"
+                label="Tauri"
+              />
             </div>
           </div>
 
           {/* 数据库 */}
           <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">数据库</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                    alt="MySQL"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">MySQL</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
-                    alt="MongoDB"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">MongoDB</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
-                    alt="Redis"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Redis</span>
-              </div>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                alt="MySQL"
+                label="MySQL"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                alt="MongoDB"
+                label="MongoDB"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
+                alt="SQLite"
+                label="SQLite"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg"
+                alt="Neo4j"
+                label="Neo4j"
+              />
             </div>
           </div>
 
           {/* DevOps 工具 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">DevOps 工具</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                    alt="Git"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Git</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                    alt="Docker"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Docker</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                    alt="Kubernetes"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Kubernetes</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
-                    alt="Nginx"
-                    fill
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Nginx</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <div className="relative w-16 h-16 mb-2">
-                  <Image
-                    src="https://user-images.githubusercontent.com/1128849/210187356-dfb7f1c5-ac2e-43aa-bb23-fc014280ae1f.svg"
-                    alt="Caddy"
-                    fill
-                    className="object-contain object-left transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">Caddy</span>
-              </div>
+            <h3 className="text-lg font-medium mb-4">DevOps</h3>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                alt="Git"
+                label="Git"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                alt="Docker"
+                label="Docker"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                alt="Kubernetes"
+                label="Kubernetes"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
+                alt="Nginx"
+                label="Nginx"
+              />
+              <TechIcon
+                src="https://user-images.githubusercontent.com/1128849/210187356-dfb7f1c5-ac2e-43aa-bb23-fc014280ae1f.svg"
+                alt="Caddy"
+                label="Caddy"
+                className="object-left"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                alt="Jenkins"
+                label="Jenkins"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg"
+                alt="RabbitMQ"
+                label="RabbitMQ"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
+                alt="Kafka"
+                label="Kafka"
+              />
+              <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+                alt="Redis"
+                label="Redis"
+              />
             </div>
           </div>
         </section>
@@ -467,29 +292,22 @@ export default function AboutPage() {
         {/* 机器学习框架 */}
         <div className="mb-8">
           <h3 className="text-lg font-medium mb-4">机器学习</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div className="flex flex-col items-center group">
-              <div className="relative w-16 h-16 mb-2">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
-                  alt="TensorFlow"
-                  fill
-                  className="object-contain transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">TensorFlow</span>
-            </div>
-            <div className="flex flex-col items-center group">
-              <div className="relative w-16 h-16 mb-2">
-                <Image
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
-                  alt="PyTorch"
-                  fill
-                  className="object-contain transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <span className="text-sm text-gray-600 dark:text-gray-400 text-center w-full">PyTorch</span>
-            </div>
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+            <TechIcon
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
+              alt="Keras"
+              label="Keras"
+            />
+            <TechIcon
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+              alt="TensorFlow"
+              label="TensorFlow"
+            />
+            <TechIcon
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
+              alt="PyTorch"
+              label="PyTorch"
+            />
           </div>
         </div>
       </div>
