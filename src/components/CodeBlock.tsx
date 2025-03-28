@@ -23,6 +23,8 @@ import yaml from 'react-syntax-highlighter/dist/cjs/languages/prism/yaml';
 import swift from 'react-syntax-highlighter/dist/cjs/languages/prism/swift';
 import php from 'react-syntax-highlighter/dist/cjs/languages/prism/php';
 import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql';
+import dart from 'react-syntax-highlighter/dist/cjs/languages/prism/dart';
+import kotlin from 'react-syntax-highlighter/dist/cjs/languages/prism/kotlin';
 
 // 注册语言
 SyntaxHighlighter.registerLanguage('typescript', typescript);
@@ -51,6 +53,9 @@ SyntaxHighlighter.registerLanguage('yml', yaml); // yaml别名
 SyntaxHighlighter.registerLanguage('swift', swift);
 SyntaxHighlighter.registerLanguage('php', php);
 SyntaxHighlighter.registerLanguage('sql', sql);
+SyntaxHighlighter.registerLanguage('dart', dart);
+SyntaxHighlighter.registerLanguage('kotlin', kotlin);
+SyntaxHighlighter.registerLanguage('kt', kotlin); // kotlin别名
 
 // 代码块容器组件
 export default function CodeBlock({ language, code, ...props }: { 
