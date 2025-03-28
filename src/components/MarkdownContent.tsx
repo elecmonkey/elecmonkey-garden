@@ -3,13 +3,16 @@ import { CodeComponent } from './ClientMarkdownRenderer';
 import Image from 'next/image';
 import React from 'react';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 // 服务器端组件包装器
 export default function MarkdownContent({ content }: { content: string }) {
   return (
     <div className="markdown-content text-lg leading-relaxed">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
         components={{
           // 添加各级标题的样式
           h1: ({ children }) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
