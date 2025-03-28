@@ -1,8 +1,5 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import '../styles/syntax-highlighter-override.css';
 
 // 导入常用语言支持
@@ -55,120 +52,14 @@ SyntaxHighlighter.registerLanguage('swift', swift);
 SyntaxHighlighter.registerLanguage('php', php);
 SyntaxHighlighter.registerLanguage('sql', sql);
 
-// 复制按钮组件
-function CopyButton({ code }: { code: string }) {
-  const [copied, setCopied] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  useEffect(() => {
-    // 检查当前主题
-    const checkTheme = () => {
-      setIsDarkTheme(document.documentElement.classList.contains('dark'));
-    };
-
-    // 初始检查
-    checkTheme();
-
-    // 监听主题变化
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          checkTheme();
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
-  return (
-    <button
-      onClick={copyToClipboard}
-      className={`absolute top-2 right-2 p-1.5 rounded-md ${isDarkTheme ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'} text-sm transition-colors`}
-      aria-label="复制代码"
-    >
-      {copied ? (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
-      ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-        </svg>
-      )}
-    </button>
-  );
-}
-
 // 代码块容器组件
 export default function CodeBlock({ language, code, ...props }: { 
   language: string, 
   code: string, 
   [key: string]: unknown 
 }) {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  useEffect(() => {
-    // 检查当前主题
-    const checkTheme = () => {
-      setIsDarkTheme(document.documentElement.classList.contains('dark'));
-    };
-
-    // 初始检查
-    checkTheme();
-
-    // 监听主题变化
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          checkTheme();
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  // 根据当前主题选择样式
-  const syntaxStyle = isDarkTheme ? vscDarkPlus : oneLight;
-  
-  // 根据主题设置颜色
-  const headerBgColor = isDarkTheme ? 'bg-gray-800' : 'bg-gray-200';
-  const headerTextColor = isDarkTheme ? 'text-gray-300' : 'text-gray-700';
-  const borderColor = isDarkTheme ? 'border-gray-700' : 'border-gray-300';
-  const lineNumberColor = isDarkTheme ? '#6e7681' : '#aaa';
-  const lineNumberBorderColor = isDarkTheme ? '#334155' : '#e5e5e5';
-
-  // 添加CSS类到行号元素的钩子
-  useEffect(() => {
-    // 给所有行号元素添加css类
-    const lineNumbers = document.querySelectorAll('.react-syntax-highlighter-line-number');
-    lineNumbers.forEach(el => {
-      el.classList.add('linenumber');
-      // 直接设置内联样式，确保最高优先级
-      (el as HTMLElement).style.fontStyle = 'normal';
-    });
-  }, [code, language]); // 代码或语言变化时重新运行
-
   return (
-    <div className={`relative my-6 rounded-sm overflow-hidden border ${borderColor}`}>
+    <div className="relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700">
       {/* 内联样式覆盖 */}
       <style jsx global>{`
         /* 全局覆盖React Syntax Highlighter的行号样式 */
@@ -186,26 +77,21 @@ export default function CodeBlock({ language, code, ...props }: {
         }
       `}</style>
       
-      <div className={`${headerBgColor} ${headerTextColor} text-xs py-1 px-3 font-mono border-b ${borderColor}`}>
+      <div className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700">
         {language}
       </div>
       <div className="relative">
         <SyntaxHighlighter
-          style={{
-            ...syntaxStyle,
-            'span.linenumber, span.react-syntax-highlighter-line-number': {
-              fontStyle: 'normal !important'
-            }
-          }}
+          style={oneLight}
           language={language}
           showLineNumbers={true}
           wrapLines={true}
           lineNumberStyle={{ 
             width: '3em',
-            color: lineNumberColor, 
+            color: '#aaa',
             textAlign: 'center', 
             userSelect: 'none',
-            borderRight: `1px solid ${lineNumberBorderColor}`,
+            borderRight: '1px solid #e5e5e5',
             marginRight: "1em",
             paddingRight: '0',
             fontStyle: 'normal !important'
@@ -218,7 +104,7 @@ export default function CodeBlock({ language, code, ...props }: {
             padding: '0.8rem 0.5rem 0.8rem 0',
             borderRadius: 0,
             fontSize: '0.9rem',
-            backgroundColor: isDarkTheme ? '#1e1e1e' : '#f8f8f8'
+            backgroundColor: '#f8f8f8'
           }}
           PreTag="div"
           codeTagProps={{
@@ -230,7 +116,6 @@ export default function CodeBlock({ language, code, ...props }: {
         >
           {code}
         </SyntaxHighlighter>
-        <CopyButton code={code} />
       </div>
     </div>
   );
