@@ -141,7 +141,8 @@ jobs:
             
             # 使用PM2重新加载应用
             cd $CURRENT_LINK
-            pm2 reload elecmonkey-garden --update-env
+            NODE_OPTIONS="--preserve-symlinks" pm2 reload elecmonkey-garden \
+              --update-env --max-memory-restart 768M
             
             echo "✅ 回滚完成"
             exit 0
