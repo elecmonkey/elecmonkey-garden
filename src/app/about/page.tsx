@@ -53,16 +53,19 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
                 alt="Golang"
                 label="Golang"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
                 alt="Java"
                 label="Java"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg"
                 alt="Rust"
                 label="Rust"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
@@ -110,6 +113,7 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"
                 alt="Nuxt"
                 label="Nuxt"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg"
@@ -120,6 +124,7 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
                 alt="Angular"
                 label="Angular"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
@@ -130,6 +135,7 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
                 alt="Sass"
                 label="Sass"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
@@ -137,7 +143,7 @@ export default function AboutPage() {
                 label="Bootstrap"
               />
               <TechIcon
-                src="https://raw.githubusercontent.com/unocss/unocss/main/docs/public/logo.svg"
+                src="https://cdn.jsdelivr.net/gh/unocss/unocss@main/docs/public/logo.svg"
                 alt="UnoCSS"
                 label="UnoCSS"
               />
@@ -177,11 +183,13 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
                 alt="Gin"
                 label="Gin"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
                 alt="Spring Boot"
                 label="Spring Boot"
+                isGray={true}
               />
             </div>
           </div>
@@ -199,11 +207,13 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg"
                 alt="Electron"
                 label="Electron"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tauri/tauri-original.svg"
                 alt="Tauri"
                 label="Tauri"
+                isGray={true}
               />
             </div>
           </div>
@@ -231,6 +241,7 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg"
                 alt="Neo4j"
                 label="Neo4j"
+                isGray={true}
               />
             </div>
           </div>
@@ -253,6 +264,7 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
                 alt="Kubernetes"
                 label="Kubernetes"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
@@ -269,21 +281,25 @@ export default function AboutPage() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
                 alt="Jenkins"
                 label="Jenkins"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg"
                 alt="RabbitMQ"
                 label="RabbitMQ"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
                 alt="Kafka"
                 label="Kafka"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
                 alt="Redis"
                 label="Redis"
+                isGray={true}
               />
             </div>
           </div>
@@ -297,16 +313,19 @@ export default function AboutPage() {
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
               alt="Keras"
               label="Keras"
+              isGray={true}
             />
             <TechIcon
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
               alt="TensorFlow"
               label="TensorFlow"
+              isGray={true}
             />
             <TechIcon
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
               alt="PyTorch"
               label="PyTorch"
+              isGray={true}
             />
           </div>
         </div>
