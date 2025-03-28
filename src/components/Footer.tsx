@@ -12,8 +12,14 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-blue-50">
               Elecmonkey的小花园
             </h3>
-            <p className="text-sm mb-3 text-gray-700 dark:text-blue-100" title="来自COP《光与影的对白》">
-              存在 为将心声响彻
+            <p 
+              className="text-sm mb-3 text-gray-700 dark:text-blue-100 cursor-pointer transition-colors quote-text" 
+              title="来自COP《光与影的对白》"
+              data-text-1="存在 为将心声响彻"
+              data-text-2="交汇的光与影 答案落定覆上姓名"
+              tabIndex={0}
+            >
+              <span>存在 为将心声响彻</span>
             </p>
             <div className="my-4"></div>
             <a 
