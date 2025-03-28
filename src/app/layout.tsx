@@ -4,6 +4,7 @@ import { GeistMono } from 'geist/font/mono';
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import 'katex/dist/katex.min.css';
 
 export const metadata: Metadata = {
   title: "Elecmonkey的小花园",
