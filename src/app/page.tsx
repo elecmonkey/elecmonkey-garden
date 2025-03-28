@@ -86,7 +86,7 @@ export default async function Home() {
           </Link>
         </div>
         
-        <div className="px-6 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm">
+        <div className="px-6 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
           <TagCloud tags={tags} />
         </div>
       </section>
