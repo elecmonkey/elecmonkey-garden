@@ -182,35 +182,31 @@ export default function MarkdownContent({ content }: { content: string }) {
             // 如果是外部 URL，使用 Image 组件并设置 domains 或 remotePatterns
             if (src.startsWith('http')) {
               return (
-                <div className="my-6 overflow-hidden rounded shadow-md">
-                  <Image 
-                    src={src} 
-                    alt={alt || ''} 
-                    width={imgWidth}
-                    height={imgHeight}
-                    sizes="(max-width: 768px) 100vw, 800px"
-                    className="max-w-full"
-                    style={{ width: '100%', height: 'auto' }}
-                    {...props}
-                  />
-                </div>
-              );
-            }
-            
-            // 对于本地图片，使用 Image 组件
-            return (
-              <div className="my-6 overflow-hidden rounded shadow-md">
                 <Image 
                   src={src} 
                   alt={alt || ''} 
                   width={imgWidth}
                   height={imgHeight}
                   sizes="(max-width: 768px) 100vw, 800px"
-                  className="max-w-full"
+                  className="max-w-full my-6 rounded shadow-md"
                   style={{ width: '100%', height: 'auto' }}
                   {...props}
                 />
-              </div>
+              );
+            }
+            
+            // 对于本地图片，使用 Image 组件
+            return (
+              <Image 
+                src={src} 
+                alt={alt || ''} 
+                width={imgWidth}
+                height={imgHeight}
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="max-w-full my-6 rounded shadow-md"
+                style={{ width: '100%', height: 'auto' }}
+                {...props}
+              />
             );
           },
         }}
