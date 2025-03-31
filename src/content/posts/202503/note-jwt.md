@@ -1,12 +1,12 @@
 ---
-title: 'JWT 鉴权原理与实现笔记'
+title: '用户鉴权系统笔记：JWT 实现无状态认证'
 date: '2025-03-31'
-description: '记录 JWT 鉴权的原理、流程以及前后端的实现方案。'
-tags: ['JWT', '鉴权', 'Authentication', 'Authorization', '前后端分离']
+description: 'JWT 认证学习笔记。无状态认证的原理分析、前后端实现方案、安全防护措施，以及在实际项目中遇到的跨域、单点登录等问题。'
+tags: ['JWT', '身份认证', 'Web安全', 'Authentication', 'Authorization', 'XSS', 'CSRF']
 author: 'Elecmonkey'
 ---
 
-## 什么是 JWT
+## Why JWT
 
 JWT（JSON Web Token）是一种用户认证的标准，它可以让服务器在不储存登录状态的情况下实现对用户登录的认证、登录状态保持和过期等操作。
 
@@ -14,7 +14,7 @@ JWT（JSON Web Token）是一种用户认证的标准，它可以让服务器在
 
 JWT，它的优势就在于，签发后服务器不需要储存，全权交由客户端储存管理。通过密码学验算保障客户端提交上来的信息**未经篡改**。使用 JWT 作为鉴权机制的 Web 应用，服务器不知道现在还有哪些用户处在有效的登录状态，客户端储存的信息中含有登录状态，我们可以说 JWT 是**无状态的**、**自令牌的**。
 
-## 生成 Json Web Token
+## 二、JWT 的结构与生成原理
 
 实现完整的登录功能，靠的是服务器签发的 JWT 令牌——由服务器生成的一个字符串。JWT 由三部分组成，以点（.）分隔，三部分分别是：
 
@@ -112,7 +112,7 @@ console.log(signature);
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyaWRfMTIzNDUiLCJpYXQiOjE3NDM0MjQ3MDAsImV4cCI6MTc0MzUxMTEwMCwiYXZhdGFyIjoiYS5wbmciLCJyb2xlIjogWyJlZGl0b3IiLCJhZG1pbmlzdHJhdG9yIl19.-ZjUVrcynB1FLMw8Opdlh-y1dAyghL2BkOY3MOzMAMQ
 ```
 
-当然——在 Payload 里能设置“过期时间”（`exp`）也是在同样的地方做验算——如果服务端发现已经不在 Payload 部分的有效期内，那后面不用做验算就可以直接判定这个 JWT 无效了。
+当然——在 Payload 里能设置"过期时间"（`exp`）也是在同样的地方做验算——如果服务端发现已经不在 Payload 部分的有效期内，那后面不用做验算就可以直接判定这个 JWT 无效了。
 
 ![JWT](https://images.elecmonkey.com/articles/202503/note-jwt.png)
 
@@ -143,7 +143,7 @@ sequenceDiagram
     end
 ```
 
-## JWT 的问题
+## JWT 的不足
 
 JWT 与传统 Session 鉴权的对比：
 
@@ -164,4 +164,15 @@ JWT 与传统 Session 鉴权的对比：
 
 如果非要实现，那就还得引入数据库做手脚。可选的方案有给用户的 MySQL 表格加验证字段、引入 Redis 缓存会话信息。那这种情况下就算 JWT 也得每次登录对着数据库一顿操作。当有这样的需求时，保留 JWT，在此基础上引入数据库机制，还是干脆别这么麻烦直接回到传统 Session Token 模式，就看具体的业务场景怎么考虑了。
 
-还有两个小问题——XSS，CSRF攻击防护。
+## XSS 与 CSRF 攻击防范
+
+XSS（跨站脚本攻击）对 JWT 的威胁主要体现在：攻击者可能通过注入恶意脚本获取到存储在 localStorage 或 cookie 中的 JWT。CSRF（跨站请求伪造）则可能利用 cookie 自动被带在请求头中来提交某些并非出自用户本意的破坏性操作。
+
+一个解法是将 JWT 存储在 HttpOnly Cookie 中，这样 JavaScript 就无法访问到 token。不过，这么搞最好使用 Nginx 
+之类的反向代理，将前后端服务代理到同一个域名下，否则可能又会被跨域的各种问题折腾个半死。既然已经将 JWT 储存在 
+Cookie 中了，CSRF 的防范则相对简单，设置 Cookie 的 SameSite 属性为 Strict 或 Lax 基本就不
+会出问题。不过，HttpOnly Cookie 的话，前端就拿不到 JWT Payload 里的信息了。可以选择干脆不在 Payload 里放太多有效信息——辛苦前端后端，使劲 Fetch 拿数据吧。
+
+对于需要在前端使用 Payload 数据的场景，还是得老老实实用 Javascript 存在 localStorage 之类的地方，那就得对 XSS 上点心了。用 CSP（内容安全策略）限制页面中可执行的脚本来源，同时一定对所有用户输入进行严格的验证和转义。
+
+当然，对于 Web 应用，无感续签也是很重要的话题，不过不在本文讨论范围之内了。如果实现了“使用 refresh token 获取新的 access token”的机制，refresh token 比 access token 有更长的有效期——那么可以配置前者储存在 HttpOnly Cookie 中，后者储存在 Javascript 可及的 localStorage 中。无感刷新机制配置的真“无感”的话，完全可以将后者的有效期设置的非常短——十五分钟，或者十分钟。这样即使发生 XSS，失窃的 refresh token 也只会带来很短的攻击窗口。
