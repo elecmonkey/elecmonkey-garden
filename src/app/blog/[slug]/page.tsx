@@ -98,7 +98,7 @@ export default async function BlogPost({ params }: Props) {
           <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
             <div className="flex justify-between items-center">
               {/* 下一篇文章（更新的文章） */}
-              <div className="w-1/2 pr-4">
+              <div className="w-1/2 pr-4 text-left">
                 {post.nextPost ? (
                   <Link 
                     href={`/blog/${post.nextPost.id}`} 
@@ -107,7 +107,7 @@ export default async function BlogPost({ params }: Props) {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span className="line-clamp-1 text-left">
+                    <span className="line-clamp-1 text-left min-w-0 mr-auto">
                       {post.nextPost.title}
                     </span>
                   </Link>
@@ -118,16 +118,16 @@ export default async function BlogPost({ params }: Props) {
               </div>
               
               {/* 上一篇文章（更旧的文章） */}
-              <div className="w-1/2 pl-4 text-right">
+              <div className="w-1/2 pl-4">
                 {post.prevPost ? (
                   <Link 
                     href={`/blog/${post.prevPost.id}`} 
-                    className="flex items-center justify-end text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
-                    <span className="line-clamp-1 text-right">
+                    <span className="line-clamp-1 text-left min-w-0 ml-auto">
                       {post.prevPost.title}
                     </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
