@@ -4,6 +4,7 @@ import PageContainer from '@/components/PageContainer';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/TagCloud';
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: "Elecmonkey的小花园 - 存在 为将心声响彻",
@@ -24,8 +25,14 @@ export default async function Home() {
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-40 h-40 relative overflow-hidden rounded-full border-4 border-gray-200 dark:border-gray-700">
             {/* 这里可以放你的头像，如果没有可以替换为默认图标 */}
-            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-5xl font-bold">
-              EM
+            <div className="w-full h-full flex items-center justify-center">
+              <Image 
+                src="https://images.elecmonkey.com/pages/em.png" 
+                alt="EM" 
+                width={200} 
+                height={200}
+                className="w-[100%] h-[100%] object-cover"
+              />
             </div>
           </div>
           <div className="text-center md:text-left">
