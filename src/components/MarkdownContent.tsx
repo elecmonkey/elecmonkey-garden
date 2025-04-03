@@ -15,12 +15,30 @@ export default function MarkdownContent({ content }: { content: string }) {
         rehypePlugins={[rehypeKatex]}
         components={{
           // 添加各级标题的样式
-          h1: ({ children }) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
-          h2: ({ children }) => <h2 className="text-2xl font-bold mt-6 mb-3">{children}</h2>,
-          h3: ({ children }) => <h3 className="text-xl font-bold mt-5 mb-2">{children}</h3>,
-          h4: ({ children }) => <h4 className="text-lg font-bold mt-4 mb-2">{children}</h4>,
-          h5: ({ children }) => <h5 className="text-base font-bold mt-3 mb-1">{children}</h5>,
-          h6: ({ children }) => <h6 className="text-sm font-bold mt-3 mb-1">{children}</h6>,
+          h1: ({ children }) => {
+            const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
+            return <h1 id={id} className="text-3xl font-bold mt-8 mb-4">{children}</h1>;
+          },
+          h2: ({ children }) => {
+            const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
+            return <h2 id={id} className="text-2xl font-bold mt-6 mb-3">{children}</h2>;
+          },
+          h3: ({ children }) => {
+            const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
+            return <h3 id={id} className="text-xl font-bold mt-5 mb-2">{children}</h3>;
+          },
+          h4: ({ children }) => {
+            const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
+            return <h4 id={id} className="text-lg font-bold mt-4 mb-2">{children}</h4>;
+          },
+          h5: ({ children }) => {
+            const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
+            return <h5 id={id} className="text-base font-bold mt-3 mb-1">{children}</h5>;
+          },
+          h6: ({ children }) => {
+            const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
+            return <h6 id={id} className="text-sm font-bold mt-3 mb-1">{children}</h6>;
+          },
           
           // 添加段落样式 - 增加段落间距、调整文字大小和添加首行缩进
           p: ({ children, node }) => {

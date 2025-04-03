@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getAllPostIds, getPostById } from '@/lib/api';
 import PageContainer from '@/components/PageContainer';
 import MarkdownContent from '@/components/MarkdownContent';
+import ClientTableOfContents from '@/components/ClientTableOfContents';
 import { Metadata } from 'next';
 
 export async function generateStaticParams() {
@@ -140,6 +141,9 @@ export default async function BlogPost({ params }: Props) {
           </div>
           )}
         </article>
+        
+        {/* 浮动大纲 */}
+        <ClientTableOfContents />
       </PageContainer>
     );
   } catch (error) {
