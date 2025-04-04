@@ -1,4 +1,4 @@
-name: 蓝绿部署
+name: 部署到服务器
 
 on:
   push:
