@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 // import ThemeSwitcher from './ThemeSwitcher';
@@ -72,8 +73,17 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* 网站标志 */}
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
-              Elecmonkey的小花园
+            <Link href="/" className="flex items-center gap-2">
+              <Image 
+                src="/icon.png" 
+                alt="Logo" 
+                width={32} 
+                height={32} 
+                className="rounded-lg"
+              />
+              <span className="text-xl font-bold text-gray-900 dark:text-white">
+                Elecmonkey的小花园
+              </span>
             </Link>
           </div>
           
