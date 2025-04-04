@@ -9,11 +9,7 @@ import 'katex/dist/katex.min.css';
 export const metadata: Metadata = {
   title: "Elecmonkey的小花园",
   description: "ElecMonkey的小花园",
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
+  icons: '/icon.png',
 };
 
 export default function RootLayout({
