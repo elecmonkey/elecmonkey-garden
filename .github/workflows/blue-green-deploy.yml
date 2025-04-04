@@ -50,6 +50,7 @@ jobs:
           cp -r .next/standalone/src deploy/
           cp -r .next/standalone/package.json deploy/
           cp -r .next/static deploy/.next/
+          cp -r public deploy/
 
           cp .next/standalone/server.js deploy/
           cp pnpm-lock.yaml deploy/
