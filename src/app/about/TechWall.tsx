@@ -179,7 +179,6 @@ export default function TechWall() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
                 alt="Vite"
                 label="Vite"
-                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
@@ -291,6 +290,7 @@ export default function TechWall() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
                 alt="Django"
                 label="Django"
+                isGray={true}
               />
               <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
@@ -367,6 +367,12 @@ export default function TechWall() {
                 label="SQLite"
               />
               <TechIcon
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/influxdb/influxdb-original.svg"
+                alt="InfluxDB"
+                label="InfluxDB"
+                isGray={true}
+              />
+              <TechIcon
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg"
                 alt="Neo4j"
                 label="Neo4j"
@@ -399,6 +405,7 @@ export default function TechWall() {
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
                 alt="Nginx"
                 label="Nginx"
+                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/caddy.svg"
