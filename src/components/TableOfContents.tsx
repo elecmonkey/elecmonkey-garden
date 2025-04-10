@@ -13,8 +13,12 @@ export default function TableOfContents() {
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktopVisible, setIsDesktopVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // 初始化isMobile状态
+    setIsMobile(window.innerWidth < 1536);
+    
     // 获取所有标题元素
     const elements = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6'))
       .filter((element) => element.id) // 只获取有 id 的标题
@@ -53,6 +57,28 @@ export default function TableOfContents() {
     };
   }, []);
 
+  // 处理窗口大小变化
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1536;
+      setIsMobile(mobile);
+      
+      // 当窗口尺寸大于等于2xl断点(1536px)时
+      if (!mobile) {
+        // 如果移动端侧栏已打开，转为桌面显示
+        if (isOpen) {
+          setIsOpen(false);
+          setIsDesktopVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isOpen]);
+
   if (headings.length === 0) return null;
 
   return (
@@ -60,15 +86,16 @@ export default function TableOfContents() {
       {/* 圆形按钮 - 移动端或桌面端隐藏时显示 */}
       <button
         onClick={() => {
-          if (window.innerWidth >= 1536) {
+          if (!isMobile) {
             setIsDesktopVisible(true);
           } else {
             setIsOpen(true);
           }
         }}
-        className={`fixed right-6 sm:right-12 lg:right-16 xl:right-20 2xl:right-24 bottom-20 z-50 flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors ${
-          isDesktopVisible ? '2xl:hidden' : ''
-        }`}
+        className={`fixed right-6 sm:right-12 lg:right-16 xl:right-20 2xl:right-24 bottom-20 z-50 flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors
+          ${isDesktopVisible ? '2xl:hidden' : ''}
+          ${isOpen && isMobile ? 'hidden' : 'block'}
+        `}
         aria-label="目录"
       >
         <svg 
@@ -94,14 +121,14 @@ export default function TableOfContents() {
           transition-all duration-300 ease-in-out
           ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-[200%] opacity-0 pointer-events-none'}
           ${isDesktopVisible ? '2xl:translate-x-0 2xl:opacity-100 2xl:pointer-events-auto' : '2xl:translate-x-[200%] 2xl:opacity-0 2xl:pointer-events-none'}
-          2xl:w-72 2xl:right-12 2xl:top-24 2xl:bottom-auto 2xl:rounded-lg
+          2xl:w-72 2xl:right-12 2xl:top-24 2xl:bottom-auto 2xl:max-h-[calc(100vh-200px)] 2xl:overflow-hidden 2xl:rounded-lg
           top-0 right-0 w-72 h-full
         `}
       >
         {/* 关闭按钮 - 移动端和桌面端都显示 */}
         <button
           onClick={() => {
-            if (window.innerWidth >= 1536) {
+            if (!isMobile) {
               setIsDesktopVisible(false);
             } else {
               setIsOpen(false);
@@ -126,7 +153,7 @@ export default function TableOfContents() {
           </svg>
         </button>
 
-        <div className="p-4 overflow-y-auto max-h-[calc(100vh-8rem)] 2xl:max-h-[calc(100vh-12rem)]">
+        <div className="p-4 overflow-y-auto h-full 2xl:h-full">
           <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">目录</h2>
           <ul className="space-y-2">
             {headings.map((heading) => (
@@ -155,7 +182,7 @@ export default function TableOfContents() {
                         behavior: 'smooth'
                       });
                     }
-                    if (window.innerWidth < 1536) {
+                    if (isMobile) {
                       setIsOpen(false);
                     }
                   }}
