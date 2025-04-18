@@ -94,11 +94,17 @@ Node.js 官方特别提到，`tsconfig.json` "are intentionally unsupported"—�
     "target": "esnext",      // 编译目标为最新 ES 标准
     "module": "nodenext",    // 模块系统为 Node.js 的 ESM 标准
     "rewriteRelativeImportExtensions": true, // 强制补全相对路径的扩展名
-    "erasableSyntaxOnly": true, // 仅移除无运行时影响的语法
+    "erasableSyntaxOnly": true, // 移除无运行时影响的语法
     "verbatimModuleSyntax": true // 严格区分类型/值的导入导出
   }
 }
 ```
+
+当你启用 `erasableSyntaxOnly` 后，你的 VSCode 编辑器就会告诉你哪些东西可能会报错：
+
+![erasableSyntaxOnly的作用](https://images.elecmonkey.com/articles/202504/ts-in-node.png)
+
+实测，枚举（enum）、命名空间（namespace）、参数属性（parameter properties）会报错，但是唯一真的无法启用的装饰器（decorators）不会报错，interesting，原因暂未深究。
 
 ## Node.js 团队想要什么？
 
