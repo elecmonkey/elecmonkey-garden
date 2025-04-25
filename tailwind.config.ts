@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
 
 const config: Config = {
   content: [
@@ -38,6 +39,7 @@ const config: Config = {
   },
   plugins: [
     typography,
+    forms,
   ],
 };
 

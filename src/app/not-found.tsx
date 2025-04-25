@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import PageContainer from '@/components/PageContainer';
+import PageContainer from '@/components/layout/PageContainer';
 
 export const metadata: Metadata = {
   title: "页面未找到 - Elecmonkey的小花园",

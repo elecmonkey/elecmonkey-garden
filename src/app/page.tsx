@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
+import PageContainer from '@/components/layout/PageContainer';
 import PostCard from '@/components/PostCard';
-import TagCloud from '@/components/TagCloud';
+import TagCloud from '@/components/tag/TagCloud';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -24,7 +24,6 @@ export default async function Home() {
       <section className="mb-16">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-40 h-40 relative overflow-hidden rounded-full border-4 border-gray-200 dark:border-gray-700">
-            {/* 这里可以放你的头像，如果没有可以替换为默认图标 */}
             <div className="w-full h-full flex items-center justify-center">
               <Image 
                 src="https://images.elecmonkey.com/pages/em.png" 

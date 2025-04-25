@@ -1,6 +1,6 @@
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import '../styles/syntax-highlighter-override.css';
+import '@/styles/syntax-highlighter-override.css';
 
 // 导入常用语言支持
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';

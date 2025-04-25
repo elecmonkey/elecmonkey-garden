@@ -3,9 +3,9 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { Components } from 'react-markdown';
-import ServerFileDownloadRenderer from './ServerFileDownloadRenderer';
-import CopyButton from './CopyButton';
-import ServerCodeRenderer from './ServerCodeRenderer';
+import ServerFileDownloadRenderer from '../file-downloader/ServerFileDownloadRenderer';
+import CopyButton from '../code/CopyButton';
+import ServerCodeRenderer from '@/components/article/code/ServerCodeRenderer';
 
 // 只对 Mermaid 使用动态导入，因为它需要客户端 JavaScript
 const MermaidRenderer = dynamic(() => import('./MermaidRenderer'), { 

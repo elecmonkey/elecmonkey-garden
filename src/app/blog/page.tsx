@@ -1,8 +1,7 @@
 import { getAllPostsWithPagination } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
+import PageContainer from '@/components/layout/PageContainer';
 import PostCard from '@/components/PostCard';
 import ScrollToContent from '@/components/ScrollToContent';
-import PageTransition from '@/components/PageTransition';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import Link from 'next/link';
@@ -65,19 +64,17 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         </Link>
       </div>
       
-      <PageTransition>
-        {posts.length === 0 ? (
-          <div className="text-center py-10">
-            <p className="text-gray-500 dark:text-gray-400">暂无文章，请稍后再来！</p>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
-      </PageTransition>
+      {posts.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-gray-500 dark:text-gray-400">暂无文章，请稍后再来！</p>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      )}
       
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (

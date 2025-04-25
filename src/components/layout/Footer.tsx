@@ -117,7 +117,7 @@ export default function Footer() {
         {/* 版权信息 */}
         <div className="mt-8 pt-6 text-center border-t border-gray-200 dark:border-blue-900">
           <p className="text-sm text-gray-600 dark:text-blue-100">
-            &copy; {currentYear} Elecmonkey的小花园
+            &copy; 2023-{currentYear} Elecmonkey的小花园
             <span className="mx-2 text-gray-500 dark:text-blue-200 select-none">｜</span>
             <a 
               href="https://beian.miit.gov.cn/" 

@@ -1,13 +1,15 @@
 import { Metadata } from 'next';
 import { searchPostsWithPagination, SearchResultItem } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
-import SearchResultCard from '@/components/SearchResultCard';
-import SearchBar from '@/components/SearchBar';
+import PageContainer from '@/components/layout/PageContainer';
+import SearchResultCard from '@/components/search/SearchResultCard';
+import SearchBar from '@/components/search/SearchBar';
 import Pagination from '@/components/Pagination';
-import PageTransition from '@/components/PageTransition';
-import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
+import { notFound } from 'next/navigation';
 import ScrollToContent from '@/components/ScrollToContent';
+
+// 搜索页无法预构建，始终会在请求时动态生成
+export const dynamic = 'force-dynamic';
 
 interface SearchPageProps {
   searchParams: Promise<{ 
@@ -77,23 +79,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         </p>
       </div>
       
-      <PageTransition>
-        {posts.length === 0 ? (
-          <div className="text-center py-10">
-            <p className="text-gray-500 dark:text-gray-400">未找到相关文章</p>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {posts.map((result: SearchResultItem) => (
-              <SearchResultCard 
-                key={result.post.id} 
-                result={result} 
-                keyword={keyword}
-              />
-            ))}
-          </div>
-        )}
-      </PageTransition>
+      {posts.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-gray-500 dark:text-gray-400">未找到相关文章</p>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {posts.map((result: SearchResultItem) => (
+            <SearchResultCard 
+              key={result.post.id} 
+              result={result} 
+              keyword={keyword}
+            />
+          ))}
+        </div>
+      )}
       
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (
