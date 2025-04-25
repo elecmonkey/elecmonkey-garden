@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllPostIds, getPostById } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
-import MarkdownContent from '@/components/MarkdownContent';
-import ClientTableOfContents from '@/components/ClientTableOfContents';
+import PageContainer from '@/components/layout/PageContainer';
+import MarkdownContent from '@/components/article/md/MarkdownContent';
+import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import { Metadata } from 'next';
 
 export async function generateStaticParams() {

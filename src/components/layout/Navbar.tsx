@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
-// import ThemeSwitcher from './ThemeSwitcher';
+import { useState } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname() || ''; // 提供默认值，避免undefined
@@ -15,14 +14,6 @@ export default function Navbar() {
   // 控制移动端菜单展开/折叠的状态
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // 添加一个状态来记录是否是客户端渲染
-  const [isClient, setIsClient] = useState(false);
-  
-  // 在客户端挂载后设置isClient为true
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  
   // 切换菜单状态
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,9 +21,9 @@ export default function Navbar() {
   
   // 定义一个函数来确定导航链接是否为当前页面
   const isActive = (path: string) => {
-    // 对于所有文章页面，确保服务器端和客户端渲染一致
+    // 对于所有文章页面
     if (path === '/blog') {
-      return isClient ? (pathname === '/blog') : (pathname === '/blog');
+      return pathname === '/blog';
     }
     // 对于搜索页面
     if (path === '/search') {

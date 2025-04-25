@@ -1,6 +1,6 @@
 'use client';
 
-import TechIcon from '@/components/TechIcon';
+import TechIcon from '@/app/about/components/TechIcon';
 import { useState } from 'react';
 
 export default function TechWall() {
@@ -27,28 +27,28 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">OS Platforms</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                src="https://images.elecmonkey.com/pages/about/linux-original.svg"
                 alt="Linux"
                 label="Linux"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg"
+                src="https://images.elecmonkey.com/pages/about/debian-original.svg"
                 alt="Debian"
                 label="Debian"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-original.svg"
+                src="https://images.elecmonkey.com/pages/about/ubuntu-original.svg"
                 alt="Ubuntu"
                 label="Ubuntu"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opensuse/opensuse-original.svg"
+                src="https://images.elecmonkey.com/pages/about/opensuse-original.svg"
                 alt="openSUSE"
                 label="openSUSE"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rockylinux/rockylinux-original.svg"
+                src="https://images.elecmonkey.com/pages/about/rockylinux-original.svg"
                 alt="Rocky Linux"
                 label="Rocky Linux"
               />
@@ -66,77 +66,77 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Languages</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                src="https://images.elecmonkey.com/pages/about/python-original.svg"
                 alt="Python"
                 label="Python"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg"
+                src="https://images.elecmonkey.com/pages/about/html5-plain.svg"
                 alt="HTML5"
                 label="HTML5"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                src="https://images.elecmonkey.com/pages/about/css3-original.svg"
                 alt="CSS3"
                 label="CSS3"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                src="https://images.elecmonkey.com/pages/about/javascript-original.svg"
                 alt="JavaScript"
                 label="JavaScript"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                src="https://images.elecmonkey.com/pages/about/typescript-original.svg"
                 alt="TypeScript"
                 label="TypeScript"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
+                src="https://images.elecmonkey.com/pages/about/go-original.svg"
                 alt="Golang"
                 label="Golang"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                src="https://images.elecmonkey.com/pages/about/java-original.svg"
                 alt="Java"
                 label="Java"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+                src="https://images.elecmonkey.com/pages/about/kotlin-original.svg"
                 alt="Kotlin"
                 label="Kotlin"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg"
+                src="https://images.elecmonkey.com/pages/about/rust-original.svg"
                 alt="Rust"
                 label="Rust"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                src="https://images.elecmonkey.com/pages/about/php-original.svg"
                 alt="PHP"
                 label="PHP"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
+                src="https://images.elecmonkey.com/pages/about/c-original.svg"
                 alt="C"
                 label="C"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                src="https://images.elecmonkey.com/pages/about/cplusplus-original.svg"
                 alt="C++"
                 label="C++"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg"
+                src="https://images.elecmonkey.com/pages/about/swift-original.svg"
                 alt="Swift"
                 label="Swift"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
+                src="https://images.elecmonkey.com/pages/about/dart-original.svg"
                 alt="Dart"
                 label="Dart"
                 isGray={true}
@@ -149,39 +149,39 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Frontend</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/nodejs-original.svg"
                 alt="Node.js"
                 label="Node.js"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/denojs/denojs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/denojs-original.svg"
                 alt="Deno"
                 label="Deno"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg"
+                src="https://images.elecmonkey.com/pages/about/bun-original.svg"
                 alt="Bun"
                 label="Bun"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg"
+                src="https://images.elecmonkey.com/pages/about/npm-original-wordmark.svg"
                 alt="npm"
                 label="npm"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pnpm/pnpm-original.svg"
+                src="https://images.elecmonkey.com/pages/about/pnpm-original.svg"
                 alt="pnpm"
                 label="pnpm"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/vitejs-original.svg"
                 alt="Vite"
                 label="Vite"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg"
+                src="https://images.elecmonkey.com/pages/about/webpack-original.svg"
                 alt="Webpack"
                 label="Webpack"
                 isGray={true}
@@ -193,55 +193,55 @@ export default function TechWall() {
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/vuejs-original.svg"
                 alt="Vue.js"
                 label="Vue.js"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                src="https://images.elecmonkey.com/pages/about/react-original.svg"
                 alt="React"
                 label="React"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg"
+                src="https://images.elecmonkey.com/pages/about/svelte-original.svg"
                 alt="Svelte"
                 label="Svelte"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/nextjs-original.svg"
                 alt="Next.js"
                 label="Next.js"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/nuxtjs-original.svg"
                 alt="Nuxt"
                 label="Nuxt"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg"
+                src="https://images.elecmonkey.com/pages/about/astro-original.svg"
                 alt="Astro"
                 label="Astro"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/angularjs-original.svg"
                 alt="Angular"
                 label="Angular"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                src="https://images.elecmonkey.com/pages/about/tailwindcss-original.svg"
                 alt="Tailwind CSS"
                 label="Tailwind CSS"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
+                src="https://images.elecmonkey.com/pages/about/sass-original.svg"
                 alt="Sass"
                 label="Sass"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                src="https://images.elecmonkey.com/pages/about/bootstrap-original.svg"
                 alt="Bootstrap"
                 label="Bootstrap"
               />
@@ -265,52 +265,52 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Backend</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                src="https://images.elecmonkey.com/pages/about/express-original.svg"
                 alt="Express"
                 label="Express"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
+                src="https://images.elecmonkey.com/pages/about/nestjs-original.svg"
                 alt="Nest.js"
                 label="Nest.js"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastify/fastify-original.svg"
+                src="https://images.elecmonkey.com/pages/about/fastify-original.svg"
                 alt="Fastify"
                 label="Fastify"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
+                src="https://images.elecmonkey.com/pages/about/flask-original.svg"
                 alt="Flask"
                 label="Flask"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
+                src="https://images.elecmonkey.com/pages/about/django-plain.svg"
                 alt="Django"
                 label="Django"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
+                src="https://images.elecmonkey.com/pages/about/fastapi-original.svg"
                 alt="FastAPI"
                 label="FastAPI"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg"
+                src="https://images.elecmonkey.com/pages/about/go-original.svg"
                 alt="Gin"
                 label="Gin"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
+                src="https://images.elecmonkey.com/pages/about/spring-original.svg"
                 alt="Spring Boot"
                 label="Spring Boot"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg"
+                src="https://images.elecmonkey.com/pages/about/socketio-original.svg"
                 alt="Socket.IO"
                 label="Socket.IO"
               />
@@ -322,24 +322,24 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Cross-Platform</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/qt/qt-original.svg"
+                src="https://images.elecmonkey.com/pages/about/qt-original.svg"
                 alt="Qt"
                 label="Qt"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg"
+                src="https://images.elecmonkey.com/pages/about/electron-original.svg"
                 alt="Electron"
                 label="Electron"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tauri/tauri-original.svg"
+                src="https://images.elecmonkey.com/pages/about/tauri-original.svg"
                 alt="Tauri"
                 label="Tauri"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
+                src="https://images.elecmonkey.com/pages/about/flutter-original.svg"
                 alt="Flutter"
                 label="Flutter"
                 isGray={true}
@@ -352,28 +352,28 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Databases</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                src="https://images.elecmonkey.com/pages/about/mysql-original.svg"
                 alt="MySQL"
                 label="MySQL"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                src="https://images.elecmonkey.com/pages/about/mongodb-original.svg"
                 alt="MongoDB"
                 label="MongoDB"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
+                src="https://images.elecmonkey.com/pages/about/sqlite-original.svg"
                 alt="SQLite"
                 label="SQLite"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/influxdb/influxdb-original.svg"
+                src="https://images.elecmonkey.com/pages/about/influxdb-original.svg"
                 alt="InfluxDB"
                 label="InfluxDB"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neo4j/neo4j-original.svg"
+                src="https://images.elecmonkey.com/pages/about/neo4j-original.svg"
                 alt="Neo4j"
                 label="Neo4j"
                 isGray={true}
@@ -386,23 +386,23 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">DevOps</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                src="https://images.elecmonkey.com/pages/about/git-original.svg"
                 alt="Git"
                 label="Git"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                src="https://images.elecmonkey.com/pages/about/docker-original.svg"
                 alt="Docker"
                 label="Docker"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                src="https://images.elecmonkey.com/pages/about/kubernetes-plain.svg"
                 alt="Kubernetes"
                 label="Kubernetes"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
+                src="https://images.elecmonkey.com/pages/about/nginx-original.svg"
                 alt="Nginx"
                 label="Nginx"
                 isGray={true}
@@ -414,36 +414,36 @@ export default function TechWall() {
                 className="object-left"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                src="https://images.elecmonkey.com/pages/about/jenkins-original.svg"
                 alt="Jenkins"
                 label="Jenkins"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg"
+                src="https://images.elecmonkey.com/pages/about/rabbitmq-original.svg"
                 alt="RabbitMQ"
                 label="RabbitMQ"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
+                src="https://images.elecmonkey.com/pages/about/apachekafka-original.svg"
                 alt="Kafka"
                 label="Kafka"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+                src="https://images.elecmonkey.com/pages/about/redis-original.svg"
                 alt="Redis"
                 label="Redis"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                src="https://images.elecmonkey.com/pages/about/github-original.svg"
                 alt="GitHub"
                 label="GitHub"
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg"
+                src="https://images.elecmonkey.com/pages/about/gitlab-original.svg"
                 alt="GitLab"
                 label="GitLab"
                 isGray={true}
@@ -455,25 +455,25 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Tools</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cmake/cmake-original.svg"
+                src="https://images.elecmonkey.com/pages/about/cmake-original.svg"
                 alt="CMake"
                 label="CMake"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"
+                src="https://images.elecmonkey.com/pages/about/jupyter-original.svg"
                 alt="Jupyter"
                 label="Jupyter"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg"
+                src="https://images.elecmonkey.com/pages/about/opencv-original.svg"
                 alt="OpenCV"
                 label="OpenCV"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
+                src="https://images.elecmonkey.com/pages/about/postman-original.svg"
                 alt="Postman"
                 label="Postman"
                 isGray={true}
@@ -485,38 +485,38 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Data Science & Machine Learning</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                src="https://images.elecmonkey.com/pages/about/numpy-original.svg"
                 alt="Numpy"
                 label="Numpy"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                src="https://images.elecmonkey.com/pages/about/pandas-original.svg"
                 alt="Pandas"
                 label="Pandas"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
+                src="https://images.elecmonkey.com/pages/about/matplotlib-original.svg"
                 alt="Matplotlib"
                 label="Matplotlib"
                 isGray={true}
               />
               
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
+                src="https://images.elecmonkey.com/pages/about/keras-original.svg"
                 alt="Keras"
                 label="Keras"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                src="https://images.elecmonkey.com/pages/about/tensorflow-original.svg"
                 alt="TensorFlow"
                 label="TensorFlow"
                 isGray={true}
               />
               <TechIcon
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
+                src="https://images.elecmonkey.com/pages/about/pytorch-original.svg"
                 alt="PyTorch"
                 label="PyTorch"
                 isGray={true}

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getAllTags } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
-import TagList from '@/components/TagList';
+import PageContainer from '@/components/layout/PageContainer';
+import TagList from '@/components/tag/TagList';
 
 export const metadata: Metadata = {
   title: '所有标签 - Elecmonkey的小花园',

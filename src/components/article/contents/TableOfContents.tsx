@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 
 interface Heading {
   id: string;
@@ -8,7 +9,8 @@ interface Heading {
   level: number;
 }
 
-export default function TableOfContents() {
+// 使用 dynamic 导入自身，实现延迟加载
+const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents() {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
@@ -204,4 +206,6 @@ export default function TableOfContents() {
       )}
     </>
   );
-} 
+}), { ssr: false });
+
+export default TableOfContents; 

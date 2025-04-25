@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getAllMonths } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
+import PageContainer from '@/components/layout/PageContainer';
 import Link from 'next/link';
 
 export const metadata: Metadata = {

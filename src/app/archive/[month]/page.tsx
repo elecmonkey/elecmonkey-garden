@@ -1,10 +1,9 @@
 import { Metadata } from 'next';
 import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
-import PageContainer from '@/components/PageContainer';
+import PageContainer from '@/components/layout/PageContainer';
 import PostCard from '@/components/PostCard';
 import Link from 'next/link';
 import Pagination from '@/components/Pagination';
-import PageTransition from '@/components/PageTransition';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import { notFound } from 'next/navigation';
@@ -118,22 +117,20 @@ export default async function MonthArchivePage({ params, searchParams }: Props) 
         </div>
       </div>
       
-      <PageTransition>
-        {posts.length === 0 ? (
-          <div className="text-center py-10">
-            <p className="text-gray-500 dark:text-gray-400">该月份未找到文章</p>
-            <Link href="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
-              查看所有文章
-            </Link>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {posts.map((post: PostData) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
-      </PageTransition>
+      {posts.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-gray-500 dark:text-gray-400">该月份未找到文章</p>
+          <Link href="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
+            查看所有文章
+          </Link>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {posts.map((post: PostData) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      )}
       
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (

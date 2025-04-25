@@ -1,4 +1,4 @@
-import CodeBlock from './CodeBlock';
+import CodeBlock from '@/components/article/code/CodeBlock';
 
 export default function ServerCodeRenderer({ 
   language, 

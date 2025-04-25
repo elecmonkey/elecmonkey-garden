@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-interface PostCardProps {
+export interface PostCardProps {
   post: {
     id: string;
     title: string;

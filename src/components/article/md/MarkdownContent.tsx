@@ -9,7 +9,7 @@ import rehypeKatex from 'rehype-katex';
 // 服务器端组件包装器
 export default function MarkdownContent({ content }: { content: string }) {
   return (
-    <div className="markdown-content text-lg leading-relaxed">
+    <div className="markdown-content prose prose-lg dark:prose-invert max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex]}
