@@ -143,7 +143,7 @@ export default async function BlogPost({ params }: Props) {
         </article>
         
         {/* 浮动大纲 */}
-        <ClientTableOfContents />
+        <ClientTableOfContents no_toc={post.no_toc === true} />
       </PageContainer>
     );
   } catch (error) {

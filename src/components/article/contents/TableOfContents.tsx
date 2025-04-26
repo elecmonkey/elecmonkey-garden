@@ -9,8 +9,12 @@ interface Heading {
   level: number;
 }
 
+interface TableOfContentsProps {
+  no_toc?: boolean;
+}
+
 // 使用 dynamic 导入自身，实现延迟加载
-const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents() {
+const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({ no_toc = false }: TableOfContentsProps) {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
@@ -81,7 +85,8 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents()
     };
   }, [isOpen]);
 
-  if (headings.length === 0) return null;
+  // 如果 no_toc 为 true，或者没有标题，则不渲染任何内容
+  if (no_toc || headings.length === 0) return null;
 
   return (
     <>
