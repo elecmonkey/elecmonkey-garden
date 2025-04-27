@@ -65,9 +65,9 @@ export default function CodeBlock({ language, code, ...props }: {
 }) {
   // 解析语言和行号范围
   const parseLanguageAndRange = (lang: string) => {
-    console.log('解析语言和范围:', lang);
+    // console.log('解析语言和范围:', lang);
     const match = lang.match(/^(\w+)(?:{([^}]+)})?$/);
-    console.log('匹配结果:', match);
+    // console.log('匹配结果:', match);
     if (match && match[2]) {
       return {
         language: match[1],
@@ -81,7 +81,7 @@ export default function CodeBlock({ language, code, ...props }: {
   };
 
   const { language: parsedLanguage, range } = parseLanguageAndRange(language);
-  console.log('解析结果:', { parsedLanguage, range });
+  // console.log('解析结果:', { parsedLanguage, range });
 
   // 解析代码中的行高亮标记
   const parseCode = (code: string, rangeStr: string | null) => {
@@ -90,25 +90,25 @@ export default function CodeBlock({ language, code, ...props }: {
     
     // 解析行号范围
     const parseLineNumbers = (rangeStr: string): number[] => {
-      console.log('解析行号范围:', rangeStr);
+      // console.log('解析行号范围:', rangeStr);
       const numbers: number[] = [];
       const parts = rangeStr.split(',');
       
       for (const part of parts) {
         if (part.includes('-')) {
           const [start, end] = part.split('-').map(Number);
-          console.log('解析范围:', start, '到', end);
+          // console.log('解析范围:', start, '到', end);
           for (let i = start; i <= end; i++) {
             numbers.push(i);
           }
         } else {
           const num = Number(part);
-          console.log('解析单个行号:', num);
+          // console.log('解析单个行号:', num);
           numbers.push(num);
         }
       }
       
-      console.log('解析后的行号数组:', numbers);
+      // console.log('解析后的行号数组:', numbers);
       return numbers;
     };
 
@@ -116,7 +116,7 @@ export default function CodeBlock({ language, code, ...props }: {
       const lineNumbers = parseLineNumbers(rangeStr);
       lineNumbers.forEach(lineNumber => {
         if (lineNumber > 0 && lineNumber <= lines.length) {
-          console.log('设置行高亮:', lineNumber);
+          // console.log('设置行高亮:', lineNumber);
           lineProps[lineNumber] = {
             style: {
               backgroundColor: 'rgba(0, 0, 0, 0.1)',
