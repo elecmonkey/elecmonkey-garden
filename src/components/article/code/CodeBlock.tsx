@@ -63,11 +63,46 @@ export default function CodeBlock({ language, code, ...props }: {
   code: string, 
   [key: string]: unknown 
 }) {
+  // 解析代码中的行高亮标记
+  const parseCode = (code: string) => {
+    const lines = code.split('\n');
+    const lineProps: { [key: number]: { style: React.CSSProperties } } = {};
+    
+    lines.forEach((line, index) => {
+      if (line.trim().startsWith('+ ')) {
+        lineProps[index + 1] = {
+          style: {
+            backgroundColor: 'rgba(0, 255, 0, 0.15)',
+            display: 'block',
+            width: '100%'
+          }
+        };
+        lines[index] = line.replace('+ ', '');
+      } else if (line.trim().startsWith('- ')) {
+        lineProps[index + 1] = {
+          style: {
+            backgroundColor: 'rgba(255, 0, 0, 0.15)',
+            display: 'block',
+            width: '100%',
+          }
+        };
+        lines[index] = line.replace('- ', '');
+      }
+    });
+    
+    return {
+      code: lines.join('\n'),
+      lineProps
+    };
+  };
+
+  const { code: processedCode, lineProps } = parseCode(code);
+
   return (
     <div className="relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700">
       {/* 内联样式覆盖 */}
-      <style jsx global>{`
-        /* 全局覆盖React Syntax Highlighter的行号样式 */
+      {/* <style jsx global>{` 
+        // 全局覆盖React Syntax Highlighter的行号样式 
         .react-syntax-highlighter-line-number,
         pre span.linenumber,
         span[class*="linenumber"],
@@ -75,12 +110,17 @@ export default function CodeBlock({ language, code, ...props }: {
           font-style: normal !important;
         }
         
-        /* 强制第一列（行号）不使用斜体 */
+        // 强制第一列（行号）不使用斜体 
         pre > span > span:first-child,
         pre > span > span.token.comment:first-child {
           font-style: normal !important;
         }
-      `}</style>
+
+        // 行高亮样式 
+        .react-syntax-highlighter-line-number {
+          background-color: inherit !important;
+        }
+       `}</style> */}
       
       <div className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700">
         {language}
@@ -94,22 +134,22 @@ export default function CodeBlock({ language, code, ...props }: {
           lineNumberStyle={{ 
             width: '3em',
             color: '#aaa',
-            textAlign: 'center', 
+            textAlign: 'right', 
             userSelect: 'none',
+            paddingRight: '1em',
             borderRight: '1px solid #e5e5e5',
-            marginRight: "1em",
-            paddingRight: '0',
-            fontStyle: 'normal !important'
+            marginRight: '1em',
+            fontStyle: 'normal'
           }}
           lineNumberContainerStyle={{
-            fontStyle: 'normal !important'
+            fontStyle: 'normal'
           }}
           customStyle={{ 
             margin: 0, 
             padding: '0.8rem 0.5rem 0.8rem 0',
             borderRadius: 0,
-            fontSize: '0.9rem',
-            backgroundColor: '#f8f8f8'
+            fontSize: '0.85rem',
+            fontWeight: 'bold',
           }}
           PreTag="div"
           codeTagProps={{
@@ -117,11 +157,41 @@ export default function CodeBlock({ language, code, ...props }: {
               fontStyle: 'normal'
             }
           }}
+          lineProps={(lineNumber) => ({
+            ...lineProps[lineNumber],
+            key: `line-${lineNumber}`,
+            'data-line-number': lineNumber,
+            className: lineProps[lineNumber]?.style?.backgroundColor ? 
+              (lineProps[lineNumber]?.style?.backgroundColor === 'rgba(0, 255, 0, 0.15)' ? 'line-add' : 'line-remove') : 
+              undefined
+          })}
           {...props}
         >
-          {code}
+          {processedCode}
         </SyntaxHighlighter>
       </div>
+      <style jsx global>{`
+        .line-add {
+          position: relative;
+        }
+        .line-add::before {
+          content: "+";
+          position: absolute;
+          left: 2.35em;
+          color: #22c55e;
+          font-weight: bold;
+        }
+        .line-remove {
+          position: relative;
+        }
+        .line-remove::before {
+          content: "-";
+          position: absolute;
+          left: 2.35em;
+          color: #ef4444;
+          font-weight: bold;
+        }
+      `}</style>
     </div>
   );
 } 
