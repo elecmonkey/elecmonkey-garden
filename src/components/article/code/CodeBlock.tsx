@@ -63,11 +63,72 @@ export default function CodeBlock({ language, code, ...props }: {
   code: string, 
   [key: string]: unknown 
 }) {
+  // 解析语言和行号范围
+  const parseLanguageAndRange = (lang: string) => {
+    console.log('解析语言和范围:', lang);
+    const match = lang.match(/^(\w+)(?:{([^}]+)})?$/);
+    console.log('匹配结果:', match);
+    if (match && match[2]) {
+      return {
+        language: match[1],
+        range: match[2]
+      };
+    }
+    return {
+      language: lang,
+      range: null
+    };
+  };
+
+  const { language: parsedLanguage, range } = parseLanguageAndRange(language);
+  console.log('解析结果:', { parsedLanguage, range });
+
   // 解析代码中的行高亮标记
-  const parseCode = (code: string) => {
+  const parseCode = (code: string, rangeStr: string | null) => {
     const lines = code.split('\n');
     const lineProps: { [key: number]: { style: React.CSSProperties } } = {};
     
+    // 解析行号范围
+    const parseLineNumbers = (rangeStr: string): number[] => {
+      console.log('解析行号范围:', rangeStr);
+      const numbers: number[] = [];
+      const parts = rangeStr.split(',');
+      
+      for (const part of parts) {
+        if (part.includes('-')) {
+          const [start, end] = part.split('-').map(Number);
+          console.log('解析范围:', start, '到', end);
+          for (let i = start; i <= end; i++) {
+            numbers.push(i);
+          }
+        } else {
+          const num = Number(part);
+          console.log('解析单个行号:', num);
+          numbers.push(num);
+        }
+      }
+      
+      console.log('解析后的行号数组:', numbers);
+      return numbers;
+    };
+
+    if (rangeStr) {
+      const lineNumbers = parseLineNumbers(rangeStr);
+      lineNumbers.forEach(lineNumber => {
+        if (lineNumber > 0 && lineNumber <= lines.length) {
+          console.log('设置行高亮:', lineNumber);
+          lineProps[lineNumber] = {
+            style: {
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              display: 'block',
+              width: '100%'
+            }
+          };
+        }
+      });
+    }
+    
+    // 处理 + 和 - 标记
     lines.forEach((line, index) => {
       if (line.trim().startsWith('+ ')) {
         lineProps[index + 1] = {
@@ -83,7 +144,7 @@ export default function CodeBlock({ language, code, ...props }: {
           style: {
             backgroundColor: 'rgba(255, 0, 0, 0.15)',
             display: 'block',
-            width: '100%',
+            width: '100%'
           }
         };
         lines[index] = line.replace('- ', '');
@@ -96,7 +157,7 @@ export default function CodeBlock({ language, code, ...props }: {
     };
   };
 
-  const { code: processedCode, lineProps } = parseCode(code);
+  const { code: processedCode, lineProps } = parseCode(code, range);
 
   return (
     <div className="relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700">
@@ -123,12 +184,12 @@ export default function CodeBlock({ language, code, ...props }: {
        `}</style> */}
       
       <div className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700">
-        {language}
+        {parsedLanguage}
       </div>
       <div className="relative">
         <SyntaxHighlighter
           style={oneLight}
-          language={language}
+          language={parsedLanguage}
           showLineNumbers={true}
           wrapLines={true}
           lineNumberStyle={{ 
@@ -157,14 +218,20 @@ export default function CodeBlock({ language, code, ...props }: {
               fontStyle: 'normal'
             }
           }}
-          lineProps={(lineNumber) => ({
-            ...lineProps[lineNumber],
-            key: `line-${lineNumber}`,
-            'data-line-number': lineNumber,
-            className: lineProps[lineNumber]?.style?.backgroundColor ? 
-              (lineProps[lineNumber]?.style?.backgroundColor === 'rgba(0, 255, 0, 0.15)' ? 'line-add' : 'line-remove') : 
-              undefined
-          })}
+          lineProps={(lineNumber) => {
+            const props = lineProps[lineNumber];
+            if (!props) return { key: `line-${lineNumber}`, 'data-line-number': lineNumber };
+            
+            const isAdd = props.style?.backgroundColor === 'rgba(0, 255, 0, 0.15)';
+            const isRemove = props.style?.backgroundColor === 'rgba(255, 0, 0, 0.15)';
+            
+            return {
+              ...props,
+              key: `line-${lineNumber}`,
+              'data-line-number': lineNumber,
+              className: isAdd ? 'line-add' : isRemove ? 'line-remove' : undefined
+            };
+          }}
           {...props}
         >
           {processedCode}
