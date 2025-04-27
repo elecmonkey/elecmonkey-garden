@@ -15,7 +15,8 @@ const MermaidRenderer = dynamic(() => import('./MermaidRenderer'), {
 
 // 使用 react-markdown 的 Components 类型来确保兼容性
 export const CodeComponent: Components['code'] = ({ className, children, ...props }) => {
-  const match = /language-(\w+)/.exec(className || '');
+  // 解析语言和行号范围
+  const match = /language-(\w+)(?:{([^}]+)})?/.exec(className || '');
   
   // 如果是 Mermaid 代码块，使用 Mermaid 渲染器
   if (match && match[1] === 'mermaid') {
@@ -35,7 +36,7 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
     return (
       <div className="relative">
         <ServerCodeRenderer 
-          language={match[1]} 
+          language={match[1] + (match[2] ? `{${match[2]}}` : '')} 
           code={code}
           {...props}
         />
