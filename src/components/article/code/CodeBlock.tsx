@@ -1,6 +1,9 @@
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import '@/styles/syntax-highlighter-override.css';
+import React from 'react';
+import { VueSFCBlock } from './vue-sfc/VueSFCBlock';
+import { SvelteSFCBlock } from './svelte-sfc/SvelteSFCBlock';
 
 // 导入常用语言支持
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
@@ -25,6 +28,7 @@ import php from 'react-syntax-highlighter/dist/cjs/languages/prism/php';
 import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql';
 import dart from 'react-syntax-highlighter/dist/cjs/languages/prism/dart';
 import kotlin from 'react-syntax-highlighter/dist/cjs/languages/prism/kotlin';
+import html from 'react-syntax-highlighter/dist/cjs/languages/prism/markup';
 
 // 注册语言
 SyntaxHighlighter.registerLanguage('typescript', typescript);
@@ -56,6 +60,7 @@ SyntaxHighlighter.registerLanguage('sql', sql);
 SyntaxHighlighter.registerLanguage('dart', dart);
 SyntaxHighlighter.registerLanguage('kotlin', kotlin);
 SyntaxHighlighter.registerLanguage('kt', kotlin); // kotlin别名
+SyntaxHighlighter.registerLanguage('html', html);
 
 // 代码块容器组件
 export default function CodeBlock({ language, code, ...props }: { 
@@ -63,11 +68,64 @@ export default function CodeBlock({ language, code, ...props }: {
   code: string, 
   [key: string]: unknown 
 }) {
+  // 共同的样式配置
+  const commonStyles = {
+    container: "relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700",
+    header: "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700",
+    sectionHeader: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700",
+    highlighter: {
+      style: oneLight,
+      showLineNumbers: true,
+      wrapLines: true,
+      lineNumberStyle: { 
+        width: '3em',
+        color: '#aaa',
+        textAlign: 'right' as const, 
+        userSelect: 'none' as const,
+        paddingRight: '1em',
+        borderRight: '1px solid #e5e5e5',
+        marginRight: '1em',
+        fontStyle: 'normal'
+      },
+      lineNumberContainerStyle: {
+        fontStyle: 'normal'
+      },
+      customStyle: { 
+        margin: 0, 
+        padding: '0.8rem 0.5rem 0.8rem 0',
+        borderRadius: 0,
+        fontSize: '0.85rem',
+        fontWeight: 'bold',
+      },
+      PreTag: "div" as keyof React.JSX.IntrinsicElements,
+      codeTagProps: {
+        style: {
+          fontStyle: 'normal'
+        }
+      }
+    }
+  };
+
   // 解析语言和行号范围
   const parseLanguageAndRange = (lang: string) => {
-    // console.log('解析语言和范围:', lang);
+    // 处理Vue文件
+    if (lang === 'vue') {
+      return {
+        language: 'vue',
+        range: null
+      };
+    }
+    
+    // 处理Svelte文件
+    if (lang === 'svelte') {
+      return {
+        language: 'svelte',
+        range: null
+      };
+    }
+    
+    // 原有的语言解析逻辑
     const match = lang.match(/^(\w+)(?:{([^}]+)})?$/);
-    // console.log('匹配结果:', match);
     if (match && match[2]) {
       return {
         language: match[1],
@@ -81,8 +139,17 @@ export default function CodeBlock({ language, code, ...props }: {
   };
 
   const { language: parsedLanguage, range } = parseLanguageAndRange(language);
-  // console.log('解析结果:', { parsedLanguage, range });
+  
+  // 如果是Vue文件，使用VueSFCBlock组件
+  if (parsedLanguage === 'vue') {
+    return <VueSFCBlock code={code} commonStyles={commonStyles} />;
+  }
 
+  // 如果是Svelte文件，使用SvelteSFCBlock组件
+  if (parsedLanguage === 'svelte') {
+    return <SvelteSFCBlock code={code} commonStyles={commonStyles} />;
+  }
+  
   // 解析代码中的行高亮标记
   const parseCode = (code: string, rangeStr: string | null) => {
     const lines = code.split('\n');
@@ -160,7 +227,7 @@ export default function CodeBlock({ language, code, ...props }: {
   const { code: processedCode, lineProps } = parseCode(code, range);
 
   return (
-    <div className="relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700">
+    <div className={commonStyles.container}>
       {/* 内联样式覆盖 */}
       {/* <style jsx global>{` 
         // 全局覆盖React Syntax Highlighter的行号样式 
@@ -183,41 +250,13 @@ export default function CodeBlock({ language, code, ...props }: {
         }
        `}</style> */}
       
-      <div className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700">
+      <div className={commonStyles.header}>
         {parsedLanguage}
       </div>
       <div className="relative">
         <SyntaxHighlighter
-          style={oneLight}
+          {...commonStyles.highlighter}
           language={parsedLanguage}
-          showLineNumbers={true}
-          wrapLines={true}
-          lineNumberStyle={{ 
-            width: '3em',
-            color: '#aaa',
-            textAlign: 'right', 
-            userSelect: 'none',
-            paddingRight: '1em',
-            borderRight: '1px solid #e5e5e5',
-            marginRight: '1em',
-            fontStyle: 'normal'
-          }}
-          lineNumberContainerStyle={{
-            fontStyle: 'normal'
-          }}
-          customStyle={{ 
-            margin: 0, 
-            padding: '0.8rem 0.5rem 0.8rem 0',
-            borderRadius: 0,
-            fontSize: '0.85rem',
-            fontWeight: 'bold',
-          }}
-          PreTag="div"
-          codeTagProps={{
-            style: {
-              fontStyle: 'normal'
-            }
-          }}
           lineProps={(lineNumber) => {
             const props = lineProps[lineNumber];
             if (!props) return { key: `line-${lineNumber}`, 'data-line-number': lineNumber };
