@@ -1,7 +1,7 @@
 ---
 title: '论如何逼着为浏览器而生的 Mermaid 在服务器端渲染'
 date: '2025-04-26'
-description: '你会发现很多标榜 SSR/SSG 的工具，禁用 JavaScript 之后 Mermaid 就无法显示了。我不服，一通尝试之后我服了。'
+description: '你会发现很多力求 SSR/SSG 的工具，Mermaid 最终还是选择了浏览器端渲染。'
 tags: ['Mermaid', 'Node.js', 'SSR', 'SSG', '服务端渲染', 'Puppeteer']
 author: 'Elecmonkey'
 ---
