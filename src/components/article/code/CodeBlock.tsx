@@ -71,8 +71,8 @@ export default function CodeBlock({ language, code, ...props }: {
   // 共同的样式配置
   const commonStyles = {
     container: "relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700",
-    header: "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700",
-    sectionHeader: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-b border-gray-300 dark:border-gray-700",
+    header: "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1.5 px-3 font-mono border-b border-gray-300 dark:border-gray-700 font-bold",
+    sectionHeader: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-gray-300 dark:border-gray-700 indent-2",
     highlighter: {
       style: oneLight,
       showLineNumbers: true,
@@ -92,7 +92,7 @@ export default function CodeBlock({ language, code, ...props }: {
       },
       customStyle: { 
         margin: 0, 
-        padding: '0.8rem 0.5rem 0.8rem 0',
+        padding: '0.4rem 0.5rem 0.4rem 0',
         borderRadius: 0,
         fontSize: '0.85rem',
         fontWeight: 'bold',

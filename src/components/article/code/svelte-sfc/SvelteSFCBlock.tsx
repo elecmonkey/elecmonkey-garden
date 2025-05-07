@@ -65,26 +65,13 @@ export function SvelteSFCBlock({ code, commonStyles }: SvelteSFCBlockProps) {
   return (
     <div className={commonStyles.container}>
       <div className={commonStyles.header}>
-        Svelte
+        Svelte SFC
       </div>
       <div className="relative">
-        {sections.markup && (
-          <div>
-            <div className={commonStyles.sectionHeader}>
-              Template
-            </div>
-            <SyntaxHighlighter
-              {...commonStyles.highlighter}
-              language="html"
-            >
-              {sections.markup}
-            </SyntaxHighlighter>
-          </div>
-        )}
         {sections.script && (
           <div>
             <div className={commonStyles.sectionHeader}>
-              Script
+              [Script]
             </div>
             <SyntaxHighlighter
               {...commonStyles.highlighter}
@@ -94,10 +81,23 @@ export function SvelteSFCBlock({ code, commonStyles }: SvelteSFCBlockProps) {
             </SyntaxHighlighter>
           </div>
         )}
+        {sections.markup && (
+          <div>
+            <div className={commonStyles.sectionHeader}>
+              [Template]
+            </div>
+            <SyntaxHighlighter
+              {...commonStyles.highlighter}
+              language="html"
+            >
+              {sections.markup}
+            </SyntaxHighlighter>
+          </div>
+        )}
         {sections.style && (
           <div>
             <div className={commonStyles.sectionHeader}>
-              Style
+              [Style]
             </div>
             <SyntaxHighlighter
               {...commonStyles.highlighter}

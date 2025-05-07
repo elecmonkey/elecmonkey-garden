@@ -53,14 +53,14 @@ export function VueSFCBlock({ code, commonStyles }: VueSFCBlockProps) {
 
   return (
     <div className={commonStyles.container}>
-      <div className={commonStyles.header}>
-        Vue
+      <div className={`${commonStyles.header} !font-mono`}>
+        Vue SFC
       </div>
       <div className="relative">
         {sections.template && (
           <div>
             <div className={commonStyles.sectionHeader}>
-              Template
+              [Template]
             </div>
             <SyntaxHighlighter
               {...commonStyles.highlighter}
@@ -73,7 +73,7 @@ export function VueSFCBlock({ code, commonStyles }: VueSFCBlockProps) {
         {sections.script && (
           <div>
             <div className={commonStyles.sectionHeader}>
-              Script
+              [Script]
             </div>
             <SyntaxHighlighter
               {...commonStyles.highlighter}
@@ -86,7 +86,7 @@ export function VueSFCBlock({ code, commonStyles }: VueSFCBlockProps) {
         {sections.style && (
           <div>
             <div className={commonStyles.sectionHeader}>
-              Style
+              [Style]
             </div>
             <SyntaxHighlighter
               {...commonStyles.highlighter}
