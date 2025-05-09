@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  turbopack: {
+    resolveExtensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.scss', '.md', '.mdx'],
+  },
 };
 
 export default withBundleAnalyzer({
