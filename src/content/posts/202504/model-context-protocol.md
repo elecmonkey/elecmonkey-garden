@@ -2,7 +2,7 @@
 title: "AI Agent 进化路：Node.js 搭建 Model Context Protocol 服务器"
 date: "2025-04-04"
 description: "Model Context Protocol —— 模型上下文，AI大模型打破对话框“次元壁”。"
-tags: ["AI", "LLM", "MCP", "Node.js", "Agent"]
+tags: ["AI", "大语言模型 (LLM)", "Node.js", "智能体 (Agent)"]
 author: "Elecmonkey"
 ---
 

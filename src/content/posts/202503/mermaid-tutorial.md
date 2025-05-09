@@ -1,9 +1,9 @@
 ---
-title: '技术文档必备之 Mermaid 图表制作入门'
-date: '2025-03-22'
-description: '用代码画图真的比拖拽工具高效吗？我觉得如果你用过 Markdown 就不会问这个问题。'
-tags: ['Mermaid', '可视化', 'Markdown', '流程图', '技术文档', '前端工具']
-author: 'Elecmonkey'
+title: "技术文档必备之 Mermaid 图表制作入门"
+date: "2025-03-22"
+description: "用代码画图真的比拖拽工具高效吗？我觉得如果你用过 Markdown 就不会问这个问题。"
+tags: ["技术文档", "Mermaid"]
+author: "Elecmonkey"
 ---
 
 Mermaid 不是画图神器，它的可 diy 程度很差劲，样式也很单调。如果是画比较复杂的图表，几乎毫无疑问你最好去用 [draw.io](https://draw.io/) 之类的工具。但是鉴于我个人只要不是特别正式的文档都已经变成 Markdown 了，在写文档的时候需要顺手画一些简单的示意图，这时候再去调专业的画图工具，就不免会想，为啥图表不能像数学公式一样，有个 LaTeX 一样的纯键盘可嵌入 Markdown 的解决方案呢？

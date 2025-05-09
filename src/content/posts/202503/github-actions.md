@@ -2,7 +2,7 @@
 title: '前端小项目的 GitHub Actions 配置爬坑记'
 date: '2025-03-26'
 description: '又名被大模型坑的前端开发者决心拯救自己的CI/CD工作流（bu。'
-tags: ['GitHub Actions', 'CI/CD', 'Next.js', 'DevOps', '前端工程化', '性能优化', 'rsync']
+tags: ['GitHub Actions', 'CI/CD', 'Next.js', 'DevOps']
 author: 'Elecmonkey'
 ---
 

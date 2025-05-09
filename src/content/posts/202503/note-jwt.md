@@ -1,9 +1,9 @@
 ---
-title: '用户鉴权系统：JWT 实现无状态认证'
-date: '2025-03-31'
-description: 'JWT 认证学习笔记。无状态认证的原理分析、前后端实现方案、安全防护措施，以及在实际项目中遇到的跨域、单点登录等问题。'
-tags: ['JWT', '身份认证', 'Web安全', 'Authentication', 'Authorization', 'XSS', 'CSRF']
-author: 'Elecmonkey'
+title: "用户鉴权系统：JWT 实现无状态认证"
+date: "2025-03-31"
+description: "JWT 认证学习笔记。无状态认证的原理分析、前后端实现方案、安全防护措施，以及在实际项目中遇到的跨域、单点登录等问题。"
+tags: ["身份认证", "Web安全", "JavaScript"]
+author: "Elecmonkey"
 ---
 
 ## Why JWT
