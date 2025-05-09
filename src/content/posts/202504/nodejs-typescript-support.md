@@ -1,9 +1,9 @@
 ---
-title: '聊聊 Node.js 原生支持运行 TypeScript 文件'
-date: '2025-04-19'
-description: 'Node.js 终于原生支持 TypeScript 了。但不是我想象的那种支持。'
-tags: ['Node.js', 'TypeScript', 'JavaScript']
-author: 'Elecmonkey'
+title: "聊聊 Node.js 原生支持运行 TypeScript 文件"
+date: "2025-04-19"
+description: "Node.js 终于原生支持 TypeScript 了。但不是我想象的那种支持。"
+tags: ["Node.js", "TypeScript", "JavaScript"]
+author: "Elecmonkey"
 ---
 
 ## 原生支持

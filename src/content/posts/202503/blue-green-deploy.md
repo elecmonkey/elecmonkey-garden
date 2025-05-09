@@ -2,7 +2,7 @@
 title: 'Next.js 零停机部署记录：从 PM2 Cluster 到 Next Standalone 模式'
 date: '2025-03-28'
 description: '记录一个 Next.js 项目在生产环境中的零停机部署方案。'
-tags: ['Next.js', 'PM2', 'Node.js', '零停机部署', 'DevOps', 'CI/CD']
+tags: ['Next.js', 'Node.js', 'DevOps', 'CI/CD']
 author: 'Elecmonkey'
 ---
 

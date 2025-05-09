@@ -2,7 +2,7 @@
 title: "解决无法访问 DockerHub 问题的笨办法一则"
 date: "2025-04-11"
 description: "离线导入最有用的一集：网络受限环境。让我想起来当年在 Ubuntu 安装 snap 程序也得用类似的办法。"
-tags: ["Docker", "DockerHub"]
+tags: ["Docker", "DevOps"]
 author: "Elecmonkey"
 ---
 
