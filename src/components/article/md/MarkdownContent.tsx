@@ -190,8 +190,11 @@ export default function MarkdownContent({ content }: { content: string }) {
           
           // 添加图片样式 - 使用 Next.js Image 组件优化图片
           img: ({ src, alt, width, height, ...props }) => {
-            // 检查 src 是否存在
-            if (!src) return null;
+            // 类型守卫：确保 src 存在且为字符串
+            if (!src || typeof src !== 'string') {
+              console.warn('Image src is missing or not a string');
+              return null;
+            }
             
             // 设置默认宽高
             const imgWidth = typeof width === 'number' ? width : 800;
