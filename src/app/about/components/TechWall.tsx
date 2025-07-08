@@ -270,6 +270,11 @@ export default function TechWall() {
                 label="Express"
               />
               <TechIcon
+                src="https://images.elecmonkey.com/pages/about/koa.png"
+                alt="Koa"
+                label="Koa"
+              />
+              <TechIcon
                 src="https://images.elecmonkey.com/pages/about/nestjs-original.svg"
                 alt="Nest.js"
                 label="Nest.js"
