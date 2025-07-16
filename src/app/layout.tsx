@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-blue-950 text-gray-900 dark:text-blue-50`}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

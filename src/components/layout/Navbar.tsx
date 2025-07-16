@@ -36,27 +36,27 @@ export default function Navbar() {
   // 生成链接样式，当前页面有灰色背景
   const getLinkClassName = (path: string) => {
     const baseClasses = "px-3 py-2 rounded-lg transition-colors";
-    const activeClasses = `${baseClasses} bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-medium`;
-    const inactiveClasses = `${baseClasses} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800`;
+    const activeClasses = `${baseClasses} bg-muted text-foreground font-medium`;
+    const inactiveClasses = `${baseClasses} text-muted-foreground hover:bg-accent`;
     
     return isActive(path) ? activeClasses : inactiveClasses;
   };
   
   // 移动端菜单项样式，添加触摸反馈
   const getMobileLinkClassName = (path: string) => {
-    const baseClasses = "block px-3 py-2 rounded-lg transition-colors active:bg-gray-200 dark:active:bg-gray-700";
-    const activeClasses = `${baseClasses} bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-medium`;
-    const inactiveClasses = `${baseClasses} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800`;
+    const baseClasses = "block px-3 py-2 rounded-lg transition-colors active:bg-muted";
+    const activeClasses = `${baseClasses} bg-muted text-foreground font-medium`;
+    const inactiveClasses = `${baseClasses} text-muted-foreground hover:bg-accent`;
     
     return isActive(path) ? activeClasses : inactiveClasses;
   };
   
   // 根据是否是主页设置不同的导航栏样式
   const navbarClasses = isHomePage 
-    ? "bg-white dark:bg-gray-900 shadow-sm" // 主页导航栏：相对定位
-    : "bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10"; // 其他页面导航栏：固定在顶部
+    ? "bg-card shadow-sm" // 主页导航栏：相对定位
+    : "bg-card shadow-sm sticky top-0 z-10"; // 其他页面导航栏：固定在顶部
   
-  const littleCircleButtonClass = "text-gray-700 dark:text-gray-300 focus:outline-none p-2 rounded-full active:bg-gray-200 hover:bg-gray-200 dark:active:bg-gray-700 dark:hover:bg-gray-700 transition-colors mx-0.5";
+  const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
 
   return (
     <nav className={navbarClasses}>
@@ -72,7 +72,7 @@ export default function Navbar() {
                 height={32} 
                 className="rounded-lg"
               />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
+              <span className="text-xl font-bold text-foreground">
                 Elecmonkey的小花园
               </span>
             </Link>
