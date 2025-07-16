@@ -68,7 +68,7 @@ export default function Navbar() {
   const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
 
   return (
-    <nav className={`${navbarClasses} border-b border-border/30`}>
+    <nav className={`${navbarClasses} border-b border-border/20`}>
       <div className="max-w-4xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* 网站标志 */}

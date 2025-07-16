@@ -103,7 +103,7 @@ export default async function Home() {
           </Link>
         </div>
         
-        <div className="px-6 py-2 bg-muted rounded-lg shadow-md">
+        <div className="px-6 py-2 bg-muted/50 rounded-lg shadow-md">
           <TagCloud tags={tags} />
         </div>
       </section>
