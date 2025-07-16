@@ -1,6 +1,6 @@
 ---
 title: "值得开始尝试 Rolldown-vite 了吗"
-date: "2025-07-06"
+date: "2025-07-08"
 description: "生产环境可以用吗。"
 tags: ["Rolldown", "Vite", "构建工具"]
 author: "Elecmonkey"
