@@ -1,7 +1,10 @@
+'use client';
+
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { oneLight, oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import '@/styles/syntax-highlighter-override.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import { VueSFCBlock } from './vue-sfc/VueSFCBlock';
 import { SvelteSFCBlock } from './svelte-sfc/SvelteSFCBlock';
 
@@ -63,18 +66,30 @@ SyntaxHighlighter.registerLanguage('kt', kotlin); // kotlin别名
 SyntaxHighlighter.registerLanguage('html', html);
 
 // 代码块容器组件
-export default function CodeBlock({ language, code, ...props }: { 
-  language: string, 
-  code: string, 
-  [key: string]: unknown 
+export default function CodeBlock({ language, code, ...props }: {
+  language: string,
+  code: string,
+  [key: string]: unknown
 }) {
+  // 处理客户端 mounted 状态，避免 Hydration Mismatch
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // SSR 时总是使用亮色主题，客户端 hydration 后才使用实际主题
+  // 这样可以保持 SSR 的同时避免 hydration mismatch
+  const themeToUse = mounted && resolvedTheme ? resolvedTheme : 'light';
+
   // 共同的样式配置
   const commonStyles = {
-    container: "relative my-6 rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700",
-    header: "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1.5 px-3 font-mono border-b border-gray-300 dark:border-gray-700 font-bold",
-    sectionHeader: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs py-1 px-3 font-mono border-gray-300 dark:border-gray-700 indent-2",
+    container: "relative my-6 rounded-sm overflow-hidden border border-border",
+    header: "bg-muted text-muted-foreground text-xs py-1.5 px-3 font-mono border-b border-border font-bold",
+    sectionHeader: "bg-muted text-muted-foreground text-xs py-1 px-3 font-mono border-border indent-2",
     highlighter: {
-      style: oneLight,
+      style: themeToUse === 'dark' ? oneDark : oneLight,
       showLineNumbers: true,
       wrapLines: true,
       lineNumberStyle: { 

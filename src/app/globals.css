@@ -22,7 +22,7 @@ html.transitioning * {
   --popover-foreground: #171717;
   --border: #e5e5e5;
   --input: #e5e5e5;
-  --primary: #0ea5e9;
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
   --secondary: #f5f5f5;
   --secondary-foreground: #171717;
@@ -30,8 +30,15 @@ html.transitioning * {
   --accent-foreground: #171717;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --ring: #0ea5e9;
+  --ring: #2563eb;
   --radius: 0.5rem;
+
+  /* 搜索结果高亮颜色 */
+  --highlight-yellow: #fef08a; /* 关键词高亮背景 */
+  --highlight-blue: #dbeafe;   /* 标题匹配 - 蓝色100 */
+  --highlight-green: #dcfce7;  /* 描述匹配 - 绿色100 */
+  --highlight-purple: #f3e8ff; /* 内容匹配 - 紫色100 */
+  --highlight-red: #fee2e2;    /* 标签匹配 - 红色100 */
 }
 
 /* 深色主题变量 */
@@ -46,7 +53,7 @@ html.transitioning * {
   --popover-foreground: #f8fafc;
   --border: #2a364d; /* 边框颜色，比 card 稍深 */
   --input: #2a364d;
-  --primary: #0ea5e9;
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
   --secondary: #1a243a;
   --secondary-foreground: #f8fafc;
@@ -54,7 +61,14 @@ html.transitioning * {
   --accent-foreground: #f8fafc;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --ring: #0ea5e9;
+  --ring: #2563eb;
+
+  /* 搜索结果高亮颜色 - 深色模式 */
+  --highlight-yellow: #a16207;
+  --highlight-blue: #1e3a8a;   /* 蓝色900 */
+  --highlight-green: #14532d;  /* 绿色900 */
+  --highlight-purple: #581c87; /* 紫色900 */
+  --highlight-red: #991b1b;    /* 红色900 */
 }
 
 @theme inline {

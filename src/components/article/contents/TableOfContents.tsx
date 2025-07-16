@@ -124,7 +124,7 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
       {/* 大纲内容 */}
       <nav 
         className={`
-          fixed z-40 bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700
+          fixed z-40 bg-card shadow-lg border border-border
           transition-all duration-300 ease-in-out
           ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-[200%] opacity-0 pointer-events-none'}
           ${isDesktopVisible ? '2xl:translate-x-0 2xl:opacity-100 2xl:pointer-events-auto' : '2xl:translate-x-[200%] 2xl:opacity-0 2xl:pointer-events-none'}
@@ -141,7 +141,7 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
               setIsOpen(false);
             }
           }}
-          className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground"
           aria-label="关闭目录"
         >
           <svg 
@@ -161,7 +161,7 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
         </button>
 
         <div className="p-4 overflow-y-auto h-full 2xl:h-full">
-          <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">目录</h2>
+          <h2 className="text-lg font-semibold mb-4 text-foreground">目录</h2>
           <ul className="space-y-2">
             {headings.map((heading) => (
               <li
@@ -174,8 +174,8 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
                   href={`#${heading.id}`}
                   className={`block py-1 text-sm transition-colors ${
                     activeId === heading.id
-                      ? 'text-blue-600 dark:text-blue-400 font-medium'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+                      ? 'text-primary font-medium'
+                      : 'text-muted-foreground hover:text-primary'
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -205,7 +205,7 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
       {/* 移动端背景遮罩 */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-gray-600/50 dark:bg-gray-900/50 backdrop-blur-sm z-30 2xl:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 2xl:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}

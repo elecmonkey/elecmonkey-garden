@@ -4,6 +4,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// 动态导入 ThemeSwitcher 以完全避免 SSR 主题相关的 hydration 问题
+const ThemeSwitcher = dynamic(() => import('@/components/ThemeSwitcher'), {
+  ssr: false,
+  loading: () => (
+    <div className="p-2 w-9 h-9"></div>
+  )
+});
 
 export default function Navbar() {
   const pathname = usePathname() || ''; // 提供默认值，避免undefined
@@ -36,8 +45,8 @@ export default function Navbar() {
   // 生成链接样式，当前页面有灰色背景
   const getLinkClassName = (path: string) => {
     const baseClasses = "px-3 py-2 rounded-lg transition-colors";
-    const activeClasses = `${baseClasses} bg-muted text-foreground font-medium`;
-    const inactiveClasses = `${baseClasses} text-muted-foreground hover:bg-accent`;
+    const activeClasses = `${baseClasses} bg-gray-200 text-foreground font-bold`;
+    const inactiveClasses = `${baseClasses} text-foreground hover:bg-gray-100`;
     
     return isActive(path) ? activeClasses : inactiveClasses;
   };
@@ -45,8 +54,8 @@ export default function Navbar() {
   // 移动端菜单项样式，添加触摸反馈
   const getMobileLinkClassName = (path: string) => {
     const baseClasses = "block px-3 py-2 rounded-lg transition-colors active:bg-muted";
-    const activeClasses = `${baseClasses} bg-muted text-foreground font-medium`;
-    const inactiveClasses = `${baseClasses} text-muted-foreground hover:bg-accent`;
+    const activeClasses = `${baseClasses} bg-gray-200 text-foreground font-bold`;
+    const inactiveClasses = `${baseClasses} text-foreground hover:bg-gray-100`;
     
     return isActive(path) ? activeClasses : inactiveClasses;
   };
@@ -54,12 +63,12 @@ export default function Navbar() {
   // 根据是否是主页设置不同的导航栏样式
   const navbarClasses = isHomePage 
     ? "bg-card shadow-sm" // 主页导航栏：相对定位
-    : "bg-card shadow-sm sticky top-0 z-10"; // 其他页面导航栏：固定在顶部
+    : "bg-card shadow-sm sticky top-0 z-20"; // 其他页面导航栏：固定在顶部
   
   const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
 
   return (
-    <nav className={navbarClasses}>
+    <nav className={`${navbarClasses} border-b border-border/30`}>
       <div className="max-w-4xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* 网站标志 */}
@@ -99,16 +108,16 @@ export default function Navbar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </Link>
-            {/* <div className="mr-2">
+            <div className="mr-2">
               <ThemeSwitcher />
-            </div> */}
+            </div>
           </div>
           
           {/* 移动端菜单按钮 */}
           <div className="md:hidden flex items-center">
-            {/* <div className="mr-2">
+            <div className="mr-2">
               <ThemeSwitcher />
-            </div> */}
+            </div>
             <Link 
               href="/search"
               className={littleCircleButtonClass}

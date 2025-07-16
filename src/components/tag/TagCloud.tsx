@@ -16,8 +16,8 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
   if (tags.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center">
-        <TagIcon className="h-12 w-12 text-gray-400 dark:text-gray-500" />
-        <p className="mt-4 text-gray-500 dark:text-gray-400 italic">暂无标签</p>
+        <TagIcon className="h-12 w-12 text-muted-foreground" />
+        <p className="mt-4 text-muted-foreground italic">暂无标签</p>
       </div>
     )
   }
@@ -61,14 +61,14 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
           <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`} className="group relative">
             <div
               className="relative px-3 py-1.5 rounded-lg transition-all duration-300 
-                        border border-gray-200 dark:border-gray-700 
-                        bg-white/80 dark:bg-gray-800/80 
-                        hover:bg-white dark:hover:bg-gray-800 
+                        border border-border 
+                        bg-card/80 
+                        hover:bg-card 
                         shadow-sm hover:shadow-md 
-                        group-hover:border-primary-400 dark:group-hover:border-primary-500
-                        group-hover:text-primary-600 dark:group-hover:text-primary-400 
-                        text-gray-700 dark:text-gray-300 
-                        hover:text-gray-900 dark:hover:text-gray-100
+                        group-hover:border-primary
+                        group-hover:text-primary 
+                        text-card-foreground 
+                        hover:text-foreground
                         transform hover:scale-105
                         flex items-center"
               style={{
@@ -83,13 +83,13 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
                               min-w-[18px] h-[18px] px-1 
                               flex items-center justify-center 
                               rounded-lg text-[0.65rem] font-medium 
-                              bg-gray-200 dark:bg-gray-700 
-                              text-gray-700 dark:text-gray-300
-                              border border-gray-300 dark:border-gray-600
+                              bg-muted 
+                              text-muted-foreground
+                              border border-border
                               transition-all duration-300 
-                              group-hover:bg-blue-600 dark:group-hover:bg-blue-400
-                              group-hover:text-white dark:group-hover:text-white
-                              group-hover:border-blue-600 dark:group-hover:border-blue-400
+                              group-hover:bg-primary
+                              group-hover:text-primary-foreground
+                              group-hover:border-primary
                               shadow-sm"
               >
                 {tag.count}

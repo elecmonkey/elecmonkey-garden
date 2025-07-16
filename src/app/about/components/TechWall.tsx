@@ -7,7 +7,7 @@ export default function TechWall() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-      <section className="mb-12 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg p-6">
+      <section className="mb-12 rounded-xl border border-border bg-card shadow-lg p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 ">
           <div>
             <p className="text-xl font-medium">很多我很想玩明白但完全玩不明白的东西。</p>
@@ -15,7 +15,7 @@ export default function TechWall() {
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+            className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-muted-foreground bg-muted rounded-lg hover:bg-muted/80 transition-colors duration-200"
           >
             {isExpanded ? '收起' : '展开'}
           </button>

@@ -75,7 +75,7 @@ export default function MermaidRenderer({ chart, className = '' }: MermaidRender
         setSvgContent(svg);
       } catch (error) {
         console.error('渲染 Mermaid 图表失败:', error);
-        setSvgContent(`<div class="p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">Mermaid 图表渲染失败</div>`);
+        setSvgContent(`<div class="p-4 bg-destructive/10 text-destructive rounded">Mermaid 图表渲染失败</div>`);
       }
     });
 
@@ -85,7 +85,7 @@ export default function MermaidRenderer({ chart, className = '' }: MermaidRender
   return (
     <div 
       ref={containerRef}
-      className={`my-6 overflow-x-auto flex justify-center ${isDarkTheme ? 'bg-gray-800' : 'bg-gray-50'} p-4 rounded-md shadow-sm ${className}`}
+      className={`my-6 overflow-x-auto flex justify-center bg-muted p-4 rounded-md shadow-sm ${className}`}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   );

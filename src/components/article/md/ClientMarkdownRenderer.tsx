@@ -5,12 +5,12 @@ import React from 'react';
 import { Components } from 'react-markdown';
 import ServerFileDownloadRenderer from '../file-downloader/ServerFileDownloadRenderer';
 import CopyButton from '../code/CopyButton';
-import ServerCodeRenderer from '@/components/article/code/ServerCodeRenderer';
+import CodeBlock from '@/components/article/code/CodeBlock';
 
 // 只对 Mermaid 使用动态导入，因为它需要客户端 JavaScript
 const MermaidRenderer = dynamic(() => import('./MermaidRenderer'), { 
   ssr: false,
-  loading: () => <div className="p-4 text-gray-500 dark:text-gray-400">加载图表，需要启用 JavaScript ...</div>
+  loading: () => <div className="p-4 text-muted-foreground">加载图表，需要启用 JavaScript ...</div>
 });
 
 // 使用 react-markdown 的 Components 类型来确保兼容性
@@ -30,12 +30,12 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
     return <ServerFileDownloadRenderer fileContent={code} />;
   }
   
-  // 其他代码块使用服务端渲染器
+  // 其他代码块使用 CodeBlock 组件
   if (match) {
     const code = String(children || '').replace(/\n$/, '');
     return (
       <div className="relative">
-        <ServerCodeRenderer 
+        <CodeBlock 
           language={match[1] + (match[2] ? `{${match[2]}}` : '')} 
           code={code}
           {...props}
@@ -48,7 +48,7 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
   // 增强内联代码样式
   return (
     <code 
-      className="bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-300 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-700 font-mono text-sm" 
+      className="bg-muted text-primary px-1.5 py-0.5 rounded border border-border font-mono text-sm" 
       {...props}
     >
       {children}

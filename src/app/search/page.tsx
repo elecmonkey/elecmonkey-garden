@@ -44,7 +44,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <SearchBar className="max-w-2xl mx-auto" placeholder="输入关键词搜索文章..." />
         </div>
         <div className="text-center py-10">
-          <p className="text-gray-500 dark:text-gray-400">请输入关键词进行搜索</p>
+          <p className="text-muted-foreground">请输入关键词进行搜索</p>
         </div>
       </PageContainer>
     );
@@ -72,16 +72,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       </div>
       
       <div className="mb-6">
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-foreground">
           找到 <span className="font-semibold">{totalPosts}</span> 篇与 
-          &ldquo;<span className="font-semibold text-blue-600 dark:text-blue-400">{keyword}</span>&rdquo; 
+          &ldquo;<span className="font-semibold text-blue-600">{keyword}</span>&rdquo; 
           相关的文章
         </p>
       </div>
       
       {posts.length === 0 ? (
         <div className="text-center py-10">
-          <p className="text-gray-500 dark:text-gray-400">未找到相关文章</p>
+          <p className="text-muted-foreground">未找到相关文章</p>
         </div>
       ) : (
         <div className="space-y-6">

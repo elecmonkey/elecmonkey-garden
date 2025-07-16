@@ -46,14 +46,14 @@ export default function SearchBar({ className = '', placeholder = '搜索文章.
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-md 
-                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 
+        className="w-full px-4 py-2 pr-10 border border-border rounded-md 
+                  bg-background text-foreground 
                   focus:outline-none shadow-md focus:shadow-lg transition-all duration-150"
       />
       <button 
         type="submit"
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 
-                  hover:text-gray-700 dark:hover:text-gray-300"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-muted-foreground 
+                  hover:text-foreground"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

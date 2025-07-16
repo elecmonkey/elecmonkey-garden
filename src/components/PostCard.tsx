@@ -13,12 +13,12 @@ export interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+    <article className="border border-border rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow bg-card">
       <Link href={`/blog/${post.id}`}>
-        <h3 className="text-xl font-semibold mb-2 hover:text-blue-600 transition-colors">{post.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-card-foreground hover:text-primary transition-colors">{post.title}</h3>
       </Link>
       
-      <p className="text-gray-500 dark:text-gray-400 text-sm mb-3">
+      <p className="text-muted-foreground text-sm mb-3">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
@@ -38,14 +38,14 @@ export default function PostCard({ post }: PostCardProps) {
         )}
       </p>
       
-      <p className="text-gray-700 dark:text-gray-300 mb-4">{post.description}</p>
+      <p className="text-card-foreground mb-4">{post.description}</p>
       
       <div className="flex flex-wrap gap-2">
         {post.tags.map((tag: string) => (
           <Link
             key={tag}
             href={`/tags/${encodeURIComponent(tag)}`}
-            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs transition-colors"
+            className="bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground px-2 py-1 rounded-md text-xs transition-colors"
             target="_blank"
             rel="noopener noreferrer"
           >

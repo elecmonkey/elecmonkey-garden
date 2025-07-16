@@ -116,41 +116,41 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
   const getIconColorClass = (type: string): string => {
     switch (type) {
       case 'pdf':
-        return 'text-red-500 dark:text-red-400';
+        return 'text-destructive';
       case 'image':
       case 'png':
       case 'jpg':
       case 'jpeg':
       case 'gif':
       case 'webp':
-        return 'text-blue-500 dark:text-blue-400';
+        return 'text-primary';
       case 'zip':
       case 'rar':
       case '7z':
       case 'tar':
       case 'gz':
-        return 'text-yellow-500 dark:text-yellow-400';
+        return 'text-yellow-500'; // 保留黄色，作为一种强调
       case 'doc':
       case 'docx':
       case 'word':
-        return 'text-blue-700 dark:text-blue-400';
+        return 'text-primary';
       case 'xls':
       case 'xlsx':
       case 'excel':
-        return 'text-green-600 dark:text-green-400';
+        return 'text-green-600'; // 保留绿色
       case 'ppt':
       case 'pptx':
       case 'powerpoint':
-        return 'text-orange-500 dark:text-orange-400';
+        return 'text-orange-500'; // 保留橙色
       case 'md':
       case 'markdown':
-        return 'text-gray-600 dark:text-gray-400';
+        return 'text-muted-foreground';
       case 'json':
-        return 'text-green-500 dark:text-green-400';
+        return 'text-green-500'; // 保留绿色
       case 'html':
-        return 'text-orange-600 dark:text-orange-400';
+        return 'text-orange-600'; // 保留橙色
       case 'css':
-        return 'text-blue-500 dark:text-blue-400';
+        return 'text-primary';
       case 'js':
       case 'ts':
       case 'jsx':
@@ -162,13 +162,12 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
       case 'go':
       case 'rust':
       case 'code':
-        return 'text-purple-500 dark:text-purple-400';
+        return 'text-purple-500'; // 保留紫色
       case 'txt':
       case 'text':
-        return 'text-gray-500 dark:text-gray-400';
+        return 'text-muted-foreground';
       default:
-        // 对于未知类型，使用灰色
-        return 'text-gray-500 dark:text-gray-400';
+        return 'text-muted-foreground';
     }
   };
   
@@ -176,26 +175,26 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
   const fileInfo = parseFileContent(fileContent);
   
   return (
-    <div className={`my-6 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 ${className}`}>
+    <div className={`my-6 rounded-lg border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 bg-card ${className}`}>
       <div className="flex flex-col sm:flex-row px-4 pt-4 pb-8 sm:pb-4 gap-4">
         {/* 图标容器 - 在移动端居中 */}
-        <div className="flex flex-shrink-0 items-center justify-center mx-auto sm:mx-0 w-20 h-20 sm:w-16 sm:h-16 mt-2 sm:ml-0.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                  <div className="flex flex-shrink-0 items-center justify-center mx-auto sm:mx-0 w-20 h-20 sm:w-16 sm:h-16 mt-2 sm:ml-0.5 bg-muted rounded-lg">
           {getFileIcon(fileInfo.type)}
         </div>
         
         {/* 文件信息 - 在移动端居中对齐文本 */}
         <div className="flex-grow text-center sm:text-left">
-          <h3 className="font-medium text-lg mb-1 text-gray-900 dark:text-gray-100">
+          <h3 className="font-medium text-lg mb-1 text-card-foreground">
             {fileInfo.filename}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+          <p className="text-sm text-muted-foreground mb-2">
             {fileInfo.description}
           </p>
           <div className="flex flex-wrap gap-3 items-center justify-center sm:justify-start">
-            <span className="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-md text-gray-600 dark:text-gray-300">
+            <span className="text-xs bg-muted px-2 py-1 rounded-md text-muted-foreground">
               {fileInfo.size}
             </span>
-            <span className="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-md text-gray-600 dark:text-gray-300">
+            <span className="text-xs bg-muted px-2 py-1 rounded-md text-muted-foreground">
               {fileInfo.type.toUpperCase()}
             </span>
           </div>
@@ -207,7 +206,7 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
             href={fileInfo.url} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 mr-0 sm:mr-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-200"
+            className="inline-flex items-center px-4 py-2 mr-0 sm:mr-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md transition-colors duration-200"
           >
             <Download className="my-1" size={18} />
           </a>

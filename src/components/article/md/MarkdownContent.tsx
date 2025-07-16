@@ -104,8 +104,8 @@ export default function MarkdownContent({ content }: { content: string }) {
               return (
                 <span 
                   className={`inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 -ml-2 mt-1 border rounded ${checked 
-                    ? 'bg-blue-500 border-blue-500 dark:bg-blue-600 dark:border-blue-600' 
-                    : 'border-gray-400 dark:border-gray-600'}`}
+                    ? 'bg-blue-500 border-blue-500' 
+                    : 'border-border'}`}
                 >
                   {checked && (
                     <svg 
@@ -132,16 +132,16 @@ export default function MarkdownContent({ content }: { content: string }) {
           // 添加表格样式，添加圆角和代码块相同的样式
           table: ({ children }) => (
             <div className="overflow-x-auto my-6">
-              <div className="rounded-lg overflow-hidden shadow-md border border-gray-300 dark:border-gray-700">
+              <div className="rounded-lg overflow-hidden shadow-md border border-border">
                 <table className="min-w-full border-collapse table-auto">
                   {children}
                 </table>
               </div>
             </div>
           ),
-          thead: ({ children }) => <thead className="bg-gray-100 dark:bg-gray-800">{children}</thead>,
-          tbody: ({ children }) => <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">{children}</tbody>,
-          tr: ({ children }) => <tr className="border-b border-gray-200 dark:border-gray-700 last:border-b-0">{children}</tr>,
+          thead: ({ children }) => <thead className="bg-muted">{children}</thead>,
+          tbody: ({ children }) => <tbody className="bg-card divide-y divide-border">{children}</tbody>,
+          tr: ({ children }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
           th: ({ children, style }) => {
             // 支持列对齐
             let textAlign = 'text-left';
@@ -151,7 +151,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             }
             
             return (
-              <th className={`px-4 py-3 ${textAlign} text-sm font-semibold text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-700 last:border-r-0`}>
+              <th className={`px-4 py-3 ${textAlign} text-sm font-semibold text-foreground border-r border-border last:border-r-0`}>
                 {children}
               </th>
             );
@@ -165,7 +165,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             }
             
             return (
-              <td className={`px-4 py-3 ${textAlign} text-sm text-gray-700 dark:text-gray-300 border-r border-gray-200 dark:border-gray-700 last:border-r-0`}>
+              <td className={`px-4 py-3 ${textAlign} text-sm text-muted-foreground border-r border-border last:border-r-0`}>
                 {children}
               </td>
             );

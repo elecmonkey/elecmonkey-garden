@@ -55,7 +55,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <h1 className="text-3xl font-bold">博客文章</h1>
         <Link 
           href="/archive" 
-          className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center"
+          className="text-blue-600 hover:underline text-sm flex items-center"
         >
           按月归档
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,7 +66,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       
       {posts.length === 0 ? (
         <div className="text-center py-10">
-          <p className="text-gray-500 dark:text-gray-400">暂无文章，请稍后再来！</p>
+          <p className="text-muted-foreground">暂无文章，请稍后再来！</p>
         </div>
       ) : (
         <div className="space-y-6">

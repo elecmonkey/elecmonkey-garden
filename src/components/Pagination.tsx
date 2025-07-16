@@ -56,7 +56,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
           {currentPage > 1 ? (
             <Link 
               href={createPageLink(currentPage - 1)}
-              className="h-10 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
+              className="h-10 px-4 py-2 bg-muted rounded-lg hover:bg-accent text-muted-foreground transition-colors flex items-center justify-center"
               aria-label="上一页"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,8 +76,8 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
               href={createPageLink(page)}
               className={`h-10 px-3 py-2 rounded-lg transition-colors flex items-center justify-center min-w-[40px] ${
                 page === currentPage
-                  ? 'bg-blue-600 text-white dark:bg-blue-700'
-                  : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-muted-foreground hover:bg-accent'
               }`}
             >
               {page}
@@ -90,7 +90,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
           {currentPage < totalPages ? (
             <Link 
               href={createPageLink(currentPage + 1)}
-              className="h-10 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
+              className="h-10 px-4 py-2 bg-muted rounded-lg hover:bg-accent text-muted-foreground transition-colors flex items-center justify-center"
               aria-label="下一页"
             >
               <span className="hidden md:inline mr-1">下一页</span>

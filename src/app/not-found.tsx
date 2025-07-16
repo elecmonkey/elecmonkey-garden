@@ -10,18 +10,18 @@ export default function NotFound() {
   return (
     <PageContainer>
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="text-9xl font-bold text-gray-200 dark:text-gray-700">404</div>
+        <div className="text-9xl font-bold text-muted-foreground/30">404</div>
         
         <h1 className="mt-6 text-3xl font-bold tracking-tight">页面走丢了</h1>
         
-        <p className="mt-4 text-base text-gray-500 dark:text-gray-400 max-w-md">
+        <p className="mt-4 text-base text-muted-foreground max-w-md">
           很抱歉，您要找的页面不存在或者已被移动到其他位置。
         </p>
         
         <div className="mt-8 flex space-x-4">
           <Link
             href="/"
-            className="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+            className="px-4 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors flex items-center"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -42,7 +42,7 @@ export default function NotFound() {
           
           <Link
             href="/blog"
-            className="px-4 py-2.5 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center"
+            className="px-4 py-2.5 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors flex items-center"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 

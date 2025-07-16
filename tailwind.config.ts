@@ -20,6 +20,11 @@ const config: Config = {
         },
       },
       colors: {
+        'highlight-yellow': 'var(--highlight-yellow)',
+        'highlight-blue': 'var(--highlight-blue)',
+        'highlight-green': 'var(--highlight-green)',
+        'highlight-purple': 'var(--highlight-purple)',
+        'highlight-red': 'var(--highlight-red)',
         // 扩展颜色主题
         primary: {
           50: '#f0f9ff',

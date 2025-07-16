@@ -46,7 +46,7 @@ export default async function BlogPost({ params }: Props) {
     
     return (
       <PageContainer>
-        <article className="prose dark:prose-invert lg:prose-xl max-w-none">
+        <article className="prose prose-slate dark:prose-invert lg:prose-xl max-w-none">
           <header className="mb-8">
             <h1 className="text-3xl font-bold mb-2">
               {post.isHidden && (
@@ -56,7 +56,7 @@ export default async function BlogPost({ params }: Props) {
               )}
               {post.title}
             </h1>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-muted-foreground">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -80,7 +80,7 @@ export default async function BlogPost({ params }: Props) {
                 <Link
                   key={tag}
                   href={`/tags/${encodeURIComponent(tag)}`}
-                  className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs transition-colors no-underline"
+                  className="bg-muted hover:bg-muted/80 text-muted-foreground px-2 py-1 rounded-md text-xs transition-colors no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -96,14 +96,14 @@ export default async function BlogPost({ params }: Props) {
 
           {/* 底部导航 */}
           {!post.isHidden && (
-          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="mt-16 pt-8 border-t border-border">
             <div className="flex justify-between items-center">
               {/* 下一篇文章（更新的文章） */}
               <div className="w-1/2 pr-4 text-left">
                 {post.nextPost ? (
                   <Link 
                     href={`/blog/${post.nextPost.id}`} 
-                    className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -123,7 +123,7 @@ export default async function BlogPost({ params }: Props) {
                 {post.prevPost ? (
                   <Link 
                     href={`/blog/${post.prevPost.id}`} 
-                    className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
                     <span className="line-clamp-1 text-left min-w-0 ml-auto">
                       {post.prevPost.title}
