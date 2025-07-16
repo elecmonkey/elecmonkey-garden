@@ -45,8 +45,8 @@ export default function Navbar() {
   // 生成链接样式，当前页面有灰色背景
   const getLinkClassName = (path: string) => {
     const baseClasses = "px-3 py-2 rounded-lg transition-colors";
-    const activeClasses = `${baseClasses} bg-gray-200 text-foreground font-bold`;
-    const inactiveClasses = `${baseClasses} text-foreground hover:bg-gray-100`;
+    const activeClasses = `${baseClasses} bg-accent text-foreground font-bold`;
+    const inactiveClasses = `${baseClasses} text-foreground hover:bg-muted`;
     
     return isActive(path) ? activeClasses : inactiveClasses;
   };
@@ -54,8 +54,8 @@ export default function Navbar() {
   // 移动端菜单项样式，添加触摸反馈
   const getMobileLinkClassName = (path: string) => {
     const baseClasses = "block px-3 py-2 rounded-lg transition-colors active:bg-muted";
-    const activeClasses = `${baseClasses} bg-gray-200 text-foreground font-bold`;
-    const inactiveClasses = `${baseClasses} text-foreground hover:bg-gray-100`;
+    const activeClasses = `${baseClasses} bg-accent text-foreground font-bold`;
+    const inactiveClasses = `${baseClasses} text-foreground hover:bg-muted`;
     
     return isActive(path) ? activeClasses : inactiveClasses;
   };
