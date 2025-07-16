@@ -15,7 +15,7 @@ html.transitioning * {
   --background: #ffffff;
   --foreground: #171717;
   --muted: #f5f5f5;
-  --muted-foreground: #737373;
+  --muted-foreground: #374151; /* 类似 gray-700 */
   --card: #ffffff;
   --card-foreground: #171717;
   --popover: #ffffff;
@@ -24,9 +24,9 @@ html.transitioning * {
   --input: #e5e5e5;
   --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
+  --secondary: #f3f4f6;
   --secondary-foreground: #171717;
-  --accent: #f5f5f5;
+  --accent: #e5e7eb; /* 类似 gray-200 */
   --accent-foreground: #171717;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
@@ -45,19 +45,19 @@ html.transitioning * {
 .dark {
   --background: #0f172a;
   --foreground: #f8fafc;
-  --muted: #2a364d; /* 代码块背景，与 border 和 accent 保持一致 */
-  --muted-foreground: #94a3b8; /* 引用文字颜色 */
-  --card: #1a243a; /* 导航栏背景，比 background 稍亮 */
+  --muted: #2a364d;
+  --muted-foreground: #cbd5e1; /* 深色模式下的中等亮度文字 */
+  --card: #1a243a;
   --card-foreground: #f8fafc;
   --popover: #1a243a;
   --popover-foreground: #f8fafc;
-  --border: #2a364d; /* 边框颜色，比 card 稍深 */
+  --border: #2a364d;
   --input: #2a364d;
   --primary: #2563eb;
   --primary-foreground: #ffffff;
   --secondary: #1a243a;
   --secondary-foreground: #f8fafc;
-  --accent: #2a364d; /* 导航栏按钮 hover 背景，与 border 保持一致 */
+  --accent: #334155; /* 深色模式下的hover背景 */
   --accent-foreground: #f8fafc;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
