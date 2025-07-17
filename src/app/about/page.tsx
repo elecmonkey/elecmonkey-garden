@@ -14,9 +14,10 @@ export default function AboutPage() {
 
       <div className="prose prose-slate dark:prose-invert lg:prose-lg max-w-none">
         <section className="mb-12">
-          <p className="text-lg text-foreground leading-relaxed">
-            <span className="font-bold">Elecmonkey</span>，软件工程本科在读。
-          </p>
+          <section className="text-lg text-foreground leading-relaxed">
+            <p><span className="font-bold">Elecmonkey</span>，前端开发者。</p>
+            <p>软件工程本科在读。</p>
+          </section>
           <p className="text-lg text-foreground leading-relaxed mt-4">
             一个平平无奇的技术主页，试图记录我爬过的坑走过的路。
           </p>
