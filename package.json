@@ -5,12 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack -p 3710",
     "build": "next build",
-    "analyze": "ANALYZE=true pnpm build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^15.3.2",
     "geist": "^1.4.2",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.22",
