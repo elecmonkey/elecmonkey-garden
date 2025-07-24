@@ -109,8 +109,8 @@ export default function CodeBlock({ language, code, ...props }: {
         margin: 0, 
         padding: '0.4rem 0.5rem 0.4rem 0',
         borderRadius: 0,
-        fontSize: '0.85rem',
-        fontWeight: 'bold',
+        fontSize: '0.95rem',
+        fontWeight: 'medium',
       },
       PreTag: "div" as keyof React.JSX.IntrinsicElements,
       codeTagProps: {
@@ -315,4 +315,4 @@ export default function CodeBlock({ language, code, ...props }: {
       `}</style>
     </div>
   );
-} 
+}
