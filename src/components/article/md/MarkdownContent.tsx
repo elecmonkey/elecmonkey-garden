@@ -70,7 +70,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             // 根据是否有标记决定样式 - 默认不缩进，有标记才缩进
             return (
               <p 
-                className={`mb-6 text-lg ${hasIndentTag ? 'indent-8' : ''}`}
+                className={`text-lg ${hasIndentTag ? 'indent-8' : ''}`}
               >
                 {displayContent}
               </p>
@@ -230,6 +230,9 @@ export default function MarkdownContent({ content }: { content: string }) {
               />
             );
           },
+
+          // 添加分割线样式
+          hr: () => <hr className="my-8 border-t-2 border-gray-300 dark:border-gray-600" />,
         }}
       >
         {content}
