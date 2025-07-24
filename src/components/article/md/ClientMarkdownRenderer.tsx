@@ -48,10 +48,10 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
   // 增强内联代码样式
   return (
     <code 
-      className="bg-muted text-primary px-1.5 py-0.5 rounded border border-border font-mono text-sm" 
+      className="bg-muted text-primary px-1.5 py-0.5 rounded border border-border font-mono text-base" 
       {...props}
     >
       {children}
     </code>
   );
-} 
+}

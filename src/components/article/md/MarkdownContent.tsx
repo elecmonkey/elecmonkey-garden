@@ -70,7 +70,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             // 根据是否有标记决定样式 - 默认不缩进，有标记才缩进
             return (
               <p 
-                className={`text-lg ${hasIndentTag ? 'indent-8' : ''}`}
+                className={`text-lg my-6 ${hasIndentTag ? 'indent-8' : ''}`}
               >
                 {displayContent}
               </p>
@@ -239,4 +239,4 @@ export default function MarkdownContent({ content }: { content: string }) {
       </ReactMarkdown>
     </div>
   );
-} 
+}
