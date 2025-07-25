@@ -5,7 +5,7 @@ tags: ['Vue', 'Vue Vapor']
 summary: 'Vue 社区动态。也许有一天 React 也会像 Angular 一样淡出大家的视线，谁知道呢？'
 ---
 
-## 虚拟 DOM
+## 削减 vDOM 带来的 overhead
 
 Evan You 在2025年7月12日的深圳 Vueconf 2025 宣布了 Vue 3.6-alpha.
 
@@ -17,7 +17,7 @@ Evan You 在2025年7月12日的深圳 Vueconf 2025 宣布了 Vue 3.6-alpha.
 
 Vue 3.6 引入的 **Vapor 模式**，本质上是一种全新的编译渲染策略。它借鉴了 Solid.js 的思路，直接在编译阶段生成操作真实 DOM 的代码，以绕过虚拟 DOM 和 diff 流程。Vapor 模式是现有 Vue 功能的子集，仅支持 Composition API 与使用 Vue SFC 定义组件。
 
-此外它暂不支持`<Transition>`、`<KeepAlive>` 与 SSR 等功能（所以很显然，Nuxt 现在用不了）。不过这几种功能会在 alpha -> beta 阶段逐步支持。
+此外它暂不支持 Async Component、`<Transition>`、`<KeepAlive>` 与 SSR 等功能（所以很显然，Nuxt 现在用不了）。不过这几种功能会在 alpha -> beta 阶段逐步支持。
 
 以下是一张来自 Evan You 在 [Vueconf 2025 主题演讲](https://www.bilibili.com/video/BV1fyu9zsEAf/) 的演示图——
 
