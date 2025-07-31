@@ -2,7 +2,7 @@
 title: "JavaScript 响应式系统，从框架实现到 TC39 Signals"
 date: "2025-05-07"
 description: "四分五裂的前端生态中，响应式数据成为一项隐约诞生的新共识"
-tags: ["响应式系统", "Vue", "Solid", "JavaScript", "ECMAScript"]
+tags: ["响应式系统", "Vue", "Solid.js", "JavaScript", "ECMAScript"]
 author: "Elecmonkey"
 ---
 
