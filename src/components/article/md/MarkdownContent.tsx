@@ -17,27 +17,27 @@ export default function MarkdownContent({ content }: { content: string }) {
           // 添加各级标题的样式
           h1: ({ children }) => {
             const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
-            return <h1 id={id} className="text-3xl font-bold mt-8 mb-4">{children}</h1>;
+            return <h1 id={id} className="text-3xl font-bold my-4">{children}</h1>;
           },
           h2: ({ children }) => {
             const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
-            return <h2 id={id} className="text-2xl font-bold mt-6 mb-3">{children}</h2>;
+            return <h2 id={id} className="text-2xl font-bold my-4">{children}</h2>;
           },
           h3: ({ children }) => {
             const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
-            return <h3 id={id} className="text-xl font-bold mt-5 mb-2">{children}</h3>;
+            return <h3 id={id} className="text-xl font-bold my-4">{children}</h3>;
           },
           h4: ({ children }) => {
             const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
-            return <h4 id={id} className="text-lg font-bold mt-4 mb-2">{children}</h4>;
+            return <h4 id={id} className="text-lg font-bold my-4">{children}</h4>;
           },
           h5: ({ children }) => {
             const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
-            return <h5 id={id} className="text-base font-bold mt-3 mb-1">{children}</h5>;
+            return <h5 id={id} className="text-base font-bold my-4">{children}</h5>;
           },
           h6: ({ children }) => {
             const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : '';
-            return <h6 id={id} className="text-sm font-bold mt-3 mb-1">{children}</h6>;
+            return <h6 id={id} className="text-sm font-bold my-4">{children}</h6>;
           },
           
           // 添加段落样式 - 增加段落间距、调整文字大小和添加首行缩进
@@ -78,8 +78,8 @@ export default function MarkdownContent({ content }: { content: string }) {
           },
           
           // 添加列表样式
-          ul: ({ children }) => <ul className="list-disc pl-6 mb-4 mt-2">{children}</ul>,
-          ol: ({ children }) => <ol className="list-decimal pl-6 mb-4 mt-2">{children}</ol>,
+          ul: ({ children }) => <ul className="list-disc my-2 pl-6 text-lg">{children}</ul>,
+          ol: ({ children }) => <ol className="list-decimal my-2 pl-6 text-lg">{children}</ol>,
           
           // 自定义列表项渲染器
           li: ({ children, className, ...props }) => {
