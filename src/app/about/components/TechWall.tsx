@@ -72,13 +72,13 @@ export default function TechWall() {
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/html5-plain.svg"
-                alt="HTML5"
-                label="HTML5"
+                alt="HTML"
+                label="HTML"
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/css3-original.svg"
-                alt="CSS3"
-                label="CSS3"
+                alt="CSS"
+                label="CSS"
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/javascript-original.svg"
@@ -146,7 +146,55 @@ export default function TechWall() {
 
           {/* 前端框架 */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">Frontend</h3>
+            <h3 className="text-lg font-medium mb-4">Frontend Frameworks</h3>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/vuejs-original.svg"
+                alt="Vue.js"
+                label="Vue.js"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/react-original.svg"
+                alt="React"
+                label="React"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/solidjs-original.svg"
+                alt="SolidJS"
+                label="SolidJS"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/svelte-original.svg"
+                alt="Svelte"
+                label="Svelte"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/qwik.svg"
+                alt="Qwik"
+                label="Qwik"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/nextjs-original.svg"
+                alt="Next.js"
+                label="Next.js"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/nuxtjs-original.svg"
+                alt="Nuxt"
+                label="Nuxt"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/angularjs-original.svg"
+                alt="Angular"
+                label="Angular"
+                isGray={true}
+              />
+            </div>
+          </div>
+
+          {/* JavaScript Toolchains */}
+          <div className="mb-8">
+            <h3 className="text-lg font-medium mb-4">JavaScript Toolchains</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/nodejs-original.svg"
@@ -184,77 +232,31 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/webpack-original.svg"
                 alt="Webpack"
                 label="Webpack"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/esbuild.svg"
                 alt="ESBuild"
                 label="ESBuild"
-                isGray={true}
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/vuejs-original.svg"
-                alt="Vue.js"
-                label="Vue.js"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/react-original.svg"
-                alt="React"
-                label="React"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/svelte-original.svg"
-                alt="Svelte"
-                label="Svelte"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/nextjs-original.svg"
-                alt="Next.js"
-                label="Next.js"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/nuxtjs-original.svg"
-                alt="Nuxt"
-                label="Nuxt"
-                isGray={true}
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/astro-original.svg"
-                alt="Astro"
-                label="Astro"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/angularjs-original.svg"
-                alt="Angular"
-                label="Angular"
-                isGray={true}
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/tailwindcss-original.svg"
-                alt="Tailwind CSS"
-                label="Tailwind CSS"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/sass-original.svg"
-                alt="Sass"
-                label="Sass"
-                isGray={true}
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/bootstrap-original.svg"
-                alt="Bootstrap"
-                label="Bootstrap"
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/qwik.svg"
-                alt="Qwik"
-                label="Qwik"
-                isGray={true}
               />
               <TechIcon
                 src="https://vitest.dev/logo.svg"
                 alt="Vitest"
                 label="Vitest"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/rollup-original.svg"
+                alt="Rollup"
+                label="Rollup"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/rolldown-round.svg"
+                alt="Rolldown"
+                label="Rolldown"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/tsdown.svg"
+                alt="tsdown"
+                label="tsdown"
                 isGray={true}
               />
             </div>
@@ -270,9 +272,11 @@ export default function TechWall() {
                 label="Express"
               />
               <TechIcon
-                src="https://images.elecmonkey.com/pages/about/koa.png"
-                alt="Koa"
-                label="Koa"
+                alt="koa"
+                label="koa"
+                customText="koa"
+                isGray={false}
+                className="text-4xl font-serif"
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/nestjs-original.svg"
@@ -410,7 +414,7 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/nginx-original.svg"
                 alt="Nginx"
                 label="Nginx"
-                isGray={true}
+                isGray={false}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/caddy.svg"
