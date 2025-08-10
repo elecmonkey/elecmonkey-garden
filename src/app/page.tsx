@@ -23,16 +23,22 @@ export default async function Home() {
       {/* 个人介绍部分 */}
       <section className="mb-16">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="w-40 h-40 relative overflow-hidden rounded-full border-4 border-border">
-            <div className="w-full h-full flex items-center justify-center">
-              <Image 
-                src="https://images.elecmonkey.com/pages/em.png" 
-                alt="EM" 
-                width={200} 
-                height={200}
-                className="w-[100%] h-[100%] object-cover"
-              />
+          <div className="relative">
+            <div className="w-40 h-40 relative overflow-hidden rounded-full border-4 border-border">
+              <div className="w-full h-full flex items-center justify-center">
+                <Image 
+                  src="https://images.elecmonkey.com/pages/em.png" 
+                  alt="EM" 
+                  width={200} 
+                  height={200}
+                  className="w-[100%] h-[100%] object-cover"
+                />
+              </div>
             </div>
+            {/* Badge positioned outside avatar container, overlapping top-right */}
+            <span className="absolute top-0 right-0 px-2 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-lg border border-border transform translate-x-4 translate-y-1.5">
+              Rust学习ing
+            </span>
           </div>
           <div className="text-center md:text-left">
             <h1>
