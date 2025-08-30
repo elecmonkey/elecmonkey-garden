@@ -71,7 +71,7 @@ export default function TechWall() {
                 label="Python"
               />
               <TechIcon
-                src="https://images.elecmonkey.com/pages/about/html5-plain.svg"
+                src="https://images.elecmonkey.com/pages/about/html5-original.svg"
                 alt="HTML"
                 label="HTML"
               />
@@ -100,7 +100,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/java-original.svg"
                 alt="Java"
                 label="Java"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/kotlin-original.svg"
@@ -112,7 +111,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/rust-original.svg"
                 alt="Rust"
                 label="Rust"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/php-original.svg"
@@ -139,6 +137,12 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/dart-original.svg"
                 alt="Dart"
                 label="Dart"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/zig-original.svg"
+                alt="Zig"
+                label="Zig"
                 isGray={true}
               />
             </div>
@@ -189,12 +193,17 @@ export default function TechWall() {
                 label="Angular"
                 isGray={true}
               />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/astro-original.svg"
+                alt="Astro"
+                label="Astro"
+              />
             </div>
           </div>
 
-          {/* JavaScript Toolchains */}
+          {/* JavaScript Ecosystem Toolchain */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">JavaScript Toolchains</h3>
+            <h3 className="text-lg font-medium mb-4">JavaScript Ecosystem Toolchain</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/nodejs-original.svg"
@@ -259,6 +268,34 @@ export default function TechWall() {
                 label="tsdown"
                 isGray={true}
               />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/babel-original.svg"
+                alt="Babel"
+                label="Babel"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/puppeteer-original.svg"
+                alt="Puppeteer"
+                label="Puppeteer"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/playwright-original.svg"
+                alt="Playwright"
+                label="Playwright"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/sass-original.svg"
+                alt="Sass"
+                label="Sass"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/postcss-original.svg"
+                alt="PostCSS"
+                label="PostCSS"
+              />
             </div>
           </div>
 
@@ -316,7 +353,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/spring-original.svg"
                 alt="Spring Boot"
                 label="Spring Boot"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/socketio-original.svg"
@@ -345,12 +381,23 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/tauri-original.svg"
                 alt="Tauri"
                 label="Tauri"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/flutter-original.svg"
                 alt="Flutter"
                 label="Flutter"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/reactnative-original.svg"
+                alt="React Native"
+                label="React Native"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/lynx-dark-logo.svg"
+                alt="Lynx"
+                label="Lynx"
                 isGray={true}
               />
             </div>
@@ -361,9 +408,10 @@ export default function TechWall() {
             <h3 className="text-lg font-medium mb-4">Databases</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
-                src="https://images.elecmonkey.com/pages/about/mysql-original.svg"
-                alt="MySQL"
-                label="MySQL"
+                src="https://images.elecmonkey.com/pages/about/postgresql-original.svg"
+                alt="PostgreSQL"
+                label="PostgreSQL"
+                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/mongodb-original.svg"
@@ -386,6 +434,11 @@ export default function TechWall() {
                 alt="Neo4j"
                 label="Neo4j"
                 isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/mysql-original.svg"
+                alt="MySQL"
+                label="MySQL"
               />
             </div>
           </div>
@@ -457,11 +510,16 @@ export default function TechWall() {
                 label="GitLab"
                 isGray={true}
               />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/pm2-original.svg"
+                alt="PM2"
+                label="PM2"
+              />
             </div>
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">Tools</h3>
+            <h3 className="text-lg font-medium mb-4">Development Tools</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/cmake-original.svg"
@@ -470,22 +528,14 @@ export default function TechWall() {
                 isGray={true}
               />
               <TechIcon
-                src="https://images.elecmonkey.com/pages/about/jupyter-original.svg"
-                alt="Jupyter"
-                label="Jupyter"
-                isGray={true}
-              />
-              <TechIcon
-                src="https://images.elecmonkey.com/pages/about/opencv-original.svg"
-                alt="OpenCV"
-                label="OpenCV"
-                isGray={true}
-              />
-              <TechIcon
                 src="https://images.elecmonkey.com/pages/about/postman-original.svg"
                 alt="Postman"
                 label="Postman"
-                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/vscode-original.svg"
+                alt="VS Code"
+                label="VS Code"
               />
             </div>
           </div>
