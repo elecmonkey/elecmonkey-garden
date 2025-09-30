@@ -94,7 +94,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/go-original.svg"
                 alt="Golang"
                 label="Golang"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/java-original.svg"
@@ -266,7 +265,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/tsdown.svg"
                 alt="tsdown"
                 label="tsdown"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/babel-original.svg"
@@ -497,7 +495,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/redis-original.svg"
                 alt="Redis"
                 label="Redis"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/github-original.svg"
