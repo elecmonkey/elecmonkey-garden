@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack -p 3710",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "geist": "^1.5.1",
@@ -29,7 +29,6 @@
     "shiki": "^3.14.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.1.16",
     "@tailwindcss/typography": "^0.5.19",
