@@ -22,6 +22,10 @@ Kimi K2 我试图把它放在各种 IDE 里用，放在 gemini-cli 和 qwen-cli 
 
 也许哪天 Kimi 官方也会出一个 kimi-cli 之类的东西（反正类似的开源实现挺多的，这得感谢 claude code 让大家看见了 Agent 工具的另一种形态），也许哪天 Trae、腾讯据说正在搞得 CodeBuddy IDE，甚至 Cursor 之类的也会花力气去适配 Kimi。目前来说，因为有 qwen-cli，Qwen Coder 的体验还要在模型能力之外再加一层分。
 
+> 2025.10更新：Kimi-cli真发布了哈，罕见的用 Python 实现的，看来是自研（）
+
+> 试了几个小时跑掉了五十块钱的 API，还不错
+
 
 附表：目前比较主流的能用来 Vibe Coding 的模型，选取 OpenRouter 的价格和数据做个对比，同时加入 Kimi K2 和 Qwen3 Coder Plus 各自的官网版本。
 
