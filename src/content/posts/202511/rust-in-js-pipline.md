@@ -2,7 +2,7 @@
 title: '原生 JavaScript 工具链中绕不开的 JavaScript 成份'
 date: '2025-11-12'
 description: '处理 JavaScript 代码的工具并不需要是 JavaScript 程序，但处理 JavaScript 代码的人必须是 JavaScript 程序员。'
-tags: ['Rust', 'JavaScript', '前端工具链', 'Rolldown', 'swc']
+tags: ['Rust', 'JavaScript', '前端工具链', 'Rolldown', 'swc', '构建工具', 'React Compiler']
 author: 'Elecmonkey'
 ---
 
@@ -37,7 +37,7 @@ Babel 负责语法降级，Webpack 负责模块打包，ESLint、Terser、Uglify
 使用 Rolldown-Vite（[Rolldown-Vite 宣布功能达到 Vite，Evan You 和他的下一代前端工具链
 ](https://www.elecmonkey.com/blog/rolldown-vite-migration)、[值得开始尝试 Rolldown-vite 了吗](https://www.elecmonkey.com/blog/rolldown-vite-production-ready)），可以让底层打包器可以从 [Rollup](https://rollupjs.org/)（JS）换成 [Rolldown](https://rolldown.rs/)（Rust），但是总得调用 vite-plugin-vue 吧？vite-plugin-vue 是 JS 写的，它要编译 Vue 的单文件组件 vue-compiler-sfc 也是 JS 写的。打开 Vue 的源码看看，vue-compiler-sfc 内部甚至使用了 Babel。
 
-换句话说，即使底层换成了 Rust，构建链路仍然会多次回到 JS 世界。将一颗 AST 在 Rust 世界和 JavaScript 世界之间来回传递的性能损耗是无法想象的。这让 Rust 工具链的“极速”在实际工程中被大量的 JS 插件调用所稀释。
+换句话说，即使底层换成了 Rust，构建链路仍然会多次回到 JS 世界。将一棵 AST 在 Rust 世界和 JavaScript 世界之间来回传递的性能损耗是无法想象的。这让 Rust 工具链的“极速”在实际工程中被大量的 JS 插件调用所稀释。
 
 ### React
 
@@ -63,9 +63,9 @@ React 一直没有很多的构建步骤，JSX 转换由工具链完成。作为�
 
 > What makes Web amazing is not just the technology, this about this community that is so wildly creative. —— Xuan Huang
 
-回到我们最开头所说的问题 —— 从原则上讲，**处理 JavaScript 代码的工具并不需要是 JavaScript**。但这句话忽略的最重要的事 —— **处理 JavaScript 代码的人必须是 JavaScript 程序员**。一种工具想扎根在 JavaScript 社区，就必须让 JavaScript 程序员能够轻松地理解、使用、扩展它。所以，不要想着如何在 JavaScript 项目的构建流程中消灭 JavaScript 成分了，impossible。此前许多做原生工具链的团队大有想用原生取代一切的豪情壮志，但是我们的社区就是这样一个充满创造力、充满多样性的社区，传说中一天一个新轮子、三天一个新框架的 JavaScript 社区。
+回到我们最开头所说的问题 —— 从原则上讲，**处理 JavaScript 代码的工具并不需要是 JavaScript 程序**。但这句话忽略的最重要的事 —— **处理 JavaScript 代码的人必须是 JavaScript 程序员**。一种工具想扎根在 JavaScript 社区，就必须让 JavaScript 程序员能够轻松地理解、使用、扩展它。所以，不要想着如何在 JavaScript 项目的构建流程中消灭 JavaScript 成分了，impossible。此前许多做原生工具链的团队大有想用原生取代一切的豪情壮志，但是我们的社区就是这样一个充满创造力、充满多样性的社区，传说中一天一个新轮子、三天一个新框架的 JavaScript 社区。
 
 那原生工具链还是未来吗？
 
 oxc 团队最新的努力也许可以为我们提供一点未来方向的思路。在 ViteConf 2025 中，
-Jim Dummett 做了演讲 [JavaScript at the speed of Rust: Oxc](https://www.youtube.com/watch?v=ofQV3xiBgT8)。我们唯一的方向，我们也一定还有更好的办法，推倒原生工具链与 JavaScript 之间的隔墙。
+Jim Dummett 做了演讲 [JavaScript at the speed of Rust: Oxc](https://www.youtube.com/watch?v=ofQV3xiBgT8)。我们唯一的方向便是 —— 我们也一定还有更好的办法 —— 推倒原生工具链与 JavaScript 之间的隔墙。
