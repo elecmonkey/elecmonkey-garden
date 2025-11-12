@@ -2,7 +2,7 @@
 title: "在 arm64 的 Mac 上运行古董前端项目，憋出一肚子关于技术债的想法"
 date: "2025-05-19"
 description: "技术债不完全是技术问题。它关于 CI/CD 现代化，关于组织治理，关于每个技术人的开源文化与社区参与。"
-tags: ["macOS", "Node.js", "技术债", "CI/CD", "开源文化"]
+tags: ["macOS", "Node.js", "技术债", "CICD", "开源文化"]
 author: "Elecmonkey"
 ---
 
