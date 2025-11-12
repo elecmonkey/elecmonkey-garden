@@ -409,7 +409,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/postgresql-original.svg"
                 alt="PostgreSQL"
                 label="PostgreSQL"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/mongodb-original.svg"
