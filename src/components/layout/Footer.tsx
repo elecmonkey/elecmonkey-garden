@@ -59,14 +59,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="https://note.elecmonkey.com" 
+                  href="https://transphere.elecmonkey.com/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm flex items-center transition-colors text-muted-foreground hover:text-primary"
                 >
-                  EM Notebook
+                  Transphere
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                   </svg>
                 </Link>
               </li>
