@@ -1,7 +1,7 @@
 ---
 title: 'Prisma ORM 6 -> 7 升级实录，闲聊 Prisma 团队升级理念'
 date: '2025-12-03'
-description: ''
+description: '逆向迁移放弃 Rust 回归 JS/TS，部署体积减一半'
 tags: ['Prisma ORM', 'node_modules']
 author: 'Elecmonkey'
 ---
@@ -88,8 +88,8 @@ Prisma 6 会在 `node_modules` 目录下生成 Prisma Client 代码。升级到 
 
 对了，还有一个直观的结果，ci/cd 部署时可以不重复构建 Prisma Client 代码，对减少部署时间有轻微的作用。
 
-## 社区与决策
+## “逆向迁移”，Prisma 与 Svelte
 
-目前看来，本次升级在社区反响也是比较积极的。在为什么抛弃 Rust 这件事上，团队还有一个解释就是使用 Rust 不利于社区发起贡献。JavaScript 社区广泛的存在这个问题。能考虑到这一点，决策团队看起来是相当考虑社区参与的问题的。
+目前看来，本次升级在社区反响也是**比较积极**的。在为什么抛弃 Rust 这件事上，团队还有一个解释就是使用 Rust 不利于社区发起贡献。JavaScript 社区广泛的存在这个问题。能考虑到这一点，决策团队看起来是相当考虑社区参与的问题的。
 
-这种看起来的“逆向迁移”（大家通常都是 JS 迁移到 TS，Node.js 迁移到 Rust 这样。）让我想起了另一个例子 —— Svelte 4 版本，创始人带领团队从 TypeScipt 迁移回了 JavaScript。那场迁移奠定了今天 Svelte 代码库使用 JSDoc 来检查类型的事实，但是翻阅当年 GitHub 上的种种讨论，可以说是“褒贬不一”。作者提出的 “TS 库大家按住函数名追踪到的是类型定义，JS 库可以直接看到源代码” 固然有道理，可是 TypeScript 仍然如此流行，大家并非不知道这些问题。不过说起来 JSDoc 仍然利用 TypeScript 提供的能力进行类型检查，也算是以一种不一样的方式 “部分使用” 了 TypeScript 吧。很多人并不想支持这项决策，但也没有人能说这项大动干戈的决策错误 —— Svelte 仍在茁壮成长。
+这种看起来的“逆向迁移”（大家通常都是 JS 迁移到 TS，Node.js 迁移到 Rust 这样。）让我想起了另一个例子 —— **Svelte 4 版本，创始人带领团队从 TypeScipt 迁移回了 JavaScript**。那场迁移奠定了今天 Svelte 代码库使用 JSDoc 来检查类型的事实，但是翻阅当年 GitHub 上的种种讨论，可以说是**褒贬不一**。作者提出的 “TS 库大家按住函数名追踪到的是类型定义，JS 库可以直接看到源代码” 固然有道理，可是 TypeScript 如此流行，大家并非不知道这些问题。不过说起来 JSDoc 仍然利用 TypeScript 提供的能力进行类型检查，也算是以一种不一样的方式 “部分使用” 了 TypeScript 吧。很多人并不想支持这项决策，但也没有人能说这项大动干戈的决策错误 —— Svelte 仍在茁壮成长。
