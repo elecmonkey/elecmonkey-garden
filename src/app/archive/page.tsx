@@ -3,6 +3,8 @@ import { getAllMonths } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: '文章归档 - Elecmonkey的小花园',
   description: '按月份浏览所有博客文章',
