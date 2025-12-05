@@ -6,13 +6,7 @@ import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import { Metadata } from 'next';
 
-export async function generateStaticParams() {
-  // 预生成普通文章和隐藏文章
-  const posts = await getAllPostIds();
-  return posts.map((post) => ({
-    slug: post.params.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 type Props = {
   params: Promise<{ slug: string }>;
