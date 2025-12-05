@@ -74,6 +74,8 @@ du -h -d 1
 
 终于摆脱这个代理层了。我没有实验这个 trade-off 到底 off 掉了多少性能，但是因为满足了我的需求我感到十分满意（笑
 
+> 我猜不一定会降低性能。二进制与 JS 之间的数据转移开销还是相当大的。。。
+
 ## Where the generated files place?
 
 Prisma 6 会在 `node_modules` 目录下生成 Prisma Client 代码。升级到 7 后，代码默认被生成到用户的代码仓库中而非 `node_modules`.
