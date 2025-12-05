@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack -p 3710",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "type-check": "tsc -b --noEmit"
   },
   "dependencies": {
     "geist": "^1.5.1",
