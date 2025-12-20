@@ -12,8 +12,6 @@ export const metadata: Metadata = {
   title: "所有文章 - Elecmonkey的小花园",
 };
 
-export const dynamic = 'force-dynamic';
-
 interface BlogPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

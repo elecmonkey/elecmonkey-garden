@@ -6,7 +6,13 @@ import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
+export async function generateStaticParams() {
+  // 预生成普通文章和隐藏文章
+  const posts = await getAllPostIds();
+  return posts.map((post) => ({
+    slug: post.params.slug,
+  }));
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -33,12 +39,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // 异步组件
 export default async function BlogPost({ params }: Props) {
+  const { slug } = await params;
+  let post;
+
   try {
     // 获取文章数据
-    const { slug } = await params;
-    const post = await getPostById(slug);
+    post = await getPostById(slug);
+  } catch (error) {
+    console.error('博客文章获取失败:', error);
+    // 如果文章不存在，触发Next.js的notFound处理
+    notFound();
+  }
     
-    return (
+  return (
       <PageContainer>
         <article className="prose prose-slate dark:prose-invert lg:prose-xl max-w-none">
           <header className="mb-8">
@@ -139,10 +152,5 @@ export default async function BlogPost({ params }: Props) {
         {/* 浮动大纲 */}
         <ClientTableOfContents no_toc={post.no_toc === true} />
       </PageContainer>
-    );
-  } catch (error) {
-    console.error('博客文章获取失败:', error);
-    // 如果文章不存在，触发Next.js的notFound处理
-    notFound();
-  }
+  );
 } 

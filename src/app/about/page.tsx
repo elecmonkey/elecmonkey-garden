@@ -3,7 +3,6 @@ import TechWall from './components/TechWall';
 
 import PageContainer from '@/components/layout/PageContainer';
 
-export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "关于我 - Elecmonkey的小花园",
