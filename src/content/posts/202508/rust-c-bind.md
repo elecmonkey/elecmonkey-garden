@@ -1,7 +1,7 @@
 ---
 title: 'Rust bindgen：为 C 头文件生成 Rust 调用绑定'
 date: '2025-08-26'
-tags: ['Rust', 'bindgen', 'C/C++']
+tags: ['Rust', 'bindgen', 'C-CPP']
 description: '`bindgen` automatically generates Rust FFI bindings to C and C++ libraries.'
 author: 'Elecmonkey'
 ---
