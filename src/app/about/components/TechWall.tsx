@@ -213,13 +213,11 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/denojs-original.svg"
                 alt="Deno"
                 label="Deno"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/bun-original.svg"
                 alt="Bun"
                 label="Bun"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/npm-original-wordmark.svg"
@@ -232,11 +230,6 @@ export default function TechWall() {
                 label="pnpm"
               />
               <TechIcon
-                src="https://images.elecmonkey.com/pages/about/vitejs-original.svg"
-                alt="Vite"
-                label="Vite"
-              />
-              <TechIcon
                 src="https://images.elecmonkey.com/pages/about/webpack-original.svg"
                 alt="Webpack"
                 label="Webpack"
@@ -247,19 +240,29 @@ export default function TechWall() {
                 label="ESBuild"
               />
               <TechIcon
-                src="https://vitest.dev/logo.svg"
-                alt="Vitest"
-                label="Vitest"
-              />
-              <TechIcon
                 src="https://images.elecmonkey.com/pages/about/rollup-original.svg"
                 alt="Rollup"
                 label="Rollup"
               />
               <TechIcon
+                src="https://images.elecmonkey.com/pages/about/vitejs-original.svg"
+                alt="Vite"
+                label="Vite"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/vitest-shadow.svg"
+                alt="Vitest"
+                label="Vitest"
+              />
+              <TechIcon
                 src="https://images.elecmonkey.com/pages/about/rolldown-round.svg"
                 alt="Rolldown"
                 label="Rolldown"
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/oxc-square-bubbles.svg"
+                alt="Oxc"
+                label="Oxc"
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/tsdown.svg"
