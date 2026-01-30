@@ -7,6 +7,12 @@ import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: "Elecmonkey的小花园 - 存在 为将心声响彻",
+  description: "Elecmonkey的小花园 - 专注前端技术的技术博客，探索JavaScript、TypeScript、React、Vue、Next.js等前端生态，分享前端工程化、性能优化、架构设计等实践经验。",
+  openGraph: {
+    title: "Elecmonkey的小花园 - 前端技术博客",
+    description: "专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践",
+    type: 'website',
+  },
 };
 
 export default async function Home() {
