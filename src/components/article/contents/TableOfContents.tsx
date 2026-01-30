@@ -59,8 +59,31 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
     };
   }, []);
 
-  // 如果 no_toc 为 true，或者没有标题，则不渲染任何内容
-  if (no_toc || headings.length === 0) return null;
+  // 如果 no_toc 为 true，则不渲染任何内容
+  if (no_toc) return null;
+
+  // 如果没有标题，显示提示信息（仅桌面端）
+  if (headings.length === 0 && desktop) {
+    return (
+      <div className="relative">
+        {/* 底层卡片 - 灰色背景，向右下偏移 */}
+        <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 border border-border"></div>
+        
+        {/* 上层卡片 - 白色/主题背景 */}
+        <div className="relative bg-card border border-border overflow-hidden">
+          <div className="px-5 py-4">
+            <h3 className="font-semibold text-lg">目录</h3>
+          </div>
+          <div className="px-5 py-8 text-center text-muted-foreground text-sm">
+            - 本文章无大纲 -
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 移动端没有标题时不显示
+  if (headings.length === 0) return null;
 
   // 桌面端固定侧栏
   if (desktop) {
