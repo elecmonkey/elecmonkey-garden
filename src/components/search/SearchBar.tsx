@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SearchBarProps {
@@ -12,15 +12,9 @@ export default function SearchBar({ className = '', placeholder = '搜索文章.
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // 从URL获取当前搜索关键词
-  const [keyword, setKeyword] = useState(() => {
-    return searchParams.get('keyword') || '';
-  });
-  
-  // 当URL中的关键词变化时更新状态
-  useEffect(() => {
-    setKeyword(searchParams.get('keyword') || '');
-  }, [searchParams]);
+  // 从URL获取当前搜索关键词，使用useMemo或直接在状态初始化中获取
+  const currentKeyword = searchParams.get('keyword') || '';
+  const [keyword, setKeyword] = useState(currentKeyword);
   
   // 处理搜索提交
   const handleSubmit = (e: React.FormEvent) => {
