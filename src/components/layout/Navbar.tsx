@@ -73,7 +73,16 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* 网站标志 */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
+            <Link 
+              href="/" 
+              className="flex items-center gap-2"
+              onClick={(e) => {
+                // 如果已经在首页，阻止默认行为避免硬刷新
+                if (pathname === '/') {
+                  e.preventDefault();
+                }
+              }}
+            >
               <Image 
                 src="/icon.png" 
                 alt="Logo" 
@@ -89,7 +98,15 @@ export default function Navbar() {
           
           {/* 桌面导航链接和主题切换器 */}
           <div className="hidden md:flex items-center space-x-2">
-            <Link href="/" className={getLinkClassName("/")}>
+            <Link 
+              href="/" 
+              className={getLinkClassName("/")}
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault();
+                }
+              }}
+            >
               首页
             </Link>
             <Link href="/blog" className={getLinkClassName("/blog")}>
@@ -149,7 +166,12 @@ export default function Navbar() {
             <Link 
               href="/" 
               className={getMobileLinkClassName("/")}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault();
+                }
+                setIsMenuOpen(false);
+              }}
             >
               首页
             </Link>

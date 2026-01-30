@@ -39,6 +39,32 @@ html.transitioning * {
   --highlight-green: #dcfce7;  /* 描述匹配 - 绿色100 */
   --highlight-purple: #f3e8ff; /* 内容匹配 - 紫色100 */
   --highlight-red: #fee2e2;    /* 标签匹配 - 红色100 */
+
+  /* 标签云颜色 */
+  --tag-blue-bg: #dbeafe;
+  --tag-blue-hover: #bfdbfe;
+  --tag-blue-text: #1e40af;
+  --tag-green-bg: #dcfce7;
+  --tag-green-hover: #bbf7d0;
+  --tag-green-text: #166534;
+  --tag-purple-bg: #f3e8ff;
+  --tag-purple-hover: #e9d5ff;
+  --tag-purple-text: #6b21a8;
+  --tag-orange-bg: #fed7aa;
+  --tag-orange-hover: #fdba74;
+  --tag-orange-text: #9a3412;
+  --tag-pink-bg: #fce7f3;
+  --tag-pink-hover: #fbcfe8;
+  --tag-pink-text: #9f1239;
+  --tag-cyan-bg: #cffafe;
+  --tag-cyan-hover: #a5f3fc;
+  --tag-cyan-text: #155e75;
+  --tag-yellow-bg: #fef9c3;
+  --tag-yellow-hover: #fef08a;
+  --tag-yellow-text: #854d0e;
+  --tag-red-bg: #fee2e2;
+  --tag-red-hover: #fecaca;
+  --tag-red-text: #991b1b;
 }
 
 /* 深色主题变量 */
@@ -69,6 +95,32 @@ html.transitioning * {
   --highlight-green: #14532d;  /* 绿色900 */
   --highlight-purple: #581c87; /* 紫色900 */
   --highlight-red: #991b1b;    /* 红色900 */
+
+  /* 标签云颜色 - 深色模式 */
+  --tag-blue-bg: #1e3a8a;
+  --tag-blue-hover: #1e40af;
+  --tag-blue-text: #bfdbfe;
+  --tag-green-bg: #14532d;
+  --tag-green-hover: #166534;
+  --tag-green-text: #bbf7d0;
+  --tag-purple-bg: #581c87;
+  --tag-purple-hover: #6b21a8;
+  --tag-purple-text: #e9d5ff;
+  --tag-orange-bg: #9a3412;
+  --tag-orange-hover: #c2410c;
+  --tag-orange-text: #fdba74;
+  --tag-pink-bg: #9f1239;
+  --tag-pink-hover: #be123c;
+  --tag-pink-text: #fbcfe8;
+  --tag-cyan-bg: #155e75;
+  --tag-cyan-hover: #0e7490;
+  --tag-cyan-text: #a5f3fc;
+  --tag-yellow-bg: #854d0e;
+  --tag-yellow-hover: #a16207;
+  --tag-yellow-text: #fef08a;
+  --tag-red-bg: #991b1b;
+  --tag-red-hover: #b91c1c;
+  --tag-red-text: #fecaca;
 }
 
 @theme inline {
@@ -126,6 +178,24 @@ img {
   border-radius: var(--radius);
 }
 
+
+/* 标签云样式 */
+.tag-color-0 { background-color: var(--tag-blue-bg); color: var(--tag-blue-text); }
+.tag-color-0:hover { background-color: var(--tag-blue-hover); }
+.tag-color-1 { background-color: var(--tag-green-bg); color: var(--tag-green-text); }
+.tag-color-1:hover { background-color: var(--tag-green-hover); }
+.tag-color-2 { background-color: var(--tag-purple-bg); color: var(--tag-purple-text); }
+.tag-color-2:hover { background-color: var(--tag-purple-hover); }
+.tag-color-3 { background-color: var(--tag-orange-bg); color: var(--tag-orange-text); }
+.tag-color-3:hover { background-color: var(--tag-orange-hover); }
+.tag-color-4 { background-color: var(--tag-pink-bg); color: var(--tag-pink-text); }
+.tag-color-4:hover { background-color: var(--tag-pink-hover); }
+.tag-color-5 { background-color: var(--tag-cyan-bg); color: var(--tag-cyan-text); }
+.tag-color-5:hover { background-color: var(--tag-cyan-hover); }
+.tag-color-6 { background-color: var(--tag-yellow-bg); color: var(--tag-yellow-text); }
+.tag-color-6:hover { background-color: var(--tag-yellow-hover); }
+.tag-color-7 { background-color: var(--tag-red-bg); color: var(--tag-red-text); }
+.tag-color-7:hover { background-color: var(--tag-red-hover); }
 
 /* focus 切换文字效果 - Footer彩蛋 */
 .quote-text {

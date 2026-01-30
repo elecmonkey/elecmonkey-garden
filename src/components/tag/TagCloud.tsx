@@ -54,25 +54,13 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
     return hashA - hashB
   })
 
-  // 预定义的背景色数组，使用柔和的颜色
-  const bgColors = [
-    'bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300',
-    'bg-green-500/10 hover:bg-green-500/20 text-green-700 dark:text-green-300',
-    'bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300',
-    'bg-orange-500/10 hover:bg-orange-500/20 text-orange-700 dark:text-orange-300',
-    'bg-pink-500/10 hover:bg-pink-500/20 text-pink-700 dark:text-pink-300',
-    'bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300',
-    'bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-700 dark:text-yellow-300',
-    'bg-red-500/10 hover:bg-red-500/20 text-red-700 dark:text-red-300',
-  ];
-
   return (
     <div className="w-full">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 justify-center items-center">
         {shuffledTags.map((tag, index) => (
           <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`} className="group">
             <div
-              className={`px-2.5 py-1.5 transition-all duration-200 ${bgColors[index % bgColors.length]}`}
+              className={`tag-color-${index % 8} px-2.5 py-1.5 transition-all duration-200`}
               style={{
                 fontSize: `${tag.calculatedSize}rem`,
               }}
