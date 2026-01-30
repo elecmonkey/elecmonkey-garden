@@ -16,6 +16,10 @@ export default async function Home() {
   
   // 获取所有标签
   const tags = await getAllTags();
+  
+  // 计算统计信息
+  const totalPosts = allPosts.length;
+  const latestUpdateDate = allPosts.length > 0 ? allPosts[0].date : null;
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
@@ -112,21 +116,51 @@ export default async function Home() {
 
         {/* 右侧边栏 */}
         <aside className="lg:w-90 flex-shrink-0">
-          {/* 标签云 */}
-          <div className="sticky top-20">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">标签云</h3>
-              <Link 
-                href="/tags" 
-                className="text-primary hover:underline text-sm flex items-center gap-1"
-              >
-                所有标签
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <div className="sticky top-20 space-y-6">
+            {/* 数据统计 */}
+            <h3 className="text-xl font-semibold">小花园</h3>
+            <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-4">
+              <div className="flex flex-col items-center justify-center py-6 lg:pt-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-              </Link>
+                <div className="text-2xl font-bold text-foreground mb-2">{totalPosts}</div>
+                <div className="text-sm text-muted-foreground">文章总数</div>
+              </div>
+              
+              {latestUpdateDate && (
+                <div className="flex flex-col items-center justify-center py-6 lg:pt-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <div className="text-2xl font-bold text-foreground mb-2">
+                    {new Date(latestUpdateDate).toLocaleDateString('zh-CN', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    }).replace(/\//g, '-')}
+                  </div>
+                  <div className="text-sm text-muted-foreground">最新更新</div>
+                </div>
+              )}
             </div>
-            <TagCloud tags={tags} limit={15} />
+            
+            {/* 标签云 */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-semibold">标签云</h3>
+                <Link 
+                  href="/tags" 
+                  className="text-primary hover:underline text-sm flex items-center gap-1"
+                >
+                  所有标签
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+              <TagCloud tags={tags} limit={15} />
+            </div>
           </div>
         </aside>
       </div>
