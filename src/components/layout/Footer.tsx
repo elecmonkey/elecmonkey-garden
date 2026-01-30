@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-muted/70 mt-auto">
       <div className="max-w-6xl mx-auto py-8 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* 网站信息 */}
           <div>
             <h3 className="text-lg font-semibold mb-3 text-foreground">
@@ -58,7 +58,37 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link 
+                <Link href="/blog" className="text-sm transition-colors text-muted-foreground hover:text-primary">
+                  所有文章
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-sm transition-colors text-muted-foreground hover:text-primary">
+                  关于我
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Emverse */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3 text-foreground">Emverse</h3>
+            <ul className="space-y-2">
+              <li>
+                <a 
+                  href="https://note.elecmonkey.com/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm flex items-center transition-colors text-muted-foreground hover:text-primary"
+                >
+                  EM Notebook
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a 
                   href="https://transphere.elecmonkey.com/" 
                   target="_blank"
                   rel="noopener noreferrer"
@@ -66,14 +96,22 @@ export default function Footer() {
                 >
                   Transphere
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/about" className="text-sm transition-colors text-muted-foreground hover:text-primary">
-                  关于我
-                </Link>
+                <a 
+                  href="https://www.edev.uno/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm flex items-center transition-colors text-muted-foreground hover:text-primary"
+                >
+                  edev.uno
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
               </li>
             </ul>
           </div>
