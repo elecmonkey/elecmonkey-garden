@@ -41,7 +41,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <PageContainer>
         <h1 className="text-3xl font-bold mb-8">搜索</h1>
         <div className="mb-8">
-          <SearchBar className="max-w-2xl mx-auto" placeholder="输入关键词搜索文章..." />
+          <SearchBar placeholder="输入关键词搜索文章..." />
         </div>
         <div className="text-center py-10">
           <p className="text-muted-foreground">请输入关键词进行搜索</p>
@@ -68,7 +68,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <h1 className="text-3xl font-bold mb-8">搜索</h1>
       
       <div className="mb-8">
-        <SearchBar className="max-w-2xl mx-auto" placeholder="搜索文章..." />
+        <SearchBar placeholder="搜索文章..." />
       </div>
       
       <div className="mb-6">
