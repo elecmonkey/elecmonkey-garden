@@ -5,7 +5,7 @@ export default function Footer() {
   
   return (
     <footer className="bg-muted/70 mt-auto">
-      <div className="max-w-4xl mx-auto py-8 px-4">
+      <div className="max-w-6xl mx-auto py-8 px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* 网站信息 */}
           <div>

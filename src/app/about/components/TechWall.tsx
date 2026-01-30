@@ -7,7 +7,12 @@ export default function TechWall() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-      <section className="mb-12 rounded-xl border border-border bg-card shadow-lg p-6">
+      <section className="mb-12 relative">
+        {/* 底层卡片 */}
+        <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 border border-border"></div>
+        
+        {/* 上层卡片 */}
+        <div className="relative border border-border bg-card p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 ">
           <div>
             <p className="text-xl font-medium">很多我很想玩明白但完全玩不明白的东西。</p>
@@ -581,6 +586,7 @@ export default function TechWall() {
               />
             </div>
           </div>
+        </div>
         </div>
       </section>
   );

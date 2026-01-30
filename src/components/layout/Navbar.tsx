@@ -44,7 +44,7 @@ export default function Navbar() {
   
   // 生成链接样式，当前页面有灰色背景
   const getLinkClassName = (path: string) => {
-    const baseClasses = "px-3 py-2 rounded-lg transition-colors";
+    const baseClasses = "px-3 py-2 transition-colors";
     const activeClasses = `${baseClasses} bg-accent text-foreground font-bold`;
     const inactiveClasses = `${baseClasses} text-foreground hover:bg-muted`;
     
@@ -53,7 +53,7 @@ export default function Navbar() {
   
   // 移动端菜单项样式，添加触摸反馈
   const getMobileLinkClassName = (path: string) => {
-    const baseClasses = "block px-3 py-2 rounded-lg transition-colors active:bg-muted";
+    const baseClasses = "block px-3 py-2 transition-colors active:bg-muted";
     const activeClasses = `${baseClasses} bg-accent text-foreground font-bold`;
     const inactiveClasses = `${baseClasses} text-foreground hover:bg-muted`;
     
@@ -69,7 +69,7 @@ export default function Navbar() {
 
   return (
     <nav className={`${navbarClasses} border-b border-border/20`}>
-      <div className="max-w-4xl mx-auto px-4 py-3">
+      <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* 网站标志 */}
           <div className="flex items-center">

@@ -50,7 +50,7 @@ export default function ThemeSwitcher() {
   return (
     <button
       onClick={cycleTheme}
-      className="p-2 rounded-lg transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+      className="p-2 transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground"
       title={getTooltip()}
       aria-label="切换主题"
     >

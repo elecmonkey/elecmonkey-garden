@@ -52,9 +52,12 @@ export default async function BlogPost({ params }: Props) {
   }
     
   return (
-      <PageContainer>
-        <article className="prose prose-slate dark:prose-invert lg:prose-xl max-w-none">
-          <header className="mb-8">
+    <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* 主内容区 - 文章 */}
+        <main className="flex-1 min-w-0">
+          <article className="prose prose-slate dark:prose-invert lg:prose-xl max-w-none">
+            <header className="mb-8">
             <h1 className="text-3xl font-bold mb-2">
               {post.isHidden && (
                 <span className="inline-block bg-gray-500 text-white text-sm py-1 px-2 rounded mr-2 align-middle">
@@ -147,10 +150,19 @@ export default async function BlogPost({ params }: Props) {
             </div>
           </div>
           )}
-        </article>
-        
-        {/* 浮动大纲 */}
-        <ClientTableOfContents no_toc={post.no_toc === true} />
-      </PageContainer>
+          </article>
+        </main>
+
+        {/* 右侧边栏 - 目录 */}
+        <aside className="hidden lg:block lg:w-90 flex-shrink-0">
+          <div className="sticky top-20">
+            <ClientTableOfContents no_toc={post.no_toc === true} desktop={true} />
+          </div>
+        </aside>
+      </div>
+      
+      {/* 移动端浮动按钮和侧栏 */}
+      <ClientTableOfContents no_toc={post.no_toc === true} desktop={false} />
+    </div>
   );
 } 

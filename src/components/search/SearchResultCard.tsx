@@ -35,26 +35,32 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
   };
   
   return (
-    <article className="border border-border rounded-lg p-6 hover:shadow-md transition-shadow bg-card">
+    <article className="relative group">
+      {/* 底层卡片 - 灰色背景，向右下偏移 */}
+      <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
+      
+      {/* 上层卡片 - 白色/主题背景 */}
+      <div className="relative p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
       <Link href={`/blog/${post.id}`}>
-        <h3 className="text-xl font-semibold mb-2 text-card-foreground hover:text-primary transition-colors">
+        <h3 className="text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors">
           {matches.title ? highlightKeyword(post.title, keyword) : post.title}
         </h3>
       </Link>
       
-      <p className="text-muted-foreground text-sm mb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        {new Date(post.date).toLocaleDateString('zh-CN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
+      <p className="text-muted-foreground text-sm mb-3 flex items-center gap-4">
+        <span className="flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          {new Date(post.date).toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </span>
         {post.author && (
-          <span>
-            <span className="mx-2"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span className="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
             {post.author}
@@ -64,11 +70,11 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
       
       {/* 描述或摘要 */}
       {matches.content.matched && matches.content.excerpt && showExcerpt ? (
-        <p className="text-card-foreground mb-4">
+        <p className="text-card-foreground/80 mb-4 line-clamp-2">
           {highlightKeyword(matches.content.excerpt, keyword)}
         </p>
       ) : (
-        <p className="text-card-foreground mb-4">
+        <p className="text-card-foreground/80 mb-4 line-clamp-2">
           {matches.description ? highlightKeyword(post.description, keyword) : post.description}
         </p>
       )}
@@ -79,22 +85,22 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
           匹配位置: 
           <span className="space-x-2 ml-2">
             {matches.title && (
-              <span className="inline-flex items-center px-2 py-1 rounded-full bg-highlight-blue text-blue-800 text-xs">
+              <span className="inline-flex items-center px-2 py-1 bg-highlight-blue text-blue-800 text-xs">
                 标题
               </span>
             )}
             {matches.description && (
-              <span className="inline-flex items-center px-2 py-1 rounded-full bg-highlight-green text-green-800 text-xs">
+              <span className="inline-flex items-center px-2 py-1 bg-highlight-green text-green-800 text-xs">
                 描述
               </span>
             )}
             {matches.content.matched && (
-              <span className="inline-flex items-center px-2 py-1 rounded-full bg-highlight-purple text-purple-800 text-xs">
+              <span className="inline-flex items-center px-2 py-1 bg-highlight-purple text-purple-800 text-xs">
                 内容
               </span>
             )}
             {matches.tags.length > 0 && (
-              <span className="inline-flex items-center px-2 py-1 rounded-full bg-highlight-red text-red-800 text-xs">
+              <span className="inline-flex items-center px-2 py-1 bg-highlight-red text-red-800 text-xs">
                 标签
               </span>
             )}
@@ -113,13 +119,16 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
               className={`${
                 isMatched 
                   ? 'bg-highlight-red text-red-800' 
-                  : 'bg-muted hover:bg-accent text-muted-foreground'
-              } px-2 py-1 rounded-md text-xs transition-colors`}
+                  : 'bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary'
+              } px-2.5 py-1 rounded text-xs transition-all`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {isMatched ? highlightKeyword(tag, keyword) : tag}
             </Link>
           );
         })}
+      </div>
       </div>
     </article>
   );

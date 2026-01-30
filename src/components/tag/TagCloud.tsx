@@ -54,44 +54,31 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
     return hashA - hashB
   })
 
+  // 预定义的背景色数组，使用柔和的颜色
+  const bgColors = [
+    'bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300',
+    'bg-green-500/10 hover:bg-green-500/20 text-green-700 dark:text-green-300',
+    'bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300',
+    'bg-orange-500/10 hover:bg-orange-500/20 text-orange-700 dark:text-orange-300',
+    'bg-pink-500/10 hover:bg-pink-500/20 text-pink-700 dark:text-pink-300',
+    'bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300',
+    'bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-700 dark:text-yellow-300',
+    'bg-red-500/10 hover:bg-red-500/20 text-red-700 dark:text-red-300',
+  ];
+
   return (
-    <div className="w-full py-6">
-      <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 px-2 md:px-8">
-        {shuffledTags.map((tag) => (
-          <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`} className="group relative">
+    <div className="w-full">
+      <div className="flex flex-wrap gap-2">
+        {shuffledTags.map((tag, index) => (
+          <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`} className="group">
             <div
-              className="relative px-3 py-1.5 rounded-lg transition-all duration-300 
-                        border border-border 
-                        bg-card/80 
-                        hover:bg-card 
-                        shadow-sm hover:shadow-md 
-                        group-hover:border-primary
-                        group-hover:text-primary 
-                        text-card-foreground 
-                        hover:text-foreground
-                        transform hover:scale-105
-                        flex items-center"
+              className={`px-2.5 py-1.5 transition-all duration-200 ${bgColors[index % bgColors.length]}`}
               style={{
                 fontSize: `${tag.calculatedSize}rem`,
               }}
             >
-              <span className="relative z-10">{tag.name}</span>
-
-              {/* 计数徽章 - 优化设计 */}
-              <span
-                className="absolute -top-1.5 -right-1.5 z-20 
-                              min-w-[18px] h-[18px] px-1 
-                              flex items-center justify-center 
-                              rounded-lg text-[0.65rem] font-medium 
-                              bg-muted 
-                              text-muted-foreground
-                              border border-border
-                              transition-all duration-300 
-                              group-hover:bg-primary
-                              group-hover:text-primary-foreground
-                              group-hover:border-primary
-                              shadow-sm"
-              >
+              <span>{tag.name}</span>
+              <span className="text-[0.7em] ml-1.5 opacity-70">
                 {tag.count}
               </span>
             </div>

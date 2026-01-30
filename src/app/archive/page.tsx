@@ -21,22 +21,28 @@ export default async function ArchiveIndexPage() {
           <p className="text-muted-foreground">暂无文章</p>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {months.map((month) => (
             <Link
               key={month.id}
               href={`/archive/${month.id}`}
-              className="flex items-center justify-between p-4 bg-muted hover:bg-muted/80 rounded-lg transition-colors"
+              className="relative group"
             >
-              <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span className="font-medium">{month.displayName}</span>
+              {/* 底层卡片 */}
+              <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
+              
+              {/* 上层卡片 */}
+              <div className="relative flex items-center justify-between p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
+                <div className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span className="font-medium">{month.displayName}</span>
+                </div>
+                <span className="bg-muted/50 text-foreground text-xs px-2 py-1">
+                  {month.count} 篇
+                </span>
               </div>
-              <span className="bg-accent text-accent-foreground text-xs px-2 py-1 rounded-full">
-                {month.count} 篇
-              </span>
             </Link>
           ))}
         </div>
