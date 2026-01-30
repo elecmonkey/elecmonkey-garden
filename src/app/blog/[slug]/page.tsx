@@ -155,7 +155,7 @@ export default async function BlogPost({ params }: Props) {
 
         {/* 右侧边栏 - 目录 */}
         <aside className="hidden lg:block lg:w-90 flex-shrink-0">
-          <div className="sticky top-20">
+          <div className="sticky top-22">
             <ClientTableOfContents no_toc={post.no_toc === true} desktop={true} />
           </div>
         </aside>

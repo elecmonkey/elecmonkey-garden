@@ -25,9 +25,9 @@ export default async function Home() {
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
       {/* 个人介绍部分 - 全宽 */}
       <section className="mb-12">
-        <div className="flex flex-col md:flex-row items-center gap-8 p-4">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-4">
           <div className="relative">
-            <div className="w-32 h-32 relative overflow-hidden rounded-full ring-2 ring-primary/20">
+            <div className="w-36 h-36 md:w-42 md:h-42 relative overflow-hidden rounded-full ring-2 ring-primary/20">
               <div className="w-full h-full flex items-center justify-center">
                 <Image 
                   src="https://images.elecmonkey.com/pages/em.png" 
@@ -39,15 +39,15 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className="text-center md:text-left flex-1">
+          <div className="text-center">
             <h1>
-              <span className="text-4xl font-bold">Elecmonkey</span>
-              <span className="text-4xl font-light">&apos;s Garden</span>
+              <span className="text-4xl md:text-5xl font-bold">Elecmonkey</span>
+              <span className="text-4xl md:text-5xl font-light">&apos;s Garden</span>
             </h1>
-            <p className="text-lg text-muted-foreground mt-2 mb-6" title="来自COP《光与影的对白》">存在 为将心声响彻</p>
+            <p className="text-xl md:text-2xl text-muted-foreground mt-3 mb-6" title="来自COP《光与影的对白》"> - 存在 为将心声响彻 - </p>
             
             {/* 导航链接 */}
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+            <div className="flex flex-wrap gap-3 justify-center">
               <Link 
                 href="/blog" 
                 className="px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow"
@@ -116,7 +116,7 @@ export default async function Home() {
 
         {/* 右侧边栏 */}
         <aside className="lg:w-90 flex-shrink-0">
-          <div className="sticky top-20 space-y-6">
+          <div className="sticky top-5 space-y-6">
             {/* 数据统计 */}
             <h3 className="text-xl font-semibold">小花园</h3>
             <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-4">
