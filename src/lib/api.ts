@@ -558,13 +558,13 @@ export async function searchPosts(keyword: string): Promise<SearchResultItem[]> 
     });
     
     // 描述匹配（中等权重）
-    if (post.description.toLowerCase().includes(normalizedKeyword)) {
+    if (post.description && post.description.toLowerCase().includes(normalizedKeyword)) {
       score += 5;
       matches.description = true;
     }
     
     // 内容匹配（基础权重）
-    if (post.content.toLowerCase().includes(normalizedKeyword)) {
+    if (post.content && post.content.toLowerCase().includes(normalizedKeyword)) {
       score += 3;
       matches.content.matched = true;
       
