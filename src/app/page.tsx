@@ -159,7 +159,7 @@ export default async function Home() {
                   </svg>
                 </Link>
               </div>
-              <TagCloud tags={tags} limit={15} />
+              <TagCloud tags={tags} limit={18} />
             </div>
           </div>
         </aside>
