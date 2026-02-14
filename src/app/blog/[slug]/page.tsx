@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllPostIds, getPostById } from '@/lib/api';
-import PageContainer from '@/components/layout/PageContainer';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import { Metadata } from 'next';
@@ -115,7 +114,7 @@ export default async function BlogPost({ params }: Props) {
                     href={`/blog/${post.nextPost.id}`} 
                     className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
                     <span className="line-clamp-1 text-left min-w-0 mr-auto">
@@ -138,7 +137,7 @@ export default async function BlogPost({ params }: Props) {
                     <span className="line-clamp-1 text-left min-w-0 ml-auto">
                       {post.prevPost.title}
                     </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
@@ -154,7 +153,7 @@ export default async function BlogPost({ params }: Props) {
         </main>
 
         {/* 右侧边栏 - 目录 */}
-        <aside className="hidden lg:block lg:w-90 flex-shrink-0">
+        <aside className="hidden lg:block lg:w-90 shrink-0">
           <div className="sticky top-22">
             <ClientTableOfContents no_toc={post.no_toc === true} desktop={true} />
           </div>
