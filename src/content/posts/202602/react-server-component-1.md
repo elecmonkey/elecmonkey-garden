@@ -1,8 +1,8 @@
 ---
 title: "论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合"
 date: "2026-02-14"
-description: "React Server Component 的原理、RSC 与 SSR、「局部水合」的意义"
-tags: ["React", "RSC", "前端架构", "Next.js"]
+description: "React 团队一声炮响，给前端送来了 RSC | 服务端组件原理、RSC 与 SSR、「局部水合」的意义"
+tags: ["React", "RSC", "前端架构", "Next.js", "服务端渲染 (SSR)"]
 author: "Elecmonkey"
 ---
 
