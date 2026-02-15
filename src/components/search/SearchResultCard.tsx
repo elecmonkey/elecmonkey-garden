@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SearchResultItem } from '@/lib/api';
+import type { SearchResultItem } from '@/lib/api';
 import { useState } from 'react';
 
 interface SearchResultCardProps {
