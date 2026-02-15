@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 interface FileDownloadProps {
-  fileContent: string; // 原始的五行文本内容
+  fileContent: string;
   className?: string;
 }
 
@@ -22,12 +22,10 @@ interface FileInfo {
   size: string;
 }
 
-export default function ServerFileDownloadRenderer({ fileContent, className = '' }: FileDownloadProps) {
-  // 解析五行文本为文件信息
+export default function FileDownloadRenderer({ fileContent, className = '' }: FileDownloadProps) {
   const parseFileContent = (content: string): FileInfo => {
     const lines = content.trim().split('\n');
     
-    // 确保至少有 3 行（最低要求：文件名、类型和链接）
     if (lines.length < 3) {
       return {
         filename: '未知文件',
@@ -47,7 +45,6 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
     };
   };
   
-  // 根据文件类型获取图标
   const getFileIcon = (type: string) => {
     const iconProps = { 
       size: 48,
@@ -107,12 +104,10 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
       case 'text':
         return <FileText {...iconProps} />;
       default:
-        // 对于未知类型，使用通用文件图标
         return <File {...iconProps} />;
     }
   };
   
-  // 根据文件类型获取图标颜色类
   const getIconColorClass = (type: string): string => {
     switch (type) {
       case 'pdf':
@@ -129,7 +124,7 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
       case '7z':
       case 'tar':
       case 'gz':
-        return 'text-yellow-500'; // 保留黄色，作为一种强调
+        return 'text-yellow-500';
       case 'doc':
       case 'docx':
       case 'word':
@@ -137,18 +132,18 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
       case 'xls':
       case 'xlsx':
       case 'excel':
-        return 'text-green-600'; // 保留绿色
+        return 'text-green-600';
       case 'ppt':
       case 'pptx':
       case 'powerpoint':
-        return 'text-orange-500'; // 保留橙色
+        return 'text-orange-500';
       case 'md':
       case 'markdown':
         return 'text-muted-foreground';
       case 'json':
-        return 'text-green-500'; // 保留绿色
+        return 'text-green-500';
       case 'html':
-        return 'text-orange-600'; // 保留橙色
+        return 'text-orange-600';
       case 'css':
         return 'text-primary';
       case 'js':
@@ -162,7 +157,7 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
       case 'go':
       case 'rust':
       case 'code':
-        return 'text-purple-500'; // 保留紫色
+        return 'text-purple-500';
       case 'txt':
       case 'text':
         return 'text-muted-foreground';
@@ -171,19 +166,16 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
     }
   };
   
-  // 获取文件信息
   const fileInfo = parseFileContent(fileContent);
   
   return (
     <div className={`my-6 rounded-lg border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 bg-card ${className}`}>
       <div className="flex flex-col sm:flex-row px-4 pt-4 pb-8 sm:pb-4 gap-4">
-        {/* 图标容器 - 在移动端居中 */}
-                  <div className="flex flex-shrink-0 items-center justify-center mx-auto sm:mx-0 w-20 h-20 sm:w-16 sm:h-16 mt-2 sm:ml-0.5 bg-muted rounded-lg">
+        <div className="flex shrink-0 items-center justify-center mx-auto sm:mx-0 w-20 h-20 sm:w-16 sm:h-16 mt-2 sm:ml-0.5 bg-muted rounded-lg">
           {getFileIcon(fileInfo.type)}
         </div>
         
-        {/* 文件信息 - 在移动端居中对齐文本 */}
-        <div className="flex-grow text-center sm:text-left">
+        <div className="grow text-center sm:text-left">
           <h3 className="font-medium text-lg mb-1 text-card-foreground">
             {fileInfo.filename}
           </h3>
@@ -200,8 +192,7 @@ export default function ServerFileDownloadRenderer({ fileContent, className = ''
           </div>
         </div>
         
-        {/* 下载按钮 - 在移动端居中 */}
-        <div className="flex-shrink-0 flex items-center justify-center sm:justify-start mt-4 sm:mt-0">
+        <div className="shrink-0 flex items-center justify-center sm:justify-start mt-4 sm:mt-0">
           <a 
             href={fileInfo.url} 
             target="_blank" 

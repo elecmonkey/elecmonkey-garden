@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { Components } from 'react-markdown';
-import ServerFileDownloadRenderer from '../file-downloader/ServerFileDownloadRenderer';
 import CopyButton from '../code/CopyButton';
 import CodeBlock from '@/components/article/code/CodeBlock';
 
@@ -13,8 +12,10 @@ const MermaidRenderer = dynamic(() => import('./MermaidRenderer'), {
   loading: () => <div className="p-4 text-muted-foreground">加载图表，需要启用 JavaScript ...</div>
 });
 
-// 使用 react-markdown 的 Components 类型来确保兼容性
-export const CodeComponent: Components['code'] = ({ className, children, ...props }) => {
+type CodeComponentType = Exclude<NonNullable<Components['code']>, keyof React.JSX.IntrinsicElements>;
+export type CodeRendererProps = CodeComponentType extends React.ComponentType<infer P> ? P : never;
+
+export const CodeComponent = ({ className, children, ...props }: CodeRendererProps) => {
   // 解析语言和行号范围
   const match = /language-(\w+)(?:{([^}]+)})?/.exec(className || '');
   
@@ -22,12 +23,6 @@ export const CodeComponent: Components['code'] = ({ className, children, ...prop
   if (match && match[1] === 'mermaid') {
     const code = String(children || '').replace(/\n$/, '');
     return <MermaidRenderer chart={code} />;
-  }
-  
-  // 如果是 File 代码块，使用文件下载渲染器（服务端组件）
-  if (match && match[1] === 'file') {
-    const code = String(children || '').replace(/\n$/, '');
-    return <ServerFileDownloadRenderer fileContent={code} />;
   }
   
   // 其他代码块使用 CodeBlock 组件

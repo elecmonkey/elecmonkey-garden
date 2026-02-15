@@ -1,13 +1,24 @@
 import ReactMarkdown from 'react-markdown';
-import { CodeComponent } from './ClientMarkdownRenderer';
+import { CodeComponent, CodeRendererProps } from './ClientMarkdownRenderer';
 import Image from 'next/image';
 import React from 'react';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import FileDownloadRenderer from '../file-downloader/FileDownloadRenderer';
 
-// 服务器端组件包装器
 export default function MarkdownContent({ content }: { content: string }) {
+  const codeRenderer = ({ className, children, ...props }: CodeRendererProps) => {
+    const match = /language-(\w+)(?:{([^}]+)})?/.exec(className || '');
+    
+    if (match && match[1] === 'file') {
+      const code = String(children || '').replace(/\n$/, '');
+      return <FileDownloadRenderer fileContent={code} />;
+    }
+    
+    return <CodeComponent className={className} {...props}>{children}</CodeComponent>;
+  };
+
   return (
     <div className="markdown-content prose prose-lg dark:prose-invert max-w-none">
       <ReactMarkdown
@@ -103,7 +114,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             if (type === 'checkbox') {
               return (
                 <span 
-                  className={`inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 -ml-2 mt-1 border rounded ${checked 
+                  className={`inline-flex items-center justify-center shrink-0 w-5 h-5 mr-2 -ml-2 mt-1 border rounded ${checked 
                     ? 'bg-blue-500 border-blue-500' 
                     : 'border-border'}`}
                 >
@@ -179,7 +190,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           ),
           
           // 代码块渲染 - 使用客户端组件
-          code: CodeComponent,
+          code: codeRenderer,
           
           // 普通链接样式
           a: ({ children, href }) => (
