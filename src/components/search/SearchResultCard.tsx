@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import type { SearchResultItem } from '@/lib/api';
-import { useState } from 'react';
 
 interface SearchResultCardProps {
   result: SearchResultItem;
@@ -11,7 +8,6 @@ interface SearchResultCardProps {
 
 export default function SearchResultCard({ result, keyword }: SearchResultCardProps) {
   const { post, matches } = result;
-  const [showExcerpt] = useState(true);
   
   // 高亮关键词
   const highlightKeyword = (text: string, keyword: string) => {
@@ -69,7 +65,7 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
       </p>
       
       {/* 描述或摘要 */}
-      {matches.content.matched && matches.content.excerpt && showExcerpt ? (
+      {matches.content.matched && matches.content.excerpt ? (
         <p className="text-card-foreground/80 mb-4 line-clamp-2">
           {highlightKeyword(matches.content.excerpt, keyword)}
         </p>
