@@ -2,7 +2,7 @@
 title: "神秘链接 javascript:void(0) 背后的故事。"
 date: "2025-04-16"
 description: "前端世界的每一处细节变化都映射着整个 Web 生态的变迁。"
-tags: ["JavaScript", "Web历史", "TypeScript"]
+tags: ["JavaScript", "Web 历史", "TypeScript"]
 author: "Elecmonkey"
 ---
 

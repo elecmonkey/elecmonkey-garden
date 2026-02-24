@@ -2,7 +2,7 @@
 title: "Vite 实现服务端渲染 (Server-Side Rendering)"
 date: "2025-07-16"
 description: "一个 SSR Demo，顺便聊聊 Web 如何从走到今天这一步。"
-tags: ["服务端渲染 (SSR)", "Web历史", "Vite", "AJAX"]
+tags: ["服务端渲染 (SSR)", "Web 历史", "Vite", "AJAX"]
 author: "Elecmonkey"
 ---
 

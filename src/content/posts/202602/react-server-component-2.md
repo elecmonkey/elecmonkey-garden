@@ -1,7 +1,7 @@
 ---
 title: "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图"
 date: "2026-02-15"
-description: "续论 RSC —— 规则、架构、JavaScript 模块"
+description: "React 团队一声炮响，给前端送来了 RSC | 续论 RSC —— 规则、架构、JavaScript 模块"
 tags: ["React", "RSC", "前端架构", "Next.js"]
 author: "Elecmonkey"
 ---
