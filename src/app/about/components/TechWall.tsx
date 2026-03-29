@@ -202,6 +202,12 @@ export default function TechWall() {
                 alt="Astro"
                 label="Astro"
               />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/ripple.svg"
+                alt="Ripple"
+                label="Ripple"
+                isGray={true}
+              />
             </div>
           </div>
 
@@ -381,7 +387,6 @@ export default function TechWall() {
                 src="https://images.elecmonkey.com/pages/about/electron-original.svg"
                 alt="Electron"
                 label="Electron"
-                isGray={true}
               />
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/tauri-original.svg"
@@ -545,6 +550,30 @@ export default function TechWall() {
           </div>
 
           <div className="mb-8">
+            <h3 className="text-lg font-medium mb-4">AI Agent</h3>
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/langchain.svg"
+                alt="LangChain"
+                label="LangChain"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/langgraph.svg"
+                alt="LangGraph"
+                label="LangGraph"
+                isGray={true}
+              />
+              <TechIcon
+                src="https://images.elecmonkey.com/pages/about/ragflow.svg"
+                alt="RAGFlow"
+                label="RAGFlow"
+                isGray={true}
+              />
+            </div>
+          </div>
+
+          <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">Data Science & Machine Learning</h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
@@ -586,6 +615,7 @@ export default function TechWall() {
               />
             </div>
           </div>
+
         </div>
         </div>
       </section>
