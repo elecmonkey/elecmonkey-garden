@@ -13,7 +13,7 @@ export default function Footer() {
               Elecmonkey的小花园
             </h3>
             <p 
-              className="text-sm mb-3 text-muted-foreground cursor-pointer transition-colors quote-text" 
+              className="text-sm mb-3 text-muted-foreground cursor-pointer transition-colors quote-text select-none" 
               title="来自COP《光与影的对白》"
               data-text-1="存在 为将心声响彻"
               data-text-2="交汇的光与影 答案落定覆上姓名"
@@ -154,9 +154,12 @@ export default function Footer() {
         
         {/* 版权信息 */}
         <div className="mt-8 pt-6 text-center border-t border-border">
-          <p className="text-sm text-muted-foreground">
-            &copy; 2023-{currentYear} Elecmonkey的小花园
-            <span className="mx-2 text-muted-foreground select-none">｜</span>
+          <p className="text-sm text-muted-foreground select-none">
+            <span>
+              &copy; 2023-{currentYear} Elecmonkey的小花园
+            </span>
+            <span className="mx-2 text-muted-foreground select-none hidden sm:inline">｜</span>
+            <br className="sm:hidden" />
             <a 
               href="https://beian.miit.gov.cn/" 
               target="_blank" 

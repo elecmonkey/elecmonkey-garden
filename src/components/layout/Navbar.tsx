@@ -68,14 +68,14 @@ export default function Navbar() {
   const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
 
   return (
-    <nav className={`${navbarClasses} border-b border-border/20`}>
+    <nav className={`${navbarClasses} border-b border-border/20 select-none`}>
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* 网站标志 */}
           <div className="flex items-center">
             <Link 
               href="/" 
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 select-none"
               onClick={(e) => {
                 // 如果已经在首页，阻止默认行为避免硬刷新
                 if (pathname === '/') {
