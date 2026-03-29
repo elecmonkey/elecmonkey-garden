@@ -33,6 +33,8 @@ author: "Elecmonkey"
 
 相比之下，oxfmt 对 prettier 的兼容性会好很多。oxfmt 兼容 prettier 绝大多数的内置行为，以及支持了常见的插件需求，比如 import 导入排序、TailwindCSS 类名排序、`package.json` 排序等。不过 oxfmt 官宣不考虑支持 prettier 插件，所以使用了一些能力未被 oxc 内建的 prettier 插件的用户就完全无法迁移了。
 
+![Vite+'s Compatibility](https://images.elecmonkey.com/articles/202603/viteplus-compatibility.png)
+
 [https://oxc.rs/compatibility.html](https://oxc.rs/compatibility.html) 有一个对框架 DSL 的兼容性矩阵，可以说截至目前情况并不乐观。另外，不支持第三方插件，就意味着未来新的框架、新的 DSL 能否支持，全看 oxc 团队的开发计划。某种意义上这不符合 Vite 生态的底色。例如最近有个作者在搞一个叫 Ripple 的框架，这个 meta-framework 更是家家户户都能搞一些自己的写法，这些 DSL 五花八门的涌现，用 oxc 可能意味着放弃了某些选型的权利。
 
 ## 什么样的业务场景会需要 Vite+
