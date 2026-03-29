@@ -10,14 +10,11 @@ author: "Elecmonkey"
 
 记得在一年前的一个访谈视频中，Evan You 曾表示 Vite+ 将会是 VoidZero 公司的一款商业产品。不过最终在发布时（[Announcing Vite+ Alpha](https://voidzero.dev/posts/announcing-vite-plus-alpha)），Vite+ 还是以 MIT 许可证开源了。
 
-## Vite+ 简介
-
-
 ## Vite+ 有门槛
 
 ### 能升级到 Vite 8 吗
 
-首先，Vite+ 生态建立在 Oxc/Rolldown stack 的基础之上，所以 Vite 版本必须是 Vite 8 (Rolldown)。对于存量项目来说，是否能使用 Vite+ 取决于项目能否平滑的升级到 Vite 8 和周边工具链能否平滑的被 Oxlint/Oxfmt 等替换掉。
+首先，Vite+ 生态建立在 oxc/Rolldown stack 的基础之上，所以 Vite 版本必须是 Vite 8 (Rolldown)。对于存量项目来说，是否能使用 Vite+ 取决于项目能否平滑的升级到 Vite 8 和周边工具链能否平滑的被 oxlint/oxfmt 等替换掉。
 
 按我的经验，如果项目本身是旧版本的 Vite，升级到 Vite 8 应该是压力不大的，除非是在配置中定向的使用了某些 rollup 的行为（rolldown 应该大多是兼容的，只是确实要手动迁移一下）。一个使用官方脚手架创建的 Vite 项目、仅配置了社区常见的插件（vite-plugin-vue，tailwindCSS）之类的，升级到 Vite 8 应该是非常顺利的。
 
@@ -30,6 +27,12 @@ author: "Elecmonkey"
 首先很令我苦恼的是我还没见过一个在认真使用 eslint 和 prettier 的旧项目。项目中有安装，然后有 `npm run lint` 之类的命令，然后一运行几千个 error。这种情况我只能把 eslint 直接删了…… 我十分理解配置项目的同学都是怀着崇高的理想去配置的 linter，比如统一的缩进、统一的引号分号风格、不能有未使用的导入、不能有未改变过的 let 变量…… 可惜那个时代没有 AI Agent，然后团队也没有配置自动的 CI 检查。代码风格变成全凭自觉的情况，eslint 就纯粹变成一个摆设了。
 
 目前（截止本文发布） oxlint 还不成熟，官方文档的推荐实践仍然是安装一个 `eslint-plugin-oxlint` 插件，禁用掉 oxlint 已经支持的规则，然后在 lint 的时候同时运行 eslint 和 oxlint。对于已经使用 flat config 的项目，oxlint 提供了 `@oxlint/migrate` 可以把 eslint 的配置文件自动迁移到 oxlint，不过项目从 eslint 8 升级到 9，从传统的 `.eslintrc` 升级到 `eslint.config.m(j|t)s` 的过程也需要折腾一番。
+
+> 不好意思我写这篇的时候没看见这个……更新一下补充
+> 
+> Oxlint: JS Plugins Alpha
+> 
+> Oxlint’s JS Plugins Alpha brings near-100% compatibility with the ESLint plugin ecosystem. Your existing ESLint plugins run inside Oxlint unmodified, alongside 650+ native Rust rules, while linting up to 100x faster than ESLint.
 
 相比之下，oxfmt 对 prettier 的兼容性会好很多。oxfmt 兼容 prettier 绝大多数的内置行为，以及支持了常见的插件需求，比如 import 导入排序、TailwindCSS 类名排序、`package.json` 排序等。不过 oxfmt 官宣不考虑支持 prettier 插件，所以使用了一些能力未被 oxc 内建的 prettier 插件的用户就完全无法迁移了。
 
