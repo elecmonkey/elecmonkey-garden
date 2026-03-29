@@ -49,6 +49,12 @@ export default async function BlogPost({ params }: Props) {
     // 如果文章不存在，触发Next.js的notFound处理
     notFound();
   }
+
+  let markdownNode = <MarkdownContent content={post.content} />;
+  if (process.env.NODE_ENV === 'development') {
+    const DevLiveMarkdownContent = (await import('@/components/article/md/DevLiveMarkdownContent')).default;
+    markdownNode = <DevLiveMarkdownContent slug={slug} initialContent={post.content} />;
+  }
     
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
@@ -100,7 +106,7 @@ export default async function BlogPost({ params }: Props) {
           </header>
           
           <div className="markdown-content">
-            <MarkdownContent content={post.content} />
+            {markdownNode}
           </div>
 
           {/* 底部导航 */}
