@@ -2,7 +2,7 @@
 title: "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
 date: "2026-03-29"
 description: "“统一” \"Unified\" 是一个和 JavaScript 生态格格不入的词。"
-tags: ["Vite+", "Vite", "Rolldown", "oxc", "oxlint", "oxfmt"]
+tags: ["Vite", "Rolldown", "oxc", "oxlint", "oxfmt"]
 author: "Elecmonkey"
 ---
 

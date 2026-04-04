@@ -2,7 +2,7 @@
 title: "写在 Astro v6 beta：Astro 让真正的“网站”拥抱现代前端生态"
 date: "2026-01-30"
 description: "史上最恨 JavaScript 的前端框架，最有意义的架构试验场"
-tags: ["Astro", "服务端渲染 (SSR)", "静态站点生成 (SSG)", "群岛架构", "Vite"]
+tags: ["Astro", "服务端渲染 (SSR)", "静态站点生成 (SSG)", "Vite"]
 author: "Elecmonkey"
 ---
 
