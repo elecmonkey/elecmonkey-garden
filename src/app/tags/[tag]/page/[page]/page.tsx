@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getAllTags, getPostsByTagWithPagination } from '@/lib/api';
 import TagContent from '@/components/tags/TagContent';
 import { notFound } from 'next/navigation';
+import { decodeTagFromSlug, encodeTagToSlug } from '@/lib/tag-url';
 
 type Props = {
   params: Promise<{ tag: string; page: string }>;
@@ -16,7 +17,7 @@ export async function generateStaticParams() {
     const { totalPages } = await getPostsByTagWithPagination(tag.name, 1);
     for (let page = 2; page <= totalPages; page++) {
       params.push({ 
-        tag: tag.name,
+        tag: encodeTagToSlug(tag.name),
         page: page.toString(),
       });
     }
@@ -27,7 +28,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag, page } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const decodedTag = decodeTagFromSlug(tag);
   
   return {
     title: `#${decodedTag} (第 ${page} 页) - Elecmonkey的小花园`,
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TagPaginationPage({ params }: Props) {
   const { tag, page } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const decodedTag = decodeTagFromSlug(tag);
   const currentPage = parseInt(page);
   
   if (isNaN(currentPage) || currentPage < 2) {
@@ -52,7 +53,8 @@ export default async function TagPaginationPage({ params }: Props) {
   
   return (
     <TagContent 
-      tag={tag}
+      tag={decodedTag}
+      tagSlug={tag}
       currentPage={currentPage}
       posts={posts}
       totalPosts={totalPosts}

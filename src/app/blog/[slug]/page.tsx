@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { getTagPath } from '@/lib/tag-url';
 import { getAllPostIds, getPostById } from '@/lib/api';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
@@ -94,7 +95,7 @@ export default async function BlogPost({ params }: Props) {
               {post.tags.map((tag: string) => (
                 <Link
                   key={tag}
-                  href={`/tags/${encodeURIComponent(tag)}`}
+                  href={getTagPath(tag)}
                   className="bg-muted hover:bg-muted/80 text-muted-foreground px-2 py-1 rounded-md text-xs transition-colors no-underline"
                   target="_blank"
                   rel="noopener noreferrer"

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getAllPostIds, getAllTags, getAllMonths, getPostById } from '@/lib/api'
+import { getTagPath } from '@/lib/tag-url'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.elecmonkey.com'
@@ -32,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 获取所有标签
   const tags = await getAllTags()
   const tagEntries = tags.map((tag) => ({
-    url: `${baseUrl}/tags/${encodeURIComponent(tag.name)}`,
+    url: `${baseUrl}${getTagPath(tag.name)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.5,

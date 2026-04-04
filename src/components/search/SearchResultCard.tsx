@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getTagPath } from '@/lib/tag-url';
 import type { SearchResultItem } from '@/lib/api';
 
 interface SearchResultCardProps {
@@ -111,7 +112,7 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
           return (
             <Link
               key={tag}
-              href={`/tags/${encodeURIComponent(tag)}`}
+              href={getTagPath(tag)}
               className={`${
                 isMatched 
                   ? 'bg-highlight-red text-red-800' 

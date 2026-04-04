@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { TagCount } from '@/lib/api';
+import { getTagPath } from '@/lib/tag-url';
 
 interface TagListProps {
   tags: TagCount[];
@@ -18,7 +19,7 @@ export default function TagList({ tags }: TagListProps) {
       {sortedTags.map((tag) => (
         <Link
           key={tag.name}
-          href={`/tags/${encodeURIComponent(tag.name)}`}
+          href={getTagPath(tag.name)}
           className="relative group"
         >
           {/* 底层卡片 */}

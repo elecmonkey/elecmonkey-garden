@@ -8,15 +8,15 @@ import PageContainer from '@/components/layout/PageContainer';
 
 interface Props {
   tag: string;
+  tagSlug: string;
   currentPage: number;
   posts: PostData[];
   totalPosts: number;
   totalPages: number;
 }
 
-export default function TagContent({ tag, currentPage, posts, totalPosts, totalPages }: Props) {
-  const decodedTag = decodeURIComponent(tag);
-  const basePath = `/tags/${tag}`;
+export default function TagContent({ tag, tagSlug, currentPage, posts, totalPosts, totalPages }: Props) {
+  const basePath = `/tags/${tagSlug}`;
 
   return (
     <PageContainer>
@@ -29,7 +29,7 @@ export default function TagContent({ tag, currentPage, posts, totalPosts, totalP
           <h1 className="text-3xl font-bold flex flex-wrap items-center whitespace-nowrap">
             <div className="flex items-center whitespace-nowrap">
               <span className="mr-2 text-muted-foreground">#</span>
-              {decodedTag}
+              {tag}
             </div>
             <span className="ml-3 text-lg font-normal text-gray-500 whitespace-nowrap">({totalPosts} 篇文章)</span>
           </h1>

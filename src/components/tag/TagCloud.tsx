@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { TagIcon } from 'lucide-react'
+import { getTagPath } from '@/lib/tag-url'
 
 interface TagCount {
   name: string
@@ -58,7 +59,7 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
     <div className="w-full">
       <div className="flex flex-wrap gap-2 justify-center items-center">
         {shuffledTags.map((tag, index) => (
-          <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`} className="group select-none">
+          <Link key={tag.name} href={getTagPath(tag.name)} className="group select-none">
             <div
               className={`tag-color-${index % 8} px-2.5 py-1.5 transition-all duration-200`}
               style={{

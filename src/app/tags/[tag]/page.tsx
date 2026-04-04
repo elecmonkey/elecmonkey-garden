@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getAllTags, getPostsByTagWithPagination } from '@/lib/api';
 import TagContent from '@/components/tags/TagContent';
 import { notFound } from 'next/navigation';
+import { decodeTagFromSlug, encodeTagToSlug } from '@/lib/tag-url';
 
 type Props = {
   params: Promise<{ tag: string }>;
@@ -11,14 +12,14 @@ type Props = {
 export async function generateStaticParams() {
   const tags = await getAllTags();
   return tags.map((tag) => ({
-    tag: tag.name,
+    tag: encodeTagToSlug(tag.name),
   }));
 }
 
 // 为每个标签页生成元数据
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const decodedTag = decodeTagFromSlug(tag);
   
   return {
     title: `#${decodedTag} - Elecmonkey的小花园`,
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TagPage({ params }: Props) {
   const { tag } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const decodedTag = decodeTagFromSlug(tag);
   const currentPage = 1;
   
   const { posts, totalPosts, totalPages } = await getPostsByTagWithPagination(decodedTag, currentPage);
@@ -39,7 +40,8 @@ export default async function TagPage({ params }: Props) {
   
   return (
     <TagContent 
-      tag={tag}
+      tag={decodedTag}
+      tagSlug={tag}
       currentPage={currentPage}
       posts={posts}
       totalPosts={totalPosts}
