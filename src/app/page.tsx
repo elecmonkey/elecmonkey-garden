@@ -40,6 +40,8 @@ export default async function Home() {
                   alt="EM" 
                   width={200} 
                   height={200}
+                  priority
+                  loading="eager"
                   className="w-[100%] h-[100%] object-cover"
                 />
               </div>
