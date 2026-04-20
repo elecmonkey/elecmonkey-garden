@@ -56,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
       >
