@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/api';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
+import { transphereArticles } from '@/lib/transphere';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // 获取所有文章并只显示最近的5篇
+  // 获取所有文章并只显示最近的8篇
   const allPosts = await getAllPosts();
-  const recentPosts = allPosts.slice(0, 5);
-  
+  const recentPosts = allPosts.slice(0, 8);
+
   // 获取所有标签
   const tags = await getAllTags();
   
@@ -168,6 +169,45 @@ export default async function Home() {
                 </Link>
               </div>
               <TagCloud tags={tags} limit={18} />
+            </div>
+
+            {/* 技术之外 */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-semibold">技术之外</h3>
+                <a
+                  href="https://transphere.elecmonkey.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline text-sm flex items-center gap-1"
+                >
+                  更多
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <ul className="space-y-2">
+                {transphereArticles.map((article) => (
+                  <li key={article.url}>
+                    <a
+                      href={article.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group text-sm text-muted-foreground hover:text-primary transition-colors leading-relaxed"
+                    >
+                      <span className="text-xs text-muted-foreground tabular-nums">{article.date}</span>
+                      <span className="mx-1.5 text-muted-foreground">·</span>
+                      <span className="group-hover:underline text-foreground group-hover:text-primary transition-colors">
+                        {article.title}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="inline-block h-3.5 w-3.5 ml-0.5 align-text-top" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </aside>
