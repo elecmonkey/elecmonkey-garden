@@ -173,6 +173,23 @@ blockquote {
   border-radius: var(--radius);
 }
 
+/* 避免引用块内首尾段落叠加额外上下留白 */
+blockquote > p:first-child {
+  margin-top: 0;
+  padding-top: 5px;
+}
+
+blockquote > p:last-child {
+  margin-bottom: 0;
+  padding-bottom: 5px;
+}
+
+/* 引用中嵌套引用时，缩小上下间距 */
+.markdown-content blockquote blockquote {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 /* 图片样式 */
 img {
   border-radius: var(--radius);
