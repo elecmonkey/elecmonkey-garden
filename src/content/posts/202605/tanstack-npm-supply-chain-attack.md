@@ -1,0 +1,73 @@
+---
+title: TanStack 投毒事件复盘"
+date: "2026-05-12"
+description: "供应链安全的噩梦升级：不是 token 泄漏，不是账号被盗，是 CI 流水线'合法地'发布了恶意包"
+tags: ["npm", "pnpm", "Web 安全", "CI/CD", "供应链安全"]
+author: "Elecmonkey"
+---
+
+## 事情概述
+
+UTC 时间 2026 年 5 月 11 日，大量带毒 `@tanstack/*` 包被发布到了 npm 上，42 个包、84 个恶意版本，持续了大约 6 分钟。波及 `@tanstack/react-query`、`@tanstack/router`、`@tanstack/table` 等 Tanstack 所有核心生态包。
+
+2024年，Rspack 核心包被投毒攻击，起因是有发布权限的维护者 token 被盗。2025年，chalk、debug 等一批知名工具库被投毒，调查结果是一名维护者误授权了 npm 账号 2FA reset，被钓鱼攻击盗取了账号。2026年3月 —— 由于我很久不更新了这甚至就是我的上上篇博客 [Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思](https://www.elecmonkey.com/blog/axios-xhr-and-fetch) —— Axios 作者的 PC 被以社会工程手段植入（说人话：骗他安装）了恶意软件。
+
+本次事件最大的不同似乎是**攻击者没有偷到任何 npm token**。这些恶意版本是 TanStack 自己的官方 CI 发布流水线“合法地”发上 npm 的。Trusted Publishing、GitHub OIDC、SLSA provenance，在 npm 服务器看起来，这些东西全都合法，这不是在 npm 侧继续增强安全模型就能解决的问题。我们过去两年在 npm 生态里反复强调的 Trusted Publishing 替代手动 token、验证 provenance 等措施，都是在增强 npm 源侧的安全模型，在这次攻击面前就统统失效了。
+
+## 攻击链路复盘
+
+这部分基本翻译总结一下 [Snyk: TanStack npm Packages Hit by Mini Shai-Hulud](https://snyk.io/blog/tanstack-npm-packages-compromised/)
+
+
+### 第一步：fork PR + `pull_request_target`
+
+攻击者 fork 了 `TanStack/router`，把 fork 改名成看起来像别的项目的名字 `zblgg/configuration`，降低被注意到的概率，然后提交恶意代码并打开 PR。
+
+这个 PR 触发了 `bundle-size.yml` 里的 `pull_request_target` workflow。这里的问题是致命的：`pull_request_target` 运行在**目标仓库上下文**，拥有主仓库的权限和 cache 作用域。而这个 workflow 又 checkout 了 PR 里的代码并执行了 `pnpm install` 和 build——等于用主仓库的权限，跑了攻击者 fork 里的代码。
+
+### 第二步：污染 GitHub Actions cache 里的 pnpm store
+
+pnpm 有一个全局 content-addressable store，CI 为了加速安装通常会缓存这个 store。攻击者代码在 PR workflow 里运行后，把恶意内容写进 pnpm store，并让它匹配上正式 release workflow 后面会使用的 cache key。PR workflow 结束时，`actions/cache` 的 post-step 把这份被污染的 store 保存了下来。
+
+### 第三步：伪装清理，缓存留存
+
+攻击者随后 force-push 把 PR 恢复成接近 main 的状态，关闭并删除分支。表面上 PR 没了、diff 没了、分支没了，但实际上被污染的 cache 安安静静躺在 GitHub Actions cache 里。
+
+### 第四步：正式 release workflow 恢复 poisoned cache
+
+后来维护者合并正常 PR 到 `main`，触发 `release.yml`。这个 workflow 是可信的、来自主仓库、具备 npm Trusted Publishing 所需的 OIDC 权限。但它恢复 cache 时，拿到的就是前面 PR workflow 写进去的恶意 pnpm store。
+
+### 第五步：从 runner 内存提取 OIDC token，直接发布
+
+恶意代码在可信 release runner 中执行后，不是走正常的 publish step（那个 step 甚至因为测试失败被跳过了），而是定位 `Runner.Worker` 进程，读取 Linux `/proc/.../mem`，直接从内存中提取 OIDC token，然后向 `registry.npmjs.org` 发 POST 请求发布恶意包。
+
+最终，84 个恶意版本跨 42 个包被发布。当用户执行 `npm install`/`pnpm install`/`yarn install` 时，生命周期脚本触发 payload，窃取 `.env`、GitHub token、npm token、CI/CD secrets、cloud credentials，并尝试横向传播。
+
+## 一些想法
+
+这次攻击如果说 Tanstack 自身犯下的安全错误，那就是其配置的 GitHub Actions 任务中，**CI cache 被跨信任边界复用了**。攻击者在**应该被低信任**的 PR workflow 里污染 cache，而这个 cache 竟然可以在更高信任的 release workflow 中恢复并执行。本轮事件首先当然会引发开发社区的
+
+首先，开源社区是防范 npm 供应链攻击的前沿阵地。我们每个人都是社区的一份子又接受来自社区的贡献，这种结构先天在安全性方面有其脆弱性。GitHub Actions 作为一项被开源社区重度依赖的基础设施，自然得在安全性上多做考虑，以官方身份出面去推行一些强制的安全措施或者建议性的最佳实践。
+
+其次，社区项目都可以自查有无类似的不同信任等级的缓存混用的问题。。。或者更进一步思考，除了缓存还有没有其它同样隐蔽的攻击面？
+
+> 脑子不好使，暂未想到。。
+
+![Rsbuild updates its GitHub Actions workflow yaml file](https://images.elecmonkey.com/articles/202605/rsbuild-actions-update.png)
+
+> 我眼睁睁的看着 Rstack 的项目删除了一大堆 workflow 文件。。。
+
+其次，在消费侧，有价值的项目可以在自己的更新策略上略作停顿。例如每次更新小版本，不是都一口气更到最新，而是只更新发布了三天以上的版本，这样子几乎不会有什么落后性（大部分业务项目升级依赖的频率都远低于这个数……）。最近发生的 npm 毒包时间，社区和安全研究人员的响应速度非常快，npm 安全团队也在第一时间做配合删除 Tarball。所以【略作等待】是一个很好的安全策略。
+
+以我自己最常使用的 `package.json` 版本更新工具 `taze` 为例，提供了如下参数：
+
+```bash
+taze --maturity-period 3
+```
+
+## 参考链接
+
+- [TanStack 官方事故复盘](https://tanstack.com/blog/npm-supply-chain-compromise-postmortem)
+- [Snyk: TanStack npm Packages Hit by Mini Shai-Hulud](https://snyk.io/blog/tanstack-npm-packages-compromised/)
+
+> 三天前刚提交了我到 Tanstack 生态的第一个 PR，作为 Tanstack Query 的老用户，愿 Tanstack 生态顺利。。。
