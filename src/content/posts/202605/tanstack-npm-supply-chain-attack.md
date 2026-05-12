@@ -1,7 +1,7 @@
 ---
-title: TanStack 投毒事件复盘"
+title: "TanStack npm 包被通过 CI 缓存投毒事件复盘"
 date: "2026-05-12"
-description: "供应链安全的噩梦升级：不是 token 泄漏，不是账号被盗，是 CI 流水线'合法地'发布了恶意包"
+description: "意想不到的地方没有做好不同信任等级的隔离。前端生态供应链安全任重道远。"
 tags: ["npm", "pnpm", "Web 安全", "CI/CD", "供应链安全"]
 author: "Elecmonkey"
 ---
