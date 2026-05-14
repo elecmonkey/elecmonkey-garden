@@ -132,18 +132,6 @@ export default function Navbar() {
           
           {/* 移动端菜单按钮 */}
           <div className="md:hidden flex items-center">
-            <div className="mr-2">
-              <ThemeSwitcher />
-            </div>
-            <Link 
-              href="/search"
-              className={littleCircleButtonClass}
-              aria-label="搜索"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </Link>
             <button 
               className={littleCircleButtonClass} 
               onClick={toggleMenu}
@@ -159,7 +147,7 @@ export default function Navbar() {
         {/* 移动端下拉菜单 */}
         <div 
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen ? 'max-h-48 opacity-100 mt-2' : 'max-h-0 opacity-0'
+            isMenuOpen ? 'max-h-72 opacity-100 mt-2' : 'max-h-0 opacity-0'
           }`}
         >
           <div className="flex flex-col space-y-1 py-2">
@@ -189,6 +177,18 @@ export default function Navbar() {
             >
               关于我
             </Link>
+            <div className="flex items-center gap-2 px-3 py-2">
+              <Link 
+                href="/search"
+                className={`${getMobileLinkClassName("/search")} flex items-center justify-center`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </Link>
+              <ThemeSwitcher />
+            </div>
           </div>
         </div>
       </div>
