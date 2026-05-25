@@ -33,7 +33,8 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "shiki": "^4.0.2"
+    "shiki": "^4.0.2",
+    "@elecmonkey/garden-content-compiler": "workspace:*"
   },
   "devDependencies": {
     "@rsbuild/core": "^2.0.7",

@@ -54,3 +54,6 @@ git*.txt
 /packages/*/out/
 /packages/*/dist/
 /packages/*/build/
+
+# rust
+/target/
