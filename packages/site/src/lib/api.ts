@@ -70,14 +70,14 @@ function getSourcePosts(options: { includeDrafts?: boolean; includeHidden?: bool
 }
 
 // 获取所有博客文章数据（默认不包含草稿和隐藏文章）
-export async function getAllPosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): Promise<PostData[]> {
+export function getAllPosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
   return sortPosts(getSourcePosts(options));
 }
 
 // 获取所有标签及其计数
-export async function getAllTags(): Promise<TagCount[]> {
+export function getAllTags(): TagCount[] {
   // 只获取非草稿、非隐藏文章的标签
-  const posts = await getAllPosts({ includeDrafts: false, includeHidden: false });
+  const posts = getAllPosts({ includeDrafts: false, includeHidden: false });
   const tagCount: Record<string, number> = {};
   
   // 统计每个标签出现的次数
@@ -100,9 +100,9 @@ export async function getAllTags(): Promise<TagCount[]> {
 }
 
 // 根据标签名获取相关文章
-export async function getPostsByTag(tagName: string): Promise<PostData[]> {
+export function getPostsByTag(tagName: string): PostData[] {
   // 只获取非草稿、非隐藏文章
-  const allPosts = await getAllPosts({ includeDrafts: false, includeHidden: false });
+  const allPosts = getAllPosts({ includeDrafts: false, includeHidden: false });
   return allPosts.filter(post => post.tags.includes(tagName));
 }
 
@@ -130,7 +130,7 @@ function calculateTagSizes(tags: TagCount[]): TagCount[] {
 }
 
 // 获取所有可能的文章 ID 和它们所在的月份文件夹
-export async function getAllPostIds() {
+export function getAllPostIds() {
   return generatedPosts.map((post) => ({
     params: {
       slug: post.id,
@@ -140,7 +140,7 @@ export async function getAllPostIds() {
 }
 
 // 根据 ID 和月份文件夹获取文章数据
-export async function getPostById(id: string): Promise<PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } }> {
+export function getPostById(id: string): PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } } {
   const currentPost = generatedPosts.find((post) => post.id === id);
 
   if (!currentPost) {
@@ -175,9 +175,9 @@ export async function getPostById(id: string): Promise<PostData & { prevPost?: {
 }
 
 // 获取所有月份及其文章数量
-export async function getAllMonths(): Promise<MonthData[]> {
+export function getAllMonths(): MonthData[] {
   // 只统计非草稿、非隐藏文章的月份
-  const posts = await getAllPosts({ includeDrafts: false, includeHidden: false });
+  const posts = getAllPosts({ includeDrafts: false, includeHidden: false });
   const monthCount: Record<string, number> = {};
   
   // 统计每个月份的文章数量
@@ -211,15 +211,15 @@ export async function getAllMonths(): Promise<MonthData[]> {
 }
 
 // 根据月份获取相关文章
-export async function getPostsByMonth(month: string): Promise<PostData[]> {
+export function getPostsByMonth(month: string): PostData[] {
   const posts = generatedPublicPosts.filter((post) => post.monthFolder === month);
   return sortPosts(posts);
 }
 
 // 获取分页的文章列表
-export async function getAllPostsWithPagination(page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+export function getAllPostsWithPagination(page: number = 1, pageSize: number = 10): PaginatedPosts {
   // 只获取非草稿、非隐藏文章
-  const allPosts = await getAllPosts({ includeDrafts: false, includeHidden: false });
+  const allPosts = getAllPosts({ includeDrafts: false, includeHidden: false });
   const totalPosts = allPosts.length;
   
   // 如果文章总数少于或等于每页数量，则不分页
@@ -253,9 +253,9 @@ export async function getAllPostsWithPagination(page: number = 1, pageSize: numb
 }
 
 // 根据标签获取分页的文章列表
-export async function getPostsByTagWithPagination(tagName: string, page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+export function getPostsByTagWithPagination(tagName: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
   // 获取包含该标签的所有非草稿、非隐藏文章
-  const allPosts = await getPostsByTag(tagName);
+  const allPosts = getPostsByTag(tagName);
   const totalPosts = allPosts.length;
   
   // 如果文章总数少于或等于每页数量，则不分页
@@ -289,9 +289,9 @@ export async function getPostsByTagWithPagination(tagName: string, page: number 
 }
 
 // 根据月份获取分页的文章列表
-export async function getPostsByMonthWithPagination(month: string, page: number = 1, pageSize: number = 10): Promise<PaginatedPosts> {
+export function getPostsByMonthWithPagination(month: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
   // 获取该月份的所有非草稿、非隐藏文章
-  const allPosts = await getPostsByMonth(month);
+  const allPosts = getPostsByMonth(month);
   const totalPosts = allPosts.length;
   
   // 如果文章总数少于或等于每页数量，则不分页
@@ -325,13 +325,13 @@ export async function getPostsByMonthWithPagination(month: string, page: number 
 }
 
 // 搜索文章
-export async function searchPosts(keyword: string): Promise<SearchResultItem[]> {
+export function searchPosts(keyword: string): SearchResultItem[] {
   if (!keyword.trim()) {
     return [];
   }
   
   // 只搜索非草稿、非隐藏文章
-  const allPosts = await getAllPosts({ includeDrafts: false, includeHidden: false });
+  const allPosts = getAllPosts({ includeDrafts: false, includeHidden: false });
   
   // 转换关键词为小写，用于不区分大小写的搜索
   const normalizedKeyword = keyword.toLowerCase();
@@ -442,15 +442,15 @@ export async function searchPosts(keyword: string): Promise<SearchResultItem[]> 
 }
 
 // 搜索文章并分页
-export async function searchPostsWithPagination(keyword: string, page: number = 1, pageSize: number = 10): Promise<{
+export function searchPostsWithPagination(keyword: string, page: number = 1, pageSize: number = 10): {
   posts: SearchResultItem[];
   totalPosts: number;
   totalPages: number;
   currentPage: number;
   pageSize: number;
-}> {
+} {
   // 获取搜索结果
-  const allResults = await searchPosts(keyword);
+  const allResults = searchPosts(keyword);
   const totalPosts = allResults.length;
   
   // 如果搜索结果总数少于或等于每页数量，则不分页
