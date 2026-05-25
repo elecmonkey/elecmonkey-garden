@@ -39,6 +39,10 @@ async function writeStaticPage(distDir: string, template: string, pathname: stri
 
 async function copyStaticAssets(distDir: string): Promise<void> {
   await copyFile(path.join('src', 'app', 'icon.png'), path.join(distDir, 'icon.png'));
+
+  const searchDir = path.join(distDir, 'static', 'search');
+  await mkdir(searchDir, { recursive: true });
+  await copyFile(path.join('src', 'generated', 'search-index.json'), path.join(searchDir, 'index.json'));
 }
 
 async function writeRobotsTxt(distDir: string): Promise<void> {
