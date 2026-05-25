@@ -33,6 +33,8 @@ type MetadataLike = {
   robots?: RobotsValue;
 };
 
+const siteUrl = 'https://www.elecmonkey.com';
+
 const rootMetadata: MetadataLike = {
   title: 'Elecmonkey的小花园',
   description: 'Elecmonkey的小花园是一个专注于前端技术的技术博客，分享JavaScript、TypeScript、React、Vue、Next.js、Vite等前端开发技术、工程化实践、性能优化和最佳实践经验。',
@@ -41,7 +43,7 @@ const rootMetadata: MetadataLike = {
   creator: 'Elecmonkey',
   publisher: 'Elecmonkey',
   icons: '/icon.png',
-  metadataBase: new URL('https://www.elecmonkey.com'),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
@@ -105,6 +107,17 @@ function mergeMetadata(base: MetadataLike, route: MetadataLike | null | undefine
 function getTitle(metadata: MetadataLike): string | undefined {
   if (typeof metadata.title === 'string') return metadata.title;
   return metadata.title?.default;
+}
+
+function normalizeCanonicalPathname(pathname: string): string {
+  const normalized = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  const withoutTrailingSlash = normalized.replace(/\/+$/g, '');
+  return withoutTrailingSlash || '/';
+}
+
+function getCanonicalUrl(pathname: string): string {
+  const normalized = normalizeCanonicalPathname(pathname);
+  return normalized === '/' ? siteUrl : `${siteUrl}${normalized}`;
 }
 
 function getUrlValue(value: unknown, metadata: MetadataLike): string | undefined {
@@ -207,8 +220,12 @@ async function getRouteMetadata(pathname: string): Promise<MetadataLike> {
 }
 
 export async function renderMetadataTags(pathname: string): Promise<string> {
-  const metadata = mergeMetadata(rootMetadata, await getRouteMetadata(pathname));
+  const routeMetadata = await getRouteMetadata(pathname);
+  const metadata = mergeMetadata(rootMetadata, routeMetadata);
+  const { route } = getRouteParams(pathname);
   const title = getTitle(metadata);
+  const routeTitle = getTitle(routeMetadata);
+  const canonicalUrl = getCanonicalUrl(pathname);
   const tags: string[] = [];
 
   if (title) tags.push(`<title>${escapeHtml(title)}</title>`);
@@ -224,21 +241,31 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
   if (googleBot) tags.push(metaTag('googlebot', googleBot));
 
   const openGraph = metadata.openGraph ?? {};
-  if (openGraph.type) tags.push(propertyTag('og:type', openGraph.type));
+  const routeOpenGraph = routeMetadata.openGraph ?? {};
+  const ogTitle = routeOpenGraph.title ?? routeTitle ?? openGraph.title ?? title;
+  const ogDescription = routeOpenGraph.description ?? routeMetadata.description ?? metadata.description ?? openGraph.description;
+  const ogUrl = getUrlValue(routeOpenGraph.url, metadata) ?? canonicalUrl;
+  const ogType = routeOpenGraph.type ?? (route === 'blog-post' ? 'article' : openGraph.type);
+
+  if (ogType) tags.push(propertyTag('og:type', ogType));
   if (openGraph.locale) tags.push(propertyTag('og:locale', openGraph.locale));
   if (openGraph.siteName) tags.push(propertyTag('og:site_name', openGraph.siteName));
-  tags.push(propertyTag('og:title', openGraph.title ?? title));
-  tags.push(propertyTag('og:description', openGraph.description ?? metadata.description));
-  if (openGraph.url) tags.push(propertyTag('og:url', getUrlValue(openGraph.url, metadata)));
-  const ogImage = getFirstImage(metadata, openGraph.images);
+  if (ogTitle) tags.push(propertyTag('og:title', ogTitle));
+  if (ogDescription) tags.push(propertyTag('og:description', ogDescription));
+  tags.push(propertyTag('og:url', ogUrl));
+  const ogImage = getFirstImage(metadata, routeOpenGraph.images ?? openGraph.images);
   if (ogImage) tags.push(propertyTag('og:image', ogImage));
 
   const twitter = metadata.twitter ?? {};
+  const routeTwitter = routeMetadata.twitter ?? {};
+  const twitterTitle = routeTwitter.title ?? routeTitle ?? twitter.title ?? title;
+  const twitterDescription = routeTwitter.description ?? routeMetadata.description ?? metadata.description ?? twitter.description;
+
   if (twitter.card) tags.push(metaTag('twitter:card', twitter.card));
-  tags.push(metaTag('twitter:title', twitter.title ?? title));
-  tags.push(metaTag('twitter:description', twitter.description ?? metadata.description));
-  const twitterImage = getFirstImage(metadata, twitter.images);
+  if (twitterTitle) tags.push(metaTag('twitter:title', twitterTitle));
+  if (twitterDescription) tags.push(metaTag('twitter:description', twitterDescription));
+  const twitterImage = getFirstImage(metadata, routeTwitter.images ?? twitter.images);
   if (twitterImage) tags.push(metaTag('twitter:image', twitterImage));
 
-  return tags.filter((tag) => !tag.includes('content="undefined"')).join('\n    ');
+  return tags.join('\n    ');
 }
