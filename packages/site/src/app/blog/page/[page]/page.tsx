@@ -3,12 +3,12 @@ import BlogIndexContent from '@/components/blog/BlogIndexContent';
 import type { Metadata } from 'next';
 
 interface Props {
-  params: Promise<{ page: string }>;
+  params: { page: string };
 }
 
 // 预生成所有分页的静态路径
 export async function generateStaticParams() {
-  const { totalPages } = await getAllPostsWithPagination(1);
+  const { totalPages } = getAllPostsWithPagination(1);
   const params = [];
   
   // 从第2页开始生成
@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { page } = await params;
+  const { page } = params;
   
   return {
     title: `所有文章 (第 ${page} 页) - Elecmonkey的小花园`,
@@ -30,15 +30,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function BlogPaginationPage({ params }: Props) {
-  const { page } = await params;
+export default function BlogPaginationPage({ params }: Props) {
+  const { page } = params;
   const currentPage = parseInt(page);
   
   if (isNaN(currentPage) || currentPage < 2) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPages } = await getAllPostsWithPagination(currentPage);
+  const { posts, totalPages } = getAllPostsWithPagination(currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });

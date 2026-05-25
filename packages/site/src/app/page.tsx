@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Home() {
+export default function Home() {
   // 获取所有文章并只显示最近的8篇
-  const allPosts = await getAllPosts();
+  const allPosts = getAllPosts();
   const recentPosts = allPosts.slice(0, 8);
 
   // 获取所有标签
-  const tags = await getAllTags();
+  const tags = getAllTags();
   
   // 计算统计信息
   const totalPosts = allPosts.length;

@@ -3,16 +3,16 @@ import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
 
 type Props = {
-  params: Promise<{ month: string; page: string }>;
+  params: { month: string; page: string };
 };
 
 // 预生成所有分页的静态路径
 export async function generateStaticParams() {
-  const months = await getAllMonths();
+  const months = getAllMonths();
   const params = [];
   
   for (const month of months) {
-    const { totalPages } = await getPostsByMonthWithPagination(month.id, 1);
+    const { totalPages } = getPostsByMonthWithPagination(month.id, 1);
     // 从第2页开始生成
     for (let page = 2; page <= totalPages; page++) {
       params.push({ 
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { month, page } = await params;
+  const { month, page } = params;
   const year = month.substring(0, 4);
   const monthNum = month.substring(4, 6);
   const displayName = `${year}年${monthNum}月`;
@@ -37,15 +37,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function MonthArchivePaginationPage({ params }: Props) {
-  const { month, page } = await params;
+export default function MonthArchivePaginationPage({ params }: Props) {
+  const { month, page } = params;
   const currentPage = parseInt(page);
   
   if (isNaN(currentPage) || currentPage < 2) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPosts, totalPages } = await getPostsByMonthWithPagination(month, currentPage);
+  const { posts, totalPosts, totalPages } = getPostsByMonthWithPagination(month, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });

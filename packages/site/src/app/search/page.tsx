@@ -11,16 +11,16 @@ import ScrollToContent from '@/components/ScrollToContent';
 export const dynamic = 'force-dynamic';
 
 interface SearchPageProps {
-  searchParams: Promise<{ 
+  searchParams: {
     keyword?: string | string[]; 
     page?: string | string[];
     [key: string]: string | string[] | undefined;
-  }>;
+  };
 }
 
 // 动态生成元数据
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
-  const params = await searchParams;
+  const params = searchParams;
   const keyword = typeof params.keyword === 'string' ? params.keyword : '';
   
   return {
@@ -29,8 +29,8 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   };
 }
 
-export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const params = await searchParams;
+export default function SearchPage({ searchParams }: SearchPageProps) {
+  const params = searchParams;
   const keyword = typeof params.keyword === 'string' ? params.keyword : '';
   const currentPage = Number(params.page) || 1;
   
@@ -50,7 +50,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   }
   
   // 获取搜索结果
-  const { posts, totalPosts, totalPages } = await searchPostsWithPagination(keyword, currentPage);
+  const { posts, totalPosts, totalPages } = searchPostsWithPagination(keyword, currentPage);
   
   // 如果页码超出范围且总页数大于0，返回404
   if (currentPage > totalPages && totalPages > 0) {

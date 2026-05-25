@@ -7,21 +7,21 @@ import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
   // 预生成普通文章和隐藏文章
-  const posts = await getAllPostIds();
+  const posts = getAllPostIds();
   return posts.map((post) => ({
     slug: post.params.slug,
   }));
 }
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 // 动态生成元数据
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   try {
-    const post = await getPostById(slug);
+    const post = getPostById(slug);
     
     return {
       title: `${post.title} - Elecmonkey的小花园`,
@@ -37,23 +37,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // 异步组件
-export default async function BlogPost({ params }: Props) {
-  const { slug } = await params;
+export default function BlogPost({ params }: Props) {
+  const { slug } = params;
   let post;
 
   try {
     // 获取文章数据
-    post = await getPostById(slug);
+    post = getPostById(slug);
   } catch (error) {
     console.error('博客文章获取失败:', error);
     throw new Response('Not Found', { status: 404 });
   }
 
-  let markdownNode = <MarkdownContent content={post.content} />;
-  if (process.env.NODE_ENV === 'development') {
-    const DevLiveMarkdownContent = (await import('@/components/article/md/DevLiveMarkdownContent')).default;
-    markdownNode = <DevLiveMarkdownContent slug={slug} initialContent={post.content} />;
-  }
+  const markdownNode = <MarkdownContent content={post.content} />;
     
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">

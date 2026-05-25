@@ -4,16 +4,16 @@ import TagContent from '@/components/tags/TagContent';
 import { decodeTagFromSlug, encodeTagToSlug } from '@/lib/tag-url';
 
 type Props = {
-  params: Promise<{ tag: string; page: string }>;
+  params: { tag: string; page: string };
 };
 
 // 预生成所有分页的静态路径
 export async function generateStaticParams() {
-  const tags = await getAllTags();
+  const tags = getAllTags();
   const params = [];
   
   for (const tag of tags) {
-    const { totalPages } = await getPostsByTagWithPagination(tag.name, 1);
+    const { totalPages } = getPostsByTagWithPagination(tag.name, 1);
     for (let page = 2; page <= totalPages; page++) {
       params.push({ 
         tag: encodeTagToSlug(tag.name),
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { tag, page } = await params;
+  const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   
   return {
@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function TagPaginationPage({ params }: Props) {
-  const { tag, page } = await params;
+export default function TagPaginationPage({ params }: Props) {
+  const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const currentPage = parseInt(page);
   
@@ -44,7 +44,7 @@ export default async function TagPaginationPage({ params }: Props) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPosts, totalPages } = await getPostsByTagWithPagination(decodedTag, currentPage);
+  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(decodedTag, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });

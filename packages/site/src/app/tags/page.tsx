@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: '浏览所有博客标签和主题',
 };
 
-export default async function TagsIndexPage() {
-  const tags = await getAllTags();
+export default function TagsIndexPage() {
+  const tags = getAllTags();
   
   return (
     <PageContainer>

@@ -1,6 +1,4 @@
 import { useParams, useSearchParams } from 'react-router';
-import { createAsyncComponent } from '@/lib/async-component';
-import PageContainer from '@/components/layout/PageContainer';
 import HomePage from '@/app/page';
 import AboutPage from '@/app/about/page';
 import BlogPage from '@/app/blog/page';
@@ -15,59 +13,63 @@ import MonthArchivePaginationPage from '@/app/archive/[month]/page/[page]/page';
 import SearchPage from '@/app/search/page';
 import NotFoundPage from '@/app/not-found';
 
-const LoadingFallback = () => (
-  <PageContainer>
-    <p className="text-muted-foreground">加载中...</p>
-  </PageContainer>
-);
+export function HomeRoute() {
+  return <HomePage />;
+}
 
-export const HomeRoute = createAsyncComponent(() => HomePage());
-export const AboutRoute = createAsyncComponent(() => Promise.resolve(<AboutPage />));
-export const BlogIndexRoute = createAsyncComponent(() => BlogPage());
-export const TagsIndexRoute = createAsyncComponent(() => TagsIndexPage());
-export const ArchiveIndexRoute = createAsyncComponent(() => ArchiveIndexPage());
-export const NotFoundRoute = createAsyncComponent(() => Promise.resolve(<NotFoundPage />));
+export function AboutRoute() {
+  return <AboutPage />;
+}
+
+export function BlogIndexRoute() {
+  return <BlogPage />;
+}
+
+export function TagsIndexRoute() {
+  return <TagsIndexPage />;
+}
+
+export function ArchiveIndexRoute() {
+  return <ArchiveIndexPage />;
+}
+
+export function NotFoundRoute() {
+  return <NotFoundPage />;
+}
 
 export function BlogPaginationRoute() {
   const { page = '1' } = useParams();
-  const Component = createAsyncComponent(() => BlogPaginationPage({ params: Promise.resolve({ page }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <BlogPaginationPage params={{ page }} />;
 }
 
 export function BlogPostRoute() {
   const { slug = '' } = useParams();
-  const Component = createAsyncComponent(() => BlogPostPage({ params: Promise.resolve({ slug }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <BlogPostPage params={{ slug }} />;
 }
 
 export function TagRoute() {
   const { tag = '' } = useParams();
-  const Component = createAsyncComponent(() => TagPage({ params: Promise.resolve({ tag }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <TagPage params={{ tag }} />;
 }
 
 export function TagPaginationRoute() {
   const { tag = '', page = '1' } = useParams();
-  const Component = createAsyncComponent(() => TagPaginationPage({ params: Promise.resolve({ tag, page }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <TagPaginationPage params={{ tag, page }} />;
 }
 
 export function MonthArchiveRoute() {
   const { month = '' } = useParams();
-  const Component = createAsyncComponent(() => MonthArchivePage({ params: Promise.resolve({ month }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <MonthArchivePage params={{ month }} />;
 }
 
 export function MonthArchivePaginationRoute() {
   const { month = '', page = '1' } = useParams();
-  const Component = createAsyncComponent(() => MonthArchivePaginationPage({ params: Promise.resolve({ month, page }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <MonthArchivePaginationPage params={{ month, page }} />;
 }
 
 export function SearchRoute() {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('keyword') ?? undefined;
   const page = searchParams.get('page') ?? undefined;
-  const Component = createAsyncComponent(() => SearchPage({ searchParams: Promise.resolve({ keyword, page }) }));
-  return <Component fallback={<LoadingFallback />} />;
+  return <SearchPage searchParams={{ keyword, page }} />;
 }

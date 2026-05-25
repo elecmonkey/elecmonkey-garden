@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: '按月份浏览所有博客文章',
 };
 
-export default async function ArchiveIndexPage() {
-  const months = await getAllMonths();
+export default function ArchiveIndexPage() {
+  const months = getAllMonths();
   
   return (
     <PageContainer>
