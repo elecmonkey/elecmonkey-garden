@@ -41,6 +41,7 @@ export default defineConfig({
       },
       output: {
         target: 'node',
+        autoExternal: true,
         distPath: {
           root: '.rsbuild/ssg',
         },
