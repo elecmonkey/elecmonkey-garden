@@ -8,7 +8,7 @@ import rehypeKatex from 'rehype-katex';
 import FileDownloadRenderer from '../file-downloader/FileDownloadRenderer';
 
 export default function MarkdownContent({ content }: { content: string }) {
-  const codeRenderer = ({ className, children, ...props }: CodeRendererProps) => {
+  const codeRenderer = ({ className, children, node: _node, ...props }: CodeRendererProps) => {
     const match = /language-(\w+)(?:{([^}]+)})?/.exec(className || '');
     
     if (match && match[1] === 'file') {
@@ -93,7 +93,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           ol: ({ children }) => <ol className="list-decimal pl-6 my-4 text-lg">{children}</ol>,
           
           // 自定义列表项渲染器
-          li: ({ children, className, ...props }) => {
+          li: ({ children, className, node: _node, ...props }) => {
             // 判断是否为任务列表项
             const isTaskItem = className && className.includes('task-list-item');
             
@@ -110,7 +110,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           },
           
           // 自定义任务列表复选框
-          input: ({ type, checked, readOnly, ...props }) => {
+          input: ({ type, checked, readOnly, node: _node, ...props }) => {
             if (type === 'checkbox') {
               return (
                 <span 
@@ -200,7 +200,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           ),
           
           // 添加图片样式 - 使用 Next.js Image 组件优化图片
-          img: ({ src, alt, width, height, ...props }) => {
+          img: ({ src, alt, width, height, node: _node, ...props }) => {
             // 类型守卫：确保 src 存在且为字符串
             if (!src || typeof src !== 'string') {
               console.warn('Image src is missing or not a string');

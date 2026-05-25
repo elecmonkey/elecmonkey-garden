@@ -33,7 +33,7 @@ function CodeBlockFallback({ language, code }: { language: string; code: string 
   );
 }
 
-export const CodeComponent = ({ className, children, ...props }: CodeRendererProps) => {
+export const CodeComponent = ({ className, children, node: _node, ...props }: CodeRendererProps) => {
   // 解析语言和行号范围
   const match = /language-(\w+)(?:{([^}]+)})?/.exec(className || '');
 
