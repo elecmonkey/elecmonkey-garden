@@ -3,10 +3,10 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "rsbuild dev",
+    "dev": "rsbuild dev --environment web",
     "build": "pnpm run build:compiler && pnpm run content && rsbuild build && node .rsbuild/ssg/build.js",
-    "start": "rsbuild preview",
-    "preview": "rsbuild preview",
+    "start": "rsbuild preview --environment web",
+    "preview": "rsbuild preview --environment web",
     "lint": "eslint .",
     "type-check": "next typegen & tsc -b --noEmit",
     "content": "node scripts/generate-content.mjs",
