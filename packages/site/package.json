@@ -1,0 +1,47 @@
+{
+  "name": "@elecmonkey/garden-site",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack -p 3710",
+    "build": "next build",
+    "start": "next start",
+    "preview": "next start",
+    "lint": "eslint .",
+    "type-check": "next typegen & tsc -b --noEmit",
+    "content": "node -e \"console.log('content compiler is not wired yet')\""
+  },
+  "dependencies": {
+    "geist": "^1.7.0",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.16.45",
+    "lucide-react": "^1.8.0",
+    "mermaid": "^11.14.0",
+    "next": "^16.2.4",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^16.1.1",
+    "rehype-highlight": "^7.0.2",
+    "rehype-katex": "^7.0.1",
+    "rehype-pretty-code": "^0.14.3",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "shiki": "^4.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.3"
+  }
+}
