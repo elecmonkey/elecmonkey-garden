@@ -12,11 +12,12 @@ interface Heading {
 interface TableOfContentsProps {
   no_toc?: boolean;
   desktop?: boolean; // 新增：是否为桌面端固定侧栏
+  headings?: Heading[];
 }
 
 // 使用 dynamic 导入自身，实现延迟加载
-const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({ no_toc = false, desktop = false }: TableOfContentsProps) {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({ no_toc = false, desktop = false, headings: initialHeadings = [] }: TableOfContentsProps) {
+  const [headings, setHeadings] = useState<Heading[]>(initialHeadings);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,7 +31,9 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
         level: parseInt(element.tagName.charAt(1)),
       }));
     
-    setHeadings(elements);
+    if (initialHeadings.length === 0) {
+      setHeadings(elements);
+    }
 
     // 设置 Intersection Observer 来检测当前可见的标题
     const observer = new IntersectionObserver(
@@ -57,7 +60,7 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [initialHeadings]);
 
   // 如果 no_toc 为 true，则不渲染任何内容
   if (no_toc) return null;

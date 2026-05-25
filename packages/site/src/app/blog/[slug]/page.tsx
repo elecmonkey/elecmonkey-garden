@@ -160,13 +160,13 @@ export default async function BlogPost({ params }: Props) {
         {/* 右侧边栏 - 目录 */}
         <aside className="hidden lg:block lg:w-90 shrink-0">
           <div className="sticky top-22">
-            <ClientTableOfContents no_toc={post.no_toc === true} desktop={true} />
+            <ClientTableOfContents no_toc={post.no_toc === true} desktop={true} headings={post.toc} />
           </div>
         </aside>
       </div>
       
       {/* 移动端浮动按钮和侧栏 */}
-      <ClientTableOfContents no_toc={post.no_toc === true} desktop={false} />
+      <ClientTableOfContents no_toc={post.no_toc === true} desktop={false} headings={post.toc} />
     </div>
   );
 } 

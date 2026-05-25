@@ -57,3 +57,7 @@ git*.txt
 
 # rust
 /target/
+
+# generated native bindings
+/packages/content-compiler-napi/*.node
+/packages/content-compiler-napi/index.js

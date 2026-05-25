@@ -12,10 +12,17 @@ export type PostData = {
   monthFolder: string;  // 月份文件夹 (例如: "202403")
   isDraft?: boolean;    // 是否为草稿
   isHidden?: boolean;   // 是否为隐藏文章
+  toc?: TocItem[];      // SSG 预生成目录
   [key: string]: unknown;
 };
 
 // 定义标签统计类型
+export type TocItem = {
+  id: string;
+  text: string;
+  level: number;
+};
+
 export type TagCount = {
   name: string;     // 标签名称
   count: number;    // 出现次数

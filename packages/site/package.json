@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "rsbuild dev",
-    "build": "pnpm run content && rsbuild build",
+    "build": "pnpm run build:compiler && pnpm run content && rsbuild build",
     "start": "rsbuild preview",
     "preview": "rsbuild preview",
     "lint": "eslint .",
@@ -12,7 +12,8 @@
     "content": "node scripts/generate-content.mjs",
     "dev:legacy": "next dev --turbopack -p 3710",
     "build:legacy": "next build",
-    "start:legacy": "next start"
+    "start:legacy": "next start",
+    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build"
   },
   "dependencies": {
     "geist": "^1.7.0",
