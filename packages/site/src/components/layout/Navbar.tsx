@@ -1,10 +1,10 @@
 "use client";
 
 import Link from '@/components/Link';
-import Image from 'next/image';
+import Image from '@/lib/image-compat';
 import { usePathname } from '@/lib/router-compat';
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
+import dynamic from '@/lib/dynamic-compat';
 
 // 动态导入 ThemeSwitcher 以完全避免 SSR 主题相关的 hydration 问题
 const ThemeSwitcher = dynamic(() => import('@/components/ThemeSwitcher'), {

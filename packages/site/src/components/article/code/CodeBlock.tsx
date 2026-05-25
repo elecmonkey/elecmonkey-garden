@@ -4,7 +4,7 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import '@/styles/syntax-highlighter-override.css';
 import React, { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/lib/theme-compat';
 import { VueSFCBlock } from './vue-sfc/VueSFCBlock';
 import { SvelteSFCBlock } from './svelte-sfc/SvelteSFCBlock';
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "next-themes";
+import { useTheme } from '@/lib/theme-compat';
 
 export default function ThemeSwitcher() {
   const { theme, setTheme, resolvedTheme } = useTheme();

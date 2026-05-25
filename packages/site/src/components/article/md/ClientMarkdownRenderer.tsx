@@ -1,6 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import dynamic from '@/lib/dynamic-compat';
 import React from 'react';
 import { Components } from 'react-markdown';
 import CopyButton from '../code/CopyButton';

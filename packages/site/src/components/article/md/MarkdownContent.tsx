@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import { CodeComponent, CodeRendererProps } from './ClientMarkdownRenderer';
-import Image from 'next/image';
+import Image from '@/lib/image-compat';
 import React from 'react';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';

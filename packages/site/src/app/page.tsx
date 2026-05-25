@@ -4,7 +4,7 @@ import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import { transphereArticles } from '@/lib/transphere';
 import { Metadata } from 'next';
-import Image from 'next/image';
+import Image from '@/lib/image-compat';
 
 export const metadata: Metadata = {
   title: "Elecmonkey的小花园 - 存在 为将心声响彻",
