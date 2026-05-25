@@ -3,7 +3,7 @@ import { getAllPosts, getAllTags } from '@/lib/api';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import { transphereArticles } from '@/lib/transphere';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from '@/lib/image-compat';
 
 export const metadata: Metadata = {

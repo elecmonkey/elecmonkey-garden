@@ -1,7 +1,6 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
-import { notFound } from 'next/navigation';
 
 type Props = {
   params: Promise<{ month: string }>;
@@ -39,7 +38,7 @@ export default async function MonthArchivePage({ params }: Props) {
   
   // 如果页码超出范围且总页数大于0，返回404
   if (currentPage > totalPages && totalPages > 0) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
   
   return (

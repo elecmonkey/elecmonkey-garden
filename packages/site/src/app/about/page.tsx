@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import TechWall from './components/TechWall';
 
 import PageContainer from '@/components/layout/PageContainer';

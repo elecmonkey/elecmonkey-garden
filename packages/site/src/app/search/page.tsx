@@ -1,11 +1,10 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { searchPostsWithPagination, SearchResultItem } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
 import SearchResultCard from '@/components/search/SearchResultCard';
 import SearchBar from '@/components/search/SearchBar';
 import Pagination from '@/components/Pagination';
 import { Suspense } from 'react';
-import { notFound } from 'next/navigation';
 import ScrollToContent from '@/components/ScrollToContent';
 
 // 搜索页无法预构建，始终会在请求时动态生成
@@ -55,7 +54,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   
   // 如果页码超出范围且总页数大于0，返回404
   if (currentPage > totalPages && totalPages > 0) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
   
   return (

@@ -1,10 +1,9 @@
-import { notFound } from 'next/navigation';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
 import { getAllPostIds, getPostById } from '@/lib/api';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
   // 预生成普通文章和隐藏文章
@@ -47,8 +46,7 @@ export default async function BlogPost({ params }: Props) {
     post = await getPostById(slug);
   } catch (error) {
     console.error('博客文章获取失败:', error);
-    // 如果文章不存在，触发Next.js的notFound处理
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
 
   let markdownNode = <MarkdownContent content={post.content} />;

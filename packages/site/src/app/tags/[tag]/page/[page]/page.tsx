@@ -1,7 +1,6 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getAllTags, getPostsByTagWithPagination } from '@/lib/api';
 import TagContent from '@/components/tags/TagContent';
-import { notFound } from 'next/navigation';
 import { decodeTagFromSlug, encodeTagToSlug } from '@/lib/tag-url';
 
 type Props = {
@@ -42,13 +41,13 @@ export default async function TagPaginationPage({ params }: Props) {
   const currentPage = parseInt(page);
   
   if (isNaN(currentPage) || currentPage < 2) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
 
   const { posts, totalPosts, totalPages } = await getPostsByTagWithPagination(decodedTag, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
   
   return (

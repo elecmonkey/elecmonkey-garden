@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getAllTags } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
 import TagList from '@/components/tag/TagList';

@@ -1,7 +1,6 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
-import { notFound } from 'next/navigation';
 
 type Props = {
   params: Promise<{ month: string; page: string }>;
@@ -43,13 +42,13 @@ export default async function MonthArchivePaginationPage({ params }: Props) {
   const currentPage = parseInt(page);
   
   if (isNaN(currentPage) || currentPage < 2) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
 
   const { posts, totalPosts, totalPages } = await getPostsByMonthWithPagination(month, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
   
   return (

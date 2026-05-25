@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getAllMonths } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
 import Link from '@/components/Link';

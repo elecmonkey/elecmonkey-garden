@@ -1,7 +1,6 @@
 import { getAllPostsWithPagination } from '@/lib/api';
 import BlogIndexContent from '@/components/blog/BlogIndexContent';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 interface Props {
   params: Promise<{ page: string }>;
@@ -36,13 +35,13 @@ export default async function BlogPaginationPage({ params }: Props) {
   const currentPage = parseInt(page);
   
   if (isNaN(currentPage) || currentPage < 2) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
 
   const { posts, totalPages } = await getAllPostsWithPagination(currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
-    notFound();
+    throw new Response('Not Found', { status: 404 });
   }
   
   return (

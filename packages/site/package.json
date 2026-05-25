@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "rsbuild dev",
-    "build": "rsbuild build",
+    "build": "pnpm run content && rsbuild build",
     "start": "rsbuild preview",
     "preview": "rsbuild preview",
     "lint": "eslint .",
     "type-check": "next typegen & tsc -b --noEmit",
-    "content": "node -e \"console.log('content compiler is not wired yet')\"",
+    "content": "node scripts/generate-content.mjs",
     "dev:legacy": "next dev --turbopack -p 3710",
     "build:legacy": "next build",
     "start:legacy": "next start"

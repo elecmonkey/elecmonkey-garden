@@ -1,6 +1,4 @@
-import fs from 'fs/promises';
-import path from 'path';
-import matter from 'gray-matter';
+import { generatedPosts, generatedPublicPosts } from '@/generated/content';
 
 // 定义文章数据类型
 export type PostData = {
@@ -55,117 +53,18 @@ export type SearchResultItem = {
   };
 };
 
-// 博客文章根目录路径
-const postsDirectory = path.join(process.cwd(), 'src/content/posts');
-
-// 文章状态常量
-const DRAFT_PREFIX = 'draft-';
-const HIDDEN_PREFIX = 'hidden-';
-
-// 检查文件名是否为草稿
-function isDraftFile(fileName: string): boolean {
-  return fileName.startsWith(DRAFT_PREFIX);
+function sortPosts(posts: PostData[]): PostData[] {
+  return [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-// 检查文件名是否为隐藏文章
-function isHiddenFile(fileName: string): boolean {
-  return fileName.startsWith(HIDDEN_PREFIX);
-}
-
-// 从文件名中提取真实ID
-function extractIdFromFileName(fileName: string): string {
-  let id = fileName.replace(/\.md$/, '');
-  if (id.startsWith(DRAFT_PREFIX)) {
-    id = id.substring(DRAFT_PREFIX.length);
-  } else if (id.startsWith(HIDDEN_PREFIX)) {
-    id = id.substring(HIDDEN_PREFIX.length);
-  }
-  return id;
-}
-
-// 获取所有月份文件夹
-async function getMonthFolders(): Promise<string[]> {
-  try {
-    const entries = await fs.readdir(postsDirectory, { withFileTypes: true });
-    return entries
-      .filter(entry => entry.isDirectory())
-      .filter(entry => /^\d{6}$/.test(entry.name)) // 只包括符合YYYYMM格式的文件夹
-      .map(entry => entry.name)
-      .sort()
-      .reverse(); // 按月份倒序排列
-  } catch (error) {
-    console.error('获取月份文件夹出错:', error);
-    return [];
-  }
-}
-
-// 获取指定月份文件夹中的所有文章
-async function getPostsFromMonth(monthFolder: string, includeDrafts: boolean = false): Promise<PostData[]> {
-  const monthPath = path.join(postsDirectory, monthFolder);
-  
-  try {
-    const fileNames = await fs.readdir(monthPath);
-    
-    const postsPromises = fileNames
-      .filter(fileName => fileName.endsWith('.md'))
-      .filter(fileName => includeDrafts || !isDraftFile(fileName)) // 根据includeDrafts决定是否过滤草稿
-      .map(async (fileName) => {
-        // 检查文件类型
-        const isDraft = isDraftFile(fileName);
-        const isHidden = isHiddenFile(fileName);
-        
-        // 提取真实ID
-        const id = extractIdFromFileName(fileName);
-        
-        // 读取 markdown 文件内容
-        const fullPath = path.join(monthPath, fileName);
-        const fileContents = await fs.readFile(fullPath, 'utf8');
-        
-        // 使用 gray-matter 解析文章元数据
-        const { data, content } = matter(fileContents);
-        
-        // 将数据与 id、content、monthFolder 以及文章状态合并
-        return {
-          id,
-          content,
-          monthFolder,
-          isDraft,
-          isHidden,
-          ...data as Omit<PostData, 'id' | 'content' | 'monthFolder' | 'isDraft' | 'isHidden'>,
-        } as PostData;
-      });
-    
-    return await Promise.all(postsPromises);
-  } catch (error) {
-    console.error(`获取月份 ${monthFolder} 的文章出错:`, error);
-    return [];
-  }
+function getSourcePosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
+  const { includeHidden = false } = options;
+  return includeHidden ? generatedPosts : generatedPublicPosts;
 }
 
 // 获取所有博客文章数据（默认不包含草稿和隐藏文章）
 export async function getAllPosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): Promise<PostData[]> {
-  const { includeDrafts = false, includeHidden = false } = options;
-  
-  const monthFolders = await getMonthFolders();
-  const allPostsPromises = monthFolders.map(folder => getPostsFromMonth(folder, includeDrafts));
-  const monthPosts = await Promise.all(allPostsPromises);
-  
-  // 合并所有月份的文章
-  let allPosts = monthPosts.flat();
-  
-  // 过滤隐藏文章（如果不包含）
-  if (!includeHidden) {
-    allPosts = allPosts.filter(post => !post.isHidden);
-  }
-  
-  // 按日期排序
-  return allPosts.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  return sortPosts(getSourcePosts(options));
 }
 
 // 获取所有标签及其计数
@@ -225,121 +124,46 @@ function calculateTagSizes(tags: TagCount[]): TagCount[] {
 
 // 获取所有可能的文章 ID 和它们所在的月份文件夹
 export async function getAllPostIds() {
-  const monthFolders = await getMonthFolders();
-  const allPostsIdPromises = monthFolders.map(async (monthFolder) => {
-    const monthPath = path.join(postsDirectory, monthFolder);
-    try {
-      const fileNames = await fs.readdir(monthPath);
-      return fileNames
-        .filter(fileName => fileName.endsWith('.md'))
-        .filter(fileName => !isDraftFile(fileName)) // 过滤掉草稿文章，但保留隐藏文章
-        .map(fileName => {
-          // 提取真实ID
-          const slug = extractIdFromFileName(fileName);
-          
-          return {
-            params: {
-              slug,
-            },
-            // 将 monthFolder 作为元数据而不是路由参数
-            monthFolder,
-          };
-        });
-    } catch (error) {
-      console.error(`获取月份 ${monthFolder} 的文章ID出错:`, error);
-      return [];
-    }
-  });
-  
-  const monthPostsIds = await Promise.all(allPostsIdPromises);
-  return monthPostsIds.flat();
+  return generatedPosts.map((post) => ({
+    params: {
+      slug: post.id,
+    },
+    monthFolder: post.monthFolder,
+  }));
 }
 
 // 根据 ID 和月份文件夹获取文章数据
 export async function getPostById(id: string): Promise<PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } }> {
-  // 尝试在各个月份文件夹中查找文章
-  const monthFolders = await getMonthFolders();
-  let currentPost: PostData | null = null;
-  
-  // 查找当前文章
-  for (const monthFolder of monthFolders) {
-    const monthPath = path.join(postsDirectory, monthFolder);
-    
-    try {
-      // 获取月份目录中的文件
-      const files = await fs.readdir(monthPath);
-      
-      // 尝试查找匹配的文件（包括草稿和隐藏文件）
-      const matchingFile = files.find(file => {
-        const fileId = extractIdFromFileName(file);
-        return fileId === id && file.endsWith('.md');
-      });
-      
-      if (matchingFile) {
-        // 检查是否为草稿文章，如果是则直接拒绝访问
-        if (isDraftFile(matchingFile)) {
-          throw new Error('草稿文章不允许访问');
-        }
-        
-        // 读取文件内容
-        const fullPath = path.join(monthPath, matchingFile);
-        const fileContents = await fs.readFile(fullPath, 'utf8');
-        const { data, content } = matter(fileContents);
-        
-        // 确定文章状态
-        const isDraft = false; // 前面已经拒绝了草稿访问
-        const isHidden = isHiddenFile(matchingFile);
-        
-        currentPost = {
-          id,
-          content,
-          monthFolder,
-          isDraft,
-          isHidden,
-          ...data as Omit<PostData, 'id' | 'content' | 'monthFolder' | 'isDraft' | 'isHidden'>,
-        } as PostData;
-        
-        break; // 找到文章，跳出循环
-      }
-    } catch (error) {
-      console.error(`在 ${monthFolder} 中查找文章 ${id} 时出错:`, error);
-      continue;
-    }
-  }
-  
-  // 如果没有找到文章，抛出错误
+  const currentPost = generatedPosts.find((post) => post.id === id);
+
   if (!currentPost) {
     throw new Error(`找不到ID为 "${id}" 的文章`);
   }
-  
-  // 只有非隐藏文章才需要前后文章导航
-  let prevPost: { id: string; title: string } | undefined = undefined;
-  let nextPost: { id: string; title: string } | undefined = undefined;
-  
-  if (!currentPost.isHidden) {
-    // 获取所有非草稿、非隐藏文章，用于确定前后文章
-    const allPublicPosts = await getAllPosts({ includeHidden: false });
-    
-    // 找到当前文章在所有公开文章中的索引
-    const currentIndex = allPublicPosts.findIndex(post => post.id === id);
-    
-    // 确定上一篇和下一篇文章（如果存在）
-    // 注意：由于文章是按日期降序排序的，所以索引+1是较旧的文章（上一篇），索引-1是较新的文章（下一篇）
-    prevPost = currentIndex < allPublicPosts.length - 1 ? 
-      { id: allPublicPosts[currentIndex + 1].id, title: allPublicPosts[currentIndex + 1].title } : 
-      undefined;
-    
-    nextPost = currentIndex > 0 ? 
-      { id: allPublicPosts[currentIndex - 1].id, title: allPublicPosts[currentIndex - 1].title } : 
-      undefined;
+
+  if (currentPost.isDraft) {
+    throw new Error('草稿文章不允许访问');
   }
-  // 隐藏文章不需要有前后导航
-  
-  // 返回增强的文章数据，包含前后文章信息
+
+  let prevPost: { id: string; title: string } | undefined;
+  let nextPost: { id: string; title: string } | undefined;
+
+  if (!currentPost.isHidden) {
+    const allPublicPosts = sortPosts(generatedPublicPosts);
+    const currentIndex = allPublicPosts.findIndex((post) => post.id === id);
+
+    prevPost = currentIndex < allPublicPosts.length - 1
+      ? { id: allPublicPosts[currentIndex + 1].id, title: allPublicPosts[currentIndex + 1].title }
+      : undefined;
+
+    nextPost = currentIndex > 0
+      ? { id: allPublicPosts[currentIndex - 1].id, title: allPublicPosts[currentIndex - 1].title }
+      : undefined;
+  }
+
   return {
     ...currentPost,
     prevPost,
-    nextPost
+    nextPost,
   };
 }
 
@@ -381,25 +205,8 @@ export async function getAllMonths(): Promise<MonthData[]> {
 
 // 根据月份获取相关文章
 export async function getPostsByMonth(month: string): Promise<PostData[]> {
-  try {
-    // 获取指定月份的所有非草稿文章
-    const posts = await getPostsFromMonth(month, false);
-    
-    // 过滤掉隐藏文章
-    const visiblePosts = posts.filter(post => !post.isHidden);
-    
-    // 按日期降序排列
-    return visiblePosts.sort((a, b) => {
-      if (a.date < b.date) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-  } catch (error) {
-    console.error(`获取月份 ${month} 的文章失败:`, error);
-    return [];
-  }
+  const posts = generatedPublicPosts.filter((post) => post.monthFolder === month);
+  return sortPosts(posts);
 }
 
 // 获取分页的文章列表
