@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 import { render } from '../entry.ssg';
 import { getStaticPathnames } from '../app-shell/static-paths';
+import { renderMetadataTags } from './metadata';
 
 const rootMarker = '<div id="root"></div>';
 
@@ -24,7 +25,10 @@ function getHtmlOutputPath(distDir: string, pathname: string): string {
 
 async function writeStaticPage(distDir: string, template: string, pathname: string): Promise<void> {
   const appHtml = render(pathname);
-  const html = template.replace(rootMarker, `<div id="root">${appHtml}</div>`);
+  const metadataTags = await renderMetadataTags(pathname);
+  const html = template
+    .replace(/<title>.*?<\/title>/, metadataTags)
+    .replace(rootMarker, `<div id="root">${appHtml}</div>`);
   const outputPath = getHtmlOutputPath(distDir, pathname);
 
   await mkdir(path.dirname(outputPath), { recursive: true });
