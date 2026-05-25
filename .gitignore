@@ -53,6 +53,7 @@ git*.txt
 /packages/*/.next/
 /packages/*/out/
 /packages/*/dist/
+/packages/*/.rsbuild/
 /packages/*/build/
 
 # rust
