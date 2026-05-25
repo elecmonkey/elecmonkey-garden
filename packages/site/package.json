@@ -3,13 +3,16 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 3710",
-    "build": "next build",
-    "start": "next start",
-    "preview": "next start",
+    "dev": "rsbuild dev",
+    "build": "rsbuild build",
+    "start": "rsbuild preview",
+    "preview": "rsbuild preview",
     "lint": "eslint .",
     "type-check": "next typegen & tsc -b --noEmit",
-    "content": "node -e \"console.log('content compiler is not wired yet')\""
+    "content": "node -e \"console.log('content compiler is not wired yet')\"",
+    "dev:legacy": "next dev --turbopack -p 3710",
+    "build:legacy": "next build",
+    "start:legacy": "next start"
   },
   "dependencies": {
     "geist": "^1.7.0",
@@ -32,6 +35,9 @@
     "shiki": "^4.0.2"
   },
   "devDependencies": {
+    "@rsbuild/core": "^2.0.7",
+    "@rsbuild/plugin-react": "^2.0.0",
+    "@rsbuild/plugin-tailwindcss": "^2.0.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/typography": "^0.5.19",
@@ -43,5 +49,6 @@
     "eslint-config-next": "^16.2.4",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.3"
-  }
+  },
+  "type": "module"
 }

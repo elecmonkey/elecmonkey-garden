@@ -48,3 +48,9 @@ next-env.d.ts
 
 git*.sh
 git*.txt
+# workspace packages
+/packages/*/node_modules/
+/packages/*/.next/
+/packages/*/out/
+/packages/*/dist/
+/packages/*/build/
