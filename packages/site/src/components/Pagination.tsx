@@ -1,7 +1,7 @@
 'use client';
 
 import Link from '@/components/Link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from '@/lib/router-compat';
 
 interface PaginationProps {
   currentPage: number;
