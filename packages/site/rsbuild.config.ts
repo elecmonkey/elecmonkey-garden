@@ -36,12 +36,11 @@ export default defineConfig({
     ssg: {
       source: {
         entry: {
-          render: './src/entry.ssg.tsx',
+          build: './src/ssg/build.ts',
         },
       },
       output: {
         target: 'node',
-        emitAssets: false,
         distPath: {
           root: '.rsbuild/ssg',
         },

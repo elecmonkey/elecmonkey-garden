@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "rsbuild dev",
-    "build": "pnpm run build:compiler && pnpm run content && rsbuild build",
+    "build": "pnpm run build:compiler && pnpm run content && rsbuild build && node .rsbuild/ssg/build.js",
     "start": "rsbuild preview",
     "preview": "rsbuild preview",
     "lint": "eslint .",
