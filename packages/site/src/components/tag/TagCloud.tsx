@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "@/components/Link"
 import { TagIcon } from 'lucide-react'
 import { getTagPath } from '@/lib/tag-url'
 

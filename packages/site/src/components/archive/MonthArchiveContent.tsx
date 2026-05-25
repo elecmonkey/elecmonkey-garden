@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/Link';
 import PostCard from '@/components/PostCard';
 import PathPagination from '@/components/PathPagination';
 import { PostData } from '@/lib/api';

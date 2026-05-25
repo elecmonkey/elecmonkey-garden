@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/Link';
 import { getAllPosts, getAllTags } from '@/lib/api';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';

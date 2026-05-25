@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getAllMonths } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
-import Link from 'next/link';
+import Link from '@/components/Link';
 
 export const metadata: Metadata = {
   title: '文章归档 - Elecmonkey的小花园',

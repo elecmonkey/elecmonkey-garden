@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/Link';
 import { Metadata } from 'next';
 import PageContainer from '@/components/layout/PageContainer';
 

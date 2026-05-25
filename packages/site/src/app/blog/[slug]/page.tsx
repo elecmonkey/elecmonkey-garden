@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
 import { getAllPostIds, getPostById } from '@/lib/api';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
