@@ -62,3 +62,6 @@ git*.txt
 # generated native bindings
 /packages/content-compiler-napi/*.node
 /packages/content-compiler-napi/index.js
+/packages/content-compiler-napi/native.d.ts
+/packages/content-compiler-napi/npm/
+/packages/content-compiler-napi/artifacts/

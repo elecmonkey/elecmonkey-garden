@@ -8,7 +8,10 @@
     "start": "pnpm --filter @elecmonkey/garden-site start",
     "preview": "pnpm --filter @elecmonkey/garden-site preview",
     "lint": "pnpm --filter @elecmonkey/garden-site lint",
-    "type-check": "pnpm --filter @elecmonkey/garden-site type-check"
+    "type-check": "pnpm --filter @elecmonkey/garden-site type-check",
+    "pack:content-compiler": "pnpm --filter @elecmonkey/garden-content-compiler pack:all",
+    "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
+    "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

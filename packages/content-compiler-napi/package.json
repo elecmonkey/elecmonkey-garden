@@ -7,13 +7,27 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "index.cjs",
     "*.node"
   ],
   "scripts": {
-    "build": "napi build --platform --release && rslib build",
-    "build:debug": "napi build --platform && rslib build",
-    "check": "cargo check -p garden_content_compiler_napi && rslib build"
+    "build": "napi build --platform --release --no-js --dts native.d.ts && rslib build",
+    "build:debug": "napi build --platform --no-js --dts native.d.ts && rslib build",
+    "build:native": "napi build --platform --release --no-js --dts native.d.ts",
+    "build:native:linux-x64-gnu": "napi build --platform --release --no-js --dts native.d.ts --target x86_64-unknown-linux-gnu --use-napi-cross",
+    "build:native:linux-x64-musl": "napi build --platform --release --no-js --dts native.d.ts --target x86_64-unknown-linux-musl --cross-compile",
+    "check": "cargo check -p garden_content_compiler_napi && rslib build",
+    "pack:local": "node scripts/build-package.mjs --pack",
+    "pack:linux-x64": "node scripts/build-package.mjs --target x86_64-unknown-linux-gnu --target x86_64-unknown-linux-musl --pack",
+    "pack:all": "node scripts/build-package.mjs --all --platform-packages --pack",
+    "pack:darwin-x64": "node scripts/build-package.mjs --target x86_64-apple-darwin --pack",
+    "pack:darwin-arm64": "node scripts/build-package.mjs --target aarch64-apple-darwin --pack",
+    "pack:linux-x64-gnu": "node scripts/build-package.mjs --target x86_64-unknown-linux-gnu --pack",
+    "pack:linux-x64-musl": "node scripts/build-package.mjs --target x86_64-unknown-linux-musl --pack",
+    "pack:linux-arm64": "node scripts/build-package.mjs --target aarch64-unknown-linux-gnu --target aarch64-unknown-linux-musl --pack",
+    "pack:linux-arm64-gnu": "node scripts/build-package.mjs --target aarch64-unknown-linux-gnu --pack",
+    "pack:linux-arm64-musl": "node scripts/build-package.mjs --target aarch64-unknown-linux-musl --pack",
+    "pack:win32-x64": "node scripts/build-package.mjs --target x86_64-pc-windows-msvc --pack",
+    "pack:win32-arm64": "node scripts/build-package.mjs --target aarch64-pc-windows-msvc --pack"
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.6.2",

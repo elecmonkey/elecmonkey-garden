@@ -5,7 +5,56 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const require = createRequire(import.meta.url);
-const nativeBinding = require('../index.cjs') as NativeBinding;
+
+const NATIVE_BINDING_CANDIDATES = [
+  '../garden-content-compiler.node',
+  '../garden-content-compiler.darwin-arm64.node',
+  '../garden-content-compiler.darwin-x64.node',
+  '../garden-content-compiler.linux-x64-gnu.node',
+  '../garden-content-compiler.linux-x64-musl.node',
+  '../garden-content-compiler.linux-arm64-gnu.node',
+  '../garden-content-compiler.linux-arm64-musl.node',
+  '../garden-content-compiler.win32-x64-msvc.node',
+  '../garden-content-compiler.win32-arm64-msvc.node',
+] as const;
+
+function nativeBindingLoadError(lastError?: unknown): Error {
+  const message = [
+    'garden-content-compiler native binding is not built for this platform.',
+    'Run `pnpm --filter @elecmonkey/garden-content-compiler build`.',
+    `Last lookup: ${path.basename(NATIVE_BINDING_CANDIDATES[NATIVE_BINDING_CANDIDATES.length - 1])}`,
+  ].join(' ');
+
+  if (lastError instanceof Error && lastError.message) {
+    return new Error(`${message} ${lastError.message}`);
+  }
+
+  return new Error(message);
+}
+
+function loadNativeBinding(): NativeBinding {
+  let lastError: unknown;
+
+  for (const candidate of NATIVE_BINDING_CANDIDATES) {
+    try {
+      return require(candidate) as NativeBinding;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  return {
+    version() {
+      return '0.0.0';
+    },
+    compilePost() {
+      throw nativeBindingLoadError(lastError);
+    },
+    compilePosts() {
+      throw nativeBindingLoadError(lastError);
+    },
+  };
+}
 
 const CACHE_VERSION = 1;
 const SCHEMA_VERSION = 1;
@@ -153,6 +202,8 @@ export interface GardenContentPluginOptions extends GenerateContentOptions {
   serveSearchIndex?: boolean;
   searchIndexRoute?: string;
 }
+
+const nativeBinding = loadNativeBinding();
 
 export const compilePost = nativeBinding.compilePost;
 export const compilePosts = nativeBinding.compilePosts;
