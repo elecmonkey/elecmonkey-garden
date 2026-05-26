@@ -9,20 +9,20 @@ const require = createRequire(import.meta.url);
 const NATIVE_BINDING_CANDIDATES = [
   '../garden-content-compiler.node',
   '../garden-content-compiler.darwin-arm64.node',
-  '../garden-content-compiler.darwin-x64.node',
+  '@elecmonkey/garden-content-compiler-darwin-arm64',
   '../garden-content-compiler.linux-x64-gnu.node',
+  '@elecmonkey/garden-content-compiler-linux-x64-gnu',
   '../garden-content-compiler.linux-x64-musl.node',
-  '../garden-content-compiler.linux-arm64-gnu.node',
-  '../garden-content-compiler.linux-arm64-musl.node',
-  '../garden-content-compiler.win32-x64-msvc.node',
-  '../garden-content-compiler.win32-arm64-msvc.node',
+  '@elecmonkey/garden-content-compiler-linux-x64-musl',
 ] as const;
+
+const PACKAGE_CANDIDATE_PREFIX = '@elecmonkey/garden-content-compiler-';
 
 function nativeBindingLoadError(lastError?: unknown): Error {
   const message = [
     'garden-content-compiler native binding is not built for this platform.',
     'Run `pnpm --filter @elecmonkey/garden-content-compiler build`.',
-    `Last lookup: ${path.basename(NATIVE_BINDING_CANDIDATES[NATIVE_BINDING_CANDIDATES.length - 1])}`,
+    `Last lookup: ${displayNativeBindingCandidate(NATIVE_BINDING_CANDIDATES[NATIVE_BINDING_CANDIDATES.length - 1])}`,
   ].join(' ');
 
   if (lastError instanceof Error && lastError.message) {
@@ -30,6 +30,12 @@ function nativeBindingLoadError(lastError?: unknown): Error {
   }
 
   return new Error(message);
+}
+
+function displayNativeBindingCandidate(candidate: string): string {
+  return candidate.startsWith(PACKAGE_CANDIDATE_PREFIX)
+    ? candidate
+    : path.basename(candidate);
 }
 
 function loadNativeBinding(): NativeBinding {

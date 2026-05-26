@@ -12,7 +12,7 @@
     "build:with-compiler": "pnpm run build:compiler && pnpm run build"
   },
   "dependencies": {
-    "@elecmonkey/garden-content-compiler": "workspace:*",
+    "@elecmonkey/garden-content-compiler": "^0.1.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.17.0",
     "lucide-react": "^1.16.0",
