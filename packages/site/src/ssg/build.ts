@@ -1,40 +1,102 @@
+import { availableParallelism } from 'node:os';
 import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
 import path from 'node:path';
-import { render } from '../entry.ssg';
+import { pathToFileURL } from 'node:url';
+import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
 import { getStaticPathnames } from '../app-shell/static-paths';
-import { renderMetadataTags } from './metadata';
 import { getAllMonths, getAllPostIds, getAllTags, getPostById } from '../lib/api';
 import { getTagPath } from '../lib/tag-url';
+import { rootMarker, writeStaticPage } from './render-page';
 
-const rootMarker = '<div id="root"></div>';
+type RenderWorkerData = {
+  distDir: string;
+  template: string;
+  pathnames: string[];
+};
 
-function normalizePathname(pathname: string): string {
-  if (!pathname.startsWith('/')) {
-    return `/${pathname}`;
-  }
-  return pathname;
-}
+function getWorkerCount(pathnameCount: number): number {
+  const rawWorkerCount = process.env.SSG_WORKERS;
 
-function getHtmlOutputPath(distDir: string, pathname: string): string {
-  const normalized = normalizePathname(pathname).replace(/\/+$/, '') || '/';
-
-  if (normalized === '/') {
-    return path.join(distDir, 'index.html');
+  if (!rawWorkerCount) {
+    return 1;
   }
 
-  return path.join(distDir, normalized.slice(1), 'index.html');
+  if (rawWorkerCount === 'auto') {
+    const cpuCount = availableParallelism();
+    return Math.max(1, Math.min(cpuCount, Math.floor(pathnameCount / 128)));
+  }
+
+  const workerCount = Number.parseInt(rawWorkerCount, 10);
+
+  if (!Number.isFinite(workerCount) || workerCount <= 1) {
+    return 1;
+  }
+
+  return Math.min(workerCount, pathnameCount);
 }
 
-async function writeStaticPage(distDir: string, template: string, pathname: string): Promise<void> {
-  const appHtml = render(pathname);
-  const metadataTags = await renderMetadataTags(pathname);
-  const html = template
-    .replace(/<title>.*?<\/title>/, metadataTags)
-    .replace(rootMarker, `<div id="root">${appHtml}</div>`);
-  const outputPath = getHtmlOutputPath(distDir, pathname);
+function splitIntoChunks<T>(items: T[], chunkCount: number): T[][] {
+  const chunks = Array.from({ length: chunkCount }, () => [] as T[]);
 
-  await mkdir(path.dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, html);
+  items.forEach((item, index) => {
+    chunks[index % chunkCount].push(item);
+  });
+
+  return chunks.filter((chunk) => chunk.length > 0);
+}
+
+async function renderStaticPagesInWorkers(
+  distDir: string,
+  template: string,
+  pathnames: string[],
+  workerCount: number,
+): Promise<void> {
+  const chunks = splitIntoChunks(pathnames, workerCount);
+  const workerUrl = pathToFileURL(process.argv[1]);
+
+  await Promise.all(chunks.map((chunk) => new Promise<void>((resolve, reject) => {
+    const worker = new Worker(workerUrl, {
+      workerData: {
+        distDir,
+        template,
+        pathnames: chunk,
+      },
+    });
+
+    worker.once('message', (message: { ok: boolean; error?: string }) => {
+      if (!message.ok) {
+        reject(new Error(message.error ?? 'SSG worker failed.'));
+      }
+    });
+    worker.once('error', reject);
+    worker.once('exit', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`SSG worker stopped with exit code ${code}.`));
+      }
+    });
+  })));
+}
+
+async function renderStaticPages(distDir: string, template: string, pathnames: string[]): Promise<number> {
+  const workerCount = getWorkerCount(pathnames.length);
+
+  if (workerCount <= 1) {
+    await Promise.all(pathnames.map((pathname) => writeStaticPage(distDir, template, pathname)));
+    return 1;
+  }
+
+  await renderStaticPagesInWorkers(distDir, template, pathnames, workerCount);
+  return workerCount;
+}
+
+async function runRenderWorker(): Promise<void> {
+  const { distDir, template, pathnames } = workerData as RenderWorkerData;
+
+  for (const pathname of pathnames) {
+    await writeStaticPage(distDir, template, pathname);
+  }
 }
 
 async function copyStaticAssets(distDir: string): Promise<void> {
@@ -141,12 +203,25 @@ export async function buildStaticSite(): Promise<void> {
   }
 
   const pathnames = await getStaticPathnames();
+  const workerCount = await renderStaticPages(distDir, template, pathnames);
 
-  await Promise.all(pathnames.map((pathname) => writeStaticPage(distDir, template, pathname)));
   await copyStaticAssets(distDir);
   await Promise.all([writeRobotsTxt(distDir), writeSitemapXml(distDir)]);
 
-  console.log(`generated ${pathnames.length} static pages`);
+  console.log(`generated ${pathnames.length} static pages with ${workerCount} SSG worker${workerCount > 1 ? 's' : ''}`);
 }
 
-await buildStaticSite();
+if (isMainThread) {
+  await buildStaticSite();
+} else {
+  try {
+    await runRenderWorker();
+    parentPort?.postMessage({ ok: true });
+  } catch (error) {
+    parentPort?.postMessage({
+      ok: false,
+      error: error instanceof Error ? error.stack ?? error.message : String(error),
+    });
+    throw error;
+  }
+}

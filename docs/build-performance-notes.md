@@ -206,3 +206,74 @@ TS 侧预计算已经避免 SSG 多页面重复调用时的重复排序、筛选
 - cache key 应包含 compiler version 和生成产物 schema version。
 - CI / release 构建不要只依赖 mtime 做缓存正确性判断。
 - 不要在不同信任边界之间共享不可信 CI cache。
+
+## SSG Worker 并发实验
+
+### 改造内容
+
+为后续真正并行渲染 SSG 页面，先把 `packages/site/src/ssg/build.ts` 中可并行的单页渲染 / 写文件逻辑拆到了 `packages/site/src/ssg/render-page.ts`：
+
+- `renderStaticPage(template, pathname)`：只负责把单个 pathname 渲染成最终 HTML 字符串。
+- `writeStaticPage(distDir, template, pathname)`：负责单页 HTML 输出路径计算、目录创建和写文件。
+- `build.ts` 保留全局 orchestration：读取模板、生成静态路径、分片、启动 worker、复制搜索索引、写 robots 和 sitemap。
+
+并新增 `SSG_WORKERS` 环境变量：
+
+```bash
+# 默认：保持原来的单进程行为，避免小站点被 worker 启动成本拖慢
+pnpm build
+
+# 显式使用 N 个 worker 并发渲染 SSG 页面
+SSG_WORKERS=6 pnpm build
+
+# 自动模式：按页面数和 os.availableParallelism() 估算
+SSG_WORKERS=auto pnpm build
+```
+
+实现上没有让 Rsbuild 额外打一个独立 worker entry，而是让 `.rsbuild/ssg/build.js` 同时支持 main thread 和 worker thread 两种模式：main thread 负责构建编排，worker thread 只处理自己分到的 pathnames。这样可以避开 `new URL('./worker.ts', import.meta.url)` 被 Rspack 当成普通 asset 后，Node 运行时无法解析 worker 内部相对 import 的问题。
+
+### Benchmark 方法
+
+本轮实验命令：
+
+```bash
+SSG_WORKERS=<1..18> pnpm build
+```
+
+每个 worker 数运行 10 次，记录完整 `pnpm build` wall time 并取平均。注意：这里测的是完整站点构建，包含 Rsbuild web/ssg bundle、内容编译缓存命中检查、Node SSG 启动、页面渲染和文件写入；因此 worker 并发只作用在其中的 SSG 页面渲染 / 写文件阶段，收益会被 Rsbuild 等固定成本稀释。
+
+### 结果
+
+![SSG worker 并发构建平均耗时曲线](./ssg-worker-benchmark.svg)
+
+| SSG_WORKERS | 平均耗时 | 中位数 | 最小值 | 最大值 |
+| ---: | ---: | ---: | ---: | ---: |
+| 1 | 1.567s | 1.544s | 1.509s | 1.667s |
+| 2 | 1.777s | 1.779s | 1.722s | 1.832s |
+| 3 | 1.755s | 1.750s | 1.697s | 1.838s |
+| 4 | 1.764s | 1.768s | 1.691s | 1.850s |
+| 5 | 1.733s | 1.718s | 1.676s | 1.854s |
+| 6 | 1.687s | 1.679s | 1.664s | 1.726s |
+| 7 | 1.699s | 1.698s | 1.675s | 1.719s |
+| 8 | 1.713s | 1.705s | 1.672s | 1.787s |
+| 9 | 1.703s | 1.697s | 1.667s | 1.749s |
+| 10 | 1.713s | 1.701s | 1.677s | 1.772s |
+| 11 | 1.971s | 1.811s | 1.688s | 2.618s |
+| 12 | 1.733s | 1.736s | 1.693s | 1.787s |
+| 13 | 1.766s | 1.747s | 1.690s | 1.917s |
+| 14 | 1.775s | 1.778s | 1.732s | 1.830s |
+| 15 | 1.797s | 1.789s | 1.753s | 1.853s |
+| 16 | 1.802s | 1.794s | 1.763s | 1.854s |
+| 17 | 1.894s | 1.898s | 1.788s | 1.969s |
+| 18 | 1.827s | 1.831s | 1.793s | 1.858s |
+
+### 结论
+
+当前内容规模下，`SSG_WORKERS=1` 仍然最快：平均 1.567s。显式开启 worker 后，最好的一组是 6 workers，平均 1.687s，比单进程慢约 0.120s。原因主要是：
+
+- 现在只有 131 个静态页面，单页 React SSR 工作量不大。
+- 每个 worker 都要启动一个 V8 isolate，并加载 `.rsbuild/ssg/build.js` 及 React / 路由 / 内容模块，固定成本较高。
+- 完整 `pnpm build` 中 Rsbuild 编译和内容缓存检查占了明显固定成本，worker 只能优化 SSG 渲染阶段的一部分。
+- 高并发时还会增加模块加载、GC、文件写入调度和 CPU cache 抖动，18 个逻辑核并不意味着当前任务适合开 18 个 worker。
+
+因此当前默认仍保持 1 worker。`SSG_WORKERS=auto` 也按页面数保守估算，目前 131 个页面会得到 1；等页面数量上来后再自动放开。显式 `SSG_WORKERS=N` 保留给 profiling 和大规模内容实验使用。
