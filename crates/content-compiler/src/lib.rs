@@ -106,6 +106,18 @@ pub fn compile_content(options: CompileOptions) -> CompileResult<ContentManifest
     })
 }
 
+pub fn compile_post_file(path: &Path, month_folder: &str) -> CompileResult<Option<Post>> {
+    let Some(file_name) = path.file_name().and_then(|file_name| file_name.to_str()) else {
+        return Ok(None);
+    };
+
+    if !file_name.ends_with(".md") || is_draft_file(file_name) {
+        return Ok(None);
+    }
+
+    read_post_file(path, month_folder, file_name).map(Some)
+}
+
 fn read_month_folders(posts_dir: &Path) -> CompileResult<Vec<String>> {
     let mut folders = Vec::new();
     for entry in fs::read_dir(posts_dir)? {
@@ -136,30 +148,33 @@ fn read_posts_from_month(posts_dir: &Path, month_folder: &str) -> CompileResult<
             continue;
         }
 
-        let path = entry.path();
-        let source = fs::read_to_string(&path)?;
-        let (frontmatter, content) = parse_markdown_file(&path, &source)?;
-        let id = extract_id_from_file_name(&file_name);
-        let toc = extract_toc(content);
-
-        posts.push(Post {
-            id,
-            content: content.to_string(),
-            month_folder: month_folder.to_string(),
-            is_draft: false,
-            is_hidden: is_hidden_file(&file_name),
-            title: frontmatter.get_string("title"),
-            date: frontmatter.get_string("date"),
-            description: frontmatter.get_string("description"),
-            tags: frontmatter.get_array("tags"),
-            author: frontmatter.get_string("author"),
-            no_toc: frontmatter.get_bool("no_toc"),
-            toc,
-            extra: frontmatter.extra,
-        });
+        posts.push(read_post_file(&entry.path(), month_folder, &file_name)?);
     }
 
     Ok(posts)
+}
+
+fn read_post_file(path: &Path, month_folder: &str, file_name: &str) -> CompileResult<Post> {
+    let source = fs::read_to_string(path)?;
+    let (frontmatter, content) = parse_markdown_file(path, &source)?;
+    let id = extract_id_from_file_name(file_name);
+    let toc = extract_toc(content);
+
+    Ok(Post {
+        id,
+        content: content.to_string(),
+        month_folder: month_folder.to_string(),
+        is_draft: false,
+        is_hidden: is_hidden_file(file_name),
+        title: frontmatter.get_string("title"),
+        date: frontmatter.get_string("date"),
+        description: frontmatter.get_string("description"),
+        tags: frontmatter.get_array("tags"),
+        author: frontmatter.get_string("author"),
+        no_toc: frontmatter.get_bool("no_toc"),
+        toc,
+        extra: frontmatter.extra,
+    })
 }
 
 fn parse_markdown_file<'a>(path: &Path, source: &'a str) -> CompileResult<(Frontmatter, &'a str)> {

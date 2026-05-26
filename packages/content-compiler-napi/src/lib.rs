@@ -1,5 +1,6 @@
 use garden_content_compiler::{
-    compile_content, CompileOptions, ContentManifest, FrontmatterValue, Post, TocItem,
+    compile_content, compile_post_file, CompileOptions, ContentManifest, FrontmatterValue, Post,
+    TocItem,
 };
 use napi_derive::napi;
 use std::path::PathBuf;
@@ -52,6 +53,13 @@ pub fn compile_posts(posts_dir: String) -> napi::Result<JsContentManifest> {
     })
     .map(Into::into)
     .map_err(|error| napi::Error::from_reason(error.to_string()))
+}
+
+#[napi]
+pub fn compile_post(post_file: String, month_folder: String) -> napi::Result<Option<JsPost>> {
+    compile_post_file(&PathBuf::from(post_file), &month_folder)
+        .map(|post| post.map(Into::into))
+        .map_err(|error| napi::Error::from_reason(error.to_string()))
 }
 
 impl From<ContentManifest> for JsContentManifest {
