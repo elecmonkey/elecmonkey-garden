@@ -1,24 +1,16 @@
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
-import { getAllPostIds, getPostById } from '@/lib/api';
+import { getPostById } from '@/lib/api';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
-import type { Metadata } from 'next';
-
-export async function generateStaticParams() {
-  // 预生成普通文章和隐藏文章
-  const posts = getAllPostIds();
-  return posts.map((post) => ({
-    slug: post.params.slug,
-  }));
-}
+import type { SiteMetadata } from '@/ssg/metadata-types';
 
 type Props = {
   params: { slug: string };
 };
 
 // 动态生成元数据
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
   const { slug } = params;
   try {
     const post = getPostById(slug);

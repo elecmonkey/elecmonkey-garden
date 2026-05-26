@@ -1,9 +1,9 @@
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
-import type { SearchResultItem } from '@/lib/api';
+import type { SearchResult } from '@/lib/search';
 
 interface SearchResultCardProps {
-  result: SearchResultItem;
+  result: SearchResult;
   keyword: string;
 }
 

@@ -1,8 +1,8 @@
 import Link from '@/components/Link';
-import { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 import PageContainer from '@/components/layout/PageContainer';
 
-export const metadata: Metadata = {
+export const metadata: SiteMetadata = {
   title: "页面未找到 - Elecmonkey的小花园",
 };
 

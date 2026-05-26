@@ -3,10 +3,10 @@ import { getAllPosts, getAllTags } from '@/lib/api';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import { transphereArticles } from '@/lib/transphere';
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 import Image from '@/lib/image-compat';
 
-export const metadata: Metadata = {
+export const metadata: SiteMetadata = {
   title: "Elecmonkey的小花园 - 存在 为将心声响彻",
   description: "Elecmonkey的小花园 - 专注前端技术的技术博客，探索JavaScript、TypeScript、React、Vue、Next.js等前端生态，分享前端工程化、性能优化、架构设计等实践经验。",
   openGraph: {

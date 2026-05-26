@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 import PageContainer from '@/components/layout/PageContainer';
 import ClientSearchPage from '@/components/search/ClientSearchPage';
 
@@ -10,7 +10,7 @@ interface SearchPageProps {
   };
 }
 
-export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
+export async function generateMetadata({ searchParams }: SearchPageProps): Promise<SiteMetadata> {
   const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : '';
 
   return {

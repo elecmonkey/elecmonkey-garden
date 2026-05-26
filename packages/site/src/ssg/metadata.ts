@@ -10,32 +10,11 @@ import { metadata as archiveMetadata } from '../app/archive/page';
 import { generateMetadata as generateMonthMetadata } from '../app/archive/[month]/page';
 import { generateMetadata as generateMonthPageMetadata } from '../app/archive/[month]/page/[page]/page';
 import { generateMetadata as generateSearchMetadata } from '../app/search/page';
-
-type MetadataValue = Record<string, unknown>;
-
-type RobotsValue = string | {
-  index?: boolean;
-  follow?: boolean;
-  googleBot?: MetadataValue;
-};
-
-type MetadataLike = {
-  title?: string | { default?: string; template?: string };
-  description?: string;
-  keywords?: string | string[];
-  authors?: Array<{ name?: string }>;
-  creator?: string;
-  publisher?: string;
-  icons?: string;
-  metadataBase?: URL;
-  openGraph?: MetadataValue;
-  twitter?: MetadataValue;
-  robots?: RobotsValue;
-};
+import type { MetadataValue, RobotsValue, SiteMetadata } from './metadata-types';
 
 const siteUrl = 'https://www.elecmonkey.com';
 
-const rootMetadata: MetadataLike = {
+const rootMetadata: SiteMetadata = {
   title: 'Elecmonkey的小花园',
   description: 'Elecmonkey的小花园是一个专注于前端技术的技术博客，分享JavaScript、TypeScript、React、Vue、Next.js、Vite等前端开发技术、工程化实践、性能优化和最佳实践经验。',
   keywords: ['前端开发', '前端技术', 'JavaScript', 'TypeScript', 'React', 'Vue', 'Next.js', 'Vite', '前端工程化', '技术博客', 'Elecmonkey'],
@@ -89,7 +68,7 @@ function escapeHtml(value: unknown): string {
   return String(value).replace(/[&<>"']/g, (char) => htmlEscapes[char]);
 }
 
-function mergeMetadata(base: MetadataLike, route: MetadataLike | null | undefined): MetadataLike {
+function mergeMetadata(base: SiteMetadata, route: SiteMetadata | null | undefined): SiteMetadata {
   return {
     ...base,
     ...route,
@@ -104,7 +83,7 @@ function mergeMetadata(base: MetadataLike, route: MetadataLike | null | undefine
   };
 }
 
-function getTitle(metadata: MetadataLike): string | undefined {
+function getTitle(metadata: SiteMetadata): string | undefined {
   if (typeof metadata.title === 'string') return metadata.title;
   return metadata.title?.default;
 }
@@ -120,7 +99,7 @@ function getCanonicalUrl(pathname: string): string {
   return normalized === '/' ? siteUrl : `${siteUrl}${normalized}`;
 }
 
-function getUrlValue(value: unknown, metadata: MetadataLike): string | undefined {
+function getUrlValue(value: unknown, metadata: SiteMetadata): string | undefined {
   if (!value) return undefined;
   const url = typeof value === 'string' ? value : value instanceof URL ? value.toString() : undefined;
   if (!url) return undefined;
@@ -130,7 +109,7 @@ function getUrlValue(value: unknown, metadata: MetadataLike): string | undefined
   return new URL(url, base).toString();
 }
 
-function getFirstImage(metadata: MetadataLike, source: unknown): string | undefined {
+function getFirstImage(metadata: SiteMetadata, source: unknown): string | undefined {
   if (!source) return undefined;
   const value = Array.isArray(source) ? source[0] : source;
   if (typeof value === 'string' || value instanceof URL) return getUrlValue(value, metadata);
@@ -186,7 +165,7 @@ function getRouteParams(pathname: string): { route: string; params: Record<strin
   return { route: 'not-found', params: {} };
 }
 
-async function getRouteMetadata(pathname: string): Promise<MetadataLike> {
+async function getRouteMetadata(pathname: string): Promise<SiteMetadata> {
   const { route, params } = getRouteParams(pathname);
 
   switch (route) {

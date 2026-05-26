@@ -1,8 +1,8 @@
 import { getAllPostsWithPagination } from '@/lib/api';
 import BlogIndexContent from '@/components/blog/BlogIndexContent';
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 
-export const metadata: Metadata = {
+export const metadata: SiteMetadata = {
   title: "所有文章 - Elecmonkey的小花园",
 };
 

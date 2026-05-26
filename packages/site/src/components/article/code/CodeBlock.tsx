@@ -74,7 +74,7 @@ export default function CodeBlock({ language, code, ...props }: {
   // 处理客户端 mounted 状态，避免 Hydration Mismatch
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
-  
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
@@ -93,10 +93,10 @@ export default function CodeBlock({ language, code, ...props }: {
       style: themeToUse === 'dark' ? oneDark : oneLight,
       showLineNumbers: true,
       wrapLines: true,
-      lineNumberStyle: { 
+      lineNumberStyle: {
         width: '3em',
         color: '#aaa',
-        textAlign: 'right' as const, 
+        textAlign: 'right' as const,
         userSelect: 'none' as const,
         paddingRight: '1em',
         borderRight: '1px solid #e5e5e5',
@@ -106,8 +106,8 @@ export default function CodeBlock({ language, code, ...props }: {
       lineNumberContainerStyle: {
         fontStyle: 'normal'
       },
-      customStyle: { 
-        margin: 0, 
+      customStyle: {
+        margin: 0,
         padding: '0.4rem 0.5rem 0.4rem 0',
         borderRadius: 0,
         fontSize: '0.95rem',
@@ -131,7 +131,7 @@ export default function CodeBlock({ language, code, ...props }: {
         range: null
       };
     }
-    
+
     // 处理Svelte文件
     if (lang === 'svelte') {
       return {
@@ -139,7 +139,7 @@ export default function CodeBlock({ language, code, ...props }: {
         range: null
       };
     }
-    
+
     // 原有的语言解析逻辑
     const match = lang.match(/^(\w+)(?:{([^}]+)})?$/);
     if (match && match[2]) {
@@ -155,7 +155,7 @@ export default function CodeBlock({ language, code, ...props }: {
   };
 
   const { language: parsedLanguage, range } = parseLanguageAndRange(language);
-  
+
   // 如果是Vue文件，使用VueSFCBlock组件
   if (parsedLanguage === 'vue') {
     return <VueSFCBlock code={code} commonStyles={commonStyles} />;
@@ -165,18 +165,18 @@ export default function CodeBlock({ language, code, ...props }: {
   if (parsedLanguage === 'svelte') {
     return <SvelteSFCBlock code={code} commonStyles={commonStyles} />;
   }
-  
+
   // 解析代码中的行高亮标记
   const parseCode = (code: string, rangeStr: string | null) => {
     const lines = code.split('\n');
     const lineProps: { [key: number]: { style: React.CSSProperties } } = {};
-    
+
     // 解析行号范围
     const parseLineNumbers = (rangeStr: string): number[] => {
       // console.log('解析行号范围:', rangeStr);
       const numbers: number[] = [];
       const parts = rangeStr.split(',');
-      
+
       for (const part of parts) {
         if (part.includes('-')) {
           const [start, end] = part.split('-').map(Number);
@@ -190,7 +190,7 @@ export default function CodeBlock({ language, code, ...props }: {
           numbers.push(num);
         }
       }
-      
+
       // console.log('解析后的行号数组:', numbers);
       return numbers;
     };
@@ -210,7 +210,7 @@ export default function CodeBlock({ language, code, ...props }: {
         }
       });
     }
-    
+
     // 处理 + 和 - 标记
     lines.forEach((line, index) => {
       if (line.trim().startsWith('+ ')) {
@@ -233,7 +233,7 @@ export default function CodeBlock({ language, code, ...props }: {
         lines[index] = line.replace('- ', '');
       }
     });
-    
+
     return {
       code: lines.join('\n'),
       lineProps
@@ -245,27 +245,27 @@ export default function CodeBlock({ language, code, ...props }: {
   return (
     <div className={commonStyles.container}>
       {/* 内联样式覆盖 */}
-      {/* <style jsx global>{` 
-        // 全局覆盖React Syntax Highlighter的行号样式 
+      {/* <style>{`
+        // 全局覆盖React Syntax Highlighter的行号样式
         .react-syntax-highlighter-line-number,
         pre span.linenumber,
         span[class*="linenumber"],
         span[style*="fontStyle: italic"] {
           font-style: normal !important;
         }
-        
-        // 强制第一列（行号）不使用斜体 
+
+        // 强制第一列（行号）不使用斜体
         pre > span > span:first-child,
         pre > span > span.token.comment:first-child {
           font-style: normal !important;
         }
 
-        // 行高亮样式 
+        // 行高亮样式
         .react-syntax-highlighter-line-number {
           background-color: inherit !important;
         }
        `}</style> */}
-      
+
       <div className={commonStyles.header}>
         {parsedLanguage}
       </div>
@@ -276,10 +276,10 @@ export default function CodeBlock({ language, code, ...props }: {
           lineProps={(lineNumber) => {
             const props = lineProps[lineNumber];
             if (!props) return { key: `line-${lineNumber}`, 'data-line-number': lineNumber };
-            
+
             const isAdd = props.style?.backgroundColor === 'rgba(0, 255, 0, 0.15)';
             const isRemove = props.style?.backgroundColor === 'rgba(255, 0, 0, 0.15)';
-            
+
             return {
               ...props,
               key: `line-${lineNumber}`,
@@ -292,7 +292,7 @@ export default function CodeBlock({ language, code, ...props }: {
           {processedCode}
         </SyntaxHighlighter>
       </div>
-      <style jsx global>{`
+      <style>{`
         .line-add {
           position: relative;
         }

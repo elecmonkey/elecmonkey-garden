@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from 'react-router';
+import { useParams } from 'react-router';
 import HomePage from '@/app/page';
 import AboutPage from '@/app/about/page';
 import BlogPage from '@/app/blog/page';
@@ -68,8 +68,5 @@ export function MonthArchivePaginationRoute() {
 }
 
 export function SearchRoute() {
-  const [searchParams] = useSearchParams();
-  const keyword = searchParams.get('keyword') ?? undefined;
-  const page = searchParams.get('page') ?? undefined;
-  return <SearchPage searchParams={{ keyword, page }} />;
+  return <SearchPage />;
 }

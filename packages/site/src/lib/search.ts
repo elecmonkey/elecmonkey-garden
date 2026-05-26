@@ -1,12 +1,25 @@
-import type { SearchResultItem } from '@/lib/api';
+export type SearchIndexPost = {
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+  author?: string;
+  content?: string;
+};
 
-export type SearchIndexPost = Pick<
-  SearchResultItem['post'],
-  'id' | 'title' | 'date' | 'description' | 'tags' | 'author' | 'content'
->;
-
-export type SearchResult = SearchResultItem & {
+export type SearchResult = {
   post: SearchIndexPost;
+  score: number;
+  matches: {
+    title: boolean;
+    tags: string[];
+    description: boolean;
+    content: {
+      matched: boolean;
+      excerpt: string;
+    };
+  };
 };
 
 export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): SearchResult[] {

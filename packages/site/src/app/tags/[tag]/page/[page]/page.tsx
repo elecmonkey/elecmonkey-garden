@@ -1,31 +1,13 @@
-import type { Metadata } from 'next';
-import { getAllTags, getPostsByTagWithPagination } from '@/lib/api';
+import type { SiteMetadata } from '@/ssg/metadata-types';
+import { getPostsByTagWithPagination } from '@/lib/api';
 import TagContent from '@/components/tags/TagContent';
-import { decodeTagFromSlug, encodeTagToSlug } from '@/lib/tag-url';
+import { decodeTagFromSlug } from '@/lib/tag-url';
 
 type Props = {
   params: { tag: string; page: string };
 };
 
-// 预生成所有分页的静态路径
-export async function generateStaticParams() {
-  const tags = getAllTags();
-  const params = [];
-  
-  for (const tag of tags) {
-    const { totalPages } = getPostsByTagWithPagination(tag.name, 1);
-    for (let page = 2; page <= totalPages; page++) {
-      params.push({ 
-        tag: encodeTagToSlug(tag.name),
-        page: page.toString(),
-      });
-    }
-  }
-  
-  return params;
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
   const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getAllTags } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
 import TagList from '@/components/tag/TagList';
 
-export const metadata: Metadata = {
+export const metadata: SiteMetadata = {
   title: '所有标签 - Elecmonkey的小花园',
   description: '浏览所有博客标签和主题',
 };

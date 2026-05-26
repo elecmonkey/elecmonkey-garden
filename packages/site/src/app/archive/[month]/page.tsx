@@ -1,21 +1,13 @@
-import type { Metadata } from 'next';
-import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
+import type { SiteMetadata } from '@/ssg/metadata-types';
+import { getPostsByMonthWithPagination } from '@/lib/api';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
 
 type Props = {
   params: { month: string };
 };
 
-// 预生成所有月份的静态路径（仅第一页）
-export async function generateStaticParams() {
-  const months = getAllMonths();
-  return months.map((month) => ({
-    month: month.id,
-  }));
-}
-
 // 为每个月份页生成元数据
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
   const { month } = params;
   
   // 转换月份格式: YYYYMM -> YYYY年MM月

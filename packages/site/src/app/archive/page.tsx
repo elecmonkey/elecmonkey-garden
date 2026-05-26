@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getAllMonths } from '@/lib/api';
 import PageContainer from '@/components/layout/PageContainer';
 import Link from '@/components/Link';
 
-export const metadata: Metadata = {
+export const metadata: SiteMetadata = {
   title: '文章归档 - Elecmonkey的小花园',
   description: '按月份浏览所有博客文章',
 };

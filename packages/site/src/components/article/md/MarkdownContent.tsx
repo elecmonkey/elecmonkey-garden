@@ -199,7 +199,7 @@ export default function MarkdownContent({ content }: { content: string }) {
             </a>
           ),
           
-          // 添加图片样式 - 使用 Next.js Image 组件优化图片
+          // 添加图片样式 - 使用兼容 Image 组件处理图片
           img: ({ src, alt, width, height, node: _node, ...props }) => {
             // 类型守卫：确保 src 存在且为字符串
             if (!src || typeof src !== 'string') {

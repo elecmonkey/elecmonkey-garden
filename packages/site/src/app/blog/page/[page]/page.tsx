@@ -1,27 +1,12 @@
 import { getAllPostsWithPagination } from '@/lib/api';
 import BlogIndexContent from '@/components/blog/BlogIndexContent';
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 
 interface Props {
   params: { page: string };
 }
 
-// 预生成所有分页的静态路径
-export async function generateStaticParams() {
-  const { totalPages } = getAllPostsWithPagination(1);
-  const params = [];
-  
-  // 从第2页开始生成
-  for (let page = 2; page <= totalPages; page++) {
-    params.push({ 
-      page: page.toString(),
-    });
-  }
-  
-  return params;
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
   const { page } = params;
   
   return {

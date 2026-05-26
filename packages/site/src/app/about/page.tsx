@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
+import type { SiteMetadata } from '@/ssg/metadata-types';
 import TechWall from './components/TechWall';
 
 import PageContainer from '@/components/layout/PageContainer';
 
 
-export const metadata: Metadata = {
+export const metadata: SiteMetadata = {
   title: "关于我 - Elecmonkey的小花园",
 };
 

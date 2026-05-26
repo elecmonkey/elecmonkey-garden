@@ -1,31 +1,12 @@
-import type { Metadata } from 'next';
-import { getAllMonths, getPostsByMonthWithPagination } from '@/lib/api';
+import type { SiteMetadata } from '@/ssg/metadata-types';
+import { getPostsByMonthWithPagination } from '@/lib/api';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
 
 type Props = {
   params: { month: string; page: string };
 };
 
-// 预生成所有分页的静态路径
-export async function generateStaticParams() {
-  const months = getAllMonths();
-  const params = [];
-  
-  for (const month of months) {
-    const { totalPages } = getPostsByMonthWithPagination(month.id, 1);
-    // 从第2页开始生成
-    for (let page = 2; page <= totalPages; page++) {
-      params.push({ 
-        month: month.id,
-        page: page.toString(),
-      });
-    }
-  }
-  
-  return params;
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
   const { month, page } = params;
   const year = month.substring(0, 4);
   const monthNum = month.substring(4, 6);

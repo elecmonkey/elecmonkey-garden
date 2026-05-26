@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Geist";
+  src: url("../../public/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../../public/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 /* 确保平滑滚动应用在html元素上 */
 html {
   scroll-behavior: smooth;
@@ -135,8 +152,8 @@ html.transitioning * {
   --color-accent-foreground: var(--accent-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Geist", Arial, Helvetica, sans-serif;
+  --font-mono: "Geist Mono", monospace;
 }
 
 
