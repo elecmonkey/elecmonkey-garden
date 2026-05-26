@@ -1,0 +1,47 @@
+{
+  "name": "@elecmonkey/garden-site",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "rsbuild dev --environment web",
+    "build": "rsbuild build && node .rsbuild/ssg/build.js",
+    "start": "rsbuild preview --environment web",
+    "preview": "rsbuild preview --environment web",
+    "lint": "rslint --type-check .",
+    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
+    "build:with-compiler": "pnpm run build:compiler && pnpm run build"
+  },
+  "dependencies": {
+    "@elecmonkey/garden-content-compiler": "^0.1.0",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.17.0",
+    "lucide-react": "^1.16.0",
+    "mermaid": "^11.15.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-markdown": "^10.1.0",
+    "react-router": "^7.15.1",
+    "react-syntax-highlighter": "^16.1.1",
+    "rehype-highlight": "^7.0.2",
+    "rehype-katex": "^7.0.1",
+    "rehype-pretty-code": "^0.14.3",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "shiki": "^4.1.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^2.0.7",
+    "@rsbuild/plugin-react": "^2.0.0",
+    "@rsbuild/plugin-tailwindcss": "^2.0.0",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  },
+  "type": "module"
+}

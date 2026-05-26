@@ -1,0 +1,59 @@
+{
+  "name": "@elecmonkey/garden-content-compiler",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release --no-js --dts native.d.ts && rslib build",
+    "build:debug": "napi build --platform --no-js --dts native.d.ts && rslib build",
+    "build:native": "napi build --platform --release --no-js --dts native.d.ts",
+    "build:native:linux-x64-gnu": "napi build --platform --release --no-js --dts native.d.ts --target x86_64-unknown-linux-gnu --cross-compile",
+    "build:native:linux-x64-musl": "napi build --platform --release --no-js --dts native.d.ts --target x86_64-unknown-linux-musl --cross-compile",
+    "check": "cargo check -p garden_content_compiler_napi && rslib build",
+    "pack:local": "node scripts/build-package.mjs --pack",
+    "pack:linux-x64": "node scripts/build-package.mjs --linux-x64 --platform-packages --pack",
+    "pack:darwin-arm64": "node scripts/build-package.mjs --target aarch64-apple-darwin --platform-packages --pack",
+    "pack:linux-x64-gnu": "node scripts/build-package.mjs --target x86_64-unknown-linux-gnu --platform-packages --pack",
+    "pack:linux-x64-musl": "node scripts/build-package.mjs --target x86_64-unknown-linux-musl --platform-packages --pack",
+    "pack:release": "node scripts/build-package.mjs --release-targets --platform-packages --pack",
+    "release": "node scripts/release-package.mjs",
+    "release:dry-run": "node scripts/release-package.mjs --dry-run",
+    "release:publish": "node scripts/release-package.mjs --publish"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^3.6.2",
+    "@rslib/core": "^0.21.5",
+    "@types/node": "^25.9.1",
+    "@typescript/native-preview": "7.0.0-dev.20260525.1",
+    "typescript": "^6.0.3"
+  },
+  "napi": {
+    "binaryName": "garden-content-compiler",
+    "packageName": "@elecmonkey/garden-content-compiler",
+    "targets": [
+      "aarch64-apple-darwin",
+      "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-linux-musl"
+    ]
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "optionalDependencies": {
+    "@elecmonkey/garden-content-compiler-darwin-arm64": "0.1.0",
+    "@elecmonkey/garden-content-compiler-linux-x64-gnu": "0.1.0",
+    "@elecmonkey/garden-content-compiler-linux-x64-musl": "0.1.0"
+  }
+}

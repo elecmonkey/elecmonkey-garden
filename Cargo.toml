@@ -1,0 +1,13 @@
+[workspace]
+members = ["crates/content-compiler", "packages/content-compiler-napi"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+
+[workspace.dependencies]
+garden-content-compiler = { path = "crates/content-compiler" }
+napi = { version = "3.4.0", default-features = false, features = ["napi4"] }
+napi-build = "2.2.3"
+napi-derive = "3.3.0"

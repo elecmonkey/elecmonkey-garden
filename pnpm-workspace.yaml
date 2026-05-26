@@ -1,0 +1,11 @@
+packages:
+  - "packages/*"
+
+minimumReleaseAgeExclude:
+  - "@elecmonkey/garden-content-compiler"
+  - "@elecmonkey/garden-content-compiler-*"
+  - "@rsbuild/plugin-tailwindcss"
+  - "@typescript/native-preview"
+  - "@typescript/native-preview-*"
+  - "es-toolkit"
+  - "webpack"

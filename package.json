@@ -3,44 +3,19 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 3710",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint .",
-    "type-check": "next typegen & tsc -b --noEmit"
-  },
-  "dependencies": {
-    "geist": "^1.7.0",
-    "gray-matter": "^4.0.3",
-    "katex": "^0.16.45",
-    "lucide-react": "^1.8.0",
-    "mermaid": "^11.14.0",
-    "next": "^16.2.4",
-    "next-themes": "^0.4.6",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-markdown": "^10.1.0",
-    "react-syntax-highlighter": "^16.1.1",
-    "rehype-highlight": "^7.0.2",
-    "rehype-katex": "^7.0.1",
-    "rehype-pretty-code": "^0.14.3",
-    "remark": "^15.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0",
-    "shiki": "^4.0.2"
+    "dev": "pnpm --filter @elecmonkey/garden-site dev",
+    "build": "pnpm --filter @elecmonkey/garden-site build",
+    "start": "pnpm --filter @elecmonkey/garden-site start",
+    "preview": "pnpm --filter @elecmonkey/garden-site preview",
+    "lint": "rslint --type-check .",
+    "pack:content-compiler": "pnpm --filter @elecmonkey/garden-content-compiler pack:release",
+    "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
+    "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local",
+    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
+    "build:all": "pnpm run build:compiler && pnpm run build"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.11",
-    "@tailwindcss/postcss": "^4.2.2",
-    "@tailwindcss/typography": "^0.5.19",
-    "@types/node": "^25.6.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.4",
-    "tailwindcss": "^4.2.2",
-    "typescript": "^6.0.3"
+    "@rslint/core": "^0.5.3"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@11.3.0"
 }

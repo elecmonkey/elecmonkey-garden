@@ -1,0 +1,11 @@
+[package]
+name = "garden-content-compiler"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[lib]
+name = "garden_content_compiler"
+path = "src/lib.rs"
+
+[dependencies]

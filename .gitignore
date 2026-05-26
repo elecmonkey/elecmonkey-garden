@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/.pnpm-store/
 /node_modules
 /.pnp
 .pnp.*
@@ -48,3 +49,20 @@ next-env.d.ts
 
 git*.sh
 git*.txt
+# workspace packages
+/packages/*/node_modules/
+/packages/*/.next/
+/packages/*/out/
+/packages/*/dist/
+/packages/*/.rsbuild/
+/packages/*/build/
+
+# rust
+/target/
+
+# generated native bindings
+/packages/content-compiler-napi/*.node
+/packages/content-compiler-napi/index.js
+/packages/content-compiler-napi/native.d.ts
+/packages/content-compiler-napi/npm/
+/packages/content-compiler-napi/artifacts/

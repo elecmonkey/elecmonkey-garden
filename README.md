@@ -2,11 +2,11 @@
 
 [https://www.elecmonkey.com](https://www.elecmonkey.com)
 
-个人技术博客，基于 [Next.js](https://nextjs.org)。
+个人技术博客，基于 Rsbuild、React Router 与 React SSG。
 
 ## 内容管理
 
-博客文章存储在 `src/content/posts` 目录中，使用 Markdown 格式。每篇文章需要包含以下前置元数据：
+博客文章存储在根目录的 `content/posts` 目录中，使用 Markdown 格式。每篇文章需要包含以下前置元数据：
 
 ```md
 ---
