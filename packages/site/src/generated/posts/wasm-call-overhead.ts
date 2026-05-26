@@ -2,6 +2,9 @@
 
 import type { PostData } from '@/lib/api';
 
+export const postSourceHash = "sha256:d6e13e99c0c723bdf3133416a28dfc83bdddc4eb76cd8b007d974857d98d2df9";
+export const postContentHash = "sha256:aa22b6675f7a481d10137334ca6ede8491a3fba2b229f2c951baf8d880883fb1";
+
 export const post = {
   "id": "wasm-call-overhead",
   "content": "\n> 希望没有什么神奇的优化手段干扰测试，实在是不太懂 Rust 和 V8 的各种编译机制。\n\n## 调用开销分析\n\n在 WASM 内部最简单的加法操作。\n\n### 测试环境\n\n- 测试次数: 1,000,000 次\n- 测试工具: Chrome 139\n\n### 测试结果\n\n| 指标 | 数值 |\n| :--- | :--- |\n| 总调用次数 | 1,000,000 |\n| 总时间 | 21.50ms |\n| 单次调用时间 | 21.50 纳秒 |\n| 每秒调用次数 | 46,511,628 |\n| 单次调用开销 | 0.0215 微秒 |\n\n## 计算密集型测试 (Rust vs JavaScript)\n\n递归计算斐波那契第 40 个数的测试。\n\n### 测试环境\n\n- 测试工具: Chrome 139\n- Rust (WASM) 执行次数: 50,000 次\n- JavaScript 执行次数: 5 次\n\n### 测试结果\n\n#### Rust (WASM) 50,000 次结果\n\n- 总时间: 6.40ms\n\n#### JavaScript 5 次结果\n\n- 总时间: 3549.40ms",

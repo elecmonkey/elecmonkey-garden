@@ -78,6 +78,10 @@ function fileHash(source) {
   return `sha256:${crypto.createHash('sha256').update(source).digest('hex')}`;
 }
 
+function postContentHash(post) {
+  return fileHash(JSON.stringify(post));
+}
+
 function toPosixPath(value) {
   return value.split(path.sep).join('/');
 }
@@ -216,15 +220,17 @@ async function buildPostsWithCache() {
     }
 
     const cacheFile = toCacheFile(post.id);
+    const contentHash = postContentHash(post);
     await writeCachePost(cacheFile, post);
 
     nextManifest.posts[sourceKey] = {
       slug: post.id,
       monthFolder,
       hash,
+      contentHash,
       cacheFile,
     };
-    posts.push({ ...post, sourceKey });
+    posts.push({ ...post, sourceKey, sourceHash: hash, contentHash });
   }
 
   const activeCacheFiles = new Set(
@@ -238,31 +244,40 @@ async function buildPostsWithCache() {
   }
 
   posts.sort((a, b) => b.date.localeCompare(a.date));
-  for (const post of posts) {
-    delete post.sourceKey;
-  }
   await writeFileIfChanged(cacheManifestFile, `${JSON.stringify(nextManifest, null, 2)}\n`);
 
   return { posts, compiledCount, reusedCount };
 }
 
-function createPostModule(post) {
+function createPostModule(postWithMeta) {
+  const { sourceHash, contentHash, sourceKey, ...post } = postWithMeta;
+
   return `${GENERATED_HEADER}\n\n` +
     `import type { PostData } from '@/lib/api';\n\n` +
+    `export const postSourceHash = ${JSON.stringify(sourceHash)};\n` +
+    `export const postContentHash = ${JSON.stringify(contentHash)};\n\n` +
     `export const post = ${JSON.stringify(post, null, 2)} satisfies PostData;\n`;
 }
 
 function createContentModule(posts) {
   const imports = posts
-    .map((post, index) => `import { post as post${index} } from './posts/${post.id}';`)
+    .map((post, index) => (
+      `import { post as post${index}, postContentHash as post${index}ContentHash, postSourceHash as post${index}SourceHash } from './posts/${post.id}';`
+    ))
     .join('\n');
   const postList = posts.map((_post, index) => `  post${index},`).join('\n');
+  const hashList = posts
+    .map((post, index) => (
+      `  ${JSON.stringify(post.id)}: { sourceHash: post${index}SourceHash, contentHash: post${index}ContentHash },`
+    ))
+    .join('\n');
 
   return `${GENERATED_HEADER}\n\n` +
     `import type { PostData } from '@/lib/api';\n` +
     `${imports}\n\n` +
     `export const generatedPosts = [\n${postList}\n] satisfies PostData[];\n\n` +
-    `export const generatedPublicPosts = generatedPosts.filter((post) => !post.isHidden);\n`;
+    `export const generatedPublicPosts = generatedPosts.filter((post) => !post.isHidden);\n\n` +
+    `export const generatedPostHashes = {\n${hashList}\n} satisfies Record<string, { sourceHash: string; contentHash: string }>;\n`;
 }
 
 async function cleanupStaleGeneratedPosts(activeSlugs) {

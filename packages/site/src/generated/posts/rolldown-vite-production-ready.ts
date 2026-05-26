@@ -2,6 +2,9 @@
 
 import type { PostData } from '@/lib/api';
 
+export const postSourceHash = "sha256:f558da04ec313b01cc3cfff8e58ed4c349c3cbc658a6c1ee8bc614d76d4a8904";
+export const postContentHash = "sha256:4981c4e206408e1b4080477b795abe9e6dda3af069727ca86a3b2ff11a40958b";
+
 export const post = {
   "id": "rolldown-vite-production-ready",
   "content": "\n绝对值得。\n\n前提是有一定规模的项目。部分行为还是和基于 Rollup 的 Vite 有区别。\n\n---\n**Announcing Rolldown-Vite**\n\n*May 30, 2025*\n\n> TL;DR: Try out the Rolldown-powered Vite today by using the `rolldown-vite` package instead of the default `vite` package.\n>\n> — Evan You\n\n\n****\n\n**Vite 7.0 发布了！**\n\n*2025年6月24日*\n\n> 我们很高兴与大家分享 Vite 7 的发布！从 Evan You 向 Vite 仓库提交第一次 commit 至今已经过去 5 年了，当时没有人能预料到前端生态会发生如此巨大的变化。如今，大多数现代前端框架和工具正在协同工作，构建在 Vite 共享的基础设施之上。\n>\n> — Vite 团队\n\n---\n\n\n![Vite with Rollup](https://images.elecmonkey.com/articles/202507/rollup-vite.png)\n\n![Rolldown-vite](https://images.elecmonkey.com/articles/202507/rolldown-vite.png)",

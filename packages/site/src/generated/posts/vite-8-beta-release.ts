@@ -2,6 +2,9 @@
 
 import type { PostData } from '@/lib/api';
 
+export const postSourceHash = "sha256:791e3abd8f9b30ca5f7a94baea28aaa8d5a31b329e5bd9dc20c6279c26ac9eb1";
+export const postContentHash = "sha256:3a8d78212dc20a7df7fd82c91bc5c979a417dbadf1ae4308e8efdc09e85fa45b";
+
 export const post = {
   "id": "vite-8-beta-release",
   "content": "\n[feat!: the epic `rolldown-vite` merge](https://github.com/vitejs/vite/pull/21189)\n\n从 Rolldown-vite 7.x 迁移没有遇到任何阻碍，更改版本号后直接 `pnpm i` 即可。\n\n来来来，来一道面试八股文：Vite 底层由什么工具实现依赖预构建和生产环境打包？\n\n趁着 Vite 8 还是 beta，珍惜最后的可以回答 esbuild + rollup 的时光吧（",
