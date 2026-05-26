@@ -12,33 +12,8 @@
     "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
     "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local"
   },
-  "dependencies": {
-    "gray-matter": "^4.0.3",
-    "katex": "^0.16.45",
-    "lucide-react": "^1.8.0",
-    "mermaid": "^11.14.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-markdown": "^10.1.0",
-    "react-syntax-highlighter": "^16.1.1",
-    "rehype-highlight": "^7.0.2",
-    "rehype-katex": "^7.0.1",
-    "rehype-pretty-code": "^0.14.3",
-    "remark": "^15.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0",
-    "shiki": "^4.0.2"
-  },
   "devDependencies": {
-    "@rslint/core": "^0.5.3",
-    "@tailwindcss/forms": "^0.5.11",
-    "@tailwindcss/typography": "^0.5.19",
-    "@types/node": "^25.6.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "tailwindcss": "^4.2.2",
-    "typescript": "^6.0.3"
+    "@rslint/core": "^0.5.3"
   },
   "packageManager": "pnpm@10.33.0"
 }
