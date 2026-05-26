@@ -15,6 +15,7 @@ pub struct JsContentManifest {
 pub struct JsPost {
     pub id: String,
     pub content: String,
+    pub search_content: String,
     pub month_folder: String,
     pub is_draft: bool,
     pub is_hidden: bool,
@@ -76,6 +77,7 @@ impl From<Post> for JsPost {
         Self {
             id: post.id,
             content: post.content,
+            search_content: post.search_content,
             month_folder: post.month_folder,
             is_draft: post.is_draft,
             is_hidden: post.is_hidden,
