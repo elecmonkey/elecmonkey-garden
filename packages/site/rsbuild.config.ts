@@ -4,7 +4,13 @@ import { pluginTailwindcss } from '@rsbuild/plugin-tailwindcss';
 import { gardenContentPlugin } from '@elecmonkey/garden-content-compiler';
 
 export default defineConfig({
-  plugins: [gardenContentPlugin(), pluginReact(), pluginTailwindcss()],
+  plugins: [
+    gardenContentPlugin({
+      postsDirectory: '../../content/posts',
+    }),
+    pluginReact(),
+    pluginTailwindcss(),
+  ],
   resolve: {
     alias: {
       '@': './src',

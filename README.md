@@ -6,7 +6,7 @@
 
 ## 内容管理
 
-博客文章存储在 `packages/site/src/content/posts` 目录中，使用 Markdown 格式。每篇文章需要包含以下前置元数据：
+博客文章存储在根目录的 `content/posts` 目录中，使用 Markdown 格式。每篇文章需要包含以下前置元数据：
 
 ```md
 ---
