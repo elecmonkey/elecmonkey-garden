@@ -5,3 +5,6 @@
 /build
 *.tsbuildinfo
 next-env.d.ts
+
+# garden content cache
+/.garden-cache/
