@@ -3,20 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "index.cjs",
-  "types": "index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
+    "dist",
     "index.cjs",
-    "index.d.ts",
     "*.node"
   ],
   "scripts": {
-    "build": "napi build --platform --release",
-    "build:debug": "napi build --platform",
-    "check": "cargo check -p garden_content_compiler_napi"
+    "build": "napi build --platform --release && rslib build",
+    "build:debug": "napi build --platform && rslib build",
+    "check": "cargo check -p garden_content_compiler_napi && rslib build"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^3.6.2"
+    "@napi-rs/cli": "^3.6.2",
+    "@rslib/core": "^0.21.5",
+    "@typescript/native-preview": "7.0.0-dev.20260525.1"
   },
   "napi": {
     "binaryName": "garden-content-compiler",
@@ -31,5 +33,12 @@
       "x86_64-pc-windows-msvc",
       "aarch64-pc-windows-msvc"
     ]
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   }
 }

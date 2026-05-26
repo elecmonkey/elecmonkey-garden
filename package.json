@@ -8,8 +8,7 @@
     "start": "pnpm --filter @elecmonkey/garden-site start",
     "preview": "pnpm --filter @elecmonkey/garden-site preview",
     "lint": "pnpm --filter @elecmonkey/garden-site lint",
-    "type-check": "pnpm --filter @elecmonkey/garden-site type-check",
-    "content": "pnpm --filter @elecmonkey/garden-site content"
+    "type-check": "pnpm --filter @elecmonkey/garden-site type-check"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

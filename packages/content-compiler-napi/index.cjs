@@ -23,18 +23,25 @@ for (const candidate of candidates) {
   }
 }
 
+function nativeBindingError() {
+  const message = [
+    'garden-content-compiler native binding is not built for this platform.',
+    'Run `pnpm --filter @elecmonkey/garden-content-compiler build`.',
+    `Last lookup: ${path.basename(candidates[candidates.length - 1])}`,
+  ].join(' ');
+  return new Error(loadError ? `${message} ${loadError.message}` : message);
+}
+
 if (!binding) {
   binding = {
     version() {
       return '0.0.0';
     },
+    compilePost() {
+      throw nativeBindingError();
+    },
     compilePosts() {
-      const message = [
-        'garden-content-compiler native binding is not built for this platform.',
-        'Run `pnpm --filter @elecmonkey/garden-content-compiler build`.',
-        `Last lookup: ${path.basename(candidates[candidates.length - 1])}`,
-      ].join(' ');
-      throw new Error(loadError ? `${message} ${loadError.message}` : message);
+      throw nativeBindingError();
     },
   };
 }
