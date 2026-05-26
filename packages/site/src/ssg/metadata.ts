@@ -10,7 +10,7 @@ import { metadata as archiveMetadata } from '../app/archive/page';
 import { generateMetadata as generateMonthMetadata } from '../app/archive/[month]/page';
 import { generateMetadata as generateMonthPageMetadata } from '../app/archive/[month]/page/[page]/page';
 import { generateMetadata as generateSearchMetadata } from '../app/search/page';
-import type { MetadataValue, RobotsValue, SiteMetadata } from './metadata-types';
+import type { RobotsValue, SiteMetadata } from './metadata-types';
 
 const siteUrl = 'https://www.elecmonkey.com';
 

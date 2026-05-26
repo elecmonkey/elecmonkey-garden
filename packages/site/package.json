@@ -7,11 +7,11 @@
     "build": "pnpm run build:compiler && rsbuild build && node .rsbuild/ssg/build.js",
     "start": "rsbuild preview --environment web",
     "preview": "rsbuild preview --environment web",
-    "lint": "eslint .",
-    "type-check": "tsc -b --noEmit",
+    "lint": "rslint --type-check .",
     "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build"
   },
   "dependencies": {
+    "@elecmonkey/garden-content-compiler": "workspace:*",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
     "lucide-react": "^1.8.0",
@@ -27,8 +27,7 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "shiki": "^4.0.2",
-    "@elecmonkey/garden-content-compiler": "workspace:*"
+    "shiki": "^4.0.2"
   },
   "devDependencies": {
     "@rsbuild/core": "^2.0.7",
@@ -40,7 +39,6 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint": "^9.39.4",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.3"
   },

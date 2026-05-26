@@ -76,7 +76,6 @@ export default function CodeBlock({ language, code, ...props }: {
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

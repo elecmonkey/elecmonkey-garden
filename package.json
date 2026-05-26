@@ -7,8 +7,7 @@
     "build": "pnpm --filter @elecmonkey/garden-site build",
     "start": "pnpm --filter @elecmonkey/garden-site start",
     "preview": "pnpm --filter @elecmonkey/garden-site preview",
-    "lint": "pnpm --filter @elecmonkey/garden-site lint",
-    "type-check": "pnpm --filter @elecmonkey/garden-site type-check",
+    "lint": "rslint --type-check .",
     "pack:content-compiler": "pnpm --filter @elecmonkey/garden-content-compiler pack:all",
     "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
     "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local"
@@ -31,13 +30,13 @@
     "shiki": "^4.0.2"
   },
   "devDependencies": {
+    "@rslint/core": "^0.5.3",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint": "^9.39.4",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.3"
   },
