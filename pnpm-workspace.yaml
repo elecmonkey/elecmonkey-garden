@@ -1,2 +1,9 @@
 packages:
   - "packages/*"
+
+minimumReleaseAgeExclude:
+  - "@rsbuild/plugin-tailwindcss"
+  - "@typescript/native-preview"
+  - "@typescript/native-preview-*"
+  - "es-toolkit"
+  - "webpack"
