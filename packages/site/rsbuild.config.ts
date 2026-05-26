@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises';
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginTailwindcss } from '@rsbuild/plugin-tailwindcss';
@@ -11,6 +12,22 @@ export default defineConfig({
   },
   server: {
     port: 3710,
+    setup({ action, server }) {
+      if (action !== 'dev') {
+        return;
+      }
+
+      server.middlewares.use('/static/search/index.json', async (_req, res) => {
+        try {
+          const searchIndex = await readFile('src/generated/search-index.json');
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(searchIndex);
+        } catch {
+          res.statusCode = 404;
+          res.end('Search index is not generated. Run `pnpm content` first.');
+        }
+      });
+    },
   },
   environments: {
     web: {
