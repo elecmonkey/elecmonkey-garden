@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "rsbuild dev --environment web",
-    "build": "pnpm run build:compiler && rsbuild build && node .rsbuild/ssg/build.js",
+    "build": "rsbuild build && node .rsbuild/ssg/build.js",
     "start": "rsbuild preview --environment web",
     "preview": "rsbuild preview --environment web",
     "lint": "rslint --type-check .",
-    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build"
+    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
+    "build:with-compiler": "pnpm run build:compiler && pnpm run build"
   },
   "dependencies": {
     "@elecmonkey/garden-content-compiler": "workspace:*",

@@ -60,54 +60,139 @@ export type SearchResultItem = {
   };
 };
 
-function sortPosts(posts: PostData[]): PostData[] {
-  return [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+type PostPathData = {
+  params: {
+    slug: string;
+  };
+  monthFolder: string;
+};
+
+type PostNavigation = {
+  prevPost?: { id: string; title: string };
+  nextPost?: { id: string; title: string };
+};
+
+const allPosts = generatedPosts as PostData[];
+const publicPostsWithDrafts = generatedPublicPosts as PostData[];
+const nonDraftPosts = allPosts.filter((post) => !post.isDraft);
+const publicPosts = publicPostsWithDrafts.filter((post) => !post.isDraft);
+
+const postById = new Map<string, PostData>();
+const publicPostIndexById = new Map<string, number>();
+const postsByTag = new Map<string, PostData[]>();
+const postsByMonth = new Map<string, PostData[]>();
+
+const allPostIds: PostPathData[] = [];
+
+for (const post of allPosts) {
+  postById.set(post.id, post);
+  allPostIds.push({
+    params: {
+      slug: post.id,
+    },
+    monthFolder: post.monthFolder,
+  });
 }
 
+publicPosts.forEach((post, index) => {
+  publicPostIndexById.set(post.id, index);
+
+  for (const tag of post.tags) {
+    const tagPosts = postsByTag.get(tag);
+    if (tagPosts) {
+      tagPosts.push(post);
+    } else {
+      postsByTag.set(tag, [post]);
+    }
+  }
+
+  const monthPosts = postsByMonth.get(post.monthFolder);
+  if (monthPosts) {
+    monthPosts.push(post);
+  } else {
+    postsByMonth.set(post.monthFolder, [post]);
+  }
+});
+
+const allTags = calculateTagSizes(
+  Array.from(postsByTag, ([name, posts]) => ({
+    name,
+    count: posts.length,
+  })).sort((a, b) => a.name.localeCompare(b.name)),
+);
+
+const allMonths = Array.from(postsByMonth, ([id, posts]) => {
+  const year = id.substring(0, 4);
+  const month = id.substring(4, 6);
+
+  return {
+    id,
+    displayName: `${year}年${month}月`,
+    count: posts.length,
+  };
+}).sort((a, b) => (a.id < b.id ? 1 : -1));
+
 function getSourcePosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
-  const { includeHidden = false } = options;
-  return includeHidden ? generatedPosts : generatedPublicPosts;
+  const { includeDrafts = false, includeHidden = false } = options;
+
+  if (includeDrafts && includeHidden) {
+    return allPosts;
+  }
+
+  if (includeDrafts) {
+    return publicPostsWithDrafts;
+  }
+
+  if (includeHidden) {
+    return nonDraftPosts;
+  }
+
+  return publicPosts;
+}
+
+function paginateItems<T>(items: T[], page: number = 1, pageSize: number = 10): {
+  posts: T[];
+  totalPosts: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+} {
+  const totalPosts = items.length;
+  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
+  const validPage = totalPosts <= pageSize ? 1 : Math.max(1, Math.min(page, totalPages));
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  return {
+    posts: totalPosts <= pageSize ? [...items] : items.slice(startIndex, endIndex),
+    totalPosts,
+    totalPages,
+    currentPage: validPage,
+    pageSize,
+  };
 }
 
 // 获取所有博客文章数据（默认不包含草稿和隐藏文章）
 export function getAllPosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
-  return sortPosts(getSourcePosts(options));
+  return [...getSourcePosts(options)];
 }
 
 // 获取所有标签及其计数
 export function getAllTags(): TagCount[] {
-  // 只获取非草稿、非隐藏文章的标签
-  const posts = getAllPosts({ includeDrafts: false, includeHidden: false });
-  const tagCount: Record<string, number> = {};
-  
-  // 统计每个标签出现的次数
-  posts.forEach(post => {
-    post.tags.forEach(tag => {
-      tagCount[tag] = (tagCount[tag] || 0) + 1;
-    });
-  });
-  
-  // 转换为数组并按标签名称字母顺序排序
-  const tags = Object.entries(tagCount)
-    .map(([name, count]) => ({
-      name,
-      count,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
-  
-  // 计算标签大小
-  return calculateTagSizes(tags);
+  return allTags.map((tag) => ({ ...tag }));
 }
 
 // 根据标签名获取相关文章
 export function getPostsByTag(tagName: string): PostData[] {
-  // 只获取非草稿、非隐藏文章
-  const allPosts = getAllPosts({ includeDrafts: false, includeHidden: false });
-  return allPosts.filter(post => post.tags.includes(tagName));
+  return [...(postsByTag.get(tagName) ?? [])];
 }
 
 // 计算标签云的标签大小
 function calculateTagSizes(tags: TagCount[]): TagCount[] {
+  if (tags.length === 0) {
+    return [];
+  }
+
   // 找出最大和最小出现次数
   const maxCount = Math.max(...tags.map(tag => tag.count));
   const minCount = Math.min(...tags.map(tag => tag.count));
@@ -130,18 +215,18 @@ function calculateTagSizes(tags: TagCount[]): TagCount[] {
 }
 
 // 获取所有可能的文章 ID 和它们所在的月份文件夹
-export function getAllPostIds() {
-  return generatedPosts.map((post) => ({
+export function getAllPostIds(): PostPathData[] {
+  return allPostIds.map((postId) => ({
     params: {
-      slug: post.id,
+      slug: postId.params.slug,
     },
-    monthFolder: post.monthFolder,
+    monthFolder: postId.monthFolder,
   }));
 }
 
 // 根据 ID 和月份文件夹获取文章数据
-export function getPostById(id: string): PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } } {
-  const currentPost = generatedPosts.find((post) => post.id === id);
+export function getPostById(id: string): PostData & PostNavigation {
+  const currentPost = postById.get(id);
 
   if (!currentPost) {
     throw new Error(`找不到ID为 "${id}" 的文章`);
@@ -155,16 +240,15 @@ export function getPostById(id: string): PostData & { prevPost?: { id: string; t
   let nextPost: { id: string; title: string } | undefined;
 
   if (!currentPost.isHidden) {
-    const allPublicPosts = sortPosts(generatedPublicPosts);
-    const currentIndex = allPublicPosts.findIndex((post) => post.id === id);
+    const currentIndex = publicPostIndexById.get(id);
 
-    prevPost = currentIndex < allPublicPosts.length - 1
-      ? { id: allPublicPosts[currentIndex + 1].id, title: allPublicPosts[currentIndex + 1].title }
-      : undefined;
+    if (currentIndex !== undefined) {
+      const previous = publicPosts[currentIndex + 1];
+      const next = publicPosts[currentIndex - 1];
 
-    nextPost = currentIndex > 0
-      ? { id: allPublicPosts[currentIndex - 1].id, title: allPublicPosts[currentIndex - 1].title }
-      : undefined;
+      prevPost = previous ? { id: previous.id, title: previous.title } : undefined;
+      nextPost = next ? { id: next.id, title: next.title } : undefined;
+    }
   }
 
   return {
@@ -176,152 +260,27 @@ export function getPostById(id: string): PostData & { prevPost?: { id: string; t
 
 // 获取所有月份及其文章数量
 export function getAllMonths(): MonthData[] {
-  // 只统计非草稿、非隐藏文章的月份
-  const posts = getAllPosts({ includeDrafts: false, includeHidden: false });
-  const monthCount: Record<string, number> = {};
-  
-  // 统计每个月份的文章数量
-  posts.forEach(post => {
-    monthCount[post.monthFolder] = (monthCount[post.monthFolder] || 0) + 1;
-  });
-  
-  // 转换为数组形式
-  const monthsData = Object.entries(monthCount)
-    .map(([id, count]) => {
-      // 转换月份格式: YYYYMM -> YYYY年MM月
-      const year = id.substring(0, 4);
-      const month = id.substring(4, 6);
-      const displayName = `${year}年${month}月`;
-      
-      return {
-        id,
-        displayName,
-        count
-      };
-    });
-  
-  // 按月份降序排列（最新的月份在前）
-  return monthsData.sort((a, b) => {
-    if (a.id < b.id) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  return allMonths.map((month) => ({ ...month }));
 }
 
 // 根据月份获取相关文章
 export function getPostsByMonth(month: string): PostData[] {
-  const posts = generatedPublicPosts.filter((post) => post.monthFolder === month);
-  return sortPosts(posts);
+  return [...(postsByMonth.get(month) ?? [])];
 }
 
 // 获取分页的文章列表
 export function getAllPostsWithPagination(page: number = 1, pageSize: number = 10): PaginatedPosts {
-  // 只获取非草稿、非隐藏文章
-  const allPosts = getAllPosts({ includeDrafts: false, includeHidden: false });
-  const totalPosts = allPosts.length;
-  
-  // 如果文章总数少于或等于每页数量，则不分页
-  if (totalPosts <= pageSize) {
-    return {
-      posts: allPosts,
-      totalPosts,
-      totalPages: 1, // 总是至少有1页
-      currentPage: 1,
-      pageSize,
-    };
-  }
-  
-  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
-  
-  // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages));
-  
-  // 计算当前页的文章
-  const startIndex = (validPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPagePosts = allPosts.slice(startIndex, endIndex);
-  
-  return {
-    posts: currentPagePosts,
-    totalPosts,
-    totalPages,
-    currentPage: validPage,
-    pageSize,
-  };
+  return paginateItems(publicPosts, page, pageSize);
 }
 
 // 根据标签获取分页的文章列表
 export function getPostsByTagWithPagination(tagName: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
-  // 获取包含该标签的所有非草稿、非隐藏文章
-  const allPosts = getPostsByTag(tagName);
-  const totalPosts = allPosts.length;
-  
-  // 如果文章总数少于或等于每页数量，则不分页
-  if (totalPosts <= pageSize) {
-    return {
-      posts: allPosts,
-      totalPosts,
-      totalPages: 1, // 总是至少有1页
-      currentPage: 1,
-      pageSize,
-    };
-  }
-  
-  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
-  
-  // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages));
-  
-  // 计算当前页的文章
-  const startIndex = (validPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPagePosts = allPosts.slice(startIndex, endIndex);
-  
-  return {
-    posts: currentPagePosts,
-    totalPosts,
-    totalPages,
-    currentPage: validPage,
-    pageSize,
-  };
+  return paginateItems(postsByTag.get(tagName) ?? [], page, pageSize);
 }
 
 // 根据月份获取分页的文章列表
 export function getPostsByMonthWithPagination(month: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
-  // 获取该月份的所有非草稿、非隐藏文章
-  const allPosts = getPostsByMonth(month);
-  const totalPosts = allPosts.length;
-  
-  // 如果文章总数少于或等于每页数量，则不分页
-  if (totalPosts <= pageSize) {
-    return {
-      posts: allPosts,
-      totalPosts,
-      totalPages: 1, // 总是至少有1页
-      currentPage: 1,
-      pageSize,
-    };
-  }
-  
-  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
-  
-  // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages));
-  
-  // 计算当前页的文章
-  const startIndex = (validPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPagePosts = allPosts.slice(startIndex, endIndex);
-  
-  return {
-    posts: currentPagePosts,
-    totalPosts,
-    totalPages,
-    currentPage: validPage,
-    pageSize,
-  };
+  return paginateItems(postsByMonth.get(month) ?? [], page, pageSize);
 }
 
 // 搜索文章
@@ -330,14 +289,11 @@ export function searchPosts(keyword: string): SearchResultItem[] {
     return [];
   }
   
-  // 只搜索非草稿、非隐藏文章
-  const allPosts = getAllPosts({ includeDrafts: false, includeHidden: false });
-  
   // 转换关键词为小写，用于不区分大小写的搜索
   const normalizedKeyword = keyword.toLowerCase();
   
   // 计算每篇文章的相关度得分
-  const scoredPosts = allPosts.map(post => {
+  const scoredPosts = publicPosts.map(post => {
     let score = 0;
     const matches = {
       title: false,
@@ -349,69 +305,77 @@ export function searchPosts(keyword: string): SearchResultItem[] {
       }
     };
     
+    const normalizedTitle = post.title.toLowerCase();
+
     // 标题匹配（权重最高）
-    if (post.title.toLowerCase().includes(normalizedKeyword)) {
+    if (normalizedTitle.includes(normalizedKeyword)) {
       score += 10;
       matches.title = true;
       // 标题开头匹配得分更高
-      if (post.title.toLowerCase().startsWith(normalizedKeyword)) {
+      if (normalizedTitle.startsWith(normalizedKeyword)) {
         score += 5;
       }
     }
     
     // 标签匹配（权重次高）
     post.tags.forEach(tag => {
-      if (tag.toLowerCase().includes(normalizedKeyword)) {
+      const normalizedTag = tag.toLowerCase();
+      if (normalizedTag.includes(normalizedKeyword)) {
         score += 8;
         matches.tags.push(tag);
         // 精确匹配标签得分更高
-        if (tag.toLowerCase() === normalizedKeyword) {
+        if (normalizedTag === normalizedKeyword) {
           score += 5;
         }
       }
     });
     
     // 描述匹配（中等权重）
-    if (post.description && post.description.toLowerCase().includes(normalizedKeyword)) {
-      score += 5;
-      matches.description = true;
+    if (post.description) {
+      const normalizedDescription = post.description.toLowerCase();
+      if (normalizedDescription.includes(normalizedKeyword)) {
+        score += 5;
+        matches.description = true;
+      }
     }
     
     // 内容匹配（基础权重）
-    if (post.content && post.content.toLowerCase().includes(normalizedKeyword)) {
-      score += 3;
-      matches.content.matched = true;
-      
-      // 计算关键词在内容中出现的次数
-      const matchCount = post.content.toLowerCase().split(normalizedKeyword).length - 1;
-      // 出现次数也计入得分，但设置上限以避免过度权重
-      score += Math.min(matchCount, 5) * 0.5;
-      
-      // 提取匹配的上下文作为摘要
-      try {
-        const lowerContent = post.content.toLowerCase();
-        const keywordIndex = lowerContent.indexOf(normalizedKeyword);
-        if (keywordIndex !== -1) {
-          // 获取关键词前后一定长度的内容作为摘要
-          const startIndex = Math.max(0, keywordIndex - 50);
-          const endIndex = Math.min(lowerContent.length, keywordIndex + normalizedKeyword.length + 50);
-          let excerpt = post.content.substring(startIndex, endIndex);
-          
-          // 如果摘要不是从内容开头开始，添加省略号
-          if (startIndex > 0) {
-            excerpt = "..." + excerpt;
+    if (post.content) {
+      const normalizedContent = post.content.toLowerCase();
+      if (normalizedContent.includes(normalizedKeyword)) {
+        score += 3;
+        matches.content.matched = true;
+        
+        // 计算关键词在内容中出现的次数
+        const matchCount = normalizedContent.split(normalizedKeyword).length - 1;
+        // 出现次数也计入得分，但设置上限以避免过度权重
+        score += Math.min(matchCount, 5) * 0.5;
+        
+        // 提取匹配的上下文作为摘要
+        try {
+          const keywordIndex = normalizedContent.indexOf(normalizedKeyword);
+          if (keywordIndex !== -1) {
+            // 获取关键词前后一定长度的内容作为摘要
+            const startIndex = Math.max(0, keywordIndex - 50);
+            const endIndex = Math.min(normalizedContent.length, keywordIndex + normalizedKeyword.length + 50);
+            let excerpt = post.content.substring(startIndex, endIndex);
+            
+            // 如果摘要不是从内容开头开始，添加省略号
+            if (startIndex > 0) {
+              excerpt = "..." + excerpt;
+            }
+            
+            // 如果摘要不是到内容结尾，添加省略号
+            if (endIndex < post.content.length) {
+              excerpt = excerpt + "...";
+            }
+            
+            matches.content.excerpt = excerpt;
           }
-          
-          // 如果摘要不是到内容结尾，添加省略号
-          if (endIndex < post.content.length) {
-            excerpt = excerpt + "...";
-          }
-          
-          matches.content.excerpt = excerpt;
+        } catch (error) {
+          console.error("提取摘要时出错:", error);
+          matches.content.excerpt = post.description;
         }
-      } catch (error) {
-        console.error("提取摘要时出错:", error);
-        matches.content.excerpt = post.description;
       }
     }
     
@@ -449,36 +413,5 @@ export function searchPostsWithPagination(keyword: string, page: number = 1, pag
   currentPage: number;
   pageSize: number;
 } {
-  // 获取搜索结果
-  const allResults = searchPosts(keyword);
-  const totalPosts = allResults.length;
-  
-  // 如果搜索结果总数少于或等于每页数量，则不分页
-  if (totalPosts <= pageSize) {
-    return {
-      posts: allResults,
-      totalPosts,
-      totalPages: 1, // 总是至少有1页
-      currentPage: 1,
-      pageSize,
-    };
-  }
-  
-  const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
-  
-  // 确保页码在有效范围内
-  const validPage = Math.max(1, Math.min(page, totalPages));
-  
-  // 计算当前页的文章
-  const startIndex = (validPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPageResults = allResults.slice(startIndex, endIndex);
-  
-  return {
-    posts: currentPageResults,
-    totalPosts,
-    totalPages,
-    currentPage: validPage,
-    pageSize,
-  };
+  return paginateItems(searchPosts(keyword), page, pageSize);
 }

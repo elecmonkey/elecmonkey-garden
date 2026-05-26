@@ -10,7 +10,9 @@
     "lint": "rslint --type-check .",
     "pack:content-compiler": "pnpm --filter @elecmonkey/garden-content-compiler pack:all",
     "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
-    "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local"
+    "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local",
+    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
+    "build:all": "pnpm run build:compiler && pnpm run build"
   },
   "devDependencies": {
     "@rslint/core": "^0.5.3"
