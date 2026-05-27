@@ -29,16 +29,6 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
-    optionalDependencies:
-      '@elecmonkey/garden-content-compiler-darwin-arm64':
-        specifier: 0.1.0
-        version: 0.1.0
-      '@elecmonkey/garden-content-compiler-linux-x64-gnu':
-        specifier: 0.1.0
-        version: 0.1.0
-      '@elecmonkey/garden-content-compiler-linux-x64-musl':
-        specifier: 0.1.0
-        version: 0.1.0
 
   packages/site:
     dependencies:
