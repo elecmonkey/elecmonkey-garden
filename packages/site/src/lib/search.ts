@@ -22,6 +22,44 @@ export type SearchResult = {
   };
 };
 
+let searchIndexPostsPromise: Promise<SearchIndexPost[]> | undefined;
+let loadedSearchIndexPosts: SearchIndexPost[] | undefined;
+
+export function getLoadedSearchIndexPosts(): SearchIndexPost[] | undefined {
+  return loadedSearchIndexPosts;
+}
+
+export function loadSearchIndexPosts(): Promise<SearchIndexPost[]> {
+  if (loadedSearchIndexPosts) {
+    return Promise.resolve(loadedSearchIndexPosts);
+  }
+
+  if (!searchIndexPostsPromise) {
+    searchIndexPostsPromise = fetch('/static/search/index.json')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to load search index: ${response.status}`);
+        }
+
+        return response.json() as Promise<SearchIndexPost[]>;
+      })
+      .then((posts) => {
+        loadedSearchIndexPosts = posts;
+        return posts;
+      })
+      .catch((error) => {
+        searchIndexPostsPromise = undefined;
+        throw error;
+      });
+  }
+
+  return searchIndexPostsPromise;
+}
+
+export function prefetchSearchIndexPosts(): Promise<void> {
+  return loadSearchIndexPosts().then(() => undefined);
+}
+
 export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): SearchResult[] {
   if (!keyword.trim()) {
     return [];

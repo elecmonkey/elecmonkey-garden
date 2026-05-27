@@ -25,6 +25,7 @@ export default function BlogIndexContent({ currentPage, posts, totalPages }: Pro
         <h1 className="text-3xl font-bold">博客文章</h1>
         <Link 
           href="/archive" 
+          prefetch
           className="text-blue-600 hover:underline text-sm flex items-center"
         >
           按月归档

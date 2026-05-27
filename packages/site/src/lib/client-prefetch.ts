@@ -1,6 +1,6 @@
 type PrefetchPriority = 'intent' | 'viewport';
 type PrefetchTask = () => Promise<void> | void;
-type PrefetchableRouteKey = 'blog' | 'tags' | 'archive' | 'search';
+type PrefetchableRouteKey = 'home' | 'about' | 'blog' | 'tags' | 'archive' | 'search';
 type PrefetchLinkAs = 'font' | 'script' | 'style' | 'fetch';
 type PrefetchLinkRel = 'prefetch' | 'preload';
 
@@ -177,10 +177,26 @@ function prefetchBlogPostRoute(): Promise<void> {
   return blogPostRoutePrefetch;
 }
 
+async function prefetchSearchPage(): Promise<void> {
+  const { clientRouteLoaders } = await import('@/app-shell/PageRoutes.client');
+  const { prefetchSearchIndexPosts } = await import('@/lib/search');
+
+  await Promise.all([
+    clientRouteLoaders.search(),
+    prefetchSearchIndexPosts(),
+  ]);
+}
+
 async function prefetchRoute(key: PrefetchableRouteKey): Promise<void> {
   const { clientRouteLoaders } = await import('@/app-shell/PageRoutes.client');
 
   switch (key) {
+    case 'home':
+      await clientRouteLoaders.home();
+      break;
+    case 'about':
+      await clientRouteLoaders.about();
+      break;
     case 'blog':
       await clientRouteLoaders.blog();
       break;
@@ -208,6 +224,16 @@ export function prefetchHref(href: string | undefined, priority: PrefetchPriorit
     return;
   }
 
+  if (url.pathname === '/') {
+    enqueuePrefetch('route:/', () => prefetchRoute('home'), priority);
+    return;
+  }
+
+  if (url.pathname === '/about') {
+    enqueuePrefetch('route:/about', () => prefetchRoute('about'), priority);
+    return;
+  }
+
   if (url.pathname === '/blog' || /^\/blog\/page\/\d+\/?$/.test(url.pathname)) {
     enqueuePrefetch(`route:${url.pathname}`, () => prefetchRoute('blog'), priority);
     return;
@@ -223,8 +249,15 @@ export function prefetchHref(href: string | undefined, priority: PrefetchPriorit
     return;
   }
 
-  if (url.pathname === '/search' && priority === 'intent') {
-    enqueuePrefetch('route:/search', () => prefetchRoute('search'), priority);
+  if (url.pathname === '/search') {
+    const searchParams = url.searchParams;
+    const hasSearchIntent = searchParams.has('keyword') || searchParams.has('page');
+
+    enqueuePrefetch(
+      hasSearchIntent ? `route:${url.pathname}${url.search}` : 'route:/search',
+      () => (hasSearchIntent ? prefetchSearchPage() : prefetchRoute('search')),
+      priority,
+    );
   }
 }
 

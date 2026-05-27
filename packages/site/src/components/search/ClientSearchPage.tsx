@@ -7,6 +7,8 @@ import SearchBar from '@/components/search/SearchBar';
 import SearchResultCard from '@/components/search/SearchResultCard';
 import { useSearchParams } from '@/lib/router-compat';
 import {
+  getLoadedSearchIndexPosts,
+  loadSearchIndexPosts,
   searchIndexPostsWithPagination,
   type SearchIndexPost,
   type SearchResult,
@@ -18,7 +20,7 @@ export default function ClientSearchPage() {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('keyword') || '';
   const currentPage = Number(searchParams.get('page')) || 1;
-  const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>([]);
+  const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>(() => getLoadedSearchIndexPosts() ?? []);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
 
@@ -31,13 +33,17 @@ export default function ClientSearchPage() {
     setLoading(true);
     setLoadError(false);
 
-    fetch('/static/search/index.json')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load search index: ${response.status}`);
-        }
-        return response.json() as Promise<SearchIndexPost[]>;
-      })
+    const cachedIndexPosts = getLoadedSearchIndexPosts();
+
+    if (cachedIndexPosts) {
+      setIndexPosts(cachedIndexPosts);
+      setLoading(false);
+      return () => {
+        canceled = true;
+      };
+    }
+
+    loadSearchIndexPosts()
       .then((posts) => {
         if (!canceled) {
           setIndexPosts(posts);

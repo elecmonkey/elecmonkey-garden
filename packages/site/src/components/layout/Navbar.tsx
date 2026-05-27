@@ -75,6 +75,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link 
               href="/" 
+              prefetch
               className="flex items-center gap-2 select-none"
               onClick={(e) => {
                 // 如果已经在首页，阻止默认行为避免硬刷新
@@ -100,6 +101,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-2">
             <Link 
               href="/" 
+              prefetch
               className={getLinkClassName("/")}
               onClick={(e) => {
                 if (pathname === '/') {
@@ -109,14 +111,15 @@ export default function Navbar() {
             >
               首页
             </Link>
-            <Link href="/blog" className={getLinkClassName("/blog")}>
+            <Link href="/blog" prefetch className={getLinkClassName("/blog")}>
               所有文章
             </Link>
-            <Link href="/about" className={getLinkClassName("/about")}>
+            <Link href="/about" prefetch className={getLinkClassName("/about")}>
               关于我
             </Link>
             <Link 
               href="/search"
+              prefetch
               className={getLinkClassName("/search")}
               aria-label="搜索"
             >
@@ -153,6 +156,7 @@ export default function Navbar() {
           <div className="flex flex-col space-y-1 py-2">
             <Link 
               href="/" 
+              prefetch
               className={getMobileLinkClassName("/")}
               onClick={(e) => {
                 if (pathname === '/') {
@@ -165,6 +169,7 @@ export default function Navbar() {
             </Link>
             <Link 
               href="/blog" 
+              prefetch
               className={getMobileLinkClassName("/blog")}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -172,6 +177,7 @@ export default function Navbar() {
             </Link>
             <Link 
               href="/about" 
+              prefetch
               className={getMobileLinkClassName("/about")}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -180,6 +186,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2 px-3 py-2">
               <Link 
                 href="/search"
+                prefetch
                 className={`${getMobileLinkClassName("/search")} flex items-center justify-center`}
                 onClick={() => setIsMenuOpen(false)}
               >
