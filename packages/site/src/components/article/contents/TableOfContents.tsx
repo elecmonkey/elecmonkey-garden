@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import dynamic from '@/lib/dynamic-compat';
 
 interface Heading {
   id: string;
@@ -15,8 +14,7 @@ interface TableOfContentsProps {
   headings?: Heading[];
 }
 
-// 使用 dynamic 导入自身，实现延迟加载
-const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({ no_toc = false, desktop = false, headings: initialHeadings = [] }: TableOfContentsProps) {
+function TableOfContents({ no_toc = false, desktop = false, headings: initialHeadings = [] }: TableOfContentsProps) {
   const [headings, setHeadings] = useState<Heading[]>(initialHeadings);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
@@ -247,6 +245,6 @@ const TableOfContents = dynamic(() => Promise.resolve(function TableOfContents({
       )}
     </>
   );
-}), { ssr: false });
+}
 
 export default TableOfContents; 
