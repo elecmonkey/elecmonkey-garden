@@ -1,22 +1,38 @@
 import { lazy, Suspense, type ReactNode } from 'react';
 import { useParams } from 'react-router';
 
-const HomePage = lazy(() => import('@/app/page'));
-const AboutPage = lazy(() => import('@/app/about/page'));
-const BlogPage = lazy(() => import('@/app/blog/page'));
-const BlogPaginationPage = lazy(() => import('@/app/blog/page/[page]/page'));
-const BlogPostPage = lazy(async () => {
-  await import('katex/dist/katex.min.css');
-  return import('@/app/blog/[slug]/page');
-});
-const TagsIndexPage = lazy(() => import('@/app/tags/page'));
-const TagPage = lazy(() => import('@/app/tags/[tag]/page'));
-const TagPaginationPage = lazy(() => import('@/app/tags/[tag]/page/[page]/page'));
-const ArchiveIndexPage = lazy(() => import('@/app/archive/page'));
-const MonthArchivePage = lazy(() => import('@/app/archive/[month]/page'));
-const MonthArchivePaginationPage = lazy(() => import('@/app/archive/[month]/page/[page]/page'));
-const SearchPage = lazy(() => import('@/app/search/page'));
-const NotFoundPage = lazy(() => import('@/app/not-found'));
+export const clientRouteLoaders = {
+  home: () => import('@/app/page'),
+  about: () => import('@/app/about/page'),
+  blog: () => import('@/app/blog/page'),
+  blogPagination: () => import('@/app/blog/page/[page]/page'),
+  blogPost: async () => {
+    await import('katex/dist/katex.min.css');
+    return import('@/app/blog/[slug]/page');
+  },
+  tags: () => import('@/app/tags/page'),
+  tag: () => import('@/app/tags/[tag]/page'),
+  tagPagination: () => import('@/app/tags/[tag]/page/[page]/page'),
+  archive: () => import('@/app/archive/page'),
+  monthArchive: () => import('@/app/archive/[month]/page'),
+  monthArchivePagination: () => import('@/app/archive/[month]/page/[page]/page'),
+  search: () => import('@/app/search/page'),
+  notFound: () => import('@/app/not-found'),
+};
+
+const HomePage = lazy(clientRouteLoaders.home);
+const AboutPage = lazy(clientRouteLoaders.about);
+const BlogPage = lazy(clientRouteLoaders.blog);
+const BlogPaginationPage = lazy(clientRouteLoaders.blogPagination);
+const BlogPostPage = lazy(clientRouteLoaders.blogPost);
+const TagsIndexPage = lazy(clientRouteLoaders.tags);
+const TagPage = lazy(clientRouteLoaders.tag);
+const TagPaginationPage = lazy(clientRouteLoaders.tagPagination);
+const ArchiveIndexPage = lazy(clientRouteLoaders.archive);
+const MonthArchivePage = lazy(clientRouteLoaders.monthArchive);
+const MonthArchivePaginationPage = lazy(clientRouteLoaders.monthArchivePagination);
+const SearchPage = lazy(clientRouteLoaders.search);
+const NotFoundPage = lazy(clientRouteLoaders.notFound);
 
 function PageLoader() {
   return (

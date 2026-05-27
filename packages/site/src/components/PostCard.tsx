@@ -1,4 +1,6 @@
+import { useEffect, useRef } from 'react';
 import Link from '@/components/Link';
+import { prefetchArticleBySlug } from '@/lib/client-prefetch';
 import { getTagPath } from '@/lib/tag-url';
 
 export interface PostCardProps {
@@ -13,14 +15,49 @@ export interface PostCardProps {
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  const articleRef = useRef<HTMLElement>(null);
+
+  const prefetchPostOnIntent = () => {
+    prefetchArticleBySlug(post.id, 'intent');
+  };
+
+  useEffect(() => {
+    const element = articleRef.current;
+    if (!element || typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          prefetchArticleBySlug(post.id, 'viewport');
+        }
+      },
+      { rootMargin: '200px 0px' },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [post.id]);
+
   return (
-    <article className="relative group">
+    <article
+      ref={articleRef}
+      className="relative group"
+      onFocusCapture={prefetchPostOnIntent}
+      onPointerEnter={prefetchPostOnIntent}
+      onTouchStart={prefetchPostOnIntent}
+    >
       {/* 底层卡片 - 灰色背景，向右下偏移 */}
       <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
       
       {/* 上层卡片 - 白色/主题背景 */}
       <div className="relative p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
-      <Link href={`/blog/${post.id}`}>
+      <Link href={`/blog/${post.id}`} prefetch>
         <h3 className="text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors">{post.title}</h3>
       </Link>
       

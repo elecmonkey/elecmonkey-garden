@@ -75,11 +75,13 @@ type PostNavigation = {
 
 const allPosts = generatedPosts as PostData[];
 const publicPostsWithDrafts = generatedPublicPosts as PostData[];
+const generatedPostLoaderById = generatedPostLoaders as Record<string, () => Promise<{ post: PostData }>>;
 const nonDraftPosts = allPosts.filter((post) => !post.isDraft);
 const publicPosts = publicPostsWithDrafts.filter((post) => !post.isDraft);
 
 const postById = new Map<string, PostData>();
 const fullPostById = new Map<string, PostData>();
+const postPrefetches = new Map<string, Promise<void>>();
 const publicPostIndexById = new Map<string, number>();
 const postsByTag = new Map<string, PostData[]>();
 const postsByMonth = new Map<string, PostData[]>();
@@ -270,7 +272,7 @@ export function getPostById(id: string): PostData & PostNavigation {
 
 export async function loadPostById(id: string): Promise<PostData & PostNavigation> {
   if (!fullPostById.has(id)) {
-    const loader = generatedPostLoaders[id];
+    const loader = generatedPostLoaderById[id];
 
     if (!loader) {
       throw new Error(`找不到ID为 "${id}" 的文章`);
@@ -281,6 +283,27 @@ export async function loadPostById(id: string): Promise<PostData & PostNavigatio
   }
 
   return getPostById(id);
+}
+
+export function prefetchPostById(id: string): Promise<void> {
+  if (fullPostById.has(id) || readInitialPostFromDocument(id)) {
+    return Promise.resolve();
+  }
+
+  const existing = postPrefetches.get(id);
+  if (existing) {
+    return existing;
+  }
+
+  const prefetch = loadPostById(id)
+    .then(() => undefined)
+    .catch((error) => {
+      postPrefetches.delete(id);
+      throw error;
+    });
+
+  postPrefetches.set(id, prefetch);
+  return prefetch;
 }
 
 export function getLoadedPostById(id: string): (PostData & PostNavigation) | undefined {
