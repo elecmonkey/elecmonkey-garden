@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
-import { getPostById, loadPostById, type PostData } from '@/lib/api';
+import { getLoadedPostById, getPostById, loadPostById, type PostData } from '@/lib/api';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -34,7 +34,7 @@ export default function BlogPost({ params }: Props) {
   const { slug } = params;
   const [post, setPost] = useState<(PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } })>(() => {
     try {
-      return getPostById(slug);
+      return getLoadedPostById(slug) ?? getPostById(slug);
     } catch (error) {
       console.error('博客文章获取失败:', error);
       throw new Response('Not Found', { status: 404 });
@@ -46,7 +46,7 @@ export default function BlogPost({ params }: Props) {
     let canceled = false;
 
     try {
-      const cachedPost = getPostById(slug);
+      const cachedPost = getLoadedPostById(slug) ?? getPostById(slug);
       setPost(cachedPost);
 
       if (cachedPost.content) {

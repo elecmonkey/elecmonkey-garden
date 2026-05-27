@@ -1,38 +1,83 @@
-import { lazy, Suspense, type ReactNode } from 'react';
+import { lazy, Suspense, type ComponentProps, type ComponentType, type ReactNode } from 'react';
 import { useParams } from 'react-router';
 
-export const clientRouteLoaders = {
-  home: () => import('@/app/page'),
-  about: () => import('@/app/about/page'),
-  blog: () => import('@/app/blog/page'),
-  blogPagination: () => import('@/app/blog/page/[page]/page'),
-  blogPost: async () => {
-    await import('katex/dist/katex.min.css');
-    return import('@/app/blog/[slug]/page');
-  },
-  tags: () => import('@/app/tags/page'),
-  tag: () => import('@/app/tags/[tag]/page'),
-  tagPagination: () => import('@/app/tags/[tag]/page/[page]/page'),
-  archive: () => import('@/app/archive/page'),
-  monthArchive: () => import('@/app/archive/[month]/page'),
-  monthArchivePagination: () => import('@/app/archive/[month]/page/[page]/page'),
-  search: () => import('@/app/search/page'),
-  notFound: () => import('@/app/not-found'),
+type RouteModule<TComponent extends ComponentType<any>> = {
+  default: TComponent;
 };
 
-const HomePage = lazy(clientRouteLoaders.home);
-const AboutPage = lazy(clientRouteLoaders.about);
-const BlogPage = lazy(clientRouteLoaders.blog);
-const BlogPaginationPage = lazy(clientRouteLoaders.blogPagination);
-const BlogPostPage = lazy(clientRouteLoaders.blogPost);
-const TagsIndexPage = lazy(clientRouteLoaders.tags);
-const TagPage = lazy(clientRouteLoaders.tag);
-const TagPaginationPage = lazy(clientRouteLoaders.tagPagination);
-const ArchiveIndexPage = lazy(clientRouteLoaders.archive);
-const MonthArchivePage = lazy(clientRouteLoaders.monthArchive);
-const MonthArchivePaginationPage = lazy(clientRouteLoaders.monthArchivePagination);
-const SearchPage = lazy(clientRouteLoaders.search);
-const NotFoundPage = lazy(clientRouteLoaders.notFound);
+type RouteLoader<TComponent extends ComponentType<any>> = () => Promise<RouteModule<TComponent>>;
+
+type PreloadableRoute<TComponent extends ComponentType<any>> = ComponentType<ComponentProps<TComponent>> & {
+  preload: () => Promise<RouteModule<TComponent>>;
+};
+
+function createPreloadableRoute<TComponent extends ComponentType<any>>(
+  loader: RouteLoader<TComponent>,
+): PreloadableRoute<TComponent> {
+  let loadedModule: RouteModule<TComponent> | undefined;
+  let loadingPromise: Promise<RouteModule<TComponent>> | undefined;
+
+  const preload = () => {
+    if (loadedModule) {
+      return Promise.resolve(loadedModule);
+    }
+
+    if (!loadingPromise) {
+      loadingPromise = loader().then((module) => {
+        loadedModule = module;
+        return module;
+      });
+    }
+
+    return loadingPromise;
+  };
+
+  const LazyRoute = lazy(preload);
+
+  function PreloadableRouteComponent(props: ComponentProps<TComponent>) {
+    if (loadedModule) {
+      const ResolvedRoute = loadedModule.default;
+      return <ResolvedRoute {...props} />;
+    }
+
+    return <LazyRoute {...props} />;
+  }
+
+  return Object.assign(PreloadableRouteComponent, { preload });
+}
+
+const HomePage = createPreloadableRoute(() => import('@/app/page'));
+const AboutPage = createPreloadableRoute(() => import('@/app/about/page'));
+const BlogPage = createPreloadableRoute(() => import('@/app/blog/page'));
+const BlogPaginationPage = createPreloadableRoute(() => import('@/app/blog/page/[page]/page'));
+const BlogPostPage = createPreloadableRoute(async () => {
+  await import('katex/dist/katex.min.css');
+  return import('@/app/blog/[slug]/page');
+});
+const TagsIndexPage = createPreloadableRoute(() => import('@/app/tags/page'));
+const TagPage = createPreloadableRoute(() => import('@/app/tags/[tag]/page'));
+const TagPaginationPage = createPreloadableRoute(() => import('@/app/tags/[tag]/page/[page]/page'));
+const ArchiveIndexPage = createPreloadableRoute(() => import('@/app/archive/page'));
+const MonthArchivePage = createPreloadableRoute(() => import('@/app/archive/[month]/page'));
+const MonthArchivePaginationPage = createPreloadableRoute(() => import('@/app/archive/[month]/page/[page]/page'));
+const SearchPage = createPreloadableRoute(() => import('@/app/search/page'));
+const NotFoundPage = createPreloadableRoute(() => import('@/app/not-found'));
+
+export const clientRouteLoaders = {
+  home: HomePage.preload,
+  about: AboutPage.preload,
+  blog: BlogPage.preload,
+  blogPagination: BlogPaginationPage.preload,
+  blogPost: BlogPostPage.preload,
+  tags: TagsIndexPage.preload,
+  tag: TagPage.preload,
+  tagPagination: TagPaginationPage.preload,
+  archive: ArchiveIndexPage.preload,
+  monthArchive: MonthArchivePage.preload,
+  monthArchivePagination: MonthArchivePaginationPage.preload,
+  search: SearchPage.preload,
+  notFound: NotFoundPage.preload,
+};
 
 function PageLoader() {
   return (

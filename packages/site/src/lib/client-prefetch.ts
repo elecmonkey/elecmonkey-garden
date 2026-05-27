@@ -1,6 +1,8 @@
 type PrefetchPriority = 'intent' | 'viewport';
 type PrefetchTask = () => Promise<void> | void;
 type PrefetchableRouteKey = 'blog' | 'tags' | 'archive' | 'search';
+type PrefetchLinkAs = 'font' | 'script' | 'style' | 'fetch';
+type PrefetchLinkRel = 'prefetch' | 'preload';
 
 type NetworkInformation = {
   saveData?: boolean;
@@ -14,6 +16,13 @@ const scheduledViewportTasks = new Map<string, PrefetchTask>();
 const queuedTasks: Array<{ key: string; task: PrefetchTask }> = [];
 let activePrefetches = 0;
 let blogPostRoutePrefetch: Promise<void> | undefined;
+const prefetchedAssets = new Set<string>();
+
+const KATEX_CORE_FONT_URLS = [
+  '/static/font/KaTeX_Main-Regular.0462f03bdf.woff2',
+  '/static/font/KaTeX_Math-Italic.f28c23acad.woff2',
+  '/static/font/KaTeX_Size1-Regular.eae34984b3.woff2',
+];
 
 function getConnection(): NetworkInformation | undefined {
   if (typeof navigator === 'undefined') return undefined;
@@ -122,6 +131,35 @@ function extractBlogSlug(pathname: string): string | undefined {
   return match?.[1] ? decodeURIComponent(match[1]) : undefined;
 }
 
+function warmAsset(url: string, as: PrefetchLinkAs, rel: PrefetchLinkRel = 'prefetch') {
+  const key = `${rel}:${url}`;
+  if (typeof document === 'undefined' || prefetchedAssets.has(key)) return;
+
+  prefetchedAssets.add(key);
+
+  const link = document.createElement('link');
+  link.rel = rel;
+  link.href = url;
+  link.as = as;
+
+  if (as === 'font') {
+    link.type = 'font/woff2';
+    link.crossOrigin = 'anonymous';
+  }
+
+  document.head.appendChild(link);
+}
+
+function prefetchArticleFonts() {
+  for (const url of KATEX_CORE_FONT_URLS) {
+    // Fonts are render-blocking for KaTeX once the article chunk is displayed.
+    // Warm them with preload during route/content prefetch so the later CSS
+    // font request can be satisfied from the preload/cache entry instead of
+    // starting only after navigation.
+    warmAsset(url, 'font', 'preload');
+  }
+}
+
 function prefetchBlogPost(slug: string): Promise<void> {
   const routePrefetch = prefetchBlogPostRoute();
   const contentPrefetch = import('@/lib/api').then(({ prefetchPostById }) => prefetchPostById(slug));
@@ -191,5 +229,6 @@ export function prefetchHref(href: string | undefined, priority: PrefetchPriorit
 }
 
 export function prefetchArticleBySlug(slug: string, priority: PrefetchPriority = 'viewport') {
+  prefetchArticleFonts();
   enqueuePrefetch(`post:${slug}`, () => prefetchBlogPost(slug), priority);
 }
