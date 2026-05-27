@@ -1,5 +1,5 @@
 import Link from '@/components/Link';
-import { getAllPosts, getAllTags } from '@/lib/api';
+import { getHomeRecentPosts, getHomeStats, getHomeTags } from '@/lib/home';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -16,16 +16,9 @@ export const metadata: SiteMetadata = {
 };
 
 export default function Home() {
-  // 获取所有文章并只显示最近的8篇
-  const allPosts = getAllPosts();
-  const recentPosts = allPosts.slice(0, 8);
-
-  // 获取所有标签
-  const tags = getAllTags();
-  
-  // 计算统计信息
-  const totalPosts = allPosts.length;
-  const latestUpdateDate = allPosts.length > 0 ? allPosts[0].date : null;
+  const recentPosts = getHomeRecentPosts();
+  const tags = getHomeTags();
+  const { totalPosts, latestUpdateDate } = getHomeStats();
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">

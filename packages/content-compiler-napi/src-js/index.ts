@@ -480,10 +480,11 @@ function createPostModule(options: ResolvedGenerateContentOptions, postWithMeta:
     + `export const post = ${JSON.stringify(post, null, 2)} satisfies PostData;\n`;
 }
 
-function toPostMetadata(postWithMeta: PostWithMeta): Omit<PostWithMeta, 'content' | 'searchContent' | 'sourceKey' | 'sourceHash' | 'contentHash'> {
+function toPostMetadata(postWithMeta: PostWithMeta): Omit<PostWithMeta, 'content' | 'searchContent' | 'toc' | 'sourceKey' | 'sourceHash' | 'contentHash'> {
   const {
     content: _content,
     searchContent: _searchContent,
+    toc: _toc,
     sourceKey: _sourceKey,
     sourceHash: _sourceHash,
     contentHash: _contentHash,
@@ -491,6 +492,37 @@ function toPostMetadata(postWithMeta: PostWithMeta): Omit<PostWithMeta, 'content
   } = postWithMeta;
 
   return post;
+}
+
+function createHomeModule(options: ResolvedGenerateContentOptions, posts: PostWithMeta[]): string {
+  const publicPosts = posts.filter((post) => !post.isHidden && !post.isDraft);
+  const recentPosts = publicPosts.slice(0, 8).map(toPostMetadata);
+  const tagCounts = new Map<string, number>();
+
+  for (const post of publicPosts) {
+    for (const tag of post.tags) {
+      tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+    }
+  }
+
+  const tags = Array.from(tagCounts, ([name, count]) => ({ name, count }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const latestUpdateDate = publicPosts[0]?.date ?? null;
+
+  return `${options.generatedHeader}
+
+`
+    + `import type { PostData, TagCount } from '${options.typeImport}';
+
+`
+    + `export const generatedHomeRecentPosts = ${JSON.stringify(recentPosts, null, 2)} satisfies PostData[];
+
+`
+    + `export const generatedHomeTags = ${JSON.stringify(tags, null, 2)} satisfies TagCount[];
+
+`
+    + `export const generatedHomeStats = ${JSON.stringify({ totalPosts: publicPosts.length, latestUpdateDate }, null, 2)} satisfies { totalPosts: number; latestUpdateDate: string | null };
+`;
 }
 
 function createContentModule(options: ResolvedGenerateContentOptions, posts: PostWithMeta[]): string {
@@ -553,9 +585,10 @@ async function writeGeneratedFiles(options: ResolvedGenerateContentOptions, post
   const publicPosts = posts.filter((post) => !post.isHidden);
   const searchIndex = publicPosts.map(toSearchIndexPost);
   const contentChanged = await writeFileIfChanged(options.outputFile, createContentModule(options, posts));
+  const homeChanged = await writeFileIfChanged(path.join(options.generatedDirectory, 'home.ts'), createHomeModule(options, posts));
   const searchChanged = await writeFileIfChanged(options.searchIndexFile, JSON.stringify(searchIndex));
 
-  return { changedPostModules, contentChanged, searchChanged };
+  return { changedPostModules, contentChanged: contentChanged || homeChanged, searchChanged };
 }
 
 export async function generateContent(rawOptions: GenerateContentOptions = {}): Promise<GenerateContentResult> {

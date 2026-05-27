@@ -16,43 +16,6 @@ export const generatedPosts = [
       "前端工具链"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "大新闻",
-        "text": "大新闻",
-        "level": 2
-      },
-      {
-        "id": "my-view",
-        "text": "My View",
-        "level": 2
-      },
-      {
-        "id": "“由来已久”",
-        "text": "“由来已久”",
-        "level": 2
-      },
-      {
-        "id": "bun-与软件基建的未来",
-        "text": "Bun 与软件基建的未来",
-        "level": 2
-      },
-      {
-        "id": "功能覆盖",
-        "text": "功能覆盖",
-        "level": 3
-      },
-      {
-        "id": "内存安全",
-        "text": "内存安全",
-        "level": 3
-      },
-      {
-        "id": "当-ai-agent-开始动我们的系统级基础设施",
-        "text": "当 AI Agent 开始动我们的系统级基础设施",
-        "level": 3
-      }
-    ],
     "monthFolder": "202605",
     "isDraft": false,
     "isHidden": false
@@ -70,53 +33,6 @@ export const generatedPosts = [
       "供应链安全"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "事情概述",
-        "text": "事情概述",
-        "level": 2
-      },
-      {
-        "id": "攻击链路复盘",
-        "text": "攻击链路复盘",
-        "level": 2
-      },
-      {
-        "id": "第一步：fork-pr-+-pullrequesttarget",
-        "text": "第一步：fork PR + pullrequesttarget",
-        "level": 3
-      },
-      {
-        "id": "第二步：污染-github-actions-cache-里的-pnpm-store",
-        "text": "第二步：污染 GitHub Actions cache 里的 pnpm store",
-        "level": 3
-      },
-      {
-        "id": "第三步：伪装清理，缓存留存",
-        "text": "第三步：伪装清理，缓存留存",
-        "level": 3
-      },
-      {
-        "id": "第四步：正式-release-workflow-恢复-poisoned-cache",
-        "text": "第四步：正式 release workflow 恢复 poisoned cache",
-        "level": 3
-      },
-      {
-        "id": "第五步：从-runner-内存提取-oidc-token，直接发布",
-        "text": "第五步：从 runner 内存提取 OIDC token，直接发布",
-        "level": 3
-      },
-      {
-        "id": "一些想法",
-        "text": "一些想法",
-        "level": 2
-      },
-      {
-        "id": "参考链接",
-        "text": "参考链接",
-        "level": 2
-      }
-    ],
     "monthFolder": "202605",
     "isDraft": false,
     "isHidden": false
@@ -132,58 +48,6 @@ export const generatedPosts = [
       "Web 安全"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "pna-引发的问题",
-        "text": "PNA 引发的问题",
-        "level": 2
-      },
-      {
-        "id": "上线初期：有提示，但不影响使用",
-        "text": "上线初期：有提示，但不影响使用",
-        "level": 3
-      },
-      {
-        "id": "一周后：部分用户接口全部失败",
-        "text": "一周后：部分用户接口全部失败",
-        "level": 3
-      },
-      {
-        "id": "为什么这个拓扑会触发-pna",
-        "text": "为什么这个拓扑会触发 PNA",
-        "level": 2
-      },
-      {
-        "id": "a-看起来是内网系统，但在浏览器视角是“公网地址”",
-        "text": "A 看起来是内网系统，但在浏览器视角是“公网地址”",
-        "level": 3
-      },
-      {
-        "id": "b-是典型内网主机",
-        "text": "B 是典型内网主机",
-        "level": 3
-      },
-      {
-        "id": "cors-方案为什么在这里不稳定",
-        "text": "CORS 方案为什么在这里不稳定",
-        "level": 2
-      },
-      {
-        "id": "理论上的方案：加-access-control-allow-private-network",
-        "text": "理论上的方案：加 Access-Control-Allow-Private-Network",
-        "level": 3
-      },
-      {
-        "id": "实际遇到的情况：chrome-直接弹用户授权",
-        "text": "实际遇到的情况：Chrome 直接弹用户授权",
-        "level": 3
-      },
-      {
-        "id": "chrome-的-pna/lna-机制演变",
-        "text": "Chrome 的 PNA/LNA 机制演变",
-        "level": 2
-      }
-    ],
     "monthFolder": "202604",
     "isDraft": false,
     "isHidden": false
@@ -201,43 +65,6 @@ export const generatedPosts = [
       "CI/CD"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "axios-投毒事件",
-        "text": "Axios 投毒事件",
-        "level": 2
-      },
-      {
-        "id": "ci-环境和生产环境请务必隔离",
-        "text": "CI 环境和生产环境请务必隔离",
-        "level": 2
-      },
-      {
-        "id": "使用-pnpm",
-        "text": "使用 pnpm",
-        "level": 3
-      },
-      {
-        "id": "隔离-ci-环境和生产环境",
-        "text": "隔离 CI 环境和生产环境",
-        "level": 3
-      },
-      {
-        "id": "将-lockfile-提交到-git-仓库",
-        "text": "将 lockfile 提交到 Git 仓库",
-        "level": 3
-      },
-      {
-        "id": "该不该在-package.json-锁死依赖版本",
-        "text": "该不该在 package.json 锁死依赖版本",
-        "level": 3
-      },
-      {
-        "id": "供应链安全与网络请求库选型反思",
-        "text": "供应链安全与网络请求库选型反思",
-        "level": 2
-      }
-    ],
     "monthFolder": "202604",
     "isDraft": false,
     "isHidden": false
@@ -255,43 +82,6 @@ export const generatedPosts = [
       "oxfmt"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "引言",
-        "text": "引言",
-        "level": 2
-      },
-      {
-        "id": "vite+-有门槛",
-        "text": "Vite+ 有门槛",
-        "level": 2
-      },
-      {
-        "id": "能升级到-vite-8-吗",
-        "text": "能升级到 Vite 8 吗",
-        "level": 3
-      },
-      {
-        "id": "linter-和-formatter-的迁移",
-        "text": "Linter 和 Formatter 的迁移",
-        "level": 3
-      },
-      {
-        "id": "什么样的业务场景会需要-vite+",
-        "text": "什么样的业务场景会需要 Vite+",
-        "level": 2
-      },
-      {
-        "id": "快入门-vs.-选型权",
-        "text": "快入门 vs. 选型权",
-        "level": 3
-      },
-      {
-        "id": "新人友好-/-agent-友好",
-        "text": "新人友好 / Agent 友好",
-        "level": 3
-      }
-    ],
     "monthFolder": "202603",
     "isDraft": false,
     "isHidden": false
@@ -307,38 +97,6 @@ export const generatedPosts = [
       "Web 安全"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "(1)-前端重定向到认证中心（请求登录）",
-        "text": "(1) 前端重定向到认证中心（请求登录）",
-        "level": 2
-      },
-      {
-        "id": "(2)-认证中心登录成功，重定向回前端并携带-code",
-        "text": "(2) 认证中心登录成功，重定向回前端并携带 code",
-        "level": 2
-      },
-      {
-        "id": "(3)-前端把-code-发送给后端",
-        "text": "(3) 前端把 code 发送给后端",
-        "level": 2
-      },
-      {
-        "id": "(4)-后端用-code-向认证中心验证用户身份",
-        "text": "(4) 后端用 code 向认证中心验证用户身份",
-        "level": 2
-      },
-      {
-        "id": "(5)-后端查询自己的数据库，确认用户情况",
-        "text": "(5) 后端查询自己的数据库，确认用户情况",
-        "level": 2
-      },
-      {
-        "id": "(6)-后端签发-jwt-给前端",
-        "text": "(6) 后端签发 JWT 给前端",
-        "level": 2
-      }
-    ],
     "monthFolder": "202602",
     "isDraft": false,
     "isHidden": false
@@ -355,28 +113,6 @@ export const generatedPosts = [
       "Next.js"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "rsc-规则",
-        "text": "RSC 规则",
-        "level": 2
-      },
-      {
-        "id": "前端的图",
-        "text": "前端的图",
-        "level": 2
-      },
-      {
-        "id": "模块依赖图",
-        "text": "模块依赖图",
-        "level": 3
-      },
-      {
-        "id": "react-应用组件树",
-        "text": "React 应用组件树",
-        "level": 3
-      }
-    ],
     "monthFolder": "202602",
     "isDraft": false,
     "isHidden": false
@@ -394,38 +130,6 @@ export const generatedPosts = [
       "服务端渲染 (SSR)"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "server-components-原理",
-        "text": "Server Components 原理",
-        "level": 2
-      },
-      {
-        "id": "rsc-与-ssr-的关系",
-        "text": "RSC 与 SSR 的关系",
-        "level": 2
-      },
-      {
-        "id": "ssr-服务端渲染",
-        "text": "SSR 服务端渲染",
-        "level": 3
-      },
-      {
-        "id": "rsc-react-服务端组件",
-        "text": "RSC React 服务端组件",
-        "level": 3
-      },
-      {
-        "id": "ssr-和-rsc-一起用",
-        "text": "SSR 和 RSC 一起用",
-        "level": 3
-      },
-      {
-        "id": "rsc-与局部水合",
-        "text": "RSC 与局部水合",
-        "level": 2
-      }
-    ],
     "monthFolder": "202602",
     "isDraft": false,
     "isHidden": false
@@ -442,53 +146,6 @@ export const generatedPosts = [
       "Vite"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "组件化不必然需要-javascript",
-        "text": "组件化不必然需要 JavaScript",
-        "level": 2
-      },
-      {
-        "id": "群岛架构：局部水合",
-        "text": "群岛架构：局部水合",
-        "level": 2
-      },
-      {
-        "id": "meta-framework-去掉前端",
-        "text": "Meta-Framework 去掉前端",
-        "level": 2
-      },
-      {
-        "id": "ssr-与按需渲染",
-        "text": "SSR 与按需渲染",
-        "level": 3
-      },
-      {
-        "id": "server-actions-与后端能力",
-        "text": "Server Actions 与后端能力",
-        "level": 3
-      },
-      {
-        "id": "充分利用现有-js-生态",
-        "text": "充分利用现有 JS 生态",
-        "level": 2
-      },
-      {
-        "id": "对-vite-环境-api-的利用",
-        "text": "对 Vite 环境 API 的利用",
-        "level": 3
-      },
-      {
-        "id": "对-vite-构建能力的利用",
-        "text": "对 Vite 构建能力的利用",
-        "level": 3
-      },
-      {
-        "id": "对现代前端框架的利用",
-        "text": "对现代前端框架的利用",
-        "level": 3
-      }
-    ],
     "monthFolder": "202601",
     "isDraft": false,
     "isHidden": false
@@ -507,43 +164,6 @@ export const generatedPosts = [
       "Android"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "创建项目",
-        "text": "创建项目",
-        "level": 2
-      },
-      {
-        "id": "android-端",
-        "text": "Android 端",
-        "level": 2
-      },
-      {
-        "id": "android-模拟器运行",
-        "text": "Android 模拟器运行",
-        "level": 3
-      },
-      {
-        "id": "android-真机运行",
-        "text": "Android 真机运行",
-        "level": 3
-      },
-      {
-        "id": "ios-端",
-        "text": "iOS 端",
-        "level": 2
-      },
-      {
-        "id": "ios-模拟器运行",
-        "text": "iOS 模拟器运行",
-        "level": 3
-      },
-      {
-        "id": "ios-真机运行",
-        "text": "iOS 真机运行",
-        "level": 3
-      }
-    ],
     "monthFolder": "202601",
     "isDraft": false,
     "isHidden": false
@@ -560,28 +180,6 @@ export const generatedPosts = [
       "全栈框架"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "引言",
-        "text": "引言",
-        "level": 2
-      },
-      {
-        "id": "next.js-middleware-鉴权绕过漏洞",
-        "text": "Next.js Middleware 鉴权绕过漏洞",
-        "level": 2
-      },
-      {
-        "id": "react-server-components-反序列化-远程执行代码漏洞",
-        "text": "React Server Components 反序列化 远程执行代码漏洞",
-        "level": 2
-      },
-      {
-        "id": "前端框架，你们怎么都在忙着写服务端代码？",
-        "text": "前端框架，你们怎么都在忙着写服务端代码？",
-        "level": 2
-      }
-    ],
     "monthFolder": "202512",
     "isDraft": false,
     "isHidden": false
@@ -596,7 +194,6 @@ export const generatedPosts = [
       "Rolldown"
     ],
     "author": "Elecmonkey",
-    "toc": [],
     "monthFolder": "202512",
     "isDraft": false,
     "isHidden": false
@@ -611,28 +208,6 @@ export const generatedPosts = [
       "node_modules"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "升级过程",
-        "text": "升级过程",
-        "level": 2
-      },
-      {
-        "id": "moving-away-from-rust",
-        "text": "Moving away from Rust",
-        "level": 2
-      },
-      {
-        "id": "where-the-generated-files-place?",
-        "text": "Where the generated files place?",
-        "level": 2
-      },
-      {
-        "id": "“逆向迁移”，prisma-与-svelte",
-        "text": "“逆向迁移”，Prisma 与 Svelte",
-        "level": 2
-      }
-    ],
     "monthFolder": "202512",
     "isDraft": false,
     "isHidden": false
@@ -648,23 +223,6 @@ export const generatedPosts = [
       "许可证 (LICENSE)"
     ],
     "author": "ChatGPT",
-    "toc": [
-      {
-        "id": "理论层面：法律框架下开源许可证与软件著作权的协调关系",
-        "text": "理论层面：法律框架下开源许可证与软件著作权的协调关系",
-        "level": 2
-      },
-      {
-        "id": "实务层面：中国大陆的软件著作权登记与开源软件",
-        "text": "实务层面：中国大陆的软件著作权登记与开源软件",
-        "level": 2
-      },
-      {
-        "id": "开发者视角：开源许可发布与软件著作权登记的兼容性",
-        "text": "开发者视角：开源许可发布与软件著作权登记的兼容性",
-        "level": 2
-      }
-    ],
     "monthFolder": "202512",
     "isDraft": false,
     "isHidden": false
@@ -680,18 +238,6 @@ export const generatedPosts = [
       "前端工具链"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "在线体验",
-        "text": "在线体验",
-        "level": 2
-      },
-      {
-        "id": "一个例子",
-        "text": "一个例子",
-        "level": 2
-      }
-    ],
     "monthFolder": "202511",
     "isDraft": false,
     "isHidden": false
@@ -708,38 +254,6 @@ export const generatedPosts = [
       "Rolldown"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "测试场景",
-        "text": "测试场景",
-        "level": 2
-      },
-      {
-        "id": "测试结果",
-        "text": "测试结果",
-        "level": 2
-      },
-      {
-        "id": "rolldown-vite-+-oxc",
-        "text": "Rolldown-Vite + Oxc",
-        "level": 3
-      },
-      {
-        "id": "vite-(rollup)",
-        "text": "Vite (Rollup)",
-        "level": 3
-      },
-      {
-        "id": "rolldown-vite-+-swc",
-        "text": "Rolldown-Vite + Swc",
-        "level": 3
-      },
-      {
-        "id": "简单分析",
-        "text": "简单分析",
-        "level": 2
-      }
-    ],
     "monthFolder": "202511",
     "isDraft": false,
     "isHidden": false
@@ -759,43 +273,6 @@ export const generatedPosts = [
       "React Compiler"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "javascript-处理-javascript",
-        "text": "JavaScript 处理 JavaScript",
-        "level": 2
-      },
-      {
-        "id": "go-与-rust-工具链",
-        "text": "Go 与 Rust 工具链",
-        "level": 2
-      },
-      {
-        "id": "绕不开的“js-成分”",
-        "text": "绕不开的“JS 成分”",
-        "level": 2
-      },
-      {
-        "id": "vue.js",
-        "text": "Vue.js",
-        "level": 3
-      },
-      {
-        "id": "react",
-        "text": "React",
-        "level": 3
-      },
-      {
-        "id": "solid.js-&-svelte",
-        "text": "Solid.js & Svelte",
-        "level": 3
-      },
-      {
-        "id": "为什么绕不开",
-        "text": "为什么绕不开",
-        "level": 2
-      }
-    ],
     "monthFolder": "202511",
     "isDraft": false,
     "isHidden": false
@@ -813,33 +290,6 @@ export const generatedPosts = [
       "虚拟模块"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "在插件中创建虚拟模块",
-        "text": "在插件中创建虚拟模块",
-        "level": 2
-      },
-      {
-        "id": "示例：定义、导入及生命周期",
-        "text": "示例：定义、导入及生命周期",
-        "level": 2
-      },
-      {
-        "id": "typescript-类型问题",
-        "text": "TypeScript 类型问题",
-        "level": 2
-      },
-      {
-        "id": "hmr-更新",
-        "text": "HMR 更新",
-        "level": 2
-      },
-      {
-        "id": "那么，虚拟模块可以用来？",
-        "text": "那么，虚拟模块可以用来？",
-        "level": 2
-      }
-    ],
     "monthFolder": "202509",
     "isDraft": false,
     "isHidden": false
@@ -856,48 +306,6 @@ export const generatedPosts = [
       "Rust"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "调用开销分析",
-        "text": "调用开销分析",
-        "level": 2
-      },
-      {
-        "id": "测试环境",
-        "text": "测试环境",
-        "level": 3
-      },
-      {
-        "id": "测试结果",
-        "text": "测试结果",
-        "level": 3
-      },
-      {
-        "id": "计算密集型测试-(rust-vs-javascript)",
-        "text": "计算密集型测试 (Rust vs JavaScript)",
-        "level": 2
-      },
-      {
-        "id": "测试环境",
-        "text": "测试环境",
-        "level": 3
-      },
-      {
-        "id": "测试结果",
-        "text": "测试结果",
-        "level": 3
-      },
-      {
-        "id": "rust-(wasm)-50,000-次结果",
-        "text": "Rust (WASM) 50,000 次结果",
-        "level": 4
-      },
-      {
-        "id": "javascript-5-次结果",
-        "text": "JavaScript 5 次结果",
-        "level": 4
-      }
-    ],
     "monthFolder": "202508",
     "isDraft": false,
     "isHidden": false
@@ -912,88 +320,6 @@ export const generatedPosts = [
       "C/C++"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "基本用法",
-        "text": "基本用法",
-        "level": 2
-      },
-      {
-        "id": "命令行方式",
-        "text": "命令行方式",
-        "level": 3
-      },
-      {
-        "id": "库调用方式（build.rs）",
-        "text": "库调用方式（build.rs）",
-        "level": 3
-      },
-      {
-        "id": "clang/libclang-依赖",
-        "text": "Clang/Libclang 依赖",
-        "level": 2
-      },
-      {
-        "id": "复杂-c-类型支持",
-        "text": "复杂 C 类型支持",
-        "level": 2
-      },
-      {
-        "id": "结构体和联合体",
-        "text": "结构体和联合体",
-        "level": 3
-      },
-      {
-        "id": "枚举处理",
-        "text": "枚举处理",
-        "level": 3
-      },
-      {
-        "id": "函数指针",
-        "text": "函数指针",
-        "level": 3
-      },
-      {
-        "id": "位域处理",
-        "text": "位域处理",
-        "level": 3
-      },
-      {
-        "id": "构建时自动生成绑定",
-        "text": "构建时自动生成绑定",
-        "level": 2
-      },
-      {
-        "id": "ffi-安全性",
-        "text": "FFI 安全性",
-        "level": 2
-      },
-      {
-        "id": "unsafe-使用",
-        "text": "unsafe 使用",
-        "level": 3
-      },
-      {
-        "id": "签名正确性",
-        "text": "签名正确性",
-        "level": 3
-      },
-      {
-        "id": "内存和所有权",
-        "text": "内存和所有权",
-        "level": 3
-      },
-      {
-        "id": "空指针检查",
-        "text": "空指针检查",
-        "level": 3
-      },
-      {
-        "id": "错误处理",
-        "text": "错误处理",
-        "level": 3
-      }
-    ],
     "monthFolder": "202508",
     "isDraft": false,
     "isHidden": false
@@ -1009,7 +335,6 @@ export const generatedPosts = [
       "Vibe Coding"
     ],
     "author": "Elecmonkey",
-    "toc": [],
     "monthFolder": "202508",
     "isDraft": false,
     "isHidden": false
@@ -1028,43 +353,6 @@ export const generatedPosts = [
       "Qwik"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "背景：为什么会卡？",
-        "text": "背景：为什么会卡？",
-        "level": 2
-      },
-      {
-        "id": "解决思路：预加载所有页面模块",
-        "text": "解决思路：预加载所有页面模块",
-        "level": 2
-      },
-      {
-        "id": "vite-的-import.meta.glob",
-        "text": "Vite 的 import.meta.glob",
-        "level": 3
-      },
-      {
-        "id": "利用-import.meta.glob-收集模块",
-        "text": "利用 import.meta.glob 收集模块",
-        "level": 3
-      },
-      {
-        "id": "在主页调用",
-        "text": "在主页调用",
-        "level": 3
-      },
-      {
-        "id": "import.meta.glob-的匹配时机",
-        "text": "import.meta.glob 的匹配时机",
-        "level": 2
-      },
-      {
-        "id": "qwik-哲学",
-        "text": "Qwik 哲学",
-        "level": 2
-      }
-    ],
     "monthFolder": "202508",
     "isDraft": false,
     "isHidden": false
@@ -1080,23 +368,6 @@ export const generatedPosts = [
       "Vibe Coding"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "百模大战",
-        "text": "百模大战",
-        "level": 2
-      },
-      {
-        "id": "工具适配",
-        "text": "工具适配",
-        "level": 2
-      },
-      {
-        "id": "kimi-k2-的问题",
-        "text": "Kimi K2 的问题",
-        "level": 2
-      }
-    ],
     "monthFolder": "202507",
     "isDraft": false,
     "isHidden": false
@@ -1111,43 +382,6 @@ export const generatedPosts = [
       "Vue Vapor"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "虚拟-dom",
-        "text": "虚拟 DOM",
-        "level": 2
-      },
-      {
-        "id": "vapor-mode",
-        "text": "Vapor Mode",
-        "level": 2
-      },
-      {
-        "id": "a.-模板编译与真实dom克隆",
-        "text": "a. 模板编译与真实DOM克隆",
-        "level": 3
-      },
-      {
-        "id": "b.-精确的dom节点导航",
-        "text": "b. 精确的DOM节点导航",
-        "level": 3
-      },
-      {
-        "id": "c.-响应式与渲染的直接绑定",
-        "text": "c. 响应式与渲染的直接绑定",
-        "level": 3
-      },
-      {
-        "id": "d.-高效的事件处理",
-        "text": "d. 高效的事件处理",
-        "level": 3
-      },
-      {
-        "id": "启动-vapor",
-        "text": "启动 Vapor",
-        "level": 2
-      }
-    ],
     "monthFolder": "202507",
     "isDraft": false,
     "isHidden": false
@@ -1166,33 +400,6 @@ export const generatedPosts = [
       "前端工程化"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "“按技术分离”-到-“逻辑聚合”",
-        "text": "“按技术分离” 到 “逻辑聚合”",
-        "level": 2
-      },
-      {
-        "id": "vue-与-react-的演进",
-        "text": "Vue 与 React 的演进",
-        "level": 2
-      },
-      {
-        "id": "那项目结构呢？",
-        "text": "那项目结构呢？",
-        "level": 2
-      },
-      {
-        "id": "复杂度提升带来的协作问题",
-        "text": "复杂度提升带来的协作问题",
-        "level": 2
-      },
-      {
-        "id": "现代前端需要怎样的-soc",
-        "text": "现代前端需要怎样的 SoC",
-        "level": 2
-      }
-    ],
     "monthFolder": "202507",
     "isDraft": false,
     "isHidden": false
@@ -1208,43 +415,6 @@ export const generatedPosts = [
       "Vite"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "走向-client-side-rendering",
-        "text": "走向 Client-Side Rendering",
-        "level": 2
-      },
-      {
-        "id": "ssr-工作流程详解",
-        "text": "SSR 工作流程详解",
-        "level": 2
-      },
-      {
-        "id": "1.-接收请求与模板准备",
-        "text": "1. 接收请求与模板准备",
-        "level": 3
-      },
-      {
-        "id": "2.-服务端渲染",
-        "text": "2. 服务端渲染",
-        "level": 3
-      },
-      {
-        "id": "3.-状态注入与-html-组装",
-        "text": "3. 状态注入与 HTML 组装",
-        "level": 3
-      },
-      {
-        "id": "4.-水合",
-        "text": "4. 水合",
-        "level": 3
-      },
-      {
-        "id": "流程图",
-        "text": "流程图",
-        "level": 2
-      }
-    ],
     "monthFolder": "202507",
     "isDraft": false,
     "isHidden": false
@@ -1260,7 +430,6 @@ export const generatedPosts = [
       "构建工具"
     ],
     "author": "Elecmonkey",
-    "toc": [],
     "monthFolder": "202507",
     "isDraft": false,
     "isHidden": false
@@ -1278,68 +447,6 @@ export const generatedPosts = [
       "前端工程化"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "rolldown-vite-正式发布",
-        "text": "Rolldown-Vite 正式发布",
-        "level": 2
-      },
-      {
-        "id": "vite-工程的三个小问题",
-        "text": "Vite 工程的三个小问题",
-        "level": 2
-      },
-      {
-        "id": "rollup-构建速度瓶颈",
-        "text": "Rollup 构建速度瓶颈",
-        "level": 3
-      },
-      {
-        "id": "开发环境与生产环境不一致",
-        "text": "开发环境与生产环境不一致",
-        "level": 3
-      },
-      {
-        "id": "前端工具链的-ast-重复解析",
-        "text": "前端工具链的 AST 重复解析",
-        "level": 3
-      },
-      {
-        "id": "下一代解决方案",
-        "text": "下一代解决方案",
-        "level": 2
-      },
-      {
-        "id": "rolldown：高性能的-rust-构建工具",
-        "text": "Rolldown：高性能的 Rust 构建工具",
-        "level": 3
-      },
-      {
-        "id": "oxc：统一的-javascript-语言工具链",
-        "text": "Oxc：统一的 JavaScript 语言工具链",
-        "level": 3
-      },
-      {
-        "id": "迁移指南",
-        "text": "迁移指南",
-        "level": 2
-      },
-      {
-        "id": "安装-rolldown-vite",
-        "text": "安装 Rolldown-Vite",
-        "level": 3
-      },
-      {
-        "id": "api-迁移",
-        "text": "API 迁移",
-        "level": 3
-      },
-      {
-        "id": "插件迁移",
-        "text": "插件迁移",
-        "level": 3
-      }
-    ],
     "monthFolder": "202506",
     "isDraft": false,
     "isHidden": false
@@ -1357,43 +464,6 @@ export const generatedPosts = [
       "开源 (Open Source)"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "运行-x8664-的-node.js",
-        "text": "运行 x8664 的 Node.js",
-        "level": 2
-      },
-      {
-        "id": "技术债无法避免吗",
-        "text": "技术债无法避免吗",
-        "level": 2
-      },
-      {
-        "id": "雪球如何滚起来",
-        "text": "雪球如何滚起来",
-        "level": 3
-      },
-      {
-        "id": "不要出事触发治理",
-        "text": "不要出事触发治理",
-        "level": 3
-      },
-      {
-        "id": "解药之-「现代-ci/cd」",
-        "text": "解药之 「现代 CI/CD」",
-        "level": 2
-      },
-      {
-        "id": "解药之-「社区参与」",
-        "text": "解药之 「社区参与」",
-        "level": 2
-      },
-      {
-        "id": "结尾",
-        "text": "结尾",
-        "level": 2
-      }
-    ],
     "monthFolder": "202505",
     "isDraft": false,
     "isHidden": false
@@ -1411,58 +481,6 @@ export const generatedPosts = [
       "ECMAScript"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "\"响应式数据\"",
-        "text": "\"响应式数据\"",
-        "level": 2
-      },
-      {
-        "id": "主流框架实现",
-        "text": "主流框架实现",
-        "level": 2
-      },
-      {
-        "id": "vue-2",
-        "text": "Vue 2",
-        "level": 3
-      },
-      {
-        "id": "vue-3-with-composition-api",
-        "text": "Vue 3 with Composition API",
-        "level": 3
-      },
-      {
-        "id": "solidjs-&-signals",
-        "text": "SolidJS & Signals",
-        "level": 3
-      },
-      {
-        "id": "响应式系统核心概念",
-        "text": "响应式系统核心概念",
-        "level": 2
-      },
-      {
-        "id": "signal（信号）",
-        "text": "Signal（信号）",
-        "level": 3
-      },
-      {
-        "id": "effect（副作用）",
-        "text": "Effect（副作用）",
-        "level": 3
-      },
-      {
-        "id": "computed（计算值）",
-        "text": "Computed（计算值）",
-        "level": 3
-      },
-      {
-        "id": "tc39-signals提案",
-        "text": "TC39 Signals提案",
-        "level": 2
-      }
-    ],
     "monthFolder": "202505",
     "isDraft": false,
     "isHidden": false
@@ -1478,33 +496,6 @@ export const generatedPosts = [
       "Mermaid"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "mermaid.js",
-        "text": "Mermaid.js",
-        "level": 2
-      },
-      {
-        "id": "浏览器依赖",
-        "text": "浏览器依赖",
-        "level": 2
-      },
-      {
-        "id": "mermaid-cli",
-        "text": "mermaid-cli",
-        "level": 2
-      },
-      {
-        "id": "批量渲染优化",
-        "text": "批量渲染优化",
-        "level": 2
-      },
-      {
-        "id": "结论",
-        "text": "结论",
-        "level": 2
-      }
-    ],
     "monthFolder": "202504",
     "isDraft": false,
     "isHidden": false
@@ -1520,33 +511,6 @@ export const generatedPosts = [
       "JavaScript"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "原生支持",
-        "text": "原生支持",
-        "level": 2
-      },
-      {
-        "id": "typescript-编译都做了什么",
-        "text": "TypeScript 编译都做了什么",
-        "level": 2
-      },
-      {
-        "id": "会支持，但是有点东西未来再说",
-        "text": "会支持，但是有点东西未来再说",
-        "level": 2
-      },
-      {
-        "id": "amaro",
-        "text": "Amaro",
-        "level": 2
-      },
-      {
-        "id": "node.js-团队想要什么？",
-        "text": "Node.js 团队想要什么？",
-        "level": 2
-      }
-    ],
     "monthFolder": "202504",
     "isDraft": false,
     "isHidden": false
@@ -1562,48 +526,6 @@ export const generatedPosts = [
       "TypeScript"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "undefined-in-javascript-👻",
-        "text": "undefined in JavaScript 👻",
-        "level": 2
-      },
-      {
-        "id": "void-运算符",
-        "text": "void 运算符",
-        "level": 2
-      },
-      {
-        "id": "javascript:void(0)-的由来",
-        "text": "javascript:void(0) 的由来",
-        "level": 2
-      },
-      {
-        "id": "javascript-伪协议",
-        "text": "JavaScript 伪协议",
-        "level": 2
-      },
-      {
-        "id": "void-与现代前端",
-        "text": "void 与现代前端",
-        "level": 2
-      },
-      {
-        "id": "阻止链接默认行为",
-        "text": "阻止链接默认行为",
-        "level": 3
-      },
-      {
-        "id": "处理箭头函数",
-        "text": "处理箭头函数",
-        "level": 3
-      },
-      {
-        "id": "立即执行表达式",
-        "text": "立即执行表达式",
-        "level": 3
-      }
-    ],
     "monthFolder": "202504",
     "isDraft": false,
     "isHidden": false
@@ -1618,33 +540,6 @@ export const generatedPosts = [
       "DevOps"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "笨办法",
-        "text": "笨办法",
-        "level": 2
-      },
-      {
-        "id": "一定程度自动化的笨办法",
-        "text": "一定程度自动化的笨办法",
-        "level": 2
-      },
-      {
-        "id": "批处理脚本",
-        "text": "批处理脚本",
-        "level": 3
-      },
-      {
-        "id": "分片传输",
-        "text": "分片传输",
-        "level": 3
-      },
-      {
-        "id": "镜像签名验证",
-        "text": "镜像签名验证",
-        "level": 2
-      }
-    ],
     "monthFolder": "202504",
     "isDraft": false,
     "isHidden": false
@@ -1661,28 +556,6 @@ export const generatedPosts = [
       "智能体 (Agent)"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "what's-&-why-mcp",
-        "text": "What's & Why MCP",
-        "level": 2
-      },
-      {
-        "id": "mcp-server",
-        "text": "MCP Server",
-        "level": 2
-      },
-      {
-        "id": "搭一个计算器-mcp-server-by-node.js",
-        "text": "搭一个计算器 MCP Server By Node.js",
-        "level": 2
-      },
-      {
-        "id": "测试-mcp-server",
-        "text": "测试 MCP Server",
-        "level": 2
-      }
-    ],
     "monthFolder": "202504",
     "isDraft": false,
     "isHidden": false
@@ -1698,28 +571,6 @@ export const generatedPosts = [
       "JavaScript"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "why-jwt",
-        "text": "Why JWT",
-        "level": 2
-      },
-      {
-        "id": "jwt-的结构与生成原理",
-        "text": "JWT 的结构与生成原理",
-        "level": 2
-      },
-      {
-        "id": "jwt-的不足",
-        "text": "JWT 的不足",
-        "level": 2
-      },
-      {
-        "id": "xss-与-csrf-攻击防范",
-        "text": "XSS 与 CSRF 攻击防范",
-        "level": 2
-      }
-    ],
     "monthFolder": "202503",
     "isDraft": false,
     "isHidden": false
@@ -1736,23 +587,6 @@ export const generatedPosts = [
       "CI/CD"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "蓝绿部署",
-        "text": "蓝绿部署",
-        "level": 2
-      },
-      {
-        "id": "pm2-cluster-模式下的-next.js-部署",
-        "text": "PM2 Cluster 模式下的 Next.js 部署",
-        "level": 2
-      },
-      {
-        "id": "静态资源丢失与-next.js-构建方式",
-        "text": "静态资源丢失与 Next.js 构建方式",
-        "level": 2
-      }
-    ],
     "monthFolder": "202503",
     "isDraft": false,
     "isHidden": false
@@ -1769,7 +603,6 @@ export const generatedPosts = [
       "DevOps"
     ],
     "author": "Elecmonkey",
-    "toc": [],
     "monthFolder": "202503",
     "isDraft": false,
     "isHidden": false
@@ -1784,33 +617,6 @@ export const generatedPosts = [
       "Mermaid"
     ],
     "author": "Elecmonkey",
-    "toc": [
-      {
-        "id": "附录：mermaid图表示例大全",
-        "text": "附录：Mermaid图表示例大全",
-        "level": 2
-      },
-      {
-        "id": "类图示例",
-        "text": "类图示例",
-        "level": 3
-      },
-      {
-        "id": "状态图示例",
-        "text": "状态图示例",
-        "level": 3
-      },
-      {
-        "id": "甘特图示例",
-        "text": "甘特图示例",
-        "level": 3
-      },
-      {
-        "id": "饼图示例",
-        "text": "饼图示例",
-        "level": 3
-      }
-    ],
     "monthFolder": "202503",
     "isDraft": false,
     "isHidden": false

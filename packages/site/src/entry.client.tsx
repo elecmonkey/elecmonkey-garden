@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { App } from './app-shell';
-import 'katex/dist/katex.min.css';
 import './app/globals.css';
 import './styles/syntax-highlighter-override.css';
 

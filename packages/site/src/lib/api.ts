@@ -1,4 +1,5 @@
 import { generatedPostLoaders, generatedPosts, generatedPublicPosts } from '@/generated/content';
+import { calculateTagSizes } from './tag-size';
 
 // 定义文章数据类型
 export type PostData = {
@@ -221,33 +222,6 @@ export function getAllTags(): TagCount[] {
 // 根据标签名获取相关文章
 export function getPostsByTag(tagName: string): PostData[] {
   return [...(postsByTag.get(tagName) ?? [])];
-}
-
-// 计算标签云的标签大小
-function calculateTagSizes(tags: TagCount[]): TagCount[] {
-  if (tags.length === 0) {
-    return [];
-  }
-
-  // 找出最大和最小出现次数
-  const maxCount = Math.max(...tags.map(tag => tag.count));
-  const minCount = Math.min(...tags.map(tag => tag.count));
-  
-  // 定义最小和最大字体大小
-  const minSize = 0.8;  // em
-  const maxSize = 2;    // em
-  
-  // 为每个标签计算相对大小
-  return tags.map(tag => {
-    // 如果只有一个标签或所有标签出现次数相同
-    if (maxCount === minCount) {
-      return { ...tag, size: `${(minSize + maxSize) / 2}em` };
-    }
-    
-    // 线性映射 count 到 size
-    const size = minSize + ((tag.count - minCount) / (maxCount - minCount)) * (maxSize - minSize);
-    return { ...tag, size: `${size.toFixed(2)}em` };
-  });
 }
 
 // 获取所有可能的文章 ID 和它们所在的月份文件夹
