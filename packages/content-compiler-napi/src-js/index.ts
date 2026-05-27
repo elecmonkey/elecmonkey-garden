@@ -480,25 +480,38 @@ function createPostModule(options: ResolvedGenerateContentOptions, postWithMeta:
     + `export const post = ${JSON.stringify(post, null, 2)} satisfies PostData;\n`;
 }
 
+function toPostMetadata(postWithMeta: PostWithMeta): Omit<PostWithMeta, 'content' | 'searchContent' | 'sourceKey' | 'sourceHash' | 'contentHash'> {
+  const {
+    content: _content,
+    searchContent: _searchContent,
+    sourceKey: _sourceKey,
+    sourceHash: _sourceHash,
+    contentHash: _contentHash,
+    ...post
+  } = postWithMeta;
+
+  return post;
+}
+
 function createContentModule(options: ResolvedGenerateContentOptions, posts: PostWithMeta[]): string {
-  const imports = posts
-    .map((post, index) => (
-      `import { post as post${index}, postContentHash as post${index}ContentHash, postSourceHash as post${index}SourceHash } from './posts/${post.id}';`
+  const postList = posts
+    .map((post) => `  ${JSON.stringify(toPostMetadata(post), null, 2).replace(/\n/g, '\n  ')},`)
+    .join('\n');
+  const hashList = posts
+    .map((post) => (
+      `  ${JSON.stringify(post.id)}: { sourceHash: ${JSON.stringify(post.sourceHash)}, contentHash: ${JSON.stringify(post.contentHash)} },`
     ))
     .join('\n');
-  const postList = posts.map((_post, index) => `  post${index},`).join('\n');
-  const hashList = posts
-    .map((post, index) => (
-      `  ${JSON.stringify(post.id)}: { sourceHash: post${index}SourceHash, contentHash: post${index}ContentHash },`
-    ))
+  const loaderList = posts
+    .map((post) => `  ${JSON.stringify(post.id)}: () => import('./posts/${post.id}'),`)
     .join('\n');
 
   return `${options.generatedHeader}\n\n`
-    + `import type { PostData } from '${options.typeImport}';\n`
-    + `${imports}\n\n`
+    + `import type { PostData } from '${options.typeImport}';\n\n`
     + `export const generatedPosts = [\n${postList}\n] satisfies PostData[];\n\n`
     + 'export const generatedPublicPosts = generatedPosts.filter((post) => !post.isHidden);\n\n'
-    + `export const generatedPostHashes = {\n${hashList}\n} satisfies Record<string, { sourceHash: string; contentHash: string }>;\n`;
+    + `export const generatedPostHashes = {\n${hashList}\n} satisfies Record<string, { sourceHash: string; contentHash: string }>;\n\n`
+    + `export const generatedPostLoaders = {\n${loaderList}\n} satisfies Record<string, () => Promise<{ post: PostData }>>;\n`;
 }
 
 async function cleanupStaleGeneratedPosts(options: ResolvedGenerateContentOptions, activeSlugs: Set<string>): Promise<void> {

@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
-import { getPostById } from '@/lib/api';
+import { getPostById, loadPostById, type PostData } from '@/lib/api';
 import MarkdownContent from '@/components/article/md/MarkdownContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -31,17 +32,62 @@ export async function generateMetadata({ params }: Props): Promise<SiteMetadata>
 // 异步组件
 export default function BlogPost({ params }: Props) {
   const { slug } = params;
-  let post;
+  const [post, setPost] = useState<(PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } })>(() => {
+    try {
+      return getPostById(slug);
+    } catch (error) {
+      console.error('博客文章获取失败:', error);
+      throw new Response('Not Found', { status: 404 });
+    }
+  });
+  const [loadError, setLoadError] = useState<Error | null>(null);
 
-  try {
-    // 获取文章数据
-    post = getPostById(slug);
-  } catch (error) {
-    console.error('博客文章获取失败:', error);
+  useEffect(() => {
+    let canceled = false;
+
+    try {
+      const cachedPost = getPostById(slug);
+      setPost(cachedPost);
+
+      if (cachedPost.content) {
+        setLoadError(null);
+        return () => {
+          canceled = true;
+        };
+      }
+    } catch (error) {
+      setLoadError(error instanceof Error ? error : new Error(String(error)));
+      return () => {
+        canceled = true;
+      };
+    }
+
+    loadPostById(slug)
+      .then((loadedPost) => {
+        if (!canceled) {
+          setPost(loadedPost);
+          setLoadError(null);
+        }
+      })
+      .catch((error) => {
+        console.error('博客文章加载失败:', error);
+        if (!canceled) {
+          setLoadError(error instanceof Error ? error : new Error(String(error)));
+        }
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, [slug]);
+
+  if (loadError) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const markdownNode = <MarkdownContent content={post.content} />;
+  const markdownNode = post.content
+    ? <MarkdownContent content={post.content} />
+    : <p className="text-muted-foreground">正在加载文章内容...</p>;
     
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">

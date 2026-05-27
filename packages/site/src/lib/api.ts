@@ -1,9 +1,9 @@
-import { generatedPosts, generatedPublicPosts } from '@/generated/content';
+import { generatedPostLoaders, generatedPosts, generatedPublicPosts } from '@/generated/content';
 
 // 定义文章数据类型
 export type PostData = {
   id: string;           // 文章唯一标识符
-  content: string;      // 文章内容
+  content?: string;     // 文章内容（列表页只保留元数据，详情页按需加载）
   title: string;        // 文章标题
   date: string;         // 发布日期
   description: string;  // 文章描述
@@ -78,11 +78,47 @@ const nonDraftPosts = allPosts.filter((post) => !post.isDraft);
 const publicPosts = publicPostsWithDrafts.filter((post) => !post.isDraft);
 
 const postById = new Map<string, PostData>();
+const fullPostById = new Map<string, PostData>();
 const publicPostIndexById = new Map<string, number>();
 const postsByTag = new Map<string, PostData[]>();
 const postsByMonth = new Map<string, PostData[]>();
 
 const allPostIds: PostPathData[] = [];
+
+declare global {
+  interface Window {
+    __GARDEN_INITIAL_POST__?: PostData;
+  }
+}
+
+function readInitialPostFromDocument(id: string): PostData | undefined {
+  if (typeof window === 'undefined') {
+    return undefined;
+  }
+
+  const existing = window.__GARDEN_INITIAL_POST__;
+  if (existing?.id === id) {
+    fullPostById.set(existing.id, existing);
+    return existing;
+  }
+
+  const script = document.getElementById('__garden_initial_post__');
+  if (script?.textContent) {
+    try {
+      const post = JSON.parse(script.textContent) as PostData;
+      window.__GARDEN_INITIAL_POST__ = post;
+      fullPostById.set(post.id, post);
+
+      if (post.id === id) {
+        return post;
+      }
+    } catch (error) {
+      console.error('解析预加载文章失败:', error);
+    }
+  }
+
+  return undefined;
+}
 
 for (const post of allPosts) {
   postById.set(post.id, post);
@@ -226,7 +262,7 @@ export function getAllPostIds(): PostPathData[] {
 
 // 根据 ID 和月份文件夹获取文章数据
 export function getPostById(id: string): PostData & PostNavigation {
-  const currentPost = postById.get(id);
+  const currentPost = fullPostById.get(id) ?? readInitialPostFromDocument(id) ?? postById.get(id);
 
   if (!currentPost) {
     throw new Error(`找不到ID为 "${id}" 的文章`);
@@ -256,6 +292,29 @@ export function getPostById(id: string): PostData & PostNavigation {
     prevPost,
     nextPost,
   };
+}
+
+export async function loadPostById(id: string): Promise<PostData & PostNavigation> {
+  if (!fullPostById.has(id)) {
+    const loader = generatedPostLoaders[id];
+
+    if (!loader) {
+      throw new Error(`找不到ID为 "${id}" 的文章`);
+    }
+
+    const { post } = await loader();
+    fullPostById.set(id, post);
+  }
+
+  return getPostById(id);
+}
+
+export function getLoadedPostById(id: string): (PostData & PostNavigation) | undefined {
+  if (!fullPostById.has(id)) {
+    return undefined;
+  }
+
+  return getPostById(id);
 }
 
 // 获取所有月份及其文章数量
