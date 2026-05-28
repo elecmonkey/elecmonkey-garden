@@ -10,3 +10,4 @@ path = "src/lib.rs"
 
 [dependencies]
 comrak = { version = "0.52", default-features = false }
+katex_rs = { package = "katex-rs", version = "0.2.4" }

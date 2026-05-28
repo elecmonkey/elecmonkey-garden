@@ -100,12 +100,25 @@ fn marks_indent_paragraphs() {
 }
 
 #[test]
-fn keeps_math_placeholders_for_js_katex_pass() {
+fn renders_inline_math_with_katex() {
     let output = compile_markdown("Inline $x^2$.");
 
+    assert!(output.html.contains(r#"<span class="katex">"#));
+    assert!(output.html.contains(r#"<span class="katex-mathml">"#));
     assert!(output
         .html
-        .contains(r#"<span data-math-style="inline">x^2</span>"#));
+        .contains(r#"<span class="katex-html" aria-hidden="true">"#));
+    assert!(!output.html.contains("data-math-style"));
+    assert!(output.islands.is_empty());
+}
+
+#[test]
+fn renders_display_math_with_katex() {
+    let output = compile_markdown("$$x^2$$");
+
+    assert!(output.html.contains(r#"<span class="katex-display">"#));
+    assert!(output.html.contains(r#"<span class="katex">"#));
+    assert!(output.islands.is_empty());
 }
 
 #[test]

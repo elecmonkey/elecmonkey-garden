@@ -3,6 +3,7 @@
 mod ast;
 mod html;
 mod islands;
+mod math;
 mod options;
 mod slug;
 mod types;
