@@ -1,6 +1,6 @@
 use garden_content_compiler::{
-    compile_content, compile_post_file, CompileOptions, ContentManifest, FrontmatterValue, Post,
-    TocItem,
+    compile_content, compile_post_file, CompileOptions, ContentManifest, FrontmatterValue,
+    MarkdownIsland, Post, TocItem,
 };
 use napi_derive::napi;
 use std::path::PathBuf;
@@ -15,6 +15,8 @@ pub struct JsContentManifest {
 pub struct JsPost {
     pub id: String,
     pub content: String,
+    pub html: String,
+    pub islands: Vec<JsMarkdownIsland>,
     pub search_content: String,
     pub month_folder: String,
     pub is_draft: bool,
@@ -27,6 +29,18 @@ pub struct JsPost {
     pub no_toc: Option<bool>,
     pub toc: Vec<JsTocItem>,
     pub extra: Vec<JsFrontmatterEntry>,
+}
+
+#[napi(object)]
+pub struct JsMarkdownIsland {
+    pub kind: String,
+    pub id: String,
+    pub language: Option<String>,
+    pub range: Option<String>,
+    pub filename: Option<String>,
+    pub file_type: Option<String>,
+    pub url: Option<String>,
+    pub size: Option<String>,
 }
 
 #[napi(object)]
@@ -77,6 +91,8 @@ impl From<Post> for JsPost {
         Self {
             id: post.id,
             content: post.content,
+            html: post.html,
+            islands: post.islands.into_iter().map(Into::into).collect(),
             search_content: post.search_content,
             month_folder: post.month_folder,
             is_draft: post.is_draft,
@@ -96,6 +112,53 @@ impl From<Post> for JsPost {
                     value: frontmatter_value_into_string(value),
                 })
                 .collect(),
+        }
+    }
+}
+
+impl From<MarkdownIsland> for JsMarkdownIsland {
+    fn from(island: MarkdownIsland) -> Self {
+        match island {
+            MarkdownIsland::Code {
+                id,
+                language,
+                range,
+            } => Self {
+                kind: "code".to_string(),
+                id,
+                language,
+                range,
+                filename: None,
+                file_type: None,
+                url: None,
+                size: None,
+            },
+            MarkdownIsland::Mermaid { id } => Self {
+                kind: "mermaid".to_string(),
+                id,
+                language: None,
+                range: None,
+                filename: None,
+                file_type: None,
+                url: None,
+                size: None,
+            },
+            MarkdownIsland::FileDownload {
+                id,
+                filename,
+                file_type,
+                url,
+                size,
+            } => Self {
+                kind: "file-download".to_string(),
+                id,
+                language: None,
+                range: None,
+                filename,
+                file_type,
+                url,
+                size,
+            },
         }
     }
 }
