@@ -44,14 +44,22 @@ export default function BlogPost({ params }: Props) {
 
   useEffect(() => {
     let canceled = false;
+    const isCompiledPost = (post: PostData) => (
+      Boolean(post.html) && Array.isArray(post.toc) && Array.isArray(post.islands)
+    );
 
     try {
       const cachedPost = getLoadedPostById(slug) ?? getPostById(slug);
-      setPost(cachedPost);
 
-      if (cachedPost.html && Array.isArray(cachedPost.toc) && Array.isArray(cachedPost.islands)) {
+      if (isCompiledPost(cachedPost)) {
+        setPost((current) => (isCompiledPost(current) && current.id === cachedPost.id ? current : cachedPost));
         setLoadError(null);
+        return () => {
+          canceled = true;
+        };
       }
+
+      setPost(cachedPost);
     } catch (error) {
       setLoadError(error instanceof Error ? error : new Error(String(error)));
       return () => {
