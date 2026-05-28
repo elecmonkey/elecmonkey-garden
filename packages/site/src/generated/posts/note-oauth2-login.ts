@@ -3,11 +3,19 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:ca265a1236c2d5c9451c5ca7aa92a276d59395b95ba839b8402af435297023b6";
-export const postContentHash = "sha256:ade5650dfd1ed7081db8bb4b94c8214bec7bcdbe642059302dee46935af89cc2";
+export const postContentHash = "sha256:b40c315ef66ce5e8679943807a919c0bb2c0a78fb046076225e767af11113034";
 
 export const post = {
   "id": "note-oauth2-login",
   "content": "\n![OAuth 2.0 授权码模式登录流程全图](https://images.elecmonkey.com/articles/202602/oauth2-login.drawio.svg)\n\n## (1) 前端重定向到认证中心（请求登录）\n\n目的：让认证中心确认“用户是谁”\n\n用户点击“登录”按钮后，前端把浏览器跳转到认证中心。我们跳转的url中通常要包含以下信息：\n\n- client_id：告诉认证中心是哪个应用在请求登录\n- redirect_uri：登录成功后跳回哪里\n- state：随机字符串，用于防攻击\n\n跳转之后，用户将会在认证中心登录，输入在认证中心的平台上的用户名密码等，这都和我们的应用无关。我们只要知道，跳转走了之后的安全都不是我们负责，认证中心负责分辨「来者何人」。\n\n## (2) 认证中心登录成功，重定向回前端并携带 code\n\n目的：认证中心告诉我们的系统：“用户已经登录成功”\n\n认证中心验证用户成功后，浏览器被重定向回我们的前端应用，例如\n\n```text\nhttps://app.example.com/callback?code=abc123&state=random123\n```\n\n前端获得：\n\n- code：授权码（临时凭证）\n- state：用于校验请求合法性\n\n这个授权码我们的前端拿着什么也做不了，它唯一的用途就是由我们的后端应用向认证中心的服务器换取登录的细节信息。这个 code 只能用一次，而且一般短时间就过期。\n\n## (3) 前端把 code 发送给后端\n\n原因上文已解释。\n\n## (4) 后端用 code 向认证中心验证用户身份\n\n后端请求认证中心，至少要提交以下信息给认证中心：\n\n- client_id\n- client_secret\n- code\n\n前两者都是我们与认证中心约定好的（或者说认证中心授权给我们的），我们此时提交，表明自己是受信任的后端。同时这个 code 就是认证中心刚刚签发的，它自然可以验证这个 code 是否是由「一个有效的用户」、刚刚在登录「这个 client_id 的应用」的时候「登录成功」之后由自己签发的。如果验证通过，认证中心将会给我们一些信息，这些信息至少保证在我们的系统里能唯一确定某个用户。\n\n而 client_secret 就是这个 code 除了我们的后端其它任何人/任何程序拿到都没什么用处的原因。\n\n## (5) 后端查询自己的数据库，确认用户情况\n\n认证中心只负责确认身份，它完全不 care 我们的系统的任何业务细节。此时和认证中心的交互已经全部完成，后续都只是一个普通的「账号密码登录」也需要走的流程。\n\n比如说，这个用户在我们系统里可能是管理员，可能是普通用户，可能我们的登录接口要返回用户的头像；再比如，这个用户可能在我们的系统里不存在，那用户选了「通过微信登录」，我们是自动创建新用户还是要求用户绑定手机号？诸如此类事项，都是认证中心所不关心的。\n\n## (6) 后端签发 JWT 给前端\n\n参考[https://www.elecmonkey.com/blog/note-jwt](https://www.elecmonkey.com/blog/note-jwt)。\n\n当然也可以用 session 模式，根据资源和业务场景而定。\n",
+  "html": "<p><img src=\"https://images.elecmonkey.com/articles/202602/oauth2-login.drawio.svg\" alt=\"OAuth 2.0 授权码模式登录流程全图\" /></p>\n<h2><a inert href=\"#1-前端重定向到认证中心-请求登录\" aria-hidden=\"true\" class=\"anchor\" id=\"1-前端重定向到认证中心-请求登录\"></a>(1) 前端重定向到认证中心（请求登录）</h2>\n<p>目的：让认证中心确认“用户是谁”</p>\n<p>用户点击“登录”按钮后，前端把浏览器跳转到认证中心。我们跳转的url中通常要包含以下信息：</p>\n<ul>\n<li>client_id：告诉认证中心是哪个应用在请求登录</li>\n<li>redirect_uri：登录成功后跳回哪里</li>\n<li>state：随机字符串，用于防攻击</li>\n</ul>\n<p>跳转之后，用户将会在认证中心登录，输入在认证中心的平台上的用户名密码等，这都和我们的应用无关。我们只要知道，跳转走了之后的安全都不是我们负责，认证中心负责分辨「来者何人」。</p>\n<h2><a inert href=\"#2-认证中心登录成功-重定向回前端并携带-code\" aria-hidden=\"true\" class=\"anchor\" id=\"2-认证中心登录成功-重定向回前端并携带-code\"></a>(2) 认证中心登录成功，重定向回前端并携带 code</h2>\n<p>目的：认证中心告诉我们的系统：“用户已经登录成功”</p>\n<p>认证中心验证用户成功后，浏览器被重定向回我们的前端应用，例如</p>\n<div data-md-island=\"code\" data-island-id=\"code-1\" data-language=\"text\"><pre><code class=\"language-text\">https://app.example.com/callback?code=abc123&amp;state=random123\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>前端获得：</p>\n<ul>\n<li>code：授权码（临时凭证）</li>\n<li>state：用于校验请求合法性</li>\n</ul>\n<p>这个授权码我们的前端拿着什么也做不了，它唯一的用途就是由我们的后端应用向认证中心的服务器换取登录的细节信息。这个 code 只能用一次，而且一般短时间就过期。</p>\n<h2><a inert href=\"#3-前端把-code-发送给后端\" aria-hidden=\"true\" class=\"anchor\" id=\"3-前端把-code-发送给后端\"></a>(3) 前端把 code 发送给后端</h2>\n<p>原因上文已解释。</p>\n<h2><a inert href=\"#4-后端用-code-向认证中心验证用户身份\" aria-hidden=\"true\" class=\"anchor\" id=\"4-后端用-code-向认证中心验证用户身份\"></a>(4) 后端用 code 向认证中心验证用户身份</h2>\n<p>后端请求认证中心，至少要提交以下信息给认证中心：</p>\n<ul>\n<li>client_id</li>\n<li>client_secret</li>\n<li>code</li>\n</ul>\n<p>前两者都是我们与认证中心约定好的（或者说认证中心授权给我们的），我们此时提交，表明自己是受信任的后端。同时这个 code 就是认证中心刚刚签发的，它自然可以验证这个 code 是否是由「一个有效的用户」、刚刚在登录「这个 client_id 的应用」的时候「登录成功」之后由自己签发的。如果验证通过，认证中心将会给我们一些信息，这些信息至少保证在我们的系统里能唯一确定某个用户。</p>\n<p>而 client_secret 就是这个 code 除了我们的后端其它任何人/任何程序拿到都没什么用处的原因。</p>\n<h2><a inert href=\"#5-后端查询自己的数据库-确认用户情况\" aria-hidden=\"true\" class=\"anchor\" id=\"5-后端查询自己的数据库-确认用户情况\"></a>(5) 后端查询自己的数据库，确认用户情况</h2>\n<p>认证中心只负责确认身份，它完全不 care 我们的系统的任何业务细节。此时和认证中心的交互已经全部完成，后续都只是一个普通的「账号密码登录」也需要走的流程。</p>\n<p>比如说，这个用户在我们系统里可能是管理员，可能是普通用户，可能我们的登录接口要返回用户的头像；再比如，这个用户可能在我们的系统里不存在，那用户选了「通过微信登录」，我们是自动创建新用户还是要求用户绑定手机号？诸如此类事项，都是认证中心所不关心的。</p>\n<h2><a inert href=\"#6-后端签发-jwt-给前端\" aria-hidden=\"true\" class=\"anchor\" id=\"6-后端签发-jwt-给前端\"></a>(6) 后端签发 JWT 给前端</h2>\n<p>参考<a href=\"https://www.elecmonkey.com/blog/note-jwt\">https://www.elecmonkey.com/blog/note-jwt</a>。</p>\n<p>当然也可以用 session 模式，根据资源和业务场景而定。</p>\n",
+  "islands": [
+    {
+      "kind": "code",
+      "id": "code-1",
+      "language": "text"
+    }
+  ],
   "title": "OAuth 2.0 授权码模式登录流程全图",
   "date": "2026-02-24",
   "description": "一张图讲清 OAuth 2.0 授权码模式的登录流程与关键参数",
@@ -19,32 +27,32 @@ export const post = {
   "author": "Elecmonkey",
   "toc": [
     {
-      "id": "(1)-前端重定向到认证中心（请求登录）",
+      "id": "1-前端重定向到认证中心-请求登录",
       "text": "(1) 前端重定向到认证中心（请求登录）",
       "level": 2
     },
     {
-      "id": "(2)-认证中心登录成功，重定向回前端并携带-code",
+      "id": "2-认证中心登录成功-重定向回前端并携带-code",
       "text": "(2) 认证中心登录成功，重定向回前端并携带 code",
       "level": 2
     },
     {
-      "id": "(3)-前端把-code-发送给后端",
+      "id": "3-前端把-code-发送给后端",
       "text": "(3) 前端把 code 发送给后端",
       "level": 2
     },
     {
-      "id": "(4)-后端用-code-向认证中心验证用户身份",
+      "id": "4-后端用-code-向认证中心验证用户身份",
       "text": "(4) 后端用 code 向认证中心验证用户身份",
       "level": 2
     },
     {
-      "id": "(5)-后端查询自己的数据库，确认用户情况",
+      "id": "5-后端查询自己的数据库-确认用户情况",
       "text": "(5) 后端查询自己的数据库，确认用户情况",
       "level": 2
     },
     {
-      "id": "(6)-后端签发-jwt-给前端",
+      "id": "6-后端签发-jwt-给前端",
       "text": "(6) 后端签发 JWT 给前端",
       "level": 2
     }

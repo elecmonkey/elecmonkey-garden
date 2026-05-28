@@ -3,11 +3,13 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:84d93330a70bbc020cca0604560fff1080276a885e61453195cf9291d4da7bb1";
-export const postContentHash = "sha256:2c91cc725fc417e723d4a90fd2184c5f78db306bbf06ded3eb5aca893dd0b6d1";
+export const postContentHash = "sha256:e2d33b20436c24506fdcf95022fbd008fe57a0722d5a072e35968c8f303ab6c7";
 
 export const post = {
   "id": "react-compiler-performance",
   "content": "\n## 测试场景\n\n一个基于 Vite 的 React 中型后台管理项目，此前已经迁移到 Rolldown-Vite，没有明显的兼容性问题。\n\n- Node.js 24.4.1\n- MacBook Air M2\n\n## 测试结果\n\n### Rolldown-Vite + Oxc\n\n| 测试次数 | 第1次 | 第2次 | 第3次 | 第4次 | 第5次 | 平均值 |\n|---------|-------|-------|-------|-------|-------|--------|\n| **无 React Compiler** | 1.41s | 954ms | 943ms | 847ms | 863ms | **1.00s** |\n| **有 React Compiler** | 3.06s | 2.71s | 2.71s | 2.57s | 2.62s | **2.74s** |\n\n**构建时间增加 174%**\n\n### Vite (Rollup)\n\n| 测试次数 | 第1次 | 第2次 | 第3次 | 第4次 | 第5次 | 平均值 |\n|---------|-------|-------|-------|-------|-------|--------|\n| **无 React Compiler** | 7.34s | 7.02s | 6.87s | 6.51s | 6.63s | **6.87s** |\n| **有 React Compiler** | 8.66s | 8.12s | 10.87s | 11.31s | 9.23s | **9.64s** |\n\n**构建时间增加 40%**\n\n### Rolldown-Vite + Swc\n\n另外做一个 swc 负责 JSX 转译的基准：\n\n| 测试次数 | 第1次 | 第2次 | 第3次 | 第4次 | 第5次 | 平均值 |\n|---------|-------|-------|-------|-------|-------|--------|\n| **无 React Compiler** | 786ms | 824ms | 1.05s | 882ms | 760ms | **860ms** |\n\n## 简单分析\n\n一个“纯” React 项目渲染管线可以被 oxc/rolldown 系工具链完全接管，内部有着统一的 AST 格式。当前 React Compiler 仅以 Babel 插件的形式提供，依赖 Babel AST。所以任何在非 Babel 支撑的构建流程之中加入 React Compiler 的方案，都是增加了一个完全独立的构建流程。`.tsx` 源代码先被 oxc parse 成自己的 AST，然后一通处理，然后变成代码，然后再被 Babel parse 一次，然后 babel-plugin-react-compiler 转换成自己的 IR，然后一通处理再转化回去。\n\n不过 Babel AST 确实是社区既成标准，而从 AST 转换到 React Compiler IR 的逻辑很难想象 React 团队会愿意再写一遍/维护多份。未来看起来有些迷茫。\n\n不过的不过，目前 React Compiler 并不带来数量级的构建时间影响，应该说是可控的。React Compiler 的价值显而易见，稳定之后应该会成为 React 项目的标配。不过目前虽然发布了正式版本，Issue 区泛滥成灾的 Bug 反馈也许提示我们可以继续观望观望。",
+  "html": "<h2><a inert href=\"#测试场景\" aria-hidden=\"true\" class=\"anchor\" id=\"测试场景\"></a>测试场景</h2>\n<p>一个基于 Vite 的 React 中型后台管理项目，此前已经迁移到 Rolldown-Vite，没有明显的兼容性问题。</p>\n<ul>\n<li>Node.js 24.4.1</li>\n<li>MacBook Air M2</li>\n</ul>\n<h2><a inert href=\"#测试结果\" aria-hidden=\"true\" class=\"anchor\" id=\"测试结果\"></a>测试结果</h2>\n<h3><a inert href=\"#rolldown-vite-oxc\" aria-hidden=\"true\" class=\"anchor\" id=\"rolldown-vite-oxc\"></a>Rolldown-Vite + Oxc</h3>\n<table>\n<thead>\n<tr>\n<th>测试次数</th>\n<th>第1次</th>\n<th>第2次</th>\n<th>第3次</th>\n<th>第4次</th>\n<th>第5次</th>\n<th>平均值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>无 React Compiler</strong></td>\n<td>1.41s</td>\n<td>954ms</td>\n<td>943ms</td>\n<td>847ms</td>\n<td>863ms</td>\n<td><strong>1.00s</strong></td>\n</tr>\n<tr>\n<td><strong>有 React Compiler</strong></td>\n<td>3.06s</td>\n<td>2.71s</td>\n<td>2.71s</td>\n<td>2.57s</td>\n<td>2.62s</td>\n<td><strong>2.74s</strong></td>\n</tr>\n</tbody>\n</table>\n<p><strong>构建时间增加 174%</strong></p>\n<h3><a inert href=\"#vite-rollup\" aria-hidden=\"true\" class=\"anchor\" id=\"vite-rollup\"></a>Vite (Rollup)</h3>\n<table>\n<thead>\n<tr>\n<th>测试次数</th>\n<th>第1次</th>\n<th>第2次</th>\n<th>第3次</th>\n<th>第4次</th>\n<th>第5次</th>\n<th>平均值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>无 React Compiler</strong></td>\n<td>7.34s</td>\n<td>7.02s</td>\n<td>6.87s</td>\n<td>6.51s</td>\n<td>6.63s</td>\n<td><strong>6.87s</strong></td>\n</tr>\n<tr>\n<td><strong>有 React Compiler</strong></td>\n<td>8.66s</td>\n<td>8.12s</td>\n<td>10.87s</td>\n<td>11.31s</td>\n<td>9.23s</td>\n<td><strong>9.64s</strong></td>\n</tr>\n</tbody>\n</table>\n<p><strong>构建时间增加 40%</strong></p>\n<h3><a inert href=\"#rolldown-vite-swc\" aria-hidden=\"true\" class=\"anchor\" id=\"rolldown-vite-swc\"></a>Rolldown-Vite + Swc</h3>\n<p>另外做一个 swc 负责 JSX 转译的基准：</p>\n<table>\n<thead>\n<tr>\n<th>测试次数</th>\n<th>第1次</th>\n<th>第2次</th>\n<th>第3次</th>\n<th>第4次</th>\n<th>第5次</th>\n<th>平均值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>无 React Compiler</strong></td>\n<td>786ms</td>\n<td>824ms</td>\n<td>1.05s</td>\n<td>882ms</td>\n<td>760ms</td>\n<td><strong>860ms</strong></td>\n</tr>\n</tbody>\n</table>\n<h2><a inert href=\"#简单分析\" aria-hidden=\"true\" class=\"anchor\" id=\"简单分析\"></a>简单分析</h2>\n<p>一个“纯” React 项目渲染管线可以被 oxc/rolldown 系工具链完全接管，内部有着统一的 AST 格式。当前 React Compiler 仅以 Babel 插件的形式提供，依赖 Babel AST。所以任何在非 Babel 支撑的构建流程之中加入 React Compiler 的方案，都是增加了一个完全独立的构建流程。<code>.tsx</code> 源代码先被 oxc parse 成自己的 AST，然后一通处理，然后变成代码，然后再被 Babel parse 一次，然后 babel-plugin-react-compiler 转换成自己的 IR，然后一通处理再转化回去。</p>\n<p>不过 Babel AST 确实是社区既成标准，而从 AST 转换到 React Compiler IR 的逻辑很难想象 React 团队会愿意再写一遍/维护多份。未来看起来有些迷茫。</p>\n<p>不过的不过，目前 React Compiler 并不带来数量级的构建时间影响，应该说是可控的。React Compiler 的价值显而易见，稳定之后应该会成为 React 项目的标配。不过目前虽然发布了正式版本，Issue 区泛滥成灾的 Bug 反馈也许提示我们可以继续观望观望。</p>\n",
+  "islands": [],
   "title": "实测 Vite 工程中 React Compiler 对构建时间的影响",
   "date": "2025-11-13",
   "description": "引入 React Compiler，Rolldown-Vite with Oxc 构建时间增加 174%；Vite (Rollup) 构建时间增加 40%。",
@@ -30,17 +32,17 @@ export const post = {
       "level": 2
     },
     {
-      "id": "rolldown-vite-+-oxc",
+      "id": "rolldown-vite-oxc",
       "text": "Rolldown-Vite + Oxc",
       "level": 3
     },
     {
-      "id": "vite-(rollup)",
+      "id": "vite-rollup",
       "text": "Vite (Rollup)",
       "level": 3
     },
     {
-      "id": "rolldown-vite-+-swc",
+      "id": "rolldown-vite-swc",
       "text": "Rolldown-Vite + Swc",
       "level": 3
     },

@@ -5,6 +5,8 @@ import { calculateTagSizes } from './tag-size';
 export type PostData = {
   id: string;           // 文章唯一标识符
   content?: string;     // 文章内容（列表页只保留元数据，详情页按需加载）
+  html?: string;        // 静态 HTML 正文（详情页按需加载）
+  islands?: MarkdownIsland[]; // 正文中的客户端增强点
   title: string;        // 文章标题
   date: string;         // 发布日期
   description: string;  // 文章描述
@@ -23,6 +25,26 @@ export type TocItem = {
   text: string;
   level: number;
 };
+
+export type MarkdownIsland =
+  | {
+      kind: 'code';
+      id: string;
+      language?: string;
+      range?: string;
+    }
+  | {
+      kind: 'mermaid';
+      id: string;
+    }
+  | {
+      kind: 'file-download';
+      id: string;
+      filename?: string;
+      fileType?: string;
+      url?: string;
+      size?: string;
+    };
 
 export type TagCount = {
   name: string;     // 标签名称
@@ -87,6 +109,10 @@ const postsByTag = new Map<string, PostData[]>();
 const postsByMonth = new Map<string, PostData[]>();
 
 const allPostIds: PostPathData[] = [];
+
+function postHasCompiledArticle(post: PostData | undefined): post is PostData {
+  return typeof post?.html === 'string' && Array.isArray(post.toc) && Array.isArray(post.islands);
+}
 
 declare global {
   interface Window {
@@ -238,7 +264,10 @@ export function getAllPostIds(): PostPathData[] {
 
 // 根据 ID 和月份文件夹获取文章数据
 export function getPostById(id: string): PostData & PostNavigation {
-  const currentPost = fullPostById.get(id) ?? readInitialPostFromDocument(id) ?? postById.get(id);
+  const cachedFullPost = fullPostById.get(id);
+  const currentPost = postHasCompiledArticle(cachedFullPost)
+    ? cachedFullPost
+    : (readInitialPostFromDocument(id) ?? cachedFullPost ?? postById.get(id));
 
   if (!currentPost) {
     throw new Error(`找不到ID为 "${id}" 的文章`);
@@ -271,7 +300,7 @@ export function getPostById(id: string): PostData & PostNavigation {
 }
 
 export async function loadPostById(id: string): Promise<PostData & PostNavigation> {
-  if (!fullPostById.has(id)) {
+  if (!postHasCompiledArticle(fullPostById.get(id) ?? readInitialPostFromDocument(id))) {
     const loader = generatedPostLoaderById[id];
 
     if (!loader) {
@@ -286,7 +315,7 @@ export async function loadPostById(id: string): Promise<PostData & PostNavigatio
 }
 
 export function prefetchPostById(id: string): Promise<void> {
-  if (fullPostById.has(id) || readInitialPostFromDocument(id)) {
+  if (postHasCompiledArticle(fullPostById.get(id) ?? readInitialPostFromDocument(id))) {
     return Promise.resolve();
   }
 
@@ -307,7 +336,7 @@ export function prefetchPostById(id: string): Promise<void> {
 }
 
 export function getLoadedPostById(id: string): (PostData & PostNavigation) | undefined {
-  if (!fullPostById.has(id)) {
+  if (!postHasCompiledArticle(fullPostById.get(id) ?? readInitialPostFromDocument(id))) {
     return undefined;
   }
 

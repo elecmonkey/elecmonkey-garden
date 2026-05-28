@@ -3,11 +3,94 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:9b82e378a15628681f8183b4e2e6c6b9adfdf6c34b315e66cf67df1749a77c63";
-export const postContentHash = "sha256:4d658f72769d3aa6db1d834518f3a7f756b885aa8a704d4d2a3c496823e4cd80";
+export const postContentHash = "sha256:297d9d9c54184052beef87b9084241a664fdf47099892f29fbeac2396872a5e0";
 
 export const post = {
   "id": "void-operator-history",
   "content": "\n在上古互联网时代，大家可能都见过这么一个神秘链接：`javascript:void(0)`。这个`javascript:void(0)` 链接曾经遍布互联网的每个角落。\n\n今天手写代码已经很少用到这个奇怪的 JavaScript 运算符了——它执行任何表达式，但返回值总是 `undefined`。不过在一些构建产物中还有它的身影，比如，写这么一个神奇的TS函数：\n\n```typescript\nfunction test(param: any) {\n    console.log(param.data?.value);\n}\n```\n\n`tsc` 会把它编译成：\n\n```javascript\nfunction test(param) {\n    var _a;\n    console.log((_a = param.data) === null || _a === void 0 ? void 0 : _a.value);\n}\n```\n\n蒽？`void 0`，why not `undefined`？\n\n## undefined in JavaScript 👻\n\n`void` 的存在确实有那么一点道理。在 JavaScript 中，`undefined` 并不是一个关键字，而仅仅是全局对象的一个普通属性：\n\n```javascript\n// 在 ES5 之前，这样的代码是完全合法的\nundefined = \"这不是 undefined 了\";\nconsole.log(undefined);\n```\n\nES6 之后，该属性的值被设置为只读（`writable: false`），无法再被修改。不过，在局部作用域中仍然可以被覆盖：\n\n```javascript   \nfunction evil() {\n    let undefined = \"我是邪恶的值\";\n    console.log(undefined);\n}\n```\n\n虽然应该不会有人故意把变量命名成 `undefined` 并重新赋值，但总之，理论上讲，使用 `undefined` 你不能保证你获取到的是 `undefined`，反而是使用 `void` 运算符总能获取到真正的 `undefined`。\n\n## void 运算符\n\nSo，为了解决这个问题，JavaScript 引入了 `void` 运算符。无论 `undefined` 被如何污染，`void` 运算符总是会返回真正的 `undefined` 值：\n\n```javascript\n// 即使 undefined 被重新赋值\nglobalThis.undefined = \"被污染了\";\n// window 和 global\n\n// void 运算符仍然返回真正的 undefined\nconsole.log(void 0); // undefined\nconsole.log(void(0)); // undefined\nconsole.log(void \"任何表达式\"); // undefined\n```\n\n由于 `void 0` 是获取 `undefined` 最短的方式，它成为了许多 JavaScript 压缩工具的首选。\n\n## javascript:void(0) 的由来\n\n那么，为什么在早期的网页中会经常看到 `javascript:void(0)` 呢？这和早期浏览器 HTML 中 `<a>` 标签的行为有关。\n\n当用户点击一个`javascript:` 协议的链接时，浏览器会：\n1. 执行 `href` 属性中的 JavaScript 代码\n2. 使用返回值更新当前页面（如果有返回值的话）\n\n例如：\n```html\n<!-- 这会导致页面被替换为 \"1\" -->\n<a href=\"javascript:1\">点击我</a>\n\n<!-- 这什么都不会发生 -->\n<a href=\"javascript:void(0)\">点击我</a>\n```\n\n（大家不用自己去试了，现代浏览器除非你 `document.write`，否则不会重写页面内容的）\n\n因此，`javascript:void(0)` 成为了阻止链接默认行为的标准方式。\n\n## JavaScript 伪协议\n\n`javascript:` 开头的链接被称为 JavaScript 伪协议。这是一个早期 Web 开发中的特殊协议，允许在 HTML 元素的 href 属性或浏览器地址栏中直接执行 JavaScript 代码。\n\n```html\n<a href=\"javascript:alert('Hello World')\">点击我</a>\n```\n（这个现代浏览器还会弹的）\n\n```html\n<a href=\"javascript:var x=1;console.log(x);void 0;\">多语句</a>\n```\n\n不过，JavaScript 伪协议存在严重的安全风险，比如XSS 攻击。\n\n```html\n<a href=\"javascript:alert(document.cookie)\">看似正常的链接</a>\n```\n\n所以内容安全策略经常会禁止使用 JavaScript 伪协议：\n\n```header\nContent-Security-Policy: script-src 'self'\n```\n\n这也是为什么现代 Web 开发中不再推荐使用 JavaScript 伪协议。\n\n## void 与现代前端\n\n### 阻止链接默认行为\n\n在现代 JavaScript 中，阻止链接默认行为还有更好的办法：\n\n```html\n<!-- 使用 preventDefault() -->\n<a href=\"#\" onclick=\"event.preventDefault(); doSomething()\">点击我</a>\n```\n\n不过，如果你这个玩意儿点击之后是执行一段 Javascript 代码，那你为啥要用 `<a>` 标签啊？\n\n```html\n<!-- 或者直接使用按钮 -->\n<button onclick=\"doSomething()\">点击我</button>\n```\n\n### 处理箭头函数\n\n`void` 运算符在现代 JavaScript 中还有个用途，就是处理箭头函数的返回值。箭头函数也是 ES6 之后的新特性了，假如我们箭头函数只是调用一个其它函数，但是箭头函数在不写 `{}` 的时候，默认会返回调用表达式的值。而我们又有可能对返回值的类型有约束，这时候就可以用 `void` 运算符来处理：\n\n```typescript\ntype VoidFunc = () => void;\nconst fn: VoidFunc = () => void someExpression();\n```\n\n当然，你也完全可以：\n\n```typescript\ntype VoidFunc = () => void;\nconst fn: VoidFunc = () => {\n    someExpression();\n};\n```\n\n### 立即执行表达式\n\n```javascript\nvoid function() {\n    console.log(\"这个函数会立即执行\");\n}();\n```\n\n由于 `void` 是个运算符，它将函数声明转换为函数表达式，这样就可以直接括号调用了。\n\n不过现在似乎一般都这么写：\n\n```javascript\n(function() {\n    console.log(\"这个函数会立即执行\");\n})();\n```",
+  "html": "<p>在上古互联网时代，大家可能都见过这么一个神秘链接：<code>javascript:void(0)</code>。这个<code>javascript:void(0)</code> 链接曾经遍布互联网的每个角落。</p>\n<p>今天手写代码已经很少用到这个奇怪的 JavaScript 运算符了——它执行任何表达式，但返回值总是 <code>undefined</code>。不过在一些构建产物中还有它的身影，比如，写这么一个神奇的TS函数：</p>\n<div data-md-island=\"code\" data-island-id=\"code-1\" data-language=\"typescript\"><pre><code class=\"language-typescript\">function test(param: any) {\n    console.log(param.data?.value);\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p><code>tsc</code> 会把它编译成：</p>\n<div data-md-island=\"code\" data-island-id=\"code-2\" data-language=\"javascript\"><pre><code class=\"language-javascript\">function test(param) {\n    var _a;\n    console.log((_a = param.data) === null || _a === void 0 ? void 0 : _a.value);\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>蒽？<code>void 0</code>，why not <code>undefined</code>？</p>\n<h2><a inert href=\"#undefined-in-javascript\" aria-hidden=\"true\" class=\"anchor\" id=\"undefined-in-javascript\"></a>undefined in JavaScript 👻</h2>\n<p><code>void</code> 的存在确实有那么一点道理。在 JavaScript 中，<code>undefined</code> 并不是一个关键字，而仅仅是全局对象的一个普通属性：</p>\n<div data-md-island=\"code\" data-island-id=\"code-3\" data-language=\"javascript\"><pre><code class=\"language-javascript\">// 在 ES5 之前，这样的代码是完全合法的\nundefined = &quot;这不是 undefined 了&quot;;\nconsole.log(undefined);\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>ES6 之后，该属性的值被设置为只读（<code>writable: false</code>），无法再被修改。不过，在局部作用域中仍然可以被覆盖：</p>\n<div data-md-island=\"code\" data-island-id=\"code-4\" data-language=\"javascript\"><pre><code class=\"language-javascript\">function evil() {\n    let undefined = &quot;我是邪恶的值&quot;;\n    console.log(undefined);\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>虽然应该不会有人故意把变量命名成 <code>undefined</code> 并重新赋值，但总之，理论上讲，使用 <code>undefined</code> 你不能保证你获取到的是 <code>undefined</code>，反而是使用 <code>void</code> 运算符总能获取到真正的 <code>undefined</code>。</p>\n<h2><a inert href=\"#void-运算符\" aria-hidden=\"true\" class=\"anchor\" id=\"void-运算符\"></a>void 运算符</h2>\n<p>So，为了解决这个问题，JavaScript 引入了 <code>void</code> 运算符。无论 <code>undefined</code> 被如何污染，<code>void</code> 运算符总是会返回真正的 <code>undefined</code> 值：</p>\n<div data-md-island=\"code\" data-island-id=\"code-5\" data-language=\"javascript\"><pre><code class=\"language-javascript\">// 即使 undefined 被重新赋值\nglobalThis.undefined = &quot;被污染了&quot;;\n// window 和 global\n\n// void 运算符仍然返回真正的 undefined\nconsole.log(void 0); // undefined\nconsole.log(void(0)); // undefined\nconsole.log(void &quot;任何表达式&quot;); // undefined\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>由于 <code>void 0</code> 是获取 <code>undefined</code> 最短的方式，它成为了许多 JavaScript 压缩工具的首选。</p>\n<h2><a inert href=\"#javascript-void-0-的由来\" aria-hidden=\"true\" class=\"anchor\" id=\"javascript-void-0-的由来\"></a>javascript:void(0) 的由来</h2>\n<p>那么，为什么在早期的网页中会经常看到 <code>javascript:void(0)</code> 呢？这和早期浏览器 HTML 中 <code>&lt;a&gt;</code> 标签的行为有关。</p>\n<p>当用户点击一个<code>javascript:</code> 协议的链接时，浏览器会：</p>\n<ol>\n<li>执行 <code>href</code> 属性中的 JavaScript 代码</li>\n<li>使用返回值更新当前页面（如果有返回值的话）</li>\n</ol>\n<p>例如：</p>\n<div data-md-island=\"code\" data-island-id=\"code-6\" data-language=\"html\"><pre><code class=\"language-html\">&lt;!-- 这会导致页面被替换为 &quot;1&quot; --&gt;\n&lt;a href=&quot;javascript:1&quot;&gt;点击我&lt;/a&gt;\n\n&lt;!-- 这什么都不会发生 --&gt;\n&lt;a href=&quot;javascript:void(0)&quot;&gt;点击我&lt;/a&gt;\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>（大家不用自己去试了，现代浏览器除非你 <code>document.write</code>，否则不会重写页面内容的）</p>\n<p>因此，<code>javascript:void(0)</code> 成为了阻止链接默认行为的标准方式。</p>\n<h2><a inert href=\"#javascript-伪协议\" aria-hidden=\"true\" class=\"anchor\" id=\"javascript-伪协议\"></a>JavaScript 伪协议</h2>\n<p><code>javascript:</code> 开头的链接被称为 JavaScript 伪协议。这是一个早期 Web 开发中的特殊协议，允许在 HTML 元素的 href 属性或浏览器地址栏中直接执行 JavaScript 代码。</p>\n<div data-md-island=\"code\" data-island-id=\"code-7\" data-language=\"html\"><pre><code class=\"language-html\">&lt;a href=&quot;javascript:alert('Hello World')&quot;&gt;点击我&lt;/a&gt;\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>（这个现代浏览器还会弹的）</p>\n<div data-md-island=\"code\" data-island-id=\"code-8\" data-language=\"html\"><pre><code class=\"language-html\">&lt;a href=&quot;javascript:var x=1;console.log(x);void 0;&quot;&gt;多语句&lt;/a&gt;\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>不过，JavaScript 伪协议存在严重的安全风险，比如XSS 攻击。</p>\n<div data-md-island=\"code\" data-island-id=\"code-9\" data-language=\"html\"><pre><code class=\"language-html\">&lt;a href=&quot;javascript:alert(document.cookie)&quot;&gt;看似正常的链接&lt;/a&gt;\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>所以内容安全策略经常会禁止使用 JavaScript 伪协议：</p>\n<div data-md-island=\"code\" data-island-id=\"code-10\" data-language=\"header\"><pre><code class=\"language-header\">Content-Security-Policy: script-src 'self'\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>这也是为什么现代 Web 开发中不再推荐使用 JavaScript 伪协议。</p>\n<h2><a inert href=\"#void-与现代前端\" aria-hidden=\"true\" class=\"anchor\" id=\"void-与现代前端\"></a>void 与现代前端</h2>\n<h3><a inert href=\"#阻止链接默认行为\" aria-hidden=\"true\" class=\"anchor\" id=\"阻止链接默认行为\"></a>阻止链接默认行为</h3>\n<p>在现代 JavaScript 中，阻止链接默认行为还有更好的办法：</p>\n<div data-md-island=\"code\" data-island-id=\"code-11\" data-language=\"html\"><pre><code class=\"language-html\">&lt;!-- 使用 preventDefault() --&gt;\n&lt;a href=&quot;#&quot; onclick=&quot;event.preventDefault(); doSomething()&quot;&gt;点击我&lt;/a&gt;\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>不过，如果你这个玩意儿点击之后是执行一段 Javascript 代码，那你为啥要用 <code>&lt;a&gt;</code> 标签啊？</p>\n<div data-md-island=\"code\" data-island-id=\"code-12\" data-language=\"html\"><pre><code class=\"language-html\">&lt;!-- 或者直接使用按钮 --&gt;\n&lt;button onclick=&quot;doSomething()&quot;&gt;点击我&lt;/button&gt;\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<h3><a inert href=\"#处理箭头函数\" aria-hidden=\"true\" class=\"anchor\" id=\"处理箭头函数\"></a>处理箭头函数</h3>\n<p><code>void</code> 运算符在现代 JavaScript 中还有个用途，就是处理箭头函数的返回值。箭头函数也是 ES6 之后的新特性了，假如我们箭头函数只是调用一个其它函数，但是箭头函数在不写 <code>{}</code> 的时候，默认会返回调用表达式的值。而我们又有可能对返回值的类型有约束，这时候就可以用 <code>void</code> 运算符来处理：</p>\n<div data-md-island=\"code\" data-island-id=\"code-13\" data-language=\"typescript\"><pre><code class=\"language-typescript\">type VoidFunc = () =&gt; void;\nconst fn: VoidFunc = () =&gt; void someExpression();\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>当然，你也完全可以：</p>\n<div data-md-island=\"code\" data-island-id=\"code-14\" data-language=\"typescript\"><pre><code class=\"language-typescript\">type VoidFunc = () =&gt; void;\nconst fn: VoidFunc = () =&gt; {\n    someExpression();\n};\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<h3><a inert href=\"#立即执行表达式\" aria-hidden=\"true\" class=\"anchor\" id=\"立即执行表达式\"></a>立即执行表达式</h3>\n<div data-md-island=\"code\" data-island-id=\"code-15\" data-language=\"javascript\"><pre><code class=\"language-javascript\">void function() {\n    console.log(&quot;这个函数会立即执行&quot;);\n}();\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>由于 <code>void</code> 是个运算符，它将函数声明转换为函数表达式，这样就可以直接括号调用了。</p>\n<p>不过现在似乎一般都这么写：</p>\n<div data-md-island=\"code\" data-island-id=\"code-16\" data-language=\"javascript\"><pre><code class=\"language-javascript\">(function() {\n    console.log(&quot;这个函数会立即执行&quot;);\n})();\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n",
+  "islands": [
+    {
+      "kind": "code",
+      "id": "code-1",
+      "language": "typescript"
+    },
+    {
+      "kind": "code",
+      "id": "code-2",
+      "language": "javascript"
+    },
+    {
+      "kind": "code",
+      "id": "code-3",
+      "language": "javascript"
+    },
+    {
+      "kind": "code",
+      "id": "code-4",
+      "language": "javascript"
+    },
+    {
+      "kind": "code",
+      "id": "code-5",
+      "language": "javascript"
+    },
+    {
+      "kind": "code",
+      "id": "code-6",
+      "language": "html"
+    },
+    {
+      "kind": "code",
+      "id": "code-7",
+      "language": "html"
+    },
+    {
+      "kind": "code",
+      "id": "code-8",
+      "language": "html"
+    },
+    {
+      "kind": "code",
+      "id": "code-9",
+      "language": "html"
+    },
+    {
+      "kind": "code",
+      "id": "code-10",
+      "language": "header"
+    },
+    {
+      "kind": "code",
+      "id": "code-11",
+      "language": "html"
+    },
+    {
+      "kind": "code",
+      "id": "code-12",
+      "language": "html"
+    },
+    {
+      "kind": "code",
+      "id": "code-13",
+      "language": "typescript"
+    },
+    {
+      "kind": "code",
+      "id": "code-14",
+      "language": "typescript"
+    },
+    {
+      "kind": "code",
+      "id": "code-15",
+      "language": "javascript"
+    },
+    {
+      "kind": "code",
+      "id": "code-16",
+      "language": "javascript"
+    }
+  ],
   "title": "神秘链接 javascript:void(0) 背后的故事。",
   "date": "2025-04-16",
   "description": "前端世界的每一处细节变化都映射着整个 Web 生态的变迁。",
@@ -19,7 +102,7 @@ export const post = {
   "author": "Elecmonkey",
   "toc": [
     {
-      "id": "undefined-in-javascript-👻",
+      "id": "undefined-in-javascript",
       "text": "undefined in JavaScript 👻",
       "level": 2
     },
@@ -29,7 +112,7 @@ export const post = {
       "level": 2
     },
     {
-      "id": "javascript:void(0)-的由来",
+      "id": "javascript-void-0-的由来",
       "text": "javascript:void(0) 的由来",
       "level": 2
     },

@@ -3,11 +3,13 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:00945a515eda73b461eadc6c3403e87f727830fe2e10594ddbea78120c0a18db";
-export const postContentHash = "sha256:b101b5bd36ead359b146704dc8ff0128f823f44a80ab01f22d8b22bc0ba8e210";
+export const postContentHash = "sha256:03bd4ca13b4e148c5d37002b3acd4b76a45be25f76305667028fa7c1affda891";
 
 export const post = {
   "id": "best-language-for-ai",
   "content": "\n很少有哪门语言的 compile-time 能提供像 Rust 编译器这样丰富的信息量。\n\nRust 是最能「在编译时消灭错误」的语言。Vibe Coding 流往往以「项目跑起来」为目标，但众所周知 **跑起来 != 写的对**。运行时的逻辑错误 AI 可不管你——Rust 苛刻的编译时检查可能会让 Rust 成为**能跑起来**最接近程序实际逻辑正确的一门语言。\n\nRust 的编译器消息往往带有「解释性质」，已经像是一份教程了，很多时候感觉 Rust 的编译器在实时给 AI 提供当前相关语法的文档，简直是个 Context7 MCP（\n\n![cuddlyferris](https://images.elecmonkey.com/articles/202508/cuddlyferris.svg)\n",
+  "html": "<p>很少有哪门语言的 compile-time 能提供像 Rust 编译器这样丰富的信息量。</p>\n<p>Rust 是最能「在编译时消灭错误」的语言。Vibe Coding 流往往以「项目跑起来」为目标，但众所周知 <strong>跑起来 != 写的对</strong>。运行时的逻辑错误 AI 可不管你——Rust 苛刻的编译时检查可能会让 Rust 成为<strong>能跑起来</strong>最接近程序实际逻辑正确的一门语言。</p>\n<p>Rust 的编译器消息往往带有「解释性质」，已经像是一份教程了，很多时候感觉 Rust 的编译器在实时给 AI 提供当前相关语法的文档，简直是个 Context7 MCP（</p>\n<p><img src=\"https://images.elecmonkey.com/articles/202508/cuddlyferris.svg\" alt=\"cuddlyferris\" /></p>\n",
+  "islands": [],
   "title": "最适合 Vibe Coding 的编程语言",
   "date": "2025-08-21",
   "description": "锈化世界吧，Rust",

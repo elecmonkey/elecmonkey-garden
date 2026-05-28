@@ -50,10 +50,7 @@ const HomePage = createPreloadableRoute(() => import('@/app/page'));
 const AboutPage = createPreloadableRoute(() => import('@/app/about/page'));
 const BlogPage = createPreloadableRoute(() => import('@/app/blog/page'));
 const BlogPaginationPage = createPreloadableRoute(() => import('@/app/blog/page/[page]/page'));
-const BlogPostPage = createPreloadableRoute(async () => {
-  await import('katex/dist/katex.min.css');
-  return import('@/app/blog/[slug]/page');
-});
+const BlogPostPage = createPreloadableRoute(() => import('@/app/blog/[slug]/page'));
 const TagsIndexPage = createPreloadableRoute(() => import('@/app/tags/page'));
 const TagPage = createPreloadableRoute(() => import('@/app/tags/[tag]/page'));
 const TagPaginationPage = createPreloadableRoute(() => import('@/app/tags/[tag]/page/[page]/page'));

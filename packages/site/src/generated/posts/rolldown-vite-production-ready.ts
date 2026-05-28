@@ -3,11 +3,13 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:f558da04ec313b01cc3cfff8e58ed4c349c3cbc658a6c1ee8bc614d76d4a8904";
-export const postContentHash = "sha256:4981c4e206408e1b4080477b795abe9e6dda3af069727ca86a3b2ff11a40958b";
+export const postContentHash = "sha256:1ee756f70118fd779508e54c8f82d6a371311606e69dd4c9b8ccb14194863249";
 
 export const post = {
   "id": "rolldown-vite-production-ready",
   "content": "\n绝对值得。\n\n前提是有一定规模的项目。部分行为还是和基于 Rollup 的 Vite 有区别。\n\n---\n**Announcing Rolldown-Vite**\n\n*May 30, 2025*\n\n> TL;DR: Try out the Rolldown-powered Vite today by using the `rolldown-vite` package instead of the default `vite` package.\n>\n> — Evan You\n\n\n****\n\n**Vite 7.0 发布了！**\n\n*2025年6月24日*\n\n> 我们很高兴与大家分享 Vite 7 的发布！从 Evan You 向 Vite 仓库提交第一次 commit 至今已经过去 5 年了，当时没有人能预料到前端生态会发生如此巨大的变化。如今，大多数现代前端框架和工具正在协同工作，构建在 Vite 共享的基础设施之上。\n>\n> — Vite 团队\n\n---\n\n\n![Vite with Rollup](https://images.elecmonkey.com/articles/202507/rollup-vite.png)\n\n![Rolldown-vite](https://images.elecmonkey.com/articles/202507/rolldown-vite.png)",
+  "html": "<p>绝对值得。</p>\n<p>前提是有一定规模的项目。部分行为还是和基于 Rollup 的 Vite 有区别。</p>\n<hr />\n<p><strong>Announcing Rolldown-Vite</strong></p>\n<p><em>May 30, 2025</em></p>\n<blockquote>\n<p>TL;DR: Try out the Rolldown-powered Vite today by using the <code>rolldown-vite</code> package instead of the default <code>vite</code> package.</p>\n<p>— Evan You</p>\n</blockquote>\n<hr />\n<p><strong>Vite 7.0 发布了！</strong></p>\n<p><em>2025年6月24日</em></p>\n<blockquote>\n<p>我们很高兴与大家分享 Vite 7 的发布！从 Evan You 向 Vite 仓库提交第一次 commit 至今已经过去 5 年了，当时没有人能预料到前端生态会发生如此巨大的变化。如今，大多数现代前端框架和工具正在协同工作，构建在 Vite 共享的基础设施之上。</p>\n<p>— Vite 团队</p>\n</blockquote>\n<hr />\n<p><img src=\"https://images.elecmonkey.com/articles/202507/rollup-vite.png\" alt=\"Vite with Rollup\" /></p>\n<p><img src=\"https://images.elecmonkey.com/articles/202507/rolldown-vite.png\" alt=\"Rolldown-vite\" /></p>\n",
+  "islands": [],
   "title": "值得开始尝试 Rolldown-vite 了吗",
   "date": "2025-07-08",
   "description": "生产环境可以用吗。",

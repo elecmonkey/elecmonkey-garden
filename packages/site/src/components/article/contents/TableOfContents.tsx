@@ -14,24 +14,38 @@ interface TableOfContentsProps {
   headings?: Heading[];
 }
 
-function TableOfContents({ no_toc = false, desktop = false, headings: initialHeadings = [] }: TableOfContentsProps) {
-  const [headings, setHeadings] = useState<Heading[]>(initialHeadings);
+const EMPTY_HEADINGS: Heading[] = [];
+
+function getHeadingElement(id: string): HTMLElement | null {
+  const target = document.getElementById(id);
+  return target?.closest<HTMLElement>('h2, h3, h4, h5, h6') ?? target;
+}
+
+function collectDomHeadings(): Heading[] {
+  return Array.from(document.querySelectorAll<HTMLElement>('[data-article-content] h2, [data-article-content] h3, [data-article-content] h4, [data-article-content] h5, [data-article-content] h6'))
+    .map((element) => {
+      const anchor = element.querySelector<HTMLElement>('.anchor[id], a[id]');
+      const id = element.id || anchor?.id || '';
+
+      return {
+        id,
+        text: element.textContent || '',
+        level: parseInt(element.tagName.charAt(1), 10),
+      };
+    })
+    .filter((heading) => heading.id);
+}
+
+function TableOfContents({ no_toc = false, desktop = false, headings: headingsProp }: TableOfContentsProps) {
+  const inputHeadings = headingsProp ?? EMPTY_HEADINGS;
+  const [headings, setHeadings] = useState<Heading[]>(inputHeadings);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // 获取所有标题元素
-    const elements = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6'))
-      .filter((element) => element.id) // 只获取有 id 的标题
-      .map((element) => ({
-        id: element.id,
-        text: element.textContent || '',
-        level: parseInt(element.tagName.charAt(1)),
-      }));
-    
-    if (initialHeadings.length === 0) {
-      setHeadings(elements);
-    }
+    const nextHeadings = inputHeadings.length > 0 ? inputHeadings : collectDomHeadings();
+    setHeadings(nextHeadings);
+    setActiveId((current) => (nextHeadings.some((heading) => heading.id === current) ? current : ''));
 
     // 设置 Intersection Observer 来检测当前可见的标题
     const observer = new IntersectionObserver(
@@ -48,8 +62,8 @@ function TableOfContents({ no_toc = false, desktop = false, headings: initialHea
     );
 
     // 观察所有标题元素
-    elements.forEach(({ id }) => {
-      const element = document.getElementById(id);
+    nextHeadings.forEach(({ id }) => {
+      const element = getHeadingElement(id);
       if (element) {
         observer.observe(element);
       }
@@ -58,7 +72,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: initialHea
     return () => {
       observer.disconnect();
     };
-  }, [initialHeadings]);
+  }, [inputHeadings]);
 
   // 如果 no_toc 为 true，则不渲染任何内容
   if (no_toc) return null;
@@ -116,7 +130,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: initialHea
                     }`}
                     onClick={(e) => {
                       e.preventDefault();
-                      const element = document.getElementById(heading.id);
+                      const element = getHeadingElement(heading.id);
                       if (element) {
                         const offset = 100;
                         const elementPosition = element.getBoundingClientRect().top;
@@ -215,7 +229,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: initialHea
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
-                    const element = document.getElementById(heading.id);
+                    const element = getHeadingElement(heading.id);
                     if (element) {
                       const offset = 100;
                       const elementPosition = element.getBoundingClientRect().top;

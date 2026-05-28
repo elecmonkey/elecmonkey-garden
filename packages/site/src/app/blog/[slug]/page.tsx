@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
 import { getLoadedPostById, getPostById, loadPostById, type PostData } from '@/lib/api';
-import MarkdownContent from '@/components/article/md/MarkdownContent';
+import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 
@@ -49,11 +49,8 @@ export default function BlogPost({ params }: Props) {
       const cachedPost = getLoadedPostById(slug) ?? getPostById(slug);
       setPost(cachedPost);
 
-      if (cachedPost.content) {
+      if (cachedPost.html && Array.isArray(cachedPost.toc) && Array.isArray(cachedPost.islands)) {
         setLoadError(null);
-        return () => {
-          canceled = true;
-        };
       }
     } catch (error) {
       setLoadError(error instanceof Error ? error : new Error(String(error)));
@@ -85,8 +82,8 @@ export default function BlogPost({ params }: Props) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const markdownNode = post.content
-    ? <MarkdownContent content={post.content} />
+  const articleNode = post.html
+    ? <StaticArticleContent postId={post.id} html={post.html} islands={post.islands} />
     : <p className="text-muted-foreground">正在加载文章内容...</p>;
     
   return (
@@ -138,9 +135,7 @@ export default function BlogPost({ params }: Props) {
             </div>
           </header>
           
-          <div className="markdown-content">
-            {markdownNode}
-          </div>
+          {articleNode}
 
           {/* 底部导航 */}
           {!post.isHidden && (

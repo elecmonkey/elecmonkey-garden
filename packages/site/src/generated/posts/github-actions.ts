@@ -3,11 +3,49 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:4c95b35ae7c3bb53bb018c4772dd15505b2c0d6975f4dabd1998af6552ddfde7";
-export const postContentHash = "sha256:3ad6187893fcea19c5d71af86667c5e63acb478874c1deb5603bb4fdf2241f25";
+export const postContentHash = "sha256:e8cb68661bf653039be76af9d43eacbf384606f403250d2506e18fcbc07162c4";
 
 export const post = {
   "id": "github-actions",
   "content": "\n自动化的 CI/CD 现在感觉起来已经成了 Web 项目必不可少的的一部分了。主要原因似乎可以算作从代码写好到生产环境的过程越来越复杂了。如果还是代码写好，一堆 `.php` 压缩一下丢到服务器里就跑的时代，估计没有太多人有动力去配置自动化的 CI/CD，也就不会有这一堆花里胡哨的 CI/CD 工具。\n\n这个站点是一个 Next.js 构建的小项目。我还是很自然地让 AI 写了一个 GitHub Actions 的 YAML 配置文件。按我一贯的感觉，这种现在爆火的框架加上最简单的架构逻辑，各路大模型经常能一次性写出所谓「最佳实践」——毕竟它们读过的代码比我多多了。\n\n写出来了，一跑，好像是能用，但是这个流程怎么感觉怪怪的呢？仔细一看，亲爱的 Claude 让我先在 GitHub 的构建服务器上 build 了一遍，跑了测试（但我并没有写任何测试代码，所以测试了个寂寞），然后登录到目标环境服务器重新 `git clone`、`pnpm install`、`pnpm build` 一通操作…… 我感觉我似乎不太理解这波操作。在我的要求下，Claude 老师很快改成了把 GitHub Actions 的编译结果打包，通过 SSH 上传到部署服务器上。跑了一遍，嘿，通的，就没再多管。\n\n后面发现这个 SSH 传文件这一步有的时候慢得吓人。虽说 GitHub Actions 的服务器在美国，但是这编译结果得多大才能一二十分钟跑不完？在 yaml 里加个 `ls -lh` 看看这个包到底有多大，好家伙，一个没有啥内容、只有几个页面和组件的 Next.js 项目，100 多 MB。我突然明白 Claude 为啥要在目标服务器上重新 build 一遍了——有传这一百多 MB 包的时间，目标服务器早把不到 1 MB 的代码仓库 pull 下来，从镜像源把依赖装好了。看来错怪 Claude 老师了……\n\n啊……不过我依然觉得在服务器上完全重新 build 感觉很不优雅，很不爽的同时突然想到，几个静态页面的构建产物为什么会这么大？原来 Next.js 它构建产物不是静态的框架的啊。 Astro 之类的框架给我编译出来纯静态的前端 html+css+javascript，那种直接搞个对象存储部署了为啥还需要一个有 Node 环境的服务器呢。Next.js 的应用是有生产环境依赖的。\n\n好吧，体积被生产环境依赖撑起来了。镜像站哪儿都是，就不拿这堆玩意儿占用宝贵的中美海底电缆了（\n\n遂注释掉在 Actions 的 ubuntu 环境下跑的 `pnpm install --prod --frozen-lockfile`：\n\n```shell\n# 创建包含必要文件的部署目录\nmkdir -p deploy\n\n# 复制 Next.js 构建产物\ncp -r .next deploy/\n\n# 复制必要的文件\ncp package.json pnpm-lock.yaml deploy/\n\n# 复制其他必要的静态文件和配置\nif [ -d \"public\" ]; then\ncp -r public deploy/\nfi\n\n# 这样好吗？注释掉吧！这样好吗？注释掉吧！这样好吗？注释掉吧！\n# cd deploy\n# pnpm install --prod --frozen-lockfile\n# cd ..\ntar -czf deploy.tar.gz deploy\n\nls -lh deploy.tar.gz\n```\n\n在 YAML 的远程服务器 SSH 部分加回来再：\n\n```shell\nrm -rf /tmp/deploy\ntar -xzf /tmp/deploy.tar.gz -C /tmp\n\nrm -rf .next package.json pnpm-lock.yaml\ncp -a /tmp/deploy/. ./\n\necho \"在服务器端安装生产依赖...\"\npnpm install --prod --frozen-lockfile\n```\n\n蒽 看着不错，打出来的 `tar.gz` 只有 20MB ，那就这样了…… 不对啊，不能这样。直觉告诉我我的这些破玩意儿也没有 20MB 大小。那看看 `.next` 目录里到底有些啥：\n\n - ​缓存/临时文件\n```txt\n.next/cache/ - 构建缓存\n.next/trace\n.next/analyze\n```\n\n这些东西生产环境也不需要啊！\n\n顺便的顺便，其实任意两次编译出来的结果，并非每个文件都有差异。如果能每次都 diff 出差异来针对性的上传——好的，我们都会想到 `rsync` 。不过这其实有点问题，用压缩包传输就不太好 diff 了。所以究竟是压缩包的那点压缩量更能节省流量还是避免相同文件重复上传更能节省流量？我猜对于\"持续集成、持续部署\"的项目来说，应该是后者会效果显著一点。\n\n```shell\nif rsync -avz --delete \\\n  --exclude='.next/cache/' \\\n  --exclude='.next/trace' \\\n  --exclude='.next/analyze' \\\n  -e \"ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no\" \\\n  ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then\n  echo \"✅ 文件传输成功！\"\nelse\n  echo \"❌ 文件传输失败，退出代码: $?\"\n  exit 1\nfi\n```\n\n通过 `--exclude` 参数排除开发缓存和调试文件，通过 `--delete` 参数可以自动删除服务器目录中多余的文件。\n\n```shell\ndu -sh deploy/\n```\n输出：\n```txt\n275M\tdeploy/\n```\n\n但是 `rsync` 告诉我——\n```txt\nsent 1,403,633 bytes  received 3,500 bytes  187,617.73 bytes/sec\ntotal size is 5,833,900  speedup is 4.15\n```\n沃德玛雅。不带生产环境依赖的目录还有275MB，我想知道我最开始带着完整环境几次 Actions 到底传了多大的包。排除掉 `cache` 之类的东西后大小仅仅 5MB ，实际传输增量仅 1MB 多。。。\n\n啊想到自己盯着屏幕等十几分钟 Actions 的过往。。。请本文主角 Claude 老师来总结一下吧：\n\n1. **不要盲目信任模型生成的\"最佳实践\"**：即使是强大的大模型，它们给出的方案也可能只是一种通用解决方案，而不一定适合你的具体场景。需要理解每一步操作的目的，不要无脑复制粘贴。\n\n2. **了解项目的构建产物特性**：不同前端框架的构建产物差异很大。Next.js 这类同构框架与纯静态框架有本质区别，了解这些特性对优化部署策略至关重要。\n\n3. **合理选择工具链**：`rsync` 这类老牌工具之所以能流行几十年，正是因为它们解决了实际问题且性能优异。在选择工具时，应该关注其核心优势而不是追逐新潮。\n\n4. **持续优化是值得的**：从最初的二十分钟到最后的几十秒，每一步优化都带来了明显的收益。对于需要频繁部署的项目，这种积累的时间节省是巨大的。\n",
+  "html": "<p>自动化的 CI/CD 现在感觉起来已经成了 Web 项目必不可少的的一部分了。主要原因似乎可以算作从代码写好到生产环境的过程越来越复杂了。如果还是代码写好，一堆 <code>.php</code> 压缩一下丢到服务器里就跑的时代，估计没有太多人有动力去配置自动化的 CI/CD，也就不会有这一堆花里胡哨的 CI/CD 工具。</p>\n<p>这个站点是一个 Next.js 构建的小项目。我还是很自然地让 AI 写了一个 GitHub Actions 的 YAML 配置文件。按我一贯的感觉，这种现在爆火的框架加上最简单的架构逻辑，各路大模型经常能一次性写出所谓「最佳实践」——毕竟它们读过的代码比我多多了。</p>\n<p>写出来了，一跑，好像是能用，但是这个流程怎么感觉怪怪的呢？仔细一看，亲爱的 Claude 让我先在 GitHub 的构建服务器上 build 了一遍，跑了测试（但我并没有写任何测试代码，所以测试了个寂寞），然后登录到目标环境服务器重新 <code>git clone</code>、<code>pnpm install</code>、<code>pnpm build</code> 一通操作…… 我感觉我似乎不太理解这波操作。在我的要求下，Claude 老师很快改成了把 GitHub Actions 的编译结果打包，通过 SSH 上传到部署服务器上。跑了一遍，嘿，通的，就没再多管。</p>\n<p>后面发现这个 SSH 传文件这一步有的时候慢得吓人。虽说 GitHub Actions 的服务器在美国，但是这编译结果得多大才能一二十分钟跑不完？在 yaml 里加个 <code>ls -lh</code> 看看这个包到底有多大，好家伙，一个没有啥内容、只有几个页面和组件的 Next.js 项目，100 多 MB。我突然明白 Claude 为啥要在目标服务器上重新 build 一遍了——有传这一百多 MB 包的时间，目标服务器早把不到 1 MB 的代码仓库 pull 下来，从镜像源把依赖装好了。看来错怪 Claude 老师了……</p>\n<p>啊……不过我依然觉得在服务器上完全重新 build 感觉很不优雅，很不爽的同时突然想到，几个静态页面的构建产物为什么会这么大？原来 Next.js 它构建产物不是静态的框架的啊。 Astro 之类的框架给我编译出来纯静态的前端 html+css+javascript，那种直接搞个对象存储部署了为啥还需要一个有 Node 环境的服务器呢。Next.js 的应用是有生产环境依赖的。</p>\n<p>好吧，体积被生产环境依赖撑起来了。镜像站哪儿都是，就不拿这堆玩意儿占用宝贵的中美海底电缆了（</p>\n<p>遂注释掉在 Actions 的 ubuntu 环境下跑的 <code>pnpm install --prod --frozen-lockfile</code>：</p>\n<div data-md-island=\"code\" data-island-id=\"code-1\" data-language=\"shell\"><pre><code class=\"language-shell\"># 创建包含必要文件的部署目录\nmkdir -p deploy\n\n# 复制 Next.js 构建产物\ncp -r .next deploy/\n\n# 复制必要的文件\ncp package.json pnpm-lock.yaml deploy/\n\n# 复制其他必要的静态文件和配置\nif [ -d &quot;public&quot; ]; then\ncp -r public deploy/\nfi\n\n# 这样好吗？注释掉吧！这样好吗？注释掉吧！这样好吗？注释掉吧！\n# cd deploy\n# pnpm install --prod --frozen-lockfile\n# cd ..\ntar -czf deploy.tar.gz deploy\n\nls -lh deploy.tar.gz\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>在 YAML 的远程服务器 SSH 部分加回来再：</p>\n<div data-md-island=\"code\" data-island-id=\"code-2\" data-language=\"shell\"><pre><code class=\"language-shell\">rm -rf /tmp/deploy\ntar -xzf /tmp/deploy.tar.gz -C /tmp\n\nrm -rf .next package.json pnpm-lock.yaml\ncp -a /tmp/deploy/. ./\n\necho &quot;在服务器端安装生产依赖...&quot;\npnpm install --prod --frozen-lockfile\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>蒽 看着不错，打出来的 <code>tar.gz</code> 只有 20MB ，那就这样了…… 不对啊，不能这样。直觉告诉我我的这些破玩意儿也没有 20MB 大小。那看看 <code>.next</code> 目录里到底有些啥：</p>\n<ul>\n<li>​缓存/临时文件</li>\n</ul>\n<div data-md-island=\"code\" data-island-id=\"code-3\" data-language=\"txt\"><pre><code class=\"language-txt\">.next/cache/ - 构建缓存\n.next/trace\n.next/analyze\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>这些东西生产环境也不需要啊！</p>\n<p>顺便的顺便，其实任意两次编译出来的结果，并非每个文件都有差异。如果能每次都 diff 出差异来针对性的上传——好的，我们都会想到 <code>rsync</code> 。不过这其实有点问题，用压缩包传输就不太好 diff 了。所以究竟是压缩包的那点压缩量更能节省流量还是避免相同文件重复上传更能节省流量？我猜对于&quot;持续集成、持续部署&quot;的项目来说，应该是后者会效果显著一点。</p>\n<div data-md-island=\"code\" data-island-id=\"code-4\" data-language=\"shell\"><pre><code class=\"language-shell\">if rsync -avz --delete \\\n  --exclude='.next/cache/' \\\n  --exclude='.next/trace' \\\n  --exclude='.next/analyze' \\\n  -e &quot;ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no&quot; \\\n  ./deploy/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/deploy/; then\n  echo &quot;✅ 文件传输成功！&quot;\nelse\n  echo &quot;❌ 文件传输失败，退出代码: $?&quot;\n  exit 1\nfi\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>通过 <code>--exclude</code> 参数排除开发缓存和调试文件，通过 <code>--delete</code> 参数可以自动删除服务器目录中多余的文件。</p>\n<div data-md-island=\"code\" data-island-id=\"code-5\" data-language=\"shell\"><pre><code class=\"language-shell\">du -sh deploy/\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>输出：</p>\n<div data-md-island=\"code\" data-island-id=\"code-6\" data-language=\"txt\"><pre><code class=\"language-txt\">275M\tdeploy/\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>但是 <code>rsync</code> 告诉我——</p>\n<div data-md-island=\"code\" data-island-id=\"code-7\" data-language=\"txt\"><pre><code class=\"language-txt\">sent 1,403,633 bytes  received 3,500 bytes  187,617.73 bytes/sec\ntotal size is 5,833,900  speedup is 4.15\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>沃德玛雅。不带生产环境依赖的目录还有275MB，我想知道我最开始带着完整环境几次 Actions 到底传了多大的包。排除掉 <code>cache</code> 之类的东西后大小仅仅 5MB ，实际传输增量仅 1MB 多。。。</p>\n<p>啊想到自己盯着屏幕等十几分钟 Actions 的过往。。。请本文主角 Claude 老师来总结一下吧：</p>\n<ol>\n<li>\n<p><strong>不要盲目信任模型生成的&quot;最佳实践&quot;</strong>：即使是强大的大模型，它们给出的方案也可能只是一种通用解决方案，而不一定适合你的具体场景。需要理解每一步操作的目的，不要无脑复制粘贴。</p>\n</li>\n<li>\n<p><strong>了解项目的构建产物特性</strong>：不同前端框架的构建产物差异很大。Next.js 这类同构框架与纯静态框架有本质区别，了解这些特性对优化部署策略至关重要。</p>\n</li>\n<li>\n<p><strong>合理选择工具链</strong>：<code>rsync</code> 这类老牌工具之所以能流行几十年，正是因为它们解决了实际问题且性能优异。在选择工具时，应该关注其核心优势而不是追逐新潮。</p>\n</li>\n<li>\n<p><strong>持续优化是值得的</strong>：从最初的二十分钟到最后的几十秒，每一步优化都带来了明显的收益。对于需要频繁部署的项目，这种积累的时间节省是巨大的。</p>\n</li>\n</ol>\n",
+  "islands": [
+    {
+      "kind": "code",
+      "id": "code-1",
+      "language": "shell"
+    },
+    {
+      "kind": "code",
+      "id": "code-2",
+      "language": "shell"
+    },
+    {
+      "kind": "code",
+      "id": "code-3",
+      "language": "txt"
+    },
+    {
+      "kind": "code",
+      "id": "code-4",
+      "language": "shell"
+    },
+    {
+      "kind": "code",
+      "id": "code-5",
+      "language": "shell"
+    },
+    {
+      "kind": "code",
+      "id": "code-6",
+      "language": "txt"
+    },
+    {
+      "kind": "code",
+      "id": "code-7",
+      "language": "txt"
+    }
+  ],
   "title": "前端小项目的 GitHub Actions 配置爬坑记",
   "date": "2025-03-26",
   "description": "又名被大模型坑的前端开发者决心拯救自己的CI/CD工作流（bu。",

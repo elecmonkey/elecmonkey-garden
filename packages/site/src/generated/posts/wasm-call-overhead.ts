@@ -3,11 +3,13 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:d6e13e99c0c723bdf3133416a28dfc83bdddc4eb76cd8b007d974857d98d2df9";
-export const postContentHash = "sha256:aa22b6675f7a481d10137334ca6ede8491a3fba2b229f2c951baf8d880883fb1";
+export const postContentHash = "sha256:0fd493e8ac1a3f05d7e5093f56b8a89e1de146077d4c212074fb796cdf58d6b2";
 
 export const post = {
   "id": "wasm-call-overhead",
   "content": "\n> 希望没有什么神奇的优化手段干扰测试，实在是不太懂 Rust 和 V8 的各种编译机制。\n\n## 调用开销分析\n\n在 WASM 内部最简单的加法操作。\n\n### 测试环境\n\n- 测试次数: 1,000,000 次\n- 测试工具: Chrome 139\n\n### 测试结果\n\n| 指标 | 数值 |\n| :--- | :--- |\n| 总调用次数 | 1,000,000 |\n| 总时间 | 21.50ms |\n| 单次调用时间 | 21.50 纳秒 |\n| 每秒调用次数 | 46,511,628 |\n| 单次调用开销 | 0.0215 微秒 |\n\n## 计算密集型测试 (Rust vs JavaScript)\n\n递归计算斐波那契第 40 个数的测试。\n\n### 测试环境\n\n- 测试工具: Chrome 139\n- Rust (WASM) 执行次数: 50,000 次\n- JavaScript 执行次数: 5 次\n\n### 测试结果\n\n#### Rust (WASM) 50,000 次结果\n\n- 总时间: 6.40ms\n\n#### JavaScript 5 次结果\n\n- 总时间: 3549.40ms",
+  "html": "<blockquote>\n<p>希望没有什么神奇的优化手段干扰测试，实在是不太懂 Rust 和 V8 的各种编译机制。</p>\n</blockquote>\n<h2><a inert href=\"#调用开销分析\" aria-hidden=\"true\" class=\"anchor\" id=\"调用开销分析\"></a>调用开销分析</h2>\n<p>在 WASM 内部最简单的加法操作。</p>\n<h3><a inert href=\"#测试环境\" aria-hidden=\"true\" class=\"anchor\" id=\"测试环境\"></a>测试环境</h3>\n<ul>\n<li>测试次数: 1,000,000 次</li>\n<li>测试工具: Chrome 139</li>\n</ul>\n<h3><a inert href=\"#测试结果\" aria-hidden=\"true\" class=\"anchor\" id=\"测试结果\"></a>测试结果</h3>\n<table>\n<thead>\n<tr>\n<th align=\"left\">指标</th>\n<th align=\"left\">数值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"left\">总调用次数</td>\n<td align=\"left\">1,000,000</td>\n</tr>\n<tr>\n<td align=\"left\">总时间</td>\n<td align=\"left\">21.50ms</td>\n</tr>\n<tr>\n<td align=\"left\">单次调用时间</td>\n<td align=\"left\">21.50 纳秒</td>\n</tr>\n<tr>\n<td align=\"left\">每秒调用次数</td>\n<td align=\"left\">46,511,628</td>\n</tr>\n<tr>\n<td align=\"left\">单次调用开销</td>\n<td align=\"left\">0.0215 微秒</td>\n</tr>\n</tbody>\n</table>\n<h2><a inert href=\"#计算密集型测试-rust-vs-javascript\" aria-hidden=\"true\" class=\"anchor\" id=\"计算密集型测试-rust-vs-javascript\"></a>计算密集型测试 (Rust vs JavaScript)</h2>\n<p>递归计算斐波那契第 40 个数的测试。</p>\n<h3><a inert href=\"#测试环境-1\" aria-hidden=\"true\" class=\"anchor\" id=\"测试环境-1\"></a>测试环境</h3>\n<ul>\n<li>测试工具: Chrome 139</li>\n<li>Rust (WASM) 执行次数: 50,000 次</li>\n<li>JavaScript 执行次数: 5 次</li>\n</ul>\n<h3><a inert href=\"#测试结果-1\" aria-hidden=\"true\" class=\"anchor\" id=\"测试结果-1\"></a>测试结果</h3>\n<h4><a inert href=\"#rust-wasm-50-000-次结果\" aria-hidden=\"true\" class=\"anchor\" id=\"rust-wasm-50-000-次结果\"></a>Rust (WASM) 50,000 次结果</h4>\n<ul>\n<li>总时间: 6.40ms</li>\n</ul>\n<h4><a inert href=\"#javascript-5-次结果\" aria-hidden=\"true\" class=\"anchor\" id=\"javascript-5-次结果\"></a>JavaScript 5 次结果</h4>\n<ul>\n<li>总时间: 3549.40ms</li>\n</ul>\n",
+  "islands": [],
   "title": "WebAssembly 调用开销分析",
   "date": "2025-08-26",
   "description": "希望没有什么神奇的优化手段干扰测试，实在是不太懂 Rust 和 V8 的各种编译机制。",
@@ -35,22 +37,22 @@ export const post = {
       "level": 3
     },
     {
-      "id": "计算密集型测试-(rust-vs-javascript)",
+      "id": "计算密集型测试-rust-vs-javascript",
       "text": "计算密集型测试 (Rust vs JavaScript)",
       "level": 2
     },
     {
-      "id": "测试环境",
+      "id": "测试环境-1",
       "text": "测试环境",
       "level": 3
     },
     {
-      "id": "测试结果",
+      "id": "测试结果-1",
       "text": "测试结果",
       "level": 3
     },
     {
-      "id": "rust-(wasm)-50,000-次结果",
+      "id": "rust-wasm-50-000-次结果",
       "text": "Rust (WASM) 50,000 次结果",
       "level": 4
     },

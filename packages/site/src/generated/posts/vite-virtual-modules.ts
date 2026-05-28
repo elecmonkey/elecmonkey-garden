@@ -3,11 +3,39 @@
 import type { PostData } from '@/lib/api';
 
 export const postSourceHash = "sha256:5fdae38cdd716d17a86708b396c8829610456bdcc7d02004341e7e800430f6f2";
-export const postContentHash = "sha256:6fd0151d0ef07a4cb9e21c68253437a0c5c0dc34f329d3d9b2b0d5ce1249bebe";
+export const postContentHash = "sha256:24271fae47a00875d23fb29c39459fa5c2e6ca10dd97b513a544db030cbcf48c";
 
 export const post = {
   "id": "vite-virtual-modules",
   "content": "\n虚拟模块（Virtual Module）是一种在构建工具中动态生成的模块，它并不对应文件系统中的实际文件，而是在编译阶段由插件生成、在运行时像普通 ESM 模块一样被导入使用。Vite 官方文档指出，虚拟模块允许开发者通过正常的 ESM `import` 语法向源码注入编译时信息。通常以 `virtual:` 为前缀命名（最好再加上插件名命名空间以避免冲突），例如 `virtual:my-module`。\n\n## 在插件中创建虚拟模块\n\n要在 Vite 插件中实现虚拟模块，需要使用两个主要钩子：`resolveId` 和 `load`。通常做法是：定义一个虚拟模块标识（例如 `const virtualId = 'virtual:foo'`），在 `resolveId(id)` 钩子中如果 `id === virtualId`，则返回带前缀的内部 ID（如 `'\\0' + virtualId`），表示该插件负责处理此导入；然后在 `load(id)` 钩子中检查是否为带前缀的内部 ID，如果匹配则返回模块内容（字符串形式的代码）。例如：\n\n```js\n// vite-plugin-foo.js（插件示例）\nexport default function fooPlugin() {\n  const virtualId = 'virtual:foo'\n  const resolvedVirtualId = '\\0' + virtualId\n  return {\n    name: 'vite-plugin-foo',\n    resolveId(id) {\n      if (id === virtualId) {\n        return resolvedVirtualId  // 捕获虚拟模块 ID\n      }\n    },\n    load(id) {\n      if (id === resolvedVirtualId) {\n        // 返回虚拟模块的导出内容\n        return 'export const msg = \"Hello from virtual module\";'\n      }\n    }\n  }\n}\n```\n\n注意返回的 `resolvedVirtualId` 带有 `\\0` 前缀，这是 Rollup/Vite 处理虚拟模块的惯例，可以阻止其他解析（如文件系统查找或别名）干扰该 ID。\n\n## 示例：定义、导入及生命周期\n\n下面通过示例演示如何定义、导入和使用虚拟模块。假设在项目中创建一个插件 `virtual-sum-plugin.js`，动态生成一个计算数组之和的模块：\n\n```js\n// virtual-sum-plugin.js\nexport default function sumPlugin() {\n  const virtualSumId = 'virtual:sum'\n  const resolvedId = '\\0' + virtualSumId\n  return {\n    name: 'vite-plugin-virtual-sum',\n    resolveId(id) {\n      if (id === virtualSumId) {\n        return resolvedId\n      }\n    },\n    load(id) {\n      if (id === resolvedId) {\n        // 虚拟模块导出的内容：一个求和函数\n        return 'export default function sum(arr, i = 0) { return i >= arr.length ? 0 : arr[i] + sum(arr, i + 1); }'\n      }\n    }\n  }\n}\n```\n\n在 `vite.config.js` 中引入并使用该插件：\n\n```js\nimport sumPlugin from './virtual-sum-plugin.js'\nexport default {\n  plugins: [\n    sumPlugin()\n  ]\n}\n```\n\n此时，在应用代码中就可以直接导入该虚拟模块并使用：\n\n```js\nimport sum from 'virtual:sum'\nconsole.log(sum([1, 3, 5, 7, 9]))  // 输出 25\n```\n\n如上所示，构建期间该模块并不来自文件系统，而是由插件的 `load` 钩子返回的字符串生成。开发模式下，每次导入此模块时会调用插件的 `load` 钩子来获取内容。在生产构建时，Rollup 打包器也会执行相同的钩子逻辑。\n\n## TypeScript 类型问题\n\n在 TypeScript 项目中，引入虚拟需要在全局声明文件中添加类型定义。\n\n例如：\n\n```ts\ndeclare module 'virtual:*' {\n  const content: any\n  export default content\n}\n```\n\n可以让 TS 接受任意以 `virtual:` 开头的导入。\n\n## HMR 更新\n\n在开发服务器运行时，虚拟模块同样支持 HMR。若虚拟模块生成的内容依赖外部数据（如 JSON 文件等），可以在插件中实现 `handleHotUpdate` 钩子来手动更新模块内容。\n\n虚拟模块内容变化时，需要使用 `handleHotUpdate` 钩子手动触发模块更新，否则 Vite 默认不会自动刷新此类模块。在该钩子中可调用 `moduleGraph.invalidateModule()` 或将对应模块返回，促使客户端进行热重载。\n\n## 那么，虚拟模块可以用来？\n\n- **注入编译时/运行时变量：** 例如，通过插件生成特定环境变量模块，将其作为常量导入应用。社区插件 *vite-plugin-env-import* 即演示了如何使用 `virtual:env` 和 `virtual:env:public` 等虚拟模块，将 `.env` 中的变量作为静态字符串导出。这样，在代码中可以直接 `import { VITE_API } from 'virtual:env:public'` 等方式获取环境配置，而无需手动管理 `import.meta.env`。\n\n- **动态配置与路由生成：** 可以利用虚拟模块根据文件结构或配置动态生成代码。比如通过插件扫描某个目录，生成路由配置或某些常量文件，然后在运行时通过 `import virtual:...` 使用。这避免了手动维护配置。\n\n然后就可以参考我的 description 了——\n\n**Vue 模块、路由都可以动态生成**，现代前端框架和 Vue 又提供了 SSR/SSG 能力，那我们完全可以以一种更像“写前端”的方式（而非“写编译器”的感觉，不断的和代码生成打交道）去构建自己的站点生成器。\n\n顺便，很喜欢这两个优雅的项目。\n\n[VitePress](https://vitepress.dev/) - Vite & Vue Powered Static Site Generator\n\n[Slidev](https://sli.dev/) - Presentation Slides for Developers",
+  "html": "<p>虚拟模块（Virtual Module）是一种在构建工具中动态生成的模块，它并不对应文件系统中的实际文件，而是在编译阶段由插件生成、在运行时像普通 ESM 模块一样被导入使用。Vite 官方文档指出，虚拟模块允许开发者通过正常的 ESM <code>import</code> 语法向源码注入编译时信息。通常以 <code>virtual:</code> 为前缀命名（最好再加上插件名命名空间以避免冲突），例如 <code>virtual:my-module</code>。</p>\n<h2><a inert href=\"#在插件中创建虚拟模块\" aria-hidden=\"true\" class=\"anchor\" id=\"在插件中创建虚拟模块\"></a>在插件中创建虚拟模块</h2>\n<p>要在 Vite 插件中实现虚拟模块，需要使用两个主要钩子：<code>resolveId</code> 和 <code>load</code>。通常做法是：定义一个虚拟模块标识（例如 <code>const virtualId = 'virtual:foo'</code>），在 <code>resolveId(id)</code> 钩子中如果 <code>id === virtualId</code>，则返回带前缀的内部 ID（如 <code>'\\0' + virtualId</code>），表示该插件负责处理此导入；然后在 <code>load(id)</code> 钩子中检查是否为带前缀的内部 ID，如果匹配则返回模块内容（字符串形式的代码）。例如：</p>\n<div data-md-island=\"code\" data-island-id=\"code-1\" data-language=\"js\"><pre><code class=\"language-js\">// vite-plugin-foo.js（插件示例）\nexport default function fooPlugin() {\n  const virtualId = 'virtual:foo'\n  const resolvedVirtualId = '\\0' + virtualId\n  return {\n    name: 'vite-plugin-foo',\n    resolveId(id) {\n      if (id === virtualId) {\n        return resolvedVirtualId  // 捕获虚拟模块 ID\n      }\n    },\n    load(id) {\n      if (id === resolvedVirtualId) {\n        // 返回虚拟模块的导出内容\n        return 'export const msg = &quot;Hello from virtual module&quot;;'\n      }\n    }\n  }\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>注意返回的 <code>resolvedVirtualId</code> 带有 <code>\\0</code> 前缀，这是 Rollup/Vite 处理虚拟模块的惯例，可以阻止其他解析（如文件系统查找或别名）干扰该 ID。</p>\n<h2><a inert href=\"#示例-定义-导入及生命周期\" aria-hidden=\"true\" class=\"anchor\" id=\"示例-定义-导入及生命周期\"></a>示例：定义、导入及生命周期</h2>\n<p>下面通过示例演示如何定义、导入和使用虚拟模块。假设在项目中创建一个插件 <code>virtual-sum-plugin.js</code>，动态生成一个计算数组之和的模块：</p>\n<div data-md-island=\"code\" data-island-id=\"code-2\" data-language=\"js\"><pre><code class=\"language-js\">// virtual-sum-plugin.js\nexport default function sumPlugin() {\n  const virtualSumId = 'virtual:sum'\n  const resolvedId = '\\0' + virtualSumId\n  return {\n    name: 'vite-plugin-virtual-sum',\n    resolveId(id) {\n      if (id === virtualSumId) {\n        return resolvedId\n      }\n    },\n    load(id) {\n      if (id === resolvedId) {\n        // 虚拟模块导出的内容：一个求和函数\n        return 'export default function sum(arr, i = 0) { return i &gt;= arr.length ? 0 : arr[i] + sum(arr, i + 1); }'\n      }\n    }\n  }\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>在 <code>vite.config.js</code> 中引入并使用该插件：</p>\n<div data-md-island=\"code\" data-island-id=\"code-3\" data-language=\"js\"><pre><code class=\"language-js\">import sumPlugin from './virtual-sum-plugin.js'\nexport default {\n  plugins: [\n    sumPlugin()\n  ]\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>此时，在应用代码中就可以直接导入该虚拟模块并使用：</p>\n<div data-md-island=\"code\" data-island-id=\"code-4\" data-language=\"js\"><pre><code class=\"language-js\">import sum from 'virtual:sum'\nconsole.log(sum([1, 3, 5, 7, 9]))  // 输出 25\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>如上所示，构建期间该模块并不来自文件系统，而是由插件的 <code>load</code> 钩子返回的字符串生成。开发模式下，每次导入此模块时会调用插件的 <code>load</code> 钩子来获取内容。在生产构建时，Rollup 打包器也会执行相同的钩子逻辑。</p>\n<h2><a inert href=\"#typescript-类型问题\" aria-hidden=\"true\" class=\"anchor\" id=\"typescript-类型问题\"></a>TypeScript 类型问题</h2>\n<p>在 TypeScript 项目中，引入虚拟需要在全局声明文件中添加类型定义。</p>\n<p>例如：</p>\n<div data-md-island=\"code\" data-island-id=\"code-5\" data-language=\"ts\"><pre><code class=\"language-ts\">declare module 'virtual:*' {\n  const content: any\n  export default content\n}\n</code></pre><button type=\"button\" data-copy-button>复制</button></div>\n<p>可以让 TS 接受任意以 <code>virtual:</code> 开头的导入。</p>\n<h2><a inert href=\"#hmr-更新\" aria-hidden=\"true\" class=\"anchor\" id=\"hmr-更新\"></a>HMR 更新</h2>\n<p>在开发服务器运行时，虚拟模块同样支持 HMR。若虚拟模块生成的内容依赖外部数据（如 JSON 文件等），可以在插件中实现 <code>handleHotUpdate</code> 钩子来手动更新模块内容。</p>\n<p>虚拟模块内容变化时，需要使用 <code>handleHotUpdate</code> 钩子手动触发模块更新，否则 Vite 默认不会自动刷新此类模块。在该钩子中可调用 <code>moduleGraph.invalidateModule()</code> 或将对应模块返回，促使客户端进行热重载。</p>\n<h2><a inert href=\"#那么-虚拟模块可以用来\" aria-hidden=\"true\" class=\"anchor\" id=\"那么-虚拟模块可以用来\"></a>那么，虚拟模块可以用来？</h2>\n<ul>\n<li>\n<p><strong>注入编译时/运行时变量：</strong> 例如，通过插件生成特定环境变量模块，将其作为常量导入应用。社区插件 <em>vite-plugin-env-import</em> 即演示了如何使用 <code>virtual:env</code> 和 <code>virtual:env:public</code> 等虚拟模块，将 <code>.env</code> 中的变量作为静态字符串导出。这样，在代码中可以直接 <code>import { VITE_API } from 'virtual:env:public'</code> 等方式获取环境配置，而无需手动管理 <code>import.meta.env</code>。</p>\n</li>\n<li>\n<p><strong>动态配置与路由生成：</strong> 可以利用虚拟模块根据文件结构或配置动态生成代码。比如通过插件扫描某个目录，生成路由配置或某些常量文件，然后在运行时通过 <code>import virtual:...</code> 使用。这避免了手动维护配置。</p>\n</li>\n</ul>\n<p>然后就可以参考我的 description 了——</p>\n<p><strong>Vue 模块、路由都可以动态生成</strong>，现代前端框架和 Vue 又提供了 SSR/SSG 能力，那我们完全可以以一种更像“写前端”的方式（而非“写编译器”的感觉，不断的和代码生成打交道）去构建自己的站点生成器。</p>\n<p>顺便，很喜欢这两个优雅的项目。</p>\n<p><a href=\"https://vitepress.dev/\">VitePress</a> - Vite &amp; Vue Powered Static Site Generator</p>\n<p><a href=\"https://sli.dev/\">Slidev</a> - Presentation Slides for Developers</p>\n",
+  "islands": [
+    {
+      "kind": "code",
+      "id": "code-1",
+      "language": "js"
+    },
+    {
+      "kind": "code",
+      "id": "code-2",
+      "language": "js"
+    },
+    {
+      "kind": "code",
+      "id": "code-3",
+      "language": "js"
+    },
+    {
+      "kind": "code",
+      "id": "code-4",
+      "language": "js"
+    },
+    {
+      "kind": "code",
+      "id": "code-5",
+      "language": "ts"
+    }
+  ],
   "title": "Vite 插件机制中的虚拟模块 (Virtual Modules)",
   "date": "2025-09-30",
   "description": "VuePress，Vitepress，Slidev…… 如何更灵活地利用 Vite 的 SSR/SSG 能力构建一个站点生成器？",
@@ -26,7 +54,7 @@ export const post = {
       "level": 2
     },
     {
-      "id": "示例：定义、导入及生命周期",
+      "id": "示例-定义-导入及生命周期",
       "text": "示例：定义、导入及生命周期",
       "level": 2
     },
@@ -41,7 +69,7 @@ export const post = {
       "level": 2
     },
     {
-      "id": "那么，虚拟模块可以用来？",
+      "id": "那么-虚拟模块可以用来",
       "text": "那么，虚拟模块可以用来？",
       "level": 2
     }
