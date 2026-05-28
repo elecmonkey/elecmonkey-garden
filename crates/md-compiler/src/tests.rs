@@ -23,6 +23,17 @@ fn heading_anchor_and_toc_share_slug() {
 }
 
 #[test]
+fn heading_slug_includes_math_literal() {
+    let output = compile_markdown("## hi: $x^2 = y$");
+
+    assert_eq!(output.toc.len(), 1);
+    assert_eq!(output.toc[0].id, "hi-x-2-y");
+    assert_eq!(output.toc[0].text, "hi: x^2 = y");
+    assert!(output.html.contains(r##"<h2><a inert href="#hi-x-2-y" aria-hidden="true" class="anchor" id="hi-x-2-y"></a>hi: <span class="katex">"##));
+    assert!(output.islands.is_empty());
+}
+
+#[test]
 fn renders_code_and_mermaid_islands() {
     let output =
         compile_markdown("```ts{1-2}\nconst a = 1 < 2;\n```\n\n```mermaid\ngraph TD;\n```");
