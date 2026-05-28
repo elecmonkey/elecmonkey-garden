@@ -9,3 +9,4 @@ name = "garden_content_compiler"
 path = "src/lib.rs"
 
 [dependencies]
+garden-md-compiler.workspace = true

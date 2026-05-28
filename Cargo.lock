@@ -223,6 +223,9 @@ dependencies = [
 [[package]]
 name = "garden-content-compiler"
 version = "0.1.0"
+dependencies = [
+ "garden-md-compiler",
+]
 
 [[package]]
 name = "garden-md-compiler"
