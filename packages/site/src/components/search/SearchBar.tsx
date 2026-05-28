@@ -32,7 +32,7 @@ export default function SearchBar({ className = '', placeholder = '搜索文章.
       onSubmit={handleSubmit} 
       action="/search" 
       method="get" 
-      className={`relative ${className}`}
+      className={`flex items-stretch bg-card border border-border focus-within:border-foreground/30 transition-colors ${className}`}
     >
       <input
         type="text"
@@ -40,14 +40,12 @@ export default function SearchBar({ className = '', placeholder = '搜索文章.
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-4 py-2 pr-10 border border-border rounded-md 
-                  bg-background text-foreground 
-                  focus:outline-none shadow-md focus:shadow-lg transition-all duration-150"
+        className="min-w-0 flex-1 bg-transparent px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none"
       />
       <button 
         type="submit"
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-muted-foreground 
-                  hover:text-foreground"
+        className="border-l border-border px-4 text-muted-foreground hover:bg-muted/70 hover:text-foreground transition-colors"
+        aria-label="搜索"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -55,4 +53,4 @@ export default function SearchBar({ className = '', placeholder = '搜索文章.
       </button>
     </form>
   );
-} 
+}
