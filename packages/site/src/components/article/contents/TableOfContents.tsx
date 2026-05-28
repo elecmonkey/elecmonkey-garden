@@ -21,6 +21,9 @@ function getHeadingElement(id: string): HTMLElement | null {
   return target?.closest<HTMLElement>('h2, h3, h4, h5, h6') ?? target;
 }
 
+const SCROLL_OFFSET = 100;
+const ACTIVE_OFFSET = 120;
+
 function collectDomHeadings(): Heading[] {
   return Array.from(document.querySelectorAll<HTMLElement>('[data-article-content] h2, [data-article-content] h3, [data-article-content] h4, [data-article-content] h5, [data-article-content] h6'))
     .map((element) => {
@@ -47,30 +50,47 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
     setHeadings(nextHeadings);
     setActiveId((current) => (nextHeadings.some((heading) => heading.id === current) ? current : ''));
 
-    // 设置 Intersection Observer 来检测当前可见的标题
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: '-80px 0px -80% 0px',
-      }
-    );
+    const headingElements = nextHeadings
+      .map((heading) => ({ id: heading.id, element: getHeadingElement(heading.id) }))
+      .filter((item): item is { id: string; element: HTMLElement } => Boolean(item.element));
 
-    // 观察所有标题元素
-    nextHeadings.forEach(({ id }) => {
-      const element = getHeadingElement(id);
-      if (element) {
-        observer.observe(element);
+    if (headingElements.length === 0) {
+      return;
+    }
+
+    let frame = 0;
+
+    const updateActiveHeading = () => {
+      frame = 0;
+
+      let activeHeadingId = headingElements[0].id;
+      for (const { id, element } of headingElements) {
+        if (element.getBoundingClientRect().top <= ACTIVE_OFFSET) {
+          activeHeadingId = id;
+        } else {
+          break;
+        }
       }
-    });
+
+      setActiveId((current) => (current === activeHeadingId ? current : activeHeadingId));
+    };
+
+    const scheduleUpdate = () => {
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(updateActiveHeading);
+      }
+    };
+
+    updateActiveHeading();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
 
     return () => {
-      observer.disconnect();
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
     };
   }, [inputHeadings]);
 
@@ -132,9 +152,9 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
                       e.preventDefault();
                       const element = getHeadingElement(heading.id);
                       if (element) {
-                        const offset = 100;
                         const elementPosition = element.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+                        const offsetPosition = elementPosition + window.pageYOffset - SCROLL_OFFSET;
+                        setActiveId(heading.id);
                         window.scrollTo({
                           top: offsetPosition,
                           behavior: 'smooth'
@@ -231,9 +251,9 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
                     e.preventDefault();
                     const element = getHeadingElement(heading.id);
                     if (element) {
-                      const offset = 100;
                       const elementPosition = element.getBoundingClientRect().top;
-                      const offsetPosition = elementPosition + window.pageYOffset - offset;
+                      const offsetPosition = elementPosition + window.pageYOffset - SCROLL_OFFSET;
+                      setActiveId(heading.id);
                       window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
