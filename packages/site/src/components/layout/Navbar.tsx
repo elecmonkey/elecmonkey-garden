@@ -183,7 +183,8 @@ export default function Navbar() {
             >
               关于我
             </Link>
-            <div className="flex items-center gap-2 px-3 py-2">
+            <div className="flex items-center gap-2 pl-0 pr-3 py-2">
+              <ThemeSwitcher />
               <Link 
                 href="/search"
                 prefetch
@@ -194,7 +195,6 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </Link>
-              <ThemeSwitcher />
             </div>
           </div>
         </div>
