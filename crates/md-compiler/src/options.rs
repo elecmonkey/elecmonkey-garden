@@ -7,9 +7,9 @@ pub fn build_comrak_options() -> comrak::Options<'static> {
     options.extension.footnotes = true;
     options.extension.math_dollars = true;
 
-    // We render generated HtmlInline/HtmlBlock nodes for anchors and `[indent]`
-    // paragraphs. User-authored raw HTML is neutralized during AST preprocessing
-    // before rendering, preserving the current safe-by-default behavior.
+    // We render generated HtmlInline/HtmlBlock nodes for anchors and KaTeX.
+    // User-authored raw HTML is neutralized during AST preprocessing before
+    // rendering, preserving the current safe-by-default behavior.
     options.render.r#unsafe = true;
     options
 }

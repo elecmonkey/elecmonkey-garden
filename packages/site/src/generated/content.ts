@@ -640,7 +640,7 @@ export const generatedPostHashes = {
   "vite-8-beta-release": { sourceHash: "sha256:791e3abd8f9b30ca5f7a94baea28aaa8d5a31b329e5bd9dc20c6279c26ac9eb1", contentHash: "sha256:3a8d78212dc20a7df7fd82c91bc5c979a417dbadf1ae4308e8efdc09e85fa45b" },
   "update-prisma-6-to-7": { sourceHash: "sha256:0295b7136026daa36eb82a827e19394624792e817bb2bab3972461e837846271", contentHash: "sha256:105317e7593d8092bcadb6d20bb4865a0e46feef08a8d07d74b403104be462d0" },
   "copyright-and-opensource": { sourceHash: "sha256:49376c5db4368eddf5ab25b559d65979f79315c0edcf82e3f5b39ecba5cfaca0", contentHash: "sha256:8c58667dbf72707da4f77d510e2948f230006cf2f7af0dc231541cc1a9f88d03" },
-  "see-react-compiler": { sourceHash: "sha256:470c241bec1e240d0c0a29ede08c3cb05b3a9969d0b2131bee6b57793ce3e4f2", contentHash: "sha256:2127c0a5a5ca5c31e7fe5f5f44cfff01f0b174d319e3864c0e0c1a16765c06d6" },
+  "see-react-compiler": { sourceHash: "sha256:474de5928ee86910575aab6412fa5b1f851bdd4f4f061710b22e177f34983793", contentHash: "sha256:3211319dd4c64c5f309d65219b050c6f49ff379c0c1d49dda1201347d9cab9f7" },
   "react-compiler-performance": { sourceHash: "sha256:84d93330a70bbc020cca0604560fff1080276a885e61453195cf9291d4da7bb1", contentHash: "sha256:2c91cc725fc417e723d4a90fd2184c5f78db306bbf06ded3eb5aca893dd0b6d1" },
   "rust-in-js-pipline": { sourceHash: "sha256:11e3bdad6b0a75ba1e5d944521c5726ecc0a9e923c080e2973dee54464b157ad", contentHash: "sha256:5a63d520ffcdf243e410be16c3376beba2e4319bab33f4644ef542703a2ceb97" },
   "vite-virtual-modules": { sourceHash: "sha256:5fdae38cdd716d17a86708b396c8829610456bdcc7d02004341e7e800430f6f2", contentHash: "sha256:6fd0151d0ef07a4cb9e21c68253437a0c5c0dc34f329d3d9b2b0d5ce1249bebe" },

@@ -6,7 +6,7 @@ tags: ['React', 'React Compiler', '前端工具链']
 author: 'Elecmonkey'
 ---
 
-[indent]做了一个小工具：**See React Compiler**。
+做了一个小工具：**See React Compiler**。
 
 ## 在线体验
 

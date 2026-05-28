@@ -102,15 +102,6 @@ fn renders_file_download_island() {
 }
 
 #[test]
-fn marks_indent_paragraphs() {
-    let output = compile_markdown("[indent] This is **indented** with `code`.");
-
-    assert!(output.html.contains(
-        r#"<p data-indent="true">This is <strong>indented</strong> with <code>code</code>.</p>"#
-    ));
-}
-
-#[test]
 fn renders_inline_math_with_katex() {
     let output = compile_markdown("Inline $x^2$.");
 
