@@ -1,5 +1,6 @@
 export type ProcessedCodeLines = {
   nodes: HTMLElement[];
+  sourceForCopy: string;
   sourceForHighlight: string;
 };
 
@@ -19,14 +20,11 @@ export function processCodeLines(source: string, range: string | undefined): Pro
         row.classList.add('is-highlighted');
       }
 
-      let displayLine = line;
-      const trimmed = line.trimStart();
-      if (trimmed.startsWith('+ ')) {
+      const { line: displayLine, diff } = extractDiffMarker(line);
+      if (diff === 'added') {
         row.classList.add('is-added');
-        displayLine = line.replace('+ ', '');
-      } else if (trimmed.startsWith('- ')) {
+      } else if (diff === 'removed') {
         row.classList.add('is-removed');
-        displayLine = line.replace('- ', '');
       }
       highlightSourceLines.push(displayLine);
 
@@ -41,7 +39,20 @@ export function processCodeLines(source: string, range: string | undefined): Pro
       row.append(gutter, content);
       return row;
     }),
+    sourceForCopy: highlightSourceLines.join('\n'),
     sourceForHighlight: highlightSourceLines.join('\n'),
+  };
+}
+
+function extractDiffMarker(line: string): { line: string; diff?: 'added' | 'removed' } {
+  const match = line.match(/\s*\/\/\s*\[([+-])diff\]\s*$/);
+  if (!match) {
+    return { line };
+  }
+
+  return {
+    line: line.slice(0, match.index).trimEnd(),
+    diff: match[1] === '+' ? 'added' : 'removed',
   };
 }
 

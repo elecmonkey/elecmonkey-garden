@@ -25,7 +25,7 @@ export function enhanceCodeIslands(root: HTMLElement, cleanups: Cleanup[]) {
       const range = block.dataset.range;
       const rawSource = code.textContent ?? '';
       const processed = processCodeLines(rawSource, range);
-      block.__gardenRawSource = rawSource;
+      block.__gardenRawSource = processed.sourceForCopy;
 
       block.dataset.language = language;
       code.textContent = '';
