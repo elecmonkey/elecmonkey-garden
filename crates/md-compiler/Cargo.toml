@@ -1,0 +1,12 @@
+[package]
+name = "garden-md-compiler"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[lib]
+name = "garden_md_compiler"
+path = "src/lib.rs"
+
+[dependencies]
+comrak = { version = "0.52", default-features = false }

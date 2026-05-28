@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/content-compiler", "packages/content-compiler-napi"]
+members = ["crates/content-compiler", "crates/md-compiler", "packages/content-compiler-napi"]
 resolver = "2"
 
 [workspace.package]
@@ -8,6 +8,7 @@ version = "0.1.0"
 
 [workspace.dependencies]
 garden-content-compiler = { path = "crates/content-compiler" }
+garden-md-compiler = { path = "crates/md-compiler" }
 napi = { version = "3.4.0", default-features = false, features = ["napi4"] }
 napi-build = "2.2.3"
 napi-derive = "3.3.0"

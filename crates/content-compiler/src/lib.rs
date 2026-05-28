@@ -628,6 +628,9 @@ mod tests {
 
     #[test]
     fn preserves_unclosed_html_like_previous_js_pipeline() {
-        assert_eq!(normalize_search_content("keep <unclosed text"), "keep <unclosed text");
+        assert_eq!(
+            normalize_search_content("keep <unclosed text"),
+            "keep <unclosed text"
+        );
     }
 }
