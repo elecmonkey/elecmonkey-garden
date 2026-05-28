@@ -2,18 +2,22 @@ use katex_rs::{render_to_string, KatexContext, Settings};
 
 use crate::html::escape_html;
 
+thread_local! {
+    static KATEX_CONTEXT: KatexContext = KatexContext::default();
+}
+
 /// Render a LaTeX math fragment to KaTeX-compatible HTML.
 ///
 /// Invalid expressions are rendered as KaTeX error markup instead of failing the
 /// whole Markdown compilation. This matches the private-site use case better
 /// than treating one bad formula as a build-stopping compiler error.
 pub fn render_math(latex: &str, display_mode: bool) -> String {
-    let ctx = KatexContext::default();
     let mut settings = Settings::default();
     settings.display_mode = display_mode;
     settings.throw_on_error = false;
 
-    render_to_string(&ctx, latex, &settings)
+    KATEX_CONTEXT
+        .with(|ctx| render_to_string(ctx, latex, &settings))
         .unwrap_or_else(|error| render_error_fallback(latex, error))
 }
 

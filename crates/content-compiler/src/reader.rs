@@ -1,7 +1,8 @@
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use garden_md_compiler::compile_markdown;
+use rayon::prelude::*;
 
 use crate::frontmatter::parse_markdown_file;
 use crate::search::normalize_search_content;
@@ -10,15 +11,27 @@ use crate::{CompileOptions, CompileResult, ContentManifest, Post};
 const DRAFT_PREFIX: &str = "draft-";
 const HIDDEN_PREFIX: &str = "hidden-";
 
-pub fn compile_content(options: CompileOptions) -> CompileResult<ContentManifest> {
-    let mut month_folders = read_month_folders(&options.posts_dir)?;
-    month_folders.sort();
-    month_folders.reverse();
+#[derive(Debug)]
+struct PostFile {
+    path: PathBuf,
+    month_folder: String,
+    file_name: String,
+}
 
-    let mut posts = Vec::new();
-    for month_folder in month_folders {
-        posts.extend(read_posts_from_month(&options.posts_dir, &month_folder)?);
-    }
+pub fn compile_content(options: CompileOptions) -> CompileResult<ContentManifest> {
+    let post_files = read_post_files(&options.posts_dir)?;
+    let mut posts = post_files
+        .par_iter()
+        .map(|post_file| {
+            read_post_file(
+                &post_file.path,
+                &post_file.month_folder,
+                &post_file.file_name,
+            )
+        })
+        .collect::<Vec<_>>()
+        .into_iter()
+        .collect::<CompileResult<Vec<_>>>()?;
 
     posts.sort_by(|a, b| b.date.cmp(&a.date));
     let public_posts = posts
@@ -45,6 +58,19 @@ pub fn compile_post_file(path: &Path, month_folder: &str) -> CompileResult<Optio
     read_post_file(path, month_folder, file_name).map(Some)
 }
 
+fn read_post_files(posts_dir: &Path) -> CompileResult<Vec<PostFile>> {
+    let mut month_folders = read_month_folders(posts_dir)?;
+    month_folders.sort();
+    month_folders.reverse();
+
+    let mut post_files = Vec::new();
+    for month_folder in month_folders {
+        post_files.extend(read_post_files_from_month(posts_dir, &month_folder)?);
+    }
+
+    Ok(post_files)
+}
+
 fn read_month_folders(posts_dir: &Path) -> CompileResult<Vec<String>> {
     let mut folders = Vec::new();
     for entry in fs::read_dir(posts_dir)? {
@@ -60,9 +86,12 @@ fn read_month_folders(posts_dir: &Path) -> CompileResult<Vec<String>> {
     Ok(folders)
 }
 
-fn read_posts_from_month(posts_dir: &Path, month_folder: &str) -> CompileResult<Vec<Post>> {
+fn read_post_files_from_month(
+    posts_dir: &Path,
+    month_folder: &str,
+) -> CompileResult<Vec<PostFile>> {
     let month_path = posts_dir.join(month_folder);
-    let mut posts = Vec::new();
+    let mut post_files = Vec::new();
 
     for entry in fs::read_dir(&month_path)? {
         let entry = entry?;
@@ -75,10 +104,14 @@ fn read_posts_from_month(posts_dir: &Path, month_folder: &str) -> CompileResult<
             continue;
         }
 
-        posts.push(read_post_file(&entry.path(), month_folder, &file_name)?);
+        post_files.push(PostFile {
+            path: entry.path(),
+            month_folder: month_folder.to_string(),
+            file_name,
+        });
     }
 
-    Ok(posts)
+    Ok(post_files)
 }
 
 fn read_post_file(path: &Path, month_folder: &str, file_name: &str) -> CompileResult<Post> {
