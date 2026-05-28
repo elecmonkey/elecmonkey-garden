@@ -566,6 +566,14 @@ img {
   white-space: pre;
 }
 
+.article-code-token {
+  color: var(--shiki-light, inherit);
+}
+
+.dark .article-code-token {
+  color: var(--shiki-dark, var(--shiki-light, inherit));
+}
+
 .article-code-line.is-added .article-code-line-content::before {
   content: "+";
   color: #22c55e;
