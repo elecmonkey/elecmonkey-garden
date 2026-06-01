@@ -1,0 +1,49 @@
+---
+title: "Throwing Cold Water on Frontend Frameworks' Server-Side Ambitions: Two Critical React Ecosystem Vulnerabilities in 2025"
+date: "2025-12-05"
+description: "Maybe just go back to Spring Boot. Modern.js is also a React full-stack framework, but it modestly says its backend is only a 'BFF layer'."
+tags: ["Next.js", "React", "Web Security", "Full-Stack Frameworks"]
+author: "Elecmonkey"
+---
+
+> This article was translated by AI and has not been manually reviewed.
+
+## Introduction
+
+On December 3, 2025, the official React team published a security advisory: **Critical Security Vulnerability in React Server Components** (CVE-2025-55182). Its CVSS score went straight to the maximum of 10.0. This is an unauthenticated remote code execution vulnerability (RCE).
+
+> An unauthenticated attacker could craft a malicious HTTP request to any Server Function endpoint that, when deserialized by React, achieves remote code execution on the server.
+
+An attacker only needs to craft a malicious HTTP request and send it to any Server Function endpoint to execute arbitrary code on the server. The affected scope is not limited to Next.js; it also includes many RSC-embracing frameworks such as react-router and waku.
+
+People cannot help but recall another incident that happened to Next.js in the first half of this year: **Middleware bypass vulnerability** (CVE-2025-29927).
+
+## Next.js Middleware Authentication Bypass Vulnerability
+
+Next.js Middleware is a mechanism for running code before a request completes. It is commonly used for authentication, redirection, and so on. Many people validate Cookies in Middleware. CVE-2025-29927 disclosed that Next.js internally used an undocumented header, `x-middleware-subrequest`, to prevent Middleware from recursively executing during internal subrequests. If an attacker manually includes this header in a request, Next.js will think "this request has already gone through Middleware" and directly skip Middleware execution, reaching the page-rendering logic.
+
+Although Vercel officially claimed that applications deployed on the Vercel platform were spared because of separation at the routing layer, self-hosted Next.js applications using `output: 'standalone'` were completely exposed to the risk.
+
+## React Server Components Deserialization Remote Code Execution Vulnerability
+
+React Server Components (RSC) has been a main focus of the React team in recent years. It allows clients to call server-side functions, namely Server Actions. To achieve this, React needs to serialize client-side arguments, send them to the server, and execute the function after the server deserializes them.
+
+The problem lies in this deserialization process. To support rich data types such as Date, Map, Set, and Promise, React implemented a complex serialization protocol. CVE-2025-55182 disclosed that when processing certain carefully crafted payloads, React's deserialization logic contains a flaw that allows attackers to inject malicious code and execute it on the server.
+
+## Frontend Frameworks, Why Are You All So Busy Writing Server-Side Code?
+
+These two incidents are very likely to hit the same group of people. I suspect this is no longer accidental.
+
+In the traditional development model, frontend and backend are physically separated. Frontend code runs in the browser, and backend code runs on the server. No matter how much attackers mess with frontend code, they cannot escape the browser sandbox unless there is XSS. But in the past few years, countless frontend frameworks have been aggressively selling the concept of "full stack". We have seen all kinds of frontend frameworks expanding into server-side territory. Next.js has become React's preferred framework, Nuxt has also been acquired by Vercel, and SvelteKit and SolidStart both "include server-side capabilities by default". If you do not use SvelteKit, you can hardly find a decent Svelte client-side routing framework. As a result, we have become used to one line of code running in the browser and the next line running on the server. This "hybrid development experience" does indeed greatly improve development efficiency. We no longer need to switch to another project to write APIs, no longer need to maintain two sets of type definitions, and no longer need to worry about API documentation. **Frameworks want us to forget the boundary between browser and server, and then we really forgot it.**
+
+Then the cost arrived. **The cost is a blurred security boundary.**
+
+Apart from framework bugs, I still often feel that this forgetting is extremely dangerous. What kind of logic should be placed on the server, and what kind of logic should be placed on the client, is one of the most important issues in software security. **Think about those magical school exam systems that request plaintext answers to the frontend for grading. Think about certain genius developers who hash passwords in the browser and think they no longer store plaintext passwords.** Software security naturally derives partly from the security of business logic. If developers themselves are not clear-headed, no matter how complete a framework is, it cannot protect that part. Since it cannot protect it, frameworks should do everything possible to remind developers and make developers plainly aware of the runtime and environment of every line of code they write, rather than deliberately blurring this boundary.
+
+When the frontend writes JS/TS and the backend writes Java/Go, this boundary is naturally divided by language and is very obvious. However, I also do not think we should deny the trend of full-stack frameworks. Whether the boundary is obvious or not, as developers, knowing what environment every line of code we write, or every piece of code generated by AI, runs in is a basic requirement. **If you cannot clearly know what environment your code runs in and at what time it runs**, I would bet 10000% that the things you write will have all kinds of bizarre problems, either undiscovered or discovered but impossible to solve.
+
+Discovering vulnerabilities is a good thing. It serves as a reminder to major frontend frameworks obsessed with the server side. The fact that the issues were found in React and Next.js does not necessarily mean others do not have them. It is very likely because React has the largest usage and is the most popular.
+
+For application developers, do not rely too much on a framework's implicit protection. Stay clear about what the framework does to every line of your code, and perform data validation at every layer. That will always be the first rule of survival.
+
+> A certain Next.js system I help maintain escaped because it uses Next 13...
