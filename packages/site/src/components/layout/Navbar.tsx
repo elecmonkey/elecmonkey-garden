@@ -74,7 +74,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
     : "bg-card shadow-sm sticky top-0 z-20"; // 其他页面导航栏：固定在顶部
 
   const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
-  const languageSwitchClass = "p-2 transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground";
+  const iconButtonClass = "p-2 transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground";
 
   return (
     <nav className={`${navbarClasses} border-b border-border/20 select-none`}>
@@ -129,7 +129,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <Link
               href={hrefFor(locale, '/search')}
               prefetch
-              className={getLinkClassName("/search")}
+              className={iconButtonClass}
+              title={dictionary.nav.search}
               aria-label={dictionary.nav.search}
             >
               <span className="sr-only">{dictionary.nav.search}</span>
@@ -139,7 +140,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             </Link>
             <Link
               href={otherLocaleHref}
-              className={languageSwitchClass}
+              className={iconButtonClass}
               title={`${languageSwitchLabel}: ${localeLabels[otherLocale]}`}
               aria-label={languageSwitchLabel}
             >
@@ -204,7 +205,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
               <ThemeSwitcher />
               <Link
                 href={otherLocaleHref}
-                className={languageSwitchClass}
+                className={iconButtonClass}
                 title={`${languageSwitchLabel}: ${localeLabels[otherLocale]}`}
                 aria-label={languageSwitchLabel}
                 onClick={() => setIsMenuOpen(false)}
@@ -214,7 +215,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
               <Link
                 href={hrefFor(locale, '/search')}
                 prefetch
-                className={`${getMobileLinkClassName("/search")} flex items-center justify-center`}
+                className={iconButtonClass}
+                title={dictionary.nav.search}
                 onClick={() => setIsMenuOpen(false)}
                 aria-label={dictionary.nav.search}
               >
