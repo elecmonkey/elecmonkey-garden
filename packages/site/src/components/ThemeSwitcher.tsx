@@ -1,9 +1,15 @@
 "use client";
 
 import { useTheme } from '@/lib/theme-compat';
+import { useEffect, useState } from 'react';
 
 export default function ThemeSwitcher() {
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const cycleTheme = () => {
     if (theme === "light") {
@@ -38,6 +44,10 @@ export default function ThemeSwitcher() {
   };
 
   const getTooltip = () => {
+    if (!mounted) {
+      return "切换主题";
+    }
+
     if (theme === "system") {
       return `跟随系统 (当前: ${resolvedTheme === "dark" ? "暗色" : "亮色"})`;
     } else if (theme === "dark") {
@@ -54,7 +64,11 @@ export default function ThemeSwitcher() {
       title={getTooltip()}
       aria-label="切换主题"
     >
-      {getIcon()}
+      {mounted ? getIcon() : (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )}
     </button>
   );
-} 
+}

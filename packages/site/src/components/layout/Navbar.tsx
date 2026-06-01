@@ -1,19 +1,11 @@
 "use client";
 
 import Link from '@/components/Link';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
 import Image from '@/lib/image-compat';
 import { usePathname } from '@/lib/router-compat';
 import { useState, type SVGProps } from 'react';
-import dynamic from '@/lib/dynamic-compat';
 import { dictionaries, hrefFor, localeLabels, stripLocalePrefix, withLocalePath, type Locale } from '@/lib/i18n';
-
-// 动态导入 ThemeSwitcher 以完全避免 SSR 主题相关的 hydration 问题
-const ThemeSwitcher = dynamic(() => import('@/components/ThemeSwitcher'), {
-  ssr: false,
-  loading: () => (
-    <div className="p-2 w-9 h-9"></div>
-  )
-});
 
 function IonLanguage(props: SVGProps<SVGSVGElement>) {
   return (
@@ -145,14 +137,14 @@ export default function Navbar({ locale }: { locale: Locale }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </Link>
-            <a
+            <Link
               href={otherLocaleHref}
               className={languageSwitchClass}
               title={`${languageSwitchLabel}: ${localeLabels[otherLocale]}`}
               aria-label={languageSwitchLabel}
             >
               <IonLanguage className="h-5 w-5" />
-            </a>
+            </Link>
             <div className="mr-2">
               <ThemeSwitcher />
             </div>
@@ -210,7 +202,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             </Link>
             <div className="flex items-center gap-2 pl-0 pr-3 py-2">
               <ThemeSwitcher />
-              <a
+              <Link
                 href={otherLocaleHref}
                 className={languageSwitchClass}
                 title={`${languageSwitchLabel}: ${localeLabels[otherLocale]}`}
@@ -218,7 +210,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
                 onClick={() => setIsMenuOpen(false)}
               >
                 <IonLanguage className="h-5 w-5" />
-              </a>
+              </Link>
               <Link
                 href={hrefFor(locale, '/search')}
                 prefetch
