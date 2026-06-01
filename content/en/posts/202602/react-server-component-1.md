@@ -2,7 +2,7 @@
 title: "On React Server Component (RSC) (1) - RSC Principles, SSR, and Partial Hydration"
 date: "2026-02-14"
 description: "With one loud shot from the React team, RSC arrived in frontend development | Server Component principles, RSC and SSR, and the meaning of partial hydration"
-tags: ["React", "RSC", "Frontend Architecture", "Next.js", "Server Side Rendering (SSR)"]
+tags: ["React", "RSC", "Frontend Architecture", "Next.js", "Server-Side Rendering (SSR)"]
 author: "Elecmonkey"
 ---
 

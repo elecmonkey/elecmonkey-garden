@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:08ae179eec46c3c9f589a48a5b5290bf3c589cfd0fae54a0fe3ee37a657d4cff";
-export const postContentHash = "sha256:c8868a3a44725d9c98796ed168ed1e917bd247b95679ac7a0a69b99fc94a79e7";
+export const postSourceHash = "sha256:6dfe29391ecd8defc002dcd8deb537fd3975811b5a1765dba48bfe5afbe4d584";
+export const postContentHash = "sha256:8401dbba257027bcd6614be203a1bf89cf351bf752caf719f25e643510659038";
 
 export const post = {
   "id": "about-astro",
@@ -15,7 +15,7 @@ export const post = {
   "description": "The frontend framework that hates JavaScript the most in history, and the most meaningful experimental field for architecture",
   "tags": [
     "Astro",
-    "Server Side Rendering (SSR)",
+    "Server-Side Rendering (SSR)",
     "Static Site Generation (SSG)",
     "Vite"
   ],

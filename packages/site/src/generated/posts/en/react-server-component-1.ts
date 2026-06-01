@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:b8ce133b2cd86a74cfbcf4e9a7159d51d078049a12a1e5ef0fc5faedab0b767e";
-export const postContentHash = "sha256:f663b3e2c8bb68ec5a6208889759b5deddb02000f955c1ca880046410c3511cf";
+export const postSourceHash = "sha256:a158e8336e254e34d6d0a4316845c76c011a7ccde60cea070cfbf092c0fecba3";
+export const postContentHash = "sha256:e2aaeebd340b918d39917431b398cd9ce9dfc1c08b0c7034adef373d39456dd2";
 
 export const post = {
   "id": "react-server-component-1",
@@ -18,7 +18,7 @@ export const post = {
     "RSC",
     "Frontend Architecture",
     "Next.js",
-    "Server Side Rendering (SSR)"
+    "Server-Side Rendering (SSR)"
   ],
   "author": "Elecmonkey",
   "toc": [

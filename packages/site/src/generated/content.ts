@@ -2283,7 +2283,7 @@ export const generatedContentByLocale = {
           "RSC",
           "Frontend Architecture",
           "Next.js",
-          "Server Side Rendering (SSR)"
+          "Server-Side Rendering (SSR)"
         ],
         "author": "Elecmonkey",
         "locale": "en",
@@ -2307,7 +2307,7 @@ export const generatedContentByLocale = {
         "description": "The frontend framework that hates JavaScript the most in history, and the most meaningful experimental field for architecture",
         "tags": [
           "Astro",
-          "Server Side Rendering (SSR)",
+          "Server-Side Rendering (SSR)",
           "Static Site Generation (SSG)",
           "Vite"
         ],
@@ -3285,7 +3285,7 @@ export const generatedContentByLocale = {
           "RSC",
           "Frontend Architecture",
           "Next.js",
-          "Server Side Rendering (SSR)"
+          "Server-Side Rendering (SSR)"
         ],
         "author": "Elecmonkey",
         "locale": "en",
@@ -3309,7 +3309,7 @@ export const generatedContentByLocale = {
         "description": "The frontend framework that hates JavaScript the most in history, and the most meaningful experimental field for architecture",
         "tags": [
           "Astro",
-          "Server Side Rendering (SSR)",
+          "Server-Side Rendering (SSR)",
           "Static Site Generation (SSG)",
           "Vite"
         ],
@@ -4104,8 +4104,8 @@ export const generatedContentByLocale = {
       "viteplus-announcement": { sourceHash: "sha256:5626b0676c03085ce17d3233bb43707fb7996751838ae52ab0ea675892af33d3", contentHash: "sha256:b1fffb94d4069c97e06a859fa75ce76044c95d1a8819280b942675f2ec516292" },
       "note-oauth2-login": { sourceHash: "sha256:715cf3e9d82d90cf70607e16306e9cc2856fe4c010b1c70100773718c2cb8007", contentHash: "sha256:d261694cf2ea64661284ff4fd5f155b3085a955ad6d9628cb0b3815ecb7564d3" },
       "react-server-component-2": { sourceHash: "sha256:9d4a7d36847da72309e2a0f6f7b0caa63538276f89a60a1c7316e1251941a8ad", contentHash: "sha256:185300821e79adb22682b5c99479c1fb6da32891d08c8871af60f8c0eae48c0c" },
-      "react-server-component-1": { sourceHash: "sha256:b8ce133b2cd86a74cfbcf4e9a7159d51d078049a12a1e5ef0fc5faedab0b767e", contentHash: "sha256:f663b3e2c8bb68ec5a6208889759b5deddb02000f955c1ca880046410c3511cf" },
-      "about-astro": { sourceHash: "sha256:08ae179eec46c3c9f589a48a5b5290bf3c589cfd0fae54a0fe3ee37a657d4cff", contentHash: "sha256:c8868a3a44725d9c98796ed168ed1e917bd247b95679ac7a0a69b99fc94a79e7" },
+      "react-server-component-1": { sourceHash: "sha256:a158e8336e254e34d6d0a4316845c76c011a7ccde60cea070cfbf092c0fecba3", contentHash: "sha256:e2aaeebd340b918d39917431b398cd9ce9dfc1c08b0c7034adef373d39456dd2" },
+      "about-astro": { sourceHash: "sha256:6dfe29391ecd8defc002dcd8deb537fd3975811b5a1765dba48bfe5afbe4d584", contentHash: "sha256:8401dbba257027bcd6614be203a1bf89cf351bf752caf719f25e643510659038" },
       "use-react-native-and-expo": { sourceHash: "sha256:9b244e1e520b7d6d4059eb19219bd353fa2faf5db4c3ca5adf968360bb15e5e9", contentHash: "sha256:4d4294c16f00b631711c93724645704ecc839abb9b450b3492746eb4b52dc112" },
       "frontend-framework-security-2025": { sourceHash: "sha256:291b9c75c20dc80fb18c5a272ccee2317074ab66d52dc32f307c0ef9b99b021d", contentHash: "sha256:86f50c13e7acc70491e36d174d8531146e57689e6a150134238115bababaf94c" },
       "vite-8-beta-release": { sourceHash: "sha256:bb454a80e75c8d15f112748edb28a9112322016fa90d784d698eddee088942e2", contentHash: "sha256:fae813923b847d21636959ade08ab93b781c0664f63e246ec32a6154cf804b5c" },

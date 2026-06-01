@@ -2,7 +2,7 @@
 title: "Writing at Astro v6 Beta: Astro Lets Real Websites Embrace the Modern Frontend Ecosystem"
 date: "2026-01-30"
 description: "The frontend framework that hates JavaScript the most in history, and the most meaningful experimental field for architecture"
-tags: ["Astro", "Server Side Rendering (SSR)", "Static Site Generation (SSG)", "Vite"]
+tags: ["Astro", "Server-Side Rendering (SSR)", "Static Site Generation (SSG)", "Vite"]
 author: "Elecmonkey"
 ---
 

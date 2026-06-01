@@ -688,7 +688,7 @@ export const generatedHomeContentByLocale = {
           "RSC",
           "Frontend Architecture",
           "Next.js",
-          "Server Side Rendering (SSR)"
+          "Server-Side Rendering (SSR)"
         ],
         "author": "Elecmonkey",
         "locale": "en",
@@ -908,12 +908,8 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
-        "name": "Server Side Rendering (SSR)",
-        "count": 2
-      },
-      {
         "name": "Server-Side Rendering (SSR)",
-        "count": 2
+        "count": 4
       },
       {
         "name": "Software Copyright",
