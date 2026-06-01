@@ -6,7 +6,7 @@ import ScrollToContent from '@/components/ScrollToContent';
 import SearchBar from '@/components/search/SearchBar';
 import SearchResultCard from '@/components/search/SearchResultCard';
 import { useSearchParams } from '@/lib/router-compat';
-import { type Locale, defaultLocale } from '@/lib/i18n';
+import { dictionaries, type Locale, defaultLocale } from '@/lib/i18n';
 import {
   getLoadedSearchIndexPosts,
   loadSearchIndexPosts,
@@ -24,6 +24,7 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
   const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>(() => getLoadedSearchIndexPosts(locale) ?? []);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
+  const dictionary = dictionaries[locale];
 
   useEffect(() => {
     if (!keyword.trim()) {
@@ -84,12 +85,12 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
   if (!keyword.trim()) {
     return (
       <>
-        <h1 className="text-3xl font-bold mb-8">搜索</h1>
+        <h1 className="text-3xl font-bold mb-8">{dictionary.search.title}</h1>
         <div className="mb-8">
-          <SearchBar placeholder="输入关键词搜索文章..." />
+          <SearchBar placeholder={dictionary.search.emptyPlaceholder} />
         </div>
         <div className="text-center py-10">
-          <p className="text-muted-foreground">请输入关键词进行搜索</p>
+          <p className="text-muted-foreground">{dictionary.search.enterKeyword}</p>
         </div>
       </>
     );
@@ -101,41 +102,42 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
         <ScrollToContent />
       </Suspense>
 
-      <h1 className="text-3xl font-bold mb-8">搜索</h1>
+      <h1 className="text-3xl font-bold mb-8">{dictionary.search.title}</h1>
 
       <div className="mb-8">
-        <SearchBar placeholder="搜索文章..." />
+        <SearchBar placeholder={dictionary.search.placeholder} />
       </div>
 
       {loadError ? (
         <div className="text-center py-10">
-          <p className="text-muted-foreground">搜索索引加载失败，请稍后重试</p>
+          <p className="text-muted-foreground">{dictionary.search.loadError}</p>
         </div>
       ) : loading ? (
         <div className="text-center py-10">
-          <p className="text-muted-foreground">正在加载搜索索引...</p>
+          <p className="text-muted-foreground">{dictionary.search.loading}</p>
         </div>
       ) : (
         <>
           <div className="mb-6">
             <p className="text-foreground">
-              找到 <span className="font-semibold">{totalPosts}</span> 篇与
+              {dictionary.search.resultPrefix} <span className="font-semibold">{totalPosts}</span> {dictionary.search.resultMiddle}
               {' '}
               &ldquo;<span className="font-semibold text-blue-600">{keyword}</span>&rdquo;
               {' '}
-              相关的文章
+              {dictionary.search.resultSuffix}
             </p>
           </div>
 
           {posts.length === 0 ? (
             <div className="text-center py-10">
-              <p className="text-muted-foreground">未找到相关文章</p>
+              <p className="text-muted-foreground">{dictionary.search.noResults}</p>
             </div>
           ) : (
             <div className="space-y-6">
               {posts.map((result) => (
                 <SearchResultCard
                   key={result.post.id}
+                  locale={locale}
                   result={result}
                   keyword={keyword}
                 />
@@ -144,7 +146,7 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
           )}
 
           {totalPages > 1 && (
-            <Pagination currentPage={currentPage} totalPages={totalPages} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} locale={locale} />
           )}
         </>
       )}

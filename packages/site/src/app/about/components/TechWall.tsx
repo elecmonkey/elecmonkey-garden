@@ -1,10 +1,12 @@
 'use client';
 
 import TechIcon from '@/app/about/components/TechIcon';
+import { dictionaries, type Locale } from '@/lib/i18n';
 import { useState } from 'react';
 
-export default function TechWall() {
+export default function TechWall({ locale }: { locale: Locale }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const dictionary = dictionaries[locale];
 
   return (
       <section className="mb-12 relative">
@@ -15,14 +17,14 @@ export default function TechWall() {
         <div className="relative border border-border bg-card p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 ">
           <div>
-            <p className="text-xl font-medium">很多我很想玩明白但完全玩不明白的东西。</p>
-            <p className="text-lg font-none">但没关系，时间还多。</p>
+            <p className="text-xl font-medium">{dictionary.about.techWallLine1}</p>
+            <p className="text-lg font-none">{dictionary.about.techWallLine2}</p>
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-muted-foreground bg-muted rounded-lg hover:bg-muted/80 transition-colors duration-200"
           >
-            {isExpanded ? '收起' : '展开'}
+            {isExpanded ? dictionary.about.collapse : dictionary.about.expand}
           </button>
         </div>
         
@@ -620,4 +622,4 @@ export default function TechWall() {
         </div>
       </section>
   );
-} 
+}

@@ -1,14 +1,17 @@
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
+import { dictionaries, postHref, type Locale } from '@/lib/i18n';
 import type { SearchResult } from '@/lib/search';
 
 interface SearchResultCardProps {
   result: SearchResult;
   keyword: string;
+  locale: Locale;
 }
 
-export default function SearchResultCard({ result, keyword }: SearchResultCardProps) {
+export default function SearchResultCard({ result, keyword, locale }: SearchResultCardProps) {
   const { post, matches } = result;
+  const dictionary = dictionaries[locale];
   
   // 高亮关键词
   const highlightKeyword = (text: string, keyword: string) => {
@@ -38,7 +41,7 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
       
       {/* 上层卡片 - 白色/主题背景 */}
       <div className="relative p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
-      <Link href={`/blog/${post.id}`}>
+      <Link href={postHref(locale, post.id)}>
         <h3 className="text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors">
           {matches.title ? highlightKeyword(post.title, keyword) : post.title}
         </h3>
@@ -79,26 +82,26 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
       {/* 匹配信息 */}
       <div className="mb-4 text-sm">
         <p className="text-muted-foreground">
-          匹配位置: 
+          {dictionary.search.matchedIn}
           <span className="space-x-2 ml-2">
             {matches.title && (
               <span className="inline-flex items-center px-2 py-1 bg-highlight-blue text-blue-800 text-xs">
-                标题
+                {dictionary.search.fields.title}
               </span>
             )}
             {matches.description && (
               <span className="inline-flex items-center px-2 py-1 bg-highlight-green text-green-800 text-xs">
-                描述
+                {dictionary.search.fields.description}
               </span>
             )}
             {matches.content.matched && (
               <span className="inline-flex items-center px-2 py-1 bg-highlight-purple text-purple-800 text-xs">
-                内容
+                {dictionary.search.fields.content}
               </span>
             )}
             {matches.tags.length > 0 && (
               <span className="inline-flex items-center px-2 py-1 bg-highlight-red text-red-800 text-xs">
-                标签
+                {dictionary.search.fields.tags}
               </span>
             )}
           </span>
@@ -112,7 +115,7 @@ export default function SearchResultCard({ result, keyword }: SearchResultCardPr
           return (
             <Link
               key={tag}
-              href={getTagPath(tag)}
+              href={getTagPath(tag, locale)}
               className={`${
                 isMatched 
                   ? 'bg-highlight-red text-red-800' 

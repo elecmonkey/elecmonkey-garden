@@ -26,7 +26,7 @@ export default function AboutPage({ locale = 'zh' }: { locale?: Locale }) {
             {isEnglish ? 'A modest technical homepage for recording the pitfalls I have climbed through and the paths I have taken.' : '一个平平无奇的技术主页，试图记录我爬过的坑走过的路。'}
           </p>
         </section>
-        <TechWall />
+        <TechWall locale={locale} />
       </div>
     </PageContainer>
   );

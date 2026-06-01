@@ -1,6 +1,6 @@
 import Link from '@/components/Link';
 import { getHomeRecentPosts, getHomeStats, getHomeTags } from '@/lib/home';
-import { type Locale, hrefFor } from '@/lib/i18n';
+import { dictionaries, type Locale, hrefFor } from '@/lib/i18n';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -20,6 +20,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
   const recentPosts = getHomeRecentPosts(locale);
   const tags = getHomeTags(locale);
   const { totalPosts, latestUpdateDate } = getHomeStats(locale);
+  const dictionary = dictionaries[locale];
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
@@ -57,7 +58,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                 </svg>
-                所有文章
+                {dictionary.common.allPosts}
               </Link>
               <Link
                 href={hrefFor(locale, '/about')}
@@ -66,7 +67,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                关于我
+                {dictionary.nav.about}
               </Link>
               <a
                 href="https://github.com/elecmonkey"
@@ -98,7 +99,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
             {/* 如果没有文章，显示提示 */}
             {recentPosts.length === 0 ? (
               <div className="text-center py-10">
-                <p className="text-muted-foreground">暂无文章，请稍后再来！</p>
+                <p className="text-muted-foreground">{dictionary.common.noPosts}</p>
               </div>
             ) : (
               <div className="mt-8 text-center">
@@ -106,7 +107,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
                   href={`${hrefFor(locale, '/blog')}?scroll=true`}
                   className="inline-flex items-center gap-2 text-primary hover:underline text-base"
                 >
-                  查看所有文章
+                  {dictionary.common.viewAllPosts}
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -120,14 +121,14 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
         <aside className="lg:w-90 flex-shrink-0">
           <div className="sticky top-5 space-y-6">
             {/* 数据统计 */}
-            <h3 className="text-xl font-semibold">小花园</h3>
+            <h3 className="text-xl font-semibold">{dictionary.home.garden}</h3>
             <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-4">
               <div className="flex flex-col items-center justify-center py-6 lg:pt-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <div className="text-2xl font-bold text-foreground mb-2">{totalPosts}</div>
-                <div className="text-sm text-muted-foreground">文章总数</div>
+                <div className="text-sm text-muted-foreground">{dictionary.home.totalPosts}</div>
               </div>
 
               {latestUpdateDate && (
@@ -142,7 +143,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
                       day: '2-digit',
                     }).replace(/\//g, '-')}
                   </div>
-                  <div className="text-sm text-muted-foreground">最新更新</div>
+                  <div className="text-sm text-muted-foreground">{dictionary.home.latestUpdate}</div>
                 </div>
               )}
             </div>
@@ -150,12 +151,12 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
             {/* 标签云 */}
             <div>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold">标签云</h3>
+                <h3 className="text-xl font-semibold">{dictionary.home.tagCloud}</h3>
                 <Link
                   href={hrefFor(locale, '/tags')}
                   className="text-primary hover:underline text-sm flex items-center gap-1"
                 >
-                  所有标签
+                  {dictionary.home.allTags}
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

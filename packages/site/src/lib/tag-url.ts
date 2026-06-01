@@ -1,3 +1,5 @@
+import { hrefFor, type Locale } from './i18n';
+
 const TAG_PLACEHOLDERS = [
   ['/', '_slash_'],
   [' ', '_space_'],
@@ -31,6 +33,6 @@ export function decodeTagFromSlug(slug: string): string {
   return restoreTagSpecialChars(decodeURIComponent(slug));
 }
 
-export function getTagPath(tag: string): string {
-  return `/tags/${encodeTagToSlug(tag)}`;
+export function getTagPath(tag: string, locale: Locale = 'zh'): string {
+  return hrefFor(locale, `/tags/${encodeTagToSlug(tag)}`);
 }

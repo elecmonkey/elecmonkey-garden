@@ -2,7 +2,7 @@ import Link from '@/components/Link';
 import PostCard from '@/components/PostCard';
 import PathPagination from '@/components/PathPagination';
 import { PostData } from '@/lib/api';
-import { type Locale, archiveHref, hrefFor } from '@/lib/i18n';
+import { dictionaries, type Locale, archiveHref, hrefFor } from '@/lib/i18n';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import PageContainer from '@/components/layout/PageContainer';
@@ -24,6 +24,7 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
     ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${year}-${monthNum}-01T00:00:00.000Z`))
     : `${year}年${monthNum}月`;
   const basePath = archiveHref(locale, month);
+  const dictionary = dictionaries[locale];
 
   return (
     <PageContainer>
@@ -43,7 +44,7 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
               </span>
               {displayName}
             </div>
-            <span className="ml-3 text-lg font-normal text-gray-500 whitespace-nowrap">({totalPosts} 篇文章)</span>
+            <span className="ml-3 text-lg font-normal text-gray-500 whitespace-nowrap">({dictionary.common.postCount(totalPosts)})</span>
           </h1>
           <div className="flex flex-wrap gap-2">
             <Link
@@ -53,7 +54,7 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
-              主页
+              {dictionary.common.home}
             </Link>
             <Link
               href={hrefFor(locale, '/archive')}
@@ -62,7 +63,7 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
               </svg>
-              所有归档
+              {dictionary.archive.allArchives}
             </Link>
           </div>
         </div>
@@ -70,9 +71,9 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
 
       {posts.length === 0 ? (
         <div className="text-center py-10">
-          <p className="text-muted-foreground">该月份未找到文章</p>
+          <p className="text-muted-foreground">{dictionary.archive.noPostsInMonth}</p>
           <Link href={hrefFor(locale, '/blog')} className="text-blue-600 hover:underline mt-4 inline-block">
-            查看所有文章
+            {dictionary.common.viewAllPosts}
           </Link>
         </div>
       ) : (
@@ -85,7 +86,7 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
 
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (
-        <PathPagination currentPage={currentPage} totalPages={totalPages} basePath={basePath} />
+        <PathPagination currentPage={currentPage} totalPages={totalPages} basePath={basePath} locale={locale} />
       )}
     </PageContainer>
   );

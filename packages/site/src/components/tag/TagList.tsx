@@ -1,6 +1,6 @@
 import Link from '@/components/Link';
 import { TagCount } from '@/lib/api';
-import { type Locale, defaultLocale, hrefFor } from '@/lib/i18n';
+import { type Locale, defaultLocale, dictionaries, hrefFor } from '@/lib/i18n';
 import { getTagPath } from '@/lib/tag-url';
 
 interface TagListProps {
@@ -9,6 +9,7 @@ interface TagListProps {
 }
 
 export default function TagList({ tags, locale = defaultLocale }: TagListProps) {
+  const dictionary = dictionaries[locale];
   // 按文章数量降序排序标签
   const sortedTags = [...tags].sort((a, b) => b.count - a.count);
   
@@ -33,7 +34,7 @@ export default function TagList({ tags, locale = defaultLocale }: TagListProps) 
               {tag.name}
             </span>
             <span className="bg-muted/50 text-foreground px-2 py-1 text-xs">
-              {tag.count} 篇文章
+              {dictionary.common.postCount(tag.count)}
             </span>
           </div>
         </Link>

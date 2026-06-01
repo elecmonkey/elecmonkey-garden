@@ -161,16 +161,20 @@ export default function Footer({ locale }: { locale: Locale }) {
             <span>
               &copy; 2023-{currentYear} {dictionary.siteName}
             </span>
-            <span className="mx-2 text-muted-foreground select-none hidden sm:inline">｜</span>
-            <br className="sm:hidden" />
-            <a
-              href="https://beian.miit.gov.cn/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center transition-colors hover:text-primary"
-            >
-              陕ICP备2023008974号-1
-            </a>
+            {!isEnglish && (
+              <>
+                <span className="mx-2 text-muted-foreground select-none hidden sm:inline">｜</span>
+                <br className="sm:hidden" />
+                <a
+                  href="https://beian.miit.gov.cn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center transition-colors hover:text-primary"
+                >
+                  陕ICP备2023008974号-1
+                </a>
+              </>
+            )}
           </p>
         </div>
       </div>

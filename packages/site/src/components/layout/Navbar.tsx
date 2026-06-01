@@ -3,7 +3,7 @@
 import Link from '@/components/Link';
 import Image from '@/lib/image-compat';
 import { usePathname } from '@/lib/router-compat';
-import { useState } from 'react';
+import { useState, type SVGProps } from 'react';
 import dynamic from '@/lib/dynamic-compat';
 import { dictionaries, hrefFor, localeLabels, stripLocalePrefix, withLocalePath, type Locale } from '@/lib/i18n';
 
@@ -15,6 +15,15 @@ const ThemeSwitcher = dynamic(() => import('@/components/ThemeSwitcher'), {
   )
 });
 
+function IonLanguage(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512" {...props}>
+      {/* Icon from IonIcons by Ben Sperry - https://github.com/ionic-team/ionicons/blob/main/LICENSE */}
+      <path fill="currentColor" d="m478.33 433.6l-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4ZM334.83 362L368 281.65L401.17 362Zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73c39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36c-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93c.92 1.19 1.83 2.35 2.74 3.51c-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59c22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9Z" />
+    </svg>
+  );
+}
+
 export default function Navbar({ locale }: { locale: Locale }) {
   const pathname = usePathname() || ''; // 提供默认值，避免undefined
   const dictionary = dictionaries[locale];
@@ -22,6 +31,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
   const homeHref = hrefFor(locale, '/');
   const otherLocale: Locale = locale === 'en' ? 'zh' : 'en';
   const otherLocaleHref = withLocalePath(pathname, otherLocale);
+  const languageSwitchLabel = locale === 'en' ? 'Switch to Chinese' : '切换到英文';
 
   // 检查是否是主页
   const isHomePage = pathname === homeHref;
@@ -72,6 +82,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
     : "bg-card shadow-sm sticky top-0 z-20"; // 其他页面导航栏：固定在顶部
 
   const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
+  const languageSwitchClass = "p-2 transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground";
 
   return (
     <nav className={`${navbarClasses} border-b border-border/20 select-none`}>
@@ -134,8 +145,13 @@ export default function Navbar({ locale }: { locale: Locale }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </Link>
-            <a href={otherLocaleHref} className="px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-              {localeLabels[otherLocale]}
+            <a
+              href={otherLocaleHref}
+              className={languageSwitchClass}
+              title={`${languageSwitchLabel}: ${localeLabels[otherLocale]}`}
+              aria-label={languageSwitchLabel}
+            >
+              <IonLanguage className="h-5 w-5" />
             </a>
             <div className="mr-2">
               <ThemeSwitcher />
@@ -192,15 +208,17 @@ export default function Navbar({ locale }: { locale: Locale }) {
             >
               {dictionary.nav.about}
             </Link>
-            <a
-              href={otherLocaleHref}
-              className="block px-3 py-2 transition-colors active:bg-muted text-foreground hover:bg-muted"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {localeLabels[otherLocale]}
-            </a>
             <div className="flex items-center gap-2 pl-0 pr-3 py-2">
               <ThemeSwitcher />
+              <a
+                href={otherLocaleHref}
+                className={languageSwitchClass}
+                title={`${languageSwitchLabel}: ${localeLabels[otherLocale]}`}
+                aria-label={languageSwitchLabel}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <IonLanguage className="h-5 w-5" />
+              </a>
               <Link
                 href={hrefFor(locale, '/search')}
                 prefetch

@@ -1,6 +1,6 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getAllMonths } from '@/lib/api';
-import { type Locale, archiveHref } from '@/lib/i18n';
+import { dictionaries, type Locale, archiveHref } from '@/lib/i18n';
 import PageContainer from '@/components/layout/PageContainer';
 import Link from '@/components/Link';
 
@@ -11,15 +11,16 @@ export const metadata: SiteMetadata = {
 
 export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale }) {
   const months = getAllMonths(locale);
+  const dictionary = dictionaries[locale];
 
   return (
     <PageContainer>
-      <h1 className="text-3xl font-bold mb-2">文章归档</h1>
-      <p className="text-muted-foreground mb-8">按时间排序</p>
+      <h1 className="text-3xl font-bold mb-2">{dictionary.archive.title}</h1>
+      <p className="text-muted-foreground mb-8">{dictionary.archive.sortedByTime}</p>
 
       {months.length === 0 ? (
         <div className="text-center py-10">
-          <p className="text-muted-foreground">暂无文章</p>
+          <p className="text-muted-foreground">{dictionary.archive.noPosts}</p>
         </div>
       ) : (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -41,7 +42,7 @@ export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale })
                   <span className="font-medium">{month.displayName}</span>
                 </div>
                 <span className="bg-muted/50 text-foreground text-xs px-2 py-1">
-                  {month.count} 篇
+                  {month.count} {dictionary.archive.postUnit}
                 </span>
               </div>
             </Link>
@@ -50,7 +51,7 @@ export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale })
       )}
 
       <div className="mt-8 text-center text-muted-foreground">
-        <p>点击月份查看相关文章</p>
+        <p>{dictionary.archive.monthHint}</p>
       </div>
     </PageContainer>
   );
