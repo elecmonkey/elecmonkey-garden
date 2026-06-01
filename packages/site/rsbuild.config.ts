@@ -6,7 +6,16 @@ import { gardenContentPlugin } from '@elecmonkey/garden-content-compiler';
 export default defineConfig({
   plugins: [
     gardenContentPlugin({
-      postsDirectory: '../../content/posts',
+      locales: {
+        zh: {
+          postsDirectory: '../../content/posts',
+          urlPrefix: '',
+        },
+        en: {
+          postsDirectory: '../../content/en/posts',
+          urlPrefix: '/en',
+        },
+      },
     }),
     pluginReact(),
     pluginTailwindcss(),

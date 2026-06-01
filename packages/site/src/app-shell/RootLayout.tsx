@@ -4,8 +4,9 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import RouteScrollRestoration from '@/components/RouteScrollRestoration';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import type { Locale } from '@/lib/i18n';
 
-export function RootLayout() {
+export function RootLayout({ locale }: { locale: Locale }) {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground antialiased">
       <AnalyticsScript />
@@ -16,11 +17,11 @@ export function RootLayout() {
         enableSystem
         disableTransitionOnChange
       >
-        <Navbar />
+        <Navbar locale={locale} />
         <main className="flex-grow">
           <Outlet />
         </main>
-        <Footer />
+        <Footer locale={locale} />
       </ThemeProvider>
     </div>
   );

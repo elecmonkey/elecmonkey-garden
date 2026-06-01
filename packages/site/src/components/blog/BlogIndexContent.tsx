@@ -2,29 +2,31 @@ import Link from '@/components/Link';
 import PostCard from '@/components/PostCard';
 import PathPagination from '@/components/PathPagination';
 import { PostData } from '@/lib/api';
+import { type Locale, hrefFor } from '@/lib/i18n';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import PageContainer from '@/components/layout/PageContainer';
 
 interface Props {
   currentPage: number;
+  locale: Locale;
   posts: PostData[];
   totalPages: number;
 }
 
-export default function BlogIndexContent({ currentPage, posts, totalPages }: Props) {
-  const basePath = '/blog';
+export default function BlogIndexContent({ currentPage, locale, posts, totalPages }: Props) {
+  const basePath = hrefFor(locale, '/blog');
 
   return (
     <PageContainer>
       <Suspense fallback={null}>
         <ScrollToContent />
       </Suspense>
-      
+
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">博客文章</h1>
-        <Link 
-          href="/archive" 
+        <Link
+          href={hrefFor(locale, '/archive')}
           prefetch
           className="text-blue-600 hover:underline text-sm flex items-center"
         >
@@ -34,7 +36,7 @@ export default function BlogIndexContent({ currentPage, posts, totalPages }: Pro
           </svg>
         </Link>
       </div>
-      
+
       {posts.length === 0 ? (
         <div className="text-center py-10">
           <p className="text-muted-foreground">暂无文章，请稍后再来！</p>
@@ -46,7 +48,7 @@ export default function BlogIndexContent({ currentPage, posts, totalPages }: Pro
           ))}
         </div>
       )}
-      
+
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (
         <PathPagination currentPage={currentPage} totalPages={totalPages} basePath={basePath} />

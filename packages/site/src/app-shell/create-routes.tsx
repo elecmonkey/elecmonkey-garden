@@ -1,24 +1,25 @@
 import type { ComponentType } from 'react';
 import type { RouteObject } from 'react-router';
+import type { Locale } from '@/lib/i18n';
 import { RootLayout } from './RootLayout';
 
 type PageRouteComponents = {
-  HomeRoute: ComponentType;
-  AboutRoute: ComponentType;
-  BlogIndexRoute: ComponentType;
-  BlogPaginationRoute: ComponentType;
-  BlogPostRoute: ComponentType;
-  TagsIndexRoute: ComponentType;
-  TagRoute: ComponentType;
-  TagPaginationRoute: ComponentType;
-  ArchiveIndexRoute: ComponentType;
-  MonthArchiveRoute: ComponentType;
-  MonthArchivePaginationRoute: ComponentType;
-  SearchRoute: ComponentType;
-  NotFoundRoute: ComponentType;
+  HomeRoute: ComponentType<{ locale: Locale }>;
+  AboutRoute: ComponentType<{ locale: Locale }>;
+  BlogIndexRoute: ComponentType<{ locale: Locale }>;
+  BlogPaginationRoute: ComponentType<{ locale: Locale }>;
+  BlogPostRoute: ComponentType<{ locale: Locale }>;
+  TagsIndexRoute: ComponentType<{ locale: Locale }>;
+  TagRoute: ComponentType<{ locale: Locale }>;
+  TagPaginationRoute: ComponentType<{ locale: Locale }>;
+  ArchiveIndexRoute: ComponentType<{ locale: Locale }>;
+  MonthArchiveRoute: ComponentType<{ locale: Locale }>;
+  MonthArchivePaginationRoute: ComponentType<{ locale: Locale }>;
+  SearchRoute: ComponentType<{ locale: Locale }>;
+  NotFoundRoute: ComponentType<{ locale: Locale }>;
 };
 
-export function createRoutes(components: PageRouteComponents): RouteObject[] {
+function createChildren(components: PageRouteComponents, locale: Locale): RouteObject[] {
   const {
     HomeRoute,
     AboutRoute,
@@ -36,24 +37,33 @@ export function createRoutes(components: PageRouteComponents): RouteObject[] {
   } = components;
 
   return [
+    { index: true, element: <HomeRoute locale={locale} /> },
+    { path: 'about', element: <AboutRoute locale={locale} /> },
+    { path: 'blog', element: <BlogIndexRoute locale={locale} /> },
+    { path: 'blog/page/:page', element: <BlogPaginationRoute locale={locale} /> },
+    { path: 'blog/:slug', element: <BlogPostRoute locale={locale} /> },
+    { path: 'tags', element: <TagsIndexRoute locale={locale} /> },
+    { path: 'tags/:tag', element: <TagRoute locale={locale} /> },
+    { path: 'tags/:tag/page/:page', element: <TagPaginationRoute locale={locale} /> },
+    { path: 'archive', element: <ArchiveIndexRoute locale={locale} /> },
+    { path: 'archive/:month', element: <MonthArchiveRoute locale={locale} /> },
+    { path: 'archive/:month/page/:page', element: <MonthArchivePaginationRoute locale={locale} /> },
+    { path: 'search', element: <SearchRoute locale={locale} /> },
+    { path: '*', element: <NotFoundRoute locale={locale} /> },
+  ];
+}
+
+export function createRoutes(components: PageRouteComponents): RouteObject[] {
+  return [
     {
       path: '/',
-      element: <RootLayout />,
-      children: [
-        { index: true, element: <HomeRoute /> },
-        { path: 'about', element: <AboutRoute /> },
-        { path: 'blog', element: <BlogIndexRoute /> },
-        { path: 'blog/page/:page', element: <BlogPaginationRoute /> },
-        { path: 'blog/:slug', element: <BlogPostRoute /> },
-        { path: 'tags', element: <TagsIndexRoute /> },
-        { path: 'tags/:tag', element: <TagRoute /> },
-        { path: 'tags/:tag/page/:page', element: <TagPaginationRoute /> },
-        { path: 'archive', element: <ArchiveIndexRoute /> },
-        { path: 'archive/:month', element: <MonthArchiveRoute /> },
-        { path: 'archive/:month/page/:page', element: <MonthArchivePaginationRoute /> },
-        { path: 'search', element: <SearchRoute /> },
-        { path: '*', element: <NotFoundRoute /> },
-      ],
+      element: <RootLayout locale="zh" />,
+      children: createChildren(components, 'zh'),
+    },
+    {
+      path: '/en',
+      element: <RootLayout locale="en" />,
+      children: createChildren(components, 'en'),
     },
   ];
 }

@@ -1,3 +1,5 @@
+import { type Locale, getLocaleFromPathname, stripLocalePrefix } from './i18n';
+
 type PrefetchPriority = 'intent' | 'viewport';
 type PrefetchTask = () => Promise<void> | void;
 type PrefetchableRouteKey = 'home' | 'about' | 'blog' | 'tags' | 'archive' | 'search';
@@ -127,7 +129,7 @@ function normalizeInternalHref(href: string): URL | undefined {
 }
 
 function extractBlogSlug(pathname: string): string | undefined {
-  const match = pathname.match(/^\/blog\/([^/?#]+)\/?$/);
+  const match = stripLocalePrefix(pathname).match(/^\/blog\/([^/?#]+)\/?$/);
   return match?.[1] ? decodeURIComponent(match[1]) : undefined;
 }
 
@@ -160,9 +162,9 @@ function prefetchArticleFonts() {
   }
 }
 
-function prefetchBlogPost(slug: string): Promise<void> {
+function prefetchBlogPost(locale: Locale, slug: string): Promise<void> {
   const routePrefetch = prefetchBlogPostRoute();
-  const contentPrefetch = import('@/lib/api').then(({ prefetchPostById }) => prefetchPostById(slug));
+  const contentPrefetch = import('@/lib/api').then(({ prefetchPostById }) => prefetchPostById(locale, slug));
 
   return Promise.all([routePrefetch, contentPrefetch]).then(() => undefined);
 }
@@ -177,13 +179,13 @@ function prefetchBlogPostRoute(): Promise<void> {
   return blogPostRoutePrefetch;
 }
 
-async function prefetchSearchPage(): Promise<void> {
+async function prefetchSearchPage(locale: Locale): Promise<void> {
   const { clientRouteLoaders } = await import('@/app-shell/PageRoutes.client');
   const { prefetchSearchIndexPosts } = await import('@/lib/search');
 
   await Promise.all([
     clientRouteLoaders.search(),
-    prefetchSearchIndexPosts(),
+    prefetchSearchIndexPosts(locale),
   ]);
 }
 
@@ -219,49 +221,51 @@ export function prefetchHref(href: string | undefined, priority: PrefetchPriorit
   if (!url) return;
 
   const slug = extractBlogSlug(url.pathname);
+  const locale = getLocaleFromPathname(url.pathname);
+  const strippedPathname = stripLocalePrefix(url.pathname);
   if (slug) {
-    enqueuePrefetch(`post:${slug}`, () => prefetchBlogPost(slug), priority);
+    enqueuePrefetch(`post:${locale}:${slug}`, () => prefetchBlogPost(locale, slug), priority);
     return;
   }
 
-  if (url.pathname === '/') {
-    enqueuePrefetch('route:/', () => prefetchRoute('home'), priority);
+  if (strippedPathname === '/') {
+    enqueuePrefetch(`route:${locale}:/`, () => prefetchRoute('home'), priority);
     return;
   }
 
-  if (url.pathname === '/about') {
-    enqueuePrefetch('route:/about', () => prefetchRoute('about'), priority);
+  if (strippedPathname === '/about') {
+    enqueuePrefetch(`route:${locale}:/about`, () => prefetchRoute('about'), priority);
     return;
   }
 
-  if (url.pathname === '/blog' || /^\/blog\/page\/\d+\/?$/.test(url.pathname)) {
+  if (strippedPathname === '/blog' || /^\/blog\/page\/\d+\/?$/.test(strippedPathname)) {
     enqueuePrefetch(`route:${url.pathname}`, () => prefetchRoute('blog'), priority);
     return;
   }
 
-  if (url.pathname === '/tags') {
-    enqueuePrefetch('route:/tags', () => prefetchRoute('tags'), priority);
+  if (strippedPathname === '/tags') {
+    enqueuePrefetch(`route:${locale}:/tags`, () => prefetchRoute('tags'), priority);
     return;
   }
 
-  if (url.pathname === '/archive') {
-    enqueuePrefetch('route:/archive', () => prefetchRoute('archive'), priority);
+  if (strippedPathname === '/archive') {
+    enqueuePrefetch(`route:${locale}:/archive`, () => prefetchRoute('archive'), priority);
     return;
   }
 
-  if (url.pathname === '/search') {
+  if (strippedPathname === '/search') {
     const searchParams = url.searchParams;
     const hasSearchIntent = searchParams.has('keyword') || searchParams.has('page');
 
     enqueuePrefetch(
       hasSearchIntent ? `route:${url.pathname}${url.search}` : 'route:/search',
-      () => (hasSearchIntent ? prefetchSearchPage() : prefetchRoute('search')),
+      () => (hasSearchIntent ? prefetchSearchPage(locale) : prefetchRoute('search')),
       priority,
     );
   }
 }
 
-export function prefetchArticleBySlug(slug: string, priority: PrefetchPriority = 'viewport') {
+export function prefetchArticleBySlug(locale: Locale, slug: string, priority: PrefetchPriority = 'viewport') {
   prefetchArticleFonts();
-  enqueuePrefetch(`post:${slug}`, () => prefetchBlogPost(slug), priority);
+  enqueuePrefetch(`post:${locale}:${slug}`, () => prefetchBlogPost(locale, slug), priority);
 }

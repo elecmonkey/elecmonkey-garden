@@ -10,6 +10,9 @@ import { metadata as archiveMetadata } from '../app/archive/page';
 import { generateMetadata as generateMonthMetadata } from '../app/archive/[month]/page';
 import { generateMetadata as generateMonthPageMetadata } from '../app/archive/[month]/page/[page]/page';
 import { generateMetadata as generateSearchMetadata } from '../app/search/page';
+import { getStaticPathnames } from '../app-shell/static-paths';
+import { getPostById } from '../lib/api';
+import { type Locale, dictionaries, getLocaleFromPathname, hrefFor, locales, stripLocalePrefix } from '../lib/i18n';
 import type { RobotsValue, SiteMetadata } from './metadata-types';
 
 const siteUrl = 'https://www.elecmonkey.com';
@@ -56,6 +59,32 @@ const rootMetadata: SiteMetadata = {
   },
 };
 
+function createRootMetadata(locale: Locale): SiteMetadata {
+  const dictionary = dictionaries[locale];
+  const isEnglish = locale === 'en';
+
+  return {
+    ...rootMetadata,
+    title: dictionary.siteName,
+    description: dictionary.siteDescription,
+    keywords: isEnglish
+      ? ['frontend development', 'JavaScript', 'TypeScript', 'React', 'Vue', 'Vite', 'web performance', 'technical blog', 'Elecmonkey']
+      : rootMetadata.keywords,
+    openGraph: {
+      ...(rootMetadata.openGraph ?? {}),
+      locale: isEnglish ? 'en_US' : 'zh_CN',
+      title: isEnglish ? "Elecmonkey's Garden - Frontend Engineering Blog" : 'Elecmonkey的小花园 - 前端技术博客',
+      description: dictionary.siteDescription,
+      siteName: dictionary.siteName,
+    },
+    twitter: {
+      ...(rootMetadata.twitter ?? {}),
+      title: isEnglish ? "Elecmonkey's Garden - Frontend Engineering Blog" : 'Elecmonkey的小花园 - 前端技术博客',
+      description: dictionary.siteDescription,
+    },
+  };
+}
+
 const htmlEscapes: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
@@ -97,6 +126,23 @@ function normalizeCanonicalPathname(pathname: string): string {
 function getCanonicalUrl(pathname: string): string {
   const normalized = normalizeCanonicalPathname(pathname);
   return normalized === '/' ? siteUrl : `${siteUrl}${normalized}`;
+}
+
+function getAlternateLinks(pathname: string): Array<{ hrefLang: string; href: string }> {
+  const stripped = stripLocalePrefix(pathname);
+
+  return locales.map((locale) => ({
+    hrefLang: locale === 'en' ? 'en' : 'zh-CN',
+    href: getCanonicalUrl(hrefFor(locale, stripped)),
+  }));
+}
+
+function linkTag(attributes: Record<string, string>): string {
+  const serialized = Object.entries(attributes)
+    .map(([key, value]) => `${key}="${escapeHtml(value)}"`)
+    .join(' ');
+
+  return `<link ${serialized} />`;
 }
 
 function getUrlValue(value: unknown, metadata: SiteMetadata): string | undefined {
@@ -147,7 +193,7 @@ function propertyTag(property: string, content: unknown): string {
 }
 
 function getRouteParams(pathname: string): { route: string; params: Record<string, string> } {
-  const segments = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+  const segments = stripLocalePrefix(pathname).replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
 
   if (segments.length === 0) return { route: 'home', params: {} };
   if (segments[0] === 'about' && segments.length === 1) return { route: 'about', params: {} };
@@ -165,7 +211,7 @@ function getRouteParams(pathname: string): { route: string; params: Record<strin
   return { route: 'not-found', params: {} };
 }
 
-async function getRouteMetadata(pathname: string): Promise<SiteMetadata> {
+async function getRouteMetadata(locale: Locale, pathname: string): Promise<SiteMetadata> {
   const { route, params } = getRouteParams(pathname);
 
   switch (route) {
@@ -176,31 +222,109 @@ async function getRouteMetadata(pathname: string): Promise<SiteMetadata> {
     case 'blog':
       return blogMetadata;
     case 'blog-page':
-      return generateBlogPageMetadata({ params: { page: params.page } });
+      return generateBlogPageMetadata({ locale, params: { page: params.page } });
     case 'blog-post':
-      return generateBlogPostMetadata({ params: { slug: params.slug } });
+      return generateBlogPostMetadata({ locale, params: { slug: params.slug } });
     case 'tags':
       return tagsMetadata;
     case 'tag':
-      return generateTagMetadata({ params: { tag: params.tag } });
+      return generateTagMetadata({ locale, params: { tag: params.tag } });
     case 'tag-page':
-      return generateTagPageMetadata({ params: { tag: params.tag, page: params.page } });
+      return generateTagPageMetadata({ locale, params: { tag: params.tag, page: params.page } });
     case 'archive':
       return archiveMetadata;
     case 'month':
-      return generateMonthMetadata({ params: { month: params.month } });
+      return generateMonthMetadata({ locale, params: { month: params.month } });
     case 'month-page':
-      return generateMonthPageMetadata({ params: { month: params.month, page: params.page } });
+      return generateMonthPageMetadata({ locale, params: { month: params.month, page: params.page } });
     case 'search':
-      return generateSearchMetadata({ searchParams: {} });
+      return {
+        ...(await generateSearchMetadata({ locale, searchParams: {} })),
+        robots: { index: false, follow: true },
+      };
     default:
-      return { title: '页面未找到 - Elecmonkey的小花园', robots: 'noindex, nofollow' };
+      return { title: locale === 'en' ? "Page Not Found - Elecmonkey's Garden" : '页面未找到 - Elecmonkey的小花园', robots: 'noindex, nofollow' };
+  }
+}
+
+async function getAvailableAlternateLinks(pathname: string): Promise<Array<{ hrefLang: string; href: string }>> {
+  const pathnames = new Set(await getStaticPathnames());
+
+  return getAlternateLinks(pathname).filter((alternate) => {
+    const alternatePathname = alternate.href.replace(siteUrl, '') || '/';
+    return pathnames.has(alternatePathname);
+  });
+}
+
+function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: SiteMetadata): SiteMetadata {
+  if (locale !== 'en') {
+    return routeMetadata;
+  }
+
+  const { route, params } = getRouteParams(pathname);
+  const siteName = dictionaries.en.siteName;
+
+  switch (route) {
+    case 'home':
+      return {
+        ...routeMetadata,
+        title: "Elecmonkey's Garden - Sounding the Heart's Voice",
+        description: dictionaries.en.siteDescription,
+        openGraph: {
+          ...(routeMetadata.openGraph ?? {}),
+          title: "Elecmonkey's Garden - Frontend Engineering Blog",
+          description: dictionaries.en.siteDescription,
+        },
+      };
+    case 'about':
+      return { ...routeMetadata, title: `About - ${siteName}` };
+    case 'blog':
+      return { ...routeMetadata, title: `Posts - ${siteName}` };
+    case 'blog-page':
+      return {
+        ...routeMetadata,
+        title: `Posts (Page ${params.page}) - ${siteName}`,
+        description: `Browse all posts - page ${params.page}`,
+      };
+    case 'blog-post': {
+      try {
+        const post = getPostById(locale, params.slug);
+        return { ...routeMetadata, title: `${post.title} - ${siteName}`, description: post.description };
+      } catch {
+        return routeMetadata;
+      }
+    }
+    case 'tags':
+      return { ...routeMetadata, title: `Tags - ${siteName}` };
+    case 'tag':
+      return {
+        ...routeMetadata,
+        title: `#${params.tag} - ${siteName}`,
+        description: `Browse posts related to ${params.tag}`,
+      };
+    case 'tag-page':
+      return {
+        ...routeMetadata,
+        title: `#${params.tag} (Page ${params.page}) - ${siteName}`,
+        description: `Browse posts related to ${params.tag} - page ${params.page}`,
+      };
+    case 'archive':
+      return { ...routeMetadata, title: `Archive - ${siteName}`, description: 'Browse posts by month' };
+    case 'month':
+      return { ...routeMetadata, title: `${params.month} Archive - ${siteName}`, description: `Browse posts published in ${params.month}` };
+    case 'month-page':
+      return { ...routeMetadata, title: `${params.month} Archive (Page ${params.page}) - ${siteName}`, description: `Browse posts published in ${params.month} - page ${params.page}` };
+    case 'search':
+      return { ...routeMetadata, title: `Search - ${siteName}`, description: 'Search posts' };
+    default:
+      return routeMetadata;
   }
 }
 
 export async function renderMetadataTags(pathname: string): Promise<string> {
-  const routeMetadata = await getRouteMetadata(pathname);
-  const metadata = mergeMetadata(rootMetadata, routeMetadata);
+  const locale = getLocaleFromPathname(pathname);
+  const routeMetadata = localizeRouteMetadata(locale, pathname, await getRouteMetadata(locale, pathname));
+  const metadata = mergeMetadata(createRootMetadata(locale), routeMetadata);
   const { route } = getRouteParams(pathname);
   const title = getTitle(metadata);
   const routeTitle = getTitle(routeMetadata);
@@ -208,6 +332,10 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
   const tags: string[] = [];
 
   if (title) tags.push(`<title>${escapeHtml(title)}</title>`);
+  tags.push(linkTag({ rel: 'canonical', href: canonicalUrl }));
+  for (const alternate of await getAvailableAlternateLinks(pathname)) {
+    tags.push(linkTag({ rel: 'alternate', hrefLang: alternate.hrefLang, href: alternate.href }));
+  }
   if (metadata.description) tags.push(metaTag('description', metadata.description));
   if (metadata.keywords) tags.push(metaTag('keywords', Array.isArray(metadata.keywords) ? metadata.keywords.join(', ') : metadata.keywords));
   if (metadata.creator) tags.push(metaTag('creator', metadata.creator));

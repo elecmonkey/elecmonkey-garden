@@ -2,24 +2,28 @@ import Link from '@/components/Link';
 import PostCard from '@/components/PostCard';
 import PathPagination from '@/components/PathPagination';
 import { PostData } from '@/lib/api';
+import { type Locale, archiveHref, hrefFor } from '@/lib/i18n';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import PageContainer from '@/components/layout/PageContainer';
 
 interface Props {
   month: string;
+  locale: Locale;
   currentPage: number;
   posts: PostData[];
   totalPosts: number;
   totalPages: number;
 }
 
-export default function MonthArchiveContent({ month, currentPage, posts, totalPosts, totalPages }: Props) {
+export default function MonthArchiveContent({ month, locale, currentPage, posts, totalPosts, totalPages }: Props) {
   // 转换月份格式: YYYYMM -> YYYY年MM月
   const year = month.substring(0, 4);
   const monthNum = month.substring(4, 6);
-  const displayName = `${year}年${monthNum}月`;
-  const basePath = `/archive/${month}`;
+  const displayName = locale === 'en'
+    ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${year}-${monthNum}-01T00:00:00.000Z`))
+    : `${year}年${monthNum}月`;
+  const basePath = archiveHref(locale, month);
 
   return (
     <PageContainer>
@@ -27,7 +31,7 @@ export default function MonthArchiveContent({ month, currentPage, posts, totalPo
       <Suspense fallback={null}>
         <ScrollToContent />
       </Suspense>
-      
+
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h1 className="text-3xl font-bold flex flex-wrap items-center whitespace-nowrap">
@@ -42,8 +46,8 @@ export default function MonthArchiveContent({ month, currentPage, posts, totalPo
             <span className="ml-3 text-lg font-normal text-gray-500 whitespace-nowrap">({totalPosts} 篇文章)</span>
           </h1>
           <div className="flex flex-wrap gap-2">
-            <Link 
-              href="/" 
+            <Link
+              href={hrefFor(locale, '/')}
               className="px-3 py-1.5 border border-border rounded-md text-sm text-muted-foreground hover:bg-muted transition-colors flex items-center whitespace-nowrap"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,8 +55,8 @@ export default function MonthArchiveContent({ month, currentPage, posts, totalPo
               </svg>
               主页
             </Link>
-            <Link 
-              href="/archive" 
+            <Link
+              href={hrefFor(locale, '/archive')}
               className="px-3 py-1.5 border border-border rounded-md text-sm text-muted-foreground hover:bg-muted transition-colors flex items-center whitespace-nowrap"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -63,11 +67,11 @@ export default function MonthArchiveContent({ month, currentPage, posts, totalPo
           </div>
         </div>
       </div>
-      
+
       {posts.length === 0 ? (
         <div className="text-center py-10">
           <p className="text-muted-foreground">该月份未找到文章</p>
-          <Link href="/blog" className="text-blue-600 hover:underline mt-4 inline-block">
+          <Link href={hrefFor(locale, '/blog')} className="text-blue-600 hover:underline mt-4 inline-block">
             查看所有文章
           </Link>
         </div>
@@ -78,7 +82,7 @@ export default function MonthArchiveContent({ month, currentPage, posts, totalPo
           ))}
         </div>
       )}
-      
+
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (
         <PathPagination currentPage={currentPage} totalPages={totalPages} basePath={basePath} />

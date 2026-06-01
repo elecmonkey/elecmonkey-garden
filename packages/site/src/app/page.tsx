@@ -1,5 +1,6 @@
 import Link from '@/components/Link';
 import { getHomeRecentPosts, getHomeStats, getHomeTags } from '@/lib/home';
+import { type Locale, hrefFor } from '@/lib/i18n';
 import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -15,10 +16,10 @@ export const metadata: SiteMetadata = {
   },
 };
 
-export default function Home() {
-  const recentPosts = getHomeRecentPosts();
-  const tags = getHomeTags();
-  const { totalPosts, latestUpdateDate } = getHomeStats();
+export default function Home({ locale = 'zh' }: { locale?: Locale }) {
+  const recentPosts = getHomeRecentPosts(locale);
+  const tags = getHomeTags(locale);
+  const { totalPosts, latestUpdateDate } = getHomeStats(locale);
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
@@ -28,10 +29,10 @@ export default function Home() {
           <div className="relative select-none">
             <div className="w-36 h-36 md:w-42 md:h-42 relative overflow-hidden rounded-full ring-2 ring-primary/20">
               <div className="w-full h-full flex items-center justify-center">
-                <Image 
-                  src="https://images.elecmonkey.com/pages/em.png" 
-                  alt="EM" 
-                  width={200} 
+                <Image
+                  src="https://images.elecmonkey.com/pages/em.png"
+                  alt="EM"
+                  width={200}
                   height={200}
                   priority
                   loading="eager"
@@ -46,11 +47,11 @@ export default function Home() {
               <span className="text-4xl md:text-5xl max-[430px]:text-[2rem] font-light">&apos;s Garden</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mt-3 mb-6" title="来自COP《光与影的对白》"> - 存在 为将心声响彻 - </p>
-            
+
             {/* 导航链接 */}
             <div className="flex flex-wrap gap-3 justify-center">
-              <Link 
-                href="/blog" 
+              <Link
+                href={hrefFor(locale, '/blog')}
                 className="px-4 py-2 max-[430px]:px-3.5 max-[430px]:text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 flex items-center gap-2 whitespace-nowrap shadow-sm hover:shadow select-none"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,8 +59,8 @@ export default function Home() {
                 </svg>
                 所有文章
               </Link>
-              <Link 
-                href="/about" 
+              <Link
+                href={hrefFor(locale, '/about')}
                 className="px-4 py-2 max-[430px]:px-3.5 max-[430px]:text-sm text-foreground bg-muted hover:bg-accent transition-all duration-200 flex items-center gap-2 whitespace-nowrap select-none"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,10 +68,10 @@ export default function Home() {
                 </svg>
                 关于我
               </Link>
-              <a 
-                href="https://github.com/elecmonkey" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://github.com/elecmonkey"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-4 py-2 max-[430px]:px-3.5 max-[430px]:text-sm text-foreground bg-muted hover:bg-accent transition-all duration-200 flex items-center gap-2 whitespace-nowrap select-none"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -101,8 +102,8 @@ export default function Home() {
               </div>
             ) : (
               <div className="mt-8 text-center">
-                <Link 
-                  href="/blog?scroll=true"
+                <Link
+                  href={`${hrefFor(locale, '/blog')}?scroll=true`}
                   className="inline-flex items-center gap-2 text-primary hover:underline text-base"
                 >
                   查看所有文章
@@ -128,7 +129,7 @@ export default function Home() {
                 <div className="text-2xl font-bold text-foreground mb-2">{totalPosts}</div>
                 <div className="text-sm text-muted-foreground">文章总数</div>
               </div>
-              
+
               {latestUpdateDate && (
                 <div className="flex flex-col items-center justify-center py-6 lg:pt-0">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,13 +146,13 @@ export default function Home() {
                 </div>
               )}
             </div>
-            
+
             {/* 标签云 */}
             <div>
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-semibold">标签云</h3>
-                <Link 
-                  href="/tags" 
+                <Link
+                  href={hrefFor(locale, '/tags')}
                   className="text-primary hover:underline text-sm flex items-center gap-1"
                 >
                   所有标签
@@ -160,7 +161,7 @@ export default function Home() {
                   </svg>
                 </Link>
               </div>
-              <TagCloud tags={tags} limit={18} />
+              <TagCloud locale={locale} tags={tags} limit={18} />
             </div>
           </div>
         </aside>

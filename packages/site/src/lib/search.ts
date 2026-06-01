@@ -1,4 +1,7 @@
+import { type Locale, defaultLocale } from './i18n';
+
 export type SearchIndexPost = {
+  locale?: Locale;
   id: string;
   title: string;
   date: string;
@@ -22,20 +25,22 @@ export type SearchResult = {
   };
 };
 
-let searchIndexPostsPromise: Promise<SearchIndexPost[]> | undefined;
-let loadedSearchIndexPosts: SearchIndexPost[] | undefined;
+const searchIndexPostsPromises = new Map<Locale, Promise<SearchIndexPost[]>>();
+const loadedSearchIndexPosts = new Map<Locale, SearchIndexPost[]>();
 
-export function getLoadedSearchIndexPosts(): SearchIndexPost[] | undefined {
-  return loadedSearchIndexPosts;
+export function getLoadedSearchIndexPosts(locale: Locale = defaultLocale): SearchIndexPost[] | undefined {
+  return loadedSearchIndexPosts.get(locale);
 }
 
-export function loadSearchIndexPosts(): Promise<SearchIndexPost[]> {
-  if (loadedSearchIndexPosts) {
-    return Promise.resolve(loadedSearchIndexPosts);
+export function loadSearchIndexPosts(locale: Locale = defaultLocale): Promise<SearchIndexPost[]> {
+  const loaded = loadedSearchIndexPosts.get(locale);
+  if (loaded) {
+    return Promise.resolve(loaded);
   }
 
+  let searchIndexPostsPromise = searchIndexPostsPromises.get(locale);
   if (!searchIndexPostsPromise) {
-    searchIndexPostsPromise = fetch('/static/search/index.json')
+    searchIndexPostsPromise = fetch(`/static/search/${locale}/index.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Failed to load search index: ${response.status}`);
@@ -44,20 +49,21 @@ export function loadSearchIndexPosts(): Promise<SearchIndexPost[]> {
         return response.json() as Promise<SearchIndexPost[]>;
       })
       .then((posts) => {
-        loadedSearchIndexPosts = posts;
+        loadedSearchIndexPosts.set(locale, posts);
         return posts;
       })
       .catch((error) => {
-        searchIndexPostsPromise = undefined;
+        searchIndexPostsPromises.delete(locale);
         throw error;
       });
+    searchIndexPostsPromises.set(locale, searchIndexPostsPromise);
   }
 
   return searchIndexPostsPromise;
 }
 
-export function prefetchSearchIndexPosts(): Promise<void> {
-  return loadSearchIndexPosts().then(() => undefined);
+export function prefetchSearchIndexPosts(locale: Locale = defaultLocale): Promise<void> {
+  return loadSearchIndexPosts(locale).then(() => undefined);
 }
 
 export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): SearchResult[] {

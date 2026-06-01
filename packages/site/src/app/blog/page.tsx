@@ -1,16 +1,17 @@
 import { getAllPostsWithPagination } from '@/lib/api';
 import BlogIndexContent from '@/components/blog/BlogIndexContent';
+import type { Locale } from '@/lib/i18n';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 
 export const metadata: SiteMetadata = {
   title: "所有文章 - Elecmonkey的小花园",
 };
 
-export default function BlogPage() {
+export default function BlogPage({ locale = 'zh' }: { locale?: Locale }) {
   const currentPage = 1;
   
   // 获取分页的文章列表
-  const { posts, totalPages } = getAllPostsWithPagination(currentPage);
+  const { posts, totalPages } = getAllPostsWithPagination(locale, currentPage);
   
   // 如果页码超出范围且总页数大于0，返回404
   if (currentPage > totalPages && totalPages > 0) {
@@ -20,6 +21,7 @@ export default function BlogPage() {
   return (
     <BlogIndexContent 
       currentPage={currentPage}
+      locale={locale}
       posts={posts}
       totalPages={totalPages}
     />

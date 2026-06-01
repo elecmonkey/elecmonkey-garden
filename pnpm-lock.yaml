@@ -43,8 +43,8 @@ importers:
   packages/site:
     dependencies:
       '@elecmonkey/garden-content-compiler':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: workspace:*
+        version: link:../content-compiler-napi
       katex:
         specifier: ^0.17.0
         version: 0.17.0
@@ -191,9 +191,6 @@ packages:
     cpu: [x64]
     os: [linux]
     libc: [musl]
-
-  '@elecmonkey/garden-content-compiler@0.1.2':
-    resolution: {integrity: sha512-0rhQxglEHGSvuag7y3xnC4tc5c2S++5DoY9cgWYHngHBCb42+Q+RPlhLr3zBOv7Er5afbXSK87L0T/dx6EjKag==}
 
   '@emnapi/core@1.10.0':
     resolution: {integrity: sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw==}
@@ -2240,12 +2237,6 @@ snapshots:
 
   '@elecmonkey/garden-content-compiler-linux-x64-musl@0.1.2':
     optional: true
-
-  '@elecmonkey/garden-content-compiler@0.1.2':
-    optionalDependencies:
-      '@elecmonkey/garden-content-compiler-darwin-arm64': 0.1.2
-      '@elecmonkey/garden-content-compiler-linux-x64-gnu': 0.1.2
-      '@elecmonkey/garden-content-compiler-linux-x64-musl': 0.1.2
 
   '@emnapi/core@1.10.0':
     dependencies:

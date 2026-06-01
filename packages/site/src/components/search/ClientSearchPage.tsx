@@ -6,6 +6,7 @@ import ScrollToContent from '@/components/ScrollToContent';
 import SearchBar from '@/components/search/SearchBar';
 import SearchResultCard from '@/components/search/SearchResultCard';
 import { useSearchParams } from '@/lib/router-compat';
+import { type Locale, defaultLocale } from '@/lib/i18n';
 import {
   getLoadedSearchIndexPosts,
   loadSearchIndexPosts,
@@ -16,11 +17,11 @@ import {
 
 const pageSize = 10;
 
-export default function ClientSearchPage() {
+export default function ClientSearchPage({ locale = defaultLocale }: { locale?: Locale }) {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('keyword') || '';
   const currentPage = Number(searchParams.get('page')) || 1;
-  const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>(() => getLoadedSearchIndexPosts() ?? []);
+  const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>(() => getLoadedSearchIndexPosts(locale) ?? []);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
 
@@ -33,7 +34,7 @@ export default function ClientSearchPage() {
     setLoading(true);
     setLoadError(false);
 
-    const cachedIndexPosts = getLoadedSearchIndexPosts();
+    const cachedIndexPosts = getLoadedSearchIndexPosts(locale);
 
     if (cachedIndexPosts) {
       setIndexPosts(cachedIndexPosts);
@@ -43,7 +44,7 @@ export default function ClientSearchPage() {
       };
     }
 
-    loadSearchIndexPosts()
+    loadSearchIndexPosts(locale)
       .then((posts) => {
         if (!canceled) {
           setIndexPosts(posts);
@@ -64,7 +65,7 @@ export default function ClientSearchPage() {
     return () => {
       canceled = true;
     };
-  }, [keyword]);
+  }, [keyword, locale]);
 
   const { posts, totalPosts, totalPages } = useMemo(() => {
     if (!keyword.trim()) {

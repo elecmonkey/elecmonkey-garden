@@ -1,8 +1,10 @@
-import { generatedPostLoaders, generatedPosts, generatedPublicPosts } from '@/generated/content';
+import { generatedContentByLocale } from '@/generated/content';
+import { type Locale, defaultLocale, locales } from './i18n';
 import { calculateTagSizes } from './tag-size';
 
 // 定义文章数据类型
 export type PostData = {
+  locale: Locale;
   id: string;           // 文章唯一标识符
   content?: string;     // 文章内容（列表页只保留元数据，详情页按需加载）
   html?: string;        // 静态 HTML 正文（详情页按需加载）
@@ -15,9 +17,27 @@ export type PostData = {
   monthFolder: string;  // 月份文件夹 (例如: "202403")
   isDraft?: boolean;    // 是否为草稿
   isHidden?: boolean;   // 是否为隐藏文章
+  permalink?: string;
+  prevPost?: { id: string; title: string };
+  nextPost?: { id: string; title: string };
   toc?: TocItem[];      // SSG 预生成目录
   [key: string]: unknown;
 };
+
+export type GeneratedLocaleContent = {
+  posts: PostData[];
+  publicPosts: PostData[];
+  postHashes: Record<string, { sourceHash: string; contentHash: string }>;
+  postLoaders: Record<string, () => Promise<{ post: PostData }>>;
+};
+
+export type GeneratedContentByLocale = Record<Locale, GeneratedLocaleContent>;
+
+export type HomeContentByLocale = Record<Locale, {
+  recentPosts: PostData[];
+  tags: TagCount[];
+  stats: { totalPosts: number; latestUpdateDate: string | null };
+}>;
 
 // 定义标签统计类型
 export type TocItem = {
@@ -95,20 +115,21 @@ type PostNavigation = {
   nextPost?: { id: string; title: string };
 };
 
-const allPosts = generatedPosts as PostData[];
-const publicPostsWithDrafts = generatedPublicPosts as PostData[];
-const generatedPostLoaderById = generatedPostLoaders as Record<string, () => Promise<{ post: PostData }>>;
-const nonDraftPosts = allPosts.filter((post) => !post.isDraft);
-const publicPosts = publicPostsWithDrafts.filter((post) => !post.isDraft);
-
-const postById = new Map<string, PostData>();
-const fullPostById = new Map<string, PostData>();
-const postPrefetches = new Map<string, Promise<void>>();
-const publicPostIndexById = new Map<string, number>();
-const postsByTag = new Map<string, PostData[]>();
-const postsByMonth = new Map<string, PostData[]>();
-
-const allPostIds: PostPathData[] = [];
+type RuntimeLocaleIndex = {
+  allPosts: PostData[];
+  publicPostsWithDrafts: PostData[];
+  nonDraftPosts: PostData[];
+  publicPosts: PostData[];
+  postById: Map<string, PostData>;
+  fullPostById: Map<string, PostData>;
+  postPrefetches: Map<string, Promise<void>>;
+  postsByTag: Map<string, PostData[]>;
+  postsByMonth: Map<string, PostData[]>;
+  allPostIds: PostPathData[];
+  allTags: TagCount[];
+  allMonths: MonthData[];
+  generatedPostLoaderById: Record<string, () => Promise<{ post: PostData }>>;
+};
 
 function postHasCompiledArticle(post: PostData | undefined): post is PostData {
   return typeof post?.html === 'string' && Array.isArray(post.toc) && Array.isArray(post.islands);
@@ -120,14 +141,97 @@ declare global {
   }
 }
 
-function readInitialPostFromDocument(id: string): PostData | undefined {
+function createRuntimeLocaleIndex(locale: Locale, content: GeneratedLocaleContent): RuntimeLocaleIndex {
+  const allPosts = content.posts;
+  const publicPostsWithDrafts = content.publicPosts;
+  const nonDraftPosts = allPosts.filter((post) => !post.isDraft);
+  const publicPosts = publicPostsWithDrafts.filter((post) => !post.isDraft);
+  const postById = new Map<string, PostData>();
+  const postsByTag = new Map<string, PostData[]>();
+  const postsByMonth = new Map<string, PostData[]>();
+  const allPostIds: PostPathData[] = [];
+
+  for (const post of allPosts) {
+    postById.set(post.id, post);
+    allPostIds.push({
+      params: { slug: post.id },
+      monthFolder: post.monthFolder,
+    });
+  }
+
+  for (const post of publicPosts) {
+    for (const tag of post.tags) {
+      const tagPosts = postsByTag.get(tag);
+      if (tagPosts) {
+        tagPosts.push(post);
+      } else {
+        postsByTag.set(tag, [post]);
+      }
+    }
+
+    const monthPosts = postsByMonth.get(post.monthFolder);
+    if (monthPosts) {
+      monthPosts.push(post);
+    } else {
+      postsByMonth.set(post.monthFolder, [post]);
+    }
+  }
+
+  const allTags = calculateTagSizes(
+    Array.from(postsByTag, ([name, posts]) => ({
+      name,
+      count: posts.length,
+    })).sort((a, b) => a.name.localeCompare(b.name)),
+  );
+
+  const allMonths = Array.from(postsByMonth, ([id, posts]) => {
+    const year = id.substring(0, 4);
+    const month = id.substring(4, 6);
+    const displayName = locale === 'en'
+      ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${year}-${month}-01T00:00:00.000Z`))
+      : `${year}年${month}月`;
+
+    return { id, displayName, count: posts.length };
+  }).sort((a, b) => (a.id < b.id ? 1 : -1));
+
+  return {
+    allPosts,
+    publicPostsWithDrafts,
+    nonDraftPosts,
+    publicPosts,
+    postById,
+    fullPostById: new Map<string, PostData>(),
+    postPrefetches: new Map<string, Promise<void>>(),
+    postsByTag,
+    postsByMonth,
+    allPostIds,
+    allTags,
+    allMonths,
+    generatedPostLoaderById: content.postLoaders,
+  };
+}
+
+const contentByLocale = Object.fromEntries(
+  locales.map((locale) => [
+    locale,
+    createRuntimeLocaleIndex(locale, generatedContentByLocale[locale]),
+  ]),
+) as Record<Locale, RuntimeLocaleIndex>;
+
+function getLocaleIndex(locale: Locale): RuntimeLocaleIndex {
+  return contentByLocale[locale] ?? contentByLocale[defaultLocale];
+}
+
+function readInitialPostFromDocument(locale: Locale, id: string): PostData | undefined {
   if (typeof window === 'undefined') {
     return undefined;
   }
 
+  const localeIndex = getLocaleIndex(locale);
+
   const existing = window.__GARDEN_INITIAL_POST__;
-  if (existing?.id === id) {
-    fullPostById.set(existing.id, existing);
+  if (existing?.locale === locale && existing.id === id) {
+    localeIndex.fullPostById.set(existing.id, existing);
     return existing;
   }
 
@@ -136,9 +240,11 @@ function readInitialPostFromDocument(id: string): PostData | undefined {
     try {
       const post = JSON.parse(script.textContent) as PostData;
       window.__GARDEN_INITIAL_POST__ = post;
-      fullPostById.set(post.id, post);
+      if (post.locale === locale) {
+        localeIndex.fullPostById.set(post.id, post);
+      }
 
-      if (post.id === id) {
+      if (post.locale === locale && post.id === id) {
         return post;
       }
     } catch (error) {
@@ -149,70 +255,23 @@ function readInitialPostFromDocument(id: string): PostData | undefined {
   return undefined;
 }
 
-for (const post of allPosts) {
-  postById.set(post.id, post);
-  allPostIds.push({
-    params: {
-      slug: post.id,
-    },
-    monthFolder: post.monthFolder,
-  });
-}
-
-publicPosts.forEach((post, index) => {
-  publicPostIndexById.set(post.id, index);
-
-  for (const tag of post.tags) {
-    const tagPosts = postsByTag.get(tag);
-    if (tagPosts) {
-      tagPosts.push(post);
-    } else {
-      postsByTag.set(tag, [post]);
-    }
-  }
-
-  const monthPosts = postsByMonth.get(post.monthFolder);
-  if (monthPosts) {
-    monthPosts.push(post);
-  } else {
-    postsByMonth.set(post.monthFolder, [post]);
-  }
-});
-
-const allTags = calculateTagSizes(
-  Array.from(postsByTag, ([name, posts]) => ({
-    name,
-    count: posts.length,
-  })).sort((a, b) => a.name.localeCompare(b.name)),
-);
-
-const allMonths = Array.from(postsByMonth, ([id, posts]) => {
-  const year = id.substring(0, 4);
-  const month = id.substring(4, 6);
-
-  return {
-    id,
-    displayName: `${year}年${month}月`,
-    count: posts.length,
-  };
-}).sort((a, b) => (a.id < b.id ? 1 : -1));
-
-function getSourcePosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
+function getSourcePosts(locale: Locale, options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
   const { includeDrafts = false, includeHidden = false } = options;
+  const localeIndex = getLocaleIndex(locale);
 
   if (includeDrafts && includeHidden) {
-    return allPosts;
+    return localeIndex.allPosts;
   }
 
   if (includeDrafts) {
-    return publicPostsWithDrafts;
+    return localeIndex.publicPostsWithDrafts;
   }
 
   if (includeHidden) {
-    return nonDraftPosts;
+    return localeIndex.nonDraftPosts;
   }
 
-  return publicPosts;
+  return localeIndex.publicPosts;
 }
 
 function paginateItems<T>(items: T[], page: number = 1, pageSize: number = 10): {
@@ -238,23 +297,23 @@ function paginateItems<T>(items: T[], page: number = 1, pageSize: number = 10): 
 }
 
 // 获取所有博客文章数据（默认不包含草稿和隐藏文章）
-export function getAllPosts(options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
-  return [...getSourcePosts(options)];
+export function getAllPosts(locale: Locale = defaultLocale, options: { includeDrafts?: boolean; includeHidden?: boolean } = {}): PostData[] {
+  return [...getSourcePosts(locale, options)];
 }
 
 // 获取所有标签及其计数
-export function getAllTags(): TagCount[] {
-  return allTags.map((tag) => ({ ...tag }));
+export function getAllTags(locale: Locale = defaultLocale): TagCount[] {
+  return getLocaleIndex(locale).allTags.map((tag) => ({ ...tag }));
 }
 
 // 根据标签名获取相关文章
-export function getPostsByTag(tagName: string): PostData[] {
-  return [...(postsByTag.get(tagName) ?? [])];
+export function getPostsByTag(locale: Locale, tagName: string): PostData[] {
+  return [...(getLocaleIndex(locale).postsByTag.get(tagName) ?? [])];
 }
 
 // 获取所有可能的文章 ID 和它们所在的月份文件夹
-export function getAllPostIds(): PostPathData[] {
-  return allPostIds.map((postId) => ({
+export function getAllPostIds(locale: Locale = defaultLocale): PostPathData[] {
+  return getLocaleIndex(locale).allPostIds.map((postId) => ({
     params: {
       slug: postId.params.slug,
     },
@@ -263,11 +322,12 @@ export function getAllPostIds(): PostPathData[] {
 }
 
 // 根据 ID 和月份文件夹获取文章数据
-export function getPostById(id: string): PostData & PostNavigation {
-  const cachedFullPost = fullPostById.get(id);
+export function getPostById(locale: Locale, id: string): PostData & PostNavigation {
+  const localeIndex = getLocaleIndex(locale);
+  const cachedFullPost = localeIndex.fullPostById.get(id);
   const currentPost = postHasCompiledArticle(cachedFullPost)
     ? cachedFullPost
-    : (readInitialPostFromDocument(id) ?? cachedFullPost ?? postById.get(id));
+    : (readInitialPostFromDocument(locale, id) ?? cachedFullPost ?? localeIndex.postById.get(id));
 
   if (!currentPost) {
     throw new Error(`找不到ID为 "${id}" 的文章`);
@@ -277,99 +337,83 @@ export function getPostById(id: string): PostData & PostNavigation {
     throw new Error('草稿文章不允许访问');
   }
 
-  let prevPost: { id: string; title: string } | undefined;
-  let nextPost: { id: string; title: string } | undefined;
-
-  if (!currentPost.isHidden) {
-    const currentIndex = publicPostIndexById.get(id);
-
-    if (currentIndex !== undefined) {
-      const previous = publicPosts[currentIndex + 1];
-      const next = publicPosts[currentIndex - 1];
-
-      prevPost = previous ? { id: previous.id, title: previous.title } : undefined;
-      nextPost = next ? { id: next.id, title: next.title } : undefined;
-    }
-  }
-
-  return {
-    ...currentPost,
-    prevPost,
-    nextPost,
-  };
+  return currentPost;
 }
 
-export async function loadPostById(id: string): Promise<PostData & PostNavigation> {
-  if (!postHasCompiledArticle(fullPostById.get(id) ?? readInitialPostFromDocument(id))) {
-    const loader = generatedPostLoaderById[id];
+export async function loadPostById(locale: Locale, id: string): Promise<PostData & PostNavigation> {
+  const localeIndex = getLocaleIndex(locale);
+  if (!postHasCompiledArticle(localeIndex.fullPostById.get(id) ?? readInitialPostFromDocument(locale, id))) {
+    const loader = localeIndex.generatedPostLoaderById[id];
 
     if (!loader) {
       throw new Error(`找不到ID为 "${id}" 的文章`);
     }
 
     const { post } = await loader();
-    fullPostById.set(id, post);
+    localeIndex.fullPostById.set(id, post);
   }
 
-  return getPostById(id);
+  return getPostById(locale, id);
 }
 
-export function prefetchPostById(id: string): Promise<void> {
-  if (postHasCompiledArticle(fullPostById.get(id) ?? readInitialPostFromDocument(id))) {
+export function prefetchPostById(locale: Locale, id: string): Promise<void> {
+  const localeIndex = getLocaleIndex(locale);
+  if (postHasCompiledArticle(localeIndex.fullPostById.get(id) ?? readInitialPostFromDocument(locale, id))) {
     return Promise.resolve();
   }
 
-  const existing = postPrefetches.get(id);
+  const existing = localeIndex.postPrefetches.get(id);
   if (existing) {
     return existing;
   }
 
-  const prefetch = loadPostById(id)
+  const prefetch = loadPostById(locale, id)
     .then(() => undefined)
     .catch((error) => {
-      postPrefetches.delete(id);
+      localeIndex.postPrefetches.delete(id);
       throw error;
     });
 
-  postPrefetches.set(id, prefetch);
+  localeIndex.postPrefetches.set(id, prefetch);
   return prefetch;
 }
 
-export function getLoadedPostById(id: string): (PostData & PostNavigation) | undefined {
-  if (!postHasCompiledArticle(fullPostById.get(id) ?? readInitialPostFromDocument(id))) {
+export function getLoadedPostById(locale: Locale, id: string): (PostData & PostNavigation) | undefined {
+  const localeIndex = getLocaleIndex(locale);
+  if (!postHasCompiledArticle(localeIndex.fullPostById.get(id) ?? readInitialPostFromDocument(locale, id))) {
     return undefined;
   }
 
-  return getPostById(id);
+  return getPostById(locale, id);
 }
 
 // 获取所有月份及其文章数量
-export function getAllMonths(): MonthData[] {
-  return allMonths.map((month) => ({ ...month }));
+export function getAllMonths(locale: Locale = defaultLocale): MonthData[] {
+  return getLocaleIndex(locale).allMonths.map((month) => ({ ...month }));
 }
 
 // 根据月份获取相关文章
-export function getPostsByMonth(month: string): PostData[] {
-  return [...(postsByMonth.get(month) ?? [])];
+export function getPostsByMonth(locale: Locale, month: string): PostData[] {
+  return [...(getLocaleIndex(locale).postsByMonth.get(month) ?? [])];
 }
 
 // 获取分页的文章列表
-export function getAllPostsWithPagination(page: number = 1, pageSize: number = 10): PaginatedPosts {
-  return paginateItems(publicPosts, page, pageSize);
+export function getAllPostsWithPagination(locale: Locale = defaultLocale, page: number = 1, pageSize: number = 10): PaginatedPosts {
+  return paginateItems(getLocaleIndex(locale).publicPosts, page, pageSize);
 }
 
 // 根据标签获取分页的文章列表
-export function getPostsByTagWithPagination(tagName: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
-  return paginateItems(postsByTag.get(tagName) ?? [], page, pageSize);
+export function getPostsByTagWithPagination(locale: Locale, tagName: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
+  return paginateItems(getLocaleIndex(locale).postsByTag.get(tagName) ?? [], page, pageSize);
 }
 
 // 根据月份获取分页的文章列表
-export function getPostsByMonthWithPagination(month: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
-  return paginateItems(postsByMonth.get(month) ?? [], page, pageSize);
+export function getPostsByMonthWithPagination(locale: Locale, month: string, page: number = 1, pageSize: number = 10): PaginatedPosts {
+  return paginateItems(getLocaleIndex(locale).postsByMonth.get(month) ?? [], page, pageSize);
 }
 
 // 搜索文章
-export function searchPosts(keyword: string): SearchResultItem[] {
+export function searchPosts(keyword: string, locale: Locale = defaultLocale): SearchResultItem[] {
   if (!keyword.trim()) {
     return [];
   }
@@ -378,7 +422,7 @@ export function searchPosts(keyword: string): SearchResultItem[] {
   const normalizedKeyword = keyword.toLowerCase();
   
   // 计算每篇文章的相关度得分
-  const scoredPosts = publicPosts.map(post => {
+  const scoredPosts = getLocaleIndex(locale).publicPosts.map(post => {
     let score = 0;
     const matches = {
       title: false,

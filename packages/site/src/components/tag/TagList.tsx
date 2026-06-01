@@ -1,12 +1,14 @@
 import Link from '@/components/Link';
 import { TagCount } from '@/lib/api';
+import { type Locale, defaultLocale, hrefFor } from '@/lib/i18n';
 import { getTagPath } from '@/lib/tag-url';
 
 interface TagListProps {
   tags: TagCount[];
+  locale?: Locale;
 }
 
-export default function TagList({ tags }: TagListProps) {
+export default function TagList({ tags, locale = defaultLocale }: TagListProps) {
   // 按文章数量降序排序标签
   const sortedTags = [...tags].sort((a, b) => b.count - a.count);
   
@@ -19,7 +21,7 @@ export default function TagList({ tags }: TagListProps) {
       {sortedTags.map((tag) => (
         <Link
           key={tag.name}
-          href={getTagPath(tag.name)}
+          href={hrefFor(locale, getTagPath(tag.name))}
           className="relative group"
         >
           {/* 底层卡片 */}

@@ -1,5 +1,6 @@
 import Link from "@/components/Link"
 import { TagIcon } from 'lucide-react'
+import { type Locale, defaultLocale, hrefFor } from '@/lib/i18n'
 import { getTagPath } from '@/lib/tag-url'
 
 interface TagCount {
@@ -11,9 +12,10 @@ interface TagCount {
 interface TagCloudProps {
   tags: TagCount[]
   limit?: number
+  locale?: Locale
 }
 
-export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
+export default function TagCloud({ tags, limit = 20, locale = defaultLocale }: TagCloudProps) {
   if (tags.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center">
@@ -59,7 +61,7 @@ export default function TagCloud({ tags, limit = 20 }: TagCloudProps) {
     <div className="w-full">
       <div className="flex flex-wrap gap-2 justify-center items-center">
         {shuffledTags.map((tag, index) => (
-          <Link key={tag.name} href={getTagPath(tag.name)} className="group select-none">
+          <Link key={tag.name} href={hrefFor(locale, getTagPath(tag.name))} className="group select-none">
             <div
               className={`tag-color-${index % 8} px-2.5 py-1.5 transition-all duration-200`}
               style={{

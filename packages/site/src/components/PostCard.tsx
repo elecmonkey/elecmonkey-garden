@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import Link from '@/components/Link';
 import { prefetchArticleBySlug } from '@/lib/client-prefetch';
+import { type Locale, postHref, hrefFor } from '@/lib/i18n';
 import { getTagPath } from '@/lib/tag-url';
 
 export interface PostCardProps {
   post: {
+    locale?: Locale;
     id: string;
     title: string;
     date: string;
@@ -15,10 +17,11 @@ export interface PostCardProps {
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  const locale = post.locale ?? 'zh';
   const articleRef = useRef<HTMLElement>(null);
 
   const prefetchPostOnIntent = () => {
-    prefetchArticleBySlug(post.id, 'intent');
+    prefetchArticleBySlug(locale, post.id, 'intent');
   };
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export default function PostCard({ post }: PostCardProps) {
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
           observer.disconnect();
-          prefetchArticleBySlug(post.id, 'viewport');
+          prefetchArticleBySlug(locale, post.id, 'viewport');
         }
       },
       { rootMargin: '200px 0px' },
@@ -42,7 +45,7 @@ export default function PostCard({ post }: PostCardProps) {
     return () => {
       observer.disconnect();
     };
-  }, [post.id]);
+  }, [locale, post.id]);
 
   return (
     <article
@@ -57,7 +60,7 @@ export default function PostCard({ post }: PostCardProps) {
       
       {/* 上层卡片 - 白色/主题背景 */}
       <div className="relative p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
-      <Link href={`/blog/${post.id}`} prefetch>
+      <Link href={postHref(locale, post.id)} prefetch>
         <h3 className="text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors">{post.title}</h3>
       </Link>
       
@@ -88,7 +91,7 @@ export default function PostCard({ post }: PostCardProps) {
         {post.tags.map((tag: string) => (
           <Link
             key={tag}
-            href={getTagPath(tag)}
+            href={hrefFor(locale, getTagPath(tag))}
             className="bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary px-2.5 py-1 rounded text-xs transition-all"
             target="_blank"
             rel="noopener noreferrer"

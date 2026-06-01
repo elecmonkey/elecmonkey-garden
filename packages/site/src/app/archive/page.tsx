@@ -1,5 +1,6 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getAllMonths } from '@/lib/api';
+import { type Locale, archiveHref } from '@/lib/i18n';
 import PageContainer from '@/components/layout/PageContainer';
 import Link from '@/components/Link';
 
@@ -8,14 +9,14 @@ export const metadata: SiteMetadata = {
   description: '按月份浏览所有博客文章',
 };
 
-export default function ArchiveIndexPage() {
-  const months = getAllMonths();
-  
+export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale }) {
+  const months = getAllMonths(locale);
+
   return (
     <PageContainer>
       <h1 className="text-3xl font-bold mb-2">文章归档</h1>
       <p className="text-muted-foreground mb-8">按时间排序</p>
-      
+
       {months.length === 0 ? (
         <div className="text-center py-10">
           <p className="text-muted-foreground">暂无文章</p>
@@ -25,12 +26,12 @@ export default function ArchiveIndexPage() {
           {months.map((month) => (
             <Link
               key={month.id}
-              href={`/archive/${month.id}`}
+              href={archiveHref(locale, month.id)}
               className="relative group"
             >
               {/* 底层卡片 */}
               <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
-              
+
               {/* 上层卡片 */}
               <div className="relative flex items-center justify-between p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
                 <div className="flex items-center">
@@ -47,10 +48,10 @@ export default function ArchiveIndexPage() {
           ))}
         </div>
       )}
-      
+
       <div className="mt-8 text-center text-muted-foreground">
         <p>点击月份查看相关文章</p>
       </div>
     </PageContainer>
   );
-} 
+}

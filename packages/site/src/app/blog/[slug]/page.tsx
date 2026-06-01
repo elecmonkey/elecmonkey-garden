@@ -2,20 +2,22 @@ import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
 import { getLoadedPostById, getPostById, loadPostById, type PostData } from '@/lib/api';
+import { type Locale, hrefFor, postHref } from '@/lib/i18n';
 import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 
 type Props = {
+  locale?: Locale;
   params: { slug: string };
 };
 
 // 动态生成元数据
-export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
+export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
   const { slug } = params;
   try {
-    const post = getPostById(slug);
-    
+    const post = getPostById(locale, slug);
+
     return {
       title: `${post.title} - Elecmonkey的小花园`,
       description: post.description,
@@ -30,11 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<SiteMetadata>
 }
 
 // 异步组件
-export default function BlogPost({ params }: Props) {
+export default function BlogPost({ locale = 'zh', params }: Props) {
   const { slug } = params;
   const [post, setPost] = useState<(PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } })>(() => {
     try {
-      return getLoadedPostById(slug) ?? getPostById(slug);
+      return getLoadedPostById(locale, slug) ?? getPostById(locale, slug);
     } catch (error) {
       console.error('博客文章获取失败:', error);
       throw new Response('Not Found', { status: 404 });
@@ -49,7 +51,7 @@ export default function BlogPost({ params }: Props) {
     );
 
     try {
-      const cachedPost = getLoadedPostById(slug) ?? getPostById(slug);
+      const cachedPost = getLoadedPostById(locale, slug) ?? getPostById(locale, slug);
 
       if (isCompiledPost(cachedPost)) {
         setPost((current) => (isCompiledPost(current) && current.id === cachedPost.id ? current : cachedPost));
@@ -67,7 +69,7 @@ export default function BlogPost({ params }: Props) {
       };
     }
 
-    loadPostById(slug)
+    loadPostById(locale, slug)
       .then((loadedPost) => {
         if (!canceled) {
           setPost(loadedPost);
@@ -84,7 +86,7 @@ export default function BlogPost({ params }: Props) {
     return () => {
       canceled = true;
     };
-  }, [slug]);
+  }, [locale, slug]);
 
   if (loadError) {
     throw new Response('Not Found', { status: 404 });
@@ -93,7 +95,7 @@ export default function BlogPost({ params }: Props) {
   const articleNode = post.html
     ? <StaticArticleContent postId={post.id} html={post.html} islands={post.islands} />
     : <p className="text-muted-foreground">正在加载文章内容...</p>;
-    
+
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -132,7 +134,7 @@ export default function BlogPost({ params }: Props) {
               {post.tags.map((tag: string) => (
                 <Link
                   key={tag}
-                  href={getTagPath(tag)}
+                  href={hrefFor(locale, getTagPath(tag))}
                   className="bg-muted hover:bg-muted/80 text-muted-foreground px-2 py-1 rounded-md text-xs transition-colors no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -142,7 +144,7 @@ export default function BlogPost({ params }: Props) {
               ))}
             </div>
           </header>
-          
+
           {articleNode}
 
           {/* 底部导航 */}
@@ -152,8 +154,8 @@ export default function BlogPost({ params }: Props) {
               {/* 下一篇文章（更新的文章） */}
               <div className="w-1/2 pr-4 text-left">
                 {post.nextPost ? (
-                  <Link 
-                    href={`/blog/${post.nextPost.id}`} 
+                  <Link
+                    href={postHref(locale, post.nextPost.id)}
                     className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -168,12 +170,12 @@ export default function BlogPost({ params }: Props) {
                   <div></div>
                 )}
               </div>
-              
+
               {/* 上一篇文章（更旧的文章） */}
               <div className="w-1/2 pl-4">
                 {post.prevPost ? (
-                  <Link 
-                    href={`/blog/${post.prevPost.id}`} 
+                  <Link
+                    href={postHref(locale, post.prevPost.id)}
                     className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
                     <span className="line-clamp-1 text-left min-w-0 ml-auto">
@@ -201,9 +203,9 @@ export default function BlogPost({ params }: Props) {
           </div>
         </aside>
       </div>
-      
+
       {/* 移动端浮动按钮和侧栏 */}
       <ClientTableOfContents no_toc={post.no_toc === true} desktop={false} headings={post.toc} />
     </div>
   );
-} 
+}

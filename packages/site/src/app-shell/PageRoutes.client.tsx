@@ -1,5 +1,6 @@
 import { lazy, Suspense, type ComponentProps, type ComponentType, type ReactNode } from 'react';
 import { useParams } from 'react-router';
+import { type Locale, dictionaries } from '@/lib/i18n';
 
 type RouteModule<TComponent extends ComponentType<any>> = {
   default: TComponent;
@@ -76,72 +77,72 @@ export const clientRouteLoaders = {
   notFound: NotFoundPage.preload,
 };
 
-function PageLoader() {
+function PageLoader({ locale }: { locale: Locale }) {
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 text-muted-foreground">
-      正在加载页面...
+      {dictionaries[locale].loading}
     </div>
   );
 }
 
-function withSuspense(node: ReactNode) {
-  return <Suspense fallback={<PageLoader />}>{node}</Suspense>;
+function withSuspense(locale: Locale, node: ReactNode) {
+  return <Suspense fallback={<PageLoader locale={locale} />}>{node}</Suspense>;
 }
 
-export function HomeRoute() {
-  return withSuspense(<HomePage />);
+export function HomeRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <HomePage locale={locale} />);
 }
 
-export function AboutRoute() {
-  return withSuspense(<AboutPage />);
+export function AboutRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <AboutPage locale={locale} />);
 }
 
-export function BlogIndexRoute() {
-  return withSuspense(<BlogPage />);
+export function BlogIndexRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <BlogPage locale={locale} />);
 }
 
-export function TagsIndexRoute() {
-  return withSuspense(<TagsIndexPage />);
+export function TagsIndexRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <TagsIndexPage locale={locale} />);
 }
 
-export function ArchiveIndexRoute() {
-  return withSuspense(<ArchiveIndexPage />);
+export function ArchiveIndexRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <ArchiveIndexPage locale={locale} />);
 }
 
-export function NotFoundRoute() {
-  return withSuspense(<NotFoundPage />);
+export function NotFoundRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <NotFoundPage locale={locale} />);
 }
 
-export function BlogPaginationRoute() {
+export function BlogPaginationRoute({ locale }: { locale: Locale }) {
   const { page = '1' } = useParams();
-  return withSuspense(<BlogPaginationPage params={{ page }} />);
+  return withSuspense(locale, <BlogPaginationPage locale={locale} params={{ page }} />);
 }
 
-export function BlogPostRoute() {
+export function BlogPostRoute({ locale }: { locale: Locale }) {
   const { slug = '' } = useParams();
-  return withSuspense(<BlogPostPage params={{ slug }} />);
+  return withSuspense(locale, <BlogPostPage locale={locale} params={{ slug }} />);
 }
 
-export function TagRoute() {
+export function TagRoute({ locale }: { locale: Locale }) {
   const { tag = '' } = useParams();
-  return withSuspense(<TagPage params={{ tag }} />);
+  return withSuspense(locale, <TagPage locale={locale} params={{ tag }} />);
 }
 
-export function TagPaginationRoute() {
+export function TagPaginationRoute({ locale }: { locale: Locale }) {
   const { tag = '', page = '1' } = useParams();
-  return withSuspense(<TagPaginationPage params={{ tag, page }} />);
+  return withSuspense(locale, <TagPaginationPage locale={locale} params={{ tag, page }} />);
 }
 
-export function MonthArchiveRoute() {
+export function MonthArchiveRoute({ locale }: { locale: Locale }) {
   const { month = '' } = useParams();
-  return withSuspense(<MonthArchivePage params={{ month }} />);
+  return withSuspense(locale, <MonthArchivePage locale={locale} params={{ month }} />);
 }
 
-export function MonthArchivePaginationRoute() {
+export function MonthArchivePaginationRoute({ locale }: { locale: Locale }) {
   const { month = '', page = '1' } = useParams();
-  return withSuspense(<MonthArchivePaginationPage params={{ month, page }} />);
+  return withSuspense(locale, <MonthArchivePaginationPage locale={locale} params={{ month, page }} />);
 }
 
-export function SearchRoute() {
-  return withSuspense(<SearchPage />);
+export function SearchRoute({ locale }: { locale: Locale }) {
+  return withSuspense(locale, <SearchPage locale={locale} />);
 }

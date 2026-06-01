@@ -1,8 +1,10 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getPostsByMonthWithPagination } from '@/lib/api';
+import type { Locale } from '@/lib/i18n';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
 
 type Props = {
+  locale?: Locale;
   params: { month: string; page: string };
 };
 
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<SiteMetadata>
   };
 }
 
-export default function MonthArchivePaginationPage({ params }: Props) {
+export default function MonthArchivePaginationPage({ locale = 'zh', params }: Props) {
   const { month, page } = params;
   const currentPage = parseInt(page);
   
@@ -26,7 +28,7 @@ export default function MonthArchivePaginationPage({ params }: Props) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPosts, totalPages } = getPostsByMonthWithPagination(month, currentPage);
+  const { posts, totalPosts, totalPages } = getPostsByMonthWithPagination(locale, month, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
@@ -35,6 +37,7 @@ export default function MonthArchivePaginationPage({ params }: Props) {
   return (
     <MonthArchiveContent 
       month={month}
+      locale={locale}
       currentPage={currentPage}
       posts={posts}
       totalPosts={totalPosts}

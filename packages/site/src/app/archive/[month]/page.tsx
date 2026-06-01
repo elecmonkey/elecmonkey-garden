@@ -1,8 +1,10 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getPostsByMonthWithPagination } from '@/lib/api';
+import type { Locale } from '@/lib/i18n';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
 
 type Props = {
+  locale?: Locale;
   params: { month: string };
 };
 
@@ -21,12 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<SiteMetadata>
   };
 }
 
-export default function MonthArchivePage({ params }: Props) {
+export default function MonthArchivePage({ locale = 'zh', params }: Props) {
   const { month } = params;
   const currentPage = 1;
   
   // 获取分页的文章列表
-  const { posts, totalPosts, totalPages } = getPostsByMonthWithPagination(month, currentPage);
+  const { posts, totalPosts, totalPages } = getPostsByMonthWithPagination(locale, month, currentPage);
   
   // 如果页码超出范围且总页数大于0，返回404
   if (currentPage > totalPages && totalPages > 0) {
@@ -36,6 +38,7 @@ export default function MonthArchivePage({ params }: Props) {
   return (
     <MonthArchiveContent 
       month={month}
+      locale={locale}
       currentPage={currentPage}
       posts={posts}
       totalPosts={totalPosts}

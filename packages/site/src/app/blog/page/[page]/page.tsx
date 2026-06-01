@@ -1,8 +1,10 @@
 import { getAllPostsWithPagination } from '@/lib/api';
 import BlogIndexContent from '@/components/blog/BlogIndexContent';
+import type { Locale } from '@/lib/i18n';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 
 interface Props {
+  locale?: Locale;
   params: { page: string };
 }
 
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<SiteMetadata>
   };
 }
 
-export default function BlogPaginationPage({ params }: Props) {
+export default function BlogPaginationPage({ locale = 'zh', params }: Props) {
   const { page } = params;
   const currentPage = parseInt(page);
   
@@ -23,7 +25,7 @@ export default function BlogPaginationPage({ params }: Props) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPages } = getAllPostsWithPagination(currentPage);
+  const { posts, totalPages } = getAllPostsWithPagination(locale, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
@@ -32,6 +34,7 @@ export default function BlogPaginationPage({ params }: Props) {
   return (
     <BlogIndexContent 
       currentPage={currentPage}
+      locale={locale}
       posts={posts}
       totalPages={totalPages}
     />

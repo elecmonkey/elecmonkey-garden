@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
 import { getStaticPathnames } from '../app-shell/static-paths';
 import { getAllMonths, getAllPostIds, getAllTags, getPostById } from '../lib/api';
+import { hrefFor, locales, stripLocalePrefix } from '../lib/i18n';
 import { getTagPath } from '../lib/tag-url';
 import { rootMarker, writeStaticPage } from './render-page';
 
@@ -102,7 +103,11 @@ async function runRenderWorker(): Promise<void> {
 async function copyStaticAssets(distDir: string): Promise<void> {
   const searchDir = path.join(distDir, 'static', 'search');
   await mkdir(searchDir, { recursive: true });
-  await copyFile(path.join('src', 'generated', 'search-index.json'), path.join(searchDir, 'index.json'));
+  await Promise.all(locales.map(async (locale) => {
+    const localeSearchDir = path.join(searchDir, locale);
+    await mkdir(localeSearchDir, { recursive: true });
+    await copyFile(path.join('src', 'generated', `search-index.${locale}.json`), path.join(localeSearchDir, 'index.json'));
+  }));
 }
 
 async function writeRobotsTxt(distDir: string): Promise<void> {
@@ -110,6 +115,7 @@ async function writeRobotsTxt(distDir: string): Promise<void> {
     'User-agent: *',
     'Allow: /',
     'Disallow: /search',
+    'Disallow: /en/search',
     'Disallow: /api/',
     '',
     'Sitemap: https://www.elecmonkey.com/sitemap.xml',
@@ -122,8 +128,12 @@ async function writeRobotsTxt(distDir: string): Promise<void> {
 type SitemapEntry = {
   url: string;
   lastModified: Date;
-  changeFrequency: string;
-  priority: number;
+  pathname: string;
+};
+
+type SitemapAlternate = {
+  hrefLang: string;
+  href: string;
 };
 
 function escapeXml(value: string): string {
@@ -141,55 +151,76 @@ function escapeXml(value: string): string {
 async function writeSitemapXml(distDir: string): Promise<void> {
   const baseUrl = 'https://www.elecmonkey.com';
   const now = new Date();
+  const availablePathnames = new Set((await getStaticPathnames())
+    .filter((pathname) => !['/search', '/en/search'].includes(pathname)));
 
-  const postEntries = getAllPostIds()
+  const toAbsoluteUrl = (pathname: string) => `${baseUrl}${pathname === '/' ? '' : pathname}`;
+  const getAlternates = (pathname: string): SitemapAlternate[] => {
+    const stripped = stripLocalePrefix(pathname);
+
+    return locales
+      .map((locale) => hrefFor(locale, stripped))
+      .filter((alternatePathname) => availablePathnames.has(alternatePathname))
+      .map((alternatePathname) => ({
+        hrefLang: alternatePathname === stripped ? 'zh-CN' : 'en',
+        href: toAbsoluteUrl(alternatePathname),
+      }));
+  };
+
+  const postEntries = locales.flatMap((locale) => getAllPostIds(locale)
     .map((postId): SitemapEntry | null => {
-      const post = getPostById(postId.params.slug);
+      const post = getPostById(locale, postId.params.slug);
 
       if (post.isHidden) {
         return null;
       }
 
+      const pathname = hrefFor(locale, `/blog/${postId.params.slug}`);
+
       return {
-        url: `${baseUrl}/blog/${postId.params.slug}`,
+        url: toAbsoluteUrl(pathname),
+        pathname,
         lastModified: post.date ? new Date(post.date) : now,
-        changeFrequency: 'weekly',
-        priority: 0.7,
       };
     })
-    .filter((entry): entry is SitemapEntry => entry !== null);
+    .filter((entry): entry is SitemapEntry => entry !== null));
 
-  const tagEntries = getAllTags().map((tag): SitemapEntry => ({
-    url: `${baseUrl}${getTagPath(tag.name)}`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.5,
+  const tagEntries = locales.flatMap((locale) => getAllTags(locale).map((tag): SitemapEntry => {
+    const pathname = hrefFor(locale, getTagPath(tag.name));
+    return {
+      url: toAbsoluteUrl(pathname),
+      pathname,
+      lastModified: now,
+    };
   }));
 
-  const monthEntries = getAllMonths().map((month): SitemapEntry => ({
-    url: `${baseUrl}/archive/${month.id}`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.5,
+  const monthEntries = locales.flatMap((locale) => getAllMonths(locale).map((month): SitemapEntry => {
+    const pathname = hrefFor(locale, `/archive/${month.id}`);
+    return {
+      url: toAbsoluteUrl(pathname),
+      pathname,
+      lastModified: now,
+    };
   }));
 
-  const staticEntries: SitemapEntry[] = [
-    { url: baseUrl, lastModified: now, changeFrequency: 'daily', priority: 1 },
-    { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/tags`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
-    { url: `${baseUrl}/archive`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
-  ];
+  const staticEntries: SitemapEntry[] = locales.flatMap((locale) => ['/', '/about', '/blog', '/tags', '/archive'].map((path): SitemapEntry => {
+    const pathname = hrefFor(locale, path);
+    return {
+      url: toAbsoluteUrl(pathname),
+      pathname,
+      lastModified: now,
+    };
+  }));
 
   const entries = [...staticEntries, ...postEntries, ...tagEntries, ...monthEntries];
   const urls = entries.map((entry) => [
     '  <url>',
     `    <loc>${escapeXml(entry.url)}</loc>`,
+    ...getAlternates(entry.pathname).map((alternate) => `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.hrefLang)}" href="${escapeXml(alternate.href)}" />`),
     `    <lastmod>${entry.lastModified.toISOString()}</lastmod>`,
-    `    <changefreq>${entry.changeFrequency}</changefreq>`,
-    `    <priority>${entry.priority}</priority>`,
     '  </url>',
   ].join('\n')).join('\n');
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`;
 
   await writeFile(path.join(distDir, 'sitemap.xml'), sitemap);
 }

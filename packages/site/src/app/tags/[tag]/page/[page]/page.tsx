@@ -1,9 +1,11 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getPostsByTagWithPagination } from '@/lib/api';
+import type { Locale } from '@/lib/i18n';
 import TagContent from '@/components/tags/TagContent';
 import { decodeTagFromSlug } from '@/lib/tag-url';
 
 type Props = {
+  locale?: Locale;
   params: { tag: string; page: string };
 };
 
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<SiteMetadata>
   };
 }
 
-export default function TagPaginationPage({ params }: Props) {
+export default function TagPaginationPage({ locale = 'zh', params }: Props) {
   const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const currentPage = parseInt(page);
@@ -26,7 +28,7 @@ export default function TagPaginationPage({ params }: Props) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(decodedTag, currentPage);
+  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(locale, decodedTag, currentPage);
   
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
@@ -36,6 +38,7 @@ export default function TagPaginationPage({ params }: Props) {
     <TagContent 
       tag={decodedTag}
       tagSlug={tag}
+      locale={locale}
       currentPage={currentPage}
       posts={posts}
       totalPosts={totalPosts}

@@ -1,8 +1,10 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import PageContainer from '@/components/layout/PageContainer';
 import ClientSearchPage from '@/components/search/ClientSearchPage';
+import type { Locale } from '@/lib/i18n';
 
 interface SearchPageProps {
+  locale?: Locale;
   searchParams: {
     keyword?: string | string[];
     page?: string | string[];
@@ -19,10 +21,10 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   };
 }
 
-export default function SearchPage() {
+export default function SearchPage({ locale = 'zh' }: { locale?: Locale }) {
   return (
     <PageContainer>
-      <ClientSearchPage />
+      <ClientSearchPage locale={locale} />
     </PageContainer>
   );
 }
