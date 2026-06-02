@@ -7,15 +7,23 @@ import type { SiteMetadata } from '@/ssg/metadata-types';
 import Image from '@/lib/image-compat';
 import { useDocumentTitle } from '@/lib/use-document-title';
 
-export const metadata: SiteMetadata = {
-  title: "Elecmonkey的小花园 - 存在 为将心声响彻",
-  description: "Elecmonkey的小花园 - 专注前端技术的技术博客，探索JavaScript、TypeScript、React、Vue、Next.js等前端生态，分享前端工程化、性能优化、架构设计等实践经验。",
-  openGraph: {
-    title: "Elecmonkey的小花园 - 前端技术博客",
-    description: "专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践",
-    type: 'website',
-  },
-};
+export const metadata: SiteMetadata = getMetadata('zh');
+
+export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
+  const isEnglish = locale === 'en';
+
+  return {
+    title: isEnglish ? "Elecmonkey's Garden - Sounding the Heart's Voice" : "Elecmonkey的小花园 - 存在 为将心声响彻",
+    description: isEnglish
+      ? dictionaries.en.siteDescription
+      : "Elecmonkey的小花园 - 专注前端技术的技术博客，探索JavaScript、TypeScript、React、Vue、Next.js等前端生态，分享前端工程化、性能优化、架构设计等实践经验。",
+    openGraph: {
+      title: isEnglish ? "Elecmonkey's Garden - Frontend Engineering Blog" : "Elecmonkey的小花园 - 前端技术博客",
+      description: isEnglish ? dictionaries.en.siteDescription : "专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践",
+      type: 'website',
+    },
+  };
+}
 
 export default function Home({ locale = 'zh' }: { locale?: Locale }) {
   useDocumentTitle(locale === 'en' ? "Elecmonkey's Garden - Sounding the Heart's Voice" : 'Elecmonkey的小花园 - 存在 为将心声响彻');

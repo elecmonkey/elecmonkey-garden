@@ -10,6 +10,13 @@ export const metadata: SiteMetadata = {
   description: '浏览所有博客标签和主题',
 };
 
+export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
+  return {
+    title: `${locale === 'en' ? 'Tags' : '所有标签'} - ${dictionaries[locale].siteName}`,
+    description: locale === 'en' ? 'Browse all tags and topics' : '浏览所有博客标签和主题',
+  };
+}
+
 export default function TagsIndexPage({ locale = 'zh' }: { locale?: Locale }) {
   const tags = getAllTags(locale);
   const dictionary = dictionaries[locale];

@@ -10,6 +10,13 @@ export const metadata: SiteMetadata = {
   description: '按月份浏览所有博客文章',
 };
 
+export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
+  return {
+    title: `${locale === 'en' ? 'Archive' : '文章归档'} - ${dictionaries[locale].siteName}`,
+    description: locale === 'en' ? 'Browse posts by month' : '按月份浏览所有博客文章',
+  };
+}
+
 export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale }) {
   const months = getAllMonths(locale);
   const dictionary = dictionaries[locale];

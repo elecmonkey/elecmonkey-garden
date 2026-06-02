@@ -1,12 +1,12 @@
-import { metadata as homeMetadata } from '../app/page';
-import { metadata as aboutMetadata } from '../app/about/page';
-import { metadata as blogMetadata } from '../app/blog/page';
+import { getMetadata as getHomeMetadata } from '../app/page';
+import { getMetadata as getAboutMetadata } from '../app/about/page';
+import { getMetadata as getBlogMetadata } from '../app/blog/page';
 import { generateMetadata as generateBlogPageMetadata } from '../app/blog/page/[page]/page';
 import { generateMetadata as generateBlogPostMetadata } from '../app/blog/[slug]/page';
-import { metadata as tagsMetadata } from '../app/tags/page';
+import { getMetadata as getTagsMetadata } from '../app/tags/page';
 import { generateMetadata as generateTagMetadata } from '../app/tags/[tag]/page';
 import { generateMetadata as generateTagPageMetadata } from '../app/tags/[tag]/page/[page]/page';
-import { metadata as archiveMetadata } from '../app/archive/page';
+import { getMetadata as getArchiveMetadata } from '../app/archive/page';
 import { generateMetadata as generateMonthMetadata } from '../app/archive/[month]/page';
 import { generateMetadata as generateMonthPageMetadata } from '../app/archive/[month]/page/[page]/page';
 import { generateMetadata as generateSearchMetadata } from '../app/search/page';
@@ -215,23 +215,23 @@ async function getRouteMetadata(locale: Locale, pathname: string): Promise<SiteM
 
   switch (route) {
     case 'home':
-      return homeMetadata;
+      return getHomeMetadata(locale);
     case 'about':
-      return aboutMetadata;
+      return getAboutMetadata(locale);
     case 'blog':
-      return blogMetadata;
+      return getBlogMetadata(locale);
     case 'blog-page':
       return generateBlogPageMetadata({ locale, params: { page: params.page } });
     case 'blog-post':
       return generateBlogPostMetadata({ locale, params: { slug: params.slug } });
     case 'tags':
-      return tagsMetadata;
+      return getTagsMetadata(locale);
     case 'tag':
       return generateTagMetadata({ locale, params: { tag: params.tag } });
     case 'tag-page':
       return generateTagPageMetadata({ locale, params: { tag: params.tag, page: params.page } });
     case 'archive':
-      return archiveMetadata;
+      return getArchiveMetadata(locale);
     case 'month':
       return generateMonthMetadata({ locale, params: { month: params.month } });
     case 'month-page':

@@ -1,11 +1,17 @@
 import { getAllPostsWithPagination } from '@/lib/api';
 import BlogIndexContent from '@/components/blog/BlogIndexContent';
-import type { Locale } from '@/lib/i18n';
+import { dictionaries, type Locale } from '@/lib/i18n';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 
 export const metadata: SiteMetadata = {
   title: "所有文章 - Elecmonkey的小花园",
 };
+
+export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
+  return {
+    title: `${locale === 'en' ? 'Posts' : '所有文章'} - ${dictionaries[locale].siteName}`,
+  };
+}
 
 export default function BlogPage({ locale = 'zh' }: { locale?: Locale }) {
   const currentPage = 1;

@@ -1,12 +1,18 @@
 import Link from '@/components/Link';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import PageContainer from '@/components/layout/PageContainer';
-import { type Locale, hrefFor } from '@/lib/i18n';
+import { dictionaries, type Locale, hrefFor } from '@/lib/i18n';
 import { useDocumentTitle } from '@/lib/use-document-title';
 
 export const metadata: SiteMetadata = {
   title: "页面未找到 - Elecmonkey的小花园",
 };
+
+export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
+  return {
+    title: `${locale === 'en' ? 'Page Not Found' : '页面未找到'} - ${dictionaries[locale].siteName}`,
+  };
+}
 
 export default function NotFound({ locale = 'zh' }: { locale?: Locale }) {
   const isEnglish = locale === 'en';
