@@ -6,6 +6,7 @@ import { dictionaries, type Locale, hrefFor } from '@/lib/i18n';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import PageContainer from '@/components/layout/PageContainer';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 interface Props {
   tag: string;
@@ -20,6 +21,9 @@ interface Props {
 export default function TagContent({ tag, tagSlug, locale, currentPage, posts, totalPosts, totalPages }: Props) {
   const basePath = hrefFor(locale, `/tags/${tagSlug}`);
   const dictionary = dictionaries[locale];
+  useDocumentTitle(withSiteTitle(locale, currentPage > 1
+    ? locale === 'en' ? `#${tag} (Page ${currentPage})` : `#${tag} (第 ${currentPage} 页)`
+    : `#${tag}`));
 
   return (
     <PageContainer>

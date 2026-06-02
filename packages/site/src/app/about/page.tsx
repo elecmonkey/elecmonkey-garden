@@ -1,6 +1,7 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import TechWall from './components/TechWall';
 import type { Locale } from '@/lib/i18n';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 import PageContainer from '@/components/layout/PageContainer';
 
@@ -11,6 +12,7 @@ export const metadata: SiteMetadata = {
 
 export default function AboutPage({ locale = 'zh' }: { locale?: Locale }) {
   const isEnglish = locale === 'en';
+  useDocumentTitle(withSiteTitle(locale, isEnglish ? 'About' : '关于我'));
 
   return (
     <PageContainer>

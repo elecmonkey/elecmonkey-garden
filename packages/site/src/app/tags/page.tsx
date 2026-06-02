@@ -3,6 +3,7 @@ import { getAllTags } from '@/lib/api';
 import { dictionaries, type Locale } from '@/lib/i18n';
 import PageContainer from '@/components/layout/PageContainer';
 import TagList from '@/components/tag/TagList';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 export const metadata: SiteMetadata = {
   title: '所有标签 - Elecmonkey的小花园',
@@ -12,6 +13,7 @@ export const metadata: SiteMetadata = {
 export default function TagsIndexPage({ locale = 'zh' }: { locale?: Locale }) {
   const tags = getAllTags(locale);
   const dictionary = dictionaries[locale];
+  useDocumentTitle(withSiteTitle(locale, locale === 'en' ? 'Tags' : '所有标签'));
 
   return (
     <PageContainer>

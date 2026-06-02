@@ -6,6 +6,7 @@ import { dictionaries, type Locale, hrefFor } from '@/lib/i18n';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import PageContainer from '@/components/layout/PageContainer';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 interface Props {
   currentPage: number;
@@ -17,6 +18,12 @@ interface Props {
 export default function BlogIndexContent({ currentPage, locale, posts, totalPages }: Props) {
   const basePath = hrefFor(locale, '/blog');
   const dictionary = dictionaries[locale];
+  useDocumentTitle(withSiteTitle(
+    locale,
+    locale === 'en'
+      ? currentPage > 1 ? `Posts (Page ${currentPage})` : 'Posts'
+      : currentPage > 1 ? `所有文章 (第 ${currentPage} 页)` : '所有文章',
+  ));
 
   return (
     <PageContainer>

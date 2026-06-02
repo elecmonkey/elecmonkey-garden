@@ -6,6 +6,7 @@ import { type Locale, hrefFor, postHref } from '@/lib/i18n';
 import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 type Props = {
   locale?: Locale;
@@ -43,6 +44,7 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
     }
   });
   const [loadError, setLoadError] = useState<Error | null>(null);
+  useDocumentTitle(withSiteTitle(locale, post.title));
 
   useEffect(() => {
     let canceled = false;

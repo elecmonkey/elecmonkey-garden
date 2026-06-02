@@ -6,6 +6,7 @@ import { dictionaries, type Locale, archiveHref, hrefFor } from '@/lib/i18n';
 import { Suspense } from 'react';
 import ScrollToContent from '@/components/ScrollToContent';
 import PageContainer from '@/components/layout/PageContainer';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 interface Props {
   month: string;
@@ -25,6 +26,9 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
     : `${year}年${monthNum}月`;
   const basePath = archiveHref(locale, month);
   const dictionary = dictionaries[locale];
+  useDocumentTitle(withSiteTitle(locale, currentPage > 1
+    ? locale === 'en' ? `${month} Archive (Page ${currentPage})` : `${displayName}归档 (第 ${currentPage} 页)`
+    : locale === 'en' ? `${month} Archive` : `${displayName}归档`));
 
   return (
     <PageContainer>

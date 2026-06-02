@@ -5,6 +5,7 @@ import PostCard from '@/components/PostCard';
 import TagCloud from '@/components/tag/TagCloud';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import Image from '@/lib/image-compat';
+import { useDocumentTitle } from '@/lib/use-document-title';
 
 export const metadata: SiteMetadata = {
   title: "Elecmonkey的小花园 - 存在 为将心声响彻",
@@ -17,6 +18,8 @@ export const metadata: SiteMetadata = {
 };
 
 export default function Home({ locale = 'zh' }: { locale?: Locale }) {
+  useDocumentTitle(locale === 'en' ? "Elecmonkey's Garden - Sounding the Heart's Voice" : 'Elecmonkey的小花园 - 存在 为将心声响彻');
+
   const recentPosts = getHomeRecentPosts(locale);
   const tags = getHomeTags(locale);
   const { totalPosts, latestUpdateDate } = getHomeStats(locale);

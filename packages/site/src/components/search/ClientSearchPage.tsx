@@ -14,6 +14,7 @@ import {
   type SearchIndexPost,
   type SearchResult,
 } from '@/lib/search';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 const pageSize = 10;
 
@@ -25,6 +26,7 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const dictionary = dictionaries[locale];
+  useDocumentTitle(withSiteTitle(locale, locale === 'en' ? 'Search' : `搜索: ${keyword || '所有文章'}`));
 
   useEffect(() => {
     if (!keyword.trim()) {

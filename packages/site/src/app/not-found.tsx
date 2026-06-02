@@ -2,6 +2,7 @@ import Link from '@/components/Link';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import PageContainer from '@/components/layout/PageContainer';
 import { type Locale, hrefFor } from '@/lib/i18n';
+import { useDocumentTitle } from '@/lib/use-document-title';
 
 export const metadata: SiteMetadata = {
   title: "页面未找到 - Elecmonkey的小花园",
@@ -9,6 +10,7 @@ export const metadata: SiteMetadata = {
 
 export default function NotFound({ locale = 'zh' }: { locale?: Locale }) {
   const isEnglish = locale === 'en';
+  useDocumentTitle(isEnglish ? "Page Not Found - Elecmonkey's Garden" : '页面未找到 - Elecmonkey的小花园');
 
   return (
     <PageContainer>

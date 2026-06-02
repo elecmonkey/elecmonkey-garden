@@ -3,6 +3,7 @@ import { getAllMonths } from '@/lib/api';
 import { dictionaries, type Locale, archiveHref } from '@/lib/i18n';
 import PageContainer from '@/components/layout/PageContainer';
 import Link from '@/components/Link';
+import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 export const metadata: SiteMetadata = {
   title: '文章归档 - Elecmonkey的小花园',
@@ -12,6 +13,7 @@ export const metadata: SiteMetadata = {
 export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale }) {
   const months = getAllMonths(locale);
   const dictionary = dictionaries[locale];
+  useDocumentTitle(withSiteTitle(locale, locale === 'en' ? 'Archive' : '文章归档'));
 
   return (
     <PageContainer>
