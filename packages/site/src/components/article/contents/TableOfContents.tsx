@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { Locale } from '@/lib/i18n';
 
 interface Heading {
   id: string;
@@ -12,6 +13,7 @@ interface TableOfContentsProps {
   no_toc?: boolean;
   desktop?: boolean; // 新增：是否为桌面端固定侧栏
   headings?: Heading[];
+  locale?: Locale;
 }
 
 const EMPTY_HEADINGS: Heading[] = [];
@@ -39,11 +41,14 @@ function collectDomHeadings(): Heading[] {
     .filter((heading) => heading.id);
 }
 
-function TableOfContents({ no_toc = false, desktop = false, headings: headingsProp }: TableOfContentsProps) {
+function TableOfContents({ no_toc = false, desktop = false, headings: headingsProp, locale = 'zh' }: TableOfContentsProps) {
   const inputHeadings = headingsProp ?? EMPTY_HEADINGS;
   const [headings, setHeadings] = useState<Heading[]>(inputHeadings);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
+  const tocTitle = locale === 'en' ? 'Table of Contents' : '目录';
+  const emptyMessage = locale === 'en' ? '- No outline for this post -' : '- 本文章无大纲 -';
+  const closeLabel = locale === 'en' ? 'Close table of contents' : '关闭目录';
 
   useEffect(() => {
     const nextHeadings = inputHeadings.length > 0 ? inputHeadings : collectDomHeadings();
@@ -107,10 +112,10 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         {/* 上层卡片 - 白色/主题背景 */}
         <div className="relative bg-card border border-border overflow-hidden">
           <div className="px-5 py-4">
-            <h3 className="font-semibold text-lg">目录</h3>
+            <h3 className="font-semibold text-lg">{tocTitle}</h3>
           </div>
           <div className="px-5 py-8 text-center text-muted-foreground text-sm">
-            - 本文章无大纲 -
+            {emptyMessage}
           </div>
         </div>
       </div>
@@ -130,7 +135,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         {/* 上层卡片 - 白色/主题背景 */}
         <div className="relative bg-card border border-border overflow-hidden">
           <div className="px-5 py-4">
-            <h3 className="font-semibold text-lg">目录</h3>
+            <h3 className="font-semibold text-lg">{tocTitle}</h3>
           </div>
           <div className="px-5 py-4 max-h-[calc(100vh-200px)] overflow-y-auto">
             <ul className="space-y-2">
@@ -182,7 +187,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         className={`fixed right-6 bottom-20 z-50 lg:hidden w-12 h-12 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-all
           ${isOpen ? 'hidden' : 'flex items-center justify-center'}
         `}
-        aria-label="目录"
+        aria-label={tocTitle}
       >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -212,7 +217,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground"
-          aria-label="关闭目录"
+          aria-label={closeLabel}
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -231,7 +236,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         </button>
 
         <div className="p-4 overflow-y-auto h-full">
-          <h2 className="text-lg font-semibold mb-4 text-foreground">目录</h2>
+          <h2 className="text-lg font-semibold mb-4 text-foreground">{tocTitle}</h2>
           <ul className="space-y-2">
             {headings.map((heading) => (
               <li
