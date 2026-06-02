@@ -28,7 +28,7 @@ export async function generateMetadata({ locale = 'zh', params }: Props): Promis
     };
   } catch {
     return {
-      title: "页面未找到 - Elecmonkey的小花园",
+      title: `${locale === 'en' ? 'Page Not Found' : '页面未找到'} - ${siteName}`,
     };
   }
 }
