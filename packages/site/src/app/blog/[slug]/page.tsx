@@ -54,7 +54,11 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
       const cachedPost = getLoadedPostById(locale, slug) ?? getPostById(locale, slug);
 
       if (isCompiledPost(cachedPost)) {
-        setPost((current) => (isCompiledPost(current) && current.id === cachedPost.id ? current : cachedPost));
+        setPost((current) => (
+          isCompiledPost(current) && current.locale === cachedPost.locale && current.id === cachedPost.id
+            ? current
+            : cachedPost
+        ));
         setLoadError(null);
         return () => {
           canceled = true;
