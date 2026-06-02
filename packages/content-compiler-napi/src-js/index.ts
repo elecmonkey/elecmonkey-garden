@@ -271,7 +271,7 @@ function toSearchIndexPost(post: NormalizedPost) {
 
 function toPermalink(localeOptions: ResolvedLocaleContentOptions, slug: string): string {
   const prefix = localeOptions.urlPrefix.replace(/\/+$/g, '');
-  return `${prefix}/blog/${slug}` || `/blog/${slug}`;
+  return `${prefix}/blog/${slug}`;
 }
 
 function normalizePost(post: JsPost, localeOptions: ResolvedLocaleContentOptions): NormalizedPost {
