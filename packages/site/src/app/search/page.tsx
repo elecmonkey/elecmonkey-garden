@@ -1,7 +1,7 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import PageContainer from '@/components/layout/PageContainer';
 import ClientSearchPage from '@/components/search/ClientSearchPage';
-import type { Locale } from '@/lib/i18n';
+import { dictionaries, type Locale } from '@/lib/i18n';
 
 interface SearchPageProps {
   locale?: Locale;
@@ -12,12 +12,17 @@ interface SearchPageProps {
   };
 }
 
-export async function generateMetadata({ searchParams }: SearchPageProps): Promise<SiteMetadata> {
+export async function generateMetadata({ locale = 'zh', searchParams }: SearchPageProps): Promise<SiteMetadata> {
   const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : '';
+  const siteName = dictionaries[locale].siteName;
 
   return {
-    title: `搜索: ${keyword || '所有文章'} - Elecmonkey的小花园`,
-    description: `搜索关于 "${keyword}" 的文章结果`,
+    title: locale === 'en'
+      ? `Search: ${keyword || 'All Posts'} - ${siteName}`
+      : `搜索: ${keyword || '所有文章'} - ${siteName}`,
+    description: locale === 'en'
+      ? `Search results for "${keyword}"`
+      : `搜索关于 "${keyword}" 的文章结果`,
   };
 }
 

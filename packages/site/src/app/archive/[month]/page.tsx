@@ -1,6 +1,6 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getPostsByMonthWithPagination } from '@/lib/api';
-import type { Locale } from '@/lib/i18n';
+import { dictionaries, type Locale } from '@/lib/i18n';
 import MonthArchiveContent from '@/components/archive/MonthArchiveContent';
 
 type Props = {
@@ -9,17 +9,22 @@ type Props = {
 };
 
 // 为每个月份页生成元数据
-export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
+export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
   const { month } = params;
   
   // 转换月份格式: YYYYMM -> YYYY年MM月
   const year = month.substring(0, 4);
   const monthNum = month.substring(4, 6);
-  const displayName = `${year}年${monthNum}月`;
-  
+  const displayName = locale === 'en'
+    ? new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${year}-${monthNum}-01T00:00:00.000Z`))
+    : `${year}年${monthNum}月`;
+  const siteName = dictionaries[locale].siteName;
+   
   return {
-    title: `${displayName}归档 - Elecmonkey的小花园`,
-    description: `查看 ${displayName} 发布的所有文章`,
+    title: locale === 'en' ? `${displayName} Archive - ${siteName}` : `${displayName}归档 - ${siteName}`,
+    description: locale === 'en'
+      ? `Browse posts published in ${displayName}`
+      : `查看 ${displayName} 发布的所有文章`,
   };
 }
 

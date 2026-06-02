@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
 import { getLoadedPostById, getPostById, loadPostById, type PostData } from '@/lib/api';
-import { type Locale, hrefFor, postHref } from '@/lib/i18n';
+import { dictionaries, type Locale, hrefFor, postHref } from '@/lib/i18n';
 import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -16,11 +16,12 @@ type Props = {
 // 动态生成元数据
 export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
   const { slug } = params;
+  const siteName = dictionaries[locale].siteName;
   try {
     const post = getPostById(locale, slug);
 
     return {
-      title: `${post.title} - Elecmonkey的小花园`,
+      title: `${post.title} - ${siteName}`,
       description: post.description,
       // 禁止搜索引擎索引隐藏文章
       robots: post.isHidden ? 'noindex, nofollow' : undefined,

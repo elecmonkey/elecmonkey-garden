@@ -1,6 +1,6 @@
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { getPostsByTagWithPagination } from '@/lib/api';
-import type { Locale } from '@/lib/i18n';
+import { dictionaries, type Locale } from '@/lib/i18n';
 import TagContent from '@/components/tags/TagContent';
 import { decodeTagFromSlug } from '@/lib/tag-url';
 
@@ -10,13 +10,16 @@ type Props = {
 };
 
 // 为每个标签页生成元数据
-export async function generateMetadata({ params }: Props): Promise<SiteMetadata> {
+export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
   const { tag } = params;
   const decodedTag = decodeTagFromSlug(tag);
-  
+  const siteName = dictionaries[locale].siteName;
+   
   return {
-    title: `#${decodedTag} - Elecmonkey的小花园`,
-    description: `查看所有与 ${decodedTag} 相关的文章`,
+    title: `#${decodedTag} - ${siteName}`,
+    description: locale === 'en'
+      ? `Browse posts related to ${decodedTag}`
+      : `查看所有与 ${decodedTag} 相关的文章`,
   };
 }
 
