@@ -122,7 +122,7 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              {new Date(post.date).toLocaleDateString('zh-CN', {
+              {new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'zh-CN', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
