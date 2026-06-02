@@ -27,8 +27,8 @@ export default function MonthArchiveContent({ month, locale, currentPage, posts,
   const basePath = archiveHref(locale, month);
   const dictionary = dictionaries[locale];
   useDocumentTitle(withSiteTitle(locale, currentPage > 1
-    ? locale === 'en' ? `${month} Archive (Page ${currentPage})` : `${displayName}归档 (第 ${currentPage} 页)`
-    : locale === 'en' ? `${month} Archive` : `${displayName}归档`));
+    ? locale === 'en' ? `${displayName} Archive (Page ${currentPage})` : `${displayName}归档 (第 ${currentPage} 页)`
+    : locale === 'en' ? `${displayName} Archive` : `${displayName}归档`));
 
   return (
     <PageContainer>
