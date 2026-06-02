@@ -7,8 +7,6 @@ import type { SiteMetadata } from '@/ssg/metadata-types';
 import Image from '@/lib/image-compat';
 import { useDocumentTitle } from '@/lib/use-document-title';
 
-export const metadata: SiteMetadata = getMetadata('zh');
-
 export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
   const isEnglish = locale === 'en';
 

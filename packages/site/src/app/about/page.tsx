@@ -5,11 +5,6 @@ import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 import PageContainer from '@/components/layout/PageContainer';
 
-
-export const metadata: SiteMetadata = {
-  title: "关于我 - Elecmonkey的小花园",
-};
-
 export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
   return {
     title: `${locale === 'en' ? 'About' : '关于我'} - ${dictionaries[locale].siteName}`,

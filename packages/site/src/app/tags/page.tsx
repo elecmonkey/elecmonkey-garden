@@ -5,11 +5,6 @@ import PageContainer from '@/components/layout/PageContainer';
 import TagList from '@/components/tag/TagList';
 import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
-export const metadata: SiteMetadata = {
-  title: '所有标签 - Elecmonkey的小花园',
-  description: '浏览所有博客标签和主题',
-};
-
 export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
   return {
     title: `${locale === 'en' ? 'Tags' : '所有标签'} - ${dictionaries[locale].siteName}`,
