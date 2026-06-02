@@ -11,7 +11,6 @@ import { generateMetadata as generateMonthMetadata } from '../app/archive/[month
 import { generateMetadata as generateMonthPageMetadata } from '../app/archive/[month]/page/[page]/page';
 import { generateMetadata as generateSearchMetadata } from '../app/search/page';
 import { getStaticPathnames } from '../app-shell/static-paths';
-import { getPostById } from '../lib/api';
 import { type Locale, dictionaries, getLocaleFromPathname, hrefFor, locales, stripLocalePrefix } from '../lib/i18n';
 import type { RobotsValue, SiteMetadata } from './metadata-types';
 
@@ -261,7 +260,7 @@ function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: 
     return routeMetadata;
   }
 
-  const { route, params } = getRouteParams(pathname);
+  const { route } = getRouteParams(pathname);
   const siteName = dictionaries.en.siteName;
 
   switch (route) {
@@ -281,39 +280,18 @@ function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: 
     case 'blog':
       return { ...routeMetadata, title: `Posts - ${siteName}` };
     case 'blog-page':
-      return {
-        ...routeMetadata,
-        title: `Posts (Page ${params.page}) - ${siteName}`,
-        description: `Browse all posts - page ${params.page}`,
-      };
-    case 'blog-post': {
-      try {
-        const post = getPostById(locale, params.slug);
-        return { ...routeMetadata, title: `${post.title} - ${siteName}`, description: post.description };
-      } catch {
-        return routeMetadata;
-      }
-    }
+    case 'blog-post':
+      return routeMetadata;
     case 'tags':
       return { ...routeMetadata, title: `Tags - ${siteName}` };
     case 'tag':
-      return {
-        ...routeMetadata,
-        title: `#${params.tag} - ${siteName}`,
-        description: `Browse posts related to ${params.tag}`,
-      };
     case 'tag-page':
-      return {
-        ...routeMetadata,
-        title: `#${params.tag} (Page ${params.page}) - ${siteName}`,
-        description: `Browse posts related to ${params.tag} - page ${params.page}`,
-      };
+      return routeMetadata;
     case 'archive':
       return { ...routeMetadata, title: `Archive - ${siteName}`, description: 'Browse posts by month' };
     case 'month':
-      return { ...routeMetadata, title: `${params.month} Archive - ${siteName}`, description: `Browse posts published in ${params.month}` };
     case 'month-page':
-      return { ...routeMetadata, title: `${params.month} Archive (Page ${params.page}) - ${siteName}`, description: `Browse posts published in ${params.month} - page ${params.page}` };
+      return routeMetadata;
     case 'search':
       return { ...routeMetadata, title: `Search - ${siteName}`, description: 'Search posts' };
     default:
