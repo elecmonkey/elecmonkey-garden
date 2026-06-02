@@ -95,6 +95,6 @@ export const post = {
   },
   "nextPost": {
     "id": "bun-rust-rewrite",
-    "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+    "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
   }
 } satisfies PostData;

@@ -6,6 +6,28 @@ export const generatedContentByLocale = {
   "zh": {
     posts: [
       {
+        "id": "ai-agent-software-engineering",
+        "title": "更高一层抽象：我们与 AI Agent 时代",
+        "date": "2026-06-03",
+        "description": "AI Agent 写代码，只是软件工程正在建立的又一层抽象",
+        "tags": [
+          "AI",
+          "AI Agent",
+          "软件工程",
+          "抽象"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/ai-agent-software-engineering",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "bun-rust-rewrite",
+          "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        }
+      },
+      {
         "id": "bun-rust-rewrite",
         "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
         "date": "2026-05-15",
@@ -26,6 +48,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
+        },
+        "nextPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "更高一层抽象：我们与 AI Agent 时代"
         }
       },
       {
@@ -1008,6 +1034,28 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "ai-agent-software-engineering",
+        "title": "更高一层抽象：我们与 AI Agent 时代",
+        "date": "2026-06-03",
+        "description": "AI Agent 写代码，只是软件工程正在建立的又一层抽象",
+        "tags": [
+          "AI",
+          "AI Agent",
+          "软件工程",
+          "抽象"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/ai-agent-software-engineering",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "bun-rust-rewrite",
+          "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        }
+      },
+      {
         "id": "bun-rust-rewrite",
         "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
         "date": "2026-05-15",
@@ -1028,6 +1076,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
+        },
+        "nextPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "更高一层抽象：我们与 AI Agent 时代"
         }
       },
       {
@@ -2009,6 +2061,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "ai-agent-software-engineering": { sourceHash: "sha256:22f7ab6bc5981922dd620bbe62005684ae33507b5c352d354c1a9bf96f8a31d3", contentHash: "sha256:18924cb629ced3c2d1fd699ae60230f1ee3862b3f15e8f4ff6041d0ea3f67c82" },
       "bun-rust-rewrite": { sourceHash: "sha256:ff8855be894e2a11cfb4c371ba7de8fa99ded86fd92fb37ffa13f9d3f8845546", contentHash: "sha256:f695df3b5f5d037af027e968db9f12206e49e6dc11fb6ef01d487340d2c9c58b" },
       "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:b92b17585c1552463be5f6d003933626da3eeee3155f3febb0fa8c6b45b01947", contentHash: "sha256:0fb75d3961186ad7435629d185480ea2c23f862e4c2d0eec93bf9892258e7dd8" },
       "private-network-access": { sourceHash: "sha256:e764ee87cc592b05adef8b8416b7d130a5fafa905453f8fb0124a9d0c2f43443", contentHash: "sha256:e3dd5ec90c8350403473d6941b4fd4d6286a81677308ad02dabc687a3e9b2a2b" },
@@ -2050,6 +2103,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:dc182fd6720de09ef8d309e8a5e9cfed22619c0f0b2e038253e44cb78f26ec94", contentHash: "sha256:d60188fe5df704efcee0634037c71453e8d87804c8cbbc1a955937db81fe9165" },
     },
     postLoaders: {
+      "ai-agent-software-engineering": () => import('./posts/zh/ai-agent-software-engineering'),
       "bun-rust-rewrite": () => import('./posts/zh/bun-rust-rewrite'),
       "tanstack-npm-supply-chain-attack": () => import('./posts/zh/tanstack-npm-supply-chain-attack'),
       "private-network-access": () => import('./posts/zh/private-network-access'),
@@ -2094,8 +2148,30 @@ export const generatedContentByLocale = {
   "en": {
     posts: [
       {
+        "id": "ai-agent-software-engineering",
+        "title": "AI Agents as the Next Abstraction Layer",
+        "date": "2026-06-03",
+        "description": "AI Agents writing code are just another layer of abstraction being built in software engineering",
+        "tags": [
+          "AI",
+          "AI Agent",
+          "Software Engineering",
+          "Abstraction"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/ai-agent-software-engineering",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "bun-rust-rewrite",
+          "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        }
+      },
+      {
         "id": "bun-rust-rewrite",
-        "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
+        "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
         "date": "2026-05-15",
         "description": "Community: PR #30702 - Revert \"Rewrite Bun in Rust\" / #30706 - Clarify that bun now is slop",
         "tags": [
@@ -2114,6 +2190,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
+        },
+        "nextPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "AI Agents as the Next Abstraction Layer"
         }
       },
       {
@@ -2140,7 +2220,7 @@ export const generatedContentByLocale = {
         },
         "nextPost": {
           "id": "bun-rust-rewrite",
-          "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+          "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
         }
       },
       {
@@ -3096,8 +3176,30 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "ai-agent-software-engineering",
+        "title": "AI Agents as the Next Abstraction Layer",
+        "date": "2026-06-03",
+        "description": "AI Agents writing code are just another layer of abstraction being built in software engineering",
+        "tags": [
+          "AI",
+          "AI Agent",
+          "Software Engineering",
+          "Abstraction"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/ai-agent-software-engineering",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "bun-rust-rewrite",
+          "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        }
+      },
+      {
         "id": "bun-rust-rewrite",
-        "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
+        "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
         "date": "2026-05-15",
         "description": "Community: PR #30702 - Revert \"Rewrite Bun in Rust\" / #30706 - Clarify that bun now is slop",
         "tags": [
@@ -3116,6 +3218,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
+        },
+        "nextPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "AI Agents as the Next Abstraction Layer"
         }
       },
       {
@@ -3142,7 +3248,7 @@ export const generatedContentByLocale = {
         },
         "nextPost": {
           "id": "bun-rust-rewrite",
-          "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+          "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
         }
       },
       {
@@ -4097,7 +4203,8 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
-      "bun-rust-rewrite": { sourceHash: "sha256:f693a59e52248ddec5a78b42a0678257f5dad3500eb34e742c6dd4b1c8336732", contentHash: "sha256:c8b09e1e04bbe932021a7c115f98734462646c0f878be735d154f9f015bb9f37" },
+      "ai-agent-software-engineering": { sourceHash: "sha256:8a5049934cd416ee5cd955bfc474a6c79a75b32e40b5825491906753e9199a00", contentHash: "sha256:ababe361155526c5169f95937179f43889e9ca7f81b84f47dc7c88d1580085cb" },
+      "bun-rust-rewrite": { sourceHash: "sha256:5789f5d36d7c5d1eb931ef3e39a6c9d23dd8c557914a73d3784468db837df2d1", contentHash: "sha256:65a78bacd39678960b305645a3cc5a79485894c1187694ede6748d209ceef328" },
       "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:5055d72dd079762bb0ce33b5c2eba128e9cfebb2ccb8da1e369b861d27feee50", contentHash: "sha256:d0510519304ce939f12a1c46efd77f02aa49ae10d45c8c974cebd3308cff8341" },
       "private-network-access": { sourceHash: "sha256:27009d8b794f79ed7da01936e0778955261da5f15551cc25af75df1d5d802116", contentHash: "sha256:1b6151be9f41f71e7f4dbf4d5477bec94e0017a2e0173830a0d7bea590e2240d" },
       "axios-xhr-and-fetch": { sourceHash: "sha256:3afcbd24cf3e12cd82a401e499487c769d93ed343f4c2b363adf212788bbb8d0", contentHash: "sha256:f952ea7f46ea09264ae49016e09f1d08da629f52c061968f9eb12e7cefb89de2" },
@@ -4138,6 +4245,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:8fc93ea8e4e6d12f33ed7688e8ed58afe1ef085b476161a209d741b4b2cc2a68", contentHash: "sha256:824645ac9b163f9263ef75f905f3a19898452ac3027164b89d1677adcd35008c" },
     },
     postLoaders: {
+      "ai-agent-software-engineering": () => import('./posts/en/ai-agent-software-engineering'),
       "bun-rust-rewrite": () => import('./posts/en/bun-rust-rewrite'),
       "tanstack-npm-supply-chain-attack": () => import('./posts/en/tanstack-npm-supply-chain-attack'),
       "private-network-access": () => import('./posts/en/private-network-access'),

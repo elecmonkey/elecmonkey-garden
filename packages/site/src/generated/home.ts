@@ -6,6 +6,28 @@ export const generatedHomeContentByLocale = {
   "zh": {
     "recentPosts": [
       {
+        "id": "ai-agent-software-engineering",
+        "title": "更高一层抽象：我们与 AI Agent 时代",
+        "date": "2026-06-03",
+        "description": "AI Agent 写代码，只是软件工程正在建立的又一层抽象",
+        "tags": [
+          "AI",
+          "AI Agent",
+          "软件工程",
+          "抽象"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/ai-agent-software-engineering",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "bun-rust-rewrite",
+          "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        }
+      },
+      {
         "id": "bun-rust-rewrite",
         "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
         "date": "2026-05-15",
@@ -26,6 +48,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
+        },
+        "nextPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "更高一层抽象：我们与 AI Agent 时代"
         }
       },
       {
@@ -184,39 +210,16 @@ export const generatedHomeContentByLocale = {
           "id": "note-oauth2-login",
           "title": "OAuth 2.0 授权码模式登录流程全图"
         }
-      },
-      {
-        "id": "react-server-component-1",
-        "title": "论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合",
-        "date": "2026-02-14",
-        "description": "React 团队一声炮响，给前端送来了 RSC | 服务端组件原理、RSC 与 SSR、「局部水合」的意义",
-        "tags": [
-          "React",
-          "RSC",
-          "前端架构",
-          "Next.js",
-          "服务端渲染 (SSR)"
-        ],
-        "author": "Elecmonkey",
-        "locale": "zh",
-        "permalink": "/blog/react-server-component-1",
-        "monthFolder": "202602",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "about-astro",
-          "title": "写在 Astro v6 beta：Astro 让真正的“网站”拥抱现代前端生态"
-        },
-        "nextPost": {
-          "id": "react-server-component-2",
-          "title": "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图"
-        }
       }
     ],
     "tags": [
       {
         "name": "AI",
-        "count": 4
+        "count": 5
+      },
+      {
+        "name": "AI Agent",
+        "count": 1
       },
       {
         "name": "Android",
@@ -455,6 +458,10 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
+        "name": "抽象",
+        "count": 1
+      },
+      {
         "name": "智能体 (Agent)",
         "count": 2
       },
@@ -483,6 +490,10 @@ export const generatedHomeContentByLocale = {
         "count": 2
       },
       {
+        "name": "软件工程",
+        "count": 1
+      },
+      {
         "name": "软件著作权",
         "count": 1
       },
@@ -492,15 +503,37 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 39,
-      "latestUpdateDate": "2026-05-15"
+      "totalPosts": 40,
+      "latestUpdateDate": "2026-06-03"
     }
   },
   "en": {
     "recentPosts": [
       {
+        "id": "ai-agent-software-engineering",
+        "title": "AI Agents as the Next Abstraction Layer",
+        "date": "2026-06-03",
+        "description": "AI Agents writing code are just another layer of abstraction being built in software engineering",
+        "tags": [
+          "AI",
+          "AI Agent",
+          "Software Engineering",
+          "Abstraction"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/ai-agent-software-engineering",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "bun-rust-rewrite",
+          "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        }
+      },
+      {
         "id": "bun-rust-rewrite",
-        "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
+        "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files",
         "date": "2026-05-15",
         "description": "Community: PR #30702 - Revert \"Rewrite Bun in Rust\" / #30706 - Clarify that bun now is slop",
         "tags": [
@@ -519,6 +552,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
+        },
+        "nextPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "AI Agents as the Next Abstraction Layer"
         }
       },
       {
@@ -545,7 +582,7 @@ export const generatedHomeContentByLocale = {
         },
         "nextPost": {
           "id": "bun-rust-rewrite",
-          "title": "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+          "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
         }
       },
       {
@@ -677,43 +714,24 @@ export const generatedHomeContentByLocale = {
           "id": "note-oauth2-login",
           "title": "Complete Diagram of the OAuth 2.0 Authorization Code Login Flow"
         }
-      },
-      {
-        "id": "react-server-component-1",
-        "title": "On React Server Component (RSC) (1) - RSC Principles, SSR, and Partial Hydration",
-        "date": "2026-02-14",
-        "description": "With one loud shot from the React team, RSC arrived in frontend development | Server Component principles, RSC and SSR, and the meaning of partial hydration",
-        "tags": [
-          "React",
-          "RSC",
-          "Frontend Architecture",
-          "Next.js",
-          "Server-Side Rendering (SSR)"
-        ],
-        "author": "Elecmonkey",
-        "locale": "en",
-        "permalink": "/en/blog/react-server-component-1",
-        "monthFolder": "202602",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "about-astro",
-          "title": "Writing at Astro v6 Beta: Astro Lets Real Websites Embrace the Modern Frontend Ecosystem"
-        },
-        "nextPost": {
-          "id": "react-server-component-2",
-          "title": "On React Server Component (RSC) (2) - RSC Rules, React Component Trees, and Module Dependency Graphs"
-        }
       }
     ],
     "tags": [
+      {
+        "name": "Abstraction",
+        "count": 1
+      },
       {
         "name": "Agent",
         "count": 2
       },
       {
         "name": "AI",
-        "count": 4
+        "count": 5
+      },
+      {
+        "name": "AI Agent",
+        "count": 1
       },
       {
         "name": "Android",
@@ -916,6 +934,10 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
+        "name": "Software Engineering",
+        "count": 1
+      },
+      {
         "name": "Solid.js",
         "count": 2
       },
@@ -985,8 +1007,8 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 39,
-      "latestUpdateDate": "2026-05-15"
+      "totalPosts": 40,
+      "latestUpdateDate": "2026-06-03"
     }
   }
 } satisfies HomeContentByLocale;

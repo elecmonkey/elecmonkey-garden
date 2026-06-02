@@ -1,5 +1,5 @@
 ---
-title: "Official Bun: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+title: "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
 date: "2026-05-15"
 description: "Community: PR #30702 - Revert \"Rewrite Bun in Rust\" / #30706 - Clarify that bun now is slop"
 tags: ["Bun", "Rust", "Zig", "AI", "Frontend Tooling"]

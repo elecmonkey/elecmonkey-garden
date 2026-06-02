@@ -66,5 +66,9 @@ export const post = {
   "prevPost": {
     "id": "tanstack-npm-supply-chain-attack",
     "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
+  },
+  "nextPost": {
+    "id": "ai-agent-software-engineering",
+    "title": "更高一层抽象：我们与 AI Agent 时代"
   }
 } satisfies PostData;
