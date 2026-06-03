@@ -24,7 +24,8 @@ function getWorkerCount(pathnameCount: number): number {
 
   if (rawWorkerCount === 'auto') {
     const cpuCount = availableParallelism();
-    return Math.max(1, Math.min(cpuCount, Math.floor(pathnameCount / 128)));
+    const pagesPerWorker = 256;
+    return Math.max(1, Math.min(cpuCount, Math.floor(pathnameCount / pagesPerWorker)));
   }
 
   const workerCount = Number.parseInt(rawWorkerCount, 10);

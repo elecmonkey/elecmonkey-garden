@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "rsbuild dev --environment web",
-    "build": "rsbuild build && node .rsbuild/ssg/build.js",
+    "build": "rsbuild build && SSG_WORKERS=auto node .rsbuild/ssg/build.js",
     "start": "rsbuild preview --environment web",
     "preview": "rsbuild preview --environment web",
     "lint": "rslint --type-check .",
