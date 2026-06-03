@@ -186,7 +186,7 @@ async function writeSitemapXml(distDir: string): Promise<void> {
     .filter((entry): entry is SitemapEntry => entry !== null));
 
   const tagEntries = locales.flatMap((locale) => getAllTags(locale).map((tag): SitemapEntry => {
-    const pathname = hrefFor(locale, getTagPath(tag.name));
+    const pathname = getTagPath(tag.name, locale);
     return {
       url: toAbsoluteUrl(pathname),
       pathname,

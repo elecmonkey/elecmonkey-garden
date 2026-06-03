@@ -3,6 +3,8 @@ import { hrefFor, type Locale } from './i18n';
 const TAG_PLACEHOLDERS = [
   ['/', '_slash_'],
   [' ', '_space_'],
+  ['(', '_lparen_'],
+  [')', '_rparen_'],
 ] as const;
 
 function replaceTagSpecialChars(value: string): string {

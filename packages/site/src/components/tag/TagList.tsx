@@ -1,6 +1,6 @@
 import Link from '@/components/Link';
 import { TagCount } from '@/lib/api';
-import { type Locale, defaultLocale, dictionaries, hrefFor } from '@/lib/i18n';
+import { type Locale, defaultLocale, dictionaries } from '@/lib/i18n';
 import { getTagPath } from '@/lib/tag-url';
 
 interface TagListProps {
@@ -22,7 +22,7 @@ export default function TagList({ tags, locale = defaultLocale }: TagListProps) 
       {sortedTags.map((tag) => (
         <Link
           key={tag.name}
-          href={hrefFor(locale, getTagPath(tag.name))}
+          href={getTagPath(tag.name, locale)}
           className="relative group"
         >
           {/* 底层卡片 */}

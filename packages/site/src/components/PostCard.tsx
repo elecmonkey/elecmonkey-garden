@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Link from '@/components/Link';
 import { prefetchArticleBySlug } from '@/lib/client-prefetch';
-import { type Locale, postHref, hrefFor } from '@/lib/i18n';
+import { type Locale, postHref } from '@/lib/i18n';
 import { getTagPath } from '@/lib/tag-url';
 
 export interface PostCardProps {
@@ -91,7 +91,7 @@ export default function PostCard({ post }: PostCardProps) {
         {post.tags.map((tag: string) => (
           <Link
             key={tag}
-            href={hrefFor(locale, getTagPath(tag))}
+            href={getTagPath(tag, locale)}
             className="bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary px-2.5 py-1 rounded text-xs transition-all"
             target="_blank"
             rel="noopener noreferrer"
