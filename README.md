@@ -2,28 +2,38 @@
 
 [https://www.elecmonkey.com](https://www.elecmonkey.com)
 
-个人技术博客，基于 Rsbuild、React Router 与 React SSG。
+English | [简体中文](README.zh-CN.md)
 
-## 内容管理
+## Blog Introduction
 
-博客文章存储在根目录的 `content/posts` 目录中，使用 Markdown 格式。每篇文章需要包含以下前置元数据：
+Technical blog focused on frontend architecture and JavaScript tooling.
+
+## Tech Stack
+
+Built with Rsbuild, React Router, and React SSG.
+
+### Content Management
+
+Blog posts are stored as Markdown files in the root `content/posts` directory. Each post should include the following front matter:
 
 ```md
 ---
-title: '文章标题'
+title: 'Post Title'
 date: 'YYYY-MM-DD'
-description: '文章简短描述'
-tags: ['标签1', '标签2']
+description: 'A short description of the post'
+tags: ['Tag 1', 'Tag 2']
 author: 'Elecmonkey'
 ---
 
-文章内容...
+Post content...
 ```
 
-## 许可协议
+## License
 
-### 代码部分
-源代码采用 [MIT 许可证](LICENSE)。
+### Code
 
-### 内容部分
-所有博客文章、图片和其他创意内容采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议（CC BY-NC-SA 4.0）](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)。
+The source code is licensed under the [MIT License](LICENSE).
+
+### Content
+
+All blog posts, images, and other creative content are licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
