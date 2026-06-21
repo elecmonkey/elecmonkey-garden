@@ -61,6 +61,39 @@ fn renders_code_and_mermaid_islands() {
 }
 
 #[test]
+fn renders_graphviz_island() {
+    let output = compile_markdown("```viz {0.75}\ndigraph { a -> b }\n```");
+
+    assert_eq!(
+        output.islands,
+        vec![MarkdownIsland::Graphviz {
+            id: "graphviz-1".to_string(),
+            scale: Some(0.75),
+        }]
+    );
+    assert!(output
+        .html
+        .contains(r#"data-md-island="graphviz" data-island-id="graphviz-1" data-scale="0.75""#));
+    assert!(output.html.contains("digraph { a -&gt; b }"));
+}
+
+#[test]
+fn renders_graphviz_language_alias() {
+    let output = compile_markdown("```graphviz\ndigraph { a -> b }\n```");
+
+    assert_eq!(
+        output.islands,
+        vec![MarkdownIsland::Graphviz {
+            id: "graphviz-1".to_string(),
+            scale: None,
+        }]
+    );
+    assert!(output
+        .html
+        .contains(r#"data-md-island="graphviz" data-island-id="graphviz-1""#));
+}
+
+#[test]
 fn renders_no_language_code_as_island() {
     let output = compile_markdown("```\nplain < text\n```");
 

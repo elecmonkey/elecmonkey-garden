@@ -3,7 +3,7 @@ use std::sync::Mutex;
 use super::file_download::FileDownloadMeta;
 use super::info::CodeFenceInfo;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum MarkdownIsland {
     Code {
         id: String,
@@ -12,6 +12,10 @@ pub enum MarkdownIsland {
     },
     Mermaid {
         id: String,
+    },
+    Graphviz {
+        id: String,
+        scale: Option<f64>,
     },
     FileDownload {
         id: String,
@@ -31,6 +35,7 @@ pub struct IslandState {
 struct IslandStateInner {
     code_count: usize,
     mermaid_count: usize,
+    graphviz_count: usize,
     file_count: usize,
     islands: Vec<MarkdownIsland>,
 }
@@ -63,6 +68,16 @@ impl IslandState {
         inner
             .islands
             .push(MarkdownIsland::Mermaid { id: id.clone() });
+        id
+    }
+
+    pub fn add_graphviz(&self, scale: Option<f64>) -> String {
+        let mut inner = self.inner.lock().expect("island state lock poisoned");
+        inner.graphviz_count += 1;
+        let id = format!("graphviz-{}", inner.graphviz_count);
+        inner
+            .islands
+            .push(MarkdownIsland::Graphviz { id: id.clone(), scale });
         id
     }
 

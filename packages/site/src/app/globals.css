@@ -641,6 +641,27 @@ img {
   margin: 0 auto;
 }
 
+.markdown-content [data-md-island="graphviz"] {
+  color: var(--foreground);
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1rem;
+}
+
+.markdown-content [data-md-island="graphviz"] pre {
+  margin: 0;
+}
+
+.markdown-content [data-md-island="graphviz"] svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
 .article-file-download {
   display: flex;
   align-items: center;

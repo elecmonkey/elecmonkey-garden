@@ -58,6 +58,11 @@ export type MarkdownIsland =
       id: string;
     }
   | {
+      kind: 'graphviz';
+      id: string;
+      scale?: number;
+    }
+  | {
       kind: 'file-download';
       id: string;
       filename?: string;

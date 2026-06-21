@@ -41,6 +41,7 @@ pub struct JsMarkdownIsland {
     pub file_type: Option<String>,
     pub url: Option<String>,
     pub size: Option<String>,
+    pub scale: Option<f64>,
 }
 
 #[napi(object)]
@@ -132,6 +133,7 @@ impl From<MarkdownIsland> for JsMarkdownIsland {
                 file_type: None,
                 url: None,
                 size: None,
+                scale: None,
             },
             MarkdownIsland::Mermaid { id } => Self {
                 kind: "mermaid".to_string(),
@@ -142,6 +144,18 @@ impl From<MarkdownIsland> for JsMarkdownIsland {
                 file_type: None,
                 url: None,
                 size: None,
+                scale: None,
+            },
+            MarkdownIsland::Graphviz { id, scale } => Self {
+                kind: "graphviz".to_string(),
+                id,
+                language: None,
+                range: None,
+                filename: None,
+                file_type: None,
+                url: None,
+                size: None,
+                scale,
             },
             MarkdownIsland::FileDownload {
                 id,
@@ -158,6 +172,7 @@ impl From<MarkdownIsland> for JsMarkdownIsland {
                 file_type,
                 url,
                 size,
+                scale: None,
             },
         }
     }

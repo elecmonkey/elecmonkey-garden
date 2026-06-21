@@ -40,6 +40,27 @@ pub fn write_mermaid_island(output: &mut dyn fmt::Write, id: &str, source: &str)
     )
 }
 
+pub fn write_graphviz_island(
+    output: &mut dyn fmt::Write,
+    id: &str,
+    scale: Option<f64>,
+    source: &str,
+) -> fmt::Result {
+    write!(
+        output,
+        "<div data-md-island=\"graphviz\" data-island-id=\"{}\"",
+        escape_attr(id)
+    )?;
+    if let Some(scale) = scale {
+        write!(output, " data-scale=\"{}\"", scale)?;
+    }
+    write!(
+        output,
+        "><pre><code class=\"language-dot\">{}</code></pre></div>\n",
+        escape_html(source)
+    )
+}
+
 pub fn write_file_download_island(
     output: &mut dyn fmt::Write,
     id: &str,

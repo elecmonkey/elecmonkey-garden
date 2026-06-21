@@ -8,7 +8,7 @@ use comrak::{
 use super::{
     file_download::FileDownloadMeta,
     info::{self, CodeFenceInfo},
-    render::{write_code_island, write_file_download_island, write_mermaid_island},
+    render::{write_code_island, write_file_download_island, write_graphviz_island, write_mermaid_island},
     state::{IslandState, MarkdownIsland},
 };
 
@@ -32,7 +32,7 @@ impl CodefenceRendererAdapter for MarkdownCodeFenceAdapter {
         &self,
         output: &mut dyn fmt::Write,
         lang: &str,
-        _meta: &str,
+        meta: &str,
         code: &str,
         _sourcepos: Option<Sourcepos>,
     ) -> fmt::Result {
@@ -40,6 +40,11 @@ impl CodefenceRendererAdapter for MarkdownCodeFenceAdapter {
             "mermaid" => {
                 let id = self.state.add_mermaid();
                 write_mermaid_island(output, &id, code)
+            }
+            "viz" | "graphviz" => {
+                let scale = parse_graphviz_scale(meta);
+                let id = self.state.add_graphviz(scale);
+                write_graphviz_island(output, &id, scale, code)
             }
             "file" => {
                 let meta = FileDownloadMeta::parse(code);
@@ -52,6 +57,18 @@ impl CodefenceRendererAdapter for MarkdownCodeFenceAdapter {
                 write_code_island(output, &id, &info, code)
             }
         }
+    }
+}
+
+fn parse_graphviz_scale(meta: &str) -> Option<f64> {
+    let open = meta.find('{')?;
+    let close = meta[open + 1..].find('}')? + open + 1;
+    let value = meta[open + 1..close].trim().parse::<f64>().ok()?;
+
+    if value.is_finite() && value > 0.0 {
+        Some(value)
+    } else {
+        None
     }
 }
 
