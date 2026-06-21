@@ -24,6 +24,15 @@ export function getHtmlOutputPath(distDir: string, pathname: string): string {
   return path.join(distDir, normalized.slice(1), 'index.html');
 }
 
+function getHtmlOutputPathForStaticFile(distDir: string, pathname: string): string {
+  try {
+    const decodedPathname = decodeURI(pathname);
+    return getHtmlOutputPath(distDir, decodedPathname);
+  } catch {
+    return getHtmlOutputPath(distDir, pathname);
+  }
+}
+
 function getBlogPostSlug(pathname: string): string | undefined {
   const segments = stripLocalePrefix(pathname).replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
   if (segments[0] === 'blog' && segments[1] && segments.length === 2) {
@@ -75,7 +84,7 @@ export async function renderStaticPage(template: string, pathname: string): Prom
 
 export async function writeStaticPage(distDir: string, template: string, pathname: string): Promise<void> {
   const html = await renderStaticPage(template, pathname);
-  const outputPath = getHtmlOutputPath(distDir, pathname);
+  const outputPath = getHtmlOutputPathForStaticFile(distDir, pathname);
 
   await mkdir(path.dirname(outputPath), { recursive: true });
   await writeFile(outputPath, html);
