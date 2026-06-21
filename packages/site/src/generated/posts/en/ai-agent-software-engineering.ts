@@ -55,5 +55,9 @@ export const post = {
   "prevPost": {
     "id": "bun-rust-rewrite",
     "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+  },
+  "nextPost": {
+    "id": "vue-tsc-runtime-patch-hack",
+    "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
   }
 } satisfies PostData;

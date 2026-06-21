@@ -6,6 +6,27 @@ export const generatedContentByLocale = {
   "zh": {
     posts: [
       {
+        "id": "vue-tsc-runtime-patch-hack",
+        "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代",
+        "date": "2026-06-21",
+        "description": "vue-tsc 在 Node 加载 tsc.js 之前，把官方 TypeScript CLI 的源码字符串临时 patch 掉，那 TypeScript Go 时代 Vue 准备怎么办呢？",
+        "tags": [
+          "Vue",
+          "TypeScript",
+          "前端工具链"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/vue-tsc-runtime-patch-hack",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "更高一层抽象：我们与 AI Agent 时代"
+        }
+      },
+      {
         "id": "ai-agent-software-engineering",
         "title": "更高一层抽象：我们与 AI Agent 时代",
         "date": "2026-06-03",
@@ -25,6 +46,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        },
+        "nextPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
         }
       },
       {
@@ -1034,6 +1059,27 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "vue-tsc-runtime-patch-hack",
+        "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代",
+        "date": "2026-06-21",
+        "description": "vue-tsc 在 Node 加载 tsc.js 之前，把官方 TypeScript CLI 的源码字符串临时 patch 掉，那 TypeScript Go 时代 Vue 准备怎么办呢？",
+        "tags": [
+          "Vue",
+          "TypeScript",
+          "前端工具链"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/vue-tsc-runtime-patch-hack",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "更高一层抽象：我们与 AI Agent 时代"
+        }
+      },
+      {
         "id": "ai-agent-software-engineering",
         "title": "更高一层抽象：我们与 AI Agent 时代",
         "date": "2026-06-03",
@@ -1053,6 +1099,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        },
+        "nextPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
         }
       },
       {
@@ -2061,6 +2111,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:3fe6ac9d875131a0cd75fc823ddcc8a8340acfcdd7d0c14926f022b9fce97bd2", contentHash: "sha256:84c826809cffd9c4fc4d01343620f2ee7cab0a7e82b45925af610724e49939c2" },
       "ai-agent-software-engineering": { sourceHash: "sha256:5f5c89766d37e4b1a365268d1b98c2ab7ce66e57ba988dd08e2fe5596150c5c0", contentHash: "sha256:cb709537f3d1e485851c6dbbac258907ae37c803cfec72d20f8e3283082301b2" },
       "bun-rust-rewrite": { sourceHash: "sha256:ff8855be894e2a11cfb4c371ba7de8fa99ded86fd92fb37ffa13f9d3f8845546", contentHash: "sha256:f695df3b5f5d037af027e968db9f12206e49e6dc11fb6ef01d487340d2c9c58b" },
       "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:b92b17585c1552463be5f6d003933626da3eeee3155f3febb0fa8c6b45b01947", contentHash: "sha256:0fb75d3961186ad7435629d185480ea2c23f862e4c2d0eec93bf9892258e7dd8" },
@@ -2103,6 +2154,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:dc182fd6720de09ef8d309e8a5e9cfed22619c0f0b2e038253e44cb78f26ec94", contentHash: "sha256:d60188fe5df704efcee0634037c71453e8d87804c8cbbc1a955937db81fe9165" },
     },
     postLoaders: {
+      "vue-tsc-runtime-patch-hack": () => import('./posts/zh/vue-tsc-runtime-patch-hack'),
       "ai-agent-software-engineering": () => import('./posts/zh/ai-agent-software-engineering'),
       "bun-rust-rewrite": () => import('./posts/zh/bun-rust-rewrite'),
       "tanstack-npm-supply-chain-attack": () => import('./posts/zh/tanstack-npm-supply-chain-attack'),
@@ -2148,6 +2200,27 @@ export const generatedContentByLocale = {
   "en": {
     posts: [
       {
+        "id": "vue-tsc-runtime-patch-hack",
+        "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation",
+        "date": "2026-06-21",
+        "description": "Before Node loads tsc.js, vue-tsc temporarily patches the source string of the official TypeScript CLI. What should Vue do in the TypeScript Go era?",
+        "tags": [
+          "Vue",
+          "TypeScript",
+          "Frontend Tooling"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/vue-tsc-runtime-patch-hack",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "AI Agents as the Next Abstraction Layer"
+        }
+      },
+      {
         "id": "ai-agent-software-engineering",
         "title": "AI Agents as the Next Abstraction Layer",
         "date": "2026-06-03",
@@ -2167,6 +2240,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        },
+        "nextPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
         }
       },
       {
@@ -3176,6 +3253,27 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "vue-tsc-runtime-patch-hack",
+        "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation",
+        "date": "2026-06-21",
+        "description": "Before Node loads tsc.js, vue-tsc temporarily patches the source string of the official TypeScript CLI. What should Vue do in the TypeScript Go era?",
+        "tags": [
+          "Vue",
+          "TypeScript",
+          "Frontend Tooling"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/vue-tsc-runtime-patch-hack",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "AI Agents as the Next Abstraction Layer"
+        }
+      },
+      {
         "id": "ai-agent-software-engineering",
         "title": "AI Agents as the Next Abstraction Layer",
         "date": "2026-06-03",
@@ -3195,6 +3293,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        },
+        "nextPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
         }
       },
       {
@@ -4203,6 +4305,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b36e480ded2dd05a72ecebddef502cfd1e5842f62a7e3279334842aa8dac0516", contentHash: "sha256:e8521c23c073d896e285a27c682130affb95553bd4b25eb431657ccff76d0376" },
       "ai-agent-software-engineering": { sourceHash: "sha256:8a5049934cd416ee5cd955bfc474a6c79a75b32e40b5825491906753e9199a00", contentHash: "sha256:ababe361155526c5169f95937179f43889e9ca7f81b84f47dc7c88d1580085cb" },
       "bun-rust-rewrite": { sourceHash: "sha256:5789f5d36d7c5d1eb931ef3e39a6c9d23dd8c557914a73d3784468db837df2d1", contentHash: "sha256:65a78bacd39678960b305645a3cc5a79485894c1187694ede6748d209ceef328" },
       "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:5055d72dd079762bb0ce33b5c2eba128e9cfebb2ccb8da1e369b861d27feee50", contentHash: "sha256:d0510519304ce939f12a1c46efd77f02aa49ae10d45c8c974cebd3308cff8341" },
@@ -4245,6 +4348,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:8fc93ea8e4e6d12f33ed7688e8ed58afe1ef085b476161a209d741b4b2cc2a68", contentHash: "sha256:824645ac9b163f9263ef75f905f3a19898452ac3027164b89d1677adcd35008c" },
     },
     postLoaders: {
+      "vue-tsc-runtime-patch-hack": () => import('./posts/en/vue-tsc-runtime-patch-hack'),
       "ai-agent-software-engineering": () => import('./posts/en/ai-agent-software-engineering'),
       "bun-rust-rewrite": () => import('./posts/en/bun-rust-rewrite'),
       "tanstack-npm-supply-chain-attack": () => import('./posts/en/tanstack-npm-supply-chain-attack'),

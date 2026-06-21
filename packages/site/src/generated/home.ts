@@ -6,6 +6,27 @@ export const generatedHomeContentByLocale = {
   "zh": {
     "recentPosts": [
       {
+        "id": "vue-tsc-runtime-patch-hack",
+        "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代",
+        "date": "2026-06-21",
+        "description": "vue-tsc 在 Node 加载 tsc.js 之前，把官方 TypeScript CLI 的源码字符串临时 patch 掉，那 TypeScript Go 时代 Vue 准备怎么办呢？",
+        "tags": [
+          "Vue",
+          "TypeScript",
+          "前端工具链"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/vue-tsc-runtime-patch-hack",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "更高一层抽象：我们与 AI Agent 时代"
+        }
+      },
+      {
         "id": "ai-agent-software-engineering",
         "title": "更高一层抽象：我们与 AI Agent 时代",
         "date": "2026-06-03",
@@ -25,6 +46,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        },
+        "nextPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
         }
       },
       {
@@ -183,32 +208,6 @@ export const generatedHomeContentByLocale = {
         "nextPost": {
           "id": "viteplus-announcement",
           "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
-        }
-      },
-      {
-        "id": "react-server-component-2",
-        "title": "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图",
-        "date": "2026-02-15",
-        "description": "React 团队一声炮响，给前端送来了 RSC | 续论 RSC —— 规则、架构、JavaScript 模块",
-        "tags": [
-          "React",
-          "RSC",
-          "前端架构",
-          "Next.js"
-        ],
-        "author": "Elecmonkey",
-        "locale": "zh",
-        "permalink": "/blog/react-server-component-2",
-        "monthFolder": "202602",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "react-server-component-1",
-          "title": "论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合"
-        },
-        "nextPost": {
-          "id": "note-oauth2-login",
-          "title": "OAuth 2.0 授权码模式登录流程全图"
         }
       }
     ],
@@ -375,7 +374,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "TypeScript",
-        "count": 2
+        "count": 3
       },
       {
         "name": "Vibe Coding",
@@ -387,7 +386,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Vue",
-        "count": 4
+        "count": 5
       },
       {
         "name": "Vue Vapor",
@@ -423,7 +422,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "前端工具链",
-        "count": 3
+        "count": 4
       },
       {
         "name": "前端工程化",
@@ -503,12 +502,33 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 40,
-      "latestUpdateDate": "2026-06-03"
+      "totalPosts": 41,
+      "latestUpdateDate": "2026-06-21"
     }
   },
   "en": {
     "recentPosts": [
+      {
+        "id": "vue-tsc-runtime-patch-hack",
+        "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation",
+        "date": "2026-06-21",
+        "description": "Before Node loads tsc.js, vue-tsc temporarily patches the source string of the official TypeScript CLI. What should Vue do in the TypeScript Go era?",
+        "tags": [
+          "Vue",
+          "TypeScript",
+          "Frontend Tooling"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/vue-tsc-runtime-patch-hack",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "ai-agent-software-engineering",
+          "title": "AI Agents as the Next Abstraction Layer"
+        }
+      },
       {
         "id": "ai-agent-software-engineering",
         "title": "AI Agents as the Next Abstraction Layer",
@@ -529,6 +549,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+        },
+        "nextPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
         }
       },
       {
@@ -688,32 +712,6 @@ export const generatedHomeContentByLocale = {
           "id": "viteplus-announcement",
           "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""
         }
-      },
-      {
-        "id": "react-server-component-2",
-        "title": "On React Server Component (RSC) (2) - RSC Rules, React Component Trees, and Module Dependency Graphs",
-        "date": "2026-02-15",
-        "description": "With one loud shot from the React team, RSC arrived in frontend development | Continuing RSC: rules, architecture, and JavaScript modules",
-        "tags": [
-          "React",
-          "RSC",
-          "Frontend Architecture",
-          "Next.js"
-        ],
-        "author": "Elecmonkey",
-        "locale": "en",
-        "permalink": "/en/blog/react-server-component-2",
-        "monthFolder": "202602",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "react-server-component-1",
-          "title": "On React Server Component (RSC) (1) - RSC Principles, SSR, and Partial Hydration"
-        },
-        "nextPost": {
-          "id": "note-oauth2-login",
-          "title": "Complete Diagram of the OAuth 2.0 Authorization Code Login Flow"
-        }
       }
     ],
     "tags": [
@@ -799,7 +797,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Frontend Tooling",
-        "count": 3
+        "count": 4
       },
       {
         "name": "Full-Stack Frameworks",
@@ -967,7 +965,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "TypeScript",
-        "count": 2
+        "count": 3
       },
       {
         "name": "Vibe Coding",
@@ -983,7 +981,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Vue",
-        "count": 4
+        "count": 5
       },
       {
         "name": "Vue Vapor",
@@ -1007,8 +1005,8 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 40,
-      "latestUpdateDate": "2026-06-03"
+      "totalPosts": 41,
+      "latestUpdateDate": "2026-06-21"
     }
   }
 } satisfies HomeContentByLocale;

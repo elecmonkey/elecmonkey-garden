@@ -55,5 +55,9 @@ export const post = {
   "prevPost": {
     "id": "bun-rust-rewrite",
     "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
+  },
+  "nextPost": {
+    "id": "vue-tsc-runtime-patch-hack",
+    "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
   }
 } satisfies PostData;
