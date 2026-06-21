@@ -12,22 +12,6 @@ Technical blog focused on frontend architecture and JavaScript tooling.
 
 Built with Rsbuild, React Router, and React SSG.
 
-### Content Management
-
-Blog posts are stored as Markdown files in the root `content/posts` directory. Each post should include the following front matter:
-
-```md
----
-title: 'Post Title'
-date: 'YYYY-MM-DD'
-description: 'A short description of the post'
-tags: ['Tag 1', 'Tag 2']
-author: 'Elecmonkey'
----
-
-Post content...
-```
-
 ## License
 
 ### Code

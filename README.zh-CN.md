@@ -12,22 +12,6 @@
 
 基于 Rsbuild、React Router 与 React SSG。
 
-### 内容管理
-
-博客文章存储在根目录的 `content/posts` 目录中，使用 Markdown 格式。每篇文章需要包含以下前置元数据：
-
-```md
----
-title: '文章标题'
-date: 'YYYY-MM-DD'
-description: '文章简短描述'
-tags: ['标签1', '标签2']
-author: 'Elecmonkey'
----
-
-文章内容...
-```
-
 ## 许可协议
 
 ### 代码部分
