@@ -74,5 +74,9 @@ export const post = {
   "prevPost": {
     "id": "ai-agent-software-engineering",
     "title": "AI Agents as the Next Abstraction Layer"
+  },
+  "nextPost": {
+    "id": "vue-move-to-esm-only",
+    "title": "Vue.js Is Moving to ESM-only"
   }
 } satisfies PostData;

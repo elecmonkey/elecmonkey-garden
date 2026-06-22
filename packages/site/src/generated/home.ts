@@ -6,6 +6,28 @@ export const generatedHomeContentByLocale = {
   "zh": {
     "recentPosts": [
       {
+        "id": "vue-move-to-esm-only",
+        "title": "Vue.js 迁移到 ESM-only",
+        "date": "2026-06-23",
+        "description": "Move on to ESM only 发布一年半以后，Vue Core 正在迁移到 ESM-only",
+        "tags": [
+          "Vue",
+          "ESM",
+          "前端工具链",
+          "AI Agent"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/vue-move-to-esm-only",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
+        }
+      },
+      {
         "id": "vue-tsc-runtime-patch-hack",
         "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代",
         "date": "2026-06-21",
@@ -24,6 +46,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "更高一层抽象：我们与 AI Agent 时代"
+        },
+        "nextPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js 迁移到 ESM-only"
         }
       },
       {
@@ -184,31 +210,6 @@ export const generatedHomeContentByLocale = {
           "id": "axios-xhr-and-fetch",
           "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思"
         }
-      },
-      {
-        "id": "note-oauth2-login",
-        "title": "OAuth 2.0 授权码模式登录流程全图",
-        "date": "2026-02-24",
-        "description": "一张图讲清 OAuth 2.0 授权码模式的登录流程与关键参数",
-        "tags": [
-          "OAuth 2.0",
-          "身份认证",
-          "Web 安全"
-        ],
-        "author": "Elecmonkey",
-        "locale": "zh",
-        "permalink": "/blog/note-oauth2-login",
-        "monthFolder": "202602",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "react-server-component-2",
-          "title": "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图"
-        },
-        "nextPost": {
-          "id": "viteplus-announcement",
-          "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
-        }
       }
     ],
     "tags": [
@@ -218,7 +219,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "AI Agent",
-        "count": 1
+        "count": 2
       },
       {
         "name": "Android",
@@ -262,6 +263,10 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "ECMAScript",
+        "count": 1
+      },
+      {
+        "name": "ESM",
         "count": 1
       },
       {
@@ -386,7 +391,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Vue",
-        "count": 5
+        "count": 6
       },
       {
         "name": "Vue Vapor",
@@ -422,7 +427,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "前端工具链",
-        "count": 4
+        "count": 5
       },
       {
         "name": "前端工程化",
@@ -502,12 +507,34 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 41,
-      "latestUpdateDate": "2026-06-21"
+      "totalPosts": 42,
+      "latestUpdateDate": "2026-06-23"
     }
   },
   "en": {
     "recentPosts": [
+      {
+        "id": "vue-move-to-esm-only",
+        "title": "Vue.js Is Moving to ESM-only",
+        "date": "2026-06-23",
+        "description": "A year and a half after Move on to ESM-only was published, Vue Core is moving to ESM-only",
+        "tags": [
+          "Vue",
+          "ESM",
+          "Frontend Tooling",
+          "AI Agent"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/vue-move-to-esm-only",
+        "monthFolder": "202606",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-tsc-runtime-patch-hack",
+          "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
+        }
+      },
       {
         "id": "vue-tsc-runtime-patch-hack",
         "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation",
@@ -527,6 +554,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "AI Agents as the Next Abstraction Layer"
+        },
+        "nextPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js Is Moving to ESM-only"
         }
       },
       {
@@ -687,31 +718,6 @@ export const generatedHomeContentByLocale = {
           "id": "axios-xhr-and-fetch",
           "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections"
         }
-      },
-      {
-        "id": "note-oauth2-login",
-        "title": "Complete Diagram of the OAuth 2.0 Authorization Code Login Flow",
-        "date": "2026-02-24",
-        "description": "One diagram explaining the OAuth 2.0 authorization code login flow and key parameters",
-        "tags": [
-          "OAuth 2.0",
-          "Authentication",
-          "Web Security"
-        ],
-        "author": "Elecmonkey",
-        "locale": "en",
-        "permalink": "/en/blog/note-oauth2-login",
-        "monthFolder": "202602",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "react-server-component-2",
-          "title": "On React Server Component (RSC) (2) - RSC Rules, React Component Trees, and Module Dependency Graphs"
-        },
-        "nextPost": {
-          "id": "viteplus-announcement",
-          "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""
-        }
       }
     ],
     "tags": [
@@ -729,7 +735,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "AI Agent",
-        "count": 1
+        "count": 2
       },
       {
         "name": "Android",
@@ -784,6 +790,10 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
+        "name": "ESM",
+        "count": 1
+      },
+      {
         "name": "Expo",
         "count": 1
       },
@@ -797,7 +807,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Frontend Tooling",
-        "count": 4
+        "count": 5
       },
       {
         "name": "Full-Stack Frameworks",
@@ -981,7 +991,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Vue",
-        "count": 5
+        "count": 6
       },
       {
         "name": "Vue Vapor",
@@ -1005,8 +1015,8 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 41,
-      "latestUpdateDate": "2026-06-21"
+      "totalPosts": 42,
+      "latestUpdateDate": "2026-06-23"
     }
   }
 } satisfies HomeContentByLocale;

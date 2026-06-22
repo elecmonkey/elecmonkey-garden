@@ -74,5 +74,9 @@ export const post = {
   "prevPost": {
     "id": "ai-agent-software-engineering",
     "title": "更高一层抽象：我们与 AI Agent 时代"
+  },
+  "nextPost": {
+    "id": "vue-move-to-esm-only",
+    "title": "Vue.js 迁移到 ESM-only"
   }
 } satisfies PostData;
