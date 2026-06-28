@@ -9,7 +9,7 @@ export const generatedHomeContentByLocale = {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js 迁移到 ESM-only",
         "date": "2026-06-23",
-        "description": "Move on to ESM only 发布一年半以后，Vue Core 正在迁移到 ESM-only",
+        "description": "antfu 发布 Move on to ESM only 一年半后，Vue Core 正在迁移到 ESM-only",
         "tags": [
           "Vue",
           "ESM",
@@ -517,7 +517,7 @@ export const generatedHomeContentByLocale = {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js Is Moving to ESM-only",
         "date": "2026-06-23",
-        "description": "A year and a half after Move on to ESM-only was published, Vue Core is moving to ESM-only",
+        "description": "A year and a half after antfu published Move on to ESM only, Vue Core is moving to ESM-only",
         "tags": [
           "Vue",
           "ESM",

@@ -9,7 +9,7 @@ export const generatedContentByLocale = {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js 迁移到 ESM-only",
         "date": "2026-06-23",
-        "description": "Move on to ESM only 发布一年半以后，Vue Core 正在迁移到 ESM-only",
+        "description": "antfu 发布 Move on to ESM only 一年半后，Vue Core 正在迁移到 ESM-only",
         "tags": [
           "Vue",
           "ESM",
@@ -1088,7 +1088,7 @@ export const generatedContentByLocale = {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js 迁移到 ESM-only",
         "date": "2026-06-23",
-        "description": "Move on to ESM only 发布一年半以后，Vue Core 正在迁移到 ESM-only",
+        "description": "antfu 发布 Move on to ESM only 一年半后，Vue Core 正在迁移到 ESM-only",
         "tags": [
           "Vue",
           "ESM",
@@ -2163,7 +2163,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
-      "vue-move-to-esm-only": { sourceHash: "sha256:d29b2aa7e172baff6de7fee0ef9410bbfebac8345e1dfeff7546f86e33f63a50", contentHash: "sha256:6cdf63ac10a329b908bb618f744f79c48072ae3a5bcb4ef50d087fb2d88d8a67" },
+      "vue-move-to-esm-only": { sourceHash: "sha256:d5876245a124ce49af8eb02487124fbd8c654d435ebb6516519da3da68cfaad9", contentHash: "sha256:c62676c49e871ea4d96db59ed361e6e1531dc84913f3b2bd1fbdba4580a8b865" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:3fe6ac9d875131a0cd75fc823ddcc8a8340acfcdd7d0c14926f022b9fce97bd2", contentHash: "sha256:84c826809cffd9c4fc4d01343620f2ee7cab0a7e82b45925af610724e49939c2" },
       "ai-agent-software-engineering": { sourceHash: "sha256:5f5c89766d37e4b1a365268d1b98c2ab7ce66e57ba988dd08e2fe5596150c5c0", contentHash: "sha256:cb709537f3d1e485851c6dbbac258907ae37c803cfec72d20f8e3283082301b2" },
       "bun-rust-rewrite": { sourceHash: "sha256:ff8855be894e2a11cfb4c371ba7de8fa99ded86fd92fb37ffa13f9d3f8845546", contentHash: "sha256:f695df3b5f5d037af027e968db9f12206e49e6dc11fb6ef01d487340d2c9c58b" },
@@ -2257,7 +2257,7 @@ export const generatedContentByLocale = {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js Is Moving to ESM-only",
         "date": "2026-06-23",
-        "description": "A year and a half after Move on to ESM-only was published, Vue Core is moving to ESM-only",
+        "description": "A year and a half after antfu published Move on to ESM only, Vue Core is moving to ESM-only",
         "tags": [
           "Vue",
           "ESM",
@@ -3336,7 +3336,7 @@ export const generatedContentByLocale = {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js Is Moving to ESM-only",
         "date": "2026-06-23",
-        "description": "A year and a half after Move on to ESM-only was published, Vue Core is moving to ESM-only",
+        "description": "A year and a half after antfu published Move on to ESM only, Vue Core is moving to ESM-only",
         "tags": [
           "Vue",
           "ESM",
@@ -4411,7 +4411,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
-      "vue-move-to-esm-only": { sourceHash: "sha256:b4b3c97cec49fcd880ac982bd370236f1daea796052071e6666926b421946518", contentHash: "sha256:ded97c71963b6341c25ea4281a24b574bd913c47754ecbbd55a90eb5d742d6bf" },
+      "vue-move-to-esm-only": { sourceHash: "sha256:ad7d1371f445d2cddc43457079c2fed5b745557f04e51509e5de9565e8f1bb8d", contentHash: "sha256:b98f6e2af3e95138a8d7efdd2f8e4c8f6419939d2574e5a04a0796ed7cc7aa73" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b36e480ded2dd05a72ecebddef502cfd1e5842f62a7e3279334842aa8dac0516", contentHash: "sha256:e8521c23c073d896e285a27c682130affb95553bd4b25eb431657ccff76d0376" },
       "ai-agent-software-engineering": { sourceHash: "sha256:8a5049934cd416ee5cd955bfc474a6c79a75b32e40b5825491906753e9199a00", contentHash: "sha256:ababe361155526c5169f95937179f43889e9ca7f81b84f47dc7c88d1580085cb" },
       "bun-rust-rewrite": { sourceHash: "sha256:5789f5d36d7c5d1eb931ef3e39a6c9d23dd8c557914a73d3784468db837df2d1", contentHash: "sha256:65a78bacd39678960b305645a3cc5a79485894c1187694ede6748d209ceef328" },

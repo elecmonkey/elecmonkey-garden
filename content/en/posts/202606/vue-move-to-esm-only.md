@@ -1,7 +1,7 @@
 ---
 title: "Vue.js Is Moving to ESM-only"
 date: "2026-06-23"
-description: "A year and a half after Move on to ESM-only was published, Vue Core is moving to ESM-only"
+description: "A year and a half after antfu published Move on to ESM only, Vue Core is moving to ESM-only"
 tags: ["Vue", "ESM", "Frontend Tooling", "AI Agent"]
 author: "Elecmonkey"
 ---
