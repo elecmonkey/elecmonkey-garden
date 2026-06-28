@@ -138,7 +138,7 @@ jobs:
         run: |
           pnpm exec napi create-npm-dirs
           pnpm exec napi artifacts --output-dir .
-          pnpm exec napi pre-publish --skip-optional-publish
+          pnpm exec napi pre-publish --no-gh-release --skip-optional-publish
 
       - name: Verify package files
         working-directory: packages/content-compiler-napi
