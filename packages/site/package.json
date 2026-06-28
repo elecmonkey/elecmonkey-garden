@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@viz-js/viz": "^3.28.0",
-    "@elecmonkey/garden-content-compiler": "0.2.0",
+    "@elecmonkey/garden-content-compiler": "0.2.1",
     "katex": "^0.17.0",
     "lucide-react": "^1.17.0",
     "mermaid": "^11.15.0",
