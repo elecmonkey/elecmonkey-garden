@@ -1,10 +1,30 @@
 {
   "name": "@elecmonkey/garden-content-compiler",
-  "version": "0.2.0",
+  "version": "0.2.1",
+  "description": "Rust-backed Markdown and content compiler for Elecmonkey's Garden.",
   "private": false,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "author": "Elecmonkey",
+  "homepage": "https://www.elecmonkey.com/en",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elecmonkey/elecmonkey-garden.git",
+    "directory": "packages/content-compiler-napi"
+  },
+  "bugs": {
+    "url": "https://github.com/elecmonkey/elecmonkey-garden/issues"
+  },
+  "keywords": [
+    "markdown",
+    "content",
+    "compiler",
+    "rsbuild",
+    "napi",
+    "blog"
+  ],
   "files": [
     "dist"
   ],
@@ -52,8 +72,8 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@elecmonkey/garden-content-compiler-darwin-arm64": "0.2.0",
-    "@elecmonkey/garden-content-compiler-linux-x64-gnu": "0.2.0",
-    "@elecmonkey/garden-content-compiler-linux-x64-musl": "0.2.0"
+    "@elecmonkey/garden-content-compiler-darwin-arm64": "0.2.1",
+    "@elecmonkey/garden-content-compiler-linux-x64-gnu": "0.2.1",
+    "@elecmonkey/garden-content-compiler-linux-x64-musl": "0.2.1"
   }
 }

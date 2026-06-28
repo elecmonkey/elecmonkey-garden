@@ -63,7 +63,7 @@ jobs:
         uses: mlugg/setup-zig@v2
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Validate release tag
         run: node -e "const pkg=require('./packages/content-compiler-napi/package.json'); const tag=process.env.GITHUB_REF_NAME; const expected='garden-content-compiler-v'+pkg.version; if(tag!==expected){throw new Error('Tag '+tag+' does not match '+expected)} for (const [name, version] of Object.entries(pkg.optionalDependencies || {})) { if (version !== pkg.version) throw new Error(name+' optional dependency version '+version+' does not match '+pkg.version); }"
@@ -111,7 +111,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Validate release tag
         run: node -e "const pkg=require('./packages/content-compiler-napi/package.json'); const tag=process.env.GITHUB_REF_NAME; const expected='garden-content-compiler-v'+pkg.version; if(tag!==expected){throw new Error('Tag '+tag+' does not match '+expected)} for (const [name, version] of Object.entries(pkg.optionalDependencies || {})) { if (version !== pkg.version) throw new Error(name+' optional dependency version '+version+' does not match '+pkg.version); }"
