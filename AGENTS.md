@@ -170,3 +170,41 @@ Notes:
 - The site should normally depend on a published `@elecmonkey/garden-content-compiler` version.
 - Temporarily switching to `workspace:*` is useful for local compiler development, but switch back to the published version before final verification unless the task explicitly requires workspace linking.
 - When adding a new island with a client dependency, ensure the dependency is dynamically imported if it should not affect pages that do not use the island.
+
+## Content Compiler Release Flow
+
+The content compiler is published through GitHub Actions with npm Trusted Publishing. Do not publish it manually from a local machine unless explicitly requested.
+
+Release package set:
+
+- `@elecmonkey/garden-content-compiler`
+- `@elecmonkey/garden-content-compiler-darwin-arm64`
+- `@elecmonkey/garden-content-compiler-linux-x64-gnu`
+- `@elecmonkey/garden-content-compiler-linux-x64-musl`
+
+Bump checklist:
+
+- Update the root `package.json` version.
+- Update `[workspace.package].version` in `Cargo.toml`.
+- Update `packages/content-compiler-napi/package.json` version.
+- Update all `packages/content-compiler-napi/package.json` `optionalDependencies` platform package versions to the same version.
+- If the site should consume the new compiler, update `packages/site/package.json` to the same published `@elecmonkey/garden-content-compiler` version. Do not leave it as `workspace:*` for release or deployment.
+- Run `pnpm install --lockfile-only` to refresh `pnpm-lock.yaml`.
+
+Before tagging, run the relevant checks:
+
+```bash
+cargo test -p garden-md-compiler
+cargo test -p garden-content-compiler
+pnpm --filter @elecmonkey/garden-content-compiler check
+pnpm --filter @elecmonkey/garden-site build
+```
+
+Publishing is triggered by pushing a tag that matches the compiler package version:
+
+```bash
+git tag garden-content-compiler-vX.Y.Z
+git push origin garden-content-compiler-vX.Y.Z
+```
+
+The workflow at `.github/workflows/publish-content-compiler.yml` validates that the tag equals `garden-content-compiler-v${packages/content-compiler-napi/package.json.version}` and that all optional platform dependency versions match. It builds native artifacts in a matrix, prepares npm platform packages, publishes the three platform packages first, and publishes the main package last using `npm publish --provenance --access public`.
