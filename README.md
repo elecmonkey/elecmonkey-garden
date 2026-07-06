@@ -1,6 +1,6 @@
 # Elecmonkey's Garden
 
-[https://www.elecmonkey.com](https://www.elecmonkey.com)
+[https://www.elecmonkey.com/en](https://www.elecmonkey.com/en)
 
 English | [简体中文](README.zh-CN.md)
 
