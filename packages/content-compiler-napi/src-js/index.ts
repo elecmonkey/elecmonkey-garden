@@ -309,7 +309,7 @@ function isPostMarkdown(fileName: string): boolean {
   return fileName.endsWith('.md') && !isDraftMarkdown(fileName);
 }
 
-function fileHash(source: crypto.BinaryLike): string {
+function fileHash(source: string | NodeJS.ArrayBufferView): string {
   return `sha256:${crypto.createHash('sha256').update(source).digest('hex')}`;
 }
 
