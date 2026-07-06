@@ -37,7 +37,7 @@ export default function StaticArticleContent({ postId, html, islands = [] }: Sta
 }
 
 function prepareArticleHtml(html: string): string {
-  return html.replace(/<a href="(https?:\/\/[^\"]+)"(?![^>]*\btarget=)/g, (_match, href: string) => (
+  return html.replace(/<a href="(https?:\/\/[^"]+)"(?![^>]*\btarget=)/g, (_match, href: string) => (
     `<a href="${href}" target="_blank" rel="noopener noreferrer"`
   ));
 }
