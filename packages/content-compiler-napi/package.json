@@ -49,8 +49,7 @@
     "@napi-rs/cli": "^3.7.2",
     "@rslib/core": "^0.23.2",
     "@types/node": "^26.1.0",
-    "@typescript/native-preview": "7.0.0-dev.20260525.1",
-    "typescript": "^6.0.3"
+    "@typescript/native-preview": "7.0.0-dev.20260525.1"
   },
   "napi": {
     "binaryName": "garden-content-compiler",

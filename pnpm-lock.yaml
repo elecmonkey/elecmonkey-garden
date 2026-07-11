@@ -26,9 +26,6 @@ importers:
       '@typescript/native-preview':
         specifier: 7.0.0-dev.20260525.1
         version: 7.0.0-dev.20260525.1
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
     optionalDependencies:
       '@elecmonkey/garden-content-compiler-darwin-arm64':
         specifier: 0.2.3
@@ -97,9 +94,6 @@ importers:
       tailwindcss:
         specifier: ^4.3.2
         version: 4.3.2
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
 
 packages:
 
@@ -4104,7 +4098,8 @@ snapshots:
 
   typanion@3.14.0: {}
 
-  typescript@6.0.3: {}
+  typescript@6.0.3:
+    optional: true
 
   ufo@1.6.1: {}
 
