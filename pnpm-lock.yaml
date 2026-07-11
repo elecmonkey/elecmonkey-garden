@@ -29,12 +29,22 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+    optionalDependencies:
+      '@elecmonkey/garden-content-compiler-darwin-arm64':
+        specifier: 0.2.2
+        version: 0.2.2
+      '@elecmonkey/garden-content-compiler-linux-x64-gnu':
+        specifier: 0.2.2
+        version: 0.2.2
+      '@elecmonkey/garden-content-compiler-linux-x64-musl':
+        specifier: 0.2.2
+        version: 0.2.2
 
   packages/site:
     dependencies:
       '@elecmonkey/garden-content-compiler':
-        specifier: 0.2.1
-        version: 0.2.1
+        specifier: 0.2.2
+        version: 0.2.2
       '@viz-js/viz':
         specifier: ^3.28.0
         version: 3.28.0
@@ -168,25 +178,25 @@ packages:
   '@chevrotain/types@11.1.2':
     resolution: {integrity: sha512-U+HFai5+zmJCkK86QsaJtoITlboZHBqrVketcO2ROv865xfCMSFpELQoz1GkX5GzME8pTa+3kbKrZHQtI0gdbw==}
 
-  '@elecmonkey/garden-content-compiler-darwin-arm64@0.2.1':
-    resolution: {integrity: sha512-E/5UCP2pRE+p5OTwcEsuWDP+cIf/UcjQKXuLRjxEtdWogFoNnC38Omn2eJfi4DZihXcWM67J04/aoHBmCwBGVw==}
+  '@elecmonkey/garden-content-compiler-darwin-arm64@0.2.2':
+    resolution: {integrity: sha512-PfU3eVFJYzKszgvd95ixjGP9kxqsbD6CWNSThtOh++9Ou+HERm84y516uvkGWQXQypw6q1rfGlLFg/B6VH2hDQ==}
     cpu: [arm64]
     os: [darwin]
 
-  '@elecmonkey/garden-content-compiler-linux-x64-gnu@0.2.1':
-    resolution: {integrity: sha512-G6eyee7mFJ4wvrA2jUQAzpmDgfiajFUcmZS5nUekGcTkURK0094rCYvveITuFKtLvqsF0mxhBeUW7sNPY5N3OA==}
+  '@elecmonkey/garden-content-compiler-linux-x64-gnu@0.2.2':
+    resolution: {integrity: sha512-OO+u3mFdiI6hJUeM55MPUCyfuPVQHcUjcTTG+8ysiUTUse5IfvDV9rF8MEx6vPFFZEYogkrUsv2oS2y2RkJW+Q==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@elecmonkey/garden-content-compiler-linux-x64-musl@0.2.1':
-    resolution: {integrity: sha512-tIvkOpJB30OGcCtawaKgsTzT0APZtNwD6L2dI5/D5/5vFoNGcSZvWl9Fcs+KO5vWllajXprFP1c0FZgHM2HN8g==}
+  '@elecmonkey/garden-content-compiler-linux-x64-musl@0.2.2':
+    resolution: {integrity: sha512-GFpEDnzwF6/4Ps+csHYzwPGMH1zW5RB488Skhw/iX0sNbQavgcC+xyW53KMPQBZ0wLvIJ9fYSL4WdL0k3CzVgA==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@elecmonkey/garden-content-compiler@0.2.1':
-    resolution: {integrity: sha512-iAt1rx3ykK5DJhQaikjujKxrUBoLMta8PyMnfhxk4ypPj/0/8CLkFls4Erhn3gRQXk4InKyAaR6+Vqw2tBy5GA==}
+  '@elecmonkey/garden-content-compiler@0.2.2':
+    resolution: {integrity: sha512-aCiybGjwaRprklNCN31+Vj69pQVE5yG2E2j9AqfIjYQ8uIfkLZf/GypartJSs7SU4oI8sydUsS2qyO+XQWgaoQ==}
 
   '@emnapi/core@1.11.1':
     resolution: {integrity: sha512-RSvbQmHzdKzNsLYa/wHrbc3KN4sYLKAdPZxqiM2HATqv/SBk2/ENSHpvXGaLOMcsAyz0poEGqkmmKYG3OWiJEQ==}
@@ -2257,20 +2267,20 @@ snapshots:
 
   '@chevrotain/types@11.1.2': {}
 
-  '@elecmonkey/garden-content-compiler-darwin-arm64@0.2.1':
+  '@elecmonkey/garden-content-compiler-darwin-arm64@0.2.2':
     optional: true
 
-  '@elecmonkey/garden-content-compiler-linux-x64-gnu@0.2.1':
+  '@elecmonkey/garden-content-compiler-linux-x64-gnu@0.2.2':
     optional: true
 
-  '@elecmonkey/garden-content-compiler-linux-x64-musl@0.2.1':
+  '@elecmonkey/garden-content-compiler-linux-x64-musl@0.2.2':
     optional: true
 
-  '@elecmonkey/garden-content-compiler@0.2.1':
+  '@elecmonkey/garden-content-compiler@0.2.2':
     optionalDependencies:
-      '@elecmonkey/garden-content-compiler-darwin-arm64': 0.2.1
-      '@elecmonkey/garden-content-compiler-linux-x64-gnu': 0.2.1
-      '@elecmonkey/garden-content-compiler-linux-x64-musl': 0.2.1
+      '@elecmonkey/garden-content-compiler-darwin-arm64': 0.2.2
+      '@elecmonkey/garden-content-compiler-linux-x64-gnu': 0.2.2
+      '@elecmonkey/garden-content-compiler-linux-x64-musl': 0.2.2
 
   '@emnapi/core@1.11.1':
     dependencies:
