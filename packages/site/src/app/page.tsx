@@ -40,7 +40,7 @@ export default function Home({ locale = 'zh' }: { locale?: Locale }) {
             <div className="w-36 h-36 md:w-42 md:h-42 relative overflow-hidden rounded-full ring-2 ring-primary/20">
               <div className="w-full h-full flex items-center justify-center">
                 <Image
-                  src="https://images.elecmonkey.com/pages/em.png"
+                  src="/em.webp"
                   alt="EM"
                   width={200}
                   height={200}

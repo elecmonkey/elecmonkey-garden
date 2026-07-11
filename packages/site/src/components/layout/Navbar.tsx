@@ -94,7 +94,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
               }}
             >
               <Image
-                src="/icon.png"
+                src="/icon.webp"
                 alt="Logo"
                 width={32}
                 height={32}
