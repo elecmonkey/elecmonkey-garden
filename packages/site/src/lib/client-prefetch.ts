@@ -1,119 +1,344 @@
 import { type Locale, getLocaleFromPathname, stripLocalePrefix } from './i18n';
 
-type PrefetchPriority = 'intent' | 'viewport';
+type PrefetchPriority = 'intent' | 'viewport' | 'adjacent';
 type PrefetchTask = () => Promise<void> | void;
 type PrefetchableRouteKey = 'home' | 'about' | 'blog' | 'blogPagination' | 'tags' | 'archive' | 'search';
-type PrefetchLinkAs = 'font' | 'script' | 'style' | 'fetch';
-type PrefetchLinkRel = 'prefetch' | 'preload';
+type QueuePriority = 'intent' | 'background';
+type BackgroundArticleKind = 'viewport' | 'adjacent';
 
 type NetworkInformation = {
   saveData?: boolean;
   effectiveType?: string;
 };
 
-const MAX_CONCURRENT_PREFETCHES = 2;
-const prefetchedKeys = new Set<string>();
-const pendingKeys = new Set<string>();
-const scheduledViewportTasks = new Map<string, PrefetchTask>();
-const queuedTasks: Array<{ key: string; task: PrefetchTask }> = [];
-let activePrefetches = 0;
-let blogPostRoutePrefetch: Promise<void> | undefined;
-const prefetchedAssets = new Set<string>();
+type PrefetchPolicy = {
+  allowIntent: boolean;
+  viewportArticleBudget: number;
+  adjacentArticleBudget: number;
+};
 
-const KATEX_CORE_FONT_URLS = [
-  '/static/font/KaTeX_Main-Regular.0462f03bdf.woff2',
-  '/static/font/KaTeX_Math-Italic.f28c23acad.woff2',
-  '/static/font/KaTeX_Size1-Regular.eae34984b3.woff2',
-];
+type QueuedPrefetch = {
+  backgroundIndex?: number;
+  backgroundKind?: BackgroundArticleKind;
+  key: string;
+  priority: QueuePriority;
+  scope: string;
+  task: PrefetchTask;
+};
+
+type IdleWindow = Window & {
+  requestIdleCallback?: (callback: IdleRequestCallback) => number;
+  cancelIdleCallback?: (handle: number) => void;
+};
+
+const PAGE_SETTLE_DELAY_MS = 650;
+const BACKGROUND_FALLBACK_DELAY_MS = 1500;
+
+const prefetchedKeys = new Set<string>();
+const queuedByKey = new Map<string, QueuedPrefetch>();
+const intentQueue: QueuedPrefetch[] = [];
+const backgroundQueue: QueuedPrefetch[] = [];
+const backgroundArticleReservations: Record<BackgroundArticleKind, number> = {
+  viewport: 0,
+  adjacent: 0,
+};
+
+let activePrefetch: QueuedPrefetch | undefined;
+let blogPostRoutePrefetch: Promise<void> | undefined;
+let currentScope = getWindowScope();
+let documentLoaded = typeof document !== 'undefined' && document.readyState === 'complete';
+let navigationInProgress = false;
+let pageSettled = false;
+let settleTimer: number | undefined;
+let cancelBackgroundTurn: (() => void) | undefined;
+
+if (typeof window !== 'undefined') {
+  if (!documentLoaded) {
+    window.addEventListener('load', handleDocumentLoad, { once: true });
+  }
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+}
+
+function getWindowScope(): string {
+  if (typeof window === 'undefined') return '';
+  return `${window.location.pathname}${window.location.search}`;
+}
 
 function getConnection(): NetworkInformation | undefined {
   if (typeof navigator === 'undefined') return undefined;
   return (navigator as Navigator & { connection?: NetworkInformation }).connection;
 }
 
-function canPrefetch(priority: PrefetchPriority): boolean {
-  if (typeof window === 'undefined') return false;
-
+function getPrefetchPolicy(): PrefetchPolicy {
   const connection = getConnection();
-  if (connection?.saveData) return false;
-
-  if (priority === 'viewport') {
-    const effectiveType = connection?.effectiveType;
-    if (effectiveType === 'slow-2g' || effectiveType === '2g') {
-      return false;
-    }
+  if (connection?.saveData) {
+    return { allowIntent: false, viewportArticleBudget: 0, adjacentArticleBudget: 0 };
   }
 
-  return true;
+  switch (connection?.effectiveType) {
+    case 'slow-2g':
+    case '2g':
+      return { allowIntent: false, viewportArticleBudget: 0, adjacentArticleBudget: 0 };
+    case '3g':
+      return { allowIntent: true, viewportArticleBudget: 1, adjacentArticleBudget: 1 };
+    case '4g':
+      return { allowIntent: true, viewportArticleBudget: 3, adjacentArticleBudget: 2 };
+    default:
+      // Safari and desktop Firefox do not expose the Network Information API.
+      // Treat missing or unfamiliar values as a conservative, fully supported fallback.
+      return { allowIntent: true, viewportArticleBudget: 2, adjacentArticleBudget: 2 };
+  }
 }
 
-function scheduleIdle(callback: () => void) {
-  if (typeof window === 'undefined') return;
+function isDocumentVisible(): boolean {
+  return typeof document !== 'undefined' && document.visibilityState !== 'hidden';
+}
 
-  const requestIdleCallback = (window as Window & {
-    requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
-  }).requestIdleCallback;
+function handleDocumentLoad() {
+  documentLoaded = true;
+  scheduleBackgroundPrefetch();
+}
 
-  if (requestIdleCallback) {
-    requestIdleCallback(callback, { timeout: 3000 });
+function handleVisibilityChange() {
+  if (!isDocumentVisible()) {
+    cancelScheduledBackgroundPrefetch();
     return;
   }
 
-  globalThis.setTimeout(callback, 1200);
+  if (intentQueue.length > 0) {
+    runNextPrefetch();
+  } else {
+    scheduleBackgroundPrefetch();
+  }
+}
+
+function cancelSettleTimer() {
+  if (settleTimer !== undefined) {
+    window.clearTimeout(settleTimer);
+    settleTimer = undefined;
+  }
+}
+
+function cancelScheduledBackgroundPrefetch() {
+  cancelBackgroundTurn?.();
+  cancelBackgroundTurn = undefined;
+}
+
+function clearQueue(queue: QueuedPrefetch[]) {
+  for (const item of queue) {
+    queuedByKey.delete(item.key);
+  }
+  queue.length = 0;
+}
+
+function clearQueuedPrefetches() {
+  clearQueue(intentQueue);
+  clearQueue(backgroundQueue);
+}
+
+function resetBackgroundArticleReservations() {
+  backgroundArticleReservations.viewport = 0;
+  backgroundArticleReservations.adjacent = 0;
+}
+
+export function syncPrefetchNavigation(isNavigating: boolean, scope: string) {
+  if (typeof window === 'undefined') return;
+
+  if (isNavigating) {
+    navigationInProgress = true;
+    pageSettled = false;
+    cancelSettleTimer();
+    cancelScheduledBackgroundPrefetch();
+    clearQueuedPrefetches();
+    return;
+  }
+
+  const scopeChanged = scope !== currentScope;
+  navigationInProgress = false;
+
+  if (scopeChanged) {
+    currentScope = scope;
+    clearQueuedPrefetches();
+    resetBackgroundArticleReservations();
+  }
+
+  if (!pageSettled && settleTimer === undefined) {
+    settleTimer = window.setTimeout(() => {
+      settleTimer = undefined;
+      pageSettled = true;
+      scheduleBackgroundPrefetch();
+    }, PAGE_SETTLE_DELAY_MS);
+  }
+
+  runNextPrefetch();
+}
+
+function hasPrefetch(key: string): boolean {
+  return prefetchedKeys.has(key) || queuedByKey.has(key) || activePrefetch?.key === key;
+}
+
+function removeFromQueue(queue: QueuedPrefetch[], item: QueuedPrefetch) {
+  const index = queue.indexOf(item);
+  if (index !== -1) {
+    queue.splice(index, 1);
+  }
+}
+
+function enqueueIntent(key: string, task: PrefetchTask) {
+  const policy = getPrefetchPolicy();
+  if (
+    !policy.allowIntent
+    || !documentLoaded
+    || navigationInProgress
+    || !isDocumentVisible()
+    || prefetchedKeys.has(key)
+    || activePrefetch?.key === key
+  ) {
+    return;
+  }
+
+  const existing = queuedByKey.get(key);
+  if (existing) {
+    if (existing.priority === 'background') {
+      removeFromQueue(backgroundQueue, existing);
+      existing.priority = 'intent';
+      existing.scope = currentScope;
+      intentQueue.push(existing);
+      cancelScheduledBackgroundPrefetch();
+      runNextPrefetch();
+    }
+    return;
+  }
+
+  const item: QueuedPrefetch = {
+    key,
+    priority: 'intent',
+    scope: currentScope,
+    task,
+  };
+  queuedByKey.set(key, item);
+  intentQueue.push(item);
+  cancelScheduledBackgroundPrefetch();
+  runNextPrefetch();
+}
+
+function getBackgroundArticleBudget(kind: BackgroundArticleKind): number {
+  const policy = getPrefetchPolicy();
+  return kind === 'viewport' ? policy.viewportArticleBudget : policy.adjacentArticleBudget;
+}
+
+function enqueueBackgroundArticle(key: string, task: PrefetchTask, kind: BackgroundArticleKind) {
+  if (navigationInProgress || hasPrefetch(key)) return;
+
+  const budget = getBackgroundArticleBudget(kind);
+  if (budget === 0 || backgroundArticleReservations[kind] >= budget) return;
+
+  backgroundArticleReservations[kind] += 1;
+  const item: QueuedPrefetch = {
+    backgroundIndex: backgroundArticleReservations[kind],
+    backgroundKind: kind,
+    key,
+    priority: 'background',
+    scope: currentScope,
+    task,
+  };
+  queuedByKey.set(key, item);
+  backgroundQueue.push(item);
+  scheduleBackgroundPrefetch();
+}
+
+function takeNextPrefetch(): QueuedPrefetch | undefined {
+  const policy = getPrefetchPolicy();
+
+  while (intentQueue.length > 0) {
+    const item = intentQueue.shift()!;
+    queuedByKey.delete(item.key);
+    if (item.scope === currentScope && policy.allowIntent) {
+      return item;
+    }
+  }
+
+  if (!pageSettled) return undefined;
+
+  while (backgroundQueue.length > 0) {
+    const item = backgroundQueue.shift()!;
+    queuedByKey.delete(item.key);
+    if (
+      item.scope === currentScope
+      && item.backgroundKind
+      && item.backgroundIndex
+      && item.backgroundIndex <= getBackgroundArticleBudget(item.backgroundKind)
+    ) {
+      return item;
+    }
+  }
+
+  return undefined;
 }
 
 function runNextPrefetch() {
-  if (activePrefetches >= MAX_CONCURRENT_PREFETCHES) return;
+  if (
+    activePrefetch
+    || navigationInProgress
+    || !documentLoaded
+    || !isDocumentVisible()
+  ) {
+    return;
+  }
 
-  const item = queuedTasks.shift();
+  const item = takeNextPrefetch();
   if (!item) return;
 
-  activePrefetches += 1;
-
-  Promise.resolve(item.task())
+  activePrefetch = item;
+  Promise.resolve()
+    .then(item.task)
     .then(() => {
       prefetchedKeys.add(item.key);
     })
     .catch(() => {
-      // Prefetch is best-effort. Keep failures silent so the next navigation can
-      // perform the real load and surface any user-visible error.
+      // Prefetch is best-effort. Failed tasks remain retryable by intent or navigation.
     })
     .finally(() => {
-      pendingKeys.delete(item.key);
-      activePrefetches -= 1;
+      activePrefetch = undefined;
+      if (intentQueue.length > 0) {
+        runNextPrefetch();
+      } else {
+        scheduleBackgroundPrefetch();
+      }
+    });
+}
+
+function scheduleBackgroundPrefetch() {
+  if (
+    cancelBackgroundTurn
+    || activePrefetch
+    || backgroundQueue.length === 0
+    || navigationInProgress
+    || !documentLoaded
+    || !pageSettled
+    || !isDocumentVisible()
+  ) {
+    return;
+  }
+
+  const idleWindow = window as IdleWindow;
+  if (idleWindow.requestIdleCallback && idleWindow.cancelIdleCallback) {
+    const cancelIdleCallback = idleWindow.cancelIdleCallback;
+    const handle = idleWindow.requestIdleCallback(() => {
+      cancelBackgroundTurn = undefined;
       runNextPrefetch();
     });
-}
-
-function enqueueNow(key: string, task: PrefetchTask) {
-  if (prefetchedKeys.has(key) || pendingKeys.has(key)) return;
-
-  pendingKeys.add(key);
-  queuedTasks.push({ key, task });
-  runNextPrefetch();
-}
-
-function enqueuePrefetch(key: string, task: PrefetchTask, priority: PrefetchPriority) {
-  if (!canPrefetch(priority)) return;
-  if (prefetchedKeys.has(key) || pendingKeys.has(key)) return;
-
-  const scheduledTask = scheduledViewportTasks.get(key);
-
-  if (priority === 'intent') {
-    scheduledViewportTasks.delete(key);
-    enqueueNow(key, scheduledTask ?? task);
-  } else {
-    if (scheduledTask) return;
-
-    scheduledViewportTasks.set(key, task);
-    scheduleIdle(() => {
-      const currentTask = scheduledViewportTasks.get(key);
-      if (!currentTask) return;
-
-      scheduledViewportTasks.delete(key);
-      enqueueNow(key, currentTask);
-    });
+    cancelBackgroundTurn = () => cancelIdleCallback(handle);
+    return;
   }
+
+  // requestIdleCallback is not Baseline (notably missing in some Safari versions).
+  // A longer post-settle delay preserves the optimization without making it required.
+  const handle = window.setTimeout(() => {
+    cancelBackgroundTurn = undefined;
+    runNextPrefetch();
+  }, BACKGROUND_FALLBACK_DELAY_MS);
+  cancelBackgroundTurn = () => window.clearTimeout(handle);
 }
 
 function normalizeInternalHref(href: string): URL | undefined {
@@ -133,35 +358,6 @@ function extractBlogSlug(pathname: string): string | undefined {
   return match?.[1] ? decodeURIComponent(match[1]) : undefined;
 }
 
-function warmAsset(url: string, as: PrefetchLinkAs, rel: PrefetchLinkRel = 'prefetch') {
-  const key = `${rel}:${url}`;
-  if (typeof document === 'undefined' || prefetchedAssets.has(key)) return;
-
-  prefetchedAssets.add(key);
-
-  const link = document.createElement('link');
-  link.rel = rel;
-  link.href = url;
-  link.as = as;
-
-  if (as === 'font') {
-    link.type = 'font/woff2';
-    link.crossOrigin = 'anonymous';
-  }
-
-  document.head.appendChild(link);
-}
-
-function prefetchArticleFonts() {
-  for (const url of KATEX_CORE_FONT_URLS) {
-    // Fonts are render-blocking for KaTeX once the article chunk is displayed.
-    // Warm them with preload during route/content prefetch so the later CSS
-    // font request can be satisfied from the preload/cache entry instead of
-    // starting only after navigation.
-    warmAsset(url, 'font', 'preload');
-  }
-}
-
 function prefetchBlogPost(locale: Locale, slug: string): Promise<void> {
   const routePrefetch = prefetchBlogPostRoute();
   const contentPrefetch = import('@/lib/api').then(({ prefetchPostById }) => prefetchPostById(locale, slug));
@@ -173,20 +369,14 @@ function prefetchBlogPostRoute(): Promise<void> {
   if (!blogPostRoutePrefetch) {
     blogPostRoutePrefetch = import('@/app-shell/PageRoutes.client')
       .then(({ clientRouteLoaders }) => clientRouteLoaders.blogPost())
-      .then(() => undefined);
+      .then(() => undefined)
+      .catch((error) => {
+        blogPostRoutePrefetch = undefined;
+        throw error;
+      });
   }
 
   return blogPostRoutePrefetch;
-}
-
-async function prefetchSearchPage(locale: Locale): Promise<void> {
-  const { clientRouteLoaders } = await import('@/app-shell/PageRoutes.client');
-  const { prefetchSearchIndexPosts } = await import('@/lib/search');
-
-  await Promise.all([
-    clientRouteLoaders.search(),
-    prefetchSearchIndexPosts(locale),
-  ]);
 }
 
 async function prefetchRoute(key: PrefetchableRouteKey): Promise<void> {
@@ -217,63 +407,77 @@ async function prefetchRoute(key: PrefetchableRouteKey): Promise<void> {
   }
 }
 
-export function prefetchHref(href: string | undefined, priority: PrefetchPriority = 'intent') {
+export function prefetchHref(href: string | undefined) {
   if (!href) return;
 
   const url = normalizeInternalHref(href);
   if (!url) return;
 
+  if (
+    url.pathname === window.location.pathname
+    && url.search === window.location.search
+  ) {
+    return;
+  }
+
   const slug = extractBlogSlug(url.pathname);
   const locale = getLocaleFromPathname(url.pathname);
   const strippedPathname = stripLocalePrefix(url.pathname);
   if (slug) {
-    enqueuePrefetch(`post:${locale}:${slug}`, () => prefetchBlogPost(locale, slug), priority);
+    enqueueIntent(`post:${locale}:${slug}`, () => prefetchBlogPost(locale, slug));
     return;
   }
 
   if (strippedPathname === '/') {
-    enqueuePrefetch(`route:${locale}:/`, () => prefetchRoute('home'), priority);
+    enqueueIntent(`route:${locale}:/`, () => prefetchRoute('home'));
     return;
   }
 
   if (strippedPathname === '/about') {
-    enqueuePrefetch(`route:${locale}:/about`, () => prefetchRoute('about'), priority);
+    enqueueIntent(`route:${locale}:/about`, () => prefetchRoute('about'));
     return;
   }
 
   if (strippedPathname === '/blog') {
-    enqueuePrefetch(`route:${url.pathname}`, () => prefetchRoute('blog'), priority);
+    enqueueIntent(`route:${url.pathname}`, () => prefetchRoute('blog'));
     return;
   }
 
   if (/^\/blog\/page\/\d+\/?$/.test(strippedPathname)) {
-    enqueuePrefetch(`route:${url.pathname}`, () => prefetchRoute('blogPagination'), priority);
+    enqueueIntent(`route:${url.pathname}`, () => prefetchRoute('blogPagination'));
     return;
   }
 
   if (strippedPathname === '/tags') {
-    enqueuePrefetch(`route:${locale}:/tags`, () => prefetchRoute('tags'), priority);
+    enqueueIntent(`route:${locale}:/tags`, () => prefetchRoute('tags'));
     return;
   }
 
   if (strippedPathname === '/archive') {
-    enqueuePrefetch(`route:${locale}:/archive`, () => prefetchRoute('archive'), priority);
+    enqueueIntent(`route:${locale}:/archive`, () => prefetchRoute('archive'));
     return;
   }
 
   if (strippedPathname === '/search') {
-    const searchParams = url.searchParams;
-    const hasSearchIntent = searchParams.has('keyword') || searchParams.has('page');
-
-    enqueuePrefetch(
-      hasSearchIntent ? `route:${url.pathname}${url.search}` : 'route:/search',
-      () => (hasSearchIntent ? prefetchSearchPage(locale) : prefetchRoute('search')),
-      priority,
-    );
+    enqueueIntent(`route:${locale}:/search`, () => prefetchRoute('search'));
   }
 }
 
 export function prefetchArticleBySlug(locale: Locale, slug: string, priority: PrefetchPriority = 'viewport') {
-  prefetchArticleFonts();
-  enqueuePrefetch(`post:${locale}:${slug}`, () => prefetchBlogPost(locale, slug), priority);
+  const key = `post:${locale}:${slug}`;
+  const task = () => prefetchBlogPost(locale, slug);
+
+  if (priority === 'intent') {
+    enqueueIntent(key, task);
+  } else {
+    enqueueBackgroundArticle(key, task, priority);
+  }
+}
+
+export function prefetchAdjacentArticles(locale: Locale, slugs: Array<string | undefined>) {
+  for (const slug of slugs) {
+    if (slug) {
+      prefetchArticleBySlug(locale, slug, 'adjacent');
+    }
+  }
 }

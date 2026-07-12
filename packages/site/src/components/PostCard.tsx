@@ -4,6 +4,8 @@ import { prefetchArticleBySlug } from '@/lib/client-prefetch';
 import { type Locale, postHref } from '@/lib/i18n';
 import { getTagPath } from '@/lib/tag-url';
 
+const HOVER_PREFETCH_DELAY_MS = 100;
+
 export interface PostCardProps {
   post: {
     locale?: Locale;
@@ -19,10 +21,36 @@ export interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   const locale = post.locale ?? 'zh';
   const articleRef = useRef<HTMLElement>(null);
+  const hoverTimerRef = useRef<number | null>(null);
 
   const prefetchPostOnIntent = () => {
     prefetchArticleBySlug(locale, post.id, 'intent');
   };
+
+  const cancelHoverPrefetch = () => {
+    if (hoverTimerRef.current !== null) {
+      window.clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
+  const prefetchPostAfterHoverDwell = () => {
+    if (hoverTimerRef.current !== null) return;
+
+    hoverTimerRef.current = window.setTimeout(() => {
+      hoverTimerRef.current = null;
+      prefetchPostOnIntent();
+    }, HOVER_PREFETCH_DELAY_MS);
+  };
+
+  const prefetchPostOnFocus = () => {
+    cancelHoverPrefetch();
+    prefetchPostOnIntent();
+  };
+
+  useEffect(() => () => {
+    cancelHoverPrefetch();
+  }, [locale, post.id]);
 
   useEffect(() => {
     const element = articleRef.current;
@@ -51,16 +79,16 @@ export default function PostCard({ post }: PostCardProps) {
     <article
       ref={articleRef}
       className="relative group"
-      onFocusCapture={prefetchPostOnIntent}
-      onPointerEnter={prefetchPostOnIntent}
-      onTouchStart={prefetchPostOnIntent}
+      onFocusCapture={prefetchPostOnFocus}
+      onPointerEnter={prefetchPostAfterHoverDwell}
+      onPointerLeave={cancelHoverPrefetch}
     >
       {/* 底层卡片 - 灰色背景，向右下偏移 */}
       <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
       
       {/* 上层卡片 - 白色/主题背景 */}
       <div className="relative p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
-      <Link href={postHref(locale, post.id)} prefetch>
+      <Link href={postHref(locale, post.id)}>
         <h3 className="text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors">{post.title}</h3>
       </Link>
       

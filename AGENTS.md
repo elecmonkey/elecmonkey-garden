@@ -42,6 +42,7 @@ Supported optional fields include draft/visibility-style metadata used by the co
 
 - Client route modules are preloadable in `packages/site/src/app-shell/PageRoutes.client.tsx`, and every client page route must have a matching loader in `packages/site/src/app-shell/routes.client.tsx`. The loader keeps the previous page visible while `NavigationProgress` reports navigation at the top of the viewport.
 - Prefetch remains best-effort and silent. Route loaders should also await data required for the target page's first meaningful render, such as article content or the search index; do not add visible page-level loading fallbacks.
+- Treat Network Information API and `requestIdleCallback` as optional enhancements, not Baseline dependencies. Keep feature detection and conservative Safari/Firefox fallbacks when changing prefetch scheduling.
 - Keep client and SSG route IDs synchronized through `create-routes.tsx`. The client marks the initially matched SSG routes as hydrated so route loaders do not rerun during first-page hydration.
 
 ## Markdown Islands

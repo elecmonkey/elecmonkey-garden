@@ -24,10 +24,15 @@ function createPreloadableRoute<TComponent extends ComponentType<any>>(
     }
 
     if (!loadingPromise) {
-      loadingPromise = loader().then((module) => {
-        loadedModule = module;
-        return module;
-      });
+      loadingPromise = loader()
+        .then((module) => {
+          loadedModule = module;
+          return module;
+        })
+        .catch((error) => {
+          loadingPromise = undefined;
+          throw error;
+        });
     }
 
     return loadingPromise;
