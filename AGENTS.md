@@ -38,6 +38,12 @@ Supported optional fields include draft/visibility-style metadata used by the co
 - If compiler output shape changes, bump the compiler schema/cache version so stale generated HTML is not reused.
 - After changing Markdown compiler behavior, run at least `cargo test -p garden-md-compiler` and `pnpm --filter @elecmonkey/garden-site build`.
 
+## Client Navigation Loading
+
+- Client route modules are preloadable in `packages/site/src/app-shell/PageRoutes.client.tsx`, and every client page route must have a matching loader in `packages/site/src/app-shell/routes.client.tsx`. The loader keeps the previous page visible while `NavigationProgress` reports navigation at the top of the viewport.
+- Prefetch remains best-effort and silent. Route loaders should also await data required for the target page's first meaningful render, such as article content or the search index; do not add visible page-level loading fallbacks.
+- Keep client and SSG route IDs synchronized through `create-routes.tsx`. The client marks the initially matched SSG routes as hydrated so route loaders do not rerun during first-page hydration.
+
 ## Markdown Islands
 
 Markdown islands are static HTML regions emitted by the Rust compiler and enhanced in the browser by `packages/site/src/components/article/enhancer/*`. They preserve readable fallback HTML for no-JS scenarios while enabling client-side behavior only where needed.

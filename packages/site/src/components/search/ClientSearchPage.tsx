@@ -114,11 +114,7 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
         <div className="text-center py-10">
           <p className="text-muted-foreground">{dictionary.search.loadError}</p>
         </div>
-      ) : loading ? (
-        <div className="text-center py-10">
-          <p className="text-muted-foreground">{dictionary.search.loading}</p>
-        </div>
-      ) : (
+      ) : loading ? null : (
         <>
           <div className="mb-6">
             <p className="text-foreground">

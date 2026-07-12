@@ -101,7 +101,7 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
 
   const articleNode = post.html
     ? <StaticArticleContent postId={post.id} html={post.html} islands={post.islands} />
-    : <p className="text-muted-foreground">正在加载文章内容...</p>;
+    : null;
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
