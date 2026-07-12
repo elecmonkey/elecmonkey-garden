@@ -2,7 +2,7 @@ import { type Locale, getLocaleFromPathname, stripLocalePrefix } from './i18n';
 
 type PrefetchPriority = 'intent' | 'viewport';
 type PrefetchTask = () => Promise<void> | void;
-type PrefetchableRouteKey = 'home' | 'about' | 'blog' | 'tags' | 'archive' | 'search';
+type PrefetchableRouteKey = 'home' | 'about' | 'blog' | 'blogPagination' | 'tags' | 'archive' | 'search';
 type PrefetchLinkAs = 'font' | 'script' | 'style' | 'fetch';
 type PrefetchLinkRel = 'prefetch' | 'preload';
 
@@ -202,6 +202,9 @@ async function prefetchRoute(key: PrefetchableRouteKey): Promise<void> {
     case 'blog':
       await clientRouteLoaders.blog();
       break;
+    case 'blogPagination':
+      await clientRouteLoaders.blogPagination();
+      break;
     case 'tags':
       await clientRouteLoaders.tags();
       break;
@@ -238,8 +241,13 @@ export function prefetchHref(href: string | undefined, priority: PrefetchPriorit
     return;
   }
 
-  if (strippedPathname === '/blog' || /^\/blog\/page\/\d+\/?$/.test(strippedPathname)) {
+  if (strippedPathname === '/blog') {
     enqueuePrefetch(`route:${url.pathname}`, () => prefetchRoute('blog'), priority);
+    return;
+  }
+
+  if (/^\/blog\/page\/\d+\/?$/.test(strippedPathname)) {
+    enqueuePrefetch(`route:${url.pathname}`, () => prefetchRoute('blogPagination'), priority);
     return;
   }
 
