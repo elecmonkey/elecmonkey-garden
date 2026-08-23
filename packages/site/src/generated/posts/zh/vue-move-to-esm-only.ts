@@ -55,5 +55,9 @@ export const post = {
   "prevPost": {
     "id": "vue-tsc-runtime-patch-hack",
     "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
+  },
+  "nextPost": {
+    "id": "web-stack-detector",
+    "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
   }
 } satisfies PostData;

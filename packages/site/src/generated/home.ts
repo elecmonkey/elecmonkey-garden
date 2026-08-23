@@ -6,6 +6,26 @@ export const generatedHomeContentByLocale = {
   "zh": {
     "recentPosts": [
       {
+        "id": "web-stack-detector",
+        "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈",
+        "date": "2026-08-24",
+        "description": "前端框架 React 还是绝对的统治地位。大厂仍然是 Webpack 数不胜数，GitHub 用了 Rspack。",
+        "tags": [
+          "浏览器扩展",
+          "前端工具"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/web-stack-detector",
+        "monthFolder": "202608",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js 迁移到 ESM-only"
+        }
+      },
+      {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js 迁移到 ESM-only",
         "date": "2026-06-23",
@@ -25,6 +45,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
+        },
+        "nextPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
         }
       },
       {
@@ -182,33 +206,6 @@ export const generatedHomeContentByLocale = {
         "nextPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access 问题"
-        }
-      },
-      {
-        "id": "viteplus-announcement",
-        "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”",
-        "date": "2026-03-29",
-        "description": "“统一” \"Unified\" 是一个和 JavaScript 生态格格不入的词。",
-        "tags": [
-          "Vite",
-          "Rolldown",
-          "oxc",
-          "oxlint",
-          "oxfmt"
-        ],
-        "author": "Elecmonkey",
-        "locale": "zh",
-        "permalink": "/blog/viteplus-announcement",
-        "monthFolder": "202603",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "note-oauth2-login",
-          "title": "OAuth 2.0 授权码模式登录流程全图"
-        },
-        "nextPost": {
-          "id": "axios-xhr-and-fetch",
-          "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思"
         }
       }
     ],
@@ -426,6 +423,10 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
+        "name": "前端工具",
+        "count": 1
+      },
+      {
         "name": "前端工具链",
         "count": 5
       },
@@ -478,6 +479,10 @@ export const generatedHomeContentByLocale = {
         "count": 4
       },
       {
+        "name": "浏览器扩展",
+        "count": 1
+      },
+      {
         "name": "移动端",
         "count": 1
       },
@@ -507,12 +512,32 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 42,
-      "latestUpdateDate": "2026-06-23"
+      "totalPosts": 43,
+      "latestUpdateDate": "2026-08-24"
     }
   },
   "en": {
     "recentPosts": [
+      {
+        "id": "web-stack-detector",
+        "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?",
+        "date": "2026-08-24",
+        "description": "React still absolutely dominates frontend frameworks. Webpack remains ubiquitous among major companies, while GitHub uses Rspack.",
+        "tags": [
+          "Browser Extension",
+          "Frontend Tooling"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/web-stack-detector",
+        "monthFolder": "202608",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js Is Moving to ESM-only"
+        }
+      },
       {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js Is Moving to ESM-only",
@@ -533,6 +558,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
+        },
+        "nextPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
         }
       },
       {
@@ -691,33 +720,6 @@ export const generatedHomeContentByLocale = {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access Issues"
         }
-      },
-      {
-        "id": "viteplus-announcement",
-        "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\"",
-        "date": "2026-03-29",
-        "description": "\"Unified\" is a word that feels out of place in the JavaScript ecosystem.",
-        "tags": [
-          "Vite",
-          "Rolldown",
-          "oxc",
-          "oxlint",
-          "oxfmt"
-        ],
-        "author": "Elecmonkey",
-        "locale": "en",
-        "permalink": "/en/blog/viteplus-announcement",
-        "monthFolder": "202603",
-        "isDraft": false,
-        "isHidden": false,
-        "prevPost": {
-          "id": "note-oauth2-login",
-          "title": "Complete Diagram of the OAuth 2.0 Authorization Code Login Flow"
-        },
-        "nextPost": {
-          "id": "axios-xhr-and-fetch",
-          "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections"
-        }
       }
     ],
     "tags": [
@@ -751,6 +753,10 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Axios",
+        "count": 1
+      },
+      {
+        "name": "Browser Extension",
         "count": 1
       },
       {
@@ -807,7 +813,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "Frontend Tooling",
-        "count": 5
+        "count": 6
       },
       {
         "name": "Full-Stack Frameworks",
@@ -1015,8 +1021,8 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 42,
-      "latestUpdateDate": "2026-06-23"
+      "totalPosts": 43,
+      "latestUpdateDate": "2026-08-24"
     }
   }
 } satisfies HomeContentByLocale;

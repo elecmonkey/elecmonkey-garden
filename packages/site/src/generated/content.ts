@@ -6,6 +6,26 @@ export const generatedContentByLocale = {
   "zh": {
     posts: [
       {
+        "id": "web-stack-detector",
+        "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈",
+        "date": "2026-08-24",
+        "description": "前端框架 React 还是绝对的统治地位。大厂仍然是 Webpack 数不胜数，GitHub 用了 Rspack。",
+        "tags": [
+          "浏览器扩展",
+          "前端工具"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/web-stack-detector",
+        "monthFolder": "202608",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js 迁移到 ESM-only"
+        }
+      },
+      {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js 迁移到 ESM-only",
         "date": "2026-06-23",
@@ -25,6 +45,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
+        },
+        "nextPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
         }
       },
       {
@@ -1085,6 +1109,26 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "web-stack-detector",
+        "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈",
+        "date": "2026-08-24",
+        "description": "前端框架 React 还是绝对的统治地位。大厂仍然是 Webpack 数不胜数，GitHub 用了 Rspack。",
+        "tags": [
+          "浏览器扩展",
+          "前端工具"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/web-stack-detector",
+        "monthFolder": "202608",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js 迁移到 ESM-only"
+        }
+      },
+      {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js 迁移到 ESM-only",
         "date": "2026-06-23",
@@ -1104,6 +1148,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
+        },
+        "nextPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
         }
       },
       {
@@ -2163,6 +2211,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "web-stack-detector": { sourceHash: "sha256:02f0a55712002f26ffaf98e576dc3a5e4e5a0c87d2db131e2e7839a01cef74ac", contentHash: "sha256:63e731e20e7ca73a40851365befe581a7267f3021a50f59a548e8337af2b4325" },
       "vue-move-to-esm-only": { sourceHash: "sha256:d5876245a124ce49af8eb02487124fbd8c654d435ebb6516519da3da68cfaad9", contentHash: "sha256:c62676c49e871ea4d96db59ed361e6e1531dc84913f3b2bd1fbdba4580a8b865" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:3fe6ac9d875131a0cd75fc823ddcc8a8340acfcdd7d0c14926f022b9fce97bd2", contentHash: "sha256:84c826809cffd9c4fc4d01343620f2ee7cab0a7e82b45925af610724e49939c2" },
       "ai-agent-software-engineering": { sourceHash: "sha256:5f5c89766d37e4b1a365268d1b98c2ab7ce66e57ba988dd08e2fe5596150c5c0", contentHash: "sha256:cb709537f3d1e485851c6dbbac258907ae37c803cfec72d20f8e3283082301b2" },
@@ -2207,6 +2256,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:dc182fd6720de09ef8d309e8a5e9cfed22619c0f0b2e038253e44cb78f26ec94", contentHash: "sha256:d60188fe5df704efcee0634037c71453e8d87804c8cbbc1a955937db81fe9165" },
     },
     postLoaders: {
+      "web-stack-detector": () => import('./posts/zh/web-stack-detector'),
       "vue-move-to-esm-only": () => import('./posts/zh/vue-move-to-esm-only'),
       "vue-tsc-runtime-patch-hack": () => import('./posts/zh/vue-tsc-runtime-patch-hack'),
       "ai-agent-software-engineering": () => import('./posts/zh/ai-agent-software-engineering'),
@@ -2254,6 +2304,26 @@ export const generatedContentByLocale = {
   "en": {
     posts: [
       {
+        "id": "web-stack-detector",
+        "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?",
+        "date": "2026-08-24",
+        "description": "React still absolutely dominates frontend frameworks. Webpack remains ubiquitous among major companies, while GitHub uses Rspack.",
+        "tags": [
+          "Browser Extension",
+          "Frontend Tooling"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/web-stack-detector",
+        "monthFolder": "202608",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js Is Moving to ESM-only"
+        }
+      },
+      {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js Is Moving to ESM-only",
         "date": "2026-06-23",
@@ -2273,6 +2343,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
+        },
+        "nextPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
         }
       },
       {
@@ -3333,6 +3407,26 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "web-stack-detector",
+        "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?",
+        "date": "2026-08-24",
+        "description": "React still absolutely dominates frontend frameworks. Webpack remains ubiquitous among major companies, while GitHub uses Rspack.",
+        "tags": [
+          "Browser Extension",
+          "Frontend Tooling"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/web-stack-detector",
+        "monthFolder": "202608",
+        "isDraft": false,
+        "isHidden": false,
+        "prevPost": {
+          "id": "vue-move-to-esm-only",
+          "title": "Vue.js Is Moving to ESM-only"
+        }
+      },
+      {
         "id": "vue-move-to-esm-only",
         "title": "Vue.js Is Moving to ESM-only",
         "date": "2026-06-23",
@@ -3352,6 +3446,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
+        },
+        "nextPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
         }
       },
       {
@@ -4411,6 +4509,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "web-stack-detector": { sourceHash: "sha256:eacefbf2840cd4766d447a44889229f93102f04e37416128711b6101d56831e3", contentHash: "sha256:3e206fd31f49311bf6cdecf3710d41f106b4195e8b2373c59a1bca4d6d03595a" },
       "vue-move-to-esm-only": { sourceHash: "sha256:ad7d1371f445d2cddc43457079c2fed5b745557f04e51509e5de9565e8f1bb8d", contentHash: "sha256:b98f6e2af3e95138a8d7efdd2f8e4c8f6419939d2574e5a04a0796ed7cc7aa73" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b36e480ded2dd05a72ecebddef502cfd1e5842f62a7e3279334842aa8dac0516", contentHash: "sha256:e8521c23c073d896e285a27c682130affb95553bd4b25eb431657ccff76d0376" },
       "ai-agent-software-engineering": { sourceHash: "sha256:8a5049934cd416ee5cd955bfc474a6c79a75b32e40b5825491906753e9199a00", contentHash: "sha256:ababe361155526c5169f95937179f43889e9ca7f81b84f47dc7c88d1580085cb" },
@@ -4455,6 +4554,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:8fc93ea8e4e6d12f33ed7688e8ed58afe1ef085b476161a209d741b4b2cc2a68", contentHash: "sha256:824645ac9b163f9263ef75f905f3a19898452ac3027164b89d1677adcd35008c" },
     },
     postLoaders: {
+      "web-stack-detector": () => import('./posts/en/web-stack-detector'),
       "vue-move-to-esm-only": () => import('./posts/en/vue-move-to-esm-only'),
       "vue-tsc-runtime-patch-hack": () => import('./posts/en/vue-tsc-runtime-patch-hack'),
       "ai-agent-software-engineering": () => import('./posts/en/ai-agent-software-engineering'),

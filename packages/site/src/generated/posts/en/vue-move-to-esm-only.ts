@@ -55,5 +55,9 @@ export const post = {
   "prevPost": {
     "id": "vue-tsc-runtime-patch-hack",
     "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
+  },
+  "nextPost": {
+    "id": "web-stack-detector",
+    "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
   }
 } satisfies PostData;
