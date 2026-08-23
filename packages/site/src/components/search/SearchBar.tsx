@@ -24,7 +24,7 @@ export default function SearchBar({ className = '', placeholder = '搜索文章.
     if (!keyword.trim()) return;
     
     // 构建搜索URL并导航
-    router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
+    void router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
   };
   
   return (

@@ -2,6 +2,7 @@
   "name": "elecmonkey-garden",
   "version": "0.2.3",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "pnpm --filter @elecmonkey/garden-site dev",
     "build": "pnpm --filter @elecmonkey/garden-site build",
@@ -15,7 +16,7 @@
     "build:all": "pnpm run build:compiler && pnpm run build"
   },
   "devDependencies": {
-    "@rslint/core": "^0.6.5"
+    "@rslint/core": "^0.8.1"
   },
   "packageManager": "pnpm@11.11.0"
 }

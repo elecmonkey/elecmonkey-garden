@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useLocation, useNavigationType } from 'react-router';
+import { NavigationType, useLocation, useNavigationType } from 'react-router';
 
 const scrollPositions = new Map<string, number>();
 
@@ -29,7 +29,7 @@ export default function RouteScrollRestoration() {
 
     scrollPositions.set(previousKeyRef.current, window.scrollY);
 
-    const nextY = navigationType === 'POP'
+    const nextY = navigationType === NavigationType.Pop
       ? scrollPositions.get(location.key) ?? 0
       : 0;
 

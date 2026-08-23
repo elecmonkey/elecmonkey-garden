@@ -5,7 +5,7 @@ import * as React from 'react';
 type Theme = 'light' | 'dark' | 'system';
 
 export type ThemeProviderProps = React.PropsWithChildren<{
-  attribute?: 'class' | string;
+  attribute?: string;
   defaultTheme?: Theme;
   enableSystem?: boolean;
   disableTransitionOnChange?: boolean;

@@ -9,7 +9,7 @@ type Props = {
 };
 
 // 为每个月份页生成元数据
-export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
   const { month } = params;
   
   // 转换月份格式: YYYYMM -> YYYY年MM月

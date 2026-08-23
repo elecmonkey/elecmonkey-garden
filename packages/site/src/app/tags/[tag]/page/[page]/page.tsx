@@ -9,7 +9,7 @@ type Props = {
   params: { tag: string; page: string };
 };
 
-export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
   const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const siteName = dictionaries[locale].siteName;

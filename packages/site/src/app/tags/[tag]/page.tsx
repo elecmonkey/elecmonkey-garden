@@ -10,7 +10,7 @@ type Props = {
 };
 
 // 为每个标签页生成元数据
-export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
   const { tag } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const siteName = dictionaries[locale].siteName;

@@ -27,7 +27,11 @@ export function createAsyncComponent<TProps extends object>(
       };
     }, [JSON.stringify(props)]);
 
-    if (error) throw error;
+    if (error) {
+      throw error instanceof Error
+        ? error
+        : new Error('Failed to load async component', { cause: error });
+    }
     return <>{node}</>;
   };
 }

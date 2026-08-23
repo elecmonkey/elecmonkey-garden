@@ -34,28 +34,24 @@ async function addLocaleStaticPathnames(paths: Set<string>, locale: Locale): Pro
     paths.add(hrefFor(locale, `/blog/${post.params.slug}`));
   }
 
-  await Promise.all(
-    tags.map(async (tag) => {
-      const tagSlug = encodeTagToSlug(tag.name);
-      paths.add(hrefFor(locale, `/tags/${tagSlug}`));
+  for (const tag of tags) {
+    const tagSlug = encodeTagToSlug(tag.name);
+    paths.add(hrefFor(locale, `/tags/${tagSlug}`));
 
-      const { totalPages } = await getPostsByTagWithPagination(locale, tag.name, 1);
-      for (let page = 2; page <= totalPages; page++) {
-        paths.add(hrefFor(locale, `/tags/${tagSlug}/page/${page}`));
-      }
-    }),
-  );
+    const { totalPages } = getPostsByTagWithPagination(locale, tag.name, 1);
+    for (let page = 2; page <= totalPages; page++) {
+      paths.add(hrefFor(locale, `/tags/${tagSlug}/page/${page}`));
+    }
+  }
 
-  await Promise.all(
-    months.map(async (month) => {
-      paths.add(hrefFor(locale, `/archive/${month.id}`));
+  for (const month of months) {
+    paths.add(hrefFor(locale, `/archive/${month.id}`));
 
-      const { totalPages } = await getPostsByMonthWithPagination(locale, month.id, 1);
-      for (let page = 2; page <= totalPages; page++) {
-        paths.add(hrefFor(locale, `/archive/${month.id}/page/${page}`));
-      }
-    }),
-  );
+    const { totalPages } = getPostsByMonthWithPagination(locale, month.id, 1);
+    for (let page = 2; page <= totalPages; page++) {
+      paths.add(hrefFor(locale, `/archive/${month.id}/page/${page}`));
+    }
+  }
 }
 
 export async function getStaticPathnames(): Promise<string[]> {

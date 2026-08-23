@@ -8,7 +8,7 @@ interface Props {
   params: { page: string };
 }
 
-export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
   const { page } = params;
   const siteName = dictionaries[locale].siteName;
    

@@ -8,7 +8,7 @@ type Props = {
   params: { month: string; page: string };
 };
 
-export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
   const { month, page } = params;
   const year = month.substring(0, 4);
   const monthNum = month.substring(4, 6);

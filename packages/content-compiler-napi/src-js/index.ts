@@ -253,9 +253,9 @@ export interface GardenContentPluginOptions extends GenerateContentOptions {
 
 const nativeBinding = loadNativeBinding();
 
-export const compilePost = nativeBinding.compilePost;
-export const compilePosts = nativeBinding.compilePosts;
-export const version = nativeBinding.version;
+export const compilePost = nativeBinding.compilePost.bind(nativeBinding);
+export const compilePosts = nativeBinding.compilePosts.bind(nativeBinding);
+export const version = nativeBinding.version.bind(nativeBinding);
 
 function toSearchIndexPost(post: NormalizedPost) {
   return {

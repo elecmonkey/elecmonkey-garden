@@ -156,7 +156,7 @@ function getUrlValue(value: unknown, metadata: SiteMetadata): string | undefined
 
 function getFirstImage(metadata: SiteMetadata, source: unknown): string | undefined {
   if (!source) return undefined;
-  const value = Array.isArray(source) ? source[0] : source;
+  const value = Array.isArray(source) ? (source as unknown[])[0] : source;
   if (typeof value === 'string' || value instanceof URL) return getUrlValue(value, metadata);
   if (value && typeof value === 'object' && 'url' in value) {
     return getUrlValue((value as { url?: unknown }).url, metadata);
@@ -210,7 +210,7 @@ function getRouteParams(pathname: string): { route: string; params: Record<strin
   return { route: 'not-found', params: {} };
 }
 
-async function getRouteMetadata(locale: Locale, pathname: string): Promise<SiteMetadata> {
+function getRouteMetadata(locale: Locale, pathname: string): SiteMetadata {
   const { route, params } = getRouteParams(pathname);
 
   switch (route) {
@@ -238,7 +238,7 @@ async function getRouteMetadata(locale: Locale, pathname: string): Promise<SiteM
       return generateMonthPageMetadata({ locale, params: { month: params.month, page: params.page } });
     case 'search':
       return {
-        ...(await generateSearchMetadata({ locale, searchParams: {} })),
+        ...generateSearchMetadata({ locale, searchParams: {} }),
         robots: { index: false, follow: true },
       };
     default:
@@ -301,7 +301,7 @@ function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: 
 
 export async function renderMetadataTags(pathname: string): Promise<string> {
   const locale = getLocaleFromPathname(pathname);
-  const routeMetadata = localizeRouteMetadata(locale, pathname, await getRouteMetadata(locale, pathname));
+  const routeMetadata = localizeRouteMetadata(locale, pathname, getRouteMetadata(locale, pathname));
   const metadata = mergeMetadata(createRootMetadata(locale), routeMetadata);
   const { route } = getRouteParams(pathname);
   const title = getTitle(metadata);

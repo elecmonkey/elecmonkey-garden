@@ -12,7 +12,7 @@ interface SearchPageProps {
   };
 }
 
-export async function generateMetadata({ locale = 'zh', searchParams }: SearchPageProps): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', searchParams }: SearchPageProps): SiteMetadata {
   const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : '';
   const siteName = dictionaries[locale].siteName;
 

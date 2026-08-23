@@ -15,7 +15,7 @@ type Props = {
 };
 
 // 动态生成元数据
-export async function generateMetadata({ locale = 'zh', params }: Props): Promise<SiteMetadata> {
+export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
   const { slug } = params;
   const siteName = dictionaries[locale].siteName;
   try {
