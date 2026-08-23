@@ -23,7 +23,7 @@ const rootMetadata: SiteMetadata = {
   authors: [{ name: 'Elecmonkey' }],
   creator: 'Elecmonkey',
   publisher: 'Elecmonkey',
-  icons: '/icon.png',
+  icons: '/icon.webp',
   metadataBase: new URL(siteUrl),
   openGraph: {
     type: 'website',
@@ -33,9 +33,9 @@ const rootMetadata: SiteMetadata = {
     description: '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
     siteName: 'Elecmonkey的小花园',
     images: [{
-      url: '/icon.png',
-      width: 512,
-      height: 512,
+      url: '/icon.webp',
+      width: 1024,
+      height: 1024,
       alt: 'Elecmonkey的小花园',
     }],
   },
@@ -43,7 +43,7 @@ const rootMetadata: SiteMetadata = {
     card: 'summary',
     title: 'Elecmonkey的小花园 - 前端技术博客',
     description: '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
-    images: ['/icon.png'],
+    images: ['/icon.webp'],
   },
   robots: {
     index: true,

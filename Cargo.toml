@@ -4,7 +4,13 @@ resolver = "2"
 
 [workspace.package]
 edition = "2021"
-version = "0.2.1"
+version = "0.2.3"
+
+[profile.release]
+strip = "symbols"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
 
 [workspace.dependencies]
 garden-content-compiler = { path = "crates/content-compiler" }

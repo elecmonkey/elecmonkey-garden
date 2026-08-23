@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router';
 import { prefetchHref } from '@/lib/client-prefetch';
 
 type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+const HOVER_PREFETCH_DELAY_MS = 100;
 
 type GardenLinkProps = Omit<AnchorProps, 'href'> & {
   href: AnchorProps['href'];
@@ -16,11 +17,33 @@ function isInternalHref(href: string): boolean {
 }
 
 export default function Link({ href, replace, prefetch, scroll: _scroll, ...props }: GardenLinkProps) {
+  const hoverTimerRef = React.useRef<number | null>(null);
+
+  const cancelHoverPrefetch = () => {
+    if (hoverTimerRef.current !== null) {
+      window.clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
+  React.useEffect(() => () => {
+    cancelHoverPrefetch();
+  }, [href]);
+
   if (typeof href === 'string' && isInternalHref(href)) {
     const prefetchOnIntent = () => {
       if (prefetch) {
-        prefetchHref(href, 'intent');
+        prefetchHref(href);
       }
+    };
+
+    const prefetchAfterHoverDwell = () => {
+      if (!prefetch || hoverTimerRef.current !== null) return;
+
+      hoverTimerRef.current = window.setTimeout(() => {
+        hoverTimerRef.current = null;
+        prefetchHref(href);
+      }, HOVER_PREFETCH_DELAY_MS);
     };
 
     return (
@@ -29,16 +52,17 @@ export default function Link({ href, replace, prefetch, scroll: _scroll, ...prop
         replace={replace}
         {...props}
         onFocus={(event) => {
+          cancelHoverPrefetch();
           prefetchOnIntent();
           props.onFocus?.(event);
         }}
         onPointerEnter={(event) => {
-          prefetchOnIntent();
+          prefetchAfterHoverDwell();
           props.onPointerEnter?.(event);
         }}
-        onTouchStart={(event) => {
-          prefetchOnIntent();
-          props.onTouchStart?.(event);
+        onPointerLeave={(event) => {
+          cancelHoverPrefetch();
+          props.onPointerLeave?.(event);
         }}
       />
     );

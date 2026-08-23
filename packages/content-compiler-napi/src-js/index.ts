@@ -599,7 +599,7 @@ function createHomeModule(options: ResolvedGenerateContentOptions, posts: PostWi
     }
 
     const tags = Array.from(tagCounts, ([name, count]) => ({ name, count }))
-      .sort((a, b) => a.name.localeCompare(b.name));
+      .sort((a, b) => a.name.localeCompare(b.name, 'en'));
     const latestUpdateDate = publicPosts[0]?.date ?? null;
 
     return [locale, {

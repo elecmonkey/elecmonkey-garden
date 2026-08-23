@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router';
 import AnalyticsScript from '@/components/AnalyticsScript';
+import NavigationProgress from '@/components/NavigationProgress';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import RouteScrollRestoration from '@/components/RouteScrollRestoration';
@@ -17,6 +18,7 @@ export function RootLayout({ locale }: { locale: Locale }) {
         enableSystem
         disableTransitionOnChange
       >
+        <NavigationProgress locale={locale} />
         <Navbar locale={locale} />
         <main className="flex-grow">
           <Outlet />

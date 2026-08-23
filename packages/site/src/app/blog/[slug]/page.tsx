@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
 import { getLoadedPostById, getPostById, loadPostById, type PostData } from '@/lib/api';
+import { prefetchAdjacentArticles } from '@/lib/client-prefetch';
 import { dictionaries, type Locale, postHref } from '@/lib/i18n';
 import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
@@ -95,13 +96,19 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
     };
   }, [locale, slug]);
 
+  useEffect(() => {
+    if (post.id !== slug || !post.html) return;
+
+    prefetchAdjacentArticles(locale, [post.nextPost?.id, post.prevPost?.id]);
+  }, [locale, post.html, post.id, post.nextPost?.id, post.prevPost?.id, slug]);
+
   if (loadError) {
     throw new Response('Not Found', { status: 404 });
   }
 
   const articleNode = post.html
     ? <StaticArticleContent postId={post.id} html={post.html} islands={post.islands} />
-    : <p className="text-muted-foreground">正在加载文章内容...</p>;
+    : null;
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
@@ -163,6 +170,7 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
                 {post.nextPost ? (
                   <Link
                     href={postHref(locale, post.nextPost.id)}
+                    prefetch
                     className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -183,6 +191,7 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
                 {post.prevPost ? (
                   <Link
                     href={postHref(locale, post.prevPost.id)}
+                    prefetch
                     className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
                   >
                     <span className="line-clamp-1 text-left min-w-0 ml-auto">
