@@ -8,7 +8,9 @@ use comrak::{
 use super::{
     file_download::FileDownloadMeta,
     info::{self, CodeFenceInfo},
-    render::{write_code_island, write_file_download_island, write_graphviz_island, write_mermaid_island},
+    render::{
+        write_code_island, write_file_download_island, write_graphviz_island, write_mermaid_island,
+    },
     state::{IslandState, MarkdownIsland},
 };
 

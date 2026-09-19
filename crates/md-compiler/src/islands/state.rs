@@ -75,9 +75,10 @@ impl IslandState {
         let mut inner = self.inner.lock().expect("island state lock poisoned");
         inner.graphviz_count += 1;
         let id = format!("graphviz-{}", inner.graphviz_count);
-        inner
-            .islands
-            .push(MarkdownIsland::Graphviz { id: id.clone(), scale });
+        inner.islands.push(MarkdownIsland::Graphviz {
+            id: id.clone(),
+            scale,
+        });
         id
     }
 
