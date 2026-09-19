@@ -16,7 +16,13 @@ function isInternalHref(href: string): boolean {
   return href.startsWith('/') || href.startsWith('#') || href.startsWith('?');
 }
 
-export default function Link({ href, replace, prefetch, scroll: _scroll, ...props }: GardenLinkProps) {
+export default function Link({
+  href,
+  replace,
+  prefetch,
+  scroll: _scroll,
+  ...props
+}: GardenLinkProps) {
   const hoverTimerRef = React.useRef<number | null>(null);
 
   const cancelHoverPrefetch = () => {
@@ -26,9 +32,12 @@ export default function Link({ href, replace, prefetch, scroll: _scroll, ...prop
     }
   };
 
-  React.useEffect(() => () => {
-    cancelHoverPrefetch();
-  }, [href]);
+  React.useEffect(
+    () => () => {
+      cancelHoverPrefetch();
+    },
+    [href],
+  );
 
   if (typeof href === 'string' && isInternalHref(href)) {
     const prefetchOnIntent = () => {

@@ -39,7 +39,10 @@ export default function NavigationProgress({ locale }: { locale: Locale }) {
 
       if (phaseRef.current === 'finishing') {
         updatePhase('running');
-      } else if (phaseRef.current === 'hidden' && showTimerRef.current === null) {
+      } else if (
+        phaseRef.current === 'hidden' &&
+        showTimerRef.current === null
+      ) {
         showTimerRef.current = window.setTimeout(() => {
           showTimerRef.current = null;
           updatePhase('running');
@@ -60,10 +63,13 @@ export default function NavigationProgress({ locale }: { locale: Locale }) {
     }
   }, [navigation.state]);
 
-  useEffect(() => () => {
-    clearShowTimer();
-    clearFinishTimer();
-  }, []);
+  useEffect(
+    () => () => {
+      clearShowTimer();
+      clearFinishTimer();
+    },
+    [],
+  );
 
   if (phase === 'hidden') {
     return null;

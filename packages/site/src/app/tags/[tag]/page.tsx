@@ -10,16 +10,20 @@ type Props = {
 };
 
 // 为每个标签页生成元数据
-export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
+export function generateMetadata({
+  locale = 'zh',
+  params,
+}: Props): SiteMetadata {
   const { tag } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const siteName = dictionaries[locale].siteName;
-   
+
   return {
     title: `#${decodedTag} - ${siteName}`,
-    description: locale === 'en'
-      ? `Browse posts related to ${decodedTag}`
-      : `查看所有与 ${decodedTag} 相关的文章`,
+    description:
+      locale === 'en'
+        ? `Browse posts related to ${decodedTag}`
+        : `查看所有与 ${decodedTag} 相关的文章`,
   };
 }
 
@@ -27,15 +31,19 @@ export default function TagPage({ locale = 'zh', params }: Props) {
   const { tag } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const currentPage = 1;
-  
-  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(locale, decodedTag, currentPage);
-  
+
+  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(
+    locale,
+    decodedTag,
+    currentPage,
+  );
+
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
   }
-  
+
   return (
-    <TagContent 
+    <TagContent
       tag={decodedTag}
       tagSlug={tag}
       locale={locale}

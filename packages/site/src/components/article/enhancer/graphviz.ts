@@ -8,13 +8,18 @@ type VizInstance = {
 let vizPromise: Promise<VizInstance> | undefined;
 
 export function enhanceGraphvizIslands(root: HTMLElement) {
-  const diagrams = root.querySelectorAll<HTMLElement>('[data-md-island="graphviz"]');
+  const diagrams = root.querySelectorAll<HTMLElement>(
+    '[data-md-island="graphviz"]',
+  );
   if (diagrams.length === 0) {
     return;
   }
 
   diagrams.forEach((diagram) => {
-    if (diagram.dataset.enhanced === 'true' || diagram.dataset.enhancing === 'true') {
+    if (
+      diagram.dataset.enhanced === 'true' ||
+      diagram.dataset.enhancing === 'true'
+    ) {
       return;
     }
 
@@ -26,26 +31,29 @@ export function enhanceGraphvizIslands(root: HTMLElement) {
     diagram.dataset.enhancing = 'true';
     diagram.classList.add('article-graphviz');
 
-    void getViz().then((viz) => {
-      if (!diagram.isConnected) {
-        return;
-      }
+    void getViz()
+      .then((viz) => {
+        if (!diagram.isConnected) {
+          return;
+        }
 
-      const svg = viz.renderSVGElement(code, {
-        graphAttributes: {
-          bgcolor: 'transparent',
-        },
+        const svg = viz.renderSVGElement(code, {
+          graphAttributes: {
+            bgcolor: 'transparent',
+          },
+        });
+        adaptColor(svg);
+        applyScaledSize(svg, Number(diagram.dataset.scale) || 1);
+        diagram.replaceChildren(svg);
+        diagram.dataset.enhanced = 'true';
+      })
+      .catch((error) => {
+        console.error('Graphviz 渲染失败:', error);
+        diagram.dataset.enhanced = 'error';
+      })
+      .finally(() => {
+        delete diagram.dataset.enhancing;
       });
-      adaptColor(svg);
-      applyScaledSize(svg, Number(diagram.dataset.scale) || 1);
-      diagram.replaceChildren(svg);
-      diagram.dataset.enhanced = 'true';
-    }).catch((error) => {
-      console.error('Graphviz 渲染失败:', error);
-      diagram.dataset.enhanced = 'error';
-    }).finally(() => {
-      delete diagram.dataset.enhancing;
-    });
   });
 }
 

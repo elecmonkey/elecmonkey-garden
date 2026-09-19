@@ -1,5 +1,7 @@
 export function enhanceExternalLinks(root: HTMLElement) {
-  const links = root.querySelectorAll<HTMLAnchorElement>('a[href^="http://"], a[href^="https://"]');
+  const links = root.querySelectorAll<HTMLAnchorElement>(
+    'a[href^="http://"], a[href^="https://"]',
+  );
 
   links.forEach((link) => {
     link.target = '_blank';

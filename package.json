@@ -8,7 +8,10 @@
     "build": "pnpm --filter @elecmonkey/garden-site build",
     "start": "pnpm --filter @elecmonkey/garden-site start",
     "preview": "pnpm --filter @elecmonkey/garden-site preview",
-    "lint": "rslint --type-check .",
+    "lint": "rs lint --type-check .",
+    "fmt": "rs fmt",
+    "fmt:check": "rs fmt --check",
+    "check": "rs check --type-check",
     "pack:content-compiler": "pnpm --filter @elecmonkey/garden-content-compiler pack:release",
     "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
     "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local",
@@ -16,7 +19,7 @@
     "build:all": "pnpm run build:compiler && pnpm run build"
   },
   "devDependencies": {
-    "@rslint/core": "^0.8.1"
+    "rstack": "^0.7.6"
   },
   "packageManager": "pnpm@11.11.0"
 }

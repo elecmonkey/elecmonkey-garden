@@ -9,16 +9,20 @@ export default function TechWall({ locale }: { locale: Locale }) {
   const dictionary = dictionaries[locale];
 
   return (
-      <section className="mb-12 relative">
-        {/* 底层卡片 */}
-        <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 border border-border"></div>
-        
-        {/* 上层卡片 */}
-        <div className="relative border border-border bg-card p-6">
+    <section className="mb-12 relative">
+      {/* 底层卡片 */}
+      <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 border border-border"></div>
+
+      {/* 上层卡片 */}
+      <div className="relative border border-border bg-card p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 ">
           <div>
-            <p className="text-xl font-medium">{dictionary.about.techWallLine1}</p>
-            <p className="text-lg font-none">{dictionary.about.techWallLine2}</p>
+            <p className="text-xl font-medium">
+              {dictionary.about.techWallLine1}
+            </p>
+            <p className="text-lg font-none">
+              {dictionary.about.techWallLine2}
+            </p>
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
@@ -27,8 +31,10 @@ export default function TechWall({ locale }: { locale: Locale }) {
             {isExpanded ? dictionary.about.collapse : dictionary.about.expand}
           </button>
         </div>
-        
-        <div className={`transition-all duration-300 ease-in-out ${isExpanded ? 'opacity-100 max-h-[5000px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+
+        <div
+          className={`transition-all duration-300 ease-in-out ${isExpanded ? 'opacity-100 max-h-[5000px]' : 'opacity-0 max-h-0 overflow-hidden'}`}
+        >
           {/* 操作系统 */}
           <div className="pt-6 mb-8">
             <h3 className="text-lg font-medium mb-4">OS Platforms</h3>
@@ -215,7 +221,9 @@ export default function TechWall({ locale }: { locale: Locale }) {
 
           {/* JavaScript Ecosystem Toolchain */}
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">JavaScript Ecosystem Toolchain</h3>
+            <h3 className="text-lg font-medium mb-4">
+              JavaScript Ecosystem Toolchain
+            </h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/nodejs-original.svg"
@@ -576,7 +584,9 @@ export default function TechWall({ locale }: { locale: Locale }) {
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">Data Science & Machine Learning</h3>
+            <h3 className="text-lg font-medium mb-4">
+              Data Science & Machine Learning
+            </h3>
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/numpy-original.svg"
@@ -596,7 +606,7 @@ export default function TechWall({ locale }: { locale: Locale }) {
                 label="Matplotlib"
                 isGray={true}
               />
-              
+
               <TechIcon
                 src="https://images.elecmonkey.com/pages/about/keras-original.svg"
                 alt="Keras"
@@ -617,9 +627,8 @@ export default function TechWall({ locale }: { locale: Locale }) {
               />
             </div>
           </div>
-
         </div>
-        </div>
-      </section>
+      </div>
+    </section>
   );
 }

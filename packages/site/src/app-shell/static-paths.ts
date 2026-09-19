@@ -14,17 +14,28 @@ function normalizePathname(pathname: string): string {
   return pathname.replace(/\/+$/, '');
 }
 
-async function addLocaleStaticPathnames(paths: Set<string>, locale: Locale): Promise<void> {
-  for (const pathname of ['/', '/about', '/blog', '/tags', '/archive', '/search']) {
+async function addLocaleStaticPathnames(
+  paths: Set<string>,
+  locale: Locale,
+): Promise<void> {
+  for (const pathname of [
+    '/',
+    '/about',
+    '/blog',
+    '/tags',
+    '/archive',
+    '/search',
+  ]) {
     paths.add(hrefFor(locale, pathname));
   }
 
-  const [{ totalPages: blogTotalPages }, postIds, tags, months] = await Promise.all([
-    getAllPostsWithPagination(locale, 1),
-    getAllPostIds(locale),
-    getAllTags(locale),
-    getAllMonths(locale),
-  ]);
+  const [{ totalPages: blogTotalPages }, postIds, tags, months] =
+    await Promise.all([
+      getAllPostsWithPagination(locale, 1),
+      getAllPostIds(locale),
+      getAllTags(locale),
+      getAllMonths(locale),
+    ]);
 
   for (let page = 2; page <= blogTotalPages; page++) {
     paths.add(hrefFor(locale, `/blog/page/${page}`));
@@ -57,7 +68,9 @@ async function addLocaleStaticPathnames(paths: Set<string>, locale: Locale): Pro
 export async function getStaticPathnames(): Promise<string[]> {
   const paths = new Set<string>();
 
-  await Promise.all(locales.map((locale) => addLocaleStaticPathnames(paths, locale)));
+  await Promise.all(
+    locales.map((locale) => addLocaleStaticPathnames(paths, locale)),
+  );
 
   return Array.from(paths).map(normalizePathname).sort();
 }

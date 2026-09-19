@@ -18,7 +18,10 @@ async function waitForBlogPost({ params, request }: LoaderFunctionArgs) {
     slug
       ? import('@/lib/api').then(async ({ prefetchPostById }) => {
           try {
-            await prefetchPostById(getLocaleFromPathname(new URL(request.url).pathname), slug);
+            await prefetchPostById(
+              getLocaleFromPathname(new URL(request.url).pathname),
+              slug,
+            );
           } catch {
             // Keep the page's existing not-found and load-error handling in control.
           }
@@ -58,7 +61,9 @@ const loaders = {
   tagPagination: waitForRoute(pageRoutes.clientRouteLoaders.tagPagination),
   archive: waitForRoute(pageRoutes.clientRouteLoaders.archive),
   monthArchive: waitForRoute(pageRoutes.clientRouteLoaders.monthArchive),
-  monthArchivePagination: waitForRoute(pageRoutes.clientRouteLoaders.monthArchivePagination),
+  monthArchivePagination: waitForRoute(
+    pageRoutes.clientRouteLoaders.monthArchivePagination,
+  ),
   search: waitForSearch,
   notFound: waitForRoute(pageRoutes.clientRouteLoaders.notFound),
 } satisfies PageRouteLoaders;

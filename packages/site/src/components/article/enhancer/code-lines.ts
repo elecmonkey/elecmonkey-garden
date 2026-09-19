@@ -4,7 +4,10 @@ export type ProcessedCodeLines = {
   sourceForHighlight: string;
 };
 
-export function processCodeLines(source: string, range: string | undefined): ProcessedCodeLines {
+export function processCodeLines(
+  source: string,
+  range: string | undefined,
+): ProcessedCodeLines {
   const highlightLines = parseLineRange(range);
   const lines = source.replace(/\n$/, '').split('\n');
   const highlightSourceLines: string[] = [];
@@ -44,7 +47,10 @@ export function processCodeLines(source: string, range: string | undefined): Pro
   };
 }
 
-function extractDiffMarker(line: string): { line: string; diff?: 'added' | 'removed' } {
+function extractDiffMarker(line: string): {
+  line: string;
+  diff?: 'added' | 'removed';
+} {
   const match = line.match(/\s*\/\/\s*\[([+-])diff\]\s*$/);
   if (!match) {
     return { line };
@@ -72,7 +78,12 @@ function parseLineRange(range: string | undefined): Set<number> {
       const [startRaw, endRaw] = value.split('-');
       const start = Number(startRaw);
       const end = Number(endRaw);
-      if (Number.isInteger(start) && Number.isInteger(end) && start > 0 && end >= start) {
+      if (
+        Number.isInteger(start) &&
+        Number.isInteger(end) &&
+        start > 0 &&
+        end >= start
+      ) {
         for (let line = start; line <= end; line += 1) {
           numbers.add(line);
         }

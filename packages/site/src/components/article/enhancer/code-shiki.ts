@@ -1,4 +1,8 @@
-import type { BundledLanguage, BundledTheme, ThemedTokenWithVariants } from 'shiki';
+import type {
+  BundledLanguage,
+  BundledTheme,
+  ThemedTokenWithVariants,
+} from 'shiki';
 
 type ShikiApi = {
   codeToTokensWithThemes: (
@@ -17,7 +21,11 @@ type ShikiApi = {
 
 let shikiPromise: Promise<ShikiApi> | undefined;
 
-export function enhanceCodeSyntax(block: HTMLElement, source: string, language: string) {
+export function enhanceCodeSyntax(
+  block: HTMLElement,
+  source: string,
+  language: string,
+) {
   if (block.dataset.shiki === 'true' || block.dataset.shiki === 'loading') {
     return;
   }
@@ -30,36 +38,53 @@ export function enhanceCodeSyntax(block: HTMLElement, source: string, language: 
 
   block.dataset.shiki = 'loading';
 
-  void getShiki().then(async (shiki) => {
-    const tokenLines = await shiki.codeToTokensWithThemes(source, {
-      lang: shikiLanguage,
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
-      tokenizeMaxLineLength: 20_000,
-      tokenizeTimeLimit: 300,
+  void getShiki()
+    .then(async (shiki) => {
+      const tokenLines = await shiki.codeToTokensWithThemes(source, {
+        lang: shikiLanguage,
+        themes: {
+          light: 'github-light',
+          dark: 'github-dark',
+        },
+        tokenizeMaxLineLength: 20_000,
+        tokenizeTimeLimit: 300,
+      });
+
+      if (!block.isConnected) {
+        return;
+      }
+
+      const lineContents = block.querySelectorAll<HTMLElement>(
+        '.article-code-line-content',
+      );
+      lineContents.forEach((lineContent, index) => {
+        renderShikiTokens(lineContent, tokenLines[index] ?? []);
+      });
+
+      block.dataset.shiki = 'true';
+    })
+    .catch((error) => {
+      console.warn(`Shiki 高亮失败：${language}`, error);
+      block.dataset.shiki = 'error';
     });
-
-    if (!block.isConnected) {
-      return;
-    }
-
-    const lineContents = block.querySelectorAll<HTMLElement>('.article-code-line-content');
-    lineContents.forEach((lineContent, index) => {
-      renderShikiTokens(lineContent, tokenLines[index] ?? []);
-    });
-
-    block.dataset.shiki = 'true';
-  }).catch((error) => {
-    console.warn(`Shiki 高亮失败：${language}`, error);
-    block.dataset.shiki = 'error';
-  });
 }
 
 function normalizeShikiLanguage(language: string): BundledLanguage | undefined {
   const normalized = language.trim().toLowerCase();
-  if (!normalized || ['text', 'txt', 'plain', 'plaintext', 'console', 'terminal', 'output', 'dir', 'tree'].includes(normalized)) {
+  if (
+    !normalized ||
+    [
+      'text',
+      'txt',
+      'plain',
+      'plaintext',
+      'console',
+      'terminal',
+      'output',
+      'dir',
+      'tree',
+    ].includes(normalized)
+  ) {
     return undefined;
   }
 
@@ -77,10 +102,13 @@ function normalizeShikiLanguage(language: string): BundledLanguage | undefined {
     zsh: 'bash',
   };
 
-  return aliases[normalized] ?? normalized as BundledLanguage;
+  return aliases[normalized] ?? (normalized as BundledLanguage);
 }
 
-function renderShikiTokens(target: HTMLElement, tokens: ThemedTokenWithVariants[]) {
+function renderShikiTokens(
+  target: HTMLElement,
+  tokens: ThemedTokenWithVariants[],
+) {
   target.textContent = '';
 
   if (tokens.length === 0) {

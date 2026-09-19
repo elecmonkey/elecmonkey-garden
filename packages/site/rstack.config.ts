@@ -1,9 +1,10 @@
-import { defineConfig } from '@rsbuild/core';
+// Configuration guide: https://rstack.rs/config
+import { gardenContentPlugin } from '@elecmonkey/garden-content-compiler';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginTailwindcss } from '@rsbuild/plugin-tailwindcss';
-import { gardenContentPlugin } from '@elecmonkey/garden-content-compiler';
+import { define } from 'rstack';
 
-export default defineConfig({
+define.app({
   plugins: [
     gardenContentPlugin({
       locales: {

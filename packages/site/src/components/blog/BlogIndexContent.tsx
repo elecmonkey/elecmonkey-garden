@@ -15,15 +15,26 @@ interface Props {
   totalPages: number;
 }
 
-export default function BlogIndexContent({ currentPage, locale, posts, totalPages }: Props) {
+export default function BlogIndexContent({
+  currentPage,
+  locale,
+  posts,
+  totalPages,
+}: Props) {
   const basePath = hrefFor(locale, '/blog');
   const dictionary = dictionaries[locale];
-  useDocumentTitle(withSiteTitle(
-    locale,
-    locale === 'en'
-      ? currentPage > 1 ? `Posts (Page ${currentPage})` : 'Posts'
-      : currentPage > 1 ? `所有文章 (第 ${currentPage} 页)` : '所有文章',
-  ));
+  useDocumentTitle(
+    withSiteTitle(
+      locale,
+      locale === 'en'
+        ? currentPage > 1
+          ? `Posts (Page ${currentPage})`
+          : 'Posts'
+        : currentPage > 1
+          ? `所有文章 (第 ${currentPage} 页)`
+          : '所有文章',
+    ),
+  );
 
   return (
     <PageContainer>
@@ -39,8 +50,19 @@ export default function BlogIndexContent({ currentPage, locale, posts, totalPage
           className="text-blue-600 hover:underline text-sm flex items-center"
         >
           {dictionary.blog.monthlyArchive}
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 ml-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </Link>
       </div>
@@ -59,7 +81,12 @@ export default function BlogIndexContent({ currentPage, locale, posts, totalPage
 
       {/* 只有当总页数大于1时才显示分页组件 */}
       {totalPages > 1 && (
-        <PathPagination currentPage={currentPage} totalPages={totalPages} basePath={basePath} locale={locale} />
+        <PathPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          basePath={basePath}
+          locale={locale}
+        />
       )}
     </PageContainer>
   );

@@ -10,7 +10,11 @@ interface PaginationProps {
   locale: Locale;
 }
 
-export default function Pagination({ currentPage, totalPages, locale }: PaginationProps) {
+export default function Pagination({
+  currentPage,
+  totalPages,
+  locale,
+}: PaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const dictionary = dictionaries[locale];
@@ -38,10 +42,10 @@ export default function Pagination({ currentPage, totalPages, locale }: Paginati
   // 创建分页链接
   const createPageLink = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     // 删除scroll参数，不在分页中保留
     params.delete('scroll');
-    
+
     if (page === 1) {
       params.delete('page');
     } else {
@@ -57,15 +61,28 @@ export default function Pagination({ currentPage, totalPages, locale }: Paginati
         {/* 上一页按钮 */}
         <li className="h-10">
           {currentPage > 1 ? (
-            <Link 
+            <Link
               href={createPageLink(currentPage - 1)}
               className="h-10 px-4 py-2 bg-muted hover:bg-accent text-muted-foreground transition-colors flex items-center justify-center"
               aria-label={dictionary.common.previousPage}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
-              <span className="hidden md:inline ml-1">{dictionary.common.previousPage}</span>
+              <span className="hidden md:inline ml-1">
+                {dictionary.common.previousPage}
+              </span>
             </Link>
           ) : (
             <span className="w-10 md:w-[95px] inline-block"></span>
@@ -91,14 +108,27 @@ export default function Pagination({ currentPage, totalPages, locale }: Paginati
         {/* 下一页按钮 */}
         <li className="h-10">
           {currentPage < totalPages ? (
-            <Link 
+            <Link
               href={createPageLink(currentPage + 1)}
               className="h-10 px-4 py-2 bg-muted hover:bg-accent text-muted-foreground transition-colors flex items-center justify-center"
               aria-label={dictionary.common.nextPage}
             >
-              <span className="hidden md:inline mr-1">{dictionary.common.nextPage}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <span className="hidden md:inline mr-1">
+                {dictionary.common.nextPage}
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </Link>
           ) : (

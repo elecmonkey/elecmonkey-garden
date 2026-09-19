@@ -18,15 +18,28 @@ import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 
 const pageSize = 10;
 
-export default function ClientSearchPage({ locale = defaultLocale }: { locale?: Locale }) {
+export default function ClientSearchPage({
+  locale = defaultLocale,
+}: {
+  locale?: Locale;
+}) {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('keyword') || '';
   const currentPage = Number(searchParams.get('page')) || 1;
-  const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>(() => getLoadedSearchIndexPosts(locale) ?? []);
+  const [indexPosts, setIndexPosts] = useState<SearchIndexPost[]>(
+    () => getLoadedSearchIndexPosts(locale) ?? [],
+  );
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const dictionary = dictionaries[locale];
-  useDocumentTitle(withSiteTitle(locale, locale === 'en' ? `Search: ${keyword || 'All Posts'}` : `搜索: ${keyword || '所有文章'}`));
+  useDocumentTitle(
+    withSiteTitle(
+      locale,
+      locale === 'en'
+        ? `Search: ${keyword || 'All Posts'}`
+        : `搜索: ${keyword || '所有文章'}`,
+    ),
+  );
 
   useEffect(() => {
     if (!keyword.trim()) {
@@ -81,7 +94,12 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
       };
     }
 
-    return searchIndexPostsWithPagination(keyword, indexPosts, currentPage, pageSize);
+    return searchIndexPostsWithPagination(
+      keyword,
+      indexPosts,
+      currentPage,
+      pageSize,
+    );
   }, [currentPage, indexPosts, keyword]);
 
   if (!keyword.trim()) {
@@ -92,7 +110,9 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
           <SearchBar placeholder={dictionary.search.emptyPlaceholder} />
         </div>
         <div className="text-center py-10">
-          <p className="text-muted-foreground">{dictionary.search.enterKeyword}</p>
+          <p className="text-muted-foreground">
+            {dictionary.search.enterKeyword}
+          </p>
         </div>
       </>
     );
@@ -118,17 +138,19 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
         <>
           <div className="mb-6">
             <p className="text-foreground">
-              {dictionary.search.resultPrefix} <span className="font-semibold">{totalPosts}</span> {dictionary.search.resultMiddle}
-              {' '}
-              &ldquo;<span className="font-semibold text-blue-600">{keyword}</span>&rdquo;
-              {' '}
-              {dictionary.search.resultSuffix}
+              {dictionary.search.resultPrefix}{' '}
+              <span className="font-semibold">{totalPosts}</span>{' '}
+              {dictionary.search.resultMiddle} &ldquo;
+              <span className="font-semibold text-blue-600">{keyword}</span>
+              &rdquo; {dictionary.search.resultSuffix}
             </p>
           </div>
 
           {posts.length === 0 ? (
             <div className="text-center py-10">
-              <p className="text-muted-foreground">{dictionary.search.noResults}</p>
+              <p className="text-muted-foreground">
+                {dictionary.search.noResults}
+              </p>
             </div>
           ) : (
             <div className="space-y-6">
@@ -144,7 +166,11 @@ export default function ClientSearchPage({ locale = defaultLocale }: { locale?: 
           )}
 
           {totalPages > 1 && (
-            <Pagination currentPage={currentPage} totalPages={totalPages} locale={locale} />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              locale={locale}
+            />
           )}
         </>
       )}

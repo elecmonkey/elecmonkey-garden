@@ -12,17 +12,23 @@ interface SearchPageProps {
   };
 }
 
-export function generateMetadata({ locale = 'zh', searchParams }: SearchPageProps): SiteMetadata {
-  const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : '';
+export function generateMetadata({
+  locale = 'zh',
+  searchParams,
+}: SearchPageProps): SiteMetadata {
+  const keyword =
+    typeof searchParams.keyword === 'string' ? searchParams.keyword : '';
   const siteName = dictionaries[locale].siteName;
 
   return {
-    title: locale === 'en'
-      ? `Search: ${keyword || 'All Posts'} - ${siteName}`
-      : `搜索: ${keyword || '所有文章'} - ${siteName}`,
-    description: locale === 'en'
-      ? `Search results for "${keyword}"`
-      : `搜索关于 "${keyword}" 的文章结果`,
+    title:
+      locale === 'en'
+        ? `Search: ${keyword || 'All Posts'} - ${siteName}`
+        : `搜索: ${keyword || '所有文章'} - ${siteName}`,
+    description:
+      locale === 'en'
+        ? `Search results for "${keyword}"`
+        : `搜索关于 "${keyword}" 的文章结果`,
   };
 }
 

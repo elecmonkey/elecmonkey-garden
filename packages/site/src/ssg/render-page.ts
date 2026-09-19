@@ -24,7 +24,10 @@ export function getHtmlOutputPath(distDir: string, pathname: string): string {
   return path.join(distDir, normalized.slice(1), 'index.html');
 }
 
-function getHtmlOutputPathForStaticFile(distDir: string, pathname: string): string {
+function getHtmlOutputPathForStaticFile(
+  distDir: string,
+  pathname: string,
+): string {
   try {
     const decodedPathname = decodeURI(pathname);
     return getHtmlOutputPath(distDir, decodedPathname);
@@ -34,7 +37,10 @@ function getHtmlOutputPathForStaticFile(distDir: string, pathname: string): stri
 }
 
 function getBlogPostSlug(pathname: string): string | undefined {
-  const segments = stripLocalePrefix(pathname).replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+  const segments = stripLocalePrefix(pathname)
+    .replace(/^\/+|\/+$/g, '')
+    .split('/')
+    .filter(Boolean);
   if (segments[0] === 'blog' && segments[1] && segments.length === 2) {
     return segments[1];
   }
@@ -51,7 +57,9 @@ function serializeJsonForHtml(value: unknown): string {
     .replace(/\u2029/g, '\\u2029');
 }
 
-async function loadInitialPost(pathname: string): Promise<PostData | undefined> {
+async function loadInitialPost(
+  pathname: string,
+): Promise<PostData | undefined> {
   const locale = getLocaleFromPathname(pathname);
   const slug = getBlogPostSlug(pathname);
   if (!slug) {
@@ -70,19 +78,32 @@ function injectInitialPost(html: string, post: PostData | undefined): string {
   return html.replace('</body>', `${script}</body>`);
 }
 
-export async function renderStaticPage(template: string, pathname: string): Promise<string> {
+export async function renderStaticPage(
+  template: string,
+  pathname: string,
+): Promise<string> {
   const locale = getLocaleFromPathname(pathname);
   const initialPost = await loadInitialPost(pathname);
   const appHtml = render(pathname);
   const metadataTags = await renderMetadataTags(pathname);
 
-  return injectInitialPost(template
-    .replace(/<html\s+lang="[^"]*"/, `<html lang="${locale === 'en' ? 'en' : 'zh-CN'}"`)
-    .replace(/<title>.*?<\/title>/, metadataTags)
-    .replace(rootMarker, `<div id="root">${appHtml}</div>`), initialPost);
+  return injectInitialPost(
+    template
+      .replace(
+        /<html\s+lang="[^"]*"/,
+        `<html lang="${locale === 'en' ? 'en' : 'zh-CN'}"`,
+      )
+      .replace(/<title>.*?<\/title>/, metadataTags)
+      .replace(rootMarker, `<div id="root">${appHtml}</div>`),
+    initialPost,
+  );
 }
 
-export async function writeStaticPage(distDir: string, template: string, pathname: string): Promise<void> {
+export async function writeStaticPage(
+  distDir: string,
+  template: string,
+  pathname: string,
+): Promise<void> {
   const html = await renderStaticPage(template, pathname);
   const outputPath = getHtmlOutputPathForStaticFile(distDir, pathname);
 

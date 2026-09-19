@@ -1,17 +1,33 @@
-"use client";
+'use client';
 
 import Link from '@/components/Link';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import Image from '@/lib/image-compat';
 import { usePathname } from '@/lib/router-compat';
 import { useState, type SVGProps } from 'react';
-import { dictionaries, hrefFor, localeLabels, stripLocalePrefix, withLocalePath, type Locale } from '@/lib/i18n';
+import {
+  dictionaries,
+  hrefFor,
+  localeLabels,
+  stripLocalePrefix,
+  withLocalePath,
+  type Locale,
+} from '@/lib/i18n';
 
 function IonLanguage(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 512 512"
+      {...props}
+    >
       {/* Icon from IonIcons by Ben Sperry - https://github.com/ionic-team/ionicons/blob/main/LICENSE */}
-      <path fill="currentColor" d="m478.33 433.6l-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4ZM334.83 362L368 281.65L401.17 362Zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73c39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36c-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93c.92 1.19 1.83 2.35 2.74 3.51c-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59c22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9Z" />
+      <path
+        fill="currentColor"
+        d="m478.33 433.6l-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4ZM334.83 362L368 281.65L401.17 362Zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73c39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36c-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93c.92 1.19 1.83 2.35 2.74 3.51c-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59c22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9Z"
+      />
     </svg>
   );
 }
@@ -23,7 +39,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
   const homeHref = hrefFor(locale, '/');
   const otherLocale: Locale = locale === 'en' ? 'zh' : 'en';
   const otherLocaleHref = withLocalePath(pathname, otherLocale);
-  const languageSwitchLabel = locale === 'en' ? 'Switch to Chinese' : '切换到英文';
+  const languageSwitchLabel =
+    locale === 'en' ? 'Switch to Chinese' : '切换到英文';
 
   // 检查是否是主页
   const isHomePage = pathname === homeHref;
@@ -52,7 +69,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
   // 生成链接样式，当前页面有灰色背景
   const getLinkClassName = (path: string) => {
-    const baseClasses = "px-3 py-2 transition-colors";
+    const baseClasses = 'px-3 py-2 transition-colors';
     const activeClasses = `${baseClasses} bg-accent text-foreground font-bold`;
     const inactiveClasses = `${baseClasses} text-foreground hover:bg-muted`;
 
@@ -61,7 +78,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
   // 移动端菜单项样式，添加触摸反馈
   const getMobileLinkClassName = (path: string) => {
-    const baseClasses = "block px-3 py-2 transition-colors active:bg-muted";
+    const baseClasses = 'block px-3 py-2 transition-colors active:bg-muted';
     const activeClasses = `${baseClasses} bg-accent text-foreground font-bold`;
     const inactiveClasses = `${baseClasses} text-foreground hover:bg-muted`;
 
@@ -70,11 +87,13 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
   // 根据是否是主页设置不同的导航栏样式
   const navbarClasses = isHomePage
-    ? "bg-card shadow-sm" // 主页导航栏：相对定位
-    : "bg-card shadow-sm sticky top-0 z-20"; // 其他页面导航栏：固定在顶部
+    ? 'bg-card shadow-sm' // 主页导航栏：相对定位
+    : 'bg-card shadow-sm sticky top-0 z-20'; // 其他页面导航栏：固定在顶部
 
-  const littleCircleButtonClass = "text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5";
-  const iconButtonClass = "p-2 transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground";
+  const littleCircleButtonClass =
+    'text-muted-foreground focus:outline-none p-2 rounded-full active:bg-muted hover:bg-accent transition-colors mx-0.5';
+  const iconButtonClass =
+    'p-2 transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground';
 
   return (
     <nav className={`${navbarClasses} border-b border-border/20 select-none`}>
@@ -111,7 +130,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <Link
               href={homeHref}
               prefetch
-              className={getLinkClassName("/")}
+              className={getLinkClassName('/')}
               onClick={(e) => {
                 if (pathname === homeHref) {
                   e.preventDefault();
@@ -120,10 +139,18 @@ export default function Navbar({ locale }: { locale: Locale }) {
             >
               {dictionary.nav.home}
             </Link>
-            <Link href={hrefFor(locale, '/blog')} prefetch className={getLinkClassName("/blog")}>
+            <Link
+              href={hrefFor(locale, '/blog')}
+              prefetch
+              className={getLinkClassName('/blog')}
+            >
               {dictionary.nav.blog}
             </Link>
-            <Link href={hrefFor(locale, '/about')} prefetch className={getLinkClassName("/about")}>
+            <Link
+              href={hrefFor(locale, '/about')}
+              prefetch
+              className={getLinkClassName('/about')}
+            >
               {dictionary.nav.about}
             </Link>
             <Link
@@ -134,8 +161,19 @@ export default function Navbar({ locale }: { locale: Locale }) {
               aria-label={dictionary.nav.search}
             >
               <span className="sr-only">{dictionary.nav.search}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
             </Link>
             <Link
@@ -156,10 +194,21 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <button
               className={littleCircleButtonClass}
               onClick={toggleMenu}
-              aria-label={isMenuOpen ? "关闭菜单" : "打开菜单"}
+              aria-label={isMenuOpen ? '关闭菜单' : '打开菜单'}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
@@ -175,7 +224,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <Link
               href={homeHref}
               prefetch
-              className={getMobileLinkClassName("/")}
+              className={getMobileLinkClassName('/')}
               onClick={(e) => {
                 if (pathname === homeHref) {
                   e.preventDefault();
@@ -188,7 +237,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <Link
               href={hrefFor(locale, '/blog')}
               prefetch
-              className={getMobileLinkClassName("/blog")}
+              className={getMobileLinkClassName('/blog')}
               onClick={() => setIsMenuOpen(false)}
             >
               {dictionary.nav.blog}
@@ -196,7 +245,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <Link
               href={hrefFor(locale, '/about')}
               prefetch
-              className={getMobileLinkClassName("/about")}
+              className={getMobileLinkClassName('/about')}
               onClick={() => setIsMenuOpen(false)}
             >
               {dictionary.nav.about}
@@ -220,8 +269,19 @@ export default function Navbar({ locale }: { locale: Locale }) {
                 onClick={() => setIsMenuOpen(false)}
                 aria-label={dictionary.nav.search}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </Link>
             </div>

@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-type ImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'width' | 'height'> & {
+type ImageProps = Omit<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  'src' | 'width' | 'height'
+> & {
   src: string;
   alt: string;
   width?: number | `${number}`;
@@ -20,7 +23,13 @@ export default function Image({
   ...props
 }: ImageProps) {
   const imageStyle: React.CSSProperties = fill
-    ? { ...style, position: 'absolute', inset: 0, width: '100%', height: '100%' }
+    ? {
+        ...style,
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+      }
     : { ...style };
 
   return (

@@ -3,11 +3,11 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "rsbuild dev --environment web",
-    "build": "rsbuild build && SSG_WORKERS=auto node .rsbuild/ssg/build.js",
-    "start": "rsbuild preview --environment web",
-    "preview": "rsbuild preview --environment web",
-    "lint": "rslint --type-check .",
+    "dev": "rs dev --environment web",
+    "build": "rs build && SSG_WORKERS=auto node .rsbuild/ssg/build.js",
+    "start": "rs preview --environment web",
+    "preview": "rs preview --environment web",
+    "lint": "pnpm --workspace-root exec rs lint --type-check packages/site",
     "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
     "build:with-compiler": "pnpm run build:compiler && pnpm run build"
   },
@@ -23,7 +23,6 @@
     "shiki": "^4.3.1"
   },
   "devDependencies": {
-    "@rsbuild/core": "^2.1.5",
     "@rsbuild/plugin-react": "^2.1.0",
     "@rsbuild/plugin-tailwindcss": "^2.0.3",
     "@tailwindcss/forms": "^0.5.11",

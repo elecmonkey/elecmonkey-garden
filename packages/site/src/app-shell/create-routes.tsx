@@ -58,9 +58,24 @@ function createChildren(
   } = components;
 
   return [
-    { id: `${locale}-home`, index: true, loader: loaders.home, element: <HomeRoute locale={locale} /> },
-    { id: `${locale}-about`, path: 'about', loader: loaders.about, element: <AboutRoute locale={locale} /> },
-    { id: `${locale}-blog`, path: 'blog', loader: loaders.blog, element: <BlogIndexRoute locale={locale} /> },
+    {
+      id: `${locale}-home`,
+      index: true,
+      loader: loaders.home,
+      element: <HomeRoute locale={locale} />,
+    },
+    {
+      id: `${locale}-about`,
+      path: 'about',
+      loader: loaders.about,
+      element: <AboutRoute locale={locale} />,
+    },
+    {
+      id: `${locale}-blog`,
+      path: 'blog',
+      loader: loaders.blog,
+      element: <BlogIndexRoute locale={locale} />,
+    },
     {
       id: `${locale}-blog-pagination`,
       path: 'blog/page/:page',
@@ -73,8 +88,18 @@ function createChildren(
       loader: loaders.blogPost,
       element: <BlogPostRoute locale={locale} />,
     },
-    { id: `${locale}-tags`, path: 'tags', loader: loaders.tags, element: <TagsIndexRoute locale={locale} /> },
-    { id: `${locale}-tag`, path: 'tags/:tag', loader: loaders.tag, element: <TagRoute locale={locale} /> },
+    {
+      id: `${locale}-tags`,
+      path: 'tags',
+      loader: loaders.tags,
+      element: <TagsIndexRoute locale={locale} />,
+    },
+    {
+      id: `${locale}-tag`,
+      path: 'tags/:tag',
+      loader: loaders.tag,
+      element: <TagRoute locale={locale} />,
+    },
     {
       id: `${locale}-tag-pagination`,
       path: 'tags/:tag/page/:page',
@@ -99,12 +124,25 @@ function createChildren(
       loader: loaders.monthArchivePagination,
       element: <MonthArchivePaginationRoute locale={locale} />,
     },
-    { id: `${locale}-search`, path: 'search', loader: loaders.search, element: <SearchRoute locale={locale} /> },
-    { id: `${locale}-not-found`, path: '*', loader: loaders.notFound, element: <NotFoundRoute locale={locale} /> },
+    {
+      id: `${locale}-search`,
+      path: 'search',
+      loader: loaders.search,
+      element: <SearchRoute locale={locale} />,
+    },
+    {
+      id: `${locale}-not-found`,
+      path: '*',
+      loader: loaders.notFound,
+      element: <NotFoundRoute locale={locale} />,
+    },
   ];
 }
 
-export function createRoutes(components: PageRouteComponents, loaders: Partial<PageRouteLoaders> = {}): RouteObject[] {
+export function createRoutes(
+  components: PageRouteComponents,
+  loaders: Partial<PageRouteLoaders> = {},
+): RouteObject[] {
   return [
     {
       id: 'zh-root',

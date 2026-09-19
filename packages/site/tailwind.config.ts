@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
 
 const config: Config = {
   content: [
-    "./src/components/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/*.{tsx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/components/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/*.{tsx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class', // 启用基于class的深色模式
   theme: {
@@ -42,10 +42,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    typography,
-    forms,
-  ],
+  plugins: [typography, forms],
 };
 
-export default config; 
+export default config;

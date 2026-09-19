@@ -1,4 +1,10 @@
-import { lazy, Suspense, type ComponentProps, type ComponentType, type ReactNode } from 'react';
+import {
+  lazy,
+  Suspense,
+  type ComponentProps,
+  type ComponentType,
+  type ReactNode,
+} from 'react';
 import { useParams } from 'react-router';
 import type { Locale } from '@/lib/i18n';
 
@@ -6,9 +12,13 @@ type RouteModule<TComponent extends ComponentType<any>> = {
   default: TComponent;
 };
 
-type RouteLoader<TComponent extends ComponentType<any>> = () => Promise<RouteModule<TComponent>>;
+type RouteLoader<TComponent extends ComponentType<any>> = () => Promise<
+  RouteModule<TComponent>
+>;
 
-type PreloadableRoute<TComponent extends ComponentType<any>> = ComponentType<ComponentProps<TComponent>> & {
+type PreloadableRoute<TComponent extends ComponentType<any>> = ComponentType<
+  ComponentProps<TComponent>
+> & {
   preload: () => Promise<RouteModule<TComponent>>;
 };
 
@@ -55,14 +65,26 @@ function createPreloadableRoute<TComponent extends ComponentType<any>>(
 const HomePage = createPreloadableRoute(() => import('@/app/page'));
 const AboutPage = createPreloadableRoute(() => import('@/app/about/page'));
 const BlogPage = createPreloadableRoute(() => import('@/app/blog/page'));
-const BlogPaginationPage = createPreloadableRoute(() => import('@/app/blog/page/[page]/page'));
-const BlogPostPage = createPreloadableRoute(() => import('@/app/blog/[slug]/page'));
+const BlogPaginationPage = createPreloadableRoute(
+  () => import('@/app/blog/page/[page]/page'),
+);
+const BlogPostPage = createPreloadableRoute(
+  () => import('@/app/blog/[slug]/page'),
+);
 const TagsIndexPage = createPreloadableRoute(() => import('@/app/tags/page'));
 const TagPage = createPreloadableRoute(() => import('@/app/tags/[tag]/page'));
-const TagPaginationPage = createPreloadableRoute(() => import('@/app/tags/[tag]/page/[page]/page'));
-const ArchiveIndexPage = createPreloadableRoute(() => import('@/app/archive/page'));
-const MonthArchivePage = createPreloadableRoute(() => import('@/app/archive/[month]/page'));
-const MonthArchivePaginationPage = createPreloadableRoute(() => import('@/app/archive/[month]/page/[page]/page'));
+const TagPaginationPage = createPreloadableRoute(
+  () => import('@/app/tags/[tag]/page/[page]/page'),
+);
+const ArchiveIndexPage = createPreloadableRoute(
+  () => import('@/app/archive/page'),
+);
+const MonthArchivePage = createPreloadableRoute(
+  () => import('@/app/archive/[month]/page'),
+);
+const MonthArchivePaginationPage = createPreloadableRoute(
+  () => import('@/app/archive/[month]/page/[page]/page'),
+);
 const SearchPage = createPreloadableRoute(() => import('@/app/search/page'));
 const NotFoundPage = createPreloadableRoute(() => import('@/app/not-found'));
 
@@ -127,7 +149,9 @@ export function TagRoute({ locale }: { locale: Locale }) {
 
 export function TagPaginationRoute({ locale }: { locale: Locale }) {
   const { tag = '', page = '1' } = useParams();
-  return withSuspense(<TagPaginationPage locale={locale} params={{ tag, page }} />);
+  return withSuspense(
+    <TagPaginationPage locale={locale} params={{ tag, page }} />,
+  );
 }
 
 export function MonthArchiveRoute({ locale }: { locale: Locale }) {
@@ -137,7 +161,9 @@ export function MonthArchiveRoute({ locale }: { locale: Locale }) {
 
 export function MonthArchivePaginationRoute({ locale }: { locale: Locale }) {
   const { month = '', page = '1' } = useParams();
-  return withSuspense(<MonthArchivePaginationPage locale={locale} params={{ month, page }} />);
+  return withSuspense(
+    <MonthArchivePaginationPage locale={locale} params={{ month, page }} />,
+  );
 }
 
 export function SearchRoute({ locale }: { locale: Locale }) {

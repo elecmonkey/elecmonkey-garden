@@ -2,7 +2,8 @@ import { type Locale, getLocaleFromPathname, stripLocalePrefix } from './i18n';
 
 type PrefetchPriority = 'intent' | 'viewport' | 'adjacent';
 type PrefetchTask = () => Promise<void> | void;
-type PrefetchableRouteKey = 'home' | 'about' | 'blog' | 'blogPagination' | 'tags' | 'archive' | 'search';
+type PrefetchableRouteKey =
+  'home' | 'about' | 'blog' | 'blogPagination' | 'tags' | 'archive' | 'search';
 type QueuePriority = 'intent' | 'background';
 type BackgroundArticleKind = 'viewport' | 'adjacent';
 
@@ -46,7 +47,8 @@ const backgroundArticleReservations: Record<BackgroundArticleKind, number> = {
 let activePrefetch: QueuedPrefetch | undefined;
 let blogPostRoutePrefetch: Promise<void> | undefined;
 let currentScope = getWindowScope();
-let documentLoaded = typeof document !== 'undefined' && document.readyState === 'complete';
+let documentLoaded =
+  typeof document !== 'undefined' && document.readyState === 'complete';
 let navigationInProgress = false;
 let pageSettled = false;
 let settleTimer: number | undefined;
@@ -66,32 +68,55 @@ function getWindowScope(): string {
 
 function getConnection(): NetworkInformation | undefined {
   if (typeof navigator === 'undefined') return undefined;
-  return (navigator as Navigator & { connection?: NetworkInformation }).connection;
+  return (navigator as Navigator & { connection?: NetworkInformation })
+    .connection;
 }
 
 function getPrefetchPolicy(): PrefetchPolicy {
   const connection = getConnection();
   if (connection?.saveData) {
-    return { allowIntent: false, viewportArticleBudget: 0, adjacentArticleBudget: 0 };
+    return {
+      allowIntent: false,
+      viewportArticleBudget: 0,
+      adjacentArticleBudget: 0,
+    };
   }
 
   switch (connection?.effectiveType) {
     case 'slow-2g':
     case '2g':
-      return { allowIntent: false, viewportArticleBudget: 0, adjacentArticleBudget: 0 };
+      return {
+        allowIntent: false,
+        viewportArticleBudget: 0,
+        adjacentArticleBudget: 0,
+      };
     case '3g':
-      return { allowIntent: true, viewportArticleBudget: 1, adjacentArticleBudget: 1 };
+      return {
+        allowIntent: true,
+        viewportArticleBudget: 1,
+        adjacentArticleBudget: 1,
+      };
     case '4g':
-      return { allowIntent: true, viewportArticleBudget: 3, adjacentArticleBudget: 2 };
+      return {
+        allowIntent: true,
+        viewportArticleBudget: 3,
+        adjacentArticleBudget: 2,
+      };
     default:
       // Safari and desktop Firefox do not expose the Network Information API.
       // Treat missing or unfamiliar values as a conservative, fully supported fallback.
-      return { allowIntent: true, viewportArticleBudget: 2, adjacentArticleBudget: 2 };
+      return {
+        allowIntent: true,
+        viewportArticleBudget: 2,
+        adjacentArticleBudget: 2,
+      };
   }
 }
 
 function isDocumentVisible(): boolean {
-  return typeof document !== 'undefined' && document.visibilityState !== 'hidden';
+  return (
+    typeof document !== 'undefined' && document.visibilityState !== 'hidden'
+  );
 }
 
 function handleDocumentLoad() {
@@ -174,7 +199,11 @@ export function syncPrefetchNavigation(isNavigating: boolean, scope: string) {
 }
 
 function hasPrefetch(key: string): boolean {
-  return prefetchedKeys.has(key) || queuedByKey.has(key) || activePrefetch?.key === key;
+  return (
+    prefetchedKeys.has(key) ||
+    queuedByKey.has(key) ||
+    activePrefetch?.key === key
+  );
 }
 
 function removeFromQueue(queue: QueuedPrefetch[], item: QueuedPrefetch) {
@@ -187,12 +216,12 @@ function removeFromQueue(queue: QueuedPrefetch[], item: QueuedPrefetch) {
 function enqueueIntent(key: string, task: PrefetchTask) {
   const policy = getPrefetchPolicy();
   if (
-    !policy.allowIntent
-    || !documentLoaded
-    || navigationInProgress
-    || !isDocumentVisible()
-    || prefetchedKeys.has(key)
-    || activePrefetch?.key === key
+    !policy.allowIntent ||
+    !documentLoaded ||
+    navigationInProgress ||
+    !isDocumentVisible() ||
+    prefetchedKeys.has(key) ||
+    activePrefetch?.key === key
   ) {
     return;
   }
@@ -224,10 +253,16 @@ function enqueueIntent(key: string, task: PrefetchTask) {
 
 function getBackgroundArticleBudget(kind: BackgroundArticleKind): number {
   const policy = getPrefetchPolicy();
-  return kind === 'viewport' ? policy.viewportArticleBudget : policy.adjacentArticleBudget;
+  return kind === 'viewport'
+    ? policy.viewportArticleBudget
+    : policy.adjacentArticleBudget;
 }
 
-function enqueueBackgroundArticle(key: string, task: PrefetchTask, kind: BackgroundArticleKind) {
+function enqueueBackgroundArticle(
+  key: string,
+  task: PrefetchTask,
+  kind: BackgroundArticleKind,
+) {
   if (navigationInProgress || hasPrefetch(key)) return;
 
   const budget = getBackgroundArticleBudget(kind);
@@ -264,10 +299,10 @@ function takeNextPrefetch(): QueuedPrefetch | undefined {
     const item = backgroundQueue.shift()!;
     queuedByKey.delete(item.key);
     if (
-      item.scope === currentScope
-      && item.backgroundKind
-      && item.backgroundIndex
-      && item.backgroundIndex <= getBackgroundArticleBudget(item.backgroundKind)
+      item.scope === currentScope &&
+      item.backgroundKind &&
+      item.backgroundIndex &&
+      item.backgroundIndex <= getBackgroundArticleBudget(item.backgroundKind)
     ) {
       return item;
     }
@@ -278,10 +313,10 @@ function takeNextPrefetch(): QueuedPrefetch | undefined {
 
 function runNextPrefetch() {
   if (
-    activePrefetch
-    || navigationInProgress
-    || !documentLoaded
-    || !isDocumentVisible()
+    activePrefetch ||
+    navigationInProgress ||
+    !documentLoaded ||
+    !isDocumentVisible()
   ) {
     return;
   }
@@ -310,13 +345,13 @@ function runNextPrefetch() {
 
 function scheduleBackgroundPrefetch() {
   if (
-    cancelBackgroundTurn
-    || activePrefetch
-    || backgroundQueue.length === 0
-    || navigationInProgress
-    || !documentLoaded
-    || !pageSettled
-    || !isDocumentVisible()
+    cancelBackgroundTurn ||
+    activePrefetch ||
+    backgroundQueue.length === 0 ||
+    navigationInProgress ||
+    !documentLoaded ||
+    !pageSettled ||
+    !isDocumentVisible()
   ) {
     return;
   }
@@ -360,7 +395,9 @@ function extractBlogSlug(pathname: string): string | undefined {
 
 function prefetchBlogPost(locale: Locale, slug: string): Promise<void> {
   const routePrefetch = prefetchBlogPostRoute();
-  const contentPrefetch = import('@/lib/api').then(({ prefetchPostById }) => prefetchPostById(locale, slug));
+  const contentPrefetch = import('@/lib/api').then(({ prefetchPostById }) =>
+    prefetchPostById(locale, slug),
+  );
 
   return Promise.all([routePrefetch, contentPrefetch]).then(() => undefined);
 }
@@ -414,8 +451,8 @@ export function prefetchHref(href: string | undefined) {
   if (!url) return;
 
   if (
-    url.pathname === window.location.pathname
-    && url.search === window.location.search
+    url.pathname === window.location.pathname &&
+    url.search === window.location.search
   ) {
     return;
   }
@@ -424,7 +461,9 @@ export function prefetchHref(href: string | undefined) {
   const locale = getLocaleFromPathname(url.pathname);
   const strippedPathname = stripLocalePrefix(url.pathname);
   if (slug) {
-    enqueueIntent(`post:${locale}:${slug}`, () => prefetchBlogPost(locale, slug));
+    enqueueIntent(`post:${locale}:${slug}`, () =>
+      prefetchBlogPost(locale, slug),
+    );
     return;
   }
 
@@ -444,7 +483,9 @@ export function prefetchHref(href: string | undefined) {
   }
 
   if (/^\/blog\/page\/\d+\/?$/.test(strippedPathname)) {
-    enqueueIntent(`route:${url.pathname}`, () => prefetchRoute('blogPagination'));
+    enqueueIntent(`route:${url.pathname}`, () =>
+      prefetchRoute('blogPagination'),
+    );
     return;
   }
 
@@ -463,7 +504,11 @@ export function prefetchHref(href: string | undefined) {
   }
 }
 
-export function prefetchArticleBySlug(locale: Locale, slug: string, priority: PrefetchPriority = 'viewport') {
+export function prefetchArticleBySlug(
+  locale: Locale,
+  slug: string,
+  priority: PrefetchPriority = 'viewport',
+) {
   const key = `post:${locale}:${slug}`;
   const task = () => prefetchBlogPost(locale, slug);
 
@@ -474,7 +519,10 @@ export function prefetchArticleBySlug(locale: Locale, slug: string, priority: Pr
   }
 }
 
-export function prefetchAdjacentArticles(locale: Locale, slugs: Array<string | undefined>) {
+export function prefetchAdjacentArticles(
+  locale: Locale,
+  slugs: Array<string | undefined>,
+) {
   for (const slug of slugs) {
     if (slug) {
       prefetchArticleBySlug(locale, slug, 'adjacent');

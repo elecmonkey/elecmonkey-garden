@@ -29,12 +29,12 @@
     "dist"
   ],
   "scripts": {
-    "build": "napi build --platform --release --no-js --dts native.d.ts && rslib build",
-    "build:debug": "napi build --platform --no-js --dts native.d.ts && rslib build",
+    "build": "napi build --platform --release --no-js --dts native.d.ts && rs lib",
+    "build:debug": "napi build --platform --no-js --dts native.d.ts && rs lib",
     "build:native": "napi build --platform --release --no-js --dts native.d.ts",
     "build:native:linux-x64-gnu": "napi build --platform --release --no-js --dts native.d.ts --target x86_64-unknown-linux-gnu --cross-compile",
     "build:native:linux-x64-musl": "napi build --platform --release --no-js --dts native.d.ts --target x86_64-unknown-linux-musl --cross-compile",
-    "check": "cargo check -p garden_content_compiler_napi && rslib build",
+    "check": "cargo check -p garden_content_compiler_napi && rs lib",
     "pack:local": "node scripts/build-package.mjs --pack",
     "pack:linux-x64": "node scripts/build-package.mjs --linux-x64 --platform-packages --pack",
     "pack:darwin-arm64": "node scripts/build-package.mjs --target aarch64-apple-darwin --platform-packages --pack",
@@ -47,9 +47,8 @@
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.7.2",
-    "@rslib/core": "^0.23.2",
     "@types/node": "^26.1.1",
-    "@typescript/native-preview": "7.0.0-dev.20260525.1"
+    "typescript": "^7.0.2"
   },
   "napi": {
     "binaryName": "garden-content-compiler",

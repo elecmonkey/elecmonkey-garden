@@ -8,9 +8,14 @@ export function getHomeRecentPosts(locale: Locale = defaultLocale): PostData[] {
 }
 
 export function getHomeTags(locale: Locale = defaultLocale): TagCount[] {
-  return calculateTagSizes(generatedHomeContentByLocale[locale].tags).map((tag) => ({ ...tag }));
+  return calculateTagSizes(generatedHomeContentByLocale[locale].tags).map(
+    (tag) => ({ ...tag }),
+  );
 }
 
-export function getHomeStats(locale: Locale = defaultLocale): { totalPosts: number; latestUpdateDate: string | null } {
+export function getHomeStats(locale: Locale = defaultLocale): {
+  totalPosts: number;
+  latestUpdateDate: string | null;
+} {
   return { ...generatedHomeContentByLocale[locale].stats };
 }

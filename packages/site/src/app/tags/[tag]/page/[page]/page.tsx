@@ -9,18 +9,23 @@ type Props = {
   params: { tag: string; page: string };
 };
 
-export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
+export function generateMetadata({
+  locale = 'zh',
+  params,
+}: Props): SiteMetadata {
   const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const siteName = dictionaries[locale].siteName;
-   
+
   return {
-    title: locale === 'en'
-      ? `#${decodedTag} (Page ${page}) - ${siteName}`
-      : `#${decodedTag} (第 ${page} 页) - ${siteName}`,
-    description: locale === 'en'
-      ? `Browse posts related to ${decodedTag} - page ${page}`
-      : `查看所有与 ${decodedTag} 相关的文章 - 第 ${page} 页`,
+    title:
+      locale === 'en'
+        ? `#${decodedTag} (Page ${page}) - ${siteName}`
+        : `#${decodedTag} (第 ${page} 页) - ${siteName}`,
+    description:
+      locale === 'en'
+        ? `Browse posts related to ${decodedTag} - page ${page}`
+        : `查看所有与 ${decodedTag} 相关的文章 - 第 ${page} 页`,
   };
 }
 
@@ -28,19 +33,23 @@ export default function TagPaginationPage({ locale = 'zh', params }: Props) {
   const { tag, page } = params;
   const decodedTag = decodeTagFromSlug(tag);
   const currentPage = parseInt(page);
-  
+
   if (isNaN(currentPage) || currentPage < 2) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(locale, decodedTag, currentPage);
-  
+  const { posts, totalPosts, totalPages } = getPostsByTagWithPagination(
+    locale,
+    decodedTag,
+    currentPage,
+  );
+
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
   }
-  
+
   return (
-    <TagContent 
+    <TagContent
       tag={decodedTag}
       tagSlug={tag}
       locale={locale}

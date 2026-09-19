@@ -1,5 +1,7 @@
 export function enhanceFileDownloadIslands(root: HTMLElement) {
-  const cards = root.querySelectorAll<HTMLElement>('[data-md-island="file-download"]');
+  const cards = root.querySelectorAll<HTMLElement>(
+    '[data-md-island="file-download"]',
+  );
 
   cards.forEach((card) => {
     if (card.dataset.enhanced === 'true') {
@@ -10,7 +12,9 @@ export function enhanceFileDownloadIslands(root: HTMLElement) {
     const fileType = card.dataset.type || 'unknown';
     const url = card.dataset.url || '#';
     const size = card.dataset.size || '未知大小';
-    const description = card.querySelector('.file-download-fallback p')?.textContent || '暂无描述';
+    const description =
+      card.querySelector('.file-download-fallback p')?.textContent ||
+      '暂无描述';
 
     card.className = 'article-file-download';
     card.innerHTML = '';
@@ -87,8 +91,23 @@ function getFileIconClass(type: string): string {
 function getFileIconText(type: string): string {
   const normalized = type.toLowerCase();
   if (normalized === 'pdf') return 'PDF';
-  if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'image'].includes(normalized)) return 'IMG';
+  if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'image'].includes(normalized))
+    return 'IMG';
   if (['zip', 'rar', '7z', 'tar', 'gz'].includes(normalized)) return 'ZIP';
-  if (['js', 'ts', 'jsx', 'tsx', 'json', 'html', 'css', 'rs', 'rust', 'code'].includes(normalized)) return '</>';
+  if (
+    [
+      'js',
+      'ts',
+      'jsx',
+      'tsx',
+      'json',
+      'html',
+      'css',
+      'rs',
+      'rust',
+      'code',
+    ].includes(normalized)
+  )
+    return '</>';
   return 'FILE';
 }

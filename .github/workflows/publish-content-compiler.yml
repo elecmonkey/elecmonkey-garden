@@ -3,7 +3,7 @@ name: Publish content compiler
 on:
   push:
     tags:
-      - "garden-content-compiler-v*"
+      - 'garden-content-compiler-v*'
 
 permissions:
   contents: read
@@ -127,7 +127,7 @@ jobs:
           test -f garden-content-compiler.linux-x64-musl.node
 
       - name: Build JavaScript package
-        run: pnpm --filter @elecmonkey/garden-content-compiler exec rslib build
+        run: pnpm --filter @elecmonkey/garden-content-compiler exec rs lib
 
       - name: Prepare platform packages
         working-directory: packages/content-compiler-napi

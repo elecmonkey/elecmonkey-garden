@@ -32,7 +32,7 @@ Supported optional fields include draft/visibility-style metadata used by the co
 
 ## Content Build Flow
 
-- `pnpm build` runs the site build, which invokes `@elecmonkey/garden-content-compiler` through `packages/site/rsbuild.config.ts`.
+- `pnpm build` runs the site build, which invokes `@elecmonkey/garden-content-compiler` through `packages/site/rstack.config.ts`.
 - The compiler parses Markdown, frontmatter, table of contents, static HTML, search indexes, and Markdown islands.
 - The default content cache is under `packages/site/.garden-cache/content` when the site build runs from `packages/site`.
 - If compiler output shape changes, bump the compiler schema/cache version so stale generated HTML is not reused.

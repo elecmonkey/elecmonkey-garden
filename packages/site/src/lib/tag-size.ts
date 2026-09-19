@@ -4,7 +4,9 @@ export type TagSizeInput = {
   size?: string;
 };
 
-export function calculateTagSizes<T extends TagSizeInput>(tags: T[]): (T & { size: string })[] {
+export function calculateTagSizes<T extends TagSizeInput>(
+  tags: T[],
+): (T & { size: string })[] {
   if (tags.length === 0) {
     return [];
   }
@@ -19,7 +21,9 @@ export function calculateTagSizes<T extends TagSizeInput>(tags: T[]): (T & { siz
       return { ...tag, size: `${(minSize + maxSize) / 2}em` };
     }
 
-    const size = minSize + ((tag.count - minCount) / (maxCount - minCount)) * (maxSize - minSize);
+    const size =
+      minSize +
+      ((tag.count - minCount) / (maxCount - minCount)) * (maxSize - minSize);
     return { ...tag, size: `${size.toFixed(2)}em` };
   });
 }

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* 确保平滑滚动应用在html元素上 */
 html {
@@ -7,7 +7,11 @@ html {
 
 /* 主题切换过渡动画 */
 html.transitioning * {
-  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out, fill 200ms ease-in-out !important;
+  transition:
+    background-color 200ms ease-in-out,
+    color 200ms ease-in-out,
+    border-color 200ms ease-in-out,
+    fill 200ms ease-in-out !important;
 }
 
 /* Client-side route navigation progress */
@@ -39,10 +43,18 @@ html.transitioning * {
 }
 
 @keyframes route-progress-running {
-  0% { transform: scaleX(0.08); }
-  18% { transform: scaleX(0.36); }
-  48% { transform: scaleX(0.64); }
-  100% { transform: scaleX(0.92); }
+  0% {
+    transform: scaleX(0.08);
+  }
+  18% {
+    transform: scaleX(0.36);
+  }
+  48% {
+    transform: scaleX(0.64);
+  }
+  100% {
+    transform: scaleX(0.92);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -81,10 +93,10 @@ html.transitioning * {
 
   /* 搜索结果高亮颜色 */
   --highlight-yellow: #fef08a; /* 关键词高亮背景 */
-  --highlight-blue: #dbeafe;   /* 标题匹配 - 蓝色100 */
-  --highlight-green: #dcfce7;  /* 描述匹配 - 绿色100 */
+  --highlight-blue: #dbeafe; /* 标题匹配 - 蓝色100 */
+  --highlight-green: #dcfce7; /* 描述匹配 - 绿色100 */
   --highlight-purple: #f3e8ff; /* 内容匹配 - 紫色100 */
-  --highlight-red: #fee2e2;    /* 标签匹配 - 红色100 */
+  --highlight-red: #fee2e2; /* 标签匹配 - 红色100 */
 
   /* 标签云颜色 */
   --tag-blue-bg: #dbeafe;
@@ -137,10 +149,10 @@ html.transitioning * {
 
   /* 搜索结果高亮颜色 - 深色模式 */
   --highlight-yellow: #a16207;
-  --highlight-blue: #1e3a8a;   /* 蓝色900 */
-  --highlight-green: #14532d;  /* 绿色900 */
+  --highlight-blue: #1e3a8a; /* 蓝色900 */
+  --highlight-green: #14532d; /* 绿色900 */
   --highlight-purple: #581c87; /* 紫色900 */
-  --highlight-red: #991b1b;    /* 红色900 */
+  --highlight-red: #991b1b; /* 红色900 */
 
   /* 标签云颜色 - 深色模式 */
   --tag-blue-bg: #1e3a8a;
@@ -181,11 +193,9 @@ html.transitioning * {
   --color-accent-foreground: var(--accent-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --font-sans: "Geist", Arial, Helvetica, sans-serif;
-  --font-mono: "Geist Mono", monospace;
+  --font-sans: 'Geist', Arial, Helvetica, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
 }
-
-
 
 body {
   background: var(--background);
@@ -241,24 +251,63 @@ img {
   border-radius: var(--radius);
 }
 
-
 /* 标签云样式 */
-.tag-color-0 { background-color: var(--tag-blue-bg); color: var(--tag-blue-text); }
-.tag-color-0:hover { background-color: var(--tag-blue-hover); }
-.tag-color-1 { background-color: var(--tag-green-bg); color: var(--tag-green-text); }
-.tag-color-1:hover { background-color: var(--tag-green-hover); }
-.tag-color-2 { background-color: var(--tag-purple-bg); color: var(--tag-purple-text); }
-.tag-color-2:hover { background-color: var(--tag-purple-hover); }
-.tag-color-3 { background-color: var(--tag-orange-bg); color: var(--tag-orange-text); }
-.tag-color-3:hover { background-color: var(--tag-orange-hover); }
-.tag-color-4 { background-color: var(--tag-pink-bg); color: var(--tag-pink-text); }
-.tag-color-4:hover { background-color: var(--tag-pink-hover); }
-.tag-color-5 { background-color: var(--tag-cyan-bg); color: var(--tag-cyan-text); }
-.tag-color-5:hover { background-color: var(--tag-cyan-hover); }
-.tag-color-6 { background-color: var(--tag-yellow-bg); color: var(--tag-yellow-text); }
-.tag-color-6:hover { background-color: var(--tag-yellow-hover); }
-.tag-color-7 { background-color: var(--tag-red-bg); color: var(--tag-red-text); }
-.tag-color-7:hover { background-color: var(--tag-red-hover); }
+.tag-color-0 {
+  background-color: var(--tag-blue-bg);
+  color: var(--tag-blue-text);
+}
+.tag-color-0:hover {
+  background-color: var(--tag-blue-hover);
+}
+.tag-color-1 {
+  background-color: var(--tag-green-bg);
+  color: var(--tag-green-text);
+}
+.tag-color-1:hover {
+  background-color: var(--tag-green-hover);
+}
+.tag-color-2 {
+  background-color: var(--tag-purple-bg);
+  color: var(--tag-purple-text);
+}
+.tag-color-2:hover {
+  background-color: var(--tag-purple-hover);
+}
+.tag-color-3 {
+  background-color: var(--tag-orange-bg);
+  color: var(--tag-orange-text);
+}
+.tag-color-3:hover {
+  background-color: var(--tag-orange-hover);
+}
+.tag-color-4 {
+  background-color: var(--tag-pink-bg);
+  color: var(--tag-pink-text);
+}
+.tag-color-4:hover {
+  background-color: var(--tag-pink-hover);
+}
+.tag-color-5 {
+  background-color: var(--tag-cyan-bg);
+  color: var(--tag-cyan-text);
+}
+.tag-color-5:hover {
+  background-color: var(--tag-cyan-hover);
+}
+.tag-color-6 {
+  background-color: var(--tag-yellow-bg);
+  color: var(--tag-yellow-text);
+}
+.tag-color-6:hover {
+  background-color: var(--tag-yellow-hover);
+}
+.tag-color-7 {
+  background-color: var(--tag-red-bg);
+  color: var(--tag-red-text);
+}
+.tag-color-7:hover {
+  background-color: var(--tag-red-hover);
+}
 
 /* focus 切换文字效果 - Footer彩蛋 */
 .quote-text {
@@ -367,7 +416,7 @@ img {
 }
 
 .markdown-content .anchor::before {
-  content: "#";
+  content: '#';
   color: var(--muted-foreground);
   opacity: 0;
   transition: opacity 160ms ease;
@@ -427,7 +476,7 @@ img {
   margin: 0.35em 0;
 }
 
-.markdown-content input[type="checkbox"] {
+.markdown-content input[type='checkbox'] {
   margin-right: 0.5em;
 }
 
@@ -541,7 +590,7 @@ img {
   font-size: 1.05em;
 }
 
-.markdown-content [data-md-island="code"] {
+.markdown-content [data-md-island='code'] {
   position: relative;
   margin: 1.5rem 0;
   overflow: hidden;
@@ -621,14 +670,14 @@ img {
 }
 
 .article-code-line.is-added .article-code-line-content::before {
-  content: "+";
+  content: '+';
   color: #22c55e;
   font-weight: 700;
   margin-right: 0.75rem;
 }
 
 .article-code-line.is-removed .article-code-line-content::before {
-  content: "-";
+  content: '-';
   color: #ef4444;
   font-weight: 700;
   margin-right: 0.75rem;
@@ -647,7 +696,9 @@ img {
   color: #374151;
   cursor: pointer;
   padding: 0.375rem;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .article-copy-button:hover {
@@ -668,7 +719,7 @@ img {
   background: #4b5563;
 }
 
-.markdown-content [data-md-island="mermaid"] {
+.markdown-content [data-md-island='mermaid'] {
   margin: 1.5rem 0;
   overflow-x: auto;
   border: 1px solid var(--border);
@@ -677,17 +728,17 @@ img {
   padding: 1rem;
 }
 
-.markdown-content [data-md-island="mermaid"] pre {
+.markdown-content [data-md-island='mermaid'] pre {
   margin: 0;
 }
 
-.markdown-content [data-md-island="mermaid"] svg {
+.markdown-content [data-md-island='mermaid'] svg {
   max-width: 100%;
   height: auto;
   margin: 0 auto;
 }
 
-.markdown-content [data-md-island="graphviz"] {
+.markdown-content [data-md-island='graphviz'] {
   color: var(--foreground);
   margin: 1.5rem 0;
   overflow-x: auto;
@@ -697,11 +748,11 @@ img {
   padding: 1rem;
 }
 
-.markdown-content [data-md-island="graphviz"] pre {
+.markdown-content [data-md-island='graphviz'] pre {
   margin: 0;
 }
 
-.markdown-content [data-md-island="graphviz"] svg {
+.markdown-content [data-md-island='graphviz'] svg {
   display: block;
   max-width: 100%;
   height: auto;
@@ -735,10 +786,18 @@ img {
   color: var(--muted-foreground);
 }
 
-.article-file-download-icon.is-pdf { color: var(--destructive); }
-.article-file-download-icon.is-image { color: var(--primary); }
-.article-file-download-icon.is-archive { color: #ca8a04; }
-.article-file-download-icon.is-code { color: #a855f7; }
+.article-file-download-icon.is-pdf {
+  color: var(--destructive);
+}
+.article-file-download-icon.is-image {
+  color: var(--primary);
+}
+.article-file-download-icon.is-archive {
+  color: #ca8a04;
+}
+.article-file-download-icon.is-code {
+  color: #a855f7;
+}
 
 .article-file-download-body {
   min-width: 0;

@@ -8,34 +8,41 @@ interface Props {
   params: { page: string };
 }
 
-export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
+export function generateMetadata({
+  locale = 'zh',
+  params,
+}: Props): SiteMetadata {
   const { page } = params;
   const siteName = dictionaries[locale].siteName;
-   
+
   return {
-    title: locale === 'en'
-      ? `Posts (Page ${page}) - ${siteName}`
-      : `所有文章 (第 ${page} 页) - ${siteName}`,
-    description: locale === 'en' ? `Browse all posts - page ${page}` : `查看所有文章 - 第 ${page} 页`,
+    title:
+      locale === 'en'
+        ? `Posts (Page ${page}) - ${siteName}`
+        : `所有文章 (第 ${page} 页) - ${siteName}`,
+    description:
+      locale === 'en'
+        ? `Browse all posts - page ${page}`
+        : `查看所有文章 - 第 ${page} 页`,
   };
 }
 
 export default function BlogPaginationPage({ locale = 'zh', params }: Props) {
   const { page } = params;
   const currentPage = parseInt(page);
-  
+
   if (isNaN(currentPage) || currentPage < 2) {
     throw new Response('Not Found', { status: 404 });
   }
 
   const { posts, totalPages } = getAllPostsWithPagination(locale, currentPage);
-  
+
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
   }
-  
+
   return (
-    <BlogIndexContent 
+    <BlogIndexContent
       currentPage={currentPage}
       locale={locale}
       posts={posts}

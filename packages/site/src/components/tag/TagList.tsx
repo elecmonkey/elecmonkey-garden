@@ -8,11 +8,14 @@ interface TagListProps {
   locale?: Locale;
 }
 
-export default function TagList({ tags, locale = defaultLocale }: TagListProps) {
+export default function TagList({
+  tags,
+  locale = defaultLocale,
+}: TagListProps) {
   const dictionary = dictionaries[locale];
   // 按文章数量降序排序标签
   const sortedTags = [...tags].sort((a, b) => b.count - a.count);
-  
+
   if (sortedTags.length === 0) {
     return <p className="text-muted-foreground text-center italic">暂无标签</p>;
   }
@@ -27,7 +30,7 @@ export default function TagList({ tags, locale = defaultLocale }: TagListProps) 
         >
           {/* 底层卡片 */}
           <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
-          
+
           {/* 上层卡片 */}
           <div className="relative flex items-center justify-between p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
             <span className="font-medium text-foreground group-hover:text-primary">
@@ -41,4 +44,4 @@ export default function TagList({ tags, locale = defaultLocale }: TagListProps) 
       ))}
     </div>
   );
-} 
+}

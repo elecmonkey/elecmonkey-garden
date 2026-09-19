@@ -8,19 +8,28 @@ import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
 export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
   return {
     title: `${locale === 'en' ? 'Archive' : '文章归档'} - ${dictionaries[locale].siteName}`,
-    description: locale === 'en' ? 'Browse posts by month' : '按月份浏览所有博客文章',
+    description:
+      locale === 'en' ? 'Browse posts by month' : '按月份浏览所有博客文章',
   };
 }
 
-export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale }) {
+export default function ArchiveIndexPage({
+  locale = 'zh',
+}: {
+  locale?: Locale;
+}) {
   const months = getAllMonths(locale);
   const dictionary = dictionaries[locale];
-  useDocumentTitle(withSiteTitle(locale, locale === 'en' ? 'Archive' : '文章归档'));
+  useDocumentTitle(
+    withSiteTitle(locale, locale === 'en' ? 'Archive' : '文章归档'),
+  );
 
   return (
     <PageContainer>
       <h1 className="text-3xl font-bold mb-2">{dictionary.archive.title}</h1>
-      <p className="text-muted-foreground mb-8">{dictionary.archive.sortedByTime}</p>
+      <p className="text-muted-foreground mb-8">
+        {dictionary.archive.sortedByTime}
+      </p>
 
       {months.length === 0 ? (
         <div className="text-center py-10">
@@ -40,8 +49,19 @@ export default function ArchiveIndexPage({ locale = 'zh' }: { locale?: Locale })
               {/* 上层卡片 */}
               <div className="relative flex items-center justify-between p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
                 <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-3 text-muted-foreground"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
                   </svg>
                   <span className="font-medium">{month.displayName}</span>
                 </div>

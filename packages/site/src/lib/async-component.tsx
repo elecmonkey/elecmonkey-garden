@@ -7,7 +7,10 @@ export type AsyncComponentProps<TProps extends object> = TProps & {
 export function createAsyncComponent<TProps extends object>(
   load: (props: TProps) => Promise<React.ReactNode>,
 ) {
-  return function AsyncComponent({ fallback = null, ...props }: AsyncComponentProps<TProps>) {
+  return function AsyncComponent({
+    fallback = null,
+    ...props
+  }: AsyncComponentProps<TProps>) {
     const [node, setNode] = React.useState<React.ReactNode>(fallback);
     const [error, setError] = React.useState<unknown>(null);
 

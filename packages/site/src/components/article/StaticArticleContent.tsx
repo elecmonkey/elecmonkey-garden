@@ -8,7 +8,11 @@ type StaticArticleContentProps = {
   islands?: MarkdownIsland[];
 };
 
-export default function StaticArticleContent({ postId, html, islands = [] }: StaticArticleContentProps) {
+export default function StaticArticleContent({
+  postId,
+  html,
+  islands = [],
+}: StaticArticleContentProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const articleHtml = prepareArticleHtml(html);
 
@@ -37,7 +41,9 @@ export default function StaticArticleContent({ postId, html, islands = [] }: Sta
 }
 
 function prepareArticleHtml(html: string): string {
-  return html.replace(/<a href="(https?:\/\/[^"]+)"(?![^>]*\btarget=)/g, (_match, href: string) => (
-    `<a href="${href}" target="_blank" rel="noopener noreferrer"`
-  ));
+  return html.replace(
+    /<a href="(https?:\/\/[^"]+)"(?![^>]*\btarget=)/g,
+    (_match, href: string) =>
+      `<a href="${href}" target="_blank" rel="noopener noreferrer"`,
+  );
 }

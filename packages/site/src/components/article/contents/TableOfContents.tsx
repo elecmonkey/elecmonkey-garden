@@ -27,7 +27,11 @@ const SCROLL_OFFSET = 100;
 const ACTIVE_OFFSET = 120;
 
 function collectDomHeadings(): Heading[] {
-  return Array.from(document.querySelectorAll<HTMLElement>('[data-article-content] h2, [data-article-content] h3, [data-article-content] h4, [data-article-content] h5, [data-article-content] h6'))
+  return Array.from(
+    document.querySelectorAll<HTMLElement>(
+      '[data-article-content] h2, [data-article-content] h3, [data-article-content] h4, [data-article-content] h5, [data-article-content] h6',
+    ),
+  )
     .map((element) => {
       const anchor = element.querySelector<HTMLElement>('.anchor[id], a[id]');
       const id = element.id || anchor?.id || '';
@@ -41,23 +45,37 @@ function collectDomHeadings(): Heading[] {
     .filter((heading) => heading.id);
 }
 
-function TableOfContents({ no_toc = false, desktop = false, headings: headingsProp, locale = 'zh' }: TableOfContentsProps) {
+function TableOfContents({
+  no_toc = false,
+  desktop = false,
+  headings: headingsProp,
+  locale = 'zh',
+}: TableOfContentsProps) {
   const inputHeadings = headingsProp ?? EMPTY_HEADINGS;
   const [headings, setHeadings] = useState<Heading[]>(inputHeadings);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
   const tocTitle = locale === 'en' ? 'Table of Contents' : '目录';
-  const emptyMessage = locale === 'en' ? '- No outline for this post -' : '- 本文章无大纲 -';
+  const emptyMessage =
+    locale === 'en' ? '- No outline for this post -' : '- 本文章无大纲 -';
   const closeLabel = locale === 'en' ? 'Close table of contents' : '关闭目录';
 
   useEffect(() => {
-    const nextHeadings = inputHeadings.length > 0 ? inputHeadings : collectDomHeadings();
+    const nextHeadings =
+      inputHeadings.length > 0 ? inputHeadings : collectDomHeadings();
     setHeadings(nextHeadings);
-    setActiveId((current) => (nextHeadings.some((heading) => heading.id === current) ? current : ''));
+    setActiveId((current) =>
+      nextHeadings.some((heading) => heading.id === current) ? current : '',
+    );
 
     const headingElements = nextHeadings
-      .map((heading) => ({ id: heading.id, element: getHeadingElement(heading.id) }))
-      .filter((item): item is { id: string; element: HTMLElement } => Boolean(item.element));
+      .map((heading) => ({
+        id: heading.id,
+        element: getHeadingElement(heading.id),
+      }))
+      .filter((item): item is { id: string; element: HTMLElement } =>
+        Boolean(item.element),
+      );
 
     if (headingElements.length === 0) {
       return;
@@ -77,7 +95,9 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         }
       }
 
-      setActiveId((current) => (current === activeHeadingId ? current : activeHeadingId));
+      setActiveId((current) =>
+        current === activeHeadingId ? current : activeHeadingId,
+      );
     };
 
     const scheduleUpdate = () => {
@@ -108,7 +128,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
       <div className="relative">
         {/* 底层卡片 - 灰色背景，向右下偏移 */}
         <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 border border-border"></div>
-        
+
         {/* 上层卡片 - 白色/主题背景 */}
         <div className="relative bg-card border border-border overflow-hidden">
           <div className="px-5 py-4">
@@ -131,7 +151,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
       <div className="relative">
         {/* 底层卡片 - 灰色背景，向右下偏移 */}
         <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 border border-border"></div>
-        
+
         {/* 上层卡片 - 白色/主题背景 */}
         <div className="relative bg-card border border-border overflow-hidden">
           <div className="px-5 py-4">
@@ -157,12 +177,14 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
                       e.preventDefault();
                       const element = getHeadingElement(heading.id);
                       if (element) {
-                        const elementPosition = element.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - SCROLL_OFFSET;
+                        const elementPosition =
+                          element.getBoundingClientRect().top;
+                        const offsetPosition =
+                          elementPosition + window.pageYOffset - SCROLL_OFFSET;
                         setActiveId(heading.id);
                         window.scrollTo({
                           top: offsetPosition,
-                          behavior: 'smooth'
+                          behavior: 'smooth',
                         });
                       }
                     }}
@@ -189,24 +211,24 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
         `}
         aria-label={tocTitle}
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-6 w-6" 
-          fill="none" 
-          viewBox="0 0 24 24" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M4 6h16M4 12h16M4 18h7" 
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h7"
           />
         </svg>
       </button>
 
       {/* 移动端侧栏 */}
-      <nav 
+      <nav
         className={`
           fixed top-0 right-0 w-72 h-full z-40 bg-card shadow-lg border border-border
           transition-transform duration-300 ease-in-out lg:hidden
@@ -219,24 +241,26 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
           className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground"
           aria-label={closeLabel}
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6" 
-            fill="none" 
-            viewBox="0 0 24 24" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M6 18L18 6M6 6l12 12" 
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         </button>
 
         <div className="p-4 overflow-y-auto h-full">
-          <h2 className="text-lg font-semibold mb-4 text-foreground">{tocTitle}</h2>
+          <h2 className="text-lg font-semibold mb-4 text-foreground">
+            {tocTitle}
+          </h2>
           <ul className="space-y-2">
             {headings.map((heading) => (
               <li
@@ -256,12 +280,14 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
                     e.preventDefault();
                     const element = getHeadingElement(heading.id);
                     if (element) {
-                      const elementPosition = element.getBoundingClientRect().top;
-                      const offsetPosition = elementPosition + window.pageYOffset - SCROLL_OFFSET;
+                      const elementPosition =
+                        element.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - SCROLL_OFFSET;
                       setActiveId(heading.id);
                       window.scrollTo({
                         top: offsetPosition,
-                        behavior: 'smooth'
+                        behavior: 'smooth',
                       });
                     }
                     setIsOpen(false);
@@ -277,7 +303,7 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
 
       {/* 移动端背景遮罩 */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
@@ -286,4 +312,4 @@ function TableOfContents({ no_toc = false, desktop = false, headings: headingsPr
   );
 }
 
-export default TableOfContents; 
+export default TableOfContents;

@@ -28,11 +28,15 @@ export type SearchResult = {
 const searchIndexPostsPromises = new Map<Locale, Promise<SearchIndexPost[]>>();
 const loadedSearchIndexPosts = new Map<Locale, SearchIndexPost[]>();
 
-export function getLoadedSearchIndexPosts(locale: Locale = defaultLocale): SearchIndexPost[] | undefined {
+export function getLoadedSearchIndexPosts(
+  locale: Locale = defaultLocale,
+): SearchIndexPost[] | undefined {
   return loadedSearchIndexPosts.get(locale);
 }
 
-export function loadSearchIndexPosts(locale: Locale = defaultLocale): Promise<SearchIndexPost[]> {
+export function loadSearchIndexPosts(
+  locale: Locale = defaultLocale,
+): Promise<SearchIndexPost[]> {
   const loaded = loadedSearchIndexPosts.get(locale);
   if (loaded) {
     return Promise.resolve(loaded);
@@ -62,11 +66,16 @@ export function loadSearchIndexPosts(locale: Locale = defaultLocale): Promise<Se
   return searchIndexPostsPromise;
 }
 
-export function prefetchSearchIndexPosts(locale: Locale = defaultLocale): Promise<void> {
+export function prefetchSearchIndexPosts(
+  locale: Locale = defaultLocale,
+): Promise<void> {
   return loadSearchIndexPosts(locale).then(() => undefined);
 }
 
-export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): SearchResult[] {
+export function searchIndexPosts(
+  keyword: string,
+  allPosts: SearchIndexPost[],
+): SearchResult[] {
   if (!keyword.trim()) {
     return [];
   }
@@ -103,16 +112,23 @@ export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): 
       }
     });
 
-    if (post.description && post.description.toLowerCase().includes(normalizedKeyword)) {
+    if (
+      post.description &&
+      post.description.toLowerCase().includes(normalizedKeyword)
+    ) {
       score += 5;
       matches.description = true;
     }
 
-    if (post.content && post.content.toLowerCase().includes(normalizedKeyword)) {
+    if (
+      post.content &&
+      post.content.toLowerCase().includes(normalizedKeyword)
+    ) {
       score += 3;
       matches.content.matched = true;
 
-      const matchCount = post.content.toLowerCase().split(normalizedKeyword).length - 1;
+      const matchCount =
+        post.content.toLowerCase().split(normalizedKeyword).length - 1;
       score += Math.min(matchCount, 5) * 0.5;
 
       try {
@@ -120,7 +136,10 @@ export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): 
         const keywordIndex = lowerContent.indexOf(normalizedKeyword);
         if (keywordIndex !== -1) {
           const startIndex = Math.max(0, keywordIndex - 50);
-          const endIndex = Math.min(lowerContent.length, keywordIndex + normalizedKeyword.length + 50);
+          const endIndex = Math.min(
+            lowerContent.length,
+            keywordIndex + normalizedKeyword.length + 50,
+          );
           let excerpt = post.content.substring(startIndex, endIndex);
 
           if (startIndex > 0) {
@@ -139,10 +158,15 @@ export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): 
       }
     }
 
-    const hasMatches = matches.title || matches.description || matches.content.matched || matches.tags.length > 0;
+    const hasMatches =
+      matches.title ||
+      matches.description ||
+      matches.content.matched ||
+      matches.tags.length > 0;
 
     if (hasMatches) {
-      const dateScore = new Date(post.date).getTime() / (1000 * 60 * 60 * 24) / 100;
+      const dateScore =
+        new Date(post.date).getTime() / (1000 * 60 * 60 * 24) / 100;
       score += dateScore;
     }
 
@@ -150,12 +174,13 @@ export function searchIndexPosts(keyword: string, allPosts: SearchIndexPost[]): 
   });
 
   return scoredPosts
-    .filter((item) => (
-      item.matches.title
-      || item.matches.description
-      || item.matches.content.matched
-      || item.matches.tags.length > 0
-    ))
+    .filter(
+      (item) =>
+        item.matches.title ||
+        item.matches.description ||
+        item.matches.content.matched ||
+        item.matches.tags.length > 0,
+    )
     .sort((a, b) => b.score - a.score);
 }
 
@@ -196,5 +221,9 @@ export function searchIndexPostsWithPagination(
   page: number = 1,
   pageSize: number = 10,
 ) {
-  return paginateSearchResults(searchIndexPosts(keyword, allPosts), page, pageSize);
+  return paginateSearchResults(
+    searchIndexPosts(keyword, allPosts),
+    page,
+    pageSize,
+  );
 }

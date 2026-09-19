@@ -29,9 +29,10 @@ export default function RouteScrollRestoration() {
 
     scrollPositions.set(previousKeyRef.current, window.scrollY);
 
-    const nextY = navigationType === NavigationType.Pop
-      ? scrollPositions.get(location.key) ?? 0
-      : 0;
+    const nextY =
+      navigationType === NavigationType.Pop
+        ? (scrollPositions.get(location.key) ?? 0)
+        : 0;
 
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: nextY, left: 0, behavior: 'smooth' });

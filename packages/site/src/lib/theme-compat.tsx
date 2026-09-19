@@ -22,11 +22,22 @@ const storageKey = 'theme';
 
 function getSystemTheme(): 'light' | 'dark' {
   if (typeof window === 'undefined') return 'light';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
 }
 
-function applyTheme(theme: Theme, enableSystem: boolean, disableTransitionOnChange: boolean): 'light' | 'dark' {
-  const resolvedTheme = theme === 'system' && enableSystem ? getSystemTheme() : theme === 'dark' ? 'dark' : 'light';
+function applyTheme(
+  theme: Theme,
+  enableSystem: boolean,
+  disableTransitionOnChange: boolean,
+): 'light' | 'dark' {
+  const resolvedTheme =
+    theme === 'system' && enableSystem
+      ? getSystemTheme()
+      : theme === 'dark'
+        ? 'dark'
+        : 'light';
   const root = document.documentElement;
 
   if (!disableTransitionOnChange) {
@@ -46,20 +57,27 @@ export function ThemeProvider({
   disableTransitionOnChange = false,
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(defaultTheme);
-  const [resolvedTheme, setResolvedTheme] = React.useState<'light' | 'dark'>('light');
+  const [resolvedTheme, setResolvedTheme] = React.useState<'light' | 'dark'>(
+    'light',
+  );
 
   React.useEffect(() => {
     const storedTheme = window.localStorage.getItem(storageKey) as Theme | null;
     const initialTheme = storedTheme ?? defaultTheme;
     setThemeState(initialTheme);
-    setResolvedTheme(applyTheme(initialTheme, enableSystem, disableTransitionOnChange));
+    setResolvedTheme(
+      applyTheme(initialTheme, enableSystem, disableTransitionOnChange),
+    );
   }, [defaultTheme, disableTransitionOnChange, enableSystem]);
 
   React.useEffect(() => {
     if (!enableSystem || theme !== 'system') return;
 
     const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const listener = () => setResolvedTheme(applyTheme('system', enableSystem, disableTransitionOnChange));
+    const listener = () =>
+      setResolvedTheme(
+        applyTheme('system', enableSystem, disableTransitionOnChange),
+      );
     media.addEventListener('change', listener);
     return () => media.removeEventListener('change', listener);
   }, [disableTransitionOnChange, enableSystem, theme]);
@@ -68,7 +86,9 @@ export function ThemeProvider({
     (nextTheme: Theme) => {
       window.localStorage.setItem(storageKey, nextTheme);
       setThemeState(nextTheme);
-      setResolvedTheme(applyTheme(nextTheme, enableSystem, disableTransitionOnChange));
+      setResolvedTheme(
+        applyTheme(nextTheme, enableSystem, disableTransitionOnChange),
+      );
     },
     [disableTransitionOnChange, enableSystem],
   );

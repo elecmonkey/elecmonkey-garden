@@ -17,7 +17,9 @@ export function getLocalePrefix(locale: Locale): '' | '/en' {
 }
 
 export function getLocaleFromPathname(pathname: string): Locale {
-  return pathname === '/en' || pathname.startsWith('/en/') ? 'en' : defaultLocale;
+  return pathname === '/en' || pathname.startsWith('/en/')
+    ? 'en'
+    : defaultLocale;
 }
 
 export function stripLocalePrefix(pathname: string): string {
@@ -54,7 +56,8 @@ export const dictionaries = {
   zh: {
     loading: '正在加载页面...',
     siteName: 'Elecmonkey的小花园',
-    siteDescription: '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
+    siteDescription:
+      '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
     nav: {
       home: '首页',
       blog: '所有文章',
@@ -125,7 +128,8 @@ export const dictionaries = {
   en: {
     loading: 'Loading page...',
     siteName: "Elecmonkey's Garden",
-    siteDescription: 'A frontend engineering blog about JavaScript, TypeScript, React, Vue, tooling, performance, and architecture.',
+    siteDescription:
+      'A frontend engineering blog about JavaScript, TypeScript, React, Vue, tooling, performance, and architecture.',
     nav: {
       home: 'Home',
       blog: 'Posts',
@@ -137,7 +141,8 @@ export const dictionaries = {
       allPosts: 'All Posts',
       viewAllPosts: 'View All Posts',
       noPosts: 'No posts yet. Please check back later.',
-      postCount: (count: number) => `${count} ${count === 1 ? 'post' : 'posts'}`,
+      postCount: (count: number) =>
+        `${count} ${count === 1 ? 'post' : 'posts'}`,
       previousPage: 'Previous',
       nextPage: 'Next',
     },
@@ -187,80 +192,84 @@ export const dictionaries = {
       },
     },
     about: {
-      techWallLine1: 'So many things I want to understand, and still completely fail to understand.',
+      techWallLine1:
+        'So many things I want to understand, and still completely fail to understand.',
       techWallLine2: 'That is fine. There is still time.',
       expand: 'Expand',
       collapse: 'Collapse',
     },
   },
-} satisfies Record<Locale, {
-  loading: string;
-  siteName: string;
-  siteDescription: string;
-  nav: {
-    home: string;
-    blog: string;
-    about: string;
-    search: string;
-  };
-  common: {
-    home: string;
-    allPosts: string;
-    viewAllPosts: string;
-    noPosts: string;
-    postCount: (count: number) => string;
-    previousPage: string;
-    nextPage: string;
-  };
-  home: {
-    garden: string;
-    totalPosts: string;
-    latestUpdate: string;
-    tagCloud: string;
-    allTags: string;
-  };
-  blog: {
-    title: string;
-    monthlyArchive: string;
-  };
-  tags: {
-    title: string;
-    sortedByCount: string;
-    hint: string;
-    noPosts: string;
-  };
-  archive: {
-    title: string;
-    sortedByTime: string;
-    noPosts: string;
-    monthHint: string;
-    allArchives: string;
-    noPostsInMonth: string;
-    postUnit: string;
-  };
-  search: {
-    title: string;
-    emptyPlaceholder: string;
-    placeholder: string;
-    enterKeyword: string;
-    loadError: string;
+} satisfies Record<
+  Locale,
+  {
     loading: string;
-    resultPrefix: string;
-    resultMiddle: string;
-    resultSuffix: string;
-    noResults: string;
-    matchedIn: string;
-    fields: {
-      title: string;
-      description: string;
-      content: string;
-      tags: string;
+    siteName: string;
+    siteDescription: string;
+    nav: {
+      home: string;
+      blog: string;
+      about: string;
+      search: string;
     };
-  };
-  about: {
-    techWallLine1: string;
-    techWallLine2: string;
-    expand: string;
-    collapse: string;
-  };
-}>;
+    common: {
+      home: string;
+      allPosts: string;
+      viewAllPosts: string;
+      noPosts: string;
+      postCount: (count: number) => string;
+      previousPage: string;
+      nextPage: string;
+    };
+    home: {
+      garden: string;
+      totalPosts: string;
+      latestUpdate: string;
+      tagCloud: string;
+      allTags: string;
+    };
+    blog: {
+      title: string;
+      monthlyArchive: string;
+    };
+    tags: {
+      title: string;
+      sortedByCount: string;
+      hint: string;
+      noPosts: string;
+    };
+    archive: {
+      title: string;
+      sortedByTime: string;
+      noPosts: string;
+      monthHint: string;
+      allArchives: string;
+      noPostsInMonth: string;
+      postUnit: string;
+    };
+    search: {
+      title: string;
+      emptyPlaceholder: string;
+      placeholder: string;
+      enterKeyword: string;
+      loadError: string;
+      loading: string;
+      resultPrefix: string;
+      resultMiddle: string;
+      resultSuffix: string;
+      noResults: string;
+      matchedIn: string;
+      fields: {
+        title: string;
+        description: string;
+        content: string;
+        tags: string;
+      };
+    };
+    about: {
+      techWallLine1: string;
+      techWallLine2: string;
+      expand: string;
+      collapse: string;
+    };
+  }
+>;

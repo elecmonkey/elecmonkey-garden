@@ -11,15 +11,35 @@ import { generateMetadata as generateMonthMetadata } from '../app/archive/[month
 import { generateMetadata as generateMonthPageMetadata } from '../app/archive/[month]/page/[page]/page';
 import { generateMetadata as generateSearchMetadata } from '../app/search/page';
 import { getStaticPathnames } from '../app-shell/static-paths';
-import { type Locale, dictionaries, getLocaleFromPathname, hrefFor, locales, stripLocalePrefix } from '../lib/i18n';
+import {
+  type Locale,
+  dictionaries,
+  getLocaleFromPathname,
+  hrefFor,
+  locales,
+  stripLocalePrefix,
+} from '../lib/i18n';
 import type { RobotsValue, SiteMetadata } from './metadata-types';
 
 const siteUrl = 'https://www.elecmonkey.com';
 
 const rootMetadata: SiteMetadata = {
   title: 'Elecmonkey的小花园',
-  description: 'Elecmonkey的小花园是一个专注于前端技术的技术博客，分享JavaScript、TypeScript、React、Vue、Next.js、Vite等前端开发技术、工程化实践、性能优化和最佳实践经验。',
-  keywords: ['前端开发', '前端技术', 'JavaScript', 'TypeScript', 'React', 'Vue', 'Next.js', 'Vite', '前端工程化', '技术博客', 'Elecmonkey'],
+  description:
+    'Elecmonkey的小花园是一个专注于前端技术的技术博客，分享JavaScript、TypeScript、React、Vue、Next.js、Vite等前端开发技术、工程化实践、性能优化和最佳实践经验。',
+  keywords: [
+    '前端开发',
+    '前端技术',
+    'JavaScript',
+    'TypeScript',
+    'React',
+    'Vue',
+    'Next.js',
+    'Vite',
+    '前端工程化',
+    '技术博客',
+    'Elecmonkey',
+  ],
   authors: [{ name: 'Elecmonkey' }],
   creator: 'Elecmonkey',
   publisher: 'Elecmonkey',
@@ -30,19 +50,23 @@ const rootMetadata: SiteMetadata = {
     locale: 'zh_CN',
     url: 'https://www.elecmonkey.com',
     title: 'Elecmonkey的小花园 - 前端技术博客',
-    description: '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
+    description:
+      '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
     siteName: 'Elecmonkey的小花园',
-    images: [{
-      url: '/icon.webp',
-      width: 1024,
-      height: 1024,
-      alt: 'Elecmonkey的小花园',
-    }],
+    images: [
+      {
+        url: '/icon.webp',
+        width: 1024,
+        height: 1024,
+        alt: 'Elecmonkey的小花园',
+      },
+    ],
   },
   twitter: {
     card: 'summary',
     title: 'Elecmonkey的小花园 - 前端技术博客',
-    description: '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
+    description:
+      '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
     images: ['/icon.webp'],
   },
   robots: {
@@ -67,18 +91,32 @@ function createRootMetadata(locale: Locale): SiteMetadata {
     title: dictionary.siteName,
     description: dictionary.siteDescription,
     keywords: isEnglish
-      ? ['frontend development', 'JavaScript', 'TypeScript', 'React', 'Vue', 'Vite', 'web performance', 'technical blog', 'Elecmonkey']
+      ? [
+          'frontend development',
+          'JavaScript',
+          'TypeScript',
+          'React',
+          'Vue',
+          'Vite',
+          'web performance',
+          'technical blog',
+          'Elecmonkey',
+        ]
       : rootMetadata.keywords,
     openGraph: {
       ...(rootMetadata.openGraph ?? {}),
       locale: isEnglish ? 'en_US' : 'zh_CN',
-      title: isEnglish ? "Elecmonkey's Garden - Frontend Engineering Blog" : 'Elecmonkey的小花园 - 前端技术博客',
+      title: isEnglish
+        ? "Elecmonkey's Garden - Frontend Engineering Blog"
+        : 'Elecmonkey的小花园 - 前端技术博客',
       description: dictionary.siteDescription,
       siteName: dictionary.siteName,
     },
     twitter: {
       ...(rootMetadata.twitter ?? {}),
-      title: isEnglish ? "Elecmonkey's Garden - Frontend Engineering Blog" : 'Elecmonkey的小花园 - 前端技术博客',
+      title: isEnglish
+        ? "Elecmonkey's Garden - Frontend Engineering Blog"
+        : 'Elecmonkey的小花园 - 前端技术博客',
       description: dictionary.siteDescription,
     },
   };
@@ -96,7 +134,10 @@ function escapeHtml(value: unknown): string {
   return String(value).replace(/[&<>"']/g, (char) => htmlEscapes[char]);
 }
 
-function mergeMetadata(base: SiteMetadata, route: SiteMetadata | null | undefined): SiteMetadata {
+function mergeMetadata(
+  base: SiteMetadata,
+  route: SiteMetadata | null | undefined,
+): SiteMetadata {
   return {
     ...base,
     ...route,
@@ -127,7 +168,9 @@ function getCanonicalUrl(pathname: string): string {
   return normalized === '/' ? siteUrl : `${siteUrl}${normalized}`;
 }
 
-function getAlternateLinks(pathname: string): Array<{ hrefLang: string; href: string }> {
+function getAlternateLinks(
+  pathname: string,
+): Array<{ hrefLang: string; href: string }> {
   const stripped = stripLocalePrefix(pathname);
 
   return locales.map((locale) => ({
@@ -144,9 +187,17 @@ function linkTag(attributes: Record<string, string>): string {
   return `<link ${serialized} />`;
 }
 
-function getUrlValue(value: unknown, metadata: SiteMetadata): string | undefined {
+function getUrlValue(
+  value: unknown,
+  metadata: SiteMetadata,
+): string | undefined {
   if (!value) return undefined;
-  const url = typeof value === 'string' ? value : value instanceof URL ? value.toString() : undefined;
+  const url =
+    typeof value === 'string'
+      ? value
+      : value instanceof URL
+        ? value.toString()
+        : undefined;
   if (!url) return undefined;
   if (/^https?:\/\//.test(url)) return url;
   const base = metadata.metadataBase;
@@ -154,10 +205,14 @@ function getUrlValue(value: unknown, metadata: SiteMetadata): string | undefined
   return new URL(url, base).toString();
 }
 
-function getFirstImage(metadata: SiteMetadata, source: unknown): string | undefined {
+function getFirstImage(
+  metadata: SiteMetadata,
+  source: unknown,
+): string | undefined {
   if (!source) return undefined;
   const value = Array.isArray(source) ? (source as unknown[])[0] : source;
-  if (typeof value === 'string' || value instanceof URL) return getUrlValue(value, metadata);
+  if (typeof value === 'string' || value instanceof URL)
+    return getUrlValue(value, metadata);
   if (value && typeof value === 'object' && 'url' in value) {
     return getUrlValue((value as { url?: unknown }).url, metadata);
   }
@@ -168,13 +223,18 @@ function robotsToContent(robots: RobotsValue | undefined): string | undefined {
   if (!robots) return undefined;
   if (typeof robots === 'string') return robots;
   const parts: string[] = [];
-  if (robots.index !== undefined) parts.push(robots.index ? 'index' : 'noindex');
-  if (robots.follow !== undefined) parts.push(robots.follow ? 'follow' : 'nofollow');
+  if (robots.index !== undefined)
+    parts.push(robots.index ? 'index' : 'noindex');
+  if (robots.follow !== undefined)
+    parts.push(robots.follow ? 'follow' : 'nofollow');
   return parts.length > 0 ? parts.join(', ') : undefined;
 }
 
-function googleBotToContent(robots: RobotsValue | undefined): string | undefined {
-  if (!robots || typeof robots === 'string' || !robots.googleBot) return undefined;
+function googleBotToContent(
+  robots: RobotsValue | undefined,
+): string | undefined {
+  if (!robots || typeof robots === 'string' || !robots.googleBot)
+    return undefined;
   return Object.entries(robots.googleBot)
     .map(([key, value]) => {
       if (typeof value === 'boolean') return value ? key : `no${key}`;
@@ -191,20 +251,52 @@ function propertyTag(property: string, content: unknown): string {
   return `<meta property="${escapeHtml(property)}" content="${escapeHtml(content)}" />`;
 }
 
-function getRouteParams(pathname: string): { route: string; params: Record<string, string> } {
-  const segments = stripLocalePrefix(pathname).replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+function getRouteParams(pathname: string): {
+  route: string;
+  params: Record<string, string>;
+} {
+  const segments = stripLocalePrefix(pathname)
+    .replace(/^\/+|\/+$/g, '')
+    .split('/')
+    .filter(Boolean);
 
   if (segments.length === 0) return { route: 'home', params: {} };
-  if (segments[0] === 'about' && segments.length === 1) return { route: 'about', params: {} };
-  if (segments[0] === 'blog' && segments.length === 1) return { route: 'blog', params: {} };
-  if (segments[0] === 'blog' && segments[1] === 'page' && segments[2]) return { route: 'blog-page', params: { page: segments[2] } };
-  if (segments[0] === 'blog' && segments[1]) return { route: 'blog-post', params: { slug: segments[1] } };
-  if (segments[0] === 'tags' && segments.length === 1) return { route: 'tags', params: {} };
-  if (segments[0] === 'tags' && segments[1] && segments[2] === 'page' && segments[3]) return { route: 'tag-page', params: { tag: segments[1], page: segments[3] } };
-  if (segments[0] === 'tags' && segments[1]) return { route: 'tag', params: { tag: segments[1] } };
-  if (segments[0] === 'archive' && segments.length === 1) return { route: 'archive', params: {} };
-  if (segments[0] === 'archive' && segments[1] && segments[2] === 'page' && segments[3]) return { route: 'month-page', params: { month: segments[1], page: segments[3] } };
-  if (segments[0] === 'archive' && segments[1]) return { route: 'month', params: { month: segments[1] } };
+  if (segments[0] === 'about' && segments.length === 1)
+    return { route: 'about', params: {} };
+  if (segments[0] === 'blog' && segments.length === 1)
+    return { route: 'blog', params: {} };
+  if (segments[0] === 'blog' && segments[1] === 'page' && segments[2])
+    return { route: 'blog-page', params: { page: segments[2] } };
+  if (segments[0] === 'blog' && segments[1])
+    return { route: 'blog-post', params: { slug: segments[1] } };
+  if (segments[0] === 'tags' && segments.length === 1)
+    return { route: 'tags', params: {} };
+  if (
+    segments[0] === 'tags' &&
+    segments[1] &&
+    segments[2] === 'page' &&
+    segments[3]
+  )
+    return {
+      route: 'tag-page',
+      params: { tag: segments[1], page: segments[3] },
+    };
+  if (segments[0] === 'tags' && segments[1])
+    return { route: 'tag', params: { tag: segments[1] } };
+  if (segments[0] === 'archive' && segments.length === 1)
+    return { route: 'archive', params: {} };
+  if (
+    segments[0] === 'archive' &&
+    segments[1] &&
+    segments[2] === 'page' &&
+    segments[3]
+  )
+    return {
+      route: 'month-page',
+      params: { month: segments[1], page: segments[3] },
+    };
+  if (segments[0] === 'archive' && segments[1])
+    return { route: 'month', params: { month: segments[1] } };
   if (segments[0] === 'search') return { route: 'search', params: {} };
 
   return { route: 'not-found', params: {} };
@@ -221,32 +313,52 @@ function getRouteMetadata(locale: Locale, pathname: string): SiteMetadata {
     case 'blog':
       return getBlogMetadata(locale);
     case 'blog-page':
-      return generateBlogPageMetadata({ locale, params: { page: params.page } });
+      return generateBlogPageMetadata({
+        locale,
+        params: { page: params.page },
+      });
     case 'blog-post':
-      return generateBlogPostMetadata({ locale, params: { slug: params.slug } });
+      return generateBlogPostMetadata({
+        locale,
+        params: { slug: params.slug },
+      });
     case 'tags':
       return getTagsMetadata(locale);
     case 'tag':
       return generateTagMetadata({ locale, params: { tag: params.tag } });
     case 'tag-page':
-      return generateTagPageMetadata({ locale, params: { tag: params.tag, page: params.page } });
+      return generateTagPageMetadata({
+        locale,
+        params: { tag: params.tag, page: params.page },
+      });
     case 'archive':
       return getArchiveMetadata(locale);
     case 'month':
       return generateMonthMetadata({ locale, params: { month: params.month } });
     case 'month-page':
-      return generateMonthPageMetadata({ locale, params: { month: params.month, page: params.page } });
+      return generateMonthPageMetadata({
+        locale,
+        params: { month: params.month, page: params.page },
+      });
     case 'search':
       return {
         ...generateSearchMetadata({ locale, searchParams: {} }),
         robots: { index: false, follow: true },
       };
     default:
-      return { title: locale === 'en' ? "Page Not Found - Elecmonkey's Garden" : '页面未找到 - Elecmonkey的小花园', robots: 'noindex, nofollow' };
+      return {
+        title:
+          locale === 'en'
+            ? "Page Not Found - Elecmonkey's Garden"
+            : '页面未找到 - Elecmonkey的小花园',
+        robots: 'noindex, nofollow',
+      };
   }
 }
 
-async function getAvailableAlternateLinks(pathname: string): Promise<Array<{ hrefLang: string; href: string }>> {
+async function getAvailableAlternateLinks(
+  pathname: string,
+): Promise<Array<{ hrefLang: string; href: string }>> {
   const pathnames = new Set(await getStaticPathnames());
 
   return getAlternateLinks(pathname).filter((alternate) => {
@@ -255,7 +367,11 @@ async function getAvailableAlternateLinks(pathname: string): Promise<Array<{ hre
   });
 }
 
-function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: SiteMetadata): SiteMetadata {
+function localizeRouteMetadata(
+  locale: Locale,
+  pathname: string,
+  routeMetadata: SiteMetadata,
+): SiteMetadata {
   if (locale !== 'en') {
     return routeMetadata;
   }
@@ -288,12 +404,20 @@ function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: 
     case 'tag-page':
       return routeMetadata;
     case 'archive':
-      return { ...routeMetadata, title: `Archive - ${siteName}`, description: 'Browse posts by month' };
+      return {
+        ...routeMetadata,
+        title: `Archive - ${siteName}`,
+        description: 'Browse posts by month',
+      };
     case 'month':
     case 'month-page':
       return routeMetadata;
     case 'search':
-      return { ...routeMetadata, title: `Search - ${siteName}`, description: 'Search posts' };
+      return {
+        ...routeMetadata,
+        title: `Search - ${siteName}`,
+        description: 'Search posts',
+      };
     default:
       return routeMetadata;
   }
@@ -301,7 +425,11 @@ function localizeRouteMetadata(locale: Locale, pathname: string, routeMetadata: 
 
 export async function renderMetadataTags(pathname: string): Promise<string> {
   const locale = getLocaleFromPathname(pathname);
-  const routeMetadata = localizeRouteMetadata(locale, pathname, getRouteMetadata(locale, pathname));
+  const routeMetadata = localizeRouteMetadata(
+    locale,
+    pathname,
+    getRouteMetadata(locale, pathname),
+  );
   const metadata = mergeMetadata(createRootMetadata(locale), routeMetadata);
   const { route } = getRouteParams(pathname);
   const title = getTitle(metadata);
@@ -312,13 +440,37 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
   if (title) tags.push(`<title>${escapeHtml(title)}</title>`);
   tags.push(linkTag({ rel: 'canonical', href: canonicalUrl }));
   for (const alternate of await getAvailableAlternateLinks(pathname)) {
-    tags.push(linkTag({ rel: 'alternate', hrefLang: alternate.hrefLang, href: alternate.href }));
+    tags.push(
+      linkTag({
+        rel: 'alternate',
+        hrefLang: alternate.hrefLang,
+        href: alternate.href,
+      }),
+    );
   }
-  if (metadata.description) tags.push(metaTag('description', metadata.description));
-  if (metadata.keywords) tags.push(metaTag('keywords', Array.isArray(metadata.keywords) ? metadata.keywords.join(', ') : metadata.keywords));
+  if (metadata.description)
+    tags.push(metaTag('description', metadata.description));
+  if (metadata.keywords)
+    tags.push(
+      metaTag(
+        'keywords',
+        Array.isArray(metadata.keywords)
+          ? metadata.keywords.join(', ')
+          : metadata.keywords,
+      ),
+    );
   if (metadata.creator) tags.push(metaTag('creator', metadata.creator));
   if (metadata.publisher) tags.push(metaTag('publisher', metadata.publisher));
-  if (metadata.authors?.length) tags.push(metaTag('author', metadata.authors.map((author) => author.name).filter(Boolean).join(', ')));
+  if (metadata.authors?.length)
+    tags.push(
+      metaTag(
+        'author',
+        metadata.authors
+          .map((author) => author.name)
+          .filter(Boolean)
+          .join(', '),
+      ),
+    );
 
   const robots = robotsToContent(metadata.robots);
   if (robots) tags.push(metaTag('robots', robots));
@@ -327,29 +479,48 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
 
   const openGraph = metadata.openGraph ?? {};
   const routeOpenGraph = routeMetadata.openGraph ?? {};
-  const ogTitle = routeOpenGraph.title ?? routeTitle ?? openGraph.title ?? title;
-  const ogDescription = routeOpenGraph.description ?? routeMetadata.description ?? metadata.description ?? openGraph.description;
+  const ogTitle =
+    routeOpenGraph.title ?? routeTitle ?? openGraph.title ?? title;
+  const ogDescription =
+    routeOpenGraph.description ??
+    routeMetadata.description ??
+    metadata.description ??
+    openGraph.description;
   const ogUrl = getUrlValue(routeOpenGraph.url, metadata) ?? canonicalUrl;
-  const ogType = routeOpenGraph.type ?? (route === 'blog-post' ? 'article' : openGraph.type);
+  const ogType =
+    routeOpenGraph.type ?? (route === 'blog-post' ? 'article' : openGraph.type);
 
   if (ogType) tags.push(propertyTag('og:type', ogType));
   if (openGraph.locale) tags.push(propertyTag('og:locale', openGraph.locale));
-  if (openGraph.siteName) tags.push(propertyTag('og:site_name', openGraph.siteName));
+  if (openGraph.siteName)
+    tags.push(propertyTag('og:site_name', openGraph.siteName));
   if (ogTitle) tags.push(propertyTag('og:title', ogTitle));
   if (ogDescription) tags.push(propertyTag('og:description', ogDescription));
   tags.push(propertyTag('og:url', ogUrl));
-  const ogImage = getFirstImage(metadata, routeOpenGraph.images ?? openGraph.images);
+  const ogImage = getFirstImage(
+    metadata,
+    routeOpenGraph.images ?? openGraph.images,
+  );
   if (ogImage) tags.push(propertyTag('og:image', ogImage));
 
   const twitter = metadata.twitter ?? {};
   const routeTwitter = routeMetadata.twitter ?? {};
-  const twitterTitle = routeTwitter.title ?? routeTitle ?? twitter.title ?? title;
-  const twitterDescription = routeTwitter.description ?? routeMetadata.description ?? metadata.description ?? twitter.description;
+  const twitterTitle =
+    routeTwitter.title ?? routeTitle ?? twitter.title ?? title;
+  const twitterDescription =
+    routeTwitter.description ??
+    routeMetadata.description ??
+    metadata.description ??
+    twitter.description;
 
   if (twitter.card) tags.push(metaTag('twitter:card', twitter.card));
   if (twitterTitle) tags.push(metaTag('twitter:title', twitterTitle));
-  if (twitterDescription) tags.push(metaTag('twitter:description', twitterDescription));
-  const twitterImage = getFirstImage(metadata, routeTwitter.images ?? twitter.images);
+  if (twitterDescription)
+    tags.push(metaTag('twitter:description', twitterDescription));
+  const twitterImage = getFirstImage(
+    metadata,
+    routeTwitter.images ?? twitter.images,
+  );
   if (twitterImage) tags.push(metaTag('twitter:image', twitterImage));
 
   return tags.join('\n    ');

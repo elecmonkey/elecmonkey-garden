@@ -4,20 +4,25 @@ import { syncPrefetchNavigation } from '@/lib/client-prefetch';
 import { routes } from './routes';
 
 function getHydrationData() {
-  if (typeof document === 'undefined' || !document.getElementById('root')?.hasChildNodes()) {
+  if (
+    typeof document === 'undefined' ||
+    !document.getElementById('root')?.hasChildNodes()
+  ) {
     return undefined;
   }
 
   const loaderData = Object.fromEntries(
-    (matchRoutes(routes, window.location.pathname) ?? []).flatMap(({ route }) => (
-      route.id ? [[route.id, null]] : []
-    )),
+    (matchRoutes(routes, window.location.pathname) ?? []).flatMap(
+      ({ route }) => (route.id ? [[route.id, null]] : []),
+    ),
   );
 
   return { loaderData };
 }
 
-const router = createBrowserRouter(routes, { hydrationData: getHydrationData() });
+const router = createBrowserRouter(routes, {
+  hydrationData: getHydrationData(),
+});
 
 export function App() {
   useEffect(() => {

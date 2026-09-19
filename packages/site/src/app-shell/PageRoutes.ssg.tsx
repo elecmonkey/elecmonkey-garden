@@ -60,7 +60,9 @@ export function TagRoute({ locale }: { locale: Locale }) {
 
 export function TagPaginationRoute({ locale }: { locale: Locale }) {
   const { tag = '', page = '1' } = useParams();
-  return withSuspense(<TagPaginationPage locale={locale} params={{ tag, page }} />);
+  return withSuspense(
+    <TagPaginationPage locale={locale} params={{ tag, page }} />,
+  );
 }
 
 export function MonthArchiveRoute({ locale }: { locale: Locale }) {
@@ -70,7 +72,9 @@ export function MonthArchiveRoute({ locale }: { locale: Locale }) {
 
 export function MonthArchivePaginationRoute({ locale }: { locale: Locale }) {
   const { month = '', page = '1' } = useParams();
-  return withSuspense(<MonthArchivePaginationPage locale={locale} params={{ month, page }} />);
+  return withSuspense(
+    <MonthArchivePaginationPage locale={locale} params={{ month, page }} />,
+  );
 }
 
 export function SearchRoute({ locale }: { locale: Locale }) {

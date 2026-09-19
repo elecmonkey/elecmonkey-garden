@@ -9,12 +9,21 @@ interface TechIconProps {
   customText?: string;
 }
 
-export default function TechIcon({ src, alt, label, className = '', isGray = false, customText }: TechIconProps) {
+export default function TechIcon({
+  src,
+  alt,
+  label,
+  className = '',
+  isGray = false,
+  customText,
+}: TechIconProps) {
   return (
     <div className="flex flex-col items-center group">
       <div className="relative w-16 h-16 mb-2">
         {customText ? (
-          <div className={`flex items-center justify-center w-full h-full text-2xl font-serif transition-all duration-300 group-hover:scale-110 ${isGray ? 'opacity-50' : ''} ${className}`}>
+          <div
+            className={`flex items-center justify-center w-full h-full text-2xl font-serif transition-all duration-300 group-hover:scale-110 ${isGray ? 'opacity-50' : ''} ${className}`}
+          >
             {customText}
           </div>
         ) : src ? (
@@ -26,7 +35,9 @@ export default function TechIcon({ src, alt, label, className = '', isGray = fal
           />
         ) : null}
       </div>
-      <span className="text-sm text-muted-foreground text-center w-full">{label}</span>
+      <span className="text-sm text-muted-foreground text-center w-full">
+        {label}
+      </span>
     </div>
   );
 }

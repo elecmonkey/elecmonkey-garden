@@ -114,7 +114,15 @@ function run(command, args, options = {}) {
 }
 
 function nativeBuildArgs(target, release) {
-  const args = ['exec', 'napi', 'build', '--platform', '--no-js', '--dts', 'native.d.ts'];
+  const args = [
+    'exec',
+    'napi',
+    'build',
+    '--platform',
+    '--no-js',
+    '--dts',
+    'native.d.ts',
+  ];
   if (release) args.push('--release');
   if (target) {
     args.push('--target', target);
@@ -144,24 +152,45 @@ function main() {
   const options = parseArgs(process.argv.slice(2));
 
   if (options.targets.length === 0) {
-    run('pnpm', nativeBuildArgs(undefined, options.release), { cwd: packageDir, dryRun: options.dryRun });
+    run('pnpm', nativeBuildArgs(undefined, options.release), {
+      cwd: packageDir,
+      dryRun: options.dryRun,
+    });
   } else {
     for (const target of options.targets) {
-      run('pnpm', nativeBuildArgs(target, options.release), { cwd: packageDir, dryRun: options.dryRun });
+      run('pnpm', nativeBuildArgs(target, options.release), {
+        cwd: packageDir,
+        dryRun: options.dryRun,
+      });
     }
   }
 
-  run('pnpm', ['exec', 'rslib', 'build'], { cwd: packageDir, dryRun: options.dryRun });
+  run('pnpm', ['exec', 'rs', 'lib'], {
+    cwd: packageDir,
+    dryRun: options.dryRun,
+  });
 
   if (options.platformPackages) {
-    run('pnpm', ['exec', 'napi', 'create-npm-dirs'], { cwd: packageDir, dryRun: options.dryRun });
-    run('pnpm', ['exec', 'napi', 'artifacts', '--output-dir', '.'], { cwd: packageDir, dryRun: options.dryRun });
-    run('pnpm', ['exec', 'napi', 'pre-publish', '--skip-optional-publish'], { cwd: packageDir, dryRun: options.dryRun });
+    run('pnpm', ['exec', 'napi', 'create-npm-dirs'], {
+      cwd: packageDir,
+      dryRun: options.dryRun,
+    });
+    run('pnpm', ['exec', 'napi', 'artifacts', '--output-dir', '.'], {
+      cwd: packageDir,
+      dryRun: options.dryRun,
+    });
+    run('pnpm', ['exec', 'napi', 'pre-publish', '--skip-optional-publish'], {
+      cwd: packageDir,
+      dryRun: options.dryRun,
+    });
   }
 
   if (options.pack) {
     if (!options.dryRun) fs.mkdirSync(artifactsDir, { recursive: true });
-    run('pnpm', ['pack', '--pack-destination', artifactsDir], { cwd: packageDir, dryRun: options.dryRun });
+    run('pnpm', ['pack', '--pack-destination', artifactsDir], {
+      cwd: packageDir,
+      dryRun: options.dryRun,
+    });
   }
 }
 

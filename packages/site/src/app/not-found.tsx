@@ -12,17 +12,25 @@ export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
 
 export default function NotFound({ locale = 'zh' }: { locale?: Locale }) {
   const isEnglish = locale === 'en';
-  useDocumentTitle(isEnglish ? "Page Not Found - Elecmonkey's Garden" : '页面未找到 - Elecmonkey的小花园');
+  useDocumentTitle(
+    isEnglish
+      ? "Page Not Found - Elecmonkey's Garden"
+      : '页面未找到 - Elecmonkey的小花园',
+  );
 
   return (
     <PageContainer>
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <div className="text-9xl font-bold text-muted-foreground/30">404</div>
 
-        <h1 className="mt-6 text-3xl font-bold tracking-tight">{isEnglish ? 'Page Not Found' : '页面走丢了'}</h1>
+        <h1 className="mt-6 text-3xl font-bold tracking-tight">
+          {isEnglish ? 'Page Not Found' : '页面走丢了'}
+        </h1>
 
         <p className="mt-4 text-base text-muted-foreground max-w-md">
-          {isEnglish ? 'Sorry, the page you are looking for does not exist or has been moved.' : '很抱歉，您要找的页面不存在或者已被移动到其他位置。'}
+          {isEnglish
+            ? 'Sorry, the page you are looking for does not exist or has been moved.'
+            : '很抱歉，您要找的页面不存在或者已被移动到其他位置。'}
         </p>
 
         <div className="mt-8 flex space-x-4">

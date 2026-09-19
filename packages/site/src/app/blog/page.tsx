@@ -11,17 +11,17 @@ export function getMetadata(locale: Locale = 'zh'): SiteMetadata {
 
 export default function BlogPage({ locale = 'zh' }: { locale?: Locale }) {
   const currentPage = 1;
-  
+
   // 获取分页的文章列表
   const { posts, totalPages } = getAllPostsWithPagination(locale, currentPage);
-  
+
   // 如果页码超出范围且总页数大于0，返回404
   if (currentPage > totalPages && totalPages > 0) {
     throw new Response('Not Found', { status: 404 });
   }
 
   return (
-    <BlogIndexContent 
+    <BlogIndexContent
       currentPage={currentPage}
       locale={locale}
       posts={posts}

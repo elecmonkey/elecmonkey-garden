@@ -10,14 +10,14 @@ const TAG_PLACEHOLDERS = [
 function replaceTagSpecialChars(value: string): string {
   return TAG_PLACEHOLDERS.reduce(
     (result, [char, placeholder]) => result.replaceAll(char, placeholder),
-    value
+    value,
   );
 }
 
 function restoreTagSpecialChars(value: string): string {
   return TAG_PLACEHOLDERS.reduce(
     (result, [char, placeholder]) => result.replaceAll(placeholder, char),
-    value
+    value,
   );
 }
 

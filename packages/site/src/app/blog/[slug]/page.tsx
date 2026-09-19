@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import Link from '@/components/Link';
 import { getTagPath } from '@/lib/tag-url';
-import { getLoadedPostById, getPostById, loadPostById, type PostData } from '@/lib/api';
+import {
+  getLoadedPostById,
+  getPostById,
+  loadPostById,
+  type PostData,
+} from '@/lib/api';
 import { prefetchAdjacentArticles } from '@/lib/client-prefetch';
 import { dictionaries, type Locale, postHref } from '@/lib/i18n';
 import StaticArticleContent from '@/components/article/StaticArticleContent';
@@ -15,7 +20,10 @@ type Props = {
 };
 
 // 动态生成元数据
-export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata {
+export function generateMetadata({
+  locale = 'zh',
+  params,
+}: Props): SiteMetadata {
   const { slug } = params;
   const siteName = dictionaries[locale].siteName;
   try {
@@ -37,7 +45,12 @@ export function generateMetadata({ locale = 'zh', params }: Props): SiteMetadata
 // 异步组件
 export default function BlogPost({ locale = 'zh', params }: Props) {
   const { slug } = params;
-  const [post, setPost] = useState<(PostData & { prevPost?: { id: string; title: string }; nextPost?: { id: string; title: string } })>(() => {
+  const [post, setPost] = useState<
+    PostData & {
+      prevPost?: { id: string; title: string };
+      nextPost?: { id: string; title: string };
+    }
+  >(() => {
     try {
       return getLoadedPostById(locale, slug) ?? getPostById(locale, slug);
     } catch (error) {
@@ -50,19 +63,23 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
 
   useEffect(() => {
     let canceled = false;
-    const isCompiledPost = (post: PostData) => (
-      Boolean(post.html) && Array.isArray(post.toc) && Array.isArray(post.islands)
-    );
+    const isCompiledPost = (post: PostData) =>
+      Boolean(post.html) &&
+      Array.isArray(post.toc) &&
+      Array.isArray(post.islands);
 
     try {
-      const cachedPost = getLoadedPostById(locale, slug) ?? getPostById(locale, slug);
+      const cachedPost =
+        getLoadedPostById(locale, slug) ?? getPostById(locale, slug);
 
       if (isCompiledPost(cachedPost)) {
-        setPost((current) => (
-          isCompiledPost(current) && current.locale === cachedPost.locale && current.id === cachedPost.id
+        setPost((current) =>
+          isCompiledPost(current) &&
+          current.locale === cachedPost.locale &&
+          current.id === cachedPost.id
             ? current
-            : cachedPost
-        ));
+            : cachedPost,
+        );
         setLoadError(null);
         return () => {
           canceled = true;
@@ -87,7 +104,9 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
       .catch((error) => {
         console.error('博客文章加载失败:', error);
         if (!canceled) {
-          setLoadError(error instanceof Error ? error : new Error(String(error)));
+          setLoadError(
+            error instanceof Error ? error : new Error(String(error)),
+          );
         }
       });
 
@@ -106,9 +125,13 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  const articleNode = post.html
-    ? <StaticArticleContent postId={post.id} html={post.html} islands={post.islands} />
-    : null;
+  const articleNode = post.html ? (
+    <StaticArticleContent
+      postId={post.id}
+      html={post.html}
+      islands={post.islands}
+    />
+  ) : null;
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 mb-10">
@@ -117,111 +140,168 @@ export default function BlogPost({ locale = 'zh', params }: Props) {
         <main className="flex-1 min-w-0">
           <article className="prose prose-slate dark:prose-invert lg:prose-xl max-w-none">
             <header className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">
-              {post.isHidden && (
-                <span className="inline-block bg-gray-500 text-white text-sm py-1 px-2 rounded mr-2 align-middle">
-                  隐藏
-                </span>
-              )}
-              {post.title}
-            </h1>
-            <p className="text-muted-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              {new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'zh-CN', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-              {post.author && (
-                <span>
-                  <span className="mx-2"></span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline-block mr-1 align-[-2px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  {post.author}
-                </span>
-              )}
-            </p>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {post.tags.map((tag: string) => (
-                <Link
-                  key={tag}
-                  href={getTagPath(tag, locale)}
-                  className="bg-muted hover:bg-muted/80 text-muted-foreground px-2 py-1 rounded-md text-xs transition-colors no-underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <h1 className="text-3xl font-bold mb-2">
+                {post.isHidden && (
+                  <span className="inline-block bg-gray-500 text-white text-sm py-1 px-2 rounded mr-2 align-middle">
+                    隐藏
+                  </span>
+                )}
+                {post.title}
+              </h1>
+              <p className="text-muted-foreground">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 inline-block mr-1 align-[-2px]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  {tag}
-                </Link>
-              ))}
-            </div>
-          </header>
-
-          {articleNode}
-
-          {/* 底部导航 */}
-          {!post.isHidden && (
-          <div className="mt-16 pt-8 border-t border-border">
-            <div className="flex justify-between items-center">
-              {/* 下一篇文章（更新的文章） */}
-              <div className="w-1/2 pr-4 text-left">
-                {post.nextPost ? (
-                  <Link
-                    href={postHref(locale, post.nextPost.id)}
-                    prefetch
-                    className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    <span className="line-clamp-1 text-left min-w-0 mr-auto">
-                      {post.nextPost.title}
-                    </span>
-                  </Link>
-                ) : (
-                  /* 占位，保持布局 */
-                  <div></div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                {new Date(post.date).toLocaleDateString(
+                  locale === 'en' ? 'en-US' : 'zh-CN',
+                  {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  },
                 )}
-              </div>
-
-              {/* 上一篇文章（更旧的文章） */}
-              <div className="w-1/2 pl-4">
-                {post.prevPost ? (
-                  <Link
-                    href={postHref(locale, post.prevPost.id)}
-                    prefetch
-                    className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
-                  >
-                    <span className="line-clamp-1 text-left min-w-0 ml-auto">
-                      {post.prevPost.title}
-                    </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                {post.author && (
+                  <span>
+                    <span className="mx-2"></span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 inline-block mr-1 align-[-2px]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
                     </svg>
-                  </Link>
-                ) : (
-                  /* 占位，保持布局 */
-                  <div></div>
+                    {post.author}
+                  </span>
                 )}
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {post.tags.map((tag: string) => (
+                  <Link
+                    key={tag}
+                    href={getTagPath(tag, locale)}
+                    className="bg-muted hover:bg-muted/80 text-muted-foreground px-2 py-1 rounded-md text-xs transition-colors no-underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {tag}
+                  </Link>
+                ))}
               </div>
-            </div>
-          </div>
-          )}
+            </header>
+
+            {articleNode}
+
+            {/* 底部导航 */}
+            {!post.isHidden && (
+              <div className="mt-16 pt-8 border-t border-border">
+                <div className="flex justify-between items-center">
+                  {/* 下一篇文章（更新的文章） */}
+                  <div className="w-1/2 pr-4 text-left">
+                    {post.nextPost ? (
+                      <Link
+                        href={postHref(locale, post.nextPost.id)}
+                        prefetch
+                        className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M15 19l-7-7 7-7"
+                          />
+                        </svg>
+                        <span className="line-clamp-1 text-left min-w-0 mr-auto">
+                          {post.nextPost.title}
+                        </span>
+                      </Link>
+                    ) : (
+                      /* 占位，保持布局 */
+                      <div></div>
+                    )}
+                  </div>
+
+                  {/* 上一篇文章（更旧的文章） */}
+                  <div className="w-1/2 pl-4">
+                    {post.prevPost ? (
+                      <Link
+                        href={postHref(locale, post.prevPost.id)}
+                        prefetch
+                        className="flex items-center text-muted-foreground hover:text-blue-600 transition-colors"
+                      >
+                        <span className="line-clamp-1 text-left min-w-0 ml-auto">
+                          {post.prevPost.title}
+                        </span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                    ) : (
+                      /* 占位，保持布局 */
+                      <div></div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </article>
         </main>
 
         {/* 右侧边栏 - 目录 */}
         <aside className="hidden lg:block lg:w-90 shrink-0">
           <div className="sticky top-22">
-            <ClientTableOfContents no_toc={post.no_toc === true} desktop={true} headings={post.toc} locale={locale} />
+            <ClientTableOfContents
+              no_toc={post.no_toc === true}
+              desktop={true}
+              headings={post.toc}
+              locale={locale}
+            />
           </div>
         </aside>
       </div>
 
       {/* 移动端浮动按钮和侧栏 */}
-      <ClientTableOfContents no_toc={post.no_toc === true} desktop={false} headings={post.toc} locale={locale} />
+      <ClientTableOfContents
+        no_toc={post.no_toc === true}
+        desktop={false}
+        headings={post.toc}
+        locale={locale}
+      />
     </div>
   );
 }

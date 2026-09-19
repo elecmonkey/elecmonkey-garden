@@ -2,9 +2,19 @@ import { availableParallelism } from 'node:os';
 import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
+import {
+  Worker,
+  isMainThread,
+  parentPort,
+  workerData,
+} from 'node:worker_threads';
 import { getStaticPathnames } from '../app-shell/static-paths';
-import { getAllMonths, getAllPostIds, getAllTags, getPostById } from '../lib/api';
+import {
+  getAllMonths,
+  getAllPostIds,
+  getAllTags,
+  getPostById,
+} from '../lib/api';
 import { hrefFor, locales, stripLocalePrefix } from '../lib/i18n';
 import { getTagPath } from '../lib/tag-url';
 import { rootMarker, writeStaticPage } from './render-page';
@@ -25,7 +35,10 @@ function getWorkerCount(pathnameCount: number): number {
   if (rawWorkerCount === 'auto') {
     const cpuCount = availableParallelism();
     const pagesPerWorker = 256;
-    return Math.max(1, Math.min(cpuCount, Math.floor(pathnameCount / pagesPerWorker)));
+    return Math.max(
+      1,
+      Math.min(cpuCount, Math.floor(pathnameCount / pagesPerWorker)),
+    );
   }
 
   const workerCount = Number.parseInt(rawWorkerCount, 10);
@@ -56,36 +69,47 @@ async function renderStaticPagesInWorkers(
   const chunks = splitIntoChunks(pathnames, workerCount);
   const workerUrl = pathToFileURL(process.argv[1]);
 
-  await Promise.all(chunks.map((chunk) => new Promise<void>((resolve, reject) => {
-    const worker = new Worker(workerUrl, {
-      workerData: {
-        distDir,
-        template,
-        pathnames: chunk,
-      },
-    });
+  await Promise.all(
+    chunks.map(
+      (chunk) =>
+        new Promise<void>((resolve, reject) => {
+          const worker = new Worker(workerUrl, {
+            workerData: {
+              distDir,
+              template,
+              pathnames: chunk,
+            },
+          });
 
-    worker.once('message', (message: { ok: boolean; error?: string }) => {
-      if (!message.ok) {
-        reject(new Error(message.error ?? 'SSG worker failed.'));
-      }
-    });
-    worker.once('error', reject);
-    worker.once('exit', (code) => {
-      if (code === 0) {
-        resolve();
-      } else {
-        reject(new Error(`SSG worker stopped with exit code ${code}.`));
-      }
-    });
-  })));
+          worker.once('message', (message: { ok: boolean; error?: string }) => {
+            if (!message.ok) {
+              reject(new Error(message.error ?? 'SSG worker failed.'));
+            }
+          });
+          worker.once('error', reject);
+          worker.once('exit', (code) => {
+            if (code === 0) {
+              resolve();
+            } else {
+              reject(new Error(`SSG worker stopped with exit code ${code}.`));
+            }
+          });
+        }),
+    ),
+  );
 }
 
-async function renderStaticPages(distDir: string, template: string, pathnames: string[]): Promise<number> {
+async function renderStaticPages(
+  distDir: string,
+  template: string,
+  pathnames: string[],
+): Promise<number> {
   const workerCount = getWorkerCount(pathnames.length);
 
   if (workerCount <= 1) {
-    await Promise.all(pathnames.map((pathname) => writeStaticPage(distDir, template, pathname)));
+    await Promise.all(
+      pathnames.map((pathname) => writeStaticPage(distDir, template, pathname)),
+    );
     return 1;
   }
 
@@ -104,11 +128,16 @@ async function runRenderWorker(): Promise<void> {
 async function copyStaticAssets(distDir: string): Promise<void> {
   const searchDir = path.join(distDir, 'static', 'search');
   await mkdir(searchDir, { recursive: true });
-  await Promise.all(locales.map(async (locale) => {
-    const localeSearchDir = path.join(searchDir, locale);
-    await mkdir(localeSearchDir, { recursive: true });
-    await copyFile(path.join('src', 'generated', `search-index.${locale}.json`), path.join(localeSearchDir, 'index.json'));
-  }));
+  await Promise.all(
+    locales.map(async (locale) => {
+      const localeSearchDir = path.join(searchDir, locale);
+      await mkdir(localeSearchDir, { recursive: true });
+      await copyFile(
+        path.join('src', 'generated', `search-index.${locale}.json`),
+        path.join(localeSearchDir, 'index.json'),
+      );
+    }),
+  );
 }
 
 async function writeRobotsTxt(distDir: string): Promise<void> {
@@ -140,11 +169,16 @@ type SitemapAlternate = {
 function escapeXml(value: string): string {
   return value.replace(/[&<>"']/g, (char) => {
     switch (char) {
-      case '&': return '&amp;';
-      case '<': return '&lt;';
-      case '>': return '&gt;';
-      case '"': return '&quot;';
-      default: return '&apos;';
+      case '&':
+        return '&amp;';
+      case '<':
+        return '&lt;';
+      case '>':
+        return '&gt;';
+      case '"':
+        return '&quot;';
+      default:
+        return '&apos;';
     }
   });
 }
@@ -152,10 +186,14 @@ function escapeXml(value: string): string {
 async function writeSitemapXml(distDir: string): Promise<void> {
   const baseUrl = 'https://www.elecmonkey.com';
   const now = new Date();
-  const availablePathnames = new Set((await getStaticPathnames())
-    .filter((pathname) => !['/search', '/en/search'].includes(pathname)));
+  const availablePathnames = new Set(
+    (await getStaticPathnames()).filter(
+      (pathname) => !['/search', '/en/search'].includes(pathname),
+    ),
+  );
 
-  const toAbsoluteUrl = (pathname: string) => `${baseUrl}${pathname === '/' ? '' : pathname}`;
+  const toAbsoluteUrl = (pathname: string) =>
+    `${baseUrl}${pathname === '/' ? '' : pathname}`;
   const getAlternates = (pathname: string): SitemapAlternate[] => {
     const stripped = stripLocalePrefix(pathname);
 
@@ -168,59 +206,79 @@ async function writeSitemapXml(distDir: string): Promise<void> {
       }));
   };
 
-  const postEntries = locales.flatMap((locale) => getAllPostIds(locale)
-    .map((postId): SitemapEntry | null => {
-      const post = getPostById(locale, postId.params.slug);
+  const postEntries = locales.flatMap((locale) =>
+    getAllPostIds(locale)
+      .map((postId): SitemapEntry | null => {
+        const post = getPostById(locale, postId.params.slug);
 
-      if (post.isHidden) {
-        return null;
-      }
+        if (post.isHidden) {
+          return null;
+        }
 
-      const pathname = hrefFor(locale, `/blog/${postId.params.slug}`);
+        const pathname = hrefFor(locale, `/blog/${postId.params.slug}`);
 
+        return {
+          url: toAbsoluteUrl(pathname),
+          pathname,
+          lastModified: post.date ? new Date(post.date) : now,
+        };
+      })
+      .filter((entry): entry is SitemapEntry => entry !== null),
+  );
+
+  const tagEntries = locales.flatMap((locale) =>
+    getAllTags(locale).map((tag): SitemapEntry => {
+      const pathname = getTagPath(tag.name, locale);
       return {
         url: toAbsoluteUrl(pathname),
         pathname,
-        lastModified: post.date ? new Date(post.date) : now,
+        lastModified: now,
       };
-    })
-    .filter((entry): entry is SitemapEntry => entry !== null));
+    }),
+  );
 
-  const tagEntries = locales.flatMap((locale) => getAllTags(locale).map((tag): SitemapEntry => {
-    const pathname = getTagPath(tag.name, locale);
-    return {
-      url: toAbsoluteUrl(pathname),
-      pathname,
-      lastModified: now,
-    };
-  }));
+  const monthEntries = locales.flatMap((locale) =>
+    getAllMonths(locale).map((month): SitemapEntry => {
+      const pathname = hrefFor(locale, `/archive/${month.id}`);
+      return {
+        url: toAbsoluteUrl(pathname),
+        pathname,
+        lastModified: now,
+      };
+    }),
+  );
 
-  const monthEntries = locales.flatMap((locale) => getAllMonths(locale).map((month): SitemapEntry => {
-    const pathname = hrefFor(locale, `/archive/${month.id}`);
-    return {
-      url: toAbsoluteUrl(pathname),
-      pathname,
-      lastModified: now,
-    };
-  }));
+  const staticEntries: SitemapEntry[] = locales.flatMap((locale) =>
+    ['/', '/about', '/blog', '/tags', '/archive'].map((path): SitemapEntry => {
+      const pathname = hrefFor(locale, path);
+      return {
+        url: toAbsoluteUrl(pathname),
+        pathname,
+        lastModified: now,
+      };
+    }),
+  );
 
-  const staticEntries: SitemapEntry[] = locales.flatMap((locale) => ['/', '/about', '/blog', '/tags', '/archive'].map((path): SitemapEntry => {
-    const pathname = hrefFor(locale, path);
-    return {
-      url: toAbsoluteUrl(pathname),
-      pathname,
-      lastModified: now,
-    };
-  }));
-
-  const entries = [...staticEntries, ...postEntries, ...tagEntries, ...monthEntries];
-  const urls = entries.map((entry) => [
-    '  <url>',
-    `    <loc>${escapeXml(entry.url)}</loc>`,
-    ...getAlternates(entry.pathname).map((alternate) => `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.hrefLang)}" href="${escapeXml(alternate.href)}" />`),
-    `    <lastmod>${entry.lastModified.toISOString()}</lastmod>`,
-    '  </url>',
-  ].join('\n')).join('\n');
+  const entries = [
+    ...staticEntries,
+    ...postEntries,
+    ...tagEntries,
+    ...monthEntries,
+  ];
+  const urls = entries
+    .map((entry) =>
+      [
+        '  <url>',
+        `    <loc>${escapeXml(entry.url)}</loc>`,
+        ...getAlternates(entry.pathname).map(
+          (alternate) =>
+            `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.hrefLang)}" href="${escapeXml(alternate.href)}" />`,
+        ),
+        `    <lastmod>${entry.lastModified.toISOString()}</lastmod>`,
+        '  </url>',
+      ].join('\n'),
+    )
+    .join('\n');
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`;
 
   await writeFile(path.join(distDir, 'sitemap.xml'), sitemap);
@@ -240,7 +298,9 @@ export async function buildStaticSite(): Promise<void> {
   await copyStaticAssets(distDir);
   await Promise.all([writeRobotsTxt(distDir), writeSitemapXml(distDir)]);
 
-  console.log(`generated ${pathnames.length} static pages with ${workerCount} SSG worker${workerCount > 1 ? 's' : ''}`);
+  console.log(
+    `generated ${pathnames.length} static pages with ${workerCount} SSG worker${workerCount > 1 ? 's' : ''}`,
+  );
 }
 
 if (isMainThread) {
@@ -252,7 +312,8 @@ if (isMainThread) {
   } catch (error) {
     parentPort?.postMessage({
       ok: false,
-      error: error instanceof Error ? error.stack ?? error.message : String(error),
+      error:
+        error instanceof Error ? (error.stack ?? error.message) : String(error),
     });
     throw error;
   }

@@ -140,8 +140,8 @@ function detectTargetsForHost() {
   }
 
   throw new Error(
-    `Unsupported release host ${process.platform}/${process.arch}. `
-      + 'Use --target explicitly if you know this host can build the target.',
+    `Unsupported release host ${process.platform}/${process.arch}. ` +
+      'Use --target explicitly if you know this host can build the target.',
   );
 }
 
@@ -201,9 +201,14 @@ function ensurePrerequisites(targets) {
 }
 
 function ensureRustTargets(targets, dryRun) {
-  const targetsToInstall = targets.filter((target) => targetMeta[target]?.rustup);
+  const targetsToInstall = targets.filter(
+    (target) => targetMeta[target]?.rustup,
+  );
   if (targetsToInstall.length === 0) return;
-  run('rustup', ['target', 'add', ...targetsToInstall], { cwd: packageDir, dryRun });
+  run('rustup', ['target', 'add', ...targetsToInstall], {
+    cwd: packageDir,
+    dryRun,
+  });
 }
 
 function shouldUseZigCrossCompile(target) {
@@ -216,7 +221,16 @@ function shouldUseZigCrossCompile(target) {
 }
 
 function nativeBuildArgs(target) {
-  const args = ['build', '--platform', '--no-js', '--dts', 'native.d.ts', '--release', '--target', target];
+  const args = [
+    'build',
+    '--platform',
+    '--no-js',
+    '--dts',
+    'native.d.ts',
+    '--release',
+    '--target',
+    target,
+  ];
   if (shouldUseZigCrossCompile(target)) {
     args.push('--cross-compile');
   }
@@ -227,7 +241,10 @@ function cleanReleaseOutputs(targets) {
   fs.rmSync(artifactsDir, { recursive: true, force: true });
   fs.mkdirSync(artifactsDir, { recursive: true });
   for (const target of targets) {
-    fs.rmSync(path.join(npmDir, targetMeta[target].platformArchABI), { recursive: true, force: true });
+    fs.rmSync(path.join(npmDir, targetMeta[target].platformArchABI), {
+      recursive: true,
+      force: true,
+    });
   }
 }
 
@@ -235,13 +252,19 @@ function buildTargets(targets, dryRun) {
   for (const target of targets) {
     runPackageBin('napi', nativeBuildArgs(target), { cwd: packageDir, dryRun });
   }
-  runPackageBin('rslib', ['build'], { cwd: packageDir, dryRun });
+  runPackageBin('rs', ['lib'], { cwd: packageDir, dryRun });
 }
 
 function preparePlatformPackages(dryRun) {
   runPackageBin('napi', ['create-npm-dirs'], { cwd: packageDir, dryRun });
-  runPackageBin('napi', ['artifacts', '--output-dir', '.'], { cwd: packageDir, dryRun });
-  runPackageBin('napi', ['pre-publish', '--skip-optional-publish'], { cwd: packageDir, dryRun });
+  runPackageBin('napi', ['artifacts', '--output-dir', '.'], {
+    cwd: packageDir,
+    dryRun,
+  });
+  runPackageBin('napi', ['pre-publish', '--skip-optional-publish'], {
+    cwd: packageDir,
+    dryRun,
+  });
 }
 
 function assertArtifacts(targets, dryRun) {
@@ -264,7 +287,9 @@ function assertArtifacts(targets, dryRun) {
   }
 
   if (missing.length > 0) {
-    throw new Error(`Missing release artifacts:\n${missing.map((item) => `  - ${item}`).join('\n')}`);
+    throw new Error(
+      `Missing release artifacts:\n${missing.map((item) => `  - ${item}`).join('\n')}`,
+    );
   }
 }
 
@@ -278,7 +303,10 @@ function packPackages(targets, dryRun) {
     });
   }
 
-  run('npm', ['pack', '--pack-destination', artifactsDir], { cwd: packageDir, dryRun });
+  run('npm', ['pack', '--pack-destination', artifactsDir], {
+    cwd: packageDir,
+    dryRun,
+  });
 }
 
 function publishPackages(targets, options) {
@@ -299,16 +327,22 @@ function printSummary(targets, options) {
   console.log('\nRelease package set:');
   for (const target of targets) {
     const meta = targetMeta[target];
-    console.log(`  - ${meta.packageName}@${packageVersion} (${meta.platformArchABI})`);
+    console.log(
+      `  - ${meta.packageName}@${packageVersion} (${meta.platformArchABI})`,
+    );
   }
   console.log(`  - ${packageName}@${packageVersion} (main package)`);
 
-  console.log(`\nArtifacts directory: ${path.relative(process.cwd(), artifactsDir)}`);
+  console.log(
+    `\nArtifacts directory: ${path.relative(process.cwd(), artifactsDir)}`,
+  );
 
   if (options.printOnly) {
     console.log('\nPrint-only completed; no commands were executed.');
   } else if (options.dryRun) {
-    console.log('\nPublish dry-run completed. Remove --dry-run and add --publish to publish for real.');
+    console.log(
+      '\nPublish dry-run completed. Remove --dry-run and add --publish to publish for real.',
+    );
   } else if (!options.publish) {
     console.log('\nBuild/pack completed. To publish, run:');
     console.log('  node scripts/release-package.mjs --publish');
@@ -321,7 +355,9 @@ function main() {
   const options = parseArgs(process.argv.slice(2));
   const targets = options.targets;
 
-  console.log(`Release host: ${process.platform}/${process.arch} (${os.platform()} ${os.arch()})`);
+  console.log(
+    `Release host: ${process.platform}/${process.arch} (${os.platform()} ${os.arch()})`,
+  );
   console.log(`Release targets: ${targets.join(', ')}`);
 
   ensurePrerequisites(targets);
