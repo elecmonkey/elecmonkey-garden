@@ -4,6 +4,7 @@ date: "2026-06-03"
 description: "AI Agent 写代码，只是软件工程正在建立的又一层抽象"
 tags: ["AI", "AI Agent", "软件工程", "抽象"]
 author: "Elecmonkey"
+pinned: true
 ---
 
 本博客聊 AI Agent 的问题聊得比较少 —— 这通常不是我所关注的问题。但搜索 AI 也能搜出若干提到的文章；我也从不避讳，我几乎所有代码都已经是 AI 写出来的了。

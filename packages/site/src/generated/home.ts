@@ -93,6 +93,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
@@ -606,6 +607,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"

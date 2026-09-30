@@ -15,11 +15,13 @@ export interface PostCardProps {
     description: string;
     tags: string[];
     author?: string;
+    pinned?: boolean | string;
   };
 }
 
 export default function PostCard({ post }: PostCardProps) {
   const locale = post.locale ?? 'zh';
+  const pinned = post.pinned === true || post.pinned === 'true';
   const articleRef = useRef<HTMLElement>(null);
   const hoverTimerRef = useRef<number | null>(null);
 
@@ -87,12 +89,38 @@ export default function PostCard({ post }: PostCardProps) {
       onPointerLeave={cancelHoverPrefetch}
     >
       {/* 底层卡片 - 灰色背景，向右下偏移 */}
-      <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200"></div>
+      <div
+        className={
+          pinned
+            ? 'absolute inset-0 translate-x-1.5 translate-y-1.5 bg-primary/20 group-hover:bg-primary/30 border border-primary/40 transition-colors duration-200'
+            : 'absolute inset-0 translate-x-1.5 translate-y-1.5 bg-muted/40 group-hover:bg-muted/50 border border-border transition-colors duration-200'
+        }
+      ></div>
 
       {/* 上层卡片 - 白色/主题背景 */}
-      <div className="relative p-4 bg-card hover:bg-card/90 border border-border transition-all duration-200 group-hover:-translate-y-1">
+      <div
+        className={`relative p-4 bg-card hover:bg-card/90 border transition-all duration-200 group-hover:-translate-y-1 ${
+          pinned ? 'border-primary/40' : 'border-border'
+        }`}
+      >
+        {pinned && (
+          <div className="absolute -top-px right-4 flex items-center gap-1 bg-primary text-primary-foreground px-2.5 pt-1 pb-1.5 text-xs font-medium tracking-wide [clip-path:polygon(0_0,100%_0,100%_100%,50%_82%,0_100%)]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 rotate-45"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M16 3a1 1 0 0 1 .7 1.7L15.4 6l1.8 5.4 1.5 1.5a1 1 0 0 1-.7 1.7H13v5.5a1 1 0 1 1-2 0v-5.5H6a1 1 0 0 1-.7-1.7l1.5-1.5L8.6 6 7.3 4.7A1 1 0 0 1 8 3h8Z" />
+            </svg>
+            {locale === 'en' ? 'Pinned' : '置顶'}
+          </div>
+        )}
         <Link href={postHref(locale, post.id)}>
-          <h3 className="text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors">
+          <h3
+            className={`text-xl font-semibold mb-3 text-card-foreground group-hover:text-primary transition-colors ${pinned ? 'pr-16' : ''}`}
+          >
             {post.title}
           </h3>
         </Link>

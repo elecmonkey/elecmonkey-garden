@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:8a5049934cd416ee5cd955bfc474a6c79a75b32e40b5825491906753e9199a00";
-export const postContentHash = "sha256:ababe361155526c5169f95937179f43889e9ca7f81b84f47dc7c88d1580085cb";
+export const postSourceHash = "sha256:8008b8315f7775bb9b51666071facf99d88ea84edac6a09633922eaf9b4af871";
+export const postContentHash = "sha256:8fd163e56cf5abb93d3bc8487913c5a9f8a4c56f3b8817aa5457e28f616b3af7";
 
 export const post = {
   "id": "ai-agent-software-engineering",
@@ -52,6 +52,7 @@ export const post = {
   "monthFolder": "202606",
   "isDraft": false,
   "isHidden": false,
+  "pinned": "true",
   "prevPost": {
     "id": "bun-rust-rewrite",
     "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"

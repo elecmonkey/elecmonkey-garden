@@ -28,7 +28,9 @@ author: 'Elecmonkey'
 Post content...
 ```
 
-Supported optional fields include draft/visibility-style metadata used by the content compiler. Before inventing new frontmatter, inspect `packages/content-compiler-napi/src-js/index.ts` and the generated `PostData` type in `packages/site/src/lib/api.ts`.
+Supported optional fields include draft/visibility-style metadata used by the content compiler. Add `pinned: true` to pin a post: it is shown first on the home page and the main post list (`/blog`), with a "Pinned" badge. It is read from the frontmatter extra fields in the site (`isPinnedPost` in `packages/site/src/lib/api.ts`), so no compiler change is needed. Pin both locale versions together.
+
+Before inventing new frontmatter, inspect `packages/content-compiler-napi/src-js/index.ts` and the generated `PostData` type in `packages/site/src/lib/api.ts`.
 
 ## Content Build Flow
 

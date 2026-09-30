@@ -93,6 +93,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
@@ -1196,6 +1197,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun 官方：PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
@@ -2214,7 +2216,7 @@ export const generatedContentByLocale = {
       "web-stack-detector": { sourceHash: "sha256:02f0a55712002f26ffaf98e576dc3a5e4e5a0c87d2db131e2e7839a01cef74ac", contentHash: "sha256:63e731e20e7ca73a40851365befe581a7267f3021a50f59a548e8337af2b4325" },
       "vue-move-to-esm-only": { sourceHash: "sha256:d5876245a124ce49af8eb02487124fbd8c654d435ebb6516519da3da68cfaad9", contentHash: "sha256:c62676c49e871ea4d96db59ed361e6e1531dc84913f3b2bd1fbdba4580a8b865" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:3fe6ac9d875131a0cd75fc823ddcc8a8340acfcdd7d0c14926f022b9fce97bd2", contentHash: "sha256:84c826809cffd9c4fc4d01343620f2ee7cab0a7e82b45925af610724e49939c2" },
-      "ai-agent-software-engineering": { sourceHash: "sha256:5f5c89766d37e4b1a365268d1b98c2ab7ce66e57ba988dd08e2fe5596150c5c0", contentHash: "sha256:cb709537f3d1e485851c6dbbac258907ae37c803cfec72d20f8e3283082301b2" },
+      "ai-agent-software-engineering": { sourceHash: "sha256:d30825fb3c6f3e8fd0aeff024db5fcece640722da3ec6c4cbc1992d6d2fb6f22", contentHash: "sha256:7825c39cc62e8dde0560ee2a1c9e318a860ca6c3445ae52721a3d352b33319b9" },
       "bun-rust-rewrite": { sourceHash: "sha256:ff8855be894e2a11cfb4c371ba7de8fa99ded86fd92fb37ffa13f9d3f8845546", contentHash: "sha256:f695df3b5f5d037af027e968db9f12206e49e6dc11fb6ef01d487340d2c9c58b" },
       "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:b92b17585c1552463be5f6d003933626da3eeee3155f3febb0fa8c6b45b01947", contentHash: "sha256:0fb75d3961186ad7435629d185480ea2c23f862e4c2d0eec93bf9892258e7dd8" },
       "private-network-access": { sourceHash: "sha256:e764ee87cc592b05adef8b8416b7d130a5fafa905453f8fb0124a9d0c2f43443", contentHash: "sha256:e3dd5ec90c8350403473d6941b4fd4d6286a81677308ad02dabc687a3e9b2a2b" },
@@ -2391,6 +2393,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
@@ -3494,6 +3497,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
           "title": "Bun Team: PR #30412 - Rewrite Bun in Rust / #30683 - Remove .zig source files"
@@ -4512,7 +4516,7 @@ export const generatedContentByLocale = {
       "web-stack-detector": { sourceHash: "sha256:eacefbf2840cd4766d447a44889229f93102f04e37416128711b6101d56831e3", contentHash: "sha256:3e206fd31f49311bf6cdecf3710d41f106b4195e8b2373c59a1bca4d6d03595a" },
       "vue-move-to-esm-only": { sourceHash: "sha256:ad7d1371f445d2cddc43457079c2fed5b745557f04e51509e5de9565e8f1bb8d", contentHash: "sha256:b98f6e2af3e95138a8d7efdd2f8e4c8f6419939d2574e5a04a0796ed7cc7aa73" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b36e480ded2dd05a72ecebddef502cfd1e5842f62a7e3279334842aa8dac0516", contentHash: "sha256:e8521c23c073d896e285a27c682130affb95553bd4b25eb431657ccff76d0376" },
-      "ai-agent-software-engineering": { sourceHash: "sha256:8a5049934cd416ee5cd955bfc474a6c79a75b32e40b5825491906753e9199a00", contentHash: "sha256:ababe361155526c5169f95937179f43889e9ca7f81b84f47dc7c88d1580085cb" },
+      "ai-agent-software-engineering": { sourceHash: "sha256:8008b8315f7775bb9b51666071facf99d88ea84edac6a09633922eaf9b4af871", contentHash: "sha256:8fd163e56cf5abb93d3bc8487913c5a9f8a4c56f3b8817aa5457e28f616b3af7" },
       "bun-rust-rewrite": { sourceHash: "sha256:5789f5d36d7c5d1eb931ef3e39a6c9d23dd8c557914a73d3784468db837df2d1", contentHash: "sha256:65a78bacd39678960b305645a3cc5a79485894c1187694ede6748d209ceef328" },
       "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:5055d72dd079762bb0ce33b5c2eba128e9cfebb2ccb8da1e369b861d27feee50", contentHash: "sha256:d0510519304ce939f12a1c46efd77f02aa49ae10d45c8c974cebd3308cff8341" },
       "private-network-access": { sourceHash: "sha256:27009d8b794f79ed7da01936e0778955261da5f15551cc25af75df1d5d802116", contentHash: "sha256:1b6151be9f41f71e7f4dbf4d5477bec94e0017a2e0173830a0d7bea590e2240d" },

@@ -17,6 +17,7 @@ export type PostData = {
   monthFolder: string; // 月份文件夹 (例如: "202403")
   isDraft?: boolean; // 是否为草稿
   isHidden?: boolean; // 是否为隐藏文章
+  pinned?: boolean | string; // 是否置顶（frontmatter 中的 pinned: true）
   permalink?: string;
   prevPost?: { id: string; title: string };
   nextPost?: { id: string; title: string };
@@ -128,6 +129,7 @@ type RuntimeLocaleIndex = {
   publicPostsWithDrafts: PostData[];
   nonDraftPosts: PostData[];
   publicPosts: PostData[];
+  pinnedPublicPosts: PostData[];
   postById: Map<string, PostData>;
   fullPostById: Map<string, PostData>;
   postPrefetches: Map<string, Promise<void>>;
@@ -138,6 +140,18 @@ type RuntimeLocaleIndex = {
   allMonths: MonthData[];
   generatedPostLoaderById: Record<string, () => Promise<{ post: PostData }>>;
 };
+
+export function isPinnedPost(post: PostData): boolean {
+  return post.pinned === true || post.pinned === 'true';
+}
+
+// 置顶文章排在前面，其余保持原有（日期倒序）顺序
+export function pinPostsFirst(posts: PostData[]): PostData[] {
+  return [
+    ...posts.filter((post) => isPinnedPost(post)),
+    ...posts.filter((post) => !isPinnedPost(post)),
+  ];
+}
 
 function postHasCompiledArticle(post: PostData | undefined): post is PostData {
   return (
@@ -161,6 +175,7 @@ function createRuntimeLocaleIndex(
   const publicPostsWithDrafts = content.publicPosts;
   const nonDraftPosts = allPosts.filter((post) => !post.isDraft);
   const publicPosts = publicPostsWithDrafts.filter((post) => !post.isDraft);
+  const pinnedPublicPosts = pinPostsFirst(publicPosts);
   const postById = new Map<string, PostData>();
   const postsByTag = new Map<string, PostData[]>();
   const postsByMonth = new Map<string, PostData[]>();
@@ -219,6 +234,7 @@ function createRuntimeLocaleIndex(
     publicPostsWithDrafts,
     nonDraftPosts,
     publicPosts,
+    pinnedPublicPosts,
     postById,
     fullPostById: new Map<string, PostData>(),
     postPrefetches: new Map<string, Promise<void>>(),
@@ -464,7 +480,7 @@ export function getAllPostsWithPagination(
   page: number = 1,
   pageSize: number = 10,
 ): PaginatedPosts {
-  return paginateItems(getLocaleIndex(locale).publicPosts, page, pageSize);
+  return paginateItems(getLocaleIndex(locale).pinnedPublicPosts, page, pageSize);
 }
 
 // 根据标签获取分页的文章列表
