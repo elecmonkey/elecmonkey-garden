@@ -480,7 +480,11 @@ export function getAllPostsWithPagination(
   page: number = 1,
   pageSize: number = 10,
 ): PaginatedPosts {
-  return paginateItems(getLocaleIndex(locale).pinnedPublicPosts, page, pageSize);
+  return paginateItems(
+    getLocaleIndex(locale).pinnedPublicPosts,
+    page,
+    pageSize,
+  );
 }
 
 // 根据标签获取分页的文章列表
