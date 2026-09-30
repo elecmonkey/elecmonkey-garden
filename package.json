@@ -19,7 +19,7 @@
     "build:all": "pnpm run build:compiler && pnpm run build"
   },
   "devDependencies": {
-    "rstack": "^0.7.6"
+    "rstack": "^0.8.0"
   },
   "packageManager": "pnpm@12.4.2"
 }

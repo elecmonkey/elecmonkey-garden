@@ -358,12 +358,11 @@ function scheduleBackgroundPrefetch() {
 
   const idleWindow = window as IdleWindow;
   if (idleWindow.requestIdleCallback && idleWindow.cancelIdleCallback) {
-    const cancelIdleCallback = idleWindow.cancelIdleCallback;
     const handle = idleWindow.requestIdleCallback(() => {
       cancelBackgroundTurn = undefined;
       runNextPrefetch();
     });
-    cancelBackgroundTurn = () => cancelIdleCallback(handle);
+    cancelBackgroundTurn = () => idleWindow.cancelIdleCallback?.(handle);
     return;
   }
 
