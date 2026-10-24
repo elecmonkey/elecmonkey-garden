@@ -15,15 +15,15 @@ export default function Footer({ locale }: { locale: Locale }) {
             <h3 className="text-lg font-semibold mb-3 text-foreground">
               {dictionary.siteName}
             </h3>
-            <p
-              className="text-sm mb-3 text-muted-foreground cursor-pointer transition-colors quote-text select-none"
+            <button
+              type="button"
+              className="block text-left text-sm mb-3 text-muted-foreground cursor-pointer transition-colors quote-text select-none"
               title="来自COP《光与影的对白》"
               data-text-1="存在 为将心声响彻"
               data-text-2="交汇的光与影 答案落定覆上姓名"
-              tabIndex={0}
             >
               <span>存在 为将心声响彻</span>
-            </p>
+            </button>
             <div className="my-4"></div>
             <a
               href="https://github.com/elecmonkey/elecmonkey-garden"

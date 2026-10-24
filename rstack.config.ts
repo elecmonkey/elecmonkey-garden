@@ -4,16 +4,7 @@ import { define } from 'rstack';
 define.lint(
   ({ globals, js, ts, reactPlugin, reactHooksPlugin, jsxA11yPlugin }) => [
     {
-      ignores: [
-        '**/dist/**',
-        '**/.rsbuild/**',
-        '**/.garden-cache/**',
-        '**/artifacts/**',
-        '**/npm/**',
-        '**/src/generated/**',
-        '**/*.node',
-        '**/native.d.ts',
-      ],
+      ignores: ['**/src/generated/**'],
     },
     js.configs.recommended,
     ts.configs.recommendedTypeChecked,
@@ -54,10 +45,7 @@ define.lint(
       files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
       languageOptions: {
         parserOptions: {
-          project: [
-            './packages/site/tsconfig.json',
-            './packages/content-compiler-napi/tsconfig.json',
-          ],
+          projectService: true,
         },
       },
       settings: {
@@ -65,21 +53,12 @@ define.lint(
           version: 'detect',
         },
       },
-      rules: {
-        '@typescript-eslint/no-explicit-any': 'off',
-        'react/react-in-jsx-scope': 'off',
-        'react-hooks/exhaustive-deps': 'off',
-        'jsx-a11y/anchor-has-content': 'off',
-        'jsx-a11y/alt-text': 'off',
-        'jsx-a11y/click-events-have-key-events': 'off',
-        'jsx-a11y/no-noninteractive-tabindex': 'off',
-        'jsx-a11y/no-static-element-interactions': 'off',
-      },
     },
   ],
 );
 
 define.fmt({
   singleQuote: true,
+  sortPackageJson: true,
   ignorePatterns: ['content/**', 'packages/site/src/generated/**'],
 });

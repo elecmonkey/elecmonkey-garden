@@ -8,21 +8,25 @@ import {
 import { useParams } from 'react-router';
 import type { Locale } from '@/lib/i18n';
 
-type RouteModule<TComponent extends ComponentType<any>> = {
+// Accept components with different props; TComponent preserves each route's props.
+// rslint-disable-next-line @typescript-eslint/no-explicit-any
+type RouteComponent = ComponentType<any>;
+
+type RouteModule<TComponent extends RouteComponent> = {
   default: TComponent;
 };
 
-type RouteLoader<TComponent extends ComponentType<any>> = () => Promise<
+type RouteLoader<TComponent extends RouteComponent> = () => Promise<
   RouteModule<TComponent>
 >;
 
-type PreloadableRoute<TComponent extends ComponentType<any>> = ComponentType<
+type PreloadableRoute<TComponent extends RouteComponent> = ComponentType<
   ComponentProps<TComponent>
 > & {
   preload: () => Promise<RouteModule<TComponent>>;
 };
 
-function createPreloadableRoute<TComponent extends ComponentType<any>>(
+function createPreloadableRoute<TComponent extends RouteComponent>(
   loader: RouteLoader<TComponent>,
 ): PreloadableRoute<TComponent> {
   let loadedModule: RouteModule<TComponent> | undefined;

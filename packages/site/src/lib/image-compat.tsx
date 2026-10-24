@@ -20,6 +20,7 @@ export default function Image({
   style,
   width,
   height,
+  alt,
   ...props
 }: ImageProps) {
   const imageStyle: React.CSSProperties = fill
@@ -35,6 +36,7 @@ export default function Image({
   return (
     <img
       {...props}
+      alt={alt}
       width={fill ? undefined : width}
       height={fill ? undefined : height}
       loading={priority ? 'eager' : loading}

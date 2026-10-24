@@ -21,6 +21,7 @@ export default function Link({
   replace,
   prefetch,
   scroll: _scroll,
+  children,
   ...props
 }: GardenLinkProps) {
   const hoverTimerRef = React.useRef<number | null>(null);
@@ -73,9 +74,15 @@ export default function Link({
           cancelHoverPrefetch();
           props.onPointerLeave?.(event);
         }}
-      />
+      >
+        {children}
+      </RouterLink>
     );
   }
 
-  return <a href={href} {...props} />;
+  return (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
 }

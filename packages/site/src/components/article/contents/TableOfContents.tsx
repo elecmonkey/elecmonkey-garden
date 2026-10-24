@@ -303,7 +303,9 @@ function TableOfContents({
 
       {/* 移动端背景遮罩 */}
       {isOpen && (
-        <div
+        <button
+          type="button"
+          aria-label={closeLabel}
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
