@@ -436,11 +436,12 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
   const title = getTitle(metadata);
   const routeTitle = getTitle(routeMetadata);
   const canonicalUrl = getCanonicalUrl(pathname);
+  const alternateLinks = await getAvailableAlternateLinks(pathname);
   const tags: string[] = [];
 
   if (title) tags.push(`<title>${escapeHtml(title)}</title>`);
   tags.push(linkTag({ rel: 'canonical', href: canonicalUrl }));
-  for (const alternate of await getAvailableAlternateLinks(pathname)) {
+  for (const alternate of alternateLinks) {
     tags.push(
       linkTag({
         rel: 'alternate',
@@ -493,6 +494,12 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
 
   if (ogType) tags.push(propertyTag('og:type', ogType));
   if (openGraph.locale) tags.push(propertyTag('og:locale', openGraph.locale));
+  for (const alternate of alternateLinks) {
+    const alternateLocale = alternate.hrefLang === 'en' ? 'en_US' : 'zh_CN';
+    if (alternateLocale !== openGraph.locale) {
+      tags.push(propertyTag('og:locale:alternate', alternateLocale));
+    }
+  }
   if (openGraph.siteName)
     tags.push(propertyTag('og:site_name', openGraph.siteName));
   if (ogTitle) tags.push(propertyTag('og:title', ogTitle));
