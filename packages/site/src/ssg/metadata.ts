@@ -141,6 +141,7 @@ function mergeMetadata(
   return {
     ...base,
     ...route,
+    robots: route?.robots ?? base.robots,
     openGraph: {
       ...(base.openGraph ?? {}),
       ...(route?.openGraph ?? {}),
