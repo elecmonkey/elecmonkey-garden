@@ -39,13 +39,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
@@ -81,7 +81,7 @@ jobs:
         run: test -f "${{ matrix.native_file }}"
 
       - name: Upload native artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: native-${{ matrix.platform }}
           path: packages/content-compiler-napi/${{ matrix.native_file }}
@@ -94,13 +94,13 @@ jobs:
     needs: build-native
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
@@ -113,7 +113,7 @@ jobs:
         run: node -e "const pkg=require('./packages/content-compiler-napi/package.json'); const tag=process.env.GITHUB_REF_NAME; const expected='garden-content-compiler-v'+pkg.version; if(tag!==expected){throw new Error('Tag '+tag+' does not match '+expected)} for (const [name, version] of Object.entries(pkg.optionalDependencies || {})) { if (version !== pkg.version) throw new Error(name+' optional dependency version '+version+' does not match '+pkg.version); }"
 
       - name: Download native artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: native-*
           path: packages/content-compiler-napi
