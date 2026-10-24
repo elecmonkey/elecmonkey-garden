@@ -4,22 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter @elecmonkey/garden-site dev",
     "build": "pnpm --filter @elecmonkey/garden-site build",
-    "start": "pnpm --filter @elecmonkey/garden-site start",
-    "preview": "pnpm --filter @elecmonkey/garden-site preview",
-    "lint": "rs lint --type-check .",
+    "build:all": "pnpm run build:compiler && pnpm run build",
+    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
+    "check": "rs check --type-check",
+    "dev": "pnpm --filter @elecmonkey/garden-site dev",
     "fmt": "rs fmt",
     "fmt:check": "rs fmt --check",
-    "check": "rs check --type-check",
+    "lint": "rs lint --type-check .",
     "pack:content-compiler": "pnpm --filter @elecmonkey/garden-content-compiler pack:release",
     "pack:content-compiler:linux-x64": "pnpm --filter @elecmonkey/garden-content-compiler pack:linux-x64",
     "pack:content-compiler:local": "pnpm --filter @elecmonkey/garden-content-compiler pack:local",
-    "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
-    "build:all": "pnpm run build:compiler && pnpm run build"
+    "preview": "pnpm --filter @elecmonkey/garden-site preview",
+    "start": "pnpm --filter @elecmonkey/garden-site start"
   },
   "devDependencies": {
-    "rstack": "^0.8.0"
+    "rstack": "^0.8.5"
   },
-  "packageManager": "pnpm@12.4.2"
+  "packageManager": "pnpm@12.15.0"
 }

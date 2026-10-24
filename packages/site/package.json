@@ -2,35 +2,35 @@
   "name": "@elecmonkey/garden-site",
   "version": "0.2.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "rs dev --environment web",
     "build": "rs build && SSG_WORKERS=auto node .rsbuild/ssg/build.js",
-    "start": "rs preview --environment web",
-    "preview": "rs preview --environment web",
-    "lint": "pnpm --workspace-root exec rs lint --type-check packages/site",
     "build:compiler": "pnpm --filter @elecmonkey/garden-content-compiler build",
-    "build:with-compiler": "pnpm run build:compiler && pnpm run build"
+    "build:with-compiler": "pnpm run build:compiler && pnpm run build",
+    "dev": "rs dev --environment web",
+    "lint": "pnpm --workspace-root exec rs lint --type-check packages/site",
+    "preview": "rs preview --environment web",
+    "start": "rs preview --environment web"
   },
   "dependencies": {
     "@elecmonkey/garden-content-compiler": "0.2.3",
-    "@viz-js/viz": "^3.28.0",
-    "katex": "^0.17.0",
-    "lucide-react": "^1.24.0",
-    "mermaid": "^11.16.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-router": "^8.1.0",
-    "shiki": "^4.3.1"
+    "@viz-js/viz": "^3.31.0",
+    "katex": "^0.19.0",
+    "lucide-react": "^1.61.0",
+    "mermaid": "^12.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^8.5.0",
+    "shiki": "^4.5.0"
   },
   "devDependencies": {
-    "@rsbuild/plugin-react": "^2.1.0",
+    "@rsbuild/plugin-react": "^2.1.1",
     "@rsbuild/plugin-tailwindcss": "^2.0.3",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.20",
-    "@types/node": "^26.1.1",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "tailwindcss": "^4.3.2"
-  },
-  "type": "module"
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3"
+  }
 }
