@@ -587,6 +587,21 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
     for (const tag of article.tags) {
       tags.push(propertyTag('article:tag', tag));
     }
+
+    const jsonLd = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      '@id': `${canonicalUrl}#article`,
+      url: canonicalUrl,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+      headline: article.headline,
+      description: metadata.description,
+      datePublished: article.publishedTime,
+      author: authors,
+      keywords: article.tags,
+      inLanguage: locale === 'en' ? 'en' : 'zh-CN',
+    }).replace(/</g, '\\u003c');
+    tags.push(`<script type="application/ld+json">${jsonLd}</script>`);
   }
 
   return tags.join('\n    ');
