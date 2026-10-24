@@ -56,6 +56,8 @@ const rootMetadata: SiteMetadata = {
   },
   twitter: {
     card: 'summary',
+    site: '@elecmonkeyjs',
+    creator: '@elecmonkeyjs',
     title: 'Elecmonkey的小花园 - 前端技术博客',
     description:
       '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
@@ -552,6 +554,8 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
     twitter.description;
 
   if (twitter.card) tags.push(metaTag('twitter:card', twitter.card));
+  if (twitter.site) tags.push(metaTag('twitter:site', twitter.site));
+  if (twitter.creator) tags.push(metaTag('twitter:creator', twitter.creator));
   if (twitterTitle) tags.push(metaTag('twitter:title', twitterTitle));
   if (twitterDescription)
     tags.push(metaTag('twitter:description', twitterDescription));
