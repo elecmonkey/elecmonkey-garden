@@ -572,5 +572,22 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
       tags.push(metaTag('twitter:image:alt', imageAlt));
   }
 
+  if (ogType === 'article' && metadata.article) {
+    const article = metadata.article;
+    const authors = (metadata.authors ?? []).map((author) => ({
+      '@type': 'Person',
+      name: author.name,
+      url: getUrlValue(author.url, metadata),
+    }));
+
+    tags.push(propertyTag('article:published_time', article.publishedTime));
+    for (const author of authors) {
+      if (author.url) tags.push(propertyTag('article:author', author.url));
+    }
+    for (const tag of article.tags) {
+      tags.push(propertyTag('article:tag', tag));
+    }
+  }
+
   return tags.join('\n    ');
 }

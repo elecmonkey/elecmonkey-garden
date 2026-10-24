@@ -8,7 +8,7 @@ import {
   type PostData,
 } from '@/lib/api';
 import { prefetchAdjacentArticles } from '@/lib/client-prefetch';
-import { dictionaries, type Locale, postHref } from '@/lib/i18n';
+import { dictionaries, hrefFor, type Locale, postHref } from '@/lib/i18n';
 import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
@@ -32,6 +32,12 @@ export function generateMetadata({
     return {
       title: `${post.title} - ${siteName}`,
       description: post.description,
+      authors: [{ name: post.author, url: hrefFor(locale, '/about') }],
+      article: {
+        headline: post.title,
+        publishedTime: post.date,
+        tags: post.tags,
+      },
       // 禁止搜索引擎索引隐藏文章
       robots: post.isHidden ? 'noindex, nofollow' : undefined,
     };

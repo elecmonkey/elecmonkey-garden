@@ -12,7 +12,12 @@ export type SiteMetadata = {
   title?: string | { default?: string; template?: string };
   description?: string;
   keywords?: string | string[];
-  authors?: Array<{ name?: string }>;
+  authors?: Array<{ name?: string; url?: string }>;
+  article?: {
+    headline: string;
+    publishedTime: string;
+    tags: string[];
+  };
   creator?: string;
   publisher?: string;
   icons?: string;
