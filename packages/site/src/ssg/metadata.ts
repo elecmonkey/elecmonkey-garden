@@ -53,21 +53,12 @@ const rootMetadata: SiteMetadata = {
     description:
       '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
     siteName: 'Elecmonkey的小花园',
-    images: [
-      {
-        url: '/icon.webp',
-        width: 1024,
-        height: 1024,
-        alt: 'Elecmonkey的小花园',
-      },
-    ],
   },
   twitter: {
     card: 'summary',
     title: 'Elecmonkey的小花园 - 前端技术博客',
     description:
       '专注于前端技术的技术博客，分享前端开发经验、工程化实践和最佳实践',
-    images: ['/icon.webp'],
   },
   robots: {
     index: true,
@@ -85,6 +76,15 @@ const rootMetadata: SiteMetadata = {
 function createRootMetadata(locale: Locale): SiteMetadata {
   const dictionary = dictionaries[locale];
   const isEnglish = locale === 'en';
+  const images = [
+    {
+      url: '/icon.webp',
+      width: 1024,
+      height: 1024,
+      type: 'image/webp',
+      alt: dictionary.siteName,
+    },
+  ];
 
   return {
     ...rootMetadata,
@@ -111,6 +111,7 @@ function createRootMetadata(locale: Locale): SiteMetadata {
         : 'Elecmonkey的小花园 - 前端技术博客',
       description: dictionary.siteDescription,
       siteName: dictionary.siteName,
+      images,
     },
     twitter: {
       ...(rootMetadata.twitter ?? {}),
@@ -118,6 +119,7 @@ function createRootMetadata(locale: Locale): SiteMetadata {
         ? "Elecmonkey's Garden - Frontend Engineering Blog"
         : 'Elecmonkey的小花园 - 前端技术博客',
       description: dictionary.siteDescription,
+      images,
     },
   };
 }
@@ -206,16 +208,35 @@ function getUrlValue(
   return new URL(url, base).toString();
 }
 
+type MetadataImage = {
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+  alt?: string;
+};
+
 function getFirstImage(
   metadata: SiteMetadata,
   source: unknown,
-): string | undefined {
+): MetadataImage | undefined {
   if (!source) return undefined;
   const value = Array.isArray(source) ? (source as unknown[])[0] : source;
-  if (typeof value === 'string' || value instanceof URL)
-    return getUrlValue(value, metadata);
+  if (typeof value === 'string' || value instanceof URL) {
+    const url = getUrlValue(value, metadata);
+    return url ? { url } : undefined;
+  }
   if (value && typeof value === 'object' && 'url' in value) {
-    return getUrlValue((value as { url?: unknown }).url, metadata);
+    const image = value as Record<string, unknown>;
+    const url = getUrlValue(image.url, metadata);
+    if (!url) return undefined;
+    return {
+      url,
+      width: typeof image.width === 'number' ? image.width : undefined,
+      height: typeof image.height === 'number' ? image.height : undefined,
+      type: typeof image.type === 'string' ? image.type : undefined,
+      alt: typeof image.alt === 'string' ? image.alt : undefined,
+    };
   }
   return undefined;
 }
@@ -509,7 +530,16 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
     metadata,
     routeOpenGraph.images ?? openGraph.images,
   );
-  if (ogImage) tags.push(propertyTag('og:image', ogImage));
+  if (ogImage) {
+    tags.push(propertyTag('og:image', ogImage.url));
+    if (ogImage.width !== undefined)
+      tags.push(propertyTag('og:image:width', ogImage.width));
+    if (ogImage.height !== undefined)
+      tags.push(propertyTag('og:image:height', ogImage.height));
+    if (ogImage.type) tags.push(propertyTag('og:image:type', ogImage.type));
+    if (ogImage.alt !== undefined)
+      tags.push(propertyTag('og:image:alt', ogImage.alt));
+  }
 
   const twitter = metadata.twitter ?? {};
   const routeTwitter = routeMetadata.twitter ?? {};
@@ -529,7 +559,14 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
     metadata,
     routeTwitter.images ?? twitter.images,
   );
-  if (twitterImage) tags.push(metaTag('twitter:image', twitterImage));
+  if (twitterImage) {
+    tags.push(metaTag('twitter:image', twitterImage.url));
+    const imageAlt =
+      twitterImage.alt ??
+      (twitterImage.url === ogImage?.url ? ogImage.alt : undefined);
+    if (imageAlt !== undefined)
+      tags.push(metaTag('twitter:image:alt', imageAlt));
+  }
 
   return tags.join('\n    ');
 }
