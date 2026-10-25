@@ -82,11 +82,38 @@ export async function generateOgImage(post: OgPost, options: OgOptions = {}) {
     return width;
   }
 
+  function getWrapSegments(text: string) {
+    const words = [
+      ...new Intl.Segmenter(post.locale, { granularity: 'word' }).segment(text),
+    ];
+    const groups = [
+      ...text.matchAll(/\([^()\n]{1,32}\)|（[^（）\n]{1,32}）/gu),
+    ].map((match) => [match.index, match.index + match[0].length]);
+    const segments: Array<{ segment: string; index: number }> = [];
+    let segment = '';
+    let start = 0;
+    for (let i = 0; i < words.length; i += 1) {
+      if (!segment) start = words[i].index;
+      segment += words[i].segment;
+      const end = words[i + 1]?.index ?? text.length;
+      const left = text.slice(0, end).trimEnd();
+      const right = text.slice(end).trimStart();
+      const unsafe =
+        /^[，。！？、；：,.!?;:)\]}】）》」』”’]/u.test(right) ||
+        /[([{【《（「『“‘]$/u.test(left) ||
+        groups.some(([from, to]) => end > from && end < to);
+      if (end === text.length || !unsafe) {
+        segments.push({ segment, index: start });
+        segment = '';
+      }
+    }
+    return segments;
+  }
+
   function wrap(text: string, maxWidth: number, size: number, weight: number) {
-    const segments = new Intl.Segmenter(post.locale, { granularity: 'word' });
     const lines: string[] = [];
     let line = '';
-    for (const { segment } of segments.segment(text)) {
+    for (const { segment } of getWrapSegments(text)) {
       if (textWidth(line + segment, size, weight) <= maxWidth) {
         line += segment;
         continue;
@@ -125,16 +152,9 @@ export async function generateOgImage(post: OgPost, options: OgOptions = {}) {
     }
     const lines = wrap(post.title, TEXT_WIDTH, size, TITLE_WEIGHT);
     if (lines.length !== 2) return lines;
-    const segments = [
-      ...new Intl.Segmenter(post.locale, { granularity: 'word' }).segment(
-        post.title,
-      ),
-    ];
+    const segments = getWrapSegments(post.title);
     let best = lines;
-    let bestDifference = Math.abs(
-      textWidth(lines[0], size, TITLE_WEIGHT) -
-        textWidth(lines[1], size, TITLE_WEIGHT),
-    );
+    let bestDifference = Infinity;
     for (const { index } of segments.slice(1)) {
       const left = post.title.slice(0, index).trim();
       const right = post.title.slice(index).trim();
@@ -164,7 +184,8 @@ export async function generateOgImage(post: OgPost, options: OgOptions = {}) {
     titleSize -= 2;
     titleLines = wrapTitle(titleSize);
   }
-  if (titleLines.length > 3) {
+  // Exceptionally long titles can use a fourth line at the minimum size.
+  if (titleLines.length > 4) {
     throw new Error(
       'Title is too long for this OG layout. Use a shorter title.',
     );
@@ -186,7 +207,8 @@ export async function generateOgImage(post: OgPost, options: OgOptions = {}) {
       400,
     );
   }
-  if (descriptionLines.length > 2) {
+  // Keep long descriptions intact with a third line at the minimum size.
+  if (descriptionLines.length > 3) {
     throw new Error('Description is too long for this OG layout.');
   }
 
