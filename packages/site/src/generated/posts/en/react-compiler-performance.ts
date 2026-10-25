@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:7cc29c811e9b621b87d403f97033c00526d2e20040e70070bef2944e428d1d15";
-export const postContentHash = "sha256:1508ca3077a19a328021e4444f718bc283dfdc9d03a36ae0f9cd3ef3ba43989d";
+export const postSourceHash = "sha256:a24a155eda868b9b29f01ba2f4501805818eefea3269196c7951c84821b8450c";
+export const postContentHash = "sha256:4b18f480a3841d5d9b07a2b7a5b7542c64e00010cab2e6b79a956459b3787b2f";
 
 export const post = {
   "id": "react-compiler-performance",
@@ -57,6 +57,7 @@ export const post = {
   "monthFolder": "202511",
   "isDraft": false,
   "isHidden": false,
+  "og": "react-compiler-performance.og.jpg",
   "prevPost": {
     "id": "rust-in-js-pipline",
     "title": "The Unavoidable JavaScript Components in Native JavaScript Toolchains"

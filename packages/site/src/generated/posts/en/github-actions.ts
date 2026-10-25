@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:8f12ed58c64a8c9defbf31d57216e33e5bf08f00d7818cf5a63b11911b7cb07f";
-export const postContentHash = "sha256:e7761438ca49fb3e6cc5ea82fea9fc64f263ef6908f38555da4e6c3df05eb16e";
+export const postSourceHash = "sha256:ab1da07f13c6bb17fd9759084fbad154165d480e7319bbd2dabbdf790f4e67d2";
+export const postContentHash = "sha256:6f90172644194d14998f50b5a5e77aca5022fd7cd853664e46123357dc692271";
 
 export const post = {
   "id": "github-actions",
@@ -62,6 +62,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "github-actions.og.jpg",
   "prevPost": {
     "id": "mermaid-tutorial",
     "title": "Getting Started with Mermaid Diagrams, Essential for Technical Documentation"

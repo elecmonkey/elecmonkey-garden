@@ -4,6 +4,7 @@ date: "2025-08-26"
 tags: ["WebAssembly", "Performance Optimization", "JavaScript", "Rust"]
 description: "I hope no magical optimizations interfered with the test; I really do not understand all the compilation mechanisms of Rust and V8 very well."
 author: "Elecmonkey"
+og: 'wasm-call-overhead.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

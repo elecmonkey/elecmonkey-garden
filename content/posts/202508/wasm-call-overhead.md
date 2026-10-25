@@ -4,6 +4,7 @@ date: "2025-08-26"
 tags: ["WebAssembly", "性能优化", "JavaScript", "Rust"]
 description: "希望没有什么神奇的优化手段干扰测试，实在是不太懂 Rust 和 V8 的各种编译机制。"
 author: "Elecmonkey"
+og: 'wasm-call-overhead.og.jpg'
 ---
 
 > 希望没有什么神奇的优化手段干扰测试，实在是不太懂 Rust 和 V8 的各种编译机制。

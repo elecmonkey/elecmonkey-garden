@@ -4,6 +4,7 @@ date: '2025-03-26'
 description: '又名被大模型坑的前端开发者决心拯救自己的CI/CD工作流（bu。'
 tags: ['GitHub Actions', 'CI/CD', 'Next.js', 'DevOps']
 author: 'Elecmonkey'
+og: 'github-actions.og.jpg'
 ---
 
 自动化的 CI/CD 现在感觉起来已经成了 Web 项目必不可少的的一部分了。主要原因似乎可以算作从代码写好到生产环境的过程越来越复杂了。如果还是代码写好，一堆 `.php` 压缩一下丢到服务器里就跑的时代，估计没有太多人有动力去配置自动化的 CI/CD，也就不会有这一堆花里胡哨的 CI/CD 工具。

@@ -4,6 +4,7 @@ date: "2025-12-05"
 description: "还是回家找 Spring Boot 吧。Modern.js 也是 React 全栈框架，但是它很谦虚的说自己的后端只是“BFF层”。"
 tags: ["Next.js", "React", "Web 安全", "全栈框架"]
 author: "Elecmonkey"
+og: 'frontend-framework-security-2025.og.jpg'
 ---
 
 ## 引言

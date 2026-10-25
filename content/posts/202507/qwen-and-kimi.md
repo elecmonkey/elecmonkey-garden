@@ -4,6 +4,7 @@ date: "2025-07-26"
 description: "也许模型适配也是 Vibe Coding 效果体验的重要一环。也许国内的模型厂都可以顺便做一做自家模型工具适配的问题。"
 tags: ["AI", "智能体 (Agent)", "Vibe Coding"]
 author: "Elecmonkey"
+og: 'qwen-and-kimi.og.jpg'
 ---
 
 ## 百模大战

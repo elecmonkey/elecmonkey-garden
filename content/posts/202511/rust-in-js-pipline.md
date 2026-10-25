@@ -4,6 +4,7 @@ date: '2025-11-12'
 description: '处理 JavaScript 代码的工具并不需要是 JavaScript 程序，但处理 JavaScript 代码的人必须是 JavaScript 程序员。'
 tags: ['Rust', 'JavaScript', '前端工具链', 'Rolldown', 'swc', '构建工具', 'React Compiler']
 author: 'Elecmonkey'
+og: 'rust-in-js-pipline.og.jpg'
 ---
 
 ## JavaScript 处理 JavaScript

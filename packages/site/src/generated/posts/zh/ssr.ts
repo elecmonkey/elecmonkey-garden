@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:1be82718181a6fe18a3bc46a7a1c084b529b880bf7d7f8b1420b26aba2455bc4";
-export const postContentHash = "sha256:13dc419508c15a6b104aeabb58b72fe86bff2553f0681d37091d4da554484666";
+export const postSourceHash = "sha256:e1b916b6c637987ff182392ca1f3061985fb0d6355cff42b910918bdc43d3247";
+export const postContentHash = "sha256:0689067651082222b728b09defb2c849ac535c49d36c3695a56dbad73edc6e01";
 
 export const post = {
   "id": "ssr",
@@ -101,6 +101,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "ssr.og.jpg",
   "prevPost": {
     "id": "rolldown-vite-production-ready",
     "title": "值得开始尝试 Rolldown-vite 了吗"

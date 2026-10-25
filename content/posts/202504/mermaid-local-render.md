@@ -4,6 +4,7 @@ date: "2025-04-26"
 description: "你会发现很多力求 SSR/SSG 的工具，Mermaid 最终还是选择了浏览器端渲染。"
 tags: ["服务端渲染 (SSR)", "Node.js", "Mermaid"]
 author: "Elecmonkey"
+og: 'mermaid-local-render.og.jpg'
 ---
 
 ## Mermaid.js

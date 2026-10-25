@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:26f2e3b8f0901508eab66bdaedadc993c6c96814d814942666ff338442f94753";
-export const postContentHash = "sha256:0ddc427676106bc2c0b06ec2dd7cf08ff19cb0539a2051cdba93644486d3e32d";
+export const postSourceHash = "sha256:f4c7fbd1f35e5b779b7bd14637e16255dc06b2e547edf9e3acdf08d3114c4b59";
+export const postContentHash = "sha256:81952eec5016d9f9abcb3bbc5888b0701eeec65f9e638689f8546c06a44aaed4";
 
 export const post = {
   "id": "blue-green-deploy",
@@ -77,6 +77,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "blue-green-deploy.og.jpg",
   "prevPost": {
     "id": "github-actions",
     "title": "前端小项目的 GitHub Actions 配置爬坑记"

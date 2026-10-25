@@ -4,6 +4,7 @@ date: "2026-05-12"
 description: "意想不到的地方没有做好不同信任等级的隔离。前端生态供应链安全任重道远。"
 tags: ["npm", "pnpm", "Web 安全", "CI/CD", "供应链安全"]
 author: "Elecmonkey"
+og: 'tanstack-npm-supply-chain-attack.og.jpg'
 ---
 
 ## 事情概述

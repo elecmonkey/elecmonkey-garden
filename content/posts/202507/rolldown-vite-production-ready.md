@@ -4,6 +4,7 @@ date: "2025-07-08"
 description: "生产环境可以用吗。"
 tags: ["Rolldown", "Vite", "构建工具"]
 author: "Elecmonkey"
+og: 'rolldown-vite-production-ready.og.jpg'
 ---
 
 绝对值得。

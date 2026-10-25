@@ -4,6 +4,7 @@ date: "2025-03-22"
 description: "Is drawing diagrams with code really more efficient than drag-and-drop tools? I think if you have used Markdown, you would not ask this question."
 tags: ["Technical Documentation", "Mermaid"]
 author: "Elecmonkey"
+og: 'mermaid-tutorial.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

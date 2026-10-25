@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:eb64e3fb9a085fac0a106c90d0c94b7fa387a86098fd5961442a4f28a09f5fb3";
-export const postContentHash = "sha256:6d4b757f1fa8c049e4d822750189062b8b3f210e279153d9c5042b97b249b589";
+export const postSourceHash = "sha256:9551a9dbff380c82c2aca5418411c9516edd054f7efcac615726d291b896a38d";
+export const postContentHash = "sha256:ed0c2e416fe46d30c81a281a656e23510914b405435a158df7843442e0fa59cc";
 
 export const post = {
   "id": "rolldown-vite-migration",
@@ -109,6 +109,7 @@ export const post = {
   "monthFolder": "202506",
   "isDraft": false,
   "isHidden": false,
+  "og": "rolldown-vite-migration.og.jpg",
   "prevPost": {
     "id": "tech-debt",
     "title": "Running an Antique Frontend Project on an arm64 Mac, and Ending Up with a Head Full of Thoughts About Technical Debt"

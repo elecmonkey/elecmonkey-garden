@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:ad7d1371f445d2cddc43457079c2fed5b745557f04e51509e5de9565e8f1bb8d";
-export const postContentHash = "sha256:b98f6e2af3e95138a8d7efdd2f8e4c8f6419939d2574e5a04a0796ed7cc7aa73";
+export const postSourceHash = "sha256:4ab84719fb51dccd316817a04324f8a541d1f76e5e7e0aaf3474e69bf00389e7";
+export const postContentHash = "sha256:0c98168e51ba7f47ee87602d3c4e9f17eb4167a30e2078ce9486b295ed02fb52";
 
 export const post = {
   "id": "vue-move-to-esm-only",
@@ -52,6 +52,7 @@ export const post = {
   "monthFolder": "202606",
   "isDraft": false,
   "isHidden": false,
+  "og": "vue-move-to-esm-only.og.jpg",
   "prevPost": {
     "id": "vue-tsc-runtime-patch-hack",
     "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"

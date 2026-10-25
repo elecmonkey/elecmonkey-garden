@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:6dfe29391ecd8defc002dcd8deb537fd3975811b5a1765dba48bfe5afbe4d584";
-export const postContentHash = "sha256:8401dbba257027bcd6614be203a1bf89cf351bf752caf719f25e643510659038";
+export const postSourceHash = "sha256:8e12e30b4c4fdd75b47c567e6c791922d2ffa85aa6c85912b5011d6878582834";
+export const postContentHash = "sha256:ca7faf3d8c867c3256655102ec6440b2e563347330ecb3cc0ae7307dfa4a2f5f";
 
 export const post = {
   "id": "about-astro",
@@ -72,6 +72,7 @@ export const post = {
   "monthFolder": "202601",
   "isDraft": false,
   "isHidden": false,
+  "og": "about-astro.og.jpg",
   "prevPost": {
     "id": "use-react-native-and-expo",
     "title": "Notes on Trying React Native Mobile Development with the Expo Framework"

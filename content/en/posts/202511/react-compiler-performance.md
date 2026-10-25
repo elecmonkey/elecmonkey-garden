@@ -4,6 +4,7 @@ date: '2025-11-13'
 description: 'After introducing React Compiler, Rolldown-Vite with Oxc build time increased by 174%; Vite (Rollup) build time increased by 40%.'
 tags: ['React', 'React Compiler', 'Vite', 'Rolldown']
 author: 'Elecmonkey'
+og: 'react-compiler-performance.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

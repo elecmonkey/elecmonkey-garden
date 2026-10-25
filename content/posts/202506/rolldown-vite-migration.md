@@ -4,6 +4,7 @@ date: "2025-06-02"
 description: "Vite + Rust，前端构建工具的未来愿景"
 tags: ["Vite", "Rolldown", "构建工具", "Rust", "前端工程化"]
 author: "Elecmonkey"
+og: 'rolldown-vite-migration.og.jpg'
 ---
 
 ## Rolldown-Vite 正式发布

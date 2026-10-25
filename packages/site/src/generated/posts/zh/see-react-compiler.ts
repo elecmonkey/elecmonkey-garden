@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:474de5928ee86910575aab6412fa5b1f851bdd4f4f061710b22e177f34983793";
-export const postContentHash = "sha256:f07193836e4835248c2ff61a1682194f62f59937964ee85185e50dd47de6f38e";
+export const postSourceHash = "sha256:d81f9c1d16231df9f330fd9fc5238aa88545d7a33d13394649cffdbef2651758";
+export const postContentHash = "sha256:b8e5eec353601159f74299bf45fbf8ae77c24d41a668f9abb4132a6e338c02d5";
 
 export const post = {
   "id": "see-react-compiler",
@@ -47,6 +47,7 @@ export const post = {
   "monthFolder": "202511",
   "isDraft": false,
   "isHidden": false,
+  "og": "see-react-compiler.og.jpg",
   "prevPost": {
     "id": "react-compiler-performance",
     "title": "实测 Vite 工程中 React Compiler 对构建时间的影响"

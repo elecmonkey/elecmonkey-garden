@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:d4d2fac100bf307623b9d76e93da97c8a38c00d393b28b4dba7ecb498c18fffd";
-export const postContentHash = "sha256:839e5eec036a5c9020c5887a6d4204c0ef6e61815118e59fa4a250def79de9b2";
+export const postSourceHash = "sha256:7ac73e086bf12fbbab529fd2f9f84b907adc8a150c02db1ddd85a8b2d5b39bb9";
+export const postContentHash = "sha256:9e4007b5fc309996f96a3b7e730f44eb84551cb40a6f667514ef7365bf928713";
 
 export const post = {
   "id": "axios-xhr-and-fetch",
@@ -79,6 +79,7 @@ export const post = {
   "monthFolder": "202604",
   "isDraft": false,
   "isHidden": false,
+  "og": "axios-xhr-and-fetch.og.jpg",
   "prevPost": {
     "id": "viteplus-announcement",
     "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"

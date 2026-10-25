@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:f226e6e7922432931275ee8ea4a3f2851432db2ef6c2b52aa95a7d08aa45e4a4";
-export const postContentHash = "sha256:40ba6ecbfbfb00d1c98b4fdf1144ad7cfc5309ec7a7cb836c2b2b0c0c69cf6e8";
+export const postSourceHash = "sha256:6973db7a5854b7378255171f2d856033feb4d52e27493b0ec07a0d23afc46e6d";
+export const postContentHash = "sha256:cee3c0e2118b60ade6c6dd2f48a3fb02f2271f93ee88ee545ffce1904f85ae3e";
 
 export const post = {
   "id": "vite-route-preloading",
@@ -90,6 +90,7 @@ export const post = {
   "monthFolder": "202508",
   "isDraft": false,
   "isHidden": false,
+  "og": "vite-route-preloading.og.jpg",
   "prevPost": {
     "id": "qwen-and-kimi",
     "title": "Qwen Coder 与 Kimi K2，好像还缺点什么"

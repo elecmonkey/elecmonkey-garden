@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:dc182fd6720de09ef8d309e8a5e9cfed22619c0f0b2e038253e44cb78f26ec94";
-export const postContentHash = "sha256:d60188fe5df704efcee0634037c71453e8d87804c8cbbc1a955937db81fe9165";
+export const postSourceHash = "sha256:0787ab65b77b5dbfda529f5b42aa50567aeac83d86ca55c283b4ec6bad64e4da";
+export const postContentHash = "sha256:2ca2c99b34879c49e7179b670646d063298f8ef2c420d2cd7770a24dcaaa3e54";
 
 export const post = {
   "id": "mermaid-tutorial",
@@ -132,6 +132,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "mermaid-tutorial.og.jpg",
   "nextPost": {
     "id": "github-actions",
     "title": "前端小项目的 GitHub Actions 配置爬坑记"

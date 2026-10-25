@@ -4,6 +4,7 @@ date: "2026-04-20"
 description: "Google Chrome's security model drags the entire Web community along by the nose"
 tags: ["Chrome", "CORS", "Web Security"]
 author: "Elecmonkey"
+og: 'private-network-access.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

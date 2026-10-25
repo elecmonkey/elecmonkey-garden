@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:ca265a1236c2d5c9451c5ca7aa92a276d59395b95ba839b8402af435297023b6";
-export const postContentHash = "sha256:0bf70c6d2d85d7d59c6e8d2ca9fee3f6bbf62f5805ec59b89521cff351d01797";
+export const postSourceHash = "sha256:58c7074e57fad72d08adef8123a7e9ba9d2bfcc047aa9f68cd32dba320735191";
+export const postContentHash = "sha256:bce2b4eb41102d884ddd6225ad167b5870972511d21387737607b5e546270273";
 
 export const post = {
   "id": "note-oauth2-login",
@@ -62,6 +62,7 @@ export const post = {
   "monthFolder": "202602",
   "isDraft": false,
   "isHidden": false,
+  "og": "note-oauth2-login.og.jpg",
   "prevPost": {
     "id": "react-server-component-2",
     "title": "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图"

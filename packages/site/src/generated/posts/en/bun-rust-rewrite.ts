@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:5789f5d36d7c5d1eb931ef3e39a6c9d23dd8c557914a73d3784468db837df2d1";
-export const postContentHash = "sha256:65a78bacd39678960b305645a3cc5a79485894c1187694ede6748d209ceef328";
+export const postSourceHash = "sha256:97e7d737c618dea487e962bf343b73b7aa106867a696f759bc0cfa685de36839";
+export const postContentHash = "sha256:abed41291321524feb5a7cb99fd5b57dd9bb14911cea5d899fa9c9577aae910c";
 
 export const post = {
   "id": "bun-rust-rewrite",
@@ -63,6 +63,7 @@ export const post = {
   "monthFolder": "202605",
   "isDraft": false,
   "isHidden": false,
+  "og": "bun-rust-rewrite.og.jpg",
   "prevPost": {
     "id": "tanstack-npm-supply-chain-attack",
     "title": "A Review of the TanStack npm Package Poisoning via CI Cache"

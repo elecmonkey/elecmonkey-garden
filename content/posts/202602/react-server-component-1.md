@@ -4,6 +4,7 @@ date: "2026-02-14"
 description: "React 团队一声炮响，给前端送来了 RSC | 服务端组件原理、RSC 与 SSR、「局部水合」的意义"
 tags: ["React", "RSC", "前端架构", "Next.js", "服务端渲染 (SSR)"]
 author: "Elecmonkey"
+og: 'react-server-component-1.og.jpg'
 ---
 
 最近，国内扛把子的 React 框架 [Modern.js](https://github.com/web-infra-dev/modern.js) 发布了 [v3 大版本](https://modernjs.dev/zh/community/blog/v3-release-note.html)，正式支持了 React 服务端组件（后续简写为 RSC）。而 React 元框架的事实标准 [Next.js](https://nextjs.org/) 早已全面拥抱 RSC。

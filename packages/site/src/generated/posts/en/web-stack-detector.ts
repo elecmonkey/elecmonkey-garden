@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:eacefbf2840cd4766d447a44889229f93102f04e37416128711b6101d56831e3";
-export const postContentHash = "sha256:3e206fd31f49311bf6cdecf3710d41f106b4195e8b2373c59a1bca4d6d03595a";
+export const postSourceHash = "sha256:6af37651616bd4290ea091081420d47202e465d22795c614301d78b5b067a497";
+export const postContentHash = "sha256:fdb6841fbe8463c23d395400e4cfb3d186959ab5031d70e60c130ffb23f85593";
 
 export const post = {
   "id": "web-stack-detector",
@@ -24,6 +24,7 @@ export const post = {
   "monthFolder": "202608",
   "isDraft": false,
   "isHidden": false,
+  "og": "web-stack-detector.og.jpg",
   "prevPost": {
     "id": "vue-move-to-esm-only",
     "title": "Vue.js Is Moving to ESM-only"

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:9b82e378a15628681f8183b4e2e6c6b9adfdf6c34b315e66cf67df1749a77c63";
-export const postContentHash = "sha256:f5235ded434a58996e1d66fe7cdb86ca9386c9c1ee1964ab1c528ca178b653ac";
+export const postSourceHash = "sha256:cee874d85cda1342a456bb94f0165c0345a574fa619544d3e9a38536b74ebc88";
+export const postContentHash = "sha256:fdb7b16720e6b09553747f605840a4978ce1a3e88c08fcaaf2c8fa2e5066242b";
 
 export const post = {
   "id": "void-operator-history",
@@ -147,6 +147,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "void-operator-history.og.jpg",
   "prevPost": {
     "id": "docker-offline-images",
     "title": "解决无法访问 DockerHub 问题的笨办法一则"

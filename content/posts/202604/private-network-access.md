@@ -4,6 +4,7 @@ date: "2026-04-20"
 description: "Google Chrome 的安全模型牵着整个 Web 社区的鼻子走"
 tags: ["Chrome", "CORS", "Web 安全"]
 author: "Elecmonkey"
+og: 'private-network-access.og.jpg'
 ---
 
 ## PNA 引发的问题

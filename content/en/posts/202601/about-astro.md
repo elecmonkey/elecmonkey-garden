@@ -4,6 +4,7 @@ date: "2026-01-30"
 description: "The frontend framework that hates JavaScript the most in history, and the most meaningful experimental field for architecture"
 tags: ["Astro", "Server-Side Rendering (SSR)", "Static Site Generation (SSG)", "Vite"]
 author: "Elecmonkey"
+og: 'about-astro.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

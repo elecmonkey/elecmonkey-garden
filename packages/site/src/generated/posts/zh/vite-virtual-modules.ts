@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:5fdae38cdd716d17a86708b396c8829610456bdcc7d02004341e7e800430f6f2";
-export const postContentHash = "sha256:504fefd3ab4e78acc8394b7534c7f4b6e4813283fc03bf878fabd26272f2f949";
+export const postSourceHash = "sha256:351ce8492e9aba6a306bbf9622e76d6d85f8aabe7b2007b50f1c0c52d2372d2f";
+export const postContentHash = "sha256:9f3c91bb4a23c4a25021768ba3793c17e7c15d1d77dc4b502dbfe027674473b7";
 
 export const post = {
   "id": "vite-virtual-modules",
@@ -79,6 +79,7 @@ export const post = {
   "monthFolder": "202509",
   "isDraft": false,
   "isHidden": false,
+  "og": "vite-virtual-modules.og.jpg",
   "prevPost": {
     "id": "wasm-call-overhead",
     "title": "WebAssembly 调用开销分析"

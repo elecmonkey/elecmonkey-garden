@@ -4,6 +4,7 @@ date: '2025-11-13'
 description: '引入 React Compiler，Rolldown-Vite with Oxc 构建时间增加 174%；Vite (Rollup) 构建时间增加 40%。'
 tags: ['React', 'React Compiler', 'Vite', 'Rolldown']
 author: 'Elecmonkey'
+og: 'react-compiler-performance.og.jpg'
 ---
 
 ## 测试场景

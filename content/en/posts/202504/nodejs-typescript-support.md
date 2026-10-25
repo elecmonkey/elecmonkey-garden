@@ -4,6 +4,7 @@ date: "2025-04-19"
 description: "Node.js finally supports TypeScript natively. But not in the way I imagined."
 tags: ["Node.js", "TypeScript", "JavaScript"]
 author: "Elecmonkey"
+og: 'nodejs-typescript-support.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

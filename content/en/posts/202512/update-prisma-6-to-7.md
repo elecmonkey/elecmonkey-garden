@@ -4,6 +4,7 @@ date: '2025-12-03'
 description: 'A reverse migration away from Rust back to JS/TS, cutting deployment size in half'
 tags: ['Prisma ORM', 'node_modules']
 author: 'Elecmonkey'
+og: 'update-prisma-6-to-7.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

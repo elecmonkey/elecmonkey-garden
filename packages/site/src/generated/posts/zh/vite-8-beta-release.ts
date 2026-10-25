@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:791e3abd8f9b30ca5f7a94baea28aaa8d5a31b329e5bd9dc20c6279c26ac9eb1";
-export const postContentHash = "sha256:7da01d28e5a42a16647afa57b7ae823982e21ff81c6cdcef0ccd561181ece3df";
+export const postSourceHash = "sha256:29a36eee5ab8c694fa4fa14b4af460df965bc7b48399e0d5f3f90a6dd60b7439";
+export const postContentHash = "sha256:0fd68b54e7feca65663a11f0f563768469d59e604df96c5f0a51f37e5573ccf8";
 
 export const post = {
   "id": "vite-8-beta-release",
@@ -24,6 +24,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "vite-8-beta-release.og.jpg",
   "prevPost": {
     "id": "update-prisma-6-to-7",
     "title": "Prisma ORM 6 -> 7 升级实录，闲聊 Prisma 团队升级理念"

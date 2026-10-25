@@ -4,6 +4,7 @@ date: '2025-12-03'
 description: '逆向迁移放弃 Rust 回归 JS/TS，部署体积减一半'
 tags: ['Prisma ORM', 'node_modules']
 author: 'Elecmonkey'
+og: 'update-prisma-6-to-7.og.jpg'
 ---
 
 ## 升级过程

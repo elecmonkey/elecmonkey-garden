@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:9854304f96643baf1fd5daf87e3e93cccea7b0181903d459885fb38a37ff7463";
-export const postContentHash = "sha256:580cb312da3cc87b3022fffd7f8ce6254c8a05f6f116fb9b5f9d327fcc93c527";
+export const postSourceHash = "sha256:9230d84da5a9426b51f050b679c8b4b4d1ebc51c1fbf0e09ca455a11c6e6faf5";
+export const postContentHash = "sha256:1370eb41e7e705ea4dff8aa3da018ba1b152f1fc01f53ccd11a835402dc4940b";
 
 export const post = {
   "id": "docker-offline-images",
@@ -121,6 +121,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "docker-offline-images.og.jpg",
   "prevPost": {
     "id": "model-context-protocol",
     "title": "The Evolution Path of AI Agents: Building a Model Context Protocol Server with Node.js"

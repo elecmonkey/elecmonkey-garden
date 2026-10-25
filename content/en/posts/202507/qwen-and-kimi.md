@@ -4,6 +4,7 @@ date: "2025-07-26"
 description: "Perhaps model adaptation is also an important part of the Vibe Coding experience. Maybe domestic model vendors could also work on tooling adaptation for their own models."
 tags: ["AI", "Agent", "Vibe Coding"]
 author: "Elecmonkey"
+og: 'qwen-and-kimi.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

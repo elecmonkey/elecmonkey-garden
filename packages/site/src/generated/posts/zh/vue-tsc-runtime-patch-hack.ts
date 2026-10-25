@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:3fe6ac9d875131a0cd75fc823ddcc8a8340acfcdd7d0c14926f022b9fce97bd2";
-export const postContentHash = "sha256:84c826809cffd9c4fc4d01343620f2ee7cab0a7e82b45925af610724e49939c2";
+export const postSourceHash = "sha256:b3bcaae5f133531b0362f0802eefabf315ee5358cdbdcd94ed58fd176495965f";
+export const postContentHash = "sha256:46613e030a7c69b5be27f7296e89b4fa9a21b6937762d83a3064936c57fe8dc5";
 
 export const post = {
   "id": "vue-tsc-runtime-patch-hack",
@@ -71,6 +71,7 @@ export const post = {
   "monthFolder": "202606",
   "isDraft": false,
   "isHidden": false,
+  "og": "vue-tsc-runtime-patch-hack.og.jpg",
   "prevPost": {
     "id": "ai-agent-software-engineering",
     "title": "更高一层抽象：我们与 AI Agent 时代"

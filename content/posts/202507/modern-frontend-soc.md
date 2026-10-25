@@ -4,6 +4,7 @@ date: "2025-07-17"
 description: "我说 Tailwind CSS 不就是在写 inline-style，你能反驳吗？你能反驳吗？"
 tags: ["前端架构", "关注点分离 (SoC)", "Tailwind CSS", "Vue", "React", "前端工程化"]
 author: "Elecmonkey"
+og: 'modern-frontend-soc.og.jpg'
 ---
 
 ## “按技术分离” 到 “逻辑聚合”

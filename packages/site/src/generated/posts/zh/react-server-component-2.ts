@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:6072077b0a4ed05bc226eff6f693248a74440584d1232dc9459f4e6f6654f7c9";
-export const postContentHash = "sha256:a9f310bbbb9372f040354376e44a758002317f88c5ce6353f777aa06bf3b756e";
+export const postSourceHash = "sha256:95826fe9496d953cd6c52c6ab4016e903a90b614fcba6f918babaec63d26ea50";
+export const postContentHash = "sha256:b6a0458baa427c3076bd07c34dcb0ce256296cf2e57f844e31ca44c8a38d58bc";
 
 export const post = {
   "id": "react-server-component-2",
@@ -58,6 +58,7 @@ export const post = {
   "monthFolder": "202602",
   "isDraft": false,
   "isHidden": false,
+  "og": "react-server-component-2.og.jpg",
   "prevPost": {
     "id": "react-server-component-1",
     "title": "论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合"

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:5501d52a2133ae81d3305c2744423a153d29ba9d38dd729155997168cd4a9309";
-export const postContentHash = "sha256:58bad8d3def3625b54950aa2a88d65b38f7b3129d2eb167aa7c04b9601782606";
+export const postSourceHash = "sha256:7526522ffadadeaa58032fb0b4c4fc2c69e0fbffc7099c6992a084483e1f53b4";
+export const postContentHash = "sha256:32f9079515db002dfafb8de5d05f399ac090f840d59ddbf96b4e5447dca52762";
 
 export const post = {
   "id": "model-context-protocol",
@@ -113,6 +113,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "model-context-protocol.og.jpg",
   "prevPost": {
     "id": "note-jwt",
     "title": "User Authentication System: Stateless Authentication with JWT"

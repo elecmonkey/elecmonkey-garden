@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:8c95f7b72797f6d0d950da9dc30a198ed7611c7a10f901e8ebaf337493b3801e";
-export const postContentHash = "sha256:fa9213190c2f6d8e4696848d45e63f450ab584608f682643066b80544d3289fd";
+export const postSourceHash = "sha256:028ee563d1032cfa35bf257eca251ea36c144581973c4b3b3aa22dcb019e8b96";
+export const postContentHash = "sha256:9047369bf23596bea31a8e9a51e874a3457bbdc2604d6c24c2e53a68a8d1201f";
 
 export const post = {
   "id": "see-react-compiler",
@@ -47,6 +47,7 @@ export const post = {
   "monthFolder": "202511",
   "isDraft": false,
   "isHidden": false,
+  "og": "see-react-compiler.og.jpg",
   "prevPost": {
     "id": "react-compiler-performance",
     "title": "Testing the Impact of React Compiler on Build Time in a Vite Project"

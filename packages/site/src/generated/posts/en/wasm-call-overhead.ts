@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:7068d26035e16a675ca5c02386344ac36af372afc668ed728a1091c03b7cecb9";
-export const postContentHash = "sha256:2facbba7b4415e301be7f954eecec98684d7ee95d3abb4f830ce4a70cca22c87";
+export const postSourceHash = "sha256:859d453687b4177b8e3e0b09d759f01b8bb8edf05485ff4a84ad54a11e1b49a9";
+export const postContentHash = "sha256:22cee7b645ea3e38e5e43d8beac6fb231c78e2434339215677a76655c32c1279";
 
 export const post = {
   "id": "wasm-call-overhead",
@@ -67,6 +67,7 @@ export const post = {
   "monthFolder": "202508",
   "isDraft": false,
   "isHidden": false,
+  "og": "wasm-call-overhead.og.jpg",
   "prevPost": {
     "id": "rust-c-bind",
     "title": "Rust bindgen: Generate Rust Bindings for C Header Files"

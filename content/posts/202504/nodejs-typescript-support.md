@@ -4,6 +4,7 @@ date: "2025-04-19"
 description: "Node.js 终于原生支持 TypeScript 了。但不是我想象的那种支持。"
 tags: ["Node.js", "TypeScript", "JavaScript"]
 author: "Elecmonkey"
+og: 'nodejs-typescript-support.og.jpg'
 ---
 
 ## 原生支持

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:7569105fdcbfaa00d0a9a55fc65e4ebbf08f9b663e3e3faba298e1c34d014f6a";
-export const postContentHash = "sha256:d95208bd2a5de5564f8a87071535f0de059617a8ed4000ce0eb768219251ca7c";
+export const postSourceHash = "sha256:0ec72a5fba802d9f83a9d7c03b8af26f4be983e8af360595ffc1dd485c0bf59f";
+export const postContentHash = "sha256:168ae34a429ae66363d66de6fc07319ee4465820ee33ac95cac72ac1a072dfb2";
 
 export const post = {
   "id": "note-jwt",
@@ -86,6 +86,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "note-jwt.og.jpg",
   "prevPost": {
     "id": "blue-green-deploy",
     "title": "Next.js Zero-Downtime Deployment Notes: From PM2 Cluster to Next Standalone Mode"

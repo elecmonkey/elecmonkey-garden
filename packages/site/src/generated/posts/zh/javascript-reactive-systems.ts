@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:4c28b933346b26e2f9848a10923a82c830e5b4c6956f35fa4e2e45ea564748e7";
-export const postContentHash = "sha256:396ebe013a9c984e6922527adb32093a2ee68a3eb79f9e7c0e26f891c364e634";
+export const postSourceHash = "sha256:7f343c6a3124f6f41c2a34e770aab460d5df83cb21ba6cc32fc1d109362f4ea4";
+export const postContentHash = "sha256:bd6f4c5dc5fafefb325f2f3be59d104ce55da5681a6f4fc664a2a2c9e17d988f";
 
 export const post = {
   "id": "javascript-reactive-systems",
@@ -149,6 +149,7 @@ export const post = {
   "monthFolder": "202505",
   "isDraft": false,
   "isHidden": false,
+  "og": "javascript-reactive-systems.og.jpg",
   "prevPost": {
     "id": "mermaid-local-render",
     "title": "论如何逼着为浏览器而生的 Mermaid 在服务器端渲染"

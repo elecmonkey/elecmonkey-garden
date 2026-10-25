@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:27009d8b794f79ed7da01936e0778955261da5f15551cc25af75df1d5d802116";
-export const postContentHash = "sha256:1b6151be9f41f71e7f4dbf4d5477bec94e0017a2e0173830a0d7bea590e2240d";
+export const postSourceHash = "sha256:7e8d2f75fcf27be5703d1ad735dcf6034397f80f72d6c6cabf45333d512aa30d";
+export const postContentHash = "sha256:0fc08ae40f2902bb82ca76aeeae7ddc10355baf17953ed182938f931e789dd40";
 
 export const post = {
   "id": "private-network-access",
@@ -76,6 +76,7 @@ export const post = {
   "monthFolder": "202604",
   "isDraft": false,
   "isHidden": false,
+  "og": "private-network-access.og.jpg",
   "prevPost": {
     "id": "axios-xhr-and-fetch",
     "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections"

@@ -4,6 +4,7 @@ date: "2025-05-07"
 description: "In the fragmented frontend ecosystem, reactive data has become a faintly emerging new consensus"
 tags: ["Reactive Systems", "Vue", "Solid.js", "JavaScript", "ECMAScript"]
 author: "Elecmonkey"
+og: 'javascript-reactive-systems.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

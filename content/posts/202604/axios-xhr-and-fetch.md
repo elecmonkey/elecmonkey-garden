@@ -4,6 +4,7 @@ date: "2026-04-04"
 description: "后半篇话题似乎跑题了。。跑到了网络请求库选型反思，从 Axios 到 Fetch API"
 tags: ["Axios", "npm", "pnpm", "Web 安全", "CI/CD"]
 author: "Elecmonkey"
+og: 'axios-xhr-and-fetch.og.jpg'
 ---
 
 > 更新：账户被盗者在GitHub复盘了被盗经过 [https://github.com/axios/axios/issues/10636#issuecomment-4180237789](https://github.com/axios/axios/issues/10636#issuecomment-4180237789)

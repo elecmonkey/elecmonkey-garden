@@ -4,6 +4,7 @@ date: "2025-03-31"
 description: "JWT authentication study notes. Analysis of stateless authentication principles, frontend and backend implementation solutions, security protection measures, and cross-origin and single sign-on issues encountered in real projects."
 tags: ["Authentication", "Web Security", "JavaScript"]
 author: "Elecmonkey"
+og: 'note-jwt.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

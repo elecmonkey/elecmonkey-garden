@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:c305beec2783ace8df31b655a8e7ce84b07c823ad2257753991483413ccdd15f";
-export const postContentHash = "sha256:15f2768db7a094dca86bd5db28a3b535f2b0ea7cea05a0f63556b2a154d7bd2d";
+export const postSourceHash = "sha256:749ee0b66635a78c25b03d6aec9613e33e677478afb5ca4ee27b4a1206e8b4e1";
+export const postContentHash = "sha256:3cc7cf03024d172d7157d9fb38ca6699550e2529366d3afbc90b6517783cd339";
 
 export const post = {
   "id": "best-language-for-ai",
@@ -25,6 +25,7 @@ export const post = {
   "monthFolder": "202508",
   "isDraft": false,
   "isHidden": false,
+  "og": "best-language-for-ai.og.jpg",
   "prevPost": {
     "id": "vite-route-preloading",
     "title": "Vite Chunk Preloading Optimization: Balancing First-Screen Latency and Later Interactions"

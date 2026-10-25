@@ -4,6 +4,7 @@ date: "2026-05-15"
 description: "社区：PR #30702 - Revert \"Rewrite Bun in Rust\" / #30706 - Clarify that bun now is slop"
 tags: ["Bun", "Rust", "Zig", "AI", "前端工具链"]
 author: "Elecmonkey"
+og: 'bun-rust-rewrite.og.jpg'
 ---
 
 ## 大新闻

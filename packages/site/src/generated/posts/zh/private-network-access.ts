@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:e764ee87cc592b05adef8b8416b7d130a5fafa905453f8fb0124a9d0c2f43443";
-export const postContentHash = "sha256:e3dd5ec90c8350403473d6941b4fd4d6286a81677308ad02dabc687a3e9b2a2b";
+export const postSourceHash = "sha256:48e3d14cf563fe4a64faed3e405d2c098996702e6da6b565fcc7d43038035204";
+export const postContentHash = "sha256:71f62f2029f1fb3d0fb52b07f3cf7201e4ea1c36a54dd67e0dc59c5ecb2c5905";
 
 export const post = {
   "id": "private-network-access",
@@ -76,6 +76,7 @@ export const post = {
   "monthFolder": "202604",
   "isDraft": false,
   "isHidden": false,
+  "og": "private-network-access.og.jpg",
   "prevPost": {
     "id": "axios-xhr-and-fetch",
     "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思"

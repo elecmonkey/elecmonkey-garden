@@ -4,6 +4,7 @@ date: "2025-05-19"
 description: "Technical debt is not purely a technical problem. It is about CI/CD modernization, organizational governance, and every technologist's open source culture and community participation."
 tags: ["macOS", "Node.js", "Technical Debt", "CI/CD", "Open Source"]
 author: "Elecmonkey"
+og: 'tech-debt.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

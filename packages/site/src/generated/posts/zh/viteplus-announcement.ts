@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:d3792ac4fc03ff3d8604cf09cca1336761cca0f6fc553d15bf1bb33d3f56d468";
-export const postContentHash = "sha256:30d2e28dca6bb62dac69f84e87db390209d9976973fc0d9a9a83ed3da7fa7a27";
+export const postSourceHash = "sha256:c22048968e2b003066b3ace8864bbf2b1259e25ec3c3dd46ef1fb13b8eb103df";
+export const postContentHash = "sha256:ad4ba7af0f57a30c92eb0f7dec44b9701c5b07dc1960e6ed0740bd153ef23d86";
 
 export const post = {
   "id": "viteplus-announcement",
@@ -63,6 +63,7 @@ export const post = {
   "monthFolder": "202603",
   "isDraft": false,
   "isHidden": false,
+  "og": "viteplus-announcement.og.jpg",
   "prevPost": {
     "id": "note-oauth2-login",
     "title": "OAuth 2.0 授权码模式登录流程全图"

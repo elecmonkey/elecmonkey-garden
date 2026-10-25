@@ -4,6 +4,7 @@ date: "2026-04-04"
 description: "The second half seems to go off topic... drifting into reflections on choosing network request libraries, from Axios to the Fetch API"
 tags: ["Axios", "npm", "pnpm", "Web Security", "CI/CD"]
 author: "Elecmonkey"
+og: 'axios-xhr-and-fetch.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

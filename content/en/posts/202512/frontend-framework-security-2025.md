@@ -4,6 +4,7 @@ date: "2025-12-05"
 description: "Maybe just go back to Spring Boot. Modern.js is also a React full-stack framework, but it modestly says its backend is only a 'BFF layer'."
 tags: ["Next.js", "React", "Web Security", "Full-Stack Frameworks"]
 author: "Elecmonkey"
+og: 'frontend-framework-security-2025.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

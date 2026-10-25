@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:8f86ce30237380cdddd8a705b162dc0e649cfea69eef976a3226198df284bb36";
-export const postContentHash = "sha256:2232748a690177fca4a2f815c136854428d431aa870d7d0806ae1865aeb51167";
+export const postSourceHash = "sha256:13066d69274e32924a299b21bfc2862b1ad3c38f6a36e12c442077a8625cbb2d";
+export const postContentHash = "sha256:7d11a57854a69630520c557c2c138a14314ac50e0595f8ba2a33cf8918af5ec8";
 
 export const post = {
   "id": "copyright-and-opensource",
@@ -41,6 +41,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "copyright-and-opensource.og.jpg",
   "prevPost": {
     "id": "see-react-compiler",
     "title": "See What React Compiler Does to Your Components"

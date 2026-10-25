@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:ff48d80b58e9002f372caea4a201d21abaaa323d8d7294b567e4b4a77d8d9a46";
-export const postContentHash = "sha256:a6f762a6cee82999b2682dc59431e033151adf21dd863c8279b5f9dec51f4f39";
+export const postSourceHash = "sha256:f73061a5ffe1a5d08f5d4572cd397970bccdd2e03aa4ba9c4d63871d7b864404";
+export const postContentHash = "sha256:988a931a37409bfdce10009ccf68b98997c009ac435597c00d9fd4d542ff4947";
 
 export const post = {
   "id": "rolldown-vite-migration",
@@ -109,6 +109,7 @@ export const post = {
   "monthFolder": "202506",
   "isDraft": false,
   "isHidden": false,
+  "og": "rolldown-vite-migration.og.jpg",
   "prevPost": {
     "id": "tech-debt",
     "title": "在 arm64 的 Mac 上运行古董前端项目，憋出一肚子关于技术债的想法"

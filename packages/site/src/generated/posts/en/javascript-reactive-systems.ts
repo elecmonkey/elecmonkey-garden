@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:b320dd5401e5a6ff7f283cd02a9b73cefb4cd73c245f97089dc932e8ae1ddf30";
-export const postContentHash = "sha256:4633802a7750aa00a440197f8ead7e2bbbeddf57b45e48575e43ee1af7da65b3";
+export const postSourceHash = "sha256:1c416cac5877674b135da2525bf98fa300f5f2a2c40bdd4c0c3d4107122ecc1d";
+export const postContentHash = "sha256:5ad4676c02d06652663a474b5e421b14554490b26c71629c78c9ce398e1fd433";
 
 export const post = {
   "id": "javascript-reactive-systems",
@@ -149,6 +149,7 @@ export const post = {
   "monthFolder": "202505",
   "isDraft": false,
   "isHidden": false,
+  "og": "javascript-reactive-systems.og.jpg",
   "prevPost": {
     "id": "mermaid-local-render",
     "title": "How to Force Mermaid, Born for the Browser, to Render on the Server"

@@ -4,6 +4,7 @@ date: "2025-08-01"
 description: "利用 Vite 的 import.meta.glob 实现模块 prefetch 逻辑。"
 tags: ["Vite", "性能优化", "Vue", "React", "Solid.js", "Qwik"]
 author: "Elecmonkey"
+og: 'vite-route-preloading.og.jpg'
 ---
 
 ## 背景：为什么会卡？

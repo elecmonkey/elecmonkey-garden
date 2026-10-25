@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:83129b57c55d6c3b5a7cf71d9b4a69c5bac7ec21ea887f9e87be913eddffc6f8";
-export const postContentHash = "sha256:466edcd9b4f6e1b225c10a5af8fc43b8a9d2930c0c7083eb2eb0470e33387dc4";
+export const postSourceHash = "sha256:a4dcd38d85a4e4e386e6953772150b4fe1678d9cdac6e6cd3be2483634931aa9";
+export const postContentHash = "sha256:725536f9e6068640997332ead43d9d07161b175250719e50c2db96d7aa4d6007";
 
 export const post = {
   "id": "modern-frontend-soc",
@@ -80,6 +80,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "modern-frontend-soc.og.jpg",
   "prevPost": {
     "id": "ssr",
     "title": "Vite 实现服务端渲染 (Server-Side Rendering)"

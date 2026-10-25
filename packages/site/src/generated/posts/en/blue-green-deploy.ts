@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:53f5a088c60f2e9877b1252e0449fa96024674f7c80e00e363151be415577a42";
-export const postContentHash = "sha256:d406c35b5d15bd39de8a35754abcb9c437e0824e196e55ea595f794cbb6845c9";
+export const postSourceHash = "sha256:00ce261e4629af424a381cf8383d9b68691cfedd7b363cb10c0584e29da1a623";
+export const postContentHash = "sha256:fe889b686af54d22e6273aff9690922941e730c7cb7e41d4759ef246714db5f8";
 
 export const post = {
   "id": "blue-green-deploy",
@@ -77,6 +77,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "blue-green-deploy.og.jpg",
   "prevPost": {
     "id": "github-actions",
     "title": "Pitfalls in Configuring GitHub Actions for a Small Frontend Project"

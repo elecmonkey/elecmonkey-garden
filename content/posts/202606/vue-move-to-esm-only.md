@@ -4,6 +4,7 @@ date: "2026-06-23"
 description: "antfu 发布 Move on to ESM only 一年半后，Vue Core 正在迁移到 ESM-only"
 tags: ["Vue", "ESM", "前端工具链", "AI Agent"]
 author: "Elecmonkey"
+og: 'vue-move-to-esm-only.og.jpg'
 ---
 
 ## Vue #15000

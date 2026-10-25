@@ -4,6 +4,7 @@ date: "2025-04-16"
 description: "Every tiny detail change in the frontend world reflects the evolution of the whole Web ecosystem."
 tags: ["JavaScript", "Web History", "TypeScript"]
 author: "Elecmonkey"
+og: 'void-operator-history.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

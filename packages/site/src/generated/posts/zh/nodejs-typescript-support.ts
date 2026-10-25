@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:826b48f4d5cdf7dcea6e0bd7a833d586eeaf5588ae564faaa964e09845bc905f";
-export const postContentHash = "sha256:f53f81e88ce04a6ec8cbcbc8c85b854e023c804c7b003d0545d1a770bdc57bc9";
+export const postSourceHash = "sha256:feb9e2ed727ebe8becc7e26f1be00894c6b1c2b5b9a13a033de970b6d4912d1c";
+export const postContentHash = "sha256:130f36947dc7118d8c70cb7ec89dba87724a22bb2946994585ccb523823983a1";
 
 export const post = {
   "id": "nodejs-typescript-support",
@@ -77,6 +77,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "nodejs-typescript-support.og.jpg",
   "prevPost": {
     "id": "void-operator-history",
     "title": "神秘链接 javascript:void(0) 背后的故事。"

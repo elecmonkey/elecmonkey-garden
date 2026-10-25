@@ -4,6 +4,7 @@ date: "2025-06-02"
 description: "Vite + Rust, a vision for the future of frontend build tools"
 tags: ["Vite", "Rolldown", "Build Tools", "Rust", "Frontend Engineering"]
 author: "Elecmonkey"
+og: 'rolldown-vite-migration.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

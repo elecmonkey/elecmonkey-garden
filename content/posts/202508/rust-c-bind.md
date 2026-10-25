@@ -4,6 +4,7 @@ date: '2025-08-26'
 tags: ['Rust', 'C/C++']
 description: '`bindgen` automatically generates Rust FFI bindings to C and C++ libraries.'
 author: 'Elecmonkey'
+og: 'rust-c-bind.og.jpg'
 ---
 
 ## 基本用法

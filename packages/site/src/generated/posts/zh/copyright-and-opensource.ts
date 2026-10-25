@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:49376c5db4368eddf5ab25b559d65979f79315c0edcf82e3f5b39ecba5cfaca0";
-export const postContentHash = "sha256:224ae78547a41b248d0cb1570c221f762ea6e0c3a36bc385c7dc59abb8f3d052";
+export const postSourceHash = "sha256:a0ba3afca28ccb33c792ef671fa77f3a19a8fae29c29a17916fe0b11d36ad3d0";
+export const postContentHash = "sha256:2c1a0a93a72498ec894497b2602e9af144eb21ffa8f05b63a7f4510a6e309019";
 
 export const post = {
   "id": "copyright-and-opensource",
@@ -41,6 +41,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "copyright-and-opensource.og.jpg",
   "prevPost": {
     "id": "see-react-compiler",
     "title": "看看 React Compiler 对你的组件做了些什么"

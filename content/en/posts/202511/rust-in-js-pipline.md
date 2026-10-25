@@ -4,6 +4,7 @@ date: '2025-11-12'
 description: 'Tools that process JavaScript code do not need to be JavaScript programs, but the people processing JavaScript code must be JavaScript programmers.'
 tags: ['Rust', 'JavaScript', 'Frontend Tooling', 'Rolldown', 'swc', 'Build Tools', 'React Compiler']
 author: 'Elecmonkey'
+og: 'rust-in-js-pipline.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

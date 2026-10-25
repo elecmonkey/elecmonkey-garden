@@ -4,6 +4,7 @@ date: "2025-04-04"
 description: "Model Context Protocol: model context, helping AI large models break through the dimensional wall of the chat box."
 tags: ["AI", "Large Language Model (LLM)", "Node.js", "Agent"]
 author: "Elecmonkey"
+og: 'model-context-protocol.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:dccdf92fa103d91ed18e2a1bbae835beb0d5a75d95b6837226f335912974f866";
-export const postContentHash = "sha256:ba9c42198a4b83c7b104d537369bd3c5bbec72a069139789e60ec21757184a7e";
+export const postSourceHash = "sha256:24c157c0a38ad20ddae211917f40ba7df2374f314d9d9d6cf2d556bf518d12e6";
+export const postContentHash = "sha256:0f31f30895d05581d4a2157c0053738fddd5735fdce190a6a83fe091f9c60b49";
 
 export const post = {
   "id": "tech-debt",
@@ -89,6 +89,7 @@ export const post = {
   "monthFolder": "202505",
   "isDraft": false,
   "isHidden": false,
+  "og": "tech-debt.og.jpg",
   "prevPost": {
     "id": "javascript-reactive-systems",
     "title": "JavaScript Reactive Systems, from Framework Implementations to TC39 Signals"

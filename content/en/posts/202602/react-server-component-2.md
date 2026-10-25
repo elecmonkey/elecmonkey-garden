@@ -4,6 +4,7 @@ date: "2026-02-15"
 description: "With one loud shot from the React team, RSC arrived in frontend development | Continuing RSC: rules, architecture, and JavaScript modules"
 tags: ["React", "RSC", "Frontend Architecture", "Next.js"]
 author: "Elecmonkey"
+og: 'react-server-component-2.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

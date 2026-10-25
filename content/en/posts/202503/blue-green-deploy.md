@@ -4,6 +4,7 @@ date: '2025-03-28'
 description: 'Notes on a zero-downtime deployment solution for a Next.js project in production.'
 tags: ['Next.js', 'Node.js', 'DevOps', 'CI/CD']
 author: 'Elecmonkey'
+og: 'blue-green-deploy.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:b92b17585c1552463be5f6d003933626da3eeee3155f3febb0fa8c6b45b01947";
-export const postContentHash = "sha256:0fb75d3961186ad7435629d185480ea2c23f862e4c2d0eec93bf9892258e7dd8";
+export const postSourceHash = "sha256:61da98ccaea10bb01b306773659f854d3e887106773ee32035409de11a5d2f7f";
+export const postContentHash = "sha256:c691ea74c993481914c168332c5f580b6f430e955de4fb78a208012153dc23da";
 
 export const post = {
   "id": "tanstack-npm-supply-chain-attack",
@@ -89,6 +89,7 @@ export const post = {
   "monthFolder": "202605",
   "isDraft": false,
   "isHidden": false,
+  "og": "tanstack-npm-supply-chain-attack.og.jpg",
   "prevPost": {
     "id": "private-network-access",
     "title": "Private Network Access / Local Network Access 问题"

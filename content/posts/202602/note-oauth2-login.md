@@ -4,6 +4,7 @@ date: "2026-02-24"
 description: "一张图讲清 OAuth 2.0 授权码模式的登录流程与关键参数"
 tags: ["OAuth 2.0", "身份认证", "Web 安全"]
 author: "Elecmonkey"
+og: 'note-oauth2-login.og.jpg'
 ---
 
 ![OAuth 2.0 授权码模式登录流程全图](https://images.elecmonkey.com/articles/202602/oauth2-login.drawio.svg)

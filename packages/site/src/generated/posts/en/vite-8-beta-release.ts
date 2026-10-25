@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:bb454a80e75c8d15f112748edb28a9112322016fa90d784d698eddee088942e2";
-export const postContentHash = "sha256:fae813923b847d21636959ade08ab93b781c0664f63e246ec32a6154cf804b5c";
+export const postSourceHash = "sha256:7741ffcb20683da5cbb93bc85890ada57d24437af2eec757c9debdbef8be7287";
+export const postContentHash = "sha256:4ef4fc65ec1902bd12b815812cd6e6e4e6556092439352158de31ae6a9de4738";
 
 export const post = {
   "id": "vite-8-beta-release",
@@ -24,6 +24,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "vite-8-beta-release.og.jpg",
   "prevPost": {
     "id": "update-prisma-6-to-7",
     "title": "Prisma ORM 6 -> 7 Upgrade Notes, and Some Thoughts on the Prisma Team's Upgrade Philosophy"

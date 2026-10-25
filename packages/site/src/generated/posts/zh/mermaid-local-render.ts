@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:447fc59a47aef93cc6b7f4da542b8934d062a9c1aefca43d3576e6e2b996a756";
-export const postContentHash = "sha256:174f57fa989f646ed7d215a24d8ed2111ff4dfa936bc2a2d1f30ee5f5aea7252";
+export const postSourceHash = "sha256:e0fb8da60e506111793989c6174b18f712e9b696ff1c466f2386cfcea4215479";
+export const postContentHash = "sha256:b66026f490308a40faf54cc9e7f55fd69a2370ff5d89b7bf05210bb33ab50924";
 
 export const post = {
   "id": "mermaid-local-render",
@@ -72,6 +72,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "mermaid-local-render.og.jpg",
   "prevPost": {
     "id": "nodejs-typescript-support",
     "title": "聊聊 Node.js 原生支持运行 TypeScript 文件"

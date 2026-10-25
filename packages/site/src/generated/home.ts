@@ -20,6 +20,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202608",
         "isDraft": false,
         "isHidden": false,
+        "og": "web-stack-detector.og.jpg",
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js 迁移到 ESM-only"
@@ -42,6 +43,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-move-to-esm-only.og.jpg",
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
@@ -67,6 +69,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-tsc-runtime-patch-hack.og.jpg",
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "更高一层抽象：我们与 AI Agent 时代"
@@ -122,6 +125,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "bun-rust-rewrite.og.jpg",
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
@@ -149,6 +153,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "tanstack-npm-supply-chain-attack.og.jpg",
         "prevPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access 问题"
@@ -174,6 +179,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "private-network-access.og.jpg",
         "prevPost": {
           "id": "axios-xhr-and-fetch",
           "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思"
@@ -201,6 +207,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "axios-xhr-and-fetch.og.jpg",
         "prevPost": {
           "id": "viteplus-announcement",
           "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
@@ -535,6 +542,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202608",
         "isDraft": false,
         "isHidden": false,
+        "og": "web-stack-detector.og.jpg",
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js Is Moving to ESM-only"
@@ -557,6 +565,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-move-to-esm-only.og.jpg",
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
@@ -582,6 +591,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-tsc-runtime-patch-hack.og.jpg",
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "AI Agents as the Next Abstraction Layer"
@@ -637,6 +647,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "bun-rust-rewrite.og.jpg",
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
@@ -664,6 +675,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "tanstack-npm-supply-chain-attack.og.jpg",
         "prevPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access Issues"
@@ -689,6 +701,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "private-network-access.og.jpg",
         "prevPost": {
           "id": "axios-xhr-and-fetch",
           "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections"
@@ -716,6 +729,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "axios-xhr-and-fetch.og.jpg",
         "prevPost": {
           "id": "viteplus-announcement",
           "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""

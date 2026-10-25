@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:8fc93ea8e4e6d12f33ed7688e8ed58afe1ef085b476161a209d741b4b2cc2a68";
-export const postContentHash = "sha256:824645ac9b163f9263ef75f905f3a19898452ac3027164b89d1677adcd35008c";
+export const postSourceHash = "sha256:7506c24ee460c61b132a1cfdf39e4e4a304c73b3fef04c0307bedc293fb13a2b";
+export const postContentHash = "sha256:4edc8920a45f04382e2bfd3ac29c40670aa1f7c8c7b39dc52d52a1eb59362e0b";
 
 export const post = {
   "id": "mermaid-tutorial",
@@ -132,6 +132,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "mermaid-tutorial.og.jpg",
   "nextPost": {
     "id": "github-actions",
     "title": "Pitfalls in Configuring GitHub Actions for a Small Frontend Project"

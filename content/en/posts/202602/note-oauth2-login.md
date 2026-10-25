@@ -4,6 +4,7 @@ date: "2026-02-24"
 description: "One diagram explaining the OAuth 2.0 authorization code login flow and key parameters"
 tags: ["OAuth 2.0", "Authentication", "Web Security"]
 author: "Elecmonkey"
+og: 'note-oauth2-login.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

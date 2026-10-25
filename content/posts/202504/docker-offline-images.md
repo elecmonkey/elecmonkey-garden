@@ -4,6 +4,7 @@ date: "2025-04-11"
 description: "离线导入最有用的一集：网络受限环境。让我想起来当年在 Ubuntu 安装 snap 程序也得用类似的办法。"
 tags: ["Docker", "DevOps"]
 author: "Elecmonkey"
+og: 'docker-offline-images.og.jpg'
 ---
 
 DockerHub 镜像无法访问有时候真的就成了拦路虎。不过对于个人电脑上实验性的需求来说，如果只是想下载一个镜像，完全可以通过笨办法解决。鉴于网络受限的场景不止出现在 DockerHub，这个办法我还挺常用。

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:298a1f3c8e6c0e907386cc39b6661c67ea09a3ab4e93c4c833e159152e05a334";
-export const postContentHash = "sha256:c76627a3db109d2650b3623523ff6cf8ad93f8afad17baf7c22cdb3ffb7d8970";
+export const postSourceHash = "sha256:8aecc3141f81e5d969d85646e3e580f4d8c4b7cf59df30754f485baf5b7f0373";
+export const postContentHash = "sha256:f4a6f82f74c49396838c39dc8d428ea8f16eacb344030dc13673a22cfb15b109";
 
 export const post = {
   "id": "rust-c-bind",
@@ -146,6 +146,7 @@ export const post = {
   "monthFolder": "202508",
   "isDraft": false,
   "isHidden": false,
+  "og": "rust-c-bind.og.jpg",
   "prevPost": {
     "id": "best-language-for-ai",
     "title": "最适合 Vibe Coding 的编程语言"

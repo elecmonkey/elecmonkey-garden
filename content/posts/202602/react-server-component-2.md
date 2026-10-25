@@ -4,6 +4,7 @@ date: "2026-02-15"
 description: "React 团队一声炮响，给前端送来了 RSC | 续论 RSC —— 规则、架构、JavaScript 模块"
 tags: ["React", "RSC", "前端架构", "Next.js"]
 author: "Elecmonkey"
+og: 'react-server-component-2.og.jpg'
 ---
 
 继续聊聊 RSC。上一篇：[论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合](https://www.elecmonkey.com/blog/react-server-component-1)

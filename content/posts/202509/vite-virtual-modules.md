@@ -4,6 +4,7 @@ date: "2025-09-30"
 description: "VuePress，Vitepress，Slidev…… 如何更灵活地利用 Vite 的 SSR/SSG 能力构建一个站点生成器？"
 tags: ["Vite", "Rollup", "构建工具", "前端工程化", "虚拟模块"]
 author: "Elecmonkey"
+og: 'vite-virtual-modules.og.jpg'
 ---
 
 虚拟模块（Virtual Module）是一种在构建工具中动态生成的模块，它并不对应文件系统中的实际文件，而是在编译阶段由插件生成、在运行时像普通 ESM 模块一样被导入使用。Vite 官方文档指出，虚拟模块允许开发者通过正常的 ESM `import` 语法向源码注入编译时信息。通常以 `virtual:` 为前缀命名（最好再加上插件名命名空间以避免冲突），例如 `virtual:my-module`。

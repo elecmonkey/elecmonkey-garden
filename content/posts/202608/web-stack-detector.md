@@ -4,6 +4,7 @@ date: "2026-08-24"
 description: "前端框架 React 还是绝对的统治地位。大厂仍然是 Webpack 数不胜数，GitHub 用了 Rspack。"
 tags: ["浏览器扩展", "前端工具"]
 author: "Elecmonkey"
+og: 'web-stack-detector.og.jpg'
 ---
 
 Firefox: [Web Stack Detector](https://addons.mozilla.org/zh-CN/firefox/addon/web-stack-detector/)

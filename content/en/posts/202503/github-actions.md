@@ -4,6 +4,7 @@ date: '2025-03-26'
 description: 'Also known as: a frontend developer misled by large models decides to save their own CI/CD workflow (nope).'
 tags: ['GitHub Actions', 'CI/CD', 'Next.js', 'DevOps']
 author: 'Elecmonkey'
+og: 'github-actions.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

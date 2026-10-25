@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:bbddc164666db6debe948a0219c25875e6c8adbdfa85cbfc72ee3f42868f7a81";
-export const postContentHash = "sha256:c7737a5bc7d3c147eaf44c979e38ccccf86e164f8e3851de1ee8f3c404717541";
+export const postSourceHash = "sha256:dda7ac3973688f9df606de5069a451dd7c1370dfdd6ee300472c846fd5335988";
+export const postContentHash = "sha256:de4d5b4aa21ea6c0895312d73971000cc8915d7750b84d701050ca6f5950b71c";
 
 export const post = {
   "id": "qwen-and-kimi",
@@ -41,6 +41,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "qwen-and-kimi.og.jpg",
   "prevPost": {
     "id": "vue-vapor",
     "title": "Vue Vapor Mode | 2025 Vueconf 观后感"

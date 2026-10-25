@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:31d40d8119eb4ab9a84286f51758e7b870c1b305eac3466acfe69e0fde13cb44";
-export const postContentHash = "sha256:e74149e0aca0d460dae4755d74c79c9155ddb7107262a5665216697c73069fb8";
+export const postSourceHash = "sha256:d3405ea671bca603a90d157fbfeb02865c4253c28550438480c6eebcb9f0560b";
+export const postContentHash = "sha256:d477b3aa475ab97d668d95b7645badb105cbc7610cc6b0a867a28f12d2a905b6";
 
 export const post = {
   "id": "tech-debt",
@@ -89,6 +89,7 @@ export const post = {
   "monthFolder": "202505",
   "isDraft": false,
   "isHidden": false,
+  "og": "tech-debt.og.jpg",
   "prevPost": {
     "id": "javascript-reactive-systems",
     "title": "JavaScript 响应式系统，从框架实现到 TC39 Signals"

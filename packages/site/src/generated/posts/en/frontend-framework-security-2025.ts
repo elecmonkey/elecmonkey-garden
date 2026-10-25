@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:291b9c75c20dc80fb18c5a272ccee2317074ab66d52dc32f307c0ef9b99b021d";
-export const postContentHash = "sha256:86f50c13e7acc70491e36d174d8531146e57689e6a150134238115bababaf94c";
+export const postSourceHash = "sha256:eb6c1a7d1b3b0b71a03fbda9684e935f16e57f3dcbbbe78292c6a6bcf8081a17";
+export const postContentHash = "sha256:4738dd0cd2ea680b57d9339bf155d47b4ef1bb72128f14f85c089c5aad915c6a";
 
 export const post = {
   "id": "frontend-framework-security-2025",
@@ -47,6 +47,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "frontend-framework-security-2025.og.jpg",
   "prevPost": {
     "id": "vite-8-beta-release",
     "title": "Vite 8.0 Beta Release: Vite Enables Rolldown by Default"

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:a158e8336e254e34d6d0a4316845c76c011a7ccde60cea070cfbf092c0fecba3";
-export const postContentHash = "sha256:e2aaeebd340b918d39917431b398cd9ce9dfc1c08b0c7034adef373d39456dd2";
+export const postSourceHash = "sha256:c925b110f14e4e9694e7205498900e349bb827359c2ca23bd0efeb7988af89fb";
+export const postContentHash = "sha256:08cfbd2f3a27ba6417b2faa360aabaead6c7475b66322233c618acbe7eca5617";
 
 export const post = {
   "id": "react-server-component-1",
@@ -58,6 +58,7 @@ export const post = {
   "monthFolder": "202602",
   "isDraft": false,
   "isHidden": false,
+  "og": "react-server-component-1.og.jpg",
   "prevPost": {
     "id": "about-astro",
     "title": "Writing at Astro v6 Beta: Astro Lets Real Websites Embrace the Modern Frontend Ecosystem"

@@ -4,6 +4,7 @@ date: "2025-07-17"
 description: "If I say Tailwind CSS is just writing inline-style, can you refute it? Can you?"
 tags: ["Frontend Architecture", "Separation of Concerns (SoC)", "Tailwind CSS", "Vue", "React", "Frontend Engineering"]
 author: "Elecmonkey"
+og: 'modern-frontend-soc.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

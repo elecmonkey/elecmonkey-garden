@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:a7cb0a483d42bdfaf115989c05f975656ba40624b9a711c0b75e9f927371b3f7";
-export const postContentHash = "sha256:e8d2dc27dec72b59e7ee1a83ce28910602b2ad9f8c67e42ab7514e019b2b46ea";
+export const postSourceHash = "sha256:92110fa12050376fd5674dafe1f8e5da8371b1910f42f13a787257e7643a5d6d";
+export const postContentHash = "sha256:fed9ec8266195abd7f8bf4356d53888d0e4df7d1e1812821b41a8b8097f9f769";
 
 export const post = {
   "id": "docker-offline-images",
@@ -121,6 +121,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "docker-offline-images.og.jpg",
   "prevPost": {
     "id": "model-context-protocol",
     "title": "AI Agent 进化路：Node.js 搭建 Model Context Protocol 服务器"

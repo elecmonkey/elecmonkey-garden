@@ -20,6 +20,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202608",
         "isDraft": false,
         "isHidden": false,
+        "og": "web-stack-detector.og.jpg",
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js 迁移到 ESM-only"
@@ -42,6 +43,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-move-to-esm-only.og.jpg",
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
@@ -67,6 +69,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-tsc-runtime-patch-hack.og.jpg",
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "更高一层抽象：我们与 AI Agent 时代"
@@ -122,6 +125,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "bun-rust-rewrite.og.jpg",
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
@@ -149,6 +153,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "tanstack-npm-supply-chain-attack.og.jpg",
         "prevPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access 问题"
@@ -174,6 +179,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "private-network-access.og.jpg",
         "prevPost": {
           "id": "axios-xhr-and-fetch",
           "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思"
@@ -201,6 +207,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "axios-xhr-and-fetch.og.jpg",
         "prevPost": {
           "id": "viteplus-announcement",
           "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
@@ -228,6 +235,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202603",
         "isDraft": false,
         "isHidden": false,
+        "og": "viteplus-announcement.og.jpg",
         "prevPost": {
           "id": "note-oauth2-login",
           "title": "OAuth 2.0 授权码模式登录流程全图"
@@ -253,6 +261,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-oauth2-login.og.jpg",
         "prevPost": {
           "id": "react-server-component-2",
           "title": "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图"
@@ -279,6 +288,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-2.og.jpg",
         "prevPost": {
           "id": "react-server-component-1",
           "title": "论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合"
@@ -306,6 +316,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-1.og.jpg",
         "prevPost": {
           "id": "about-astro",
           "title": "写在 Astro v6 beta：Astro 让真正的“网站”拥抱现代前端生态"
@@ -332,6 +343,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "about-astro.og.jpg",
         "prevPost": {
           "id": "use-react-native-and-expo",
           "title": "使用 Expo 框架试图上手 React Native 移动端开发记录"
@@ -360,6 +372,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "use-react-native-and-expo.og.jpg",
         "prevPost": {
           "id": "frontend-framework-security-2025",
           "title": "给前端框架的“服务端”野心泼冷水：2025年 React 生态两起致命漏洞"
@@ -386,6 +399,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "frontend-framework-security-2025.og.jpg",
         "prevPost": {
           "id": "vite-8-beta-release",
           "title": "Vite 8.0 Beta Release，Vite 默认实装 Rolldown"
@@ -410,6 +424,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-8-beta-release.og.jpg",
         "prevPost": {
           "id": "update-prisma-6-to-7",
           "title": "Prisma ORM 6 -> 7 升级实录，闲聊 Prisma 团队升级理念"
@@ -434,6 +449,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "update-prisma-6-to-7.og.jpg",
         "prevPost": {
           "id": "copyright-and-opensource",
           "title": "开源许可证与软件著作权的关系"
@@ -459,6 +475,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "copyright-and-opensource.og.jpg",
         "prevPost": {
           "id": "see-react-compiler",
           "title": "看看 React Compiler 对你的组件做了些什么"
@@ -484,6 +501,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "see-react-compiler.og.jpg",
         "prevPost": {
           "id": "react-compiler-performance",
           "title": "实测 Vite 工程中 React Compiler 对构建时间的影响"
@@ -510,6 +528,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-compiler-performance.og.jpg",
         "prevPost": {
           "id": "rust-in-js-pipline",
           "title": "原生 JavaScript 工具链中绕不开的 JavaScript 成份"
@@ -539,6 +558,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-in-js-pipline.og.jpg",
         "prevPost": {
           "id": "vite-virtual-modules",
           "title": "Vite 插件机制中的虚拟模块 (Virtual Modules)"
@@ -566,6 +586,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202509",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-virtual-modules.og.jpg",
         "prevPost": {
           "id": "wasm-call-overhead",
           "title": "WebAssembly 调用开销分析"
@@ -592,6 +613,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "wasm-call-overhead.og.jpg",
         "prevPost": {
           "id": "rust-c-bind",
           "title": "Rust bindgen：为 C 头文件生成 Rust 调用绑定"
@@ -616,6 +638,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-c-bind.og.jpg",
         "prevPost": {
           "id": "best-language-for-ai",
           "title": "最适合 Vibe Coding 的编程语言"
@@ -641,6 +664,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "best-language-for-ai.og.jpg",
         "prevPost": {
           "id": "vite-route-preloading",
           "title": "Vite 分包预加载优化：首屏延迟与后续交互的平衡"
@@ -669,6 +693,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-route-preloading.og.jpg",
         "prevPost": {
           "id": "qwen-and-kimi",
           "title": "Qwen Coder 与 Kimi K2，好像还缺点什么"
@@ -694,6 +719,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "qwen-and-kimi.og.jpg",
         "prevPost": {
           "id": "vue-vapor",
           "title": "Vue Vapor Mode | 2025 Vueconf 观后感"
@@ -718,6 +744,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-vapor.og.jpg",
         "prevPost": {
           "id": "modern-frontend-soc",
           "title": "技术分层or功能聚合，现代前端应当有怎样的关注点分离"
@@ -746,6 +773,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "modern-frontend-soc.og.jpg",
         "prevPost": {
           "id": "ssr",
           "title": "Vite 实现服务端渲染 (Server-Side Rendering)"
@@ -771,6 +799,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "ssr.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-production-ready",
           "title": "值得开始尝试 Rolldown-vite 了吗"
@@ -796,6 +825,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-production-ready.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-migration",
           "title": "Rolldown-Vite 宣布功能达到 Vite，Evan You 和他的下一代前端工具链"
@@ -823,6 +853,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202506",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-migration.og.jpg",
         "prevPost": {
           "id": "tech-debt",
           "title": "在 arm64 的 Mac 上运行古董前端项目，憋出一肚子关于技术债的想法"
@@ -850,6 +881,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "tech-debt.og.jpg",
         "prevPost": {
           "id": "javascript-reactive-systems",
           "title": "JavaScript 响应式系统，从框架实现到 TC39 Signals"
@@ -877,6 +909,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "javascript-reactive-systems.og.jpg",
         "prevPost": {
           "id": "mermaid-local-render",
           "title": "论如何逼着为浏览器而生的 Mermaid 在服务器端渲染"
@@ -902,6 +935,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-local-render.og.jpg",
         "prevPost": {
           "id": "nodejs-typescript-support",
           "title": "聊聊 Node.js 原生支持运行 TypeScript 文件"
@@ -927,6 +961,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "nodejs-typescript-support.og.jpg",
         "prevPost": {
           "id": "void-operator-history",
           "title": "神秘链接 javascript:void(0) 背后的故事。"
@@ -952,6 +987,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "void-operator-history.og.jpg",
         "prevPost": {
           "id": "docker-offline-images",
           "title": "解决无法访问 DockerHub 问题的笨办法一则"
@@ -976,6 +1012,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "docker-offline-images.og.jpg",
         "prevPost": {
           "id": "model-context-protocol",
           "title": "AI Agent 进化路：Node.js 搭建 Model Context Protocol 服务器"
@@ -1002,6 +1039,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "model-context-protocol.og.jpg",
         "prevPost": {
           "id": "note-jwt",
           "title": "用户鉴权系统：JWT 实现无状态认证"
@@ -1027,6 +1065,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-jwt.og.jpg",
         "prevPost": {
           "id": "blue-green-deploy",
           "title": "Next.js 零停机部署记录：从 PM2 Cluster 到 Next Standalone 模式"
@@ -1053,6 +1092,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "blue-green-deploy.og.jpg",
         "prevPost": {
           "id": "github-actions",
           "title": "前端小项目的 GitHub Actions 配置爬坑记"
@@ -1079,6 +1119,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "github-actions.og.jpg",
         "prevPost": {
           "id": "mermaid-tutorial",
           "title": "技术文档必备之 Mermaid 图表制作入门"
@@ -1103,6 +1144,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-tutorial.og.jpg",
         "nextPost": {
           "id": "github-actions",
           "title": "前端小项目的 GitHub Actions 配置爬坑记"
@@ -1125,6 +1167,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202608",
         "isDraft": false,
         "isHidden": false,
+        "og": "web-stack-detector.og.jpg",
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js 迁移到 ESM-only"
@@ -1147,6 +1190,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-move-to-esm-only.og.jpg",
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"
@@ -1172,6 +1216,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-tsc-runtime-patch-hack.og.jpg",
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "更高一层抽象：我们与 AI Agent 时代"
@@ -1227,6 +1272,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "bun-rust-rewrite.og.jpg",
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
@@ -1254,6 +1300,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "tanstack-npm-supply-chain-attack.og.jpg",
         "prevPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access 问题"
@@ -1279,6 +1326,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "private-network-access.og.jpg",
         "prevPost": {
           "id": "axios-xhr-and-fetch",
           "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思"
@@ -1306,6 +1354,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "axios-xhr-and-fetch.og.jpg",
         "prevPost": {
           "id": "viteplus-announcement",
           "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
@@ -1333,6 +1382,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202603",
         "isDraft": false,
         "isHidden": false,
+        "og": "viteplus-announcement.og.jpg",
         "prevPost": {
           "id": "note-oauth2-login",
           "title": "OAuth 2.0 授权码模式登录流程全图"
@@ -1358,6 +1408,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-oauth2-login.og.jpg",
         "prevPost": {
           "id": "react-server-component-2",
           "title": "论 React Server Component (RSC) (2) - RSC规则、React组件树与模块依赖图"
@@ -1384,6 +1435,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-2.og.jpg",
         "prevPost": {
           "id": "react-server-component-1",
           "title": "论 React Server Component (RSC) (1) - RSC原理、SSR、局部水合"
@@ -1411,6 +1463,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-1.og.jpg",
         "prevPost": {
           "id": "about-astro",
           "title": "写在 Astro v6 beta：Astro 让真正的“网站”拥抱现代前端生态"
@@ -1437,6 +1490,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "about-astro.og.jpg",
         "prevPost": {
           "id": "use-react-native-and-expo",
           "title": "使用 Expo 框架试图上手 React Native 移动端开发记录"
@@ -1465,6 +1519,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "use-react-native-and-expo.og.jpg",
         "prevPost": {
           "id": "frontend-framework-security-2025",
           "title": "给前端框架的“服务端”野心泼冷水：2025年 React 生态两起致命漏洞"
@@ -1491,6 +1546,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "frontend-framework-security-2025.og.jpg",
         "prevPost": {
           "id": "vite-8-beta-release",
           "title": "Vite 8.0 Beta Release，Vite 默认实装 Rolldown"
@@ -1515,6 +1571,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-8-beta-release.og.jpg",
         "prevPost": {
           "id": "update-prisma-6-to-7",
           "title": "Prisma ORM 6 -> 7 升级实录，闲聊 Prisma 团队升级理念"
@@ -1539,6 +1596,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "update-prisma-6-to-7.og.jpg",
         "prevPost": {
           "id": "copyright-and-opensource",
           "title": "开源许可证与软件著作权的关系"
@@ -1564,6 +1622,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "copyright-and-opensource.og.jpg",
         "prevPost": {
           "id": "see-react-compiler",
           "title": "看看 React Compiler 对你的组件做了些什么"
@@ -1589,6 +1648,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "see-react-compiler.og.jpg",
         "prevPost": {
           "id": "react-compiler-performance",
           "title": "实测 Vite 工程中 React Compiler 对构建时间的影响"
@@ -1615,6 +1675,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-compiler-performance.og.jpg",
         "prevPost": {
           "id": "rust-in-js-pipline",
           "title": "原生 JavaScript 工具链中绕不开的 JavaScript 成份"
@@ -1644,6 +1705,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-in-js-pipline.og.jpg",
         "prevPost": {
           "id": "vite-virtual-modules",
           "title": "Vite 插件机制中的虚拟模块 (Virtual Modules)"
@@ -1671,6 +1733,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202509",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-virtual-modules.og.jpg",
         "prevPost": {
           "id": "wasm-call-overhead",
           "title": "WebAssembly 调用开销分析"
@@ -1697,6 +1760,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "wasm-call-overhead.og.jpg",
         "prevPost": {
           "id": "rust-c-bind",
           "title": "Rust bindgen：为 C 头文件生成 Rust 调用绑定"
@@ -1721,6 +1785,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-c-bind.og.jpg",
         "prevPost": {
           "id": "best-language-for-ai",
           "title": "最适合 Vibe Coding 的编程语言"
@@ -1746,6 +1811,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "best-language-for-ai.og.jpg",
         "prevPost": {
           "id": "vite-route-preloading",
           "title": "Vite 分包预加载优化：首屏延迟与后续交互的平衡"
@@ -1774,6 +1840,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-route-preloading.og.jpg",
         "prevPost": {
           "id": "qwen-and-kimi",
           "title": "Qwen Coder 与 Kimi K2，好像还缺点什么"
@@ -1799,6 +1866,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "qwen-and-kimi.og.jpg",
         "prevPost": {
           "id": "vue-vapor",
           "title": "Vue Vapor Mode | 2025 Vueconf 观后感"
@@ -1823,6 +1891,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-vapor.og.jpg",
         "prevPost": {
           "id": "modern-frontend-soc",
           "title": "技术分层or功能聚合，现代前端应当有怎样的关注点分离"
@@ -1851,6 +1920,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "modern-frontend-soc.og.jpg",
         "prevPost": {
           "id": "ssr",
           "title": "Vite 实现服务端渲染 (Server-Side Rendering)"
@@ -1876,6 +1946,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "ssr.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-production-ready",
           "title": "值得开始尝试 Rolldown-vite 了吗"
@@ -1901,6 +1972,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-production-ready.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-migration",
           "title": "Rolldown-Vite 宣布功能达到 Vite，Evan You 和他的下一代前端工具链"
@@ -1928,6 +2000,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202506",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-migration.og.jpg",
         "prevPost": {
           "id": "tech-debt",
           "title": "在 arm64 的 Mac 上运行古董前端项目，憋出一肚子关于技术债的想法"
@@ -1955,6 +2028,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "tech-debt.og.jpg",
         "prevPost": {
           "id": "javascript-reactive-systems",
           "title": "JavaScript 响应式系统，从框架实现到 TC39 Signals"
@@ -1982,6 +2056,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "javascript-reactive-systems.og.jpg",
         "prevPost": {
           "id": "mermaid-local-render",
           "title": "论如何逼着为浏览器而生的 Mermaid 在服务器端渲染"
@@ -2007,6 +2082,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-local-render.og.jpg",
         "prevPost": {
           "id": "nodejs-typescript-support",
           "title": "聊聊 Node.js 原生支持运行 TypeScript 文件"
@@ -2032,6 +2108,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "nodejs-typescript-support.og.jpg",
         "prevPost": {
           "id": "void-operator-history",
           "title": "神秘链接 javascript:void(0) 背后的故事。"
@@ -2057,6 +2134,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "void-operator-history.og.jpg",
         "prevPost": {
           "id": "docker-offline-images",
           "title": "解决无法访问 DockerHub 问题的笨办法一则"
@@ -2081,6 +2159,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "docker-offline-images.og.jpg",
         "prevPost": {
           "id": "model-context-protocol",
           "title": "AI Agent 进化路：Node.js 搭建 Model Context Protocol 服务器"
@@ -2107,6 +2186,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "model-context-protocol.og.jpg",
         "prevPost": {
           "id": "note-jwt",
           "title": "用户鉴权系统：JWT 实现无状态认证"
@@ -2132,6 +2212,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-jwt.og.jpg",
         "prevPost": {
           "id": "blue-green-deploy",
           "title": "Next.js 零停机部署记录：从 PM2 Cluster 到 Next Standalone 模式"
@@ -2158,6 +2239,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "blue-green-deploy.og.jpg",
         "prevPost": {
           "id": "github-actions",
           "title": "前端小项目的 GitHub Actions 配置爬坑记"
@@ -2184,6 +2266,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "github-actions.og.jpg",
         "prevPost": {
           "id": "mermaid-tutorial",
           "title": "技术文档必备之 Mermaid 图表制作入门"
@@ -2208,6 +2291,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-tutorial.og.jpg",
         "nextPost": {
           "id": "github-actions",
           "title": "前端小项目的 GitHub Actions 配置爬坑记"
@@ -2215,49 +2299,49 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
-      "web-stack-detector": { sourceHash: "sha256:02f0a55712002f26ffaf98e576dc3a5e4e5a0c87d2db131e2e7839a01cef74ac", contentHash: "sha256:63e731e20e7ca73a40851365befe581a7267f3021a50f59a548e8337af2b4325" },
-      "vue-move-to-esm-only": { sourceHash: "sha256:d5876245a124ce49af8eb02487124fbd8c654d435ebb6516519da3da68cfaad9", contentHash: "sha256:c62676c49e871ea4d96db59ed361e6e1531dc84913f3b2bd1fbdba4580a8b865" },
-      "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:3fe6ac9d875131a0cd75fc823ddcc8a8340acfcdd7d0c14926f022b9fce97bd2", contentHash: "sha256:84c826809cffd9c4fc4d01343620f2ee7cab0a7e82b45925af610724e49939c2" },
+      "web-stack-detector": { sourceHash: "sha256:04cec21597b3a31ed481e21a8bfc79873255761edc35ad317667487d5b5e42a6", contentHash: "sha256:48bf0c7e1313fcc8151581379e74838e34e388319dd6d4a9c5d5c46591a28ccf" },
+      "vue-move-to-esm-only": { sourceHash: "sha256:147375f47fa81a00fb4c39bb3f376421167bf3363ca5556fb28a97d58711002c", contentHash: "sha256:2a6d61c96e61a8c60625201612e96f96d685b80cdb187b83de0e6176952347a6" },
+      "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b3bcaae5f133531b0362f0802eefabf315ee5358cdbdcd94ed58fd176495965f", contentHash: "sha256:46613e030a7c69b5be27f7296e89b4fa9a21b6937762d83a3064936c57fe8dc5" },
       "ai-agent-software-engineering": { sourceHash: "sha256:8d7ff9a6536f49d77f23933daa57f88592941dbeb74f1492e572a38406e514a8", contentHash: "sha256:f4a367f451d473697672b00923700586ca2a32a86610e5dba24395c61387f16a" },
-      "bun-rust-rewrite": { sourceHash: "sha256:ff8855be894e2a11cfb4c371ba7de8fa99ded86fd92fb37ffa13f9d3f8845546", contentHash: "sha256:f695df3b5f5d037af027e968db9f12206e49e6dc11fb6ef01d487340d2c9c58b" },
-      "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:b92b17585c1552463be5f6d003933626da3eeee3155f3febb0fa8c6b45b01947", contentHash: "sha256:0fb75d3961186ad7435629d185480ea2c23f862e4c2d0eec93bf9892258e7dd8" },
-      "private-network-access": { sourceHash: "sha256:e764ee87cc592b05adef8b8416b7d130a5fafa905453f8fb0124a9d0c2f43443", contentHash: "sha256:e3dd5ec90c8350403473d6941b4fd4d6286a81677308ad02dabc687a3e9b2a2b" },
-      "axios-xhr-and-fetch": { sourceHash: "sha256:d4d2fac100bf307623b9d76e93da97c8a38c00d393b28b4dba7ecb498c18fffd", contentHash: "sha256:839e5eec036a5c9020c5887a6d4204c0ef6e61815118e59fa4a250def79de9b2" },
-      "viteplus-announcement": { sourceHash: "sha256:d3792ac4fc03ff3d8604cf09cca1336761cca0f6fc553d15bf1bb33d3f56d468", contentHash: "sha256:30d2e28dca6bb62dac69f84e87db390209d9976973fc0d9a9a83ed3da7fa7a27" },
-      "note-oauth2-login": { sourceHash: "sha256:ca265a1236c2d5c9451c5ca7aa92a276d59395b95ba839b8402af435297023b6", contentHash: "sha256:0bf70c6d2d85d7d59c6e8d2ca9fee3f6bbf62f5805ec59b89521cff351d01797" },
-      "react-server-component-2": { sourceHash: "sha256:6072077b0a4ed05bc226eff6f693248a74440584d1232dc9459f4e6f6654f7c9", contentHash: "sha256:a9f310bbbb9372f040354376e44a758002317f88c5ce6353f777aa06bf3b756e" },
-      "react-server-component-1": { sourceHash: "sha256:4add70c9e8b400b9cde176aab63bc9bd5d654c1e8480d50bc63927423f8fcc88", contentHash: "sha256:16949549a7b701defdfb0fd0f17133e66d9295ae0b982a139f5a44dbe5a53685" },
-      "about-astro": { sourceHash: "sha256:ec9a67954ff68a008ac91bf9c63e767f7549793f085e9e508fb60edbc4f9006f", contentHash: "sha256:1ec8c3983bae13436471d5fac67c0a7ff1a04180bcc4755a644aded7ee0be80d" },
-      "use-react-native-and-expo": { sourceHash: "sha256:0c212275a331dd30d3e5eca550e40bdea5abbfd063ef497498f14008d434df67", contentHash: "sha256:62e42acd9f666ebbeb337fc197fc6d027f7dc297b1e3f839f4b2ddc48385b0a9" },
-      "frontend-framework-security-2025": { sourceHash: "sha256:6a0542899548309458f87f120963b174f08c8ad22deaf388db78c795115e45aa", contentHash: "sha256:7079674f403d875a1a65976f225d6abf5b13d0bf9b307204327889dc6770dd3e" },
-      "vite-8-beta-release": { sourceHash: "sha256:791e3abd8f9b30ca5f7a94baea28aaa8d5a31b329e5bd9dc20c6279c26ac9eb1", contentHash: "sha256:7da01d28e5a42a16647afa57b7ae823982e21ff81c6cdcef0ccd561181ece3df" },
-      "update-prisma-6-to-7": { sourceHash: "sha256:0295b7136026daa36eb82a827e19394624792e817bb2bab3972461e837846271", contentHash: "sha256:159d1227341b2f4b89fef22e815a0f7a51d7a3f1186f49b36cc24a7c69d5ad6c" },
-      "copyright-and-opensource": { sourceHash: "sha256:49376c5db4368eddf5ab25b559d65979f79315c0edcf82e3f5b39ecba5cfaca0", contentHash: "sha256:224ae78547a41b248d0cb1570c221f762ea6e0c3a36bc385c7dc59abb8f3d052" },
-      "see-react-compiler": { sourceHash: "sha256:474de5928ee86910575aab6412fa5b1f851bdd4f4f061710b22e177f34983793", contentHash: "sha256:f07193836e4835248c2ff61a1682194f62f59937964ee85185e50dd47de6f38e" },
-      "react-compiler-performance": { sourceHash: "sha256:84d93330a70bbc020cca0604560fff1080276a885e61453195cf9291d4da7bb1", contentHash: "sha256:2eb2b71d221ac0f57fc3e53ab5739e6751fb0052371ffb35a7656eb6072015fc" },
-      "rust-in-js-pipline": { sourceHash: "sha256:11e3bdad6b0a75ba1e5d944521c5726ecc0a9e923c080e2973dee54464b157ad", contentHash: "sha256:515c04ecadc2c8c48cbbe37a1fadbe9e35d26c9bf0b5b9d24b7b4c567263502f" },
-      "vite-virtual-modules": { sourceHash: "sha256:5fdae38cdd716d17a86708b396c8829610456bdcc7d02004341e7e800430f6f2", contentHash: "sha256:504fefd3ab4e78acc8394b7534c7f4b6e4813283fc03bf878fabd26272f2f949" },
-      "wasm-call-overhead": { sourceHash: "sha256:d6e13e99c0c723bdf3133416a28dfc83bdddc4eb76cd8b007d974857d98d2df9", contentHash: "sha256:98683dd19a631b2f03a53396e1dc9b92ed86cfcdcaef40cc0aa72a66980b5394" },
-      "rust-c-bind": { sourceHash: "sha256:298a1f3c8e6c0e907386cc39b6661c67ea09a3ab4e93c4c833e159152e05a334", contentHash: "sha256:c76627a3db109d2650b3623523ff6cf8ad93f8afad17baf7c22cdb3ffb7d8970" },
-      "best-language-for-ai": { sourceHash: "sha256:00945a515eda73b461eadc6c3403e87f727830fe2e10594ddbea78120c0a18db", contentHash: "sha256:5ab1604126bf0114c6164ee374bd81fc2b4e2fe6423a904da8455953567ed01e" },
-      "vite-route-preloading": { sourceHash: "sha256:f226e6e7922432931275ee8ea4a3f2851432db2ef6c2b52aa95a7d08aa45e4a4", contentHash: "sha256:40ba6ecbfbfb00d1c98b4fdf1144ad7cfc5309ec7a7cb836c2b2b0c0c69cf6e8" },
-      "qwen-and-kimi": { sourceHash: "sha256:bbddc164666db6debe948a0219c25875e6c8adbdfa85cbfc72ee3f42868f7a81", contentHash: "sha256:c7737a5bc7d3c147eaf44c979e38ccccf86e164f8e3851de1ee8f3c404717541" },
-      "vue-vapor": { sourceHash: "sha256:7203b36fdfc2cfa5b913f404fd0230840d67f4806d0c923d9c7300bafe18db6a", contentHash: "sha256:503203052e03d733ed1e10f5ad7a1b9f9bf3a82d32929da676f16face23a02b2" },
-      "modern-frontend-soc": { sourceHash: "sha256:83129b57c55d6c3b5a7cf71d9b4a69c5bac7ec21ea887f9e87be913eddffc6f8", contentHash: "sha256:466edcd9b4f6e1b225c10a5af8fc43b8a9d2930c0c7083eb2eb0470e33387dc4" },
-      "ssr": { sourceHash: "sha256:1be82718181a6fe18a3bc46a7a1c084b529b880bf7d7f8b1420b26aba2455bc4", contentHash: "sha256:13dc419508c15a6b104aeabb58b72fe86bff2553f0681d37091d4da554484666" },
-      "rolldown-vite-production-ready": { sourceHash: "sha256:f558da04ec313b01cc3cfff8e58ed4c349c3cbc658a6c1ee8bc614d76d4a8904", contentHash: "sha256:6049c07c77ab650d48329d65c37a9623b049719d4bc95b556bb2322f02f48747" },
-      "rolldown-vite-migration": { sourceHash: "sha256:ff48d80b58e9002f372caea4a201d21abaaa323d8d7294b567e4b4a77d8d9a46", contentHash: "sha256:a6f762a6cee82999b2682dc59431e033151adf21dd863c8279b5f9dec51f4f39" },
-      "tech-debt": { sourceHash: "sha256:31d40d8119eb4ab9a84286f51758e7b870c1b305eac3466acfe69e0fde13cb44", contentHash: "sha256:e74149e0aca0d460dae4755d74c79c9155ddb7107262a5665216697c73069fb8" },
-      "javascript-reactive-systems": { sourceHash: "sha256:4c28b933346b26e2f9848a10923a82c830e5b4c6956f35fa4e2e45ea564748e7", contentHash: "sha256:396ebe013a9c984e6922527adb32093a2ee68a3eb79f9e7c0e26f891c364e634" },
-      "mermaid-local-render": { sourceHash: "sha256:447fc59a47aef93cc6b7f4da542b8934d062a9c1aefca43d3576e6e2b996a756", contentHash: "sha256:174f57fa989f646ed7d215a24d8ed2111ff4dfa936bc2a2d1f30ee5f5aea7252" },
-      "nodejs-typescript-support": { sourceHash: "sha256:826b48f4d5cdf7dcea6e0bd7a833d586eeaf5588ae564faaa964e09845bc905f", contentHash: "sha256:f53f81e88ce04a6ec8cbcbc8c85b854e023c804c7b003d0545d1a770bdc57bc9" },
-      "void-operator-history": { sourceHash: "sha256:9b82e378a15628681f8183b4e2e6c6b9adfdf6c34b315e66cf67df1749a77c63", contentHash: "sha256:f5235ded434a58996e1d66fe7cdb86ca9386c9c1ee1964ab1c528ca178b653ac" },
-      "docker-offline-images": { sourceHash: "sha256:a7cb0a483d42bdfaf115989c05f975656ba40624b9a711c0b75e9f927371b3f7", contentHash: "sha256:e8d2dc27dec72b59e7ee1a83ce28910602b2ad9f8c67e42ab7514e019b2b46ea" },
-      "model-context-protocol": { sourceHash: "sha256:e0ebd95d9b9d6f65aaa07315502015a006389fd7d62b552d8a1569d27a7609d7", contentHash: "sha256:78049d01d1aa604bdd91eb2926b47bceaadae46e81f748aae53fb34ad40586a4" },
-      "note-jwt": { sourceHash: "sha256:0898f8ca92020579d7e30465d4aedb761b23df5f9ba4e5471e52742e7ea1c6df", contentHash: "sha256:eb9bde5c135e50d3f0d08afe28b296a66bd6736f5830f89443049dba1ceb3ab1" },
-      "blue-green-deploy": { sourceHash: "sha256:26f2e3b8f0901508eab66bdaedadc993c6c96814d814942666ff338442f94753", contentHash: "sha256:0ddc427676106bc2c0b06ec2dd7cf08ff19cb0539a2051cdba93644486d3e32d" },
-      "github-actions": { sourceHash: "sha256:4c95b35ae7c3bb53bb018c4772dd15505b2c0d6975f4dabd1998af6552ddfde7", contentHash: "sha256:1db4eea309fa554454c6ae225cdb74d97f8d614256ae70f230775a18cb50d8ae" },
-      "mermaid-tutorial": { sourceHash: "sha256:dc182fd6720de09ef8d309e8a5e9cfed22619c0f0b2e038253e44cb78f26ec94", contentHash: "sha256:d60188fe5df704efcee0634037c71453e8d87804c8cbbc1a955937db81fe9165" },
+      "bun-rust-rewrite": { sourceHash: "sha256:2cb805d5c536cab6b60f5d7f8f723b6f825b9984361fc6b3699f747aa24e503e", contentHash: "sha256:afdc855a94228c572d4b24e61101fac4ec8c7a1c390f7285e8686d57108b2656" },
+      "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:61da98ccaea10bb01b306773659f854d3e887106773ee32035409de11a5d2f7f", contentHash: "sha256:c691ea74c993481914c168332c5f580b6f430e955de4fb78a208012153dc23da" },
+      "private-network-access": { sourceHash: "sha256:48e3d14cf563fe4a64faed3e405d2c098996702e6da6b565fcc7d43038035204", contentHash: "sha256:71f62f2029f1fb3d0fb52b07f3cf7201e4ea1c36a54dd67e0dc59c5ecb2c5905" },
+      "axios-xhr-and-fetch": { sourceHash: "sha256:7ac73e086bf12fbbab529fd2f9f84b907adc8a150c02db1ddd85a8b2d5b39bb9", contentHash: "sha256:9e4007b5fc309996f96a3b7e730f44eb84551cb40a6f667514ef7365bf928713" },
+      "viteplus-announcement": { sourceHash: "sha256:c22048968e2b003066b3ace8864bbf2b1259e25ec3c3dd46ef1fb13b8eb103df", contentHash: "sha256:ad4ba7af0f57a30c92eb0f7dec44b9701c5b07dc1960e6ed0740bd153ef23d86" },
+      "note-oauth2-login": { sourceHash: "sha256:58c7074e57fad72d08adef8123a7e9ba9d2bfcc047aa9f68cd32dba320735191", contentHash: "sha256:bce2b4eb41102d884ddd6225ad167b5870972511d21387737607b5e546270273" },
+      "react-server-component-2": { sourceHash: "sha256:95826fe9496d953cd6c52c6ab4016e903a90b614fcba6f918babaec63d26ea50", contentHash: "sha256:b6a0458baa427c3076bd07c34dcb0ce256296cf2e57f844e31ca44c8a38d58bc" },
+      "react-server-component-1": { sourceHash: "sha256:53ce13fab438c45592adbf34bd4fc54ae42e1fe37204a7b3c75446a8157cf9c1", contentHash: "sha256:30c8535605d945ba026429b1427f29515f49e479efda3b5c6ea37df4270bb8f0" },
+      "about-astro": { sourceHash: "sha256:747415179f752d38e41ad8e6dcf86c43ef33d356cf3478e4db04868f390e5d50", contentHash: "sha256:9d71141935f1626f3b611c4bb55a5df605522ba12e513fa728c202222582825e" },
+      "use-react-native-and-expo": { sourceHash: "sha256:bd611ba307eebec819d8b7fbfa7157342e1b93b112c789a2a42e43abe5195530", contentHash: "sha256:07e65c1b8ab0bb05de0f5c14f51b8e44b0930693349d064a44b142fc7591d724" },
+      "frontend-framework-security-2025": { sourceHash: "sha256:3c965cf8a18222c8cb95cf76a586576e49b2ddbc268c27052e00b0ddaffff3cc", contentHash: "sha256:cbd137cb7e104cb1c66687eb4b802d03edf4f8a81267e7c214fcdc6cf7e77ed5" },
+      "vite-8-beta-release": { sourceHash: "sha256:29a36eee5ab8c694fa4fa14b4af460df965bc7b48399e0d5f3f90a6dd60b7439", contentHash: "sha256:0fd68b54e7feca65663a11f0f563768469d59e604df96c5f0a51f37e5573ccf8" },
+      "update-prisma-6-to-7": { sourceHash: "sha256:554ac3099ae13c885ba5e302e9c02ae416ac3366cd935b633a64910365b9ca0e", contentHash: "sha256:92a0dfbbf42ea38672fd5881757c86b77b500447f01c0b98e0f9b01af1f4618e" },
+      "copyright-and-opensource": { sourceHash: "sha256:a0ba3afca28ccb33c792ef671fa77f3a19a8fae29c29a17916fe0b11d36ad3d0", contentHash: "sha256:2c1a0a93a72498ec894497b2602e9af144eb21ffa8f05b63a7f4510a6e309019" },
+      "see-react-compiler": { sourceHash: "sha256:d81f9c1d16231df9f330fd9fc5238aa88545d7a33d13394649cffdbef2651758", contentHash: "sha256:b8e5eec353601159f74299bf45fbf8ae77c24d41a668f9abb4132a6e338c02d5" },
+      "react-compiler-performance": { sourceHash: "sha256:63c6fac27f2ea1baa6ef63241797232aa09a99e428bd8311b2d7202c683fa4af", contentHash: "sha256:98c9e976927e9056194669100343d3c09ab5dffd7392c5cf09554db5c329b16d" },
+      "rust-in-js-pipline": { sourceHash: "sha256:100e0ffc4db5a87475e85f6d64f7dae9f86c0b06fccd7bb72fea84b83f9ceb9e", contentHash: "sha256:0e6b35464e273ebc71b7dab173e1615d81aa1409a605363c440d99becca7dafe" },
+      "vite-virtual-modules": { sourceHash: "sha256:351ce8492e9aba6a306bbf9622e76d6d85f8aabe7b2007b50f1c0c52d2372d2f", contentHash: "sha256:9f3c91bb4a23c4a25021768ba3793c17e7c15d1d77dc4b502dbfe027674473b7" },
+      "wasm-call-overhead": { sourceHash: "sha256:16ff72c2ef214a57ac4cb6e343344cedccbd01e03877e35bc168c205670e8083", contentHash: "sha256:f0120953282504191c97e308be5fa33222795f2fb6f314fe0bef52647982ab75" },
+      "rust-c-bind": { sourceHash: "sha256:8aecc3141f81e5d969d85646e3e580f4d8c4b7cf59df30754f485baf5b7f0373", contentHash: "sha256:f4a6f82f74c49396838c39dc8d428ea8f16eacb344030dc13673a22cfb15b109" },
+      "best-language-for-ai": { sourceHash: "sha256:a388a94d96bcc3c86fe287f84485dd948704593fada35ef8ad4f7fa3f9218738", contentHash: "sha256:495dd8d1d2750a69898fa1ebda390b55a9acafaa8382c0a8966168135430b79d" },
+      "vite-route-preloading": { sourceHash: "sha256:6973db7a5854b7378255171f2d856033feb4d52e27493b0ec07a0d23afc46e6d", contentHash: "sha256:cee3c0e2118b60ade6c6dd2f48a3fb02f2271f93ee88ee545ffce1904f85ae3e" },
+      "qwen-and-kimi": { sourceHash: "sha256:dda7ac3973688f9df606de5069a451dd7c1370dfdd6ee300472c846fd5335988", contentHash: "sha256:de4d5b4aa21ea6c0895312d73971000cc8915d7750b84d701050ca6f5950b71c" },
+      "vue-vapor": { sourceHash: "sha256:bbb7016ad842ffa26489cd6996da865f071c7181e6f6d23e0733ad164c85a441", contentHash: "sha256:07c0942740869b804f2146de3b8f6dd42e0d467b617f724e0038f96baca5bcf2" },
+      "modern-frontend-soc": { sourceHash: "sha256:a4dcd38d85a4e4e386e6953772150b4fe1678d9cdac6e6cd3be2483634931aa9", contentHash: "sha256:725536f9e6068640997332ead43d9d07161b175250719e50c2db96d7aa4d6007" },
+      "ssr": { sourceHash: "sha256:e1b916b6c637987ff182392ca1f3061985fb0d6355cff42b910918bdc43d3247", contentHash: "sha256:0689067651082222b728b09defb2c849ac535c49d36c3695a56dbad73edc6e01" },
+      "rolldown-vite-production-ready": { sourceHash: "sha256:5f309a6a8a346fcb1f548abb78d32cc7440caf16ee53d6326b41f82e5639c23b", contentHash: "sha256:d77627e3f152d92c07919cb5649787c74a2671d813801fcdf5e574d65fb267dd" },
+      "rolldown-vite-migration": { sourceHash: "sha256:f73061a5ffe1a5d08f5d4572cd397970bccdd2e03aa4ba9c4d63871d7b864404", contentHash: "sha256:988a931a37409bfdce10009ccf68b98997c009ac435597c00d9fd4d542ff4947" },
+      "tech-debt": { sourceHash: "sha256:d3405ea671bca603a90d157fbfeb02865c4253c28550438480c6eebcb9f0560b", contentHash: "sha256:d477b3aa475ab97d668d95b7645badb105cbc7610cc6b0a867a28f12d2a905b6" },
+      "javascript-reactive-systems": { sourceHash: "sha256:7f343c6a3124f6f41c2a34e770aab460d5df83cb21ba6cc32fc1d109362f4ea4", contentHash: "sha256:bd6f4c5dc5fafefb325f2f3be59d104ce55da5681a6f4fc664a2a2c9e17d988f" },
+      "mermaid-local-render": { sourceHash: "sha256:e0fb8da60e506111793989c6174b18f712e9b696ff1c466f2386cfcea4215479", contentHash: "sha256:b66026f490308a40faf54cc9e7f55fd69a2370ff5d89b7bf05210bb33ab50924" },
+      "nodejs-typescript-support": { sourceHash: "sha256:feb9e2ed727ebe8becc7e26f1be00894c6b1c2b5b9a13a033de970b6d4912d1c", contentHash: "sha256:130f36947dc7118d8c70cb7ec89dba87724a22bb2946994585ccb523823983a1" },
+      "void-operator-history": { sourceHash: "sha256:cee874d85cda1342a456bb94f0165c0345a574fa619544d3e9a38536b74ebc88", contentHash: "sha256:fdb7b16720e6b09553747f605840a4978ce1a3e88c08fcaaf2c8fa2e5066242b" },
+      "docker-offline-images": { sourceHash: "sha256:92110fa12050376fd5674dafe1f8e5da8371b1910f42f13a787257e7643a5d6d", contentHash: "sha256:fed9ec8266195abd7f8bf4356d53888d0e4df7d1e1812821b41a8b8097f9f769" },
+      "model-context-protocol": { sourceHash: "sha256:7fbc43a537b86bbdae0c67efe84e84b5f1a37bf9e37faf45a7b1d6b48fe5231b", contentHash: "sha256:bce6300b6695e4aa35c110d7c7547bef969af71db821d50fa601abef680adf2a" },
+      "note-jwt": { sourceHash: "sha256:dbf46b37f7858dc588cd8707a2c8039f3c1eedf5a455c97909e12fd291e839a1", contentHash: "sha256:75a0dabe6b161107d1180f8130a65314d3cab3f3682440a6cabb8e3dca11f8bf" },
+      "blue-green-deploy": { sourceHash: "sha256:f4c7fbd1f35e5b779b7bd14637e16255dc06b2e547edf9e3acdf08d3114c4b59", contentHash: "sha256:81952eec5016d9f9abcb3bbc5888b0701eeec65f9e638689f8546c06a44aaed4" },
+      "github-actions": { sourceHash: "sha256:591fa2ee4103eafb842ccd99e826f896f249dd090ca21ed821a5f053d394e626", contentHash: "sha256:2122dc111bef252651a19b243ba79b04a49d2a73b1cfce5e542834b1582e32bd" },
+      "mermaid-tutorial": { sourceHash: "sha256:0787ab65b77b5dbfda529f5b42aa50567aeac83d86ca55c283b4ec6bad64e4da", contentHash: "sha256:2ca2c99b34879c49e7179b670646d063298f8ef2c420d2cd7770a24dcaaa3e54" },
     },
     postLoaders: {
       "web-stack-detector": () => import('./posts/zh/web-stack-detector'),
@@ -2322,6 +2406,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202608",
         "isDraft": false,
         "isHidden": false,
+        "og": "web-stack-detector.og.jpg",
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js Is Moving to ESM-only"
@@ -2344,6 +2429,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-move-to-esm-only.og.jpg",
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
@@ -2369,6 +2455,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-tsc-runtime-patch-hack.og.jpg",
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "AI Agents as the Next Abstraction Layer"
@@ -2424,6 +2511,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "bun-rust-rewrite.og.jpg",
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
@@ -2451,6 +2539,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "tanstack-npm-supply-chain-attack.og.jpg",
         "prevPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access Issues"
@@ -2476,6 +2565,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "private-network-access.og.jpg",
         "prevPost": {
           "id": "axios-xhr-and-fetch",
           "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections"
@@ -2503,6 +2593,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "axios-xhr-and-fetch.og.jpg",
         "prevPost": {
           "id": "viteplus-announcement",
           "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""
@@ -2530,6 +2621,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202603",
         "isDraft": false,
         "isHidden": false,
+        "og": "viteplus-announcement.og.jpg",
         "prevPost": {
           "id": "note-oauth2-login",
           "title": "Complete Diagram of the OAuth 2.0 Authorization Code Login Flow"
@@ -2555,6 +2647,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-oauth2-login.og.jpg",
         "prevPost": {
           "id": "react-server-component-2",
           "title": "On React Server Component (RSC) (2) - RSC Rules, React Component Trees, and Module Dependency Graphs"
@@ -2581,6 +2674,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-2.og.jpg",
         "prevPost": {
           "id": "react-server-component-1",
           "title": "On React Server Component (RSC) (1) - RSC Principles, SSR, and Partial Hydration"
@@ -2608,6 +2702,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-1.og.jpg",
         "prevPost": {
           "id": "about-astro",
           "title": "Writing at Astro v6 Beta: Astro Lets Real Websites Embrace the Modern Frontend Ecosystem"
@@ -2634,6 +2729,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "about-astro.og.jpg",
         "prevPost": {
           "id": "use-react-native-and-expo",
           "title": "Notes on Trying React Native Mobile Development with the Expo Framework"
@@ -2662,6 +2758,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "use-react-native-and-expo.og.jpg",
         "prevPost": {
           "id": "frontend-framework-security-2025",
           "title": "Throwing Cold Water on Frontend Frameworks' Server-Side Ambitions: Two Critical React Ecosystem Vulnerabilities in 2025"
@@ -2688,6 +2785,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "frontend-framework-security-2025.og.jpg",
         "prevPost": {
           "id": "vite-8-beta-release",
           "title": "Vite 8.0 Beta Release: Vite Enables Rolldown by Default"
@@ -2712,6 +2810,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-8-beta-release.og.jpg",
         "prevPost": {
           "id": "update-prisma-6-to-7",
           "title": "Prisma ORM 6 -> 7 Upgrade Notes, and Some Thoughts on the Prisma Team's Upgrade Philosophy"
@@ -2736,6 +2835,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "update-prisma-6-to-7.og.jpg",
         "prevPost": {
           "id": "copyright-and-opensource",
           "title": "The Relationship Between Open-Source Licenses and Software Copyright"
@@ -2761,6 +2861,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "copyright-and-opensource.og.jpg",
         "prevPost": {
           "id": "see-react-compiler",
           "title": "See What React Compiler Does to Your Components"
@@ -2786,6 +2887,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "see-react-compiler.og.jpg",
         "prevPost": {
           "id": "react-compiler-performance",
           "title": "Testing the Impact of React Compiler on Build Time in a Vite Project"
@@ -2812,6 +2914,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-compiler-performance.og.jpg",
         "prevPost": {
           "id": "rust-in-js-pipline",
           "title": "The Unavoidable JavaScript Components in Native JavaScript Toolchains"
@@ -2841,6 +2944,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-in-js-pipline.og.jpg",
         "prevPost": {
           "id": "vite-virtual-modules",
           "title": "Virtual Modules in Vite's Plugin Mechanism"
@@ -2868,6 +2972,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202509",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-virtual-modules.og.jpg",
         "prevPost": {
           "id": "wasm-call-overhead",
           "title": "WebAssembly Call Overhead Analysis"
@@ -2894,6 +2999,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "wasm-call-overhead.og.jpg",
         "prevPost": {
           "id": "rust-c-bind",
           "title": "Rust bindgen: Generate Rust Bindings for C Header Files"
@@ -2918,6 +3024,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-c-bind.og.jpg",
         "prevPost": {
           "id": "best-language-for-ai",
           "title": "The Best Programming Language for Vibe Coding"
@@ -2943,6 +3050,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "best-language-for-ai.og.jpg",
         "prevPost": {
           "id": "vite-route-preloading",
           "title": "Vite Chunk Preloading Optimization: Balancing First-Screen Latency and Later Interactions"
@@ -2971,6 +3079,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-route-preloading.og.jpg",
         "prevPost": {
           "id": "qwen-and-kimi",
           "title": "Qwen Coder and Kimi K2 Still Seem to Be Missing Something"
@@ -2996,6 +3105,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "qwen-and-kimi.og.jpg",
         "prevPost": {
           "id": "vue-vapor",
           "title": "Vue Vapor Mode | Thoughts After Watching VueConf 2025"
@@ -3020,6 +3130,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-vapor.og.jpg",
         "prevPost": {
           "id": "modern-frontend-soc",
           "title": "Technical Layering or Feature Cohesion: What Kind of Separation of Concerns Should Modern Frontend Have?"
@@ -3048,6 +3159,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "modern-frontend-soc.og.jpg",
         "prevPost": {
           "id": "ssr",
           "title": "Implementing Server-Side Rendering with Vite"
@@ -3073,6 +3185,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "ssr.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-production-ready",
           "title": "Is Rolldown-vite Worth Trying Now?"
@@ -3098,6 +3211,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-production-ready.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-migration",
           "title": "Rolldown-Vite Announces Feature Parity with Vite, Evan You and His Next-Generation Frontend Toolchain"
@@ -3125,6 +3239,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202506",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-migration.og.jpg",
         "prevPost": {
           "id": "tech-debt",
           "title": "Running an Antique Frontend Project on an arm64 Mac, and Ending Up with a Head Full of Thoughts About Technical Debt"
@@ -3152,6 +3267,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "tech-debt.og.jpg",
         "prevPost": {
           "id": "javascript-reactive-systems",
           "title": "JavaScript Reactive Systems, from Framework Implementations to TC39 Signals"
@@ -3179,6 +3295,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "javascript-reactive-systems.og.jpg",
         "prevPost": {
           "id": "mermaid-local-render",
           "title": "How to Force Mermaid, Born for the Browser, to Render on the Server"
@@ -3204,6 +3321,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-local-render.og.jpg",
         "prevPost": {
           "id": "nodejs-typescript-support",
           "title": "Talking About Node.js Native Support for Running TypeScript Files"
@@ -3229,6 +3347,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "nodejs-typescript-support.og.jpg",
         "prevPost": {
           "id": "void-operator-history",
           "title": "The Story Behind the Mysterious javascript:void(0) Link"
@@ -3254,6 +3373,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "void-operator-history.og.jpg",
         "prevPost": {
           "id": "docker-offline-images",
           "title": "A Dumb Way to Solve DockerHub Access Problems"
@@ -3278,6 +3398,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "docker-offline-images.og.jpg",
         "prevPost": {
           "id": "model-context-protocol",
           "title": "The Evolution Path of AI Agents: Building a Model Context Protocol Server with Node.js"
@@ -3304,6 +3425,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "model-context-protocol.og.jpg",
         "prevPost": {
           "id": "note-jwt",
           "title": "User Authentication System: Stateless Authentication with JWT"
@@ -3329,6 +3451,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-jwt.og.jpg",
         "prevPost": {
           "id": "blue-green-deploy",
           "title": "Next.js Zero-Downtime Deployment Notes: From PM2 Cluster to Next Standalone Mode"
@@ -3355,6 +3478,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "blue-green-deploy.og.jpg",
         "prevPost": {
           "id": "github-actions",
           "title": "Pitfalls in Configuring GitHub Actions for a Small Frontend Project"
@@ -3381,6 +3505,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "github-actions.og.jpg",
         "prevPost": {
           "id": "mermaid-tutorial",
           "title": "Getting Started with Mermaid Diagrams, Essential for Technical Documentation"
@@ -3405,6 +3530,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-tutorial.og.jpg",
         "nextPost": {
           "id": "github-actions",
           "title": "Pitfalls in Configuring GitHub Actions for a Small Frontend Project"
@@ -3427,6 +3553,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202608",
         "isDraft": false,
         "isHidden": false,
+        "og": "web-stack-detector.og.jpg",
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js Is Moving to ESM-only"
@@ -3449,6 +3576,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-move-to-esm-only.og.jpg",
         "prevPost": {
           "id": "vue-tsc-runtime-patch-hack",
           "title": "vue-tsc and Volar.js Enter the tsgo Era with an Ungraceful Implementation"
@@ -3474,6 +3602,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-tsc-runtime-patch-hack.og.jpg",
         "prevPost": {
           "id": "ai-agent-software-engineering",
           "title": "AI Agents as the Next Abstraction Layer"
@@ -3529,6 +3658,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "bun-rust-rewrite.og.jpg",
         "prevPost": {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
@@ -3556,6 +3686,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202605",
         "isDraft": false,
         "isHidden": false,
+        "og": "tanstack-npm-supply-chain-attack.og.jpg",
         "prevPost": {
           "id": "private-network-access",
           "title": "Private Network Access / Local Network Access Issues"
@@ -3581,6 +3712,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "private-network-access.og.jpg",
         "prevPost": {
           "id": "axios-xhr-and-fetch",
           "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections"
@@ -3608,6 +3740,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202604",
         "isDraft": false,
         "isHidden": false,
+        "og": "axios-xhr-and-fetch.og.jpg",
         "prevPost": {
           "id": "viteplus-announcement",
           "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""
@@ -3635,6 +3768,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202603",
         "isDraft": false,
         "isHidden": false,
+        "og": "viteplus-announcement.og.jpg",
         "prevPost": {
           "id": "note-oauth2-login",
           "title": "Complete Diagram of the OAuth 2.0 Authorization Code Login Flow"
@@ -3660,6 +3794,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-oauth2-login.og.jpg",
         "prevPost": {
           "id": "react-server-component-2",
           "title": "On React Server Component (RSC) (2) - RSC Rules, React Component Trees, and Module Dependency Graphs"
@@ -3686,6 +3821,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-2.og.jpg",
         "prevPost": {
           "id": "react-server-component-1",
           "title": "On React Server Component (RSC) (1) - RSC Principles, SSR, and Partial Hydration"
@@ -3713,6 +3849,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202602",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-server-component-1.og.jpg",
         "prevPost": {
           "id": "about-astro",
           "title": "Writing at Astro v6 Beta: Astro Lets Real Websites Embrace the Modern Frontend Ecosystem"
@@ -3739,6 +3876,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "about-astro.og.jpg",
         "prevPost": {
           "id": "use-react-native-and-expo",
           "title": "Notes on Trying React Native Mobile Development with the Expo Framework"
@@ -3767,6 +3905,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202601",
         "isDraft": false,
         "isHidden": false,
+        "og": "use-react-native-and-expo.og.jpg",
         "prevPost": {
           "id": "frontend-framework-security-2025",
           "title": "Throwing Cold Water on Frontend Frameworks' Server-Side Ambitions: Two Critical React Ecosystem Vulnerabilities in 2025"
@@ -3793,6 +3932,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "frontend-framework-security-2025.og.jpg",
         "prevPost": {
           "id": "vite-8-beta-release",
           "title": "Vite 8.0 Beta Release: Vite Enables Rolldown by Default"
@@ -3817,6 +3957,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-8-beta-release.og.jpg",
         "prevPost": {
           "id": "update-prisma-6-to-7",
           "title": "Prisma ORM 6 -> 7 Upgrade Notes, and Some Thoughts on the Prisma Team's Upgrade Philosophy"
@@ -3841,6 +3982,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "update-prisma-6-to-7.og.jpg",
         "prevPost": {
           "id": "copyright-and-opensource",
           "title": "The Relationship Between Open-Source Licenses and Software Copyright"
@@ -3866,6 +4008,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202512",
         "isDraft": false,
         "isHidden": false,
+        "og": "copyright-and-opensource.og.jpg",
         "prevPost": {
           "id": "see-react-compiler",
           "title": "See What React Compiler Does to Your Components"
@@ -3891,6 +4034,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "see-react-compiler.og.jpg",
         "prevPost": {
           "id": "react-compiler-performance",
           "title": "Testing the Impact of React Compiler on Build Time in a Vite Project"
@@ -3917,6 +4061,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "react-compiler-performance.og.jpg",
         "prevPost": {
           "id": "rust-in-js-pipline",
           "title": "The Unavoidable JavaScript Components in Native JavaScript Toolchains"
@@ -3946,6 +4091,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202511",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-in-js-pipline.og.jpg",
         "prevPost": {
           "id": "vite-virtual-modules",
           "title": "Virtual Modules in Vite's Plugin Mechanism"
@@ -3973,6 +4119,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202509",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-virtual-modules.og.jpg",
         "prevPost": {
           "id": "wasm-call-overhead",
           "title": "WebAssembly Call Overhead Analysis"
@@ -3999,6 +4146,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "wasm-call-overhead.og.jpg",
         "prevPost": {
           "id": "rust-c-bind",
           "title": "Rust bindgen: Generate Rust Bindings for C Header Files"
@@ -4023,6 +4171,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "rust-c-bind.og.jpg",
         "prevPost": {
           "id": "best-language-for-ai",
           "title": "The Best Programming Language for Vibe Coding"
@@ -4048,6 +4197,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "best-language-for-ai.og.jpg",
         "prevPost": {
           "id": "vite-route-preloading",
           "title": "Vite Chunk Preloading Optimization: Balancing First-Screen Latency and Later Interactions"
@@ -4076,6 +4226,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202508",
         "isDraft": false,
         "isHidden": false,
+        "og": "vite-route-preloading.og.jpg",
         "prevPost": {
           "id": "qwen-and-kimi",
           "title": "Qwen Coder and Kimi K2 Still Seem to Be Missing Something"
@@ -4101,6 +4252,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "qwen-and-kimi.og.jpg",
         "prevPost": {
           "id": "vue-vapor",
           "title": "Vue Vapor Mode | Thoughts After Watching VueConf 2025"
@@ -4125,6 +4277,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "vue-vapor.og.jpg",
         "prevPost": {
           "id": "modern-frontend-soc",
           "title": "Technical Layering or Feature Cohesion: What Kind of Separation of Concerns Should Modern Frontend Have?"
@@ -4153,6 +4306,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "modern-frontend-soc.og.jpg",
         "prevPost": {
           "id": "ssr",
           "title": "Implementing Server-Side Rendering with Vite"
@@ -4178,6 +4332,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "ssr.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-production-ready",
           "title": "Is Rolldown-vite Worth Trying Now?"
@@ -4203,6 +4358,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202507",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-production-ready.og.jpg",
         "prevPost": {
           "id": "rolldown-vite-migration",
           "title": "Rolldown-Vite Announces Feature Parity with Vite, Evan You and His Next-Generation Frontend Toolchain"
@@ -4230,6 +4386,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202506",
         "isDraft": false,
         "isHidden": false,
+        "og": "rolldown-vite-migration.og.jpg",
         "prevPost": {
           "id": "tech-debt",
           "title": "Running an Antique Frontend Project on an arm64 Mac, and Ending Up with a Head Full of Thoughts About Technical Debt"
@@ -4257,6 +4414,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "tech-debt.og.jpg",
         "prevPost": {
           "id": "javascript-reactive-systems",
           "title": "JavaScript Reactive Systems, from Framework Implementations to TC39 Signals"
@@ -4284,6 +4442,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202505",
         "isDraft": false,
         "isHidden": false,
+        "og": "javascript-reactive-systems.og.jpg",
         "prevPost": {
           "id": "mermaid-local-render",
           "title": "How to Force Mermaid, Born for the Browser, to Render on the Server"
@@ -4309,6 +4468,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-local-render.og.jpg",
         "prevPost": {
           "id": "nodejs-typescript-support",
           "title": "Talking About Node.js Native Support for Running TypeScript Files"
@@ -4334,6 +4494,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "nodejs-typescript-support.og.jpg",
         "prevPost": {
           "id": "void-operator-history",
           "title": "The Story Behind the Mysterious javascript:void(0) Link"
@@ -4359,6 +4520,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "void-operator-history.og.jpg",
         "prevPost": {
           "id": "docker-offline-images",
           "title": "A Dumb Way to Solve DockerHub Access Problems"
@@ -4383,6 +4545,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "docker-offline-images.og.jpg",
         "prevPost": {
           "id": "model-context-protocol",
           "title": "The Evolution Path of AI Agents: Building a Model Context Protocol Server with Node.js"
@@ -4409,6 +4572,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202504",
         "isDraft": false,
         "isHidden": false,
+        "og": "model-context-protocol.og.jpg",
         "prevPost": {
           "id": "note-jwt",
           "title": "User Authentication System: Stateless Authentication with JWT"
@@ -4434,6 +4598,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "note-jwt.og.jpg",
         "prevPost": {
           "id": "blue-green-deploy",
           "title": "Next.js Zero-Downtime Deployment Notes: From PM2 Cluster to Next Standalone Mode"
@@ -4460,6 +4625,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "blue-green-deploy.og.jpg",
         "prevPost": {
           "id": "github-actions",
           "title": "Pitfalls in Configuring GitHub Actions for a Small Frontend Project"
@@ -4486,6 +4652,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "github-actions.og.jpg",
         "prevPost": {
           "id": "mermaid-tutorial",
           "title": "Getting Started with Mermaid Diagrams, Essential for Technical Documentation"
@@ -4510,6 +4677,7 @@ export const generatedContentByLocale = {
         "monthFolder": "202503",
         "isDraft": false,
         "isHidden": false,
+        "og": "mermaid-tutorial.og.jpg",
         "nextPost": {
           "id": "github-actions",
           "title": "Pitfalls in Configuring GitHub Actions for a Small Frontend Project"
@@ -4517,49 +4685,49 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
-      "web-stack-detector": { sourceHash: "sha256:eacefbf2840cd4766d447a44889229f93102f04e37416128711b6101d56831e3", contentHash: "sha256:3e206fd31f49311bf6cdecf3710d41f106b4195e8b2373c59a1bca4d6d03595a" },
-      "vue-move-to-esm-only": { sourceHash: "sha256:ad7d1371f445d2cddc43457079c2fed5b745557f04e51509e5de9565e8f1bb8d", contentHash: "sha256:b98f6e2af3e95138a8d7efdd2f8e4c8f6419939d2574e5a04a0796ed7cc7aa73" },
-      "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b36e480ded2dd05a72ecebddef502cfd1e5842f62a7e3279334842aa8dac0516", contentHash: "sha256:e8521c23c073d896e285a27c682130affb95553bd4b25eb431657ccff76d0376" },
+      "web-stack-detector": { sourceHash: "sha256:6af37651616bd4290ea091081420d47202e465d22795c614301d78b5b067a497", contentHash: "sha256:fdb6841fbe8463c23d395400e4cfb3d186959ab5031d70e60c130ffb23f85593" },
+      "vue-move-to-esm-only": { sourceHash: "sha256:4ab84719fb51dccd316817a04324f8a541d1f76e5e7e0aaf3474e69bf00389e7", contentHash: "sha256:0c98168e51ba7f47ee87602d3c4e9f17eb4167a30e2078ce9486b295ed02fb52" },
+      "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:5941c4a5a48c17dfed1885795a1d9c12262847e464e0200912cd7d8c7763280f", contentHash: "sha256:673802f6a9b200e9a77878c520292a04d4ac2df324be6140755e987313729e27" },
       "ai-agent-software-engineering": { sourceHash: "sha256:b6ab5ad3fbfe84a95d5caf0bf7529ac99e36a815762eaff5bb7529a9f0449373", contentHash: "sha256:c0f3fcc645671f2e1bda5f3689874c15e0f3c931076b4d27c2e77cd649b3ea54" },
-      "bun-rust-rewrite": { sourceHash: "sha256:5789f5d36d7c5d1eb931ef3e39a6c9d23dd8c557914a73d3784468db837df2d1", contentHash: "sha256:65a78bacd39678960b305645a3cc5a79485894c1187694ede6748d209ceef328" },
-      "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:5055d72dd079762bb0ce33b5c2eba128e9cfebb2ccb8da1e369b861d27feee50", contentHash: "sha256:d0510519304ce939f12a1c46efd77f02aa49ae10d45c8c974cebd3308cff8341" },
-      "private-network-access": { sourceHash: "sha256:27009d8b794f79ed7da01936e0778955261da5f15551cc25af75df1d5d802116", contentHash: "sha256:1b6151be9f41f71e7f4dbf4d5477bec94e0017a2e0173830a0d7bea590e2240d" },
-      "axios-xhr-and-fetch": { sourceHash: "sha256:3afcbd24cf3e12cd82a401e499487c769d93ed343f4c2b363adf212788bbb8d0", contentHash: "sha256:f952ea7f46ea09264ae49016e09f1d08da629f52c061968f9eb12e7cefb89de2" },
-      "viteplus-announcement": { sourceHash: "sha256:5626b0676c03085ce17d3233bb43707fb7996751838ae52ab0ea675892af33d3", contentHash: "sha256:b1fffb94d4069c97e06a859fa75ce76044c95d1a8819280b942675f2ec516292" },
-      "note-oauth2-login": { sourceHash: "sha256:715cf3e9d82d90cf70607e16306e9cc2856fe4c010b1c70100773718c2cb8007", contentHash: "sha256:d261694cf2ea64661284ff4fd5f155b3085a955ad6d9628cb0b3815ecb7564d3" },
-      "react-server-component-2": { sourceHash: "sha256:9d4a7d36847da72309e2a0f6f7b0caa63538276f89a60a1c7316e1251941a8ad", contentHash: "sha256:185300821e79adb22682b5c99479c1fb6da32891d08c8871af60f8c0eae48c0c" },
-      "react-server-component-1": { sourceHash: "sha256:a158e8336e254e34d6d0a4316845c76c011a7ccde60cea070cfbf092c0fecba3", contentHash: "sha256:e2aaeebd340b918d39917431b398cd9ce9dfc1c08b0c7034adef373d39456dd2" },
-      "about-astro": { sourceHash: "sha256:6dfe29391ecd8defc002dcd8deb537fd3975811b5a1765dba48bfe5afbe4d584", contentHash: "sha256:8401dbba257027bcd6614be203a1bf89cf351bf752caf719f25e643510659038" },
-      "use-react-native-and-expo": { sourceHash: "sha256:9b244e1e520b7d6d4059eb19219bd353fa2faf5db4c3ca5adf968360bb15e5e9", contentHash: "sha256:4d4294c16f00b631711c93724645704ecc839abb9b450b3492746eb4b52dc112" },
-      "frontend-framework-security-2025": { sourceHash: "sha256:291b9c75c20dc80fb18c5a272ccee2317074ab66d52dc32f307c0ef9b99b021d", contentHash: "sha256:86f50c13e7acc70491e36d174d8531146e57689e6a150134238115bababaf94c" },
-      "vite-8-beta-release": { sourceHash: "sha256:bb454a80e75c8d15f112748edb28a9112322016fa90d784d698eddee088942e2", contentHash: "sha256:fae813923b847d21636959ade08ab93b781c0664f63e246ec32a6154cf804b5c" },
-      "update-prisma-6-to-7": { sourceHash: "sha256:77a25eb280dab30453b997bb0081f1b41d0a56fe22eb58fa75d5aad61a1dd342", contentHash: "sha256:8c7267a97dbe16444b559825819205c3ec817791f9b16be4c8c9d766da2d2f10" },
-      "copyright-and-opensource": { sourceHash: "sha256:8f86ce30237380cdddd8a705b162dc0e649cfea69eef976a3226198df284bb36", contentHash: "sha256:2232748a690177fca4a2f815c136854428d431aa870d7d0806ae1865aeb51167" },
-      "see-react-compiler": { sourceHash: "sha256:8c95f7b72797f6d0d950da9dc30a198ed7611c7a10f901e8ebaf337493b3801e", contentHash: "sha256:fa9213190c2f6d8e4696848d45e63f450ab584608f682643066b80544d3289fd" },
-      "react-compiler-performance": { sourceHash: "sha256:7cc29c811e9b621b87d403f97033c00526d2e20040e70070bef2944e428d1d15", contentHash: "sha256:1508ca3077a19a328021e4444f718bc283dfdc9d03a36ae0f9cd3ef3ba43989d" },
-      "rust-in-js-pipline": { sourceHash: "sha256:3fd70ea76bd4ece3fcba20f8ed603e82a6aa0ef9d23900dd34647745bc85e6c5", contentHash: "sha256:ef32c4980b8f64e6b1dd31552d19d360bb7cf8fff65684cc2a03bef28221e5c5" },
-      "vite-virtual-modules": { sourceHash: "sha256:70cf8b95dd569e77736b8e604bfef572ccd5e7f70fd39f0a80514c763014a09b", contentHash: "sha256:77ad15837404442872e272018572af7fd8e331e88556f3f9be3083595ffa7d49" },
-      "wasm-call-overhead": { sourceHash: "sha256:7068d26035e16a675ca5c02386344ac36af372afc668ed728a1091c03b7cecb9", contentHash: "sha256:2facbba7b4415e301be7f954eecec98684d7ee95d3abb4f830ce4a70cca22c87" },
-      "rust-c-bind": { sourceHash: "sha256:b85b18361cb0e2ada59ad941e287e1b351b7a41166d2279691981109eb91290e", contentHash: "sha256:c9575f527783c87557d1227bc119b93eddd1780478a0ad1fa4f153ea24609e31" },
-      "best-language-for-ai": { sourceHash: "sha256:c305beec2783ace8df31b655a8e7ce84b07c823ad2257753991483413ccdd15f", contentHash: "sha256:15f2768db7a094dca86bd5db28a3b535f2b0ea7cea05a0f63556b2a154d7bd2d" },
-      "vite-route-preloading": { sourceHash: "sha256:e34ec1e00ca8023f2ceb1d5c8152f49039068e8c27459d9a57ab5e2c5529a1e1", contentHash: "sha256:f1968a064244a14ea7a0e610ec977c81313bc75f494c9c238dc94ccaaa76cb7c" },
-      "qwen-and-kimi": { sourceHash: "sha256:3dd7a47dff207e32fa9fea57563154e74034a3d7b66f66bed595c7349367b957", contentHash: "sha256:3174d0985ea4bf3c8f39b2f8b0760621a941c2e1f784c8640053bd5fc4e2217f" },
-      "vue-vapor": { sourceHash: "sha256:49cf4dddc2c51af3932b00952017c5f013730484560e5f8756c9f77232dc0ccd", contentHash: "sha256:8ab57faf8bb5944cb5cec8aabc25cbbd245ee045597f559406ff690e0235203c" },
-      "modern-frontend-soc": { sourceHash: "sha256:c1ded7dbeaeb6f4ec47d64af7f7aa92efdfbee52fbcd23a77cf5a9c73644bf5d", contentHash: "sha256:4b711cd63faf2f83aad7a198db9f808a030683cc4e4825f495596b46b25565a5" },
-      "ssr": { sourceHash: "sha256:49b57c46efcbeab75703e875ce5954ce25d6051214e801de7600d32580493ebf", contentHash: "sha256:f1ab62ce3a1885c1ed3ab2fc91ca7719e3ec1e4b5faadd77a73fe44aabab9375" },
-      "rolldown-vite-production-ready": { sourceHash: "sha256:f7541180775c2b48c629f7c6dcf68d4eafbb597ce8f2dc5da612c14663e94706", contentHash: "sha256:86ae87213dbb7684226234bb61efc67a5e8e3f70a6c743c8f3c8e30acd402204" },
-      "rolldown-vite-migration": { sourceHash: "sha256:eb64e3fb9a085fac0a106c90d0c94b7fa387a86098fd5961442a4f28a09f5fb3", contentHash: "sha256:6d4b757f1fa8c049e4d822750189062b8b3f210e279153d9c5042b97b249b589" },
-      "tech-debt": { sourceHash: "sha256:dccdf92fa103d91ed18e2a1bbae835beb0d5a75d95b6837226f335912974f866", contentHash: "sha256:ba9c42198a4b83c7b104d537369bd3c5bbec72a069139789e60ec21757184a7e" },
-      "javascript-reactive-systems": { sourceHash: "sha256:b320dd5401e5a6ff7f283cd02a9b73cefb4cd73c245f97089dc932e8ae1ddf30", contentHash: "sha256:4633802a7750aa00a440197f8ead7e2bbbeddf57b45e48575e43ee1af7da65b3" },
-      "mermaid-local-render": { sourceHash: "sha256:9d044c63e793df2b6d9631dff59d3cdc389e183d17e1c7ea686708266ad18aa6", contentHash: "sha256:6bcf9708f31f6676d8f789fd2a4dae55b9f61a6031899af7629f7f0a9f01e362" },
-      "nodejs-typescript-support": { sourceHash: "sha256:ddb0d32ab0f856d9626953dec9510e8448433a6aa35510e2ea3c6b56e31f1237", contentHash: "sha256:42d91ebfcf70150e1cec16c395e6c29c67e5c0c67811e914ffdf3f32eea7ff66" },
-      "void-operator-history": { sourceHash: "sha256:9fae064f630ce2ec25125c7aff73f798bc4bf1322d265c41e784aae43e0c073d", contentHash: "sha256:049c31ad88f4440175c23c237937a3c4947018e98a52aa615fc9161c1875b05b" },
-      "docker-offline-images": { sourceHash: "sha256:9854304f96643baf1fd5daf87e3e93cccea7b0181903d459885fb38a37ff7463", contentHash: "sha256:580cb312da3cc87b3022fffd7f8ce6254c8a05f6f116fb9b5f9d327fcc93c527" },
-      "model-context-protocol": { sourceHash: "sha256:5501d52a2133ae81d3305c2744423a153d29ba9d38dd729155997168cd4a9309", contentHash: "sha256:58bad8d3def3625b54950aa2a88d65b38f7b3129d2eb167aa7c04b9601782606" },
-      "note-jwt": { sourceHash: "sha256:7569105fdcbfaa00d0a9a55fc65e4ebbf08f9b663e3e3faba298e1c34d014f6a", contentHash: "sha256:d95208bd2a5de5564f8a87071535f0de059617a8ed4000ce0eb768219251ca7c" },
-      "blue-green-deploy": { sourceHash: "sha256:53f5a088c60f2e9877b1252e0449fa96024674f7c80e00e363151be415577a42", contentHash: "sha256:d406c35b5d15bd39de8a35754abcb9c437e0824e196e55ea595f794cbb6845c9" },
-      "github-actions": { sourceHash: "sha256:8f12ed58c64a8c9defbf31d57216e33e5bf08f00d7818cf5a63b11911b7cb07f", contentHash: "sha256:e7761438ca49fb3e6cc5ea82fea9fc64f263ef6908f38555da4e6c3df05eb16e" },
-      "mermaid-tutorial": { sourceHash: "sha256:8fc93ea8e4e6d12f33ed7688e8ed58afe1ef085b476161a209d741b4b2cc2a68", contentHash: "sha256:824645ac9b163f9263ef75f905f3a19898452ac3027164b89d1677adcd35008c" },
+      "bun-rust-rewrite": { sourceHash: "sha256:97e7d737c618dea487e962bf343b73b7aa106867a696f759bc0cfa685de36839", contentHash: "sha256:abed41291321524feb5a7cb99fd5b57dd9bb14911cea5d899fa9c9577aae910c" },
+      "tanstack-npm-supply-chain-attack": { sourceHash: "sha256:5bb053be1f310fac9661275e4b6b6a84685b99b9a4b5f8867674a367ca7d1311", contentHash: "sha256:1b5d7f924ab255d27bb082069c19c69403618e8bfc9bc840309b6c1b36fae17f" },
+      "private-network-access": { sourceHash: "sha256:7e8d2f75fcf27be5703d1ad735dcf6034397f80f72d6c6cabf45333d512aa30d", contentHash: "sha256:0fc08ae40f2902bb82ca76aeeae7ddc10355baf17953ed182938f931e789dd40" },
+      "axios-xhr-and-fetch": { sourceHash: "sha256:b76f6f4b86132060d0e236c9aceccb9ee11eaa36bd42b48ebbbcef83753af9b4", contentHash: "sha256:340601fde0692cac4f3a7c0137af8b650faa2482cc6fff48242a7f3f9c35928c" },
+      "viteplus-announcement": { sourceHash: "sha256:f0428fa1802109d63dcafb73a5053c2f330f45c963b23651d20f6f81e9820916", contentHash: "sha256:5706fd3aa10be519ce900e54ca99d848cf168c358904b08e6ca59eda3a17605e" },
+      "note-oauth2-login": { sourceHash: "sha256:944a748dc4b33fcf33f69690174e4fe2bfda1f3037d3e1747a8a8b624a2fb6bd", contentHash: "sha256:f60bab1712d3888505fad969754a88822270a0eb4e5142b88c60a0606158cfd1" },
+      "react-server-component-2": { sourceHash: "sha256:c252801243a68b1124c75b5b814312c93560f88990ab078759c005cc9c6eef3b", contentHash: "sha256:15a52eb03429f47d78b2d6c49bc783ed300f99ad9203f8bddafbe3ba3d06a7d8" },
+      "react-server-component-1": { sourceHash: "sha256:c925b110f14e4e9694e7205498900e349bb827359c2ca23bd0efeb7988af89fb", contentHash: "sha256:08cfbd2f3a27ba6417b2faa360aabaead6c7475b66322233c618acbe7eca5617" },
+      "about-astro": { sourceHash: "sha256:8e12e30b4c4fdd75b47c567e6c791922d2ffa85aa6c85912b5011d6878582834", contentHash: "sha256:ca7faf3d8c867c3256655102ec6440b2e563347330ecb3cc0ae7307dfa4a2f5f" },
+      "use-react-native-and-expo": { sourceHash: "sha256:c40af96e7428f03d0e5cde756f6d2bf3441c85de4681757d13f77bb4521ddf94", contentHash: "sha256:5b8b12052e1cffeba78ba79c4f3fc9be12f7d1c3de9c98e4673b95ddd869fc75" },
+      "frontend-framework-security-2025": { sourceHash: "sha256:eb6c1a7d1b3b0b71a03fbda9684e935f16e57f3dcbbbe78292c6a6bcf8081a17", contentHash: "sha256:4738dd0cd2ea680b57d9339bf155d47b4ef1bb72128f14f85c089c5aad915c6a" },
+      "vite-8-beta-release": { sourceHash: "sha256:7741ffcb20683da5cbb93bc85890ada57d24437af2eec757c9debdbef8be7287", contentHash: "sha256:4ef4fc65ec1902bd12b815812cd6e6e4e6556092439352158de31ae6a9de4738" },
+      "update-prisma-6-to-7": { sourceHash: "sha256:683f4bfbeede88c6807c75fc41c34099a1a1eaa5cf993ab841a3450b761737e7", contentHash: "sha256:7cbab33e61725d448bbb465f8c34ecb98c6c0dbe388f6783c6ecddd4290cfd82" },
+      "copyright-and-opensource": { sourceHash: "sha256:13066d69274e32924a299b21bfc2862b1ad3c38f6a36e12c442077a8625cbb2d", contentHash: "sha256:7d11a57854a69630520c557c2c138a14314ac50e0595f8ba2a33cf8918af5ec8" },
+      "see-react-compiler": { sourceHash: "sha256:028ee563d1032cfa35bf257eca251ea36c144581973c4b3b3aa22dcb019e8b96", contentHash: "sha256:9047369bf23596bea31a8e9a51e874a3457bbdc2604d6c24c2e53a68a8d1201f" },
+      "react-compiler-performance": { sourceHash: "sha256:a24a155eda868b9b29f01ba2f4501805818eefea3269196c7951c84821b8450c", contentHash: "sha256:4b18f480a3841d5d9b07a2b7a5b7542c64e00010cab2e6b79a956459b3787b2f" },
+      "rust-in-js-pipline": { sourceHash: "sha256:089de34c1fea4452661e7b6917e2709c09ab62166c7bad667763f6df00f7c104", contentHash: "sha256:0ed414b2b4f45a8c1806145fdb691a1bc81ff52f6354a33ba802dd7e5e4069a1" },
+      "vite-virtual-modules": { sourceHash: "sha256:03b1ef014a2105b7da702ff1a5b1f5de3048e18d3f098a2c9c206d782851102f", contentHash: "sha256:d70af0c662e15c0525dcb53e5b4a02bcb9b01d421e99d11aa989419d25d43c6e" },
+      "wasm-call-overhead": { sourceHash: "sha256:859d453687b4177b8e3e0b09d759f01b8bb8edf05485ff4a84ad54a11e1b49a9", contentHash: "sha256:22cee7b645ea3e38e5e43d8beac6fb231c78e2434339215677a76655c32c1279" },
+      "rust-c-bind": { sourceHash: "sha256:d1510c23a75f612ddef982296528f8be88dd09b46eaceedf793b6173284974bf", contentHash: "sha256:50f09eb8be584ad0cc40acaba176953823701b6a45d4d34cc14c18b3864d6a72" },
+      "best-language-for-ai": { sourceHash: "sha256:749ee0b66635a78c25b03d6aec9613e33e677478afb5ca4ee27b4a1206e8b4e1", contentHash: "sha256:3cc7cf03024d172d7157d9fb38ca6699550e2529366d3afbc90b6517783cd339" },
+      "vite-route-preloading": { sourceHash: "sha256:a795dd00b673a139a20b05c2b4482f233fc91d934adcdd32aca5d49e5999fd45", contentHash: "sha256:ce2abf25369b77880183027f8e7cd1859c1ba4790ade9acc3cdedfbc869e22c5" },
+      "qwen-and-kimi": { sourceHash: "sha256:86f465b8082107a07979c7f1b187a61f164958f67d809c4cd680405995f9d74a", contentHash: "sha256:2f5b560d7d16215d906e13ba617e2cd51c392222f4b48c738105639b458f5a01" },
+      "vue-vapor": { sourceHash: "sha256:182b88e55df93916d1c42d3b0e3db1d54321086e994e047d2fae2b70b5285e8f", contentHash: "sha256:dd369883ebb34020ac4eb97e3ada1df4fc7a55cfb8407699233fc96d0d563cf4" },
+      "modern-frontend-soc": { sourceHash: "sha256:9647e5742c30e8b5775ddede4a2d75c423c8bd67640974421824cf8febb6438b", contentHash: "sha256:94b6532975f31ee5ae708c54ce29ce0fc56429bc3f36540d4889eaedd7f52f2d" },
+      "ssr": { sourceHash: "sha256:e94a06b558abf3bc7d050a655256e4e76ad0db4f4f5d1c6a1376adf04454b3a8", contentHash: "sha256:40032cfd720cdb1a4a831e28f9eef4e94863dbf0ba6a4b282d9a64f737a03ec0" },
+      "rolldown-vite-production-ready": { sourceHash: "sha256:fc3ffd07b08360e49642e6fc9a48298f0ea8f3c7579dd60d842871ffd9b252da", contentHash: "sha256:e576519c2f1311c5dda23fdab6b4e74ef4f8ffe8a0001ff43ea404527d31404e" },
+      "rolldown-vite-migration": { sourceHash: "sha256:9551a9dbff380c82c2aca5418411c9516edd054f7efcac615726d291b896a38d", contentHash: "sha256:ed0c2e416fe46d30c81a281a656e23510914b405435a158df7843442e0fa59cc" },
+      "tech-debt": { sourceHash: "sha256:24c157c0a38ad20ddae211917f40ba7df2374f314d9d9d6cf2d556bf518d12e6", contentHash: "sha256:0f31f30895d05581d4a2157c0053738fddd5735fdce190a6a83fe091f9c60b49" },
+      "javascript-reactive-systems": { sourceHash: "sha256:1c416cac5877674b135da2525bf98fa300f5f2a2c40bdd4c0c3d4107122ecc1d", contentHash: "sha256:5ad4676c02d06652663a474b5e421b14554490b26c71629c78c9ce398e1fd433" },
+      "mermaid-local-render": { sourceHash: "sha256:b52949c5c0308bf831d3e8dcb5d41e445ca63282538fcd936d0716c79ea30136", contentHash: "sha256:7f714fb2959aab8e88a87339a4dab0129250166e41bccd17e9e37659fdb4a65d" },
+      "nodejs-typescript-support": { sourceHash: "sha256:aede0ca5d886ebd96832c51534ea25cf9681417c6aab3c8e6bd234a01369b463", contentHash: "sha256:51c5c4cdd3ef239899fe0e3628348e9fa4ecd21ba1a1d8eff12d5c8976a3747c" },
+      "void-operator-history": { sourceHash: "sha256:0c34622743af7446a2e21c66520ebfb79ebc468351754f4cd9eb90472ca35bb9", contentHash: "sha256:40e3aab792503c5af68fca6cd6f3c3edb423602d9a03a08f8b7c4956c9bb7054" },
+      "docker-offline-images": { sourceHash: "sha256:9230d84da5a9426b51f050b679c8b4b4d1ebc51c1fbf0e09ca455a11c6e6faf5", contentHash: "sha256:1370eb41e7e705ea4dff8aa3da018ba1b152f1fc01f53ccd11a835402dc4940b" },
+      "model-context-protocol": { sourceHash: "sha256:7526522ffadadeaa58032fb0b4c4fc2c69e0fbffc7099c6992a084483e1f53b4", contentHash: "sha256:32f9079515db002dfafb8de5d05f399ac090f840d59ddbf96b4e5447dca52762" },
+      "note-jwt": { sourceHash: "sha256:0ec72a5fba802d9f83a9d7c03b8af26f4be983e8af360595ffc1dd485c0bf59f", contentHash: "sha256:168ae34a429ae66363d66de6fc07319ee4465820ee33ac95cac72ac1a072dfb2" },
+      "blue-green-deploy": { sourceHash: "sha256:00ce261e4629af424a381cf8383d9b68691cfedd7b363cb10c0584e29da1a623", contentHash: "sha256:fe889b686af54d22e6273aff9690922941e730c7cb7e41d4759ef246714db5f8" },
+      "github-actions": { sourceHash: "sha256:ab1da07f13c6bb17fd9759084fbad154165d480e7319bbd2dabbdf790f4e67d2", contentHash: "sha256:6f90172644194d14998f50b5a5e77aca5022fd7cd853664e46123357dc692271" },
+      "mermaid-tutorial": { sourceHash: "sha256:7506c24ee460c61b132a1cfdf39e4e4a304c73b3fef04c0307bedc293fb13a2b", contentHash: "sha256:4edc8920a45f04382e2bfd3ac29c40670aa1f7c8c7b39dc52d52a1eb59362e0b" },
     },
     postLoaders: {
       "web-stack-detector": () => import('./posts/en/web-stack-detector'),

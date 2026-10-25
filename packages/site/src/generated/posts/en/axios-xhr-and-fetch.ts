@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:3afcbd24cf3e12cd82a401e499487c769d93ed343f4c2b363adf212788bbb8d0";
-export const postContentHash = "sha256:f952ea7f46ea09264ae49016e09f1d08da629f52c061968f9eb12e7cefb89de2";
+export const postSourceHash = "sha256:b76f6f4b86132060d0e236c9aceccb9ee11eaa36bd42b48ebbbcef83753af9b4";
+export const postContentHash = "sha256:340601fde0692cac4f3a7c0137af8b650faa2482cc6fff48242a7f3f9c35928c";
 
 export const post = {
   "id": "axios-xhr-and-fetch",
@@ -79,6 +79,7 @@ export const post = {
   "monthFolder": "202604",
   "isDraft": false,
   "isHidden": false,
+  "og": "axios-xhr-and-fetch.og.jpg",
   "prevPost": {
     "id": "viteplus-announcement",
     "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""

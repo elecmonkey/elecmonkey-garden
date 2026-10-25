@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:9b244e1e520b7d6d4059eb19219bd353fa2faf5db4c3ca5adf968360bb15e5e9";
-export const postContentHash = "sha256:4d4294c16f00b631711c93724645704ecc839abb9b450b3492746eb4b52dc112";
+export const postSourceHash = "sha256:c40af96e7428f03d0e5cde756f6d2bf3441c85de4681757d13f77bb4521ddf94";
+export const postContentHash = "sha256:5b8b12052e1cffeba78ba79c4f3fc9be12f7d1c3de9c98e4673b95ddd869fc75";
 
 export const post = {
   "id": "use-react-native-and-expo",
@@ -135,6 +135,7 @@ export const post = {
   "monthFolder": "202601",
   "isDraft": false,
   "isHidden": false,
+  "og": "use-react-native-and-expo.og.jpg",
   "prevPost": {
     "id": "frontend-framework-security-2025",
     "title": "Throwing Cold Water on Frontend Frameworks' Server-Side Ambitions: Two Critical React Ecosystem Vulnerabilities in 2025"

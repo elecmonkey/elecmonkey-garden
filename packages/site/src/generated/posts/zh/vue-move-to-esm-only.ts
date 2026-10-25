@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:d5876245a124ce49af8eb02487124fbd8c654d435ebb6516519da3da68cfaad9";
-export const postContentHash = "sha256:c62676c49e871ea4d96db59ed361e6e1531dc84913f3b2bd1fbdba4580a8b865";
+export const postSourceHash = "sha256:147375f47fa81a00fb4c39bb3f376421167bf3363ca5556fb28a97d58711002c";
+export const postContentHash = "sha256:2a6d61c96e61a8c60625201612e96f96d685b80cdb187b83de0e6176952347a6";
 
 export const post = {
   "id": "vue-move-to-esm-only",
@@ -52,6 +52,7 @@ export const post = {
   "monthFolder": "202606",
   "isDraft": false,
   "isHidden": false,
+  "og": "vue-move-to-esm-only.og.jpg",
   "prevPost": {
     "id": "vue-tsc-runtime-patch-hack",
     "title": "vue-tsc 与 Volar.js，带着不优雅的实现进入 tsgo 时代"

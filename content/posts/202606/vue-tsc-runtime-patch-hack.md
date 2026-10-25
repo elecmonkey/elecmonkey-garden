@@ -4,6 +4,7 @@ date: "2026-06-21"
 description: "vue-tsc 在 Node 加载 tsc.js 之前，把官方 TypeScript CLI 的源码字符串临时 patch 掉，那 TypeScript Go 时代 Vue 准备怎么办呢？"
 tags: ["Vue", "TypeScript", "前端工具链"]
 author: "Elecmonkey"
+og: 'vue-tsc-runtime-patch-hack.og.jpg'
 ---
 
 语言服务一直是工具链里关注度比较低的一块儿内容。Vue 2 有 210k stars，Vue 3 也积累了 54k stars，但是 vuejs/language-tools 只有 6.7k stars. 这已经是星比较多的语言服务了，Svelte 有 86.7k star 但是 sveltejs/language-tools 只有 1.4k star. Astro 曾经的 withastro/language-tools 只有 337 stars，然后被官方 archive 了挪到了主仓里去。

@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:f7541180775c2b48c629f7c6dcf68d4eafbb597ce8f2dc5da612c14663e94706";
-export const postContentHash = "sha256:86ae87213dbb7684226234bb61efc67a5e8e3f70a6c743c8f3c8e30acd402204";
+export const postSourceHash = "sha256:fc3ffd07b08360e49642e6fc9a48298f0ea8f3c7579dd60d842871ffd9b252da";
+export const postContentHash = "sha256:e576519c2f1311c5dda23fdab6b4e74ef4f8ffe8a0001ff43ea404527d31404e";
 
 export const post = {
   "id": "rolldown-vite-production-ready",
@@ -25,6 +25,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "rolldown-vite-production-ready.og.jpg",
   "prevPost": {
     "id": "rolldown-vite-migration",
     "title": "Rolldown-Vite Announces Feature Parity with Vite, Evan You and His Next-Generation Frontend Toolchain"

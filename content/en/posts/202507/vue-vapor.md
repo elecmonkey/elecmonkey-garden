@@ -4,6 +4,7 @@ date: "2025-07-24"
 description: "Updates from the Vue community. Maybe one day React will fade from everyone's view like Angular did. Who knows?"
 tags: ["Vue", "Vue Vapor"]
 author: "Elecmonkey"
+og: 'vue-vapor.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

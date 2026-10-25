@@ -4,6 +4,7 @@ date: "2025-07-16"
 description: "An SSR demo, plus a bit of discussion about how the Web arrived at where it is today."
 tags: ["Server-Side Rendering (SSR)", "Web History", "Vite"]
 author: "Elecmonkey"
+og: 'ssr.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

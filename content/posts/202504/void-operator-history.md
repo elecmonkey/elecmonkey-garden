@@ -4,6 +4,7 @@ date: "2025-04-16"
 description: "前端世界的每一处细节变化都映射着整个 Web 生态的变迁。"
 tags: ["JavaScript", "Web 历史", "TypeScript"]
 author: "Elecmonkey"
+og: 'void-operator-history.og.jpg'
 ---
 
 在上古互联网时代，大家可能都见过这么一个神秘链接：`javascript:void(0)`。这个`javascript:void(0)` 链接曾经遍布互联网的每个角落。

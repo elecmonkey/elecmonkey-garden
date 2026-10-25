@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:b85b18361cb0e2ada59ad941e287e1b351b7a41166d2279691981109eb91290e";
-export const postContentHash = "sha256:c9575f527783c87557d1227bc119b93eddd1780478a0ad1fa4f153ea24609e31";
+export const postSourceHash = "sha256:d1510c23a75f612ddef982296528f8be88dd09b46eaceedf793b6173284974bf";
+export const postContentHash = "sha256:50f09eb8be584ad0cc40acaba176953823701b6a45d4d34cc14c18b3864d6a72";
 
 export const post = {
   "id": "rust-c-bind",
@@ -146,6 +146,7 @@ export const post = {
   "monthFolder": "202508",
   "isDraft": false,
   "isHidden": false,
+  "og": "rust-c-bind.og.jpg",
   "prevPost": {
     "id": "best-language-for-ai",
     "title": "The Best Programming Language for Vibe Coding"

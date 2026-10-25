@@ -4,6 +4,7 @@ date: '2025-11-15'
 description: '一个浏览器内的可视化工具，让你看到 React Compiler 如何转换你的代码。'
 tags: ['React', 'React Compiler', '前端工具链']
 author: 'Elecmonkey'
+og: 'see-react-compiler.og.jpg'
 ---
 
 做了一个小工具：**See React Compiler**。

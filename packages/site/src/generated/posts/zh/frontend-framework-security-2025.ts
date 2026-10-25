@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:6a0542899548309458f87f120963b174f08c8ad22deaf388db78c795115e45aa";
-export const postContentHash = "sha256:7079674f403d875a1a65976f225d6abf5b13d0bf9b307204327889dc6770dd3e";
+export const postSourceHash = "sha256:3c965cf8a18222c8cb95cf76a586576e49b2ddbc268c27052e00b0ddaffff3cc";
+export const postContentHash = "sha256:cbd137cb7e104cb1c66687eb4b802d03edf4f8a81267e7c214fcdc6cf7e77ed5";
 
 export const post = {
   "id": "frontend-framework-security-2025",
@@ -47,6 +47,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "frontend-framework-security-2025.og.jpg",
   "prevPost": {
     "id": "vite-8-beta-release",
     "title": "Vite 8.0 Beta Release，Vite 默认实装 Rolldown"

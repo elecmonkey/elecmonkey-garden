@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:9fae064f630ce2ec25125c7aff73f798bc4bf1322d265c41e784aae43e0c073d";
-export const postContentHash = "sha256:049c31ad88f4440175c23c237937a3c4947018e98a52aa615fc9161c1875b05b";
+export const postSourceHash = "sha256:0c34622743af7446a2e21c66520ebfb79ebc468351754f4cd9eb90472ca35bb9";
+export const postContentHash = "sha256:40e3aab792503c5af68fca6cd6f3c3edb423602d9a03a08f8b7c4956c9bb7054";
 
 export const post = {
   "id": "void-operator-history",
@@ -147,6 +147,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "void-operator-history.og.jpg",
   "prevPost": {
     "id": "docker-offline-images",
     "title": "A Dumb Way to Solve DockerHub Access Problems"

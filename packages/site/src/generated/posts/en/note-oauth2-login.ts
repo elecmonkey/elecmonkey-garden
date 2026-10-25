@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:715cf3e9d82d90cf70607e16306e9cc2856fe4c010b1c70100773718c2cb8007";
-export const postContentHash = "sha256:d261694cf2ea64661284ff4fd5f155b3085a955ad6d9628cb0b3815ecb7564d3";
+export const postSourceHash = "sha256:944a748dc4b33fcf33f69690174e4fe2bfda1f3037d3e1747a8a8b624a2fb6bd";
+export const postContentHash = "sha256:f60bab1712d3888505fad969754a88822270a0eb4e5142b88c60a0606158cfd1";
 
 export const post = {
   "id": "note-oauth2-login",
@@ -62,6 +62,7 @@ export const post = {
   "monthFolder": "202602",
   "isDraft": false,
   "isHidden": false,
+  "og": "note-oauth2-login.og.jpg",
   "prevPost": {
     "id": "react-server-component-2",
     "title": "On React Server Component (RSC) (2) - RSC Rules, React Component Trees, and Module Dependency Graphs"

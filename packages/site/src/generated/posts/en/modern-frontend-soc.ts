@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:c1ded7dbeaeb6f4ec47d64af7f7aa92efdfbee52fbcd23a77cf5a9c73644bf5d";
-export const postContentHash = "sha256:4b711cd63faf2f83aad7a198db9f808a030683cc4e4825f495596b46b25565a5";
+export const postSourceHash = "sha256:9647e5742c30e8b5775ddede4a2d75c423c8bd67640974421824cf8febb6438b";
+export const postContentHash = "sha256:94b6532975f31ee5ae708c54ce29ce0fc56429bc3f36540d4889eaedd7f52f2d";
 
 export const post = {
   "id": "modern-frontend-soc",
@@ -80,6 +80,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "modern-frontend-soc.og.jpg",
   "prevPost": {
     "id": "ssr",
     "title": "Implementing Server-Side Rendering with Vite"

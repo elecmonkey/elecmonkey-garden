@@ -4,6 +4,7 @@ date: "2026-03-29"
 description: "\"Unified\" is a word that feels out of place in the JavaScript ecosystem."
 tags: ["Vite", "Rolldown", "oxc", "oxlint", "oxfmt"]
 author: "Elecmonkey"
+og: 'viteplus-announcement.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

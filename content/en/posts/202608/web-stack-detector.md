@@ -4,6 +4,7 @@ date: "2026-08-24"
 description: "React still absolutely dominates frontend frameworks. Webpack remains ubiquitous among major companies, while GitHub uses Rspack."
 tags: ["Browser Extension", "Frontend Tooling"]
 author: "Elecmonkey"
+og: 'web-stack-detector.og.jpg'
 ---
 
 Firefox: [Web Stack Detector](https://addons.mozilla.org/zh-CN/firefox/addon/web-stack-detector/)

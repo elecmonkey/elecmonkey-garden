@@ -4,6 +4,7 @@ date: "2026-06-21"
 description: "Before Node loads tsc.js, vue-tsc temporarily patches the source string of the official TypeScript CLI. What should Vue do in the TypeScript Go era?"
 tags: ["Vue", "TypeScript", "Frontend Tooling"]
 author: "Elecmonkey"
+og: 'vue-tsc-runtime-patch-hack.og.jpg'
 ---
 
 Language services have always been one of the less-discussed parts of toolchains. Vue 2 has 210k stars, Vue 3 has accumulated 54k stars, but vuejs/language-tools has only 6.7k stars. That is already a relatively popular language service. Svelte has 86.7k stars, but sveltejs/language-tools has only 1.4k stars. Astro's old withastro/language-tools repository once had only 337 stars, and was later archived by the official team and moved into the main repository.

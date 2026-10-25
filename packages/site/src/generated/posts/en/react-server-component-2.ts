@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:9d4a7d36847da72309e2a0f6f7b0caa63538276f89a60a1c7316e1251941a8ad";
-export const postContentHash = "sha256:185300821e79adb22682b5c99479c1fb6da32891d08c8871af60f8c0eae48c0c";
+export const postSourceHash = "sha256:c252801243a68b1124c75b5b814312c93560f88990ab078759c005cc9c6eef3b";
+export const postContentHash = "sha256:15a52eb03429f47d78b2d6c49bc783ed300f99ad9203f8bddafbe3ba3d06a7d8";
 
 export const post = {
   "id": "react-server-component-2",
@@ -58,6 +58,7 @@ export const post = {
   "monthFolder": "202602",
   "isDraft": false,
   "isHidden": false,
+  "og": "react-server-component-2.og.jpg",
   "prevPost": {
     "id": "react-server-component-1",
     "title": "On React Server Component (RSC) (1) - RSC Principles, SSR, and Partial Hydration"

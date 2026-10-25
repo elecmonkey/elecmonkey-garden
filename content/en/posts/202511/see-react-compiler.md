@@ -4,6 +4,7 @@ date: '2025-11-15'
 description: 'An in-browser visualization tool that lets you see how React Compiler transforms your code.'
 tags: ['React', 'React Compiler', 'Frontend Tooling']
 author: 'Elecmonkey'
+og: 'see-react-compiler.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

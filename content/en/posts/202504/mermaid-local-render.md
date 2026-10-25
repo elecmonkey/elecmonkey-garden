@@ -4,6 +4,7 @@ date: "2025-04-26"
 description: "You will find that many tools pursuing SSR/SSG still ultimately choose browser-side rendering for Mermaid."
 tags: ["Server-Side Rendering (SSR)", "Node.js", "Mermaid"]
 author: "Elecmonkey"
+og: 'mermaid-local-render.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

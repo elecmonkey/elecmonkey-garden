@@ -4,6 +4,7 @@ date: "2025-04-11"
 description: "The most useful episode of offline import: restricted network environments. It reminds me of installing snap programs on Ubuntu back then, which required a similar method."
 tags: ["Docker", "DevOps"]
 author: "Elecmonkey"
+og: 'docker-offline-images.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

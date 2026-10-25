@@ -4,6 +4,7 @@ date: "2025-08-01"
 description: "Use Vite's import.meta.glob to implement module prefetch logic."
 tags: ["Vite", "Performance Optimization", "Vue", "React", "Solid.js", "Qwik"]
 author: "Elecmonkey"
+og: 'vite-route-preloading.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

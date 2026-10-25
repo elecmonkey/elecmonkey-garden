@@ -4,6 +4,7 @@ date: "2026-01-26"
 description: "使用 Expo 框架上手 React Native 开发，Android 与 iOS 模拟器及真机调试的完整流程记录"
 tags: ["React", "React Native", "Expo", "移动端", "iOS", "Android"]
 author: "Elecmonkey"
+og: 'use-react-native-and-expo.og.jpg'
 ---
 
 完全没有移动端开发经验/知识，完全没有接触过 Kotlin 和 Swift。纯记录折腾成功的流程。

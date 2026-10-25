@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:3fd70ea76bd4ece3fcba20f8ed603e82a6aa0ef9d23900dd34647745bc85e6c5";
-export const postContentHash = "sha256:ef32c4980b8f64e6b1dd31552d19d360bb7cf8fff65684cc2a03bef28221e5c5";
+export const postSourceHash = "sha256:089de34c1fea4452661e7b6917e2709c09ab62166c7bad667763f6df00f7c104";
+export const postContentHash = "sha256:0ed414b2b4f45a8c1806145fdb691a1bc81ff52f6354a33ba802dd7e5e4069a1";
 
 export const post = {
   "id": "rust-in-js-pipline",
@@ -65,6 +65,7 @@ export const post = {
   "monthFolder": "202511",
   "isDraft": false,
   "isHidden": false,
+  "og": "rust-in-js-pipline.og.jpg",
   "prevPost": {
     "id": "vite-virtual-modules",
     "title": "Virtual Modules in Vite's Plugin Mechanism"

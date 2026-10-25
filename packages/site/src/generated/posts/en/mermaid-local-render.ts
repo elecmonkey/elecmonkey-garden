@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:9d044c63e793df2b6d9631dff59d3cdc389e183d17e1c7ea686708266ad18aa6";
-export const postContentHash = "sha256:6bcf9708f31f6676d8f789fd2a4dae55b9f61a6031899af7629f7f0a9f01e362";
+export const postSourceHash = "sha256:b52949c5c0308bf831d3e8dcb5d41e445ca63282538fcd936d0716c79ea30136";
+export const postContentHash = "sha256:7f714fb2959aab8e88a87339a4dab0129250166e41bccd17e9e37659fdb4a65d";
 
 export const post = {
   "id": "mermaid-local-render",
@@ -72,6 +72,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "mermaid-local-render.og.jpg",
   "prevPost": {
     "id": "nodejs-typescript-support",
     "title": "Talking About Node.js Native Support for Running TypeScript Files"

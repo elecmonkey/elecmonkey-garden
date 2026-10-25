@@ -4,6 +4,7 @@ date: '2025-12-04'
 description: 'Congratulations on Rolldown-vite being merged into the main Vite repository'
 tags: ['Vite', 'Rolldown']
 author: 'Elecmonkey'
+og: 'vite-8-beta-release.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

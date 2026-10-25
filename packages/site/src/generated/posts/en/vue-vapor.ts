@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:49cf4dddc2c51af3932b00952017c5f013730484560e5f8756c9f77232dc0ccd";
-export const postContentHash = "sha256:8ab57faf8bb5944cb5cec8aabc25cbbd245ee045597f559406ff690e0235203c";
+export const postSourceHash = "sha256:182b88e55df93916d1c42d3b0e3db1d54321086e994e047d2fae2b70b5285e8f";
+export const postContentHash = "sha256:dd369883ebb34020ac4eb97e3ada1df4fc7a55cfb8407699233fc96d0d563cf4";
 
 export const post = {
   "id": "vue-vapor",
@@ -90,6 +90,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "vue-vapor.og.jpg",
   "prevPost": {
     "id": "modern-frontend-soc",
     "title": "Technical Layering or Feature Cohesion: What Kind of Separation of Concerns Should Modern Frontend Have?"

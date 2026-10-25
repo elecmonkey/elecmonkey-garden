@@ -4,6 +4,7 @@ date: '2025-03-28'
 description: '记录一个 Next.js 项目在生产环境中的零停机部署方案。'
 tags: ['Next.js', 'Node.js', 'DevOps', 'CI/CD']
 author: 'Elecmonkey'
+og: 'blue-green-deploy.og.jpg'
 ---
 
 ## 蓝绿部署

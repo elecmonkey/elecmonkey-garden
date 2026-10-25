@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:f558da04ec313b01cc3cfff8e58ed4c349c3cbc658a6c1ee8bc614d76d4a8904";
-export const postContentHash = "sha256:6049c07c77ab650d48329d65c37a9623b049719d4bc95b556bb2322f02f48747";
+export const postSourceHash = "sha256:5f309a6a8a346fcb1f548abb78d32cc7440caf16ee53d6326b41f82e5639c23b";
+export const postContentHash = "sha256:d77627e3f152d92c07919cb5649787c74a2671d813801fcdf5e574d65fb267dd";
 
 export const post = {
   "id": "rolldown-vite-production-ready",
@@ -25,6 +25,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "rolldown-vite-production-ready.og.jpg",
   "prevPost": {
     "id": "rolldown-vite-migration",
     "title": "Rolldown-Vite 宣布功能达到 Vite，Evan You 和他的下一代前端工具链"

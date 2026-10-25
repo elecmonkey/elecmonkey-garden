@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:84d93330a70bbc020cca0604560fff1080276a885e61453195cf9291d4da7bb1";
-export const postContentHash = "sha256:2eb2b71d221ac0f57fc3e53ab5739e6751fb0052371ffb35a7656eb6072015fc";
+export const postSourceHash = "sha256:63c6fac27f2ea1baa6ef63241797232aa09a99e428bd8311b2d7202c683fa4af";
+export const postContentHash = "sha256:98c9e976927e9056194669100343d3c09ab5dffd7392c5cf09554db5c329b16d";
 
 export const post = {
   "id": "react-compiler-performance",
@@ -57,6 +57,7 @@ export const post = {
   "monthFolder": "202511",
   "isDraft": false,
   "isHidden": false,
+  "og": "react-compiler-performance.og.jpg",
   "prevPost": {
     "id": "rust-in-js-pipline",
     "title": "原生 JavaScript 工具链中绕不开的 JavaScript 成份"

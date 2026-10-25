@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:00945a515eda73b461eadc6c3403e87f727830fe2e10594ddbea78120c0a18db";
-export const postContentHash = "sha256:5ab1604126bf0114c6164ee374bd81fc2b4e2fe6423a904da8455953567ed01e";
+export const postSourceHash = "sha256:a388a94d96bcc3c86fe287f84485dd948704593fada35ef8ad4f7fa3f9218738";
+export const postContentHash = "sha256:495dd8d1d2750a69898fa1ebda390b55a9acafaa8382c0a8966168135430b79d";
 
 export const post = {
   "id": "best-language-for-ai",
@@ -25,6 +25,7 @@ export const post = {
   "monthFolder": "202508",
   "isDraft": false,
   "isHidden": false,
+  "og": "best-language-for-ai.og.jpg",
   "prevPost": {
     "id": "vite-route-preloading",
     "title": "Vite 分包预加载优化：首屏延迟与后续交互的平衡"

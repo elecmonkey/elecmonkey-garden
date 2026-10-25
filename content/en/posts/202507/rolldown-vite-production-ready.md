@@ -4,6 +4,7 @@ date: "2025-07-08"
 description: "Can it be used in production?"
 tags: ["Rolldown", "Vite", "Build Tools"]
 author: "Elecmonkey"
+og: 'rolldown-vite-production-ready.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

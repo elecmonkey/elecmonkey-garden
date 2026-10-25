@@ -4,6 +4,7 @@ date: "2026-05-12"
 description: "Isolation between different trust levels failed in an unexpected place. Supply-chain security in the frontend ecosystem still has a long way to go."
 tags: ["npm", "pnpm", "Web Security", "CI/CD", "Supply Chain Security"]
 author: "Elecmonkey"
+og: 'tanstack-npm-supply-chain-attack.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

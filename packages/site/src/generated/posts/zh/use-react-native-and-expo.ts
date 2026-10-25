@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:0c212275a331dd30d3e5eca550e40bdea5abbfd063ef497498f14008d434df67";
-export const postContentHash = "sha256:62e42acd9f666ebbeb337fc197fc6d027f7dc297b1e3f839f4b2ddc48385b0a9";
+export const postSourceHash = "sha256:bd611ba307eebec819d8b7fbfa7157342e1b93b112c789a2a42e43abe5195530";
+export const postContentHash = "sha256:07e65c1b8ab0bb05de0f5c14f51b8e44b0930693349d064a44b142fc7591d724";
 
 export const post = {
   "id": "use-react-native-and-expo",
@@ -135,6 +135,7 @@ export const post = {
   "monthFolder": "202601",
   "isDraft": false,
   "isHidden": false,
+  "og": "use-react-native-and-expo.og.jpg",
   "prevPost": {
     "id": "frontend-framework-security-2025",
     "title": "给前端框架的“服务端”野心泼冷水：2025年 React 生态两起致命漏洞"

@@ -4,6 +4,7 @@ date: "2026-01-30"
 description: "史上最恨 JavaScript 的前端框架，最有意义的架构试验场"
 tags: ["Astro", "服务端渲染 (SSR)", "静态站点生成 (SSG)", "Vite"]
 author: "Elecmonkey"
+og: 'about-astro.og.jpg'
 ---
 
 ## 组件化不必然需要 JavaScript

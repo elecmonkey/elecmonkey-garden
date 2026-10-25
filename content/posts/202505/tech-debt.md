@@ -4,6 +4,7 @@ date: "2025-05-19"
 description: "技术债不完全是技术问题。它关于 CI/CD 现代化，关于组织治理，关于每个技术人的开源文化与社区参与。"
 tags: ["macOS", "Node.js", "技术债", "CI/CD", "开源 (Open Source)"]
 author: "Elecmonkey"
+og: 'tech-debt.og.jpg'
 ---
 
 > 技术债不完全是技术问题。它关于 CI/CD 现代化，关于组织治理，关于每个技术人的开源文化与社区参与。

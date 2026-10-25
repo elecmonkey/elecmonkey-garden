@@ -4,6 +4,7 @@ date: '2025-08-21'
 description: "锈化世界吧，Rust"
 tags: ["Rust", "AI", "Vibe Coding"]
 author: "Elecmonkey"
+og: 'best-language-for-ai.og.jpg'
 ---
 
 很少有哪门语言的 compile-time 能提供像 Rust 编译器这样丰富的信息量。

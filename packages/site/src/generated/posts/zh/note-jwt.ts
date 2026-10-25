@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:0898f8ca92020579d7e30465d4aedb761b23df5f9ba4e5471e52742e7ea1c6df";
-export const postContentHash = "sha256:eb9bde5c135e50d3f0d08afe28b296a66bd6736f5830f89443049dba1ceb3ab1";
+export const postSourceHash = "sha256:dbf46b37f7858dc588cd8707a2c8039f3c1eedf5a455c97909e12fd291e839a1";
+export const postContentHash = "sha256:75a0dabe6b161107d1180f8130a65314d3cab3f3682440a6cabb8e3dca11f8bf";
 
 export const post = {
   "id": "note-jwt",
@@ -86,6 +86,7 @@ export const post = {
   "monthFolder": "202503",
   "isDraft": false,
   "isHidden": false,
+  "og": "note-jwt.og.jpg",
   "prevPost": {
     "id": "blue-green-deploy",
     "title": "Next.js 零停机部署记录：从 PM2 Cluster 到 Next Standalone 模式"

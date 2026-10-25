@@ -4,6 +4,7 @@ date: "2025-09-30"
 description: "VuePress, VitePress, Slidev... How can we use Vite's SSR/SSG capabilities more flexibly to build a site generator?"
 tags: ["Vite", "Rollup", "Build Tools", "Frontend Engineering", "Virtual Modules"]
 author: "Elecmonkey"
+og: 'vite-virtual-modules.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

@@ -4,6 +4,7 @@ date: '2025-12-04'
 description: '恭喜 Rolldown-vite 合入 Vite 主仓库'
 tags: ['Vite', 'Rolldown']
 author: 'Elecmonkey'
+og: 'vite-8-beta-release.og.jpg'
 ---
 
 [feat!: the epic `rolldown-vite` merge](https://github.com/vitejs/vite/pull/21189)

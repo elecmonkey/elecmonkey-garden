@@ -4,6 +4,7 @@ date: '2025-08-21'
 description: "Rustify the world, Rust"
 tags: ["Rust", "AI", "Vibe Coding"]
 author: "Elecmonkey"
+og: 'best-language-for-ai.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

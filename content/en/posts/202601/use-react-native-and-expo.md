@@ -4,6 +4,7 @@ date: "2026-01-26"
 description: "A complete process record of getting started with React Native development using Expo, including Android and iOS simulators and real-device debugging"
 tags: ["React", "React Native", "Expo", "Mobile", "iOS", "Android"]
 author: "Elecmonkey"
+og: 'use-react-native-and-expo.og.jpg'
 ---
 
 > This article was translated by AI and has not been manually reviewed.

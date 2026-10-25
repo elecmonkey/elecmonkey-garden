@@ -4,6 +4,7 @@ date: "2025-07-24"
 description: "Vue 社区动态。也许有一天 React 也会像 Angular 一样淡出大家的视线，谁知道呢？"
 tags: ["Vue", "Vue Vapor"]
 author: "Elecmonkey"
+og: 'vue-vapor.og.jpg'
 ---
 
 ## 虚拟 DOM

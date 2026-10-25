@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:7203b36fdfc2cfa5b913f404fd0230840d67f4806d0c923d9c7300bafe18db6a";
-export const postContentHash = "sha256:503203052e03d733ed1e10f5ad7a1b9f9bf3a82d32929da676f16face23a02b2";
+export const postSourceHash = "sha256:bbb7016ad842ffa26489cd6996da865f071c7181e6f6d23e0733ad164c85a441";
+export const postContentHash = "sha256:07c0942740869b804f2146de3b8f6dd42e0d467b617f724e0038f96baca5bcf2";
 
 export const post = {
   "id": "vue-vapor",
@@ -90,6 +90,7 @@ export const post = {
   "monthFolder": "202507",
   "isDraft": false,
   "isHidden": false,
+  "og": "vue-vapor.og.jpg",
   "prevPost": {
     "id": "modern-frontend-soc",
     "title": "技术分层or功能聚合，现代前端应当有怎样的关注点分离"

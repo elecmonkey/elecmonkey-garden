@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:e0ebd95d9b9d6f65aaa07315502015a006389fd7d62b552d8a1569d27a7609d7";
-export const postContentHash = "sha256:78049d01d1aa604bdd91eb2926b47bceaadae46e81f748aae53fb34ad40586a4";
+export const postSourceHash = "sha256:7fbc43a537b86bbdae0c67efe84e84b5f1a37bf9e37faf45a7b1d6b48fe5231b";
+export const postContentHash = "sha256:bce6300b6695e4aa35c110d7c7547bef969af71db821d50fa601abef680adf2a";
 
 export const post = {
   "id": "model-context-protocol",
@@ -113,6 +113,7 @@ export const post = {
   "monthFolder": "202504",
   "isDraft": false,
   "isHidden": false,
+  "og": "model-context-protocol.og.jpg",
   "prevPost": {
     "id": "note-jwt",
     "title": "用户鉴权系统：JWT 实现无状态认证"

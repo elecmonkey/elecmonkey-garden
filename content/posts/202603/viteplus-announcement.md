@@ -4,6 +4,7 @@ date: "2026-03-29"
 description: "“统一” \"Unified\" 是一个和 JavaScript 生态格格不入的词。"
 tags: ["Vite", "Rolldown", "oxc", "oxlint", "oxfmt"]
 author: "Elecmonkey"
+og: 'viteplus-announcement.og.jpg'
 ---
 
 ## 引言

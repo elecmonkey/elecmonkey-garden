@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:0295b7136026daa36eb82a827e19394624792e817bb2bab3972461e837846271";
-export const postContentHash = "sha256:159d1227341b2f4b89fef22e815a0f7a51d7a3f1186f49b36cc24a7c69d5ad6c";
+export const postSourceHash = "sha256:554ac3099ae13c885ba5e302e9c02ae416ac3366cd935b633a64910365b9ca0e";
+export const postContentHash = "sha256:92a0dfbbf42ea38672fd5881757c86b77b500447f01c0b98e0f9b01af1f4618e";
 
 export const post = {
   "id": "update-prisma-6-to-7",
@@ -70,6 +70,7 @@ export const post = {
   "monthFolder": "202512",
   "isDraft": false,
   "isHidden": false,
+  "og": "update-prisma-6-to-7.og.jpg",
   "prevPost": {
     "id": "copyright-and-opensource",
     "title": "开源许可证与软件著作权的关系"
