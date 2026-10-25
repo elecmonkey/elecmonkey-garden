@@ -74,7 +74,8 @@ function injectInitialPost(html: string, post: PostData | undefined): string {
     return html;
   }
 
-  const script = `<script id="__garden_initial_post__" type="application/json">${serializeJsonForHtml(post)}</script>`;
+  const { content: _content, ...initialPost } = post;
+  const script = `<script id="__garden_initial_post__" type="application/json">${serializeJsonForHtml(initialPost)}</script>`;
   return html.replace('</body>', `${script}</body>`);
 }
 
