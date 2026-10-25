@@ -1,0 +1,18 @@
+{
+  "name": "@elecmonkey/garden-og-generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "example": "node src/cli.ts --slug ai-agent-software-engineering",
+    "generate": "node src/cli.ts"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "sharp": "^0.35.5",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5"
+  }
+}

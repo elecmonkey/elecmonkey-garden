@@ -23,6 +23,7 @@ define.lint(
         '*.config.{js,mjs,cjs,ts,mts,cts}',
         'packages/**/*.config.{js,mjs,cjs,ts,mts,cts}',
         'packages/content-compiler-napi/**/*.{js,mjs,cjs,ts,mts,cts}',
+        'packages/og-generator/**/*.{js,mjs,cjs,ts,mts,cts}',
         'packages/site/src/entry.ssg.tsx',
         'packages/site/src/ssg/**/*.{js,mjs,cjs,ts,mts,cts}',
       ],

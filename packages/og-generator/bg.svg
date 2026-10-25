@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="sky" x2="0.4" y2="1">
+      <stop stop-color="#fbfcfe"/>
+      <stop offset="1" stop-color="#f6fbfe"/>
+    </linearGradient>
+    <linearGradient id="planet" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#edf3ff"/>
+      <stop offset="1" stop-color="#dce7ff"/>
+    </linearGradient>
+    <linearGradient id="farWave" x2="0" y2="1">
+      <stop stop-color="#e6eeff"/>
+      <stop offset="1" stop-color="#f2f7ff"/>
+    </linearGradient>
+    <linearGradient id="nearWave" x2="0.8" y2="1">
+      <stop stop-color="#f1f6ff"/>
+      <stop offset="1" stop-color="#dce8ff"/>
+    </linearGradient>
+    <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="1.5" fill="#a8bfea"/>
+    </pattern>
+    <path id="spark" d="M0 -16L2 -2L13 0L2 2L0 16L-2 2L-13 0L-2 -2Z"/>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <circle cx="58" cy="-30" r="172" fill="url(#planet)"/>
+  <circle cx="30.4" cy="-103" r="277.5" fill="none" stroke="#6f91ff" stroke-width="0.9"/>
+  <circle cx="214" cy="105.1" r="6.5" fill="#316fff"/>
+  <rect x="1056" y="96" width="112" height="64" fill="url(#dots)" opacity="0.48"/>
+  <path d="M0 521C130 511 195 565 300 598C442 656 533 518 647 506C742 491 826 565 940 543C1069 519 1082 412 1200 393V630H0Z" fill="url(#farWave)"/>
+  <path d="M255 630C398 595 478 561 603 562C759 563 847 620 1033 630Z" fill="url(#nearWave)"/>
+  <path d="M1199 471C1060 460 990 508 877 535" fill="none" stroke="#8ba7ff" stroke-width="0.9"/>
+  <path d="M578 630C705 553 817 477 1007 497" fill="none" stroke="#a0b8ff" stroke-width="0.9"/>
+  <circle cx="1007" cy="497" r="6.5" fill="#316fff"/>
+  <path d="M57 581H352" fill="none" stroke="#b7c9ed" stroke-width="0.8"/>
+  <use href="#spark" transform="translate(43 581) scale(0.9)" fill="#9caed0"/>
+  <path d="M1146 269V350" fill="none" stroke="#b7c9ed" stroke-width="0.8"/>
+  <use href="#spark" transform="translate(1146 243)" fill="#316fff"/>
+  <rect x="1088" y="544" width="80" height="64" fill="url(#dots)" opacity="0.48"/>
+</svg>
