@@ -6,6 +6,31 @@ export const generatedContentByLocale = {
   "zh": {
     posts: [
       {
+        "id": "orm-sql-ai-agent",
+        "title": "告别 ORM",
+        "date": "2026-10-26",
+        "description": "AI Agent 改变了生产大量优质代码的成本，进而影响软件工程权衡中的结果",
+        "tags": [
+          "ORM",
+          "SQL",
+          "Prisma",
+          "sqlx",
+          "AI Agent",
+          "数据库"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/orm-sql-ai-agent",
+        "monthFolder": "202610",
+        "isDraft": false,
+        "isHidden": false,
+        "og": "orm-sql-ai-agent.og.jpg",
+        "prevPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
+        }
+      },
+      {
         "id": "web-stack-detector",
         "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈",
         "date": "2026-08-24",
@@ -24,6 +49,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js 迁移到 ESM-only"
+        },
+        "nextPost": {
+          "id": "orm-sql-ai-agent",
+          "title": "告别 ORM"
         }
       },
       {
@@ -1153,6 +1182,31 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "orm-sql-ai-agent",
+        "title": "告别 ORM",
+        "date": "2026-10-26",
+        "description": "AI Agent 改变了生产大量优质代码的成本，进而影响软件工程权衡中的结果",
+        "tags": [
+          "ORM",
+          "SQL",
+          "Prisma",
+          "sqlx",
+          "AI Agent",
+          "数据库"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/orm-sql-ai-agent",
+        "monthFolder": "202610",
+        "isDraft": false,
+        "isHidden": false,
+        "og": "orm-sql-ai-agent.og.jpg",
+        "prevPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
+        }
+      },
+      {
         "id": "web-stack-detector",
         "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈",
         "date": "2026-08-24",
@@ -1171,6 +1225,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js 迁移到 ESM-only"
+        },
+        "nextPost": {
+          "id": "orm-sql-ai-agent",
+          "title": "告别 ORM"
         }
       },
       {
@@ -2299,6 +2357,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "orm-sql-ai-agent": { sourceHash: "sha256:1fca96588cad8ffdb3bf4c590ad8a4846f2f2ba7e1cdd2cbce38e9076a47af2e", contentHash: "sha256:f1ef81ececbbfb4d3970993eb166fcdc962b1187f244e216f22ed87a21b81d36" },
       "web-stack-detector": { sourceHash: "sha256:04cec21597b3a31ed481e21a8bfc79873255761edc35ad317667487d5b5e42a6", contentHash: "sha256:48bf0c7e1313fcc8151581379e74838e34e388319dd6d4a9c5d5c46591a28ccf" },
       "vue-move-to-esm-only": { sourceHash: "sha256:147375f47fa81a00fb4c39bb3f376421167bf3363ca5556fb28a97d58711002c", contentHash: "sha256:2a6d61c96e61a8c60625201612e96f96d685b80cdb187b83de0e6176952347a6" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:b3bcaae5f133531b0362f0802eefabf315ee5358cdbdcd94ed58fd176495965f", contentHash: "sha256:46613e030a7c69b5be27f7296e89b4fa9a21b6937762d83a3064936c57fe8dc5" },
@@ -2344,6 +2403,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:0787ab65b77b5dbfda529f5b42aa50567aeac83d86ca55c283b4ec6bad64e4da", contentHash: "sha256:2ca2c99b34879c49e7179b670646d063298f8ef2c420d2cd7770a24dcaaa3e54" },
     },
     postLoaders: {
+      "orm-sql-ai-agent": () => import('./posts/zh/orm-sql-ai-agent'),
       "web-stack-detector": () => import('./posts/zh/web-stack-detector'),
       "vue-move-to-esm-only": () => import('./posts/zh/vue-move-to-esm-only'),
       "vue-tsc-runtime-patch-hack": () => import('./posts/zh/vue-tsc-runtime-patch-hack'),
@@ -2392,6 +2452,31 @@ export const generatedContentByLocale = {
   "en": {
     posts: [
       {
+        "id": "orm-sql-ai-agent",
+        "title": "Goodbye, ORM",
+        "date": "2026-10-26",
+        "description": "AI agents have changed the cost of producing large amounts of quality code, shifting the trade-offs we make in software engineering.",
+        "tags": [
+          "ORM",
+          "SQL",
+          "Prisma",
+          "sqlx",
+          "AI Agent",
+          "Database"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/orm-sql-ai-agent",
+        "monthFolder": "202610",
+        "isDraft": false,
+        "isHidden": false,
+        "og": "orm-sql-ai-agent.og.jpg",
+        "prevPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
+        }
+      },
+      {
         "id": "web-stack-detector",
         "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?",
         "date": "2026-08-24",
@@ -2410,6 +2495,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js Is Moving to ESM-only"
+        },
+        "nextPost": {
+          "id": "orm-sql-ai-agent",
+          "title": "Goodbye, ORM"
         }
       },
       {
@@ -3539,6 +3628,31 @@ export const generatedContentByLocale = {
     ],
     publicPosts: [
       {
+        "id": "orm-sql-ai-agent",
+        "title": "Goodbye, ORM",
+        "date": "2026-10-26",
+        "description": "AI agents have changed the cost of producing large amounts of quality code, shifting the trade-offs we make in software engineering.",
+        "tags": [
+          "ORM",
+          "SQL",
+          "Prisma",
+          "sqlx",
+          "AI Agent",
+          "Database"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/orm-sql-ai-agent",
+        "monthFolder": "202610",
+        "isDraft": false,
+        "isHidden": false,
+        "og": "orm-sql-ai-agent.og.jpg",
+        "prevPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
+        }
+      },
+      {
         "id": "web-stack-detector",
         "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?",
         "date": "2026-08-24",
@@ -3557,6 +3671,10 @@ export const generatedContentByLocale = {
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js Is Moving to ESM-only"
+        },
+        "nextPost": {
+          "id": "orm-sql-ai-agent",
+          "title": "Goodbye, ORM"
         }
       },
       {
@@ -4685,6 +4803,7 @@ export const generatedContentByLocale = {
       },
     ],
     postHashes: {
+      "orm-sql-ai-agent": { sourceHash: "sha256:853aeb4b1a1ec1057a0fb76253fd4b638e6d25d227d6bcf99abc72b4c3931c18", contentHash: "sha256:14a21fe01558828586ce0ebbbf6428933f5316a9509a0aab47690014c3ce9103" },
       "web-stack-detector": { sourceHash: "sha256:6af37651616bd4290ea091081420d47202e465d22795c614301d78b5b067a497", contentHash: "sha256:fdb6841fbe8463c23d395400e4cfb3d186959ab5031d70e60c130ffb23f85593" },
       "vue-move-to-esm-only": { sourceHash: "sha256:4ab84719fb51dccd316817a04324f8a541d1f76e5e7e0aaf3474e69bf00389e7", contentHash: "sha256:0c98168e51ba7f47ee87602d3c4e9f17eb4167a30e2078ce9486b295ed02fb52" },
       "vue-tsc-runtime-patch-hack": { sourceHash: "sha256:5941c4a5a48c17dfed1885795a1d9c12262847e464e0200912cd7d8c7763280f", contentHash: "sha256:673802f6a9b200e9a77878c520292a04d4ac2df324be6140755e987313729e27" },
@@ -4730,6 +4849,7 @@ export const generatedContentByLocale = {
       "mermaid-tutorial": { sourceHash: "sha256:7506c24ee460c61b132a1cfdf39e4e4a304c73b3fef04c0307bedc293fb13a2b", contentHash: "sha256:4edc8920a45f04382e2bfd3ac29c40670aa1f7c8c7b39dc52d52a1eb59362e0b" },
     },
     postLoaders: {
+      "orm-sql-ai-agent": () => import('./posts/en/orm-sql-ai-agent'),
       "web-stack-detector": () => import('./posts/en/web-stack-detector'),
       "vue-move-to-esm-only": () => import('./posts/en/vue-move-to-esm-only'),
       "vue-tsc-runtime-patch-hack": () => import('./posts/en/vue-tsc-runtime-patch-hack'),

@@ -28,5 +28,9 @@ export const post = {
   "prevPost": {
     "id": "vue-move-to-esm-only",
     "title": "Vue.js 迁移到 ESM-only"
+  },
+  "nextPost": {
+    "id": "orm-sql-ai-agent",
+    "title": "告别 ORM"
   }
 } satisfies PostData;

@@ -6,6 +6,31 @@ export const generatedHomeContentByLocale = {
   "zh": {
     "recentPosts": [
       {
+        "id": "orm-sql-ai-agent",
+        "title": "告别 ORM",
+        "date": "2026-10-26",
+        "description": "AI Agent 改变了生产大量优质代码的成本，进而影响软件工程权衡中的结果",
+        "tags": [
+          "ORM",
+          "SQL",
+          "Prisma",
+          "sqlx",
+          "AI Agent",
+          "数据库"
+        ],
+        "author": "Elecmonkey",
+        "locale": "zh",
+        "permalink": "/blog/orm-sql-ai-agent",
+        "monthFolder": "202610",
+        "isDraft": false,
+        "isHidden": false,
+        "og": "orm-sql-ai-agent.og.jpg",
+        "prevPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈"
+        }
+      },
+      {
         "id": "web-stack-detector",
         "title": "Web Stack Detector，看看大厂大产品都在用什么技术栈",
         "date": "2026-08-24",
@@ -24,6 +49,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js 迁移到 ESM-only"
+        },
+        "nextPost": {
+          "id": "orm-sql-ai-agent",
+          "title": "告别 ORM"
         }
       },
       {
@@ -188,34 +217,6 @@ export const generatedHomeContentByLocale = {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "TanStack npm 包被通过 CI 缓存投毒事件复盘"
         }
-      },
-      {
-        "id": "axios-xhr-and-fetch",
-        "title": "Axios 202603 投毒事件杂谈：CI 最佳实践、供应链安全与选型反思",
-        "date": "2026-04-04",
-        "description": "后半篇话题似乎跑题了。。跑到了网络请求库选型反思，从 Axios 到 Fetch API",
-        "tags": [
-          "Axios",
-          "npm",
-          "pnpm",
-          "Web 安全",
-          "CI/CD"
-        ],
-        "author": "Elecmonkey",
-        "locale": "zh",
-        "permalink": "/blog/axios-xhr-and-fetch",
-        "monthFolder": "202604",
-        "isDraft": false,
-        "isHidden": false,
-        "og": "axios-xhr-and-fetch.og.jpg",
-        "prevPost": {
-          "id": "viteplus-announcement",
-          "title": "Vite+ 的意义？Evan You 和他的“统一前端工具链”"
-        },
-        "nextPost": {
-          "id": "private-network-access",
-          "title": "Private Network Access / Local Network Access 问题"
-        }
       }
     ],
     "tags": [
@@ -225,7 +226,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "AI Agent",
-        "count": 2
+        "count": 3
       },
       {
         "name": "Android",
@@ -320,6 +321,10 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
+        "name": "ORM",
+        "count": 1
+      },
+      {
         "name": "oxc",
         "count": 1
       },
@@ -334,6 +339,10 @@ export const generatedHomeContentByLocale = {
       {
         "name": "pnpm",
         "count": 2
+      },
+      {
+        "name": "Prisma",
+        "count": 1
       },
       {
         "name": "Prisma ORM",
@@ -374,6 +383,14 @@ export const generatedHomeContentByLocale = {
       {
         "name": "Solid.js",
         "count": 2
+      },
+      {
+        "name": "SQL",
+        "count": 1
+      },
+      {
+        "name": "sqlx",
+        "count": 1
       },
       {
         "name": "swc",
@@ -476,6 +493,10 @@ export const generatedHomeContentByLocale = {
         "count": 1
       },
       {
+        "name": "数据库",
+        "count": 1
+      },
+      {
         "name": "智能体 (Agent)",
         "count": 2
       },
@@ -521,12 +542,37 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 43,
-      "latestUpdateDate": "2026-08-24"
+      "totalPosts": 44,
+      "latestUpdateDate": "2026-10-26"
     }
   },
   "en": {
     "recentPosts": [
+      {
+        "id": "orm-sql-ai-agent",
+        "title": "Goodbye, ORM",
+        "date": "2026-10-26",
+        "description": "AI agents have changed the cost of producing large amounts of quality code, shifting the trade-offs we make in software engineering.",
+        "tags": [
+          "ORM",
+          "SQL",
+          "Prisma",
+          "sqlx",
+          "AI Agent",
+          "Database"
+        ],
+        "author": "Elecmonkey",
+        "locale": "en",
+        "permalink": "/en/blog/orm-sql-ai-agent",
+        "monthFolder": "202610",
+        "isDraft": false,
+        "isHidden": false,
+        "og": "orm-sql-ai-agent.og.jpg",
+        "prevPost": {
+          "id": "web-stack-detector",
+          "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?"
+        }
+      },
       {
         "id": "web-stack-detector",
         "title": "Web Stack Detector: What Tech Stacks Do Big Tech Products Use?",
@@ -546,6 +592,10 @@ export const generatedHomeContentByLocale = {
         "prevPost": {
           "id": "vue-move-to-esm-only",
           "title": "Vue.js Is Moving to ESM-only"
+        },
+        "nextPost": {
+          "id": "orm-sql-ai-agent",
+          "title": "Goodbye, ORM"
         }
       },
       {
@@ -710,34 +760,6 @@ export const generatedHomeContentByLocale = {
           "id": "tanstack-npm-supply-chain-attack",
           "title": "A Review of the TanStack npm Package Poisoning via CI Cache"
         }
-      },
-      {
-        "id": "axios-xhr-and-fetch",
-        "title": "Some Thoughts on the Axios 202603 Poisoning Incident: CI Best Practices, Supply Chain Security, and Selection Reflections",
-        "date": "2026-04-04",
-        "description": "The second half seems to go off topic... drifting into reflections on choosing network request libraries, from Axios to the Fetch API",
-        "tags": [
-          "Axios",
-          "npm",
-          "pnpm",
-          "Web Security",
-          "CI/CD"
-        ],
-        "author": "Elecmonkey",
-        "locale": "en",
-        "permalink": "/en/blog/axios-xhr-and-fetch",
-        "monthFolder": "202604",
-        "isDraft": false,
-        "isHidden": false,
-        "og": "axios-xhr-and-fetch.og.jpg",
-        "prevPost": {
-          "id": "viteplus-announcement",
-          "title": "What Is the Point of Vite+? Evan You and His \"Unified Frontend Toolchain\""
-        },
-        "nextPost": {
-          "id": "private-network-access",
-          "title": "Private Network Access / Local Network Access Issues"
-        }
       }
     ],
     "tags": [
@@ -755,7 +777,7 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "AI Agent",
-        "count": 2
+        "count": 3
       },
       {
         "name": "Android",
@@ -799,6 +821,10 @@ export const generatedHomeContentByLocale = {
       },
       {
         "name": "CORS",
+        "count": 1
+      },
+      {
+        "name": "Database",
         "count": 1
       },
       {
@@ -894,6 +920,10 @@ export const generatedHomeContentByLocale = {
         "count": 2
       },
       {
+        "name": "ORM",
+        "count": 1
+      },
+      {
         "name": "oxc",
         "count": 1
       },
@@ -912,6 +942,10 @@ export const generatedHomeContentByLocale = {
       {
         "name": "pnpm",
         "count": 2
+      },
+      {
+        "name": "Prisma",
+        "count": 1
       },
       {
         "name": "Prisma ORM",
@@ -972,6 +1006,14 @@ export const generatedHomeContentByLocale = {
       {
         "name": "Solid.js",
         "count": 2
+      },
+      {
+        "name": "SQL",
+        "count": 1
+      },
+      {
+        "name": "sqlx",
+        "count": 1
       },
       {
         "name": "Static Site Generation (SSG)",
@@ -1039,8 +1081,8 @@ export const generatedHomeContentByLocale = {
       }
     ],
     "stats": {
-      "totalPosts": 43,
-      "latestUpdateDate": "2026-08-24"
+      "totalPosts": 44,
+      "latestUpdateDate": "2026-10-26"
     }
   }
 } satisfies HomeContentByLocale;
