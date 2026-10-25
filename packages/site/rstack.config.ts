@@ -41,6 +41,20 @@ define.app({
       },
       output: {
         target: 'web',
+        copy: [
+          {
+            from: '**/*.og.jpg',
+            context: '../../content/posts',
+            to: 'og/zh/[name][ext]',
+            noErrorOnMissing: true,
+          },
+          {
+            from: '**/*.og.jpg',
+            context: '../../content/en/posts',
+            to: 'og/en/[name][ext]',
+            noErrorOnMissing: true,
+          },
+        ],
         distPath: {
           root: 'dist',
         },

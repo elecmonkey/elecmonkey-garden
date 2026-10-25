@@ -597,6 +597,7 @@ export async function renderMetadataTags(pathname: string): Promise<string> {
       headline: article.headline,
       description: metadata.description,
       datePublished: article.publishedTime,
+      image: ogImage?.url,
       author: authors,
       keywords: article.tags,
       inLanguage: locale === 'en' ? 'en' : 'zh-CN',

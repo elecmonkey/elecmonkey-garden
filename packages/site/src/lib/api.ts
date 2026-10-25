@@ -18,6 +18,7 @@ export type PostData = {
   isDraft?: boolean; // 是否为草稿
   isHidden?: boolean; // 是否为隐藏文章
   pinned?: boolean | string; // 是否置顶（frontmatter 中的 pinned: true）
+  og?: string; // 同目录的分享图文件名（例如 article-slug.og.jpg）
   permalink?: string;
   prevPost?: { id: string; title: string };
   nextPost?: { id: string; title: string };

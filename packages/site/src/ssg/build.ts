@@ -1,5 +1,5 @@
 import { availableParallelism } from 'node:os';
-import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
@@ -17,6 +17,7 @@ import {
 } from '../lib/api';
 import { hrefFor, locales, stripLocalePrefix } from '../lib/i18n';
 import { getTagPath } from '../lib/tag-url';
+import { getPostOgImagePath } from '../lib/post-og';
 import { rootMarker, writeStaticPage } from './render-page';
 
 type RenderWorkerData = {
@@ -137,6 +138,32 @@ async function copyStaticAssets(distDir: string): Promise<void> {
         path.join(localeSearchDir, 'index.json'),
       );
     }),
+  );
+}
+
+async function validatePostOgImages(distDir: string): Promise<void> {
+  await Promise.all(
+    locales.flatMap((locale) =>
+      getAllPostIds(locale).map(async ({ params: { slug } }) => {
+        const post = getPostById(locale, slug);
+        const imagePath = getPostOgImagePath(post);
+        if (!imagePath) return;
+        const source = path.resolve(
+          '../../content',
+          locale === 'en' ? 'en/posts' : 'posts',
+          post.monthFolder,
+          path.basename(imagePath),
+        );
+        try {
+          await access(source);
+          await access(path.join(distDir, imagePath.slice(1)));
+        } catch (error) {
+          throw new Error(`Missing OG image for ${locale}/${slug}: ${source}`, {
+            cause: error,
+          });
+        }
+      }),
+    ),
   );
 }
 
@@ -293,6 +320,7 @@ export async function buildStaticSite(): Promise<void> {
   }
 
   const pathnames = await getStaticPathnames();
+  await validatePostOgImages(distDir);
   const workerCount = await renderStaticPages(distDir, template, pathnames);
 
   await copyStaticAssets(distDir);

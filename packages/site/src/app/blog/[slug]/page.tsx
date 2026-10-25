@@ -13,6 +13,7 @@ import StaticArticleContent from '@/components/article/StaticArticleContent';
 import ClientTableOfContents from '@/components/article/contents/TableOfContents';
 import type { SiteMetadata } from '@/ssg/metadata-types';
 import { useDocumentTitle, withSiteTitle } from '@/lib/use-document-title';
+import { getPostOgImagePath } from '@/lib/post-og';
 
 type Props = {
   locale?: Locale;
@@ -28,10 +29,28 @@ export function generateMetadata({
   const siteName = dictionaries[locale].siteName;
   try {
     const post = getPostById(locale, slug);
+    const og = getPostOgImagePath(post);
+    const images = og
+      ? [
+          {
+            url: og,
+            width: 1200,
+            height: 630,
+            type: 'image/jpeg',
+            alt: post.title,
+          },
+        ]
+      : undefined;
 
     return {
       title: `${post.title} - ${siteName}`,
       description: post.description,
+      ...(images
+        ? {
+            openGraph: { images },
+            twitter: { card: 'summary_large_image', images },
+          }
+        : {}),
       authors: [{ name: post.author, url: hrefFor(locale, '/about') }],
       article: {
         headline: post.title,
