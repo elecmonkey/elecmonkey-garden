@@ -41,6 +41,7 @@ define.app({
       },
       output: {
         target: 'web',
+        module: true,
         copy: [
           {
             from: '**/*.og.jpg',
