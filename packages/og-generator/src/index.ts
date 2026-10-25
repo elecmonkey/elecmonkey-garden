@@ -214,10 +214,13 @@ export async function generateOgImage(post: OgPost, options: OgOptions = {}) {
 
   const titleTop = 268;
   const titleLineHeight = titleSize * 1.18;
-  const descriptionTop = Math.max(
-    426,
-    titleTop + (titleLines.length - 1) * titleLineHeight + 72,
-  );
+  const descriptionTop =
+    titleLines.length === 1
+      ? titleTop + 96
+      : Math.max(
+          426,
+          titleTop + (titleLines.length - 1) * titleLineHeight + 72,
+        );
   const domain = post.locale === 'en' ? 'elecmonkey.com/en' : 'elecmonkey.com';
 
   const titleText = titleLines
