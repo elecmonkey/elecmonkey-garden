@@ -5,6 +5,7 @@ description: "AI Agents writing code are just another layer of abstraction being
 tags: ["AI", "AI Agent", "Software Engineering", "Abstraction"]
 author: "Elecmonkey"
 pinned: true
+og: 'ai-agent-software-engineering.og.jpg'
 ---
 
 My Blog has not talked much about AI Agents. That is usually not the kind of problem I focus on. But if you search for AI here, you can still find several articles that mention it. I have also never avoided saying this: almost all of my code is already written by AI.

@@ -93,6 +93,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "ai-agent-software-engineering.og.jpg",
         "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",
@@ -607,6 +608,7 @@ export const generatedHomeContentByLocale = {
         "monthFolder": "202606",
         "isDraft": false,
         "isHidden": false,
+        "og": "ai-agent-software-engineering.og.jpg",
         "pinned": "true",
         "prevPost": {
           "id": "bun-rust-rewrite",

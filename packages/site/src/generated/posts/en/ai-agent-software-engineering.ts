@@ -2,8 +2,8 @@
 
 import type { PostData } from '@/lib/api';
 
-export const postSourceHash = "sha256:8008b8315f7775bb9b51666071facf99d88ea84edac6a09633922eaf9b4af871";
-export const postContentHash = "sha256:8fd163e56cf5abb93d3bc8487913c5a9f8a4c56f3b8817aa5457e28f616b3af7";
+export const postSourceHash = "sha256:b6ab5ad3fbfe84a95d5caf0bf7529ac99e36a815762eaff5bb7529a9f0449373";
+export const postContentHash = "sha256:c0f3fcc645671f2e1bda5f3689874c15e0f3c931076b4d27c2e77cd649b3ea54";
 
 export const post = {
   "id": "ai-agent-software-engineering",
@@ -52,6 +52,7 @@ export const post = {
   "monthFolder": "202606",
   "isDraft": false,
   "isHidden": false,
+  "og": "ai-agent-software-engineering.og.jpg",
   "pinned": "true",
   "prevPost": {
     "id": "bun-rust-rewrite",
