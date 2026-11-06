@@ -53,8 +53,8 @@
     "release:publish": "node scripts/release-package.mjs --publish"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^3.10.9",
-    "@types/node": "^26.6.5",
+    "@napi-rs/cli": "^3.10.12",
+    "@types/node": "^26.6.6",
     "typescript": "^7.0.2"
   },
   "optionalDependencies": {
