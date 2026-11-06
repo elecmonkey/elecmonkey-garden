@@ -22,7 +22,7 @@ jobs:
       matrix:
         include:
           - platform: darwin-arm64
-            runner: macos-14
+            runner: macos-latest
             target: aarch64-apple-darwin
             native_file: garden-content-compiler.darwin-arm64.node
             setup_zig: false
