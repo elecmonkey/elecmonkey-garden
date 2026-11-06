@@ -1,6 +1,6 @@
 {
   "name": "@elecmonkey/garden-content-compiler",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": false,
   "description": "Rust-backed Markdown and content compiler for Elecmonkey's Garden.",
   "keywords": [
@@ -58,9 +58,9 @@
     "typescript": "^7.0.2"
   },
   "optionalDependencies": {
-    "@elecmonkey/garden-content-compiler-darwin-arm64": "0.2.3",
-    "@elecmonkey/garden-content-compiler-linux-x64-gnu": "0.2.3",
-    "@elecmonkey/garden-content-compiler-linux-x64-musl": "0.2.3"
+    "@elecmonkey/garden-content-compiler-darwin-arm64": "0.2.4",
+    "@elecmonkey/garden-content-compiler-linux-x64-gnu": "0.2.4",
+    "@elecmonkey/garden-content-compiler-linux-x64-musl": "0.2.4"
   },
   "publishConfig": {
     "access": "public"

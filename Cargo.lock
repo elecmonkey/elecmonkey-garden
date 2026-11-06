@@ -268,7 +268,7 @@ dependencies = [
 
 [[package]]
 name = "garden-content-compiler"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "garden-md-compiler",
  "rayon",
@@ -276,7 +276,7 @@ dependencies = [
 
 [[package]]
 name = "garden-md-compiler"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "comrak",
  "katex-rs",
@@ -284,7 +284,7 @@ dependencies = [
 
 [[package]]
 name = "garden_content_compiler_napi"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "garden-content-compiler",
  "napi",
