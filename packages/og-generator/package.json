@@ -8,11 +8,11 @@
     "generate": "node src/cli.ts"
   },
   "dependencies": {
-    "@resvg/resvg-js": "^2.6.2",
-    "sharp": "^0.35.5",
-    "yaml": "^2.9.1"
+    "@resvg/resvg-js": "catalog:",
+    "sharp": "catalog:",
+    "yaml": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^26.6.6"
+    "@types/node": "catalog:"
   }
 }

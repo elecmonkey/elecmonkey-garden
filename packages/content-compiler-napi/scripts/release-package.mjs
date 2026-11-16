@@ -106,8 +106,8 @@ Options:
   --target <triple>  Build/publish a specific release target. Can be repeated.
                      Defaults to targets supported by the current host.
   --skip-build       Reuse existing native artifacts.
-  --skip-pack        Do not run npm pack for verification tarballs.
-  --dry-run          Run the full flow, then pass --dry-run to npm publish.
+  --skip-pack        Do not run pnpm pack for verification tarballs.
+  --dry-run          Run the full flow, then pass --dry-run to pnpm publish.
   --publish          Publish platform packages first, then the main package.
   --otp <code>       Forward npm one-time password to publish commands.
   --print-only       Print commands without executing them.
@@ -297,30 +297,34 @@ function packPackages(targets, dryRun) {
   fs.mkdirSync(artifactsDir, { recursive: true });
 
   for (const target of targets) {
-    run('npm', ['pack', '--pack-destination', artifactsDir], {
+    run('pnpm', ['pack', '--pack-destination', artifactsDir], {
       cwd: path.join(npmDir, targetMeta[target].platformArchABI),
       dryRun,
     });
   }
 
-  run('npm', ['pack', '--pack-destination', artifactsDir], {
+  run('pnpm', ['pack', '--pack-destination', artifactsDir], {
     cwd: packageDir,
     dryRun,
   });
 }
 
 function publishPackages(targets, options) {
-  const publishArgs = ['publish', '--access', 'public'];
+  const publishArgs = ['publish', '--access', 'public', '--no-git-checks'];
   if (options.dryRun) publishArgs.push('--dry-run');
   if (options.otp) publishArgs.push('--otp', options.otp);
 
   for (const target of targets) {
-    run('npm', publishArgs, {
+    run('pnpm', publishArgs, {
       cwd: path.join(npmDir, targetMeta[target].platformArchABI),
+      dryRun: options.printOnly,
     });
   }
 
-  run('npm', publishArgs, { cwd: packageDir });
+  run('pnpm', publishArgs, {
+    cwd: packageDir,
+    dryRun: options.printOnly,
+  });
 }
 
 function printSummary(targets, options) {

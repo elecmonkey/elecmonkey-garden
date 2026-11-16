@@ -216,4 +216,4 @@ git tag garden-content-compiler-vX.Y.Z
 git push origin garden-content-compiler-vX.Y.Z
 ```
 
-The workflow at `.github/workflows/publish-content-compiler.yml` validates that the tag equals `garden-content-compiler-v${packages/content-compiler-napi/package.json.version}` and that all optional platform dependency versions match. It builds native artifacts in a matrix, prepares npm platform packages, publishes the three platform packages first, and publishes the main package last using `npm publish --provenance --access public`.
+The workflow at `.github/workflows/publish-content-compiler.yml` validates that the tag equals `garden-content-compiler-v${packages/content-compiler-napi/package.json.version}` and that all optional platform dependency versions match. It builds native artifacts in a matrix, prepares npm platform packages, publishes the three platform packages first, and publishes the main package last using `pnpm publish --provenance --access public --no-git-checks`.

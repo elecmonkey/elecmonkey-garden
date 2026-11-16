@@ -178,16 +178,16 @@ jobs:
 
       - name: Publish darwin-arm64 package
         working-directory: packages/content-compiler-napi/npm/darwin-arm64
-        run: npm publish --provenance --access public
+        run: pnpm publish --provenance --access public --no-git-checks
 
       - name: Publish linux-x64-gnu package
         working-directory: packages/content-compiler-napi/npm/linux-x64-gnu
-        run: npm publish --provenance --access public
+        run: pnpm publish --provenance --access public --no-git-checks
 
       - name: Publish linux-x64-musl package
         working-directory: packages/content-compiler-napi/npm/linux-x64-musl
-        run: npm publish --provenance --access public
+        run: pnpm publish --provenance --access public --no-git-checks
 
       - name: Publish main package
         working-directory: packages/content-compiler-napi
-        run: npm publish --provenance --access public
+        run: pnpm publish --provenance --access public --no-git-checks

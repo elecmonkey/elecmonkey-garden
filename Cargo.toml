@@ -13,8 +13,11 @@ codegen-units = 1
 panic = "abort"
 
 [workspace.dependencies]
+comrak = { version = "0.59", default-features = false }
 garden-content-compiler = { path = "crates/content-compiler" }
 garden-md-compiler = { path = "crates/md-compiler" }
-napi = { version = "3.4.0", default-features = false, features = ["napi4"] }
-napi-build = "2.2.3"
-napi-derive = "3.3.0"
+katex_rs = { package = "katex-rs", version = "0.3.0" }
+napi = { version = "3.16.2", default-features = false, features = ["napi4"] }
+napi-build = "2.6.0"
+napi-derive = "3.7.1"
+rayon = "1.12"

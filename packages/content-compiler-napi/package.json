@@ -53,9 +53,9 @@
     "release:publish": "node scripts/release-package.mjs --publish"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^3.10.12",
-    "@types/node": "^26.6.6",
-    "typescript": "^7.0.2"
+    "@napi-rs/cli": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   },
   "optionalDependencies": {
     "@elecmonkey/garden-content-compiler-darwin-arm64": "0.2.4",

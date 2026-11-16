@@ -9,5 +9,5 @@ name = "garden_md_compiler"
 path = "src/lib.rs"
 
 [dependencies]
-comrak = { version = "0.59", default-features = false }
-katex_rs = { package = "katex-rs", version = "0.3.0" }
+comrak.workspace = true
+katex_rs.workspace = true
